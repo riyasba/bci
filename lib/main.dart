@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home:  splash(),
-      home: FlightBookingLandingScreen(),
+      home: splash(), //from klb
+      // home: FlightBookingLandingScreen(),
     );
   }
 }
