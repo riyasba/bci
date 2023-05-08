@@ -1,4 +1,6 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/screens/members/holiday/booking.dart';
+import 'package:bci/screens/members/holiday/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -11,8 +13,9 @@ class Holiday_Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF9F8FD),
       appBar: AppBar(
-        backgroundColor: kwhite,
+        backgroundColor: Color(0xFFF9F8FD),
         elevation: 0,
         leading: InkWell(
             onTap: () {
@@ -25,7 +28,8 @@ class Holiday_Home extends StatelessWidget {
               fontSize: 27, fontWeight: FontWeight.w800, color: kblue),
         ),
       ),
-      body: Column(
+      body: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -35,7 +39,7 @@ class Holiday_Home extends StatelessWidget {
                   // controller: _controller,
                   decoration: InputDecoration(
                 hintText: 'Search',
-                fillColor: Colors.grey[200],
+                fillColor: Color(0xFFFFFFFF),
                 focusColor: Colors.grey[200],
                 isDense: true,
                 filled: true,
@@ -61,18 +65,139 @@ class Holiday_Home extends StatelessWidget {
               ),
             ],
           ),
+          ksizedbox20,
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                height: 30,
-                width: 70,
+                child: Padding(
+                  padding: const EdgeInsets.all(7.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/images/mountains.png'),
+                      Text('Mountains')
+                    ],
+                  ),
+                ),
+                height: 38,
+                width: 110,
                 decoration: BoxDecoration(
-                    color: kgrey, borderRadius: BorderRadius.circular(14)),
-              )
+                    color: kwhite, borderRadius: BorderRadius.circular(14)),
+              ),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(7.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/images/beach.png'),
+                      Text('Beaches')
+                    ],
+                  ),
+                ),
+                height: 30,
+                width: 100,
+                decoration: BoxDecoration(
+                    color: kwhite, borderRadius: BorderRadius.circular(14)),
+              ),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(7.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/images/history-svgrepo-com (3).png'),
+                      Text('Historicals')
+                    ],
+                  ),
+                ),
+                height: 38,
+                width: 100,
+                decoration: BoxDecoration(
+                    color: kwhite, borderRadius: BorderRadius.circular(14)),
+              ),
             ],
+          ),
+          ksizedbox40,
+          Row(
+            children: [
+              kwidth10,
+              Text(
+                'Populars',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+              ),
+              kwidth10,
+            ],
+          ),
+          ksizedbox40,
+          InkWell(onTap: (){Get.to(Holiday_booking());},
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Holiday_containors(),
+                Holiday_containors(),
+              ],
+            ),
+          ),
+          ksizedbox30,
+          Row(
+            children: [
+              kwidth10,
+              Text(
+                'Recommended',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+              ),
+            ],
+          ),
+          ksizedbox30,
+          Container(height: 70,
+            child: ListView(physics: BouncingScrollPhysics(),
+              shrinkWrap: true,scrollDirection: Axis.horizontal,
+              children: [
+                holiday_widget2(),kwidth10,
+                holiday_widget2(),
+              ],
+            ),
           )
         ],
       ),
     );
+  }
+
+  Container holiday_widget2() {
+    return Container(
+              decoration: BoxDecoration(
+                  color: kwhite, borderRadius: BorderRadius.circular(25)),
+              width: 200,
+              height: 69,
+              child: Row(
+                children: [
+                  Image.asset('assets/images/pexels-senuscape-1658967.png'),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Grindelwald',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w500),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Jordan',
+                              style: TextStyle(fontSize: 13, color: kgrey),
+                            ),
+                            Image.asset(
+                                'assets/images/location-svgrepo-com (1).png'),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
   }
 }
