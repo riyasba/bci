@@ -29,9 +29,15 @@ class _FlightBookingHeaderState extends State<FlightBookingHeader> {
                 bottomRight: Radius.circular(20),
                 bottomLeft: Radius.circular(20),
               )),
-        ),Positioned(left: 5,right: 5,
-          child: InkWell(onTap: (){Get.back();},
-            child: Image.asset('assets/images/Back.png'))),
+        ),
+        Positioned(
+            left: 5,
+            top: 3,
+            child: InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: Image.asset('assets/images/Back.png'))),
         Positioned(
           bottom: 2,
           left: 0,
