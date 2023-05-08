@@ -1,4 +1,5 @@
 import 'package:bci/controllers/flights_controller.dart';
+import 'package:bci/controllers/settings_controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -8,6 +9,7 @@ import 'screens/members/flight_booking_screens/flight_booking_landing_screen.dar
 
 void main() {
   Get.put(FlightsController());
+  Get.put(SettingsController());
   runApp(const MyApp());
 }
 

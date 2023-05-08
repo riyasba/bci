@@ -1,6 +1,7 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/screens/members/booking/booking.dart';
 import 'package:bci/screens/members/settings_screen/settings_screen.dart';
+import 'package:bci/screens/members/settings_views/settings_screen.dart';
 import 'package:bci/views/home_screen/wallet_screen.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,7 +28,7 @@ class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
     ),
     WalletScreen(),
     Members_booking(),
-    BusinessSettingScreen()
+    SettingScreen()
   ];
 
   int selectedpage = 0;
