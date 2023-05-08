@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../constands/constands.dart';
+import '../../../views/business/notification_screen.dart';
 
 class wine_screen extends StatelessWidget {
   const wine_screen({super.key});
@@ -40,10 +41,14 @@ class wine_screen extends StatelessWidget {
                             color: Colors.white),
                       ),
                     ),
-                    Icon(
-                      Icons.notifications,
-                      color: kwhite,
-                    )
+                    IconButton(
+                      onPressed: () {
+                        Get.to(NotificationScreen());
+                      },
+                      icon: Icon(
+                        Icons.notifications,
+                        color: kwhite,
+                      ))
                   ],
                 ),
               ),

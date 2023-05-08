@@ -1,5 +1,5 @@
-import 'package:bci/authentications/onbording/introduction_screen.dart';
-import 'package:bci/authentications/onbording/onbording1.dart';
+//import 'package:bci/authentications/onbording/introduction_screen.dart';
+//import 'package:bci/authentications/onbording/onbording1.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/screens/members/home_screen/Members_home_screen.dart';
 import 'package:bci/views/busines_widget/bottumnavigation.dart';
@@ -10,7 +10,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../screens/members/members widgets/bottumbavigation.dart';
-import '../onbording/onbording_screen.dart';
+import '../onbording/onbording11.dart';
+//import '../onbording/onbording_screen.dart';
 //import '../../widgets/bottumbavigation.dart';
 
 class verified_Screen extends StatelessWidget {
@@ -27,45 +28,58 @@ class verified_Screen extends StatelessWidget {
             "Welcome :)",
             style: TextStyle(
                 fontSize: 22, color: Colors.black, fontWeight: FontWeight.w700),
-          ),ksizedbox30,   Text(
+          ),
+          ksizedbox30,
+          Text(
             "Your account has been verified",
             style: TextStyle(
-                fontSize: 19, color: Colors.black, ),
-          ), Text(
+              fontSize: 19,
+              color: Colors.black,
+            ),
+          ),
+          Text(
             "Successfully",
             style: TextStyle(
-                fontSize: 19, color: Colors.black, ),
-          ),ksizedbox40,ksizedbox40,    InkWell(onTap: (){
-            Get.to(HelloConvexAppBar());},
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20,right:20 ),
-                child: Container(
-                  width: double.infinity,
-                  height: 65,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      4,
-                    ),
-                    gradient: const LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        Color(0xFFFF5C29),
-                        Color(0xFFFFCD38),
-                      ],
-                    ),
+              fontSize: 19,
+              color: Colors.black,
+            ),
+          ),
+          ksizedbox40,
+          ksizedbox40,
+          InkWell(
+            onTap: () {
+              Get.to(Onbording());
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: Container(
+                width: double.infinity,
+                height: 65,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    4,
                   ),
-                  child: Text(
-                    'Done',
-                    style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                  gradient: const LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color(0xFFFF5C29),
+                      Color(0xFFFFCD38),
+                    ],
                   ),
                 ),
+                child: Text(
+                  'Done',
+                  style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-            ),],
+            ),
+          ),
+        ],
       ),
     );
   }

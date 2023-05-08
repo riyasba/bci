@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-import 'authentications/splash_screen/Splash_screen.dart';
+ import 'authentications/splash_screen/Splash_screen.dart';
 import 'screens/members/flight_booking_screens/flight_booking_landing_screen.dart';
 
 void main() {
@@ -11,7 +11,7 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget { 
   const MyApp({super.key});
 
   @override
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home:  splash(),
-      home: FlightBookingLandingScreen(),
+      home: splash(),
     );
   }
 }

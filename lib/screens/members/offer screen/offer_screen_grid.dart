@@ -7,6 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../../../constands/constands.dart';
 import '../../../views/business/notification_screen.dart';
+import '../../../views/home_screen/contact_admin.dart';
 import '../members widgets/gridciew.dart';
 import 'offer_screen.dart';
 
@@ -42,7 +43,8 @@ class offer_screen extends StatelessWidget {
                               color: Colors.white),
                         ),
                       ),
-                   Image.asset('assets/images/3669173_help_ic_icon.png')
+                   InkWell(onTap: (){Get.to(ContactAdmin());},
+                    child: Image.asset('assets/images/3669173_help_ic_icon.png'))
                     ],
                   ),
                 ),

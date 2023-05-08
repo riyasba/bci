@@ -10,7 +10,8 @@ class Home_screen1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: PreferredSize(
+    return Scaffold(
+      appBar: PreferredSize(
           preferredSize: Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
@@ -35,6 +36,7 @@ class Home_screen1 extends StatelessWidget {
                 ],
               ),
             ),
-          )),);
+          )),
+    );
   }
 }

@@ -15,6 +15,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../home_screen/contact_admin.dart';
 import '../home_screen/coupon_screen.dart';
+import 'notification_screen.dart';
 
 class BusinessHomeScreen extends StatefulWidget {
   BusinessHomeScreen({super.key});
@@ -50,7 +51,14 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                           color: Colors.white),
                     ),
                   ),
-                  Image.asset('assets/images/helps.png')
+                 IconButton(
+                      onPressed: () {
+                        Get.to(NotificationScreen());
+                      },
+                      icon: Icon(
+                        Icons.notifications,
+                        color: kwhite,
+                      ))
                 ],
               ),
             ),

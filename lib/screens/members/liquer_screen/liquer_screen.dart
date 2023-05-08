@@ -16,7 +16,7 @@ class liquer_screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: kwhite,
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(220),
+          preferredSize: Size.fromHeight(210),
           child: Column(
             children: [
               ClipPath(
@@ -55,10 +55,11 @@ class liquer_screen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(height: 55,
-                  child: TextField(
+                  child: TextFormField(
                     // controller: _controller,
+                    
                 
-                    decoration: InputDecoration(
+                    decoration: InputDecoration(hintText: 'Search',
                         fillColor: Colors.grey[200],
                         focusColor: Colors.grey[200],
                         isDense: true,

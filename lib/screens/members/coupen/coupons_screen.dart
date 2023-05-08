@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 import '../../../constands/constands.dart';
+import '../../../views/business/notification_screen.dart';
 
 class Coupens_members extends StatelessWidget {
   const Coupens_members({super.key});
@@ -36,10 +37,14 @@ class Coupens_members extends StatelessWidget {
                             color: Colors.white),
                       ),
                     ),
-                    Icon(
-                      Icons.notifications,
-                      color: kwhite,
-                    )
+                 IconButton(
+                      onPressed: () {
+                        Get.to(NotificationScreen());
+                      },
+                      icon: Icon(
+                        Icons.notifications,
+                        color: kwhite,
+                      ))
                   ],
                 ),
               ),

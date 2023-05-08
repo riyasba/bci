@@ -33,7 +33,8 @@ class landing_screen extends StatelessWidget {
           body: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Center(child: Image.asset('assets/images/Group 5814.png')),InkWell(
+              Image.asset('assets/images/onbording3.png'),ksizedbox40,
+              InkWell(
               
       onTap: (){Get.off(Generate_otp());},
       child: Padding(

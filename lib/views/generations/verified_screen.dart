@@ -1,4 +1,4 @@
-import 'package:bci/authentications/onbording/introduction_screen.dart';
+//import 'package:bci/authentications/onbording/introduction_screen.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../constands/constands.dart';
+import '../home_screen/contact_admin.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -78,11 +79,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           //fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                  ),
-                  Padding(
+                  ),Padding(
                     padding: const EdgeInsets.only(right: 20),
-                    child: Image.asset('assets/images/helps.png'),
+                    child: InkWell(onTap: (){Get.to(ContactAdmin());},
+                      child: Image.asset('assets/images/3669173_help_ic_icon.png')),
                   )
+                  // Padding(
+                  //   padding: const EdgeInsets.only(right: 20),
+                  //   child: Image.asset('assets/images/helps.png'),
+                  // )
                 ],
               ),
             ),

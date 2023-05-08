@@ -120,7 +120,7 @@ class _OnbordingState extends State<Onbording> {
               Positioned(
                 right: 7,
                 top: 7,
-                child: InkWell(onTap: (){Get.back();},
+                child: InkWell(onTap: (){Get.to(HomeBottomnavigationBar());},
                   child: Text("Skip",style: TextStyle(color: Colors.white,fontSize: 16),)))
             ],
           ),

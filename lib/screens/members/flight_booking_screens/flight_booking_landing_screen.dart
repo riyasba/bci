@@ -38,7 +38,105 @@ class _FlightBookingLandingScreenState
             thickness: 1,
           ),
           ksizedbox10,
-        ],
+       Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              "Cabin Class",
+              style: primaryFont.copyWith(
+                  color: kblue, fontSize: 16, fontWeight: FontWeight.w500),
+              textAlign: TextAlign.start,
+            ),
+          ),
+          ksizedbox20,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    'Economy',
+                    style: TextStyle(fontSize: 15, color: kgrey),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: korange),
+                    height: 5,
+                    width: 30,
+                  )
+                ],
+              ),
+              Text(
+                'Business',
+                style: TextStyle(fontSize: 15, color: kgrey),
+              ),
+              Text(
+                'First Class',
+                style: TextStyle(fontSize: 15, color: kgrey),
+              ),
+            ],
+          ),
+          ksizedbox20,
+          Divider(
+            thickness: 1,
+          ),
+          ksizedbox10,
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              "Passengers",
+              style: primaryFont.copyWith(
+                  color: kblue, fontSize: 16, fontWeight: FontWeight.w500),
+              textAlign: TextAlign.start,
+            ),
+          ),
+          ksizedbox20,
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  '1 Adult',
+                  style: TextStyle(fontSize: 15, color: kgrey),
+                ),
+              ),
+              Image.asset('assets/images/Group 447.png'),
+            ],
+          ),
+          ksizedbox20,
+          Divider(
+            thickness: 1,
+          ),
+          ksizedbox10,
+          Padding(
+            padding: const EdgeInsets.only(left: 42, right: 41),
+            child: Container(
+              width: double.infinity,
+              height: 50,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  4,
+                ),
+                gradient: const LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    Color(0xFFFF5C29),
+                    Color(0xFFFFCD38),
+                  ],
+                ),
+              ),
+              child: Text(
+                'Search Flights',
+                style: TextStyle(
+                    fontSize: 17,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+          ),
+          ksizedbox40 ],
       ),
     );
   }
