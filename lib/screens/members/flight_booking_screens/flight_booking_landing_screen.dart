@@ -1,6 +1,7 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/flights_controller.dart';
+import 'package:bci/screens/members/flight_booking_screens/par_nyc_screen.dart';
 import 'package:bci/widgets/flight_booking_widgets/flight_dates_choosers.dart';
 import 'package:bci/widgets/flight_booking_widgets/flight_destination_chooser.dart';
 import 'package:bci/widgets/flight_booking_widgets/flight_landing_screen_header.dart';
@@ -22,7 +23,8 @@ class _FlightBookingLandingScreenState
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: ListView(physics: BouncingScrollPhysics(),
+      body: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           FlightBookingHeader(),
           ksizedbox20,
@@ -33,12 +35,12 @@ class _FlightBookingLandingScreenState
           ),
           ksizedbox10,
           FlightDateRange(),
-           ksizedbox20,
+          ksizedbox20,
           const Divider(
             thickness: 1,
           ),
           ksizedbox10,
-       Padding(
+          Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
               "Cabin Class",
@@ -110,33 +112,39 @@ class _FlightBookingLandingScreenState
           ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 42, right: 41),
-            child: Container(
-              width: double.infinity,
-              height: 50,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  4,
+            child: InkWell(
+              onTap: () {
+                Get.to(ParNycSCreen());
+              },
+              child: Container(
+                width: double.infinity,
+                height: 50,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    15,
+                  ),
+                  gradient: const LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color(0xFFFF5C29),
+                      Color(0xFFFFCD38),
+                    ],
+                  ),
                 ),
-                gradient: const LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [
-                    Color(0xFFFF5C29),
-                    Color(0xFFFFCD38),
-                  ],
+                child: Text(
+                  'Search Flights',
+                  style: TextStyle(
+                      fontSize: 17,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700),
                 ),
-              ),
-              child: Text(
-                'Search Flights',
-                style: TextStyle(
-                    fontSize: 17,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700),
               ),
             ),
           ),
-          ksizedbox40 ],
+          ksizedbox40
+        ],
       ),
     );
   }

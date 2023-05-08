@@ -40,6 +40,7 @@ class _WalletScreenState extends State<WalletScreen> {
   List yesterdaydate = ['20/03/2023', '20/03/2023'];
   @override
   Widget build(BuildContext context) {
+    var _mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(250),
@@ -74,8 +75,7 @@ class _WalletScreenState extends State<WalletScreen> {
               ),
             ),
           )),
-      body: ListView(physics: BouncingScrollPhysics(),
-        children: [
+      body: ListView(physics: BouncingScrollPhysics(), children: [
         Column(
           children: [
             Row(
@@ -179,15 +179,16 @@ class _WalletScreenState extends State<WalletScreen> {
                         });
                   },
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 13, top: 10),
+                        padding: const EdgeInsets.only(left: 20, top: 10),
                         child: Container(
                           decoration: BoxDecoration(
                               color: kyellow,
                               border: Border.all(color: kOrange, width: 1)),
-                          height: 110,
-                          width: 90,
+                          height: _mediaQuery.height>700?108:110,
+                          width: _mediaQuery.width>700?90:95,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
