@@ -1,5 +1,5 @@
 import 'package:bci/authentications/generate_otp/generate_otp.dart';
-import 'package:bci/views/generations/generate_otp_screen.dart';
+import 'package:bci/screens/bussiness/views/generations/generate_otp_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -9,8 +9,8 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../../constands/constands.dart';
 import '../../screens/members/members widgets/bottumbavigation.dart';
-import '../../views/busines_widget/bottumnavigation.dart';
-import '../../views/business/business_home_screen.dart';
+import '../../screens/bussiness/views/busines_widget/bottumnavigation.dart';
+import '../../screens/bussiness/views/business/business_home_screen.dart';
 
 class landing_screen extends StatelessWidget {
   const landing_screen({super.key});

@@ -4,9 +4,13 @@ import 'package:bci/screens/members/settings_views/our_partner_screen.dart';
 import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:bci/screens/members/settings_views/upgrade_screen.dart';
 import 'package:bci/screens/members/settings_views/your_refferal_screen.dart';
-import 'package:bci/views/home_screen/settings/your_referal_screen.dart';
+import 'package:bci/screens/bussiness/views/home_screen/settings/your_referal_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../coupen/coupons_screen.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -98,12 +102,16 @@ class _SettingScreenState extends State<SettingScreen> {
                 color: Colors.grey,
               ),
             ),
-            Row(
-              children:const [
-                Image(image: AssetImage("assets/icons/coupans.png"),width: 20,),
-                SizedBox(width: 10,),
-                Text("Your Coupons",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500,color: Color(0xff003366)),)
-              ],
+            InkWell(onTap: () {
+               Get.to(Coupens_members());
+            },
+              child: Row(
+                children:const [
+                  Image(image: AssetImage("assets/icons/coupans.png"),width: 20,),
+                  SizedBox(width: 10,),
+                  Text("Your Coupons",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500,color: Color(0xff003366)),)
+                ],
+              ),
             ),
             const Padding(
               padding:  EdgeInsets.only(top: 5,bottom: 10),

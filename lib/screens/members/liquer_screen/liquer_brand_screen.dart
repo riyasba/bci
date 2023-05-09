@@ -11,7 +11,7 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../constands/constands.dart';
 import 'dart:math' as math;
 
-import '../../../views/business/notification_screen.dart';
+import '../../bussiness/views/business/notification_screen.dart';
 import 'cart_screen.dart';
 
 class liqor_brands extends StatelessWidget {
@@ -112,109 +112,117 @@ class liqor_brands extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    height: 150,
-                    child: Stack(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 40),
-                          child: Container(
-                            height: 110,
-                            width: 110,
-                            decoration: BoxDecoration(
-                                color: kblue,
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-                        ),
-                        Positioned(
-                            bottom: 0,
-                            left: 15,
-                            child: Image.asset(
-                              'assets/images/Vector Smart Object.png',
-                              height: 130,
-                            )),
-                        Positioned(
-                          bottom: 15,
-                          right: 5,
-                          child: Transform.rotate(
-                            angle: -math.pi / 2.0,
-                            child: Text(
-                              "Beer",
-                              style: TextStyle(color: Color(0xFFD1D1D1)),
+                  InkWell(onTap: (){Get.to( wine_screen());},
+                    child: Container(
+                      height: 150,
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40),
+                            child: Container(
+                              height: 110,
+                              width: 110,
+                              decoration: BoxDecoration(
+                                  color: kblue,
+                                  borderRadius: BorderRadius.circular(10)),
                             ),
                           ),
-                        )
-                      ],
+                          Positioned(
+                              bottom: 0,
+                              left: 15,
+                              child: Image.asset(
+                                'assets/images/Vector Smart Object.png',
+                                height: 130,
+                              )),
+                          Positioned(
+                            bottom: 15,
+                            right: 5,
+                            child: Transform.rotate(
+                              angle: -math.pi / 2.0,
+                              child: Text(
+                                "Beer",
+                                style: TextStyle(color: Color(0xFFD1D1D1)),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  Container(
-                    height: 150,
-                    child: Stack(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 40),
-                          child: Container(
-                            height: 110,
-                            width: 110,
-                            decoration: BoxDecoration(
-                                color: kblue,
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-                        ),
-                        Positioned(
-                            bottom: 0,
-                            left: 15,
-                            child: Image.asset(
-                              'assets/images/Vector Smart Object-1.png',
-                              height: 130,
-                            )),
-                        Positioned(
-                          bottom: 15,
-                          right: 5,
-                          child: Transform.rotate(
-                            angle: -math.pi / 2.0,
-                            child: Text(
-                              "Wine",
-                              style: TextStyle(color: kwhite),
+                  InkWell(onTap: () {
+                    Get.to( wine_screen());
+                  },
+                    child: Container(
+                      height: 150,
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40),
+                            child: Container(
+                              height: 110,
+                              width: 110,
+                              decoration: BoxDecoration(
+                                  color: kblue,
+                                  borderRadius: BorderRadius.circular(10)),
                             ),
                           ),
-                        )
-                      ],
+                          Positioned(
+                              bottom: 0,
+                              left: 15,
+                              child: Image.asset(
+                                'assets/images/Vector Smart Object-1.png',
+                                height: 130,
+                              )),
+                          Positioned(
+                            bottom: 15,
+                            right: 5,
+                            child: Transform.rotate(
+                              angle: -math.pi / 2.0,
+                              child: Text(
+                                "Wine",
+                                style: TextStyle(color: kwhite),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  Container(
-                    height: 150,
-                    child: Stack(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 40),
-                          child: Container(
-                            height: 110,
-                            width: 110,
-                            decoration: BoxDecoration(
-                                color: Color(0xFFD1D1D1),
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-                        ),
-                        Positioned(
-                            bottom: 0,
-                            left: 15,
-                            child: Image.asset(
-                              'assets/images/Vector Smart Object-2.png',
-                              height: 130,
-                            )),
-                        Positioned(
-                          bottom: 19,
-                          right: 5,
-                          child: Transform.rotate(
-                            angle: -math.pi / 2.0,
-                            child: Text(
-                              "whiskey",
-                              style: TextStyle(color: kwhite),
+                  InkWell(onTap: (){Get.to( wine_screen());},
+                    child: Container(
+                      height: 150,
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40),
+                            child: Container(
+                              height: 110,
+                              width: 110,
+                              decoration: BoxDecoration(
+                                  color: Color(0xFFD1D1D1),
+                                  borderRadius: BorderRadius.circular(10)),
                             ),
                           ),
-                        )
-                      ],
+                          Positioned(
+                              bottom: 0,
+                              left: 15,
+                              child: Image.asset(
+                                'assets/images/Vector Smart Object-2.png',
+                                height: 130,
+                              )),
+                          Positioned(
+                            bottom: 19,
+                            right: 5,
+                            child: Transform.rotate(
+                              angle: -math.pi / 2.0,
+                              child: Text(
+                                "whiskey",
+                                style: TextStyle(color: kwhite),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -243,11 +251,15 @@ class liqor_brands extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Wine_widget(
-                    wineimg: 'assets/images/Layer 3442.png',
+                  InkWell(onTap: (){Get.to( wine_screen());},
+                    child: Wine_widget(
+                      wineimg: 'assets/images/Layer 3442.png',
+                    ),
                   ),
-                  Wine_widget(
-                    wineimg: 'assets/images/59_Barefoot-Cellars-California-Chardonnay-750ml.png',
+                  InkWell(onTap: (){Get.to(Get.to( wine_screen()));},
+                    child: Wine_widget(
+                      wineimg: 'assets/images/59_Barefoot-Cellars-California-Chardonnay-750ml.png',
+                    ),
                   )
                 ],
               ),

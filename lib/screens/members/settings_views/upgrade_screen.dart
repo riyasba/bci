@@ -4,6 +4,8 @@ import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../otcpayment/otc_payment.dart';
+
 class UpgradeScreen extends StatefulWidget {
   const UpgradeScreen({super.key});
 
@@ -31,7 +33,8 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(Icons.arrow_back_ios,color: Colors.white,),
+                    InkWell(onTap: (){Get.back();},
+                      child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
                     const Padding(
                       padding: EdgeInsets.only(right: 20),
                       child: Text(
@@ -51,8 +54,8 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Obx( () =>
-           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+           ListView(physics: BouncingScrollPhysics(),
+          //  crossAxisAlignment: CrossAxisAlignment.start,
             children: [
                 const Text("All Select Membership Cards\nChoose Anything",
                                  style: TextStyle(fontSize: 17,
@@ -318,7 +321,8 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                                  
                                  const SizedBox(height: 40,),
                                  if(settingsController.index.value == 0)
-                                 const Image(image: AssetImage("assets/images/Group 4995.png"),height: 234,),
+                                 InkWell(onTap: (){Get.to(Otc_payment());},
+                                  child: const Image(image: AssetImage("assets/images/Group 4995.png"),height: 234,)),
                                  if(settingsController.index.value == 1)
                                  const Image(image: AssetImage("assets/images/Group 4925.png"),height: 234,),
                                   if(settingsController.index.value == 2)

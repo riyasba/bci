@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../constands/constands.dart';
-import '../../../views/business/notification_screen.dart';
+import '../../bussiness/views/business/notification_screen.dart';
 
 class cart_screen extends StatelessWidget {
   const cart_screen({super.key});

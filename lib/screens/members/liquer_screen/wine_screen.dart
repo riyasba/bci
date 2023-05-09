@@ -7,7 +7,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../constands/constands.dart';
-import '../../../views/business/notification_screen.dart';
+import '../../bussiness/views/business/notification_screen.dart';
+import 'add_cart_screen.dart';
 
 class wine_screen extends StatelessWidget {
   const wine_screen({super.key});
@@ -67,30 +68,34 @@ class wine_screen extends StatelessWidget {
               ],
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Wine_widget(
-                wineimg: 'assets/images/Layer 3442.png',
-              ),
-              Wine_widget(
-                wineimg:
-                    'assets/images/59_Barefoot-Cellars-California-Chardonnay-750ml.png',
-              )
-            ],
+          InkWell(onTap: (){Get.to(Add_cart());},
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Wine_widget(
+                  wineimg: 'assets/images/Layer 3442.png',
+                ),
+                Wine_widget(
+                  wineimg:
+                      'assets/images/59_Barefoot-Cellars-California-Chardonnay-750ml.png',
+                )
+              ],
+            ),
           ),
           ksizedbox30,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Wine_widget(
-                wineimg: 'assets/images/Layer 3442.png',
-              ),
-              Wine_widget(
-                wineimg:
-                    'assets/images/59_Barefoot-Cellars-California-Chardonnay-750ml.png',
-              )
-            ],
+          InkWell(onTap: (){Get.to(Add_cart());},
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Wine_widget(
+                  wineimg: 'assets/images/Layer 3442.png',
+                ),
+                Wine_widget(
+                  wineimg:
+                      'assets/images/59_Barefoot-Cellars-California-Chardonnay-750ml.png',
+                )
+              ],
+            ),
           ),
         ],
       ),

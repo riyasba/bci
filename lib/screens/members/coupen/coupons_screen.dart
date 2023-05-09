@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 import '../../../constands/constands.dart';
-import '../../../views/business/notification_screen.dart';
+import '../../bussiness/views/business/notification_screen.dart';
 
 class Coupens_members extends StatelessWidget {
   const Coupens_members({super.key});

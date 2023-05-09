@@ -2,7 +2,7 @@
 //import 'package:bci/authentications/onbording/onbording1.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/screens/members/home_screen/Members_home_screen.dart';
-import 'package:bci/views/busines_widget/bottumnavigation.dart';
+import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';

@@ -2,15 +2,15 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/screens/members/booking/booking.dart';
 import 'package:bci/screens/members/settings_screen/settings_screen.dart';
 import 'package:bci/screens/members/settings_views/settings_screen.dart';
-import 'package:bci/views/home_screen/wallet_screen.dart';
+import 'package:bci/screens/bussiness/views/home_screen/wallet_screen.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // import '../../../views/home_screen/wallet_screen.dart';
 
-import '../../../views/home_screen/setting_screen.dart';
-import '../../../views/home_screen/settings/my_account_screen.dart';
+import '../../bussiness/views/home_screen/setting_screen.dart';
+import '../../bussiness/views/home_screen/settings/my_account_screen.dart';
 import '../home_screen/Members_home_screen.dart';
 import '../members_search_screen/members_search_screen.dart';
 
@@ -28,7 +28,7 @@ class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
     ),
     WalletScreen(),
     Members_booking(),
-    SettingScreen()
+    SettingScreen(),
   ];
 
   int selectedpage = 0;

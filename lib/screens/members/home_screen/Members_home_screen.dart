@@ -9,12 +9,13 @@ import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../constands/constands.dart';
-import '../../../views/business/notification_screen.dart';
+import '../../bussiness/views/business/notification_screen.dart';
 import '../coupen/coupons_screen.dart';
 import '../holiday/holiday_home.dart';
 import '../hottel/Hotel_members.dart';
 import '../liquer_screen/liquer_screen.dart';
 import '../offer screen/offer_screen_grid.dart';
+import '../settings_views/upgrade_screen.dart';
 
 class Home_screen1 extends StatefulWidget {
   const Home_screen1({super.key});
@@ -129,7 +130,8 @@ class _Home_screen1State extends State<Home_screen1> {
               ),
             ],
           ),
-          Image.asset('assets/images/Group 5826.png'),
+          InkWell(onTap: (){Get.to(UpgradeScreen());},
+            child: Image.asset('assets/images/Group 5826.png')),
           Row(
             children: [
               kwidth10,

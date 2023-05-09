@@ -42,7 +42,7 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
           padding: const EdgeInsets.all(10.0),
           child: Row(
             children: [
-              Text(
+              Text( 
                 'Guest',
                 style: TextStyle(
                     fontSize: 25, color: kblue, fontWeight: FontWeight.w500),

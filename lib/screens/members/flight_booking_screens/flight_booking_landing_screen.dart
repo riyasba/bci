@@ -2,9 +2,9 @@ import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/flights_controller.dart';
 import 'package:bci/screens/members/flight_booking_screens/par_nyc_screen.dart';
-import 'package:bci/widgets/flight_booking_widgets/flight_dates_choosers.dart';
-import 'package:bci/widgets/flight_booking_widgets/flight_destination_chooser.dart';
-import 'package:bci/widgets/flight_booking_widgets/flight_landing_screen_header.dart';
+import 'package:bci/screens/members/flight_booking_screens/widgets/flight_booking_widgets/flight_dates_choosers.dart';
+import 'package:bci/screens/members/flight_booking_screens/widgets/flight_booking_widgets/flight_destination_chooser.dart';
+import 'package:bci/screens/members/flight_booking_screens/widgets/flight_booking_widgets/flight_landing_screen_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
