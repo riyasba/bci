@@ -276,7 +276,6 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                           style: TextStyle(color: kwhite, fontSize: 18),
                         )),
                     Positioned(
-                      
                       bottom: -9,
                       left: 160,
                       child: Container(
@@ -301,23 +300,28 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                 padding: const EdgeInsets.only(right: 10, left: 10),
                 child: Stack(
                   children: [
-                    Container(
-                      height: 240,
-                      width: MediaQuery.of(context).size.width,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 10),
-                        child: Container(
-                          height: 210,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              color: kwhite,
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                    offset: Offset(0.0, 0.75),
-                                    blurRadius: 5,
-                                    color: kgrey),
-                              ],
-                              borderRadius: BorderRadius.circular(5)),
+                    InkWell(
+                      onTap: () {
+                        Get.to(FlightDetailsScreen());
+                      },
+                      child: Container(
+                        height: 240,
+                        width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            height: 210,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                color: kwhite,
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                      offset: Offset(0.0, 0.75),
+                                      blurRadius: 5,
+                                      color: kgrey),
+                                ],
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
                         ),
                       ),
                     ),
@@ -421,23 +425,28 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                 padding: const EdgeInsets.only(right: 10, left: 10),
                 child: Stack(
                   children: [
-                    Container(
-                      height: 240,
-                      width: MediaQuery.of(context).size.width,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 10),
-                        child: Container(
-                          height: 210,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              color: kwhite,
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                    offset: Offset(0.0, 0.75),
-                                    blurRadius: 5,
-                                    color: kgrey),
-                              ],
-                              borderRadius: BorderRadius.circular(5)),
+                    InkWell(
+                      onTap: () {
+                        Get.to(FlightDetailsScreen());
+                      },
+                      child: Container(
+                        height: 240,
+                        width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            height: 210,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                color: kwhite,
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                      offset: Offset(0.0, 0.75),
+                                      blurRadius: 5,
+                                      color: kgrey),
+                                ],
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
                         ),
                       ),
                     ),

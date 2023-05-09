@@ -50,7 +50,7 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
     return Scaffold(
       body: List2[selectedpage],
       bottomNavigationBar: ConvexAppBar(
-          activeColor:korange,
+          activeColor:kwhite,
 
           backgroundColor: kblue,
           color: kwhite,
