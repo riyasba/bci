@@ -36,7 +36,7 @@ class landing_screen extends StatelessWidget {
           //    Image.asset('assets/images/onbording3.png'),ksizedbox40,
               InkWell(
               
-      onTap: (){Get.off(Generate_otp());},
+      onTap: (){Get.off(const MemberLoginScreen());},
       child: Padding(
         padding: const EdgeInsets.only(right: 20,left: 20),
         child: Container(
@@ -56,7 +56,8 @@ class landing_screen extends StatelessWidget {
               ],
             ),
           ),
-      child: Text('Member Login',           style: TextStyle(
+      child:const Text('Member Login', 
+                style: TextStyle(
                                fontSize: 22,
                                color: Colors.white,
                                fontWeight: FontWeight.bold),),
@@ -103,7 +104,7 @@ class landing_screen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        Get.to(BusinessGenerate_otp
+                        Get.to(BusinessLoginScreen
                         ());
                       },
                       child: Text(

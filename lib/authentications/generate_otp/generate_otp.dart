@@ -1,82 +1,136 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/screens/members/sign_up_view/sign_up_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../otp_verification/otp_verification.dart';
 
-class Generate_otp extends StatelessWidget {
-  const Generate_otp({super.key});
+class MemberLoginScreen extends StatelessWidget {
+  const MemberLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Column(
-        children: [
-          ksizedbox30,
-          Image.asset(
-            'assets/images/a.png',
-          ),
-          Text(
-            'Enter Your Phone Number',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
-          ),
-          ksizedbox20,
-          Text(
-            'We will send you an One Time Password',
-            style: TextStyle(fontSize: 20),
-          ),
-          Text(
-            'on this mobile number',
-            style: TextStyle(fontSize: 20),
-          ),
-          ksizedbox40,
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                prefixIcon: Image.asset('assets/images/Image 8.png'),
-                suffixIcon: Image.asset('assets/images/Path 471.png'),
-                hintText: 'Enter your username',
-                labelText: '+91 9633749714',
-                border: OutlineInputBorder(),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            ksizedbox30,
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Image.asset(
+                'assets/images/a.png',
               ),
             ),
-          ),
-          ksizedbox40,
-          Padding(
-            padding: const EdgeInsets.only(right: 20, left: 20),
-            child: InkWell(onTap: (){Get.to(otp_varification());},
+            const SizedBox(height: 50,),
+             Text(
+              'Enter Your Phone Number',
+              style: TextStyle(fontSize: 22,
+              color: kblue,
+               fontWeight: FontWeight.w700),
+            ),
+            ksizedbox20,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'We will send you an ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18,color: kblue),
+                ),
+                Text(
+                  'One Time Password',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: kblue),
+                ),
+              ],
+            ),
+            Text(
+              'on this mobile number',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18,color: kblue),
+            ),
+            ksizedbox40,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Container(
-                width: double.infinity,
-                height: 65,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    4,
+                height: 50,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    prefixIcon: Image.asset('assets/images/Image 8.png'),
+                    suffixIcon: Image.asset('assets/images/Path 471.png'),
+                    hintText: 'Enter your username',
+                    labelText: '+91 9633749714',
+                    border:const OutlineInputBorder(),
                   ),
-                  gradient: const LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    colors: [
-                      Color(0xFFFF5C29),
-                      Color(0xFFFFCD38),
-                    ],
-                  ),
-                ),
-                child: Text(
-                  'Genarate OTP',
-                  style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-          ),
-        ],
+            ksizedbox20,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(onTap: (){
+                Get.to(const otp_varification());},
+                child: Container(
+                  width: size.width,
+                  height: 50,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4,),
+                    border: Border.all(color:const Color(0xffFFBF7E)),
+                    boxShadow:const [
+                      BoxShadow(
+                        color:Color(0xFFFF5C29),
+                        blurRadius: 3.0, 
+                      )
+                    ],
+                    gradient: const LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                        Color(0xFFFF5C29),
+                        Color(0xFFFFCD38),
+                      ],
+                    ),
+                  ),
+                  child:const Text(
+                    'Genarate OTP',
+                    style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ),
+            ksizedbox10,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Dont't have an account? ",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18,color: kblue),
+                ),
+                InkWell(
+                  onTap: (){
+                    Get.to(const MemberSignUpScreen());
+                  },
+                  child: Text(
+                    'Sign up',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    decoration: TextDecoration.underline,
+                    color: kOrange),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

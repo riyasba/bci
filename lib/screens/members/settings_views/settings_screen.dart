@@ -1,5 +1,6 @@
 import 'package:bci/authentications/langing_screen/landing_screen.dart';
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/screens/members/settings_views/offers_screen.dart';
 import 'package:bci/screens/members/settings_views/our_partner_screen.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/My_account.dart';
@@ -25,6 +26,8 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +63,9 @@ class _SettingScreenState extends State<SettingScreen> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            InkWell(onTap: (){Get.to(MyAccountScreen());},
+            InkWell(onTap: (){
+              Get.to(const MyAccount());
+            },
               child: Row(
                 children: const [
                   Image(
