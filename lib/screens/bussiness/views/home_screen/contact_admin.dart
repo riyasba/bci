@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../constands/constands.dart';
-import '../busines_widget/textfield_widget.dart';
+
 
 class ContactAdmin extends StatefulWidget {
   const ContactAdmin({super.key});
@@ -71,95 +71,112 @@ class _ContactAdminState extends State<ContactAdmin> {
               child: Text('Submit',style: TextStyle(fontSize: 20),)),
               ksizedbox20,
               Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                padding: const EdgeInsets.only(left: 30,),
+                child: Row( 
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Text('Contact Admin',style: TextStyle(fontSize: 21),),
+                    padding: const EdgeInsets.only(),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width*0.4,
+                          child: Text('Contact Admin',style: TextStyle(fontSize: 21),)),
+                          Text(':',style: TextStyle(fontSize: 21),),
+                      ],
+                    ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 30),
-                    child: Text(':',style: TextStyle(fontSize: 21),),
-                  ),
-                  Text('+9991458154',style: TextStyle(fontSize: 18,color: kblue),)
+                  
+                  Container(
+                    width: MediaQuery.of(context).size.width*0.4,
+                    child: Text('+9991458154',style: TextStyle(fontSize: 15.5,color: kblue),))
                     
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 21,top: 8),
+                padding: const EdgeInsets.only(left: 30,),
                 child: Row(
+                  children: [
+                  Row(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width*0.4,
+                        child: Text('BVC Number ',style: TextStyle(fontSize: 21),)),
+                         Text(':',style: TextStyle(fontSize: 21),),
+                    ],
+                  ),
                  
-                  children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15),
-                    child: Text('BVC Number ',style: TextStyle(fontSize: 21),),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 26),
-                    child: Text(':',style: TextStyle(fontSize: 21),),
-                  ),
-                  Text('',style: TextStyle(fontSize: 18,color: kblue),)
+                  Container(
+                    width: MediaQuery.of(context).size.width*0.4,
+                    child: Text('',style: TextStyle(fontSize: 15.5,color: kblue),))
                     
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 0,top: 8),
+                padding: const EdgeInsets.only(left: 30),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Text('Admin Email',style: TextStyle(fontSize: 21),),
+                  Row(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width*0.4,
+                        child: Text('Admin Email',style: TextStyle(fontSize: 21),)),
+                         Text(':',style: TextStyle(fontSize: 21),),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 41),
-                    child: Text(':',style: TextStyle(fontSize: 21),),
-                  ),
-                  Text('Customer@gmail.com',style: TextStyle(fontSize: 18 ,color: kblue),)
+                 
+                  Container(
+                    width: MediaQuery.of(context).size.width*0.4,
+                    child: Text('Customer@gmail.com',style: TextStyle(fontSize: 15.5 ,color: kblue),))
                     
                   ],
                 ),
               ),
                 Padding(
-                padding: const EdgeInsets.only(right: 0,top: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 14),
-                    child: Text('Head Office',style: TextStyle(fontSize: 21),),
+                  padding: const EdgeInsets.only(left: 30,),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width*0.4,
+                          child: Text('Head Office',style: TextStyle(fontSize: 21),)),
+                           Text(':',style: TextStyle(fontSize: 21),),
+                      ],
+                    ),
+                   
+                    Container(
+                      width: MediaQuery.of(context).size.width*0.4,
+                      child: Text('No 781,Second Street',style: TextStyle(fontSize: 15.5 ,color: kblue),))
+                      
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 45),
-                    child: Text(':',style: TextStyle(fontSize: 21),),
-                  ),
-                  Text('No 781,Second Street',style: TextStyle(fontSize: 18 ,color: kblue),)
-                    
-                  ],
                 ),
-              ),
                 Padding(
-                padding: const EdgeInsets.only(right: 0,top: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 0,right:48 ),
-                    child: Text('Address',style: TextStyle(fontSize: 21),),
+                  padding: const EdgeInsets.only(left: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width*0.4,
+                          child: Text('Address',style: TextStyle(fontSize: 21),)),
+                            Text(':',style: TextStyle(fontSize: 21),),
+                      ],
+                    ),
+                  
+                    Container(
+                      width: MediaQuery.of(context).size.width*0.4,
+                      child: Text('New Chennai',style: TextStyle(fontSize: 15.5 ,color: kblue),))
+                      
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 25),
-                    child: Text(':',style: TextStyle(fontSize: 21),),
-                  ),
-                  Text('New Chennai',style: TextStyle(fontSize: 18 ,color: kblue),)
-                    
-                  ],
-                ),
-              )
+                )
           ])],
         ),
         ]

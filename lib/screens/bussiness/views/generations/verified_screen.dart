@@ -36,7 +36,7 @@ class BusinessverifiedScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 20,right:20 ),
                 child: Container(
                   width: double.infinity,
-                  height: 65,
+                  height: 55,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(

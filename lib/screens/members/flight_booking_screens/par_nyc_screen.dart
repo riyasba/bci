@@ -2,6 +2,7 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_details_screen.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../constands/app_fonts.dart';
@@ -42,50 +43,83 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(12),
                         bottomRight: Radius.circular(12))),
-                height: MediaQuery.of(context).size.height * 0.3,
+                height:200.h,
                 width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: [
-                    Row(children: [
-                      InkWell(onTap: (){Get.back();},
-                        child: Image.asset('assets/images/parflaightback.png')),
-                      Text(
-                        'PAR - NYC',
-                        style: TextStyle(color: kwhite, fontSize: 20),
-                      )
-                    ]),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20, left: 15),
-                          child: GestureDetector(
-                            onTap: () {
-                              _selectDate(context);
-                            },
+                child: ListView(
+                  children:[ Column(
+                    children: [
+                      Row(children: [
+                        InkWell(onTap: (){Get.back();},
+                          child: Image.asset('assets/images/parflaightback.png')),
+                        Text(
+                          'PAR - NYC',
+                          style: TextStyle(color: kwhite, fontSize: 20),
+                        )
+                      ]),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20, left: 15),
+                            child: GestureDetector(
+                              onTap: () {
+                                _selectDate(context);
+                              },
+                              child: Image.asset(
+                                  'assets/images/parflaightcalendar.png'),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20, right: 60),
                             child: Image.asset(
                                 'assets/images/parflaightcalendar.png'),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20, right: 60),
-                          child: Image.asset(
-                              'assets/images/parflaightcalendar.png'),
-                        ),
-                      ],
-                    ),
-                    ksizedbox10,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 10,
+                        ],
+                      ),
+                      ksizedbox10,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 10,
+                                ),
+                                child: Text(
+                                  formatDate(
+                                    selectedDate,
+                                    [
+                                      '',
+                                      DD,
+                                      '',
+                                    ],
+                                  ),
+                                  style: TextStyle(color: kwhite, fontSize: 14),
+                                ),
                               ),
-                              child: Text(
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 10, bottom: 20),
+                                child: Text(
+                                    formatDate(selectedDate, [dd, MM, yyyy]),
+                                    style:
+                                        TextStyle(color: kwhite, fontSize: 14)),
+                              )
+                            ],
+                          ),
+                          Image.asset(
+                            'assets/images/pardoubleflaight.png',
+                            color: kwhite,
+                            fit: BoxFit.fitWidth,
+                            width: 35,
+                            height: 50,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
                                 formatDate(
                                   selectedDate,
                                   [
@@ -96,80 +130,50 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                                 ),
                                 style: TextStyle(color: kwhite, fontSize: 14),
                               ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10, bottom: 20),
-                              child: Text(
-                                  formatDate(selectedDate, [dd, MM, yyyy]),
-                                  style:
-                                      TextStyle(color: kwhite, fontSize: 14)),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(bottom: 20, right: 10),
+                                child: Text(
+                                    formatDate(selectedDate, [dd, MM, yyyy]),
+                                    style:
+                                        TextStyle(color: kwhite, fontSize: 14)),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'assets/images/parflaightperson.png',
+                              color: kwhite,
                             )
                           ],
                         ),
-                        Image.asset(
-                          'assets/images/pardoubleflaight.png',
-                          color: kwhite,
-                          fit: BoxFit.fitWidth,
-                          width: 35,
-                          height: 50,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 10, right: 20, top: 1),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              formatDate(
-                                selectedDate,
-                                [
-                                  '',
-                                  DD,
-                                  '',
-                                ],
-                              ),
-                              style: TextStyle(color: kwhite, fontSize: 14),
+                              '1 Adult',
+                              style: TextStyle(color: kwhite),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 20, right: 10),
-                              child: Text(
-                                  formatDate(selectedDate, [dd, MM, yyyy]),
-                                  style:
-                                      TextStyle(color: kwhite, fontSize: 14)),
+                            Text(
+                              'Economy',
+                              style: TextStyle(color: kwhite),
                             )
                           ],
                         ),
-                      ],
-                    ),
-                    ksizedbox20,
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/parflaightperson.png',
-                            color: kwhite,
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 10, right: 20, top: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '1 Adult',
-                            style: TextStyle(color: kwhite),
-                          ),
-                          Text(
-                            'Economy',
-                            style: TextStyle(color: kwhite),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
+                  ]
                 ),
               ),
               ksizedbox30,
@@ -182,12 +186,12 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                         Get.to(FlightDetailsScreen());
                       },
                       child: Container(
-                        height: 240,
+                        height: 240.h,
                         width: MediaQuery.of(context).size.width,
                         child: Padding(
                           padding: const EdgeInsets.only(top: 10, bottom: 10),
                           child: Container(
-                            height: 210,
+                            height: 210.h,
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                                 color: kwhite,
@@ -208,7 +212,7 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                         children: [
                           Text(
                             'BGR 1565145',
-                            style: TextStyle(fontSize: 18, color: kblue),
+                            style: TextStyle(fontSize: 18.sp, color: kblue),
                           )
                         ],
                       ),
@@ -223,8 +227,8 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                             child: Row(
                               children: [
                                 Container(
-                                  height: 10,
-                                  width: 10,
+                                  height: 10.h,
+                                  width: 10.w,
                                   decoration: BoxDecoration(
                                       color: korange.withOpacity(0.8),
                                       borderRadius: BorderRadius.circular(10)),
@@ -236,8 +240,8 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                                       color: Colors.grey.withOpacity(0.5)),
                                 ),
                                 Container(
-                                  height: 10,
-                                  width: 10,
+                                  height: 10.h,
+                                  width: 10.w,
                                   decoration: BoxDecoration(
                                       border: Border.all(color: kblue),
                                       borderRadius: BorderRadius.circular(10)),
@@ -264,14 +268,14 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                     Positioned(left: 310, top: 155, child: Text('00:25')),
                     Positioned(
                       top: -5,
-                      left: 272,
+                      right: 2,
                       child: Column(children: [
                         Image.asset('assets/images/parflaightclipath.png'),
                       ]),
                     ),
                     Positioned(
                         top: 20,
-                        left: 310,
+                        right: 3,
                         child: Text(
                           '₹ 186',
                           style: TextStyle(color: kwhite, fontSize: 18),
@@ -388,14 +392,14 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                     Positioned(left: 310, top: 155, child: Text('17:25')),
                     Positioned(
                       bottom: 160,
-                      left: 272,
+                      right: 2,
                       child: Column(children: [
                         Image.asset('assets/images/parflaightclipath.png'),
                       ]),
                     ),
                     Positioned(
                         top: 20,
-                        left: 310,
+                        right: 3,
                         child: Text(
                           '₹ 125',
                           style: TextStyle(color: kwhite, fontSize: 18),
@@ -513,14 +517,14 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                     Positioned(left: 310, top: 155, child: Text('17:25')),
                     Positioned(
                       bottom: 160,
-                      left: 272,
+                      right: 2,
                       child: Column(children: [
                         Image.asset('assets/images/parflaightclipath.png'),
                       ]),
                     ),
                     Positioned(
                         top: 20,
-                        left: 310,
+                        right: 3,
                         child: Text(
                           '₹ 224',
                           style: TextStyle(color: kwhite, fontSize: 18),

@@ -17,6 +17,7 @@ class _CouponScreenState extends State<CouponScreen> {
   var couponController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final _mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(250),
@@ -99,54 +100,56 @@ class _CouponScreenState extends State<CouponScreen> {
                           padding: const EdgeInsets.only(top: 180, bottom: 120),
                           child: Dialog(
                             child: Container(
+                              height: _mediaQuery.height > 700 ? 400 : 350,
                               width: MediaQuery.of(context).size.width * 0.9,
-                              child: ListView(children: [
-                                Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 50),
-                                      child: Image.asset(
-                                        'assets/images/coupondone.png',
-                                        width: 150,
-                                      ),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 30),
+                                    child: Image.asset(
+                                      'assets/images/coupondone.png',
+                                      width:
+                                          _mediaQuery.width > 700 ? 140 : 150,
                                     ),
-                                    ksizedbox30,
-                                    Text(
-                                      'Coupon Code Apply',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Your Coupon Code used Successful Applied',
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text('and submit your coupon complete',
-                                        style: TextStyle(fontSize: 14)),
-                                    ksizedbox40,
-                                    ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            minimumSize: Size(
-                                                MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.5,
-                                                50),
-                                            backgroundColor: kOrange),
-                                        onPressed: () {},
-                                        child: Text(
-                                          'DONE',
-                                          style: TextStyle(fontSize: 23),
-                                        ))
-                                  ],
-                                ),
-                              ]),
+                                  ),
+                                  ksizedbox20,
+                                  Text(
+                                    'Coupon Code Apply',
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Your Coupon Code used Successful Applied',
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text('and submit your coupon complete',
+                                      style: TextStyle(fontSize: 14)),
+                                  ksizedbox20,
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          minimumSize: Size(
+                                              MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.5, 
+                                              50),
+                                          backgroundColor: kOrange),
+                                      onPressed: () {
+                                        Get.back(); 
+                                      },
+                                      child: Text(
+                                        'DONE',
+                                        style: TextStyle(fontSize: 23),
+                                      ))
+                                ],
+                              ),
                             ),
                           ),
                         );
@@ -171,7 +174,7 @@ class _CouponScreenState extends State<CouponScreen> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
-                    color: kwhite, 
+                    color: kwhite,
                     border: Border.all(color: kblue)),
                 child: Center(
                   child: Text('VIEW HISTORY',

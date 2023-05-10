@@ -1,6 +1,7 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/screens/members/flight_booking_screens/plane_economy_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
 import '../../../constands/app_fonts.dart';
@@ -41,7 +42,7 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
                   ],
                 ),
               ),
-              ksizedbox30,
+              ksizedbox20,
               Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: Stack(
@@ -51,7 +52,7 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
                         Get.to(PlaneEconomyDetailsScreen());
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.7,
+                        height: 850.h,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(),
                         child: Padding(
@@ -78,7 +79,7 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
                                         Text(
                                           'BGR Air',
                                           style: TextStyle(
-                                              fontSize: 22.5,
+                                              fontSize: 22.5.sp,
                                               color: kblue,
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -93,7 +94,7 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
                                         Text(
                                           'Boeing 683-321',
                                           style: TextStyle(
-                                              fontSize: 19, color: kblue),
+                                              fontSize: 19.sp, color: kblue),
                                         )
                                       ],
                                     ),
@@ -106,7 +107,7 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
                                         Text(
                                           'Customer Rating',
                                           style: TextStyle(
-                                              fontSize: 19, color: kyellow),
+                                              fontSize: 19.sp, color: kyellow),
                                         ),
                                       ],
                                     ),
@@ -143,13 +144,13 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
                                   Divider(),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 20, top: 40),
+                                        left: 20, top: 20),
                                     child: Row(
                                       children: [
                                         Text(
                                           'Model \nBoeing 683-321',
                                           style: TextStyle(
-                                            fontSize: 19,
+                                            fontSize: 19.sp,
                                             color: kblue,
                                           ),
                                         )
@@ -164,7 +165,7 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
                                         Text(
                                           'Class \nEconomy & Business',
                                           style: TextStyle(
-                                            fontSize: 19,
+                                            fontSize: 19.sp,
                                             color: kblue,
                                           ),
                                         )
@@ -179,7 +180,7 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
                                         Text(
                                           'Age \n44',
                                           style: TextStyle(
-                                            fontSize: 19,
+                                            fontSize: 19.sp,
                                             color: kblue,
                                           ),
                                         )
@@ -194,7 +195,7 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
                                         Text(
                                           'Type \nSingle',
                                           style: TextStyle(
-                                            fontSize: 19,
+                                            fontSize: 19.sp,
                                             color: kblue,
                                           ),
                                         )

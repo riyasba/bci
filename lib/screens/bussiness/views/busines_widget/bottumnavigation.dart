@@ -63,7 +63,7 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
                 AssetImage(
                   'assets/images/notificationimage.png',
                 ),
-                color: selectedpage == 1 ? kwhite : kwhite,
+                color: selectedpage == 1 ?kblue : kwhite,
               ),
               title: 'Notification',
             ),
@@ -72,7 +72,7 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
                   AssetImage(
                     'assets/images/bottomwallet.png',
                   ),
-                  color: selectedpage == 2 ? kwhite : kwhite,
+                  color: selectedpage == 2 ? kblue : kwhite,
                 ),
                 title: 'Wallet'),
             TabItem(
@@ -80,7 +80,7 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
                   AssetImage(
                     'assets/images/bottombooking.png',
                   ),
-                  color: selectedpage == 3 ? kwhite : kwhite,
+                  color: selectedpage == 3 ? kblue : kwhite,
                 ),
                 title: 'Booking'),
             TabItem(
@@ -91,7 +91,7 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
                     'assets/images/bottomsetting.png',
                     
                   ),
-                  color: selectedpage == 4 ? kwhite : kwhite,
+                  color: selectedpage == 4 ? kblue : kwhite,
                   
                 ),
                 title: 'Settings'),

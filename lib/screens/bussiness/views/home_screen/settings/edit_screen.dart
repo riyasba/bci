@@ -148,87 +148,51 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
           )),
       body: ListView(
         children: [
-          Stack(children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                    imageprofile != null
-                    ? Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle
-                      ),
-                        height: 130, width: 135, child: Image.file(imageprofile!))
-                    : InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      TextButton(
-                                          onPressed: () {
-                                            profileimage();
-                                          },
-                                          child: Text(
-                                            'Choose ur gallery',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16),
-                                          )),
-                                      TextButton(
-                                          onPressed: () {
-                                            profilepic();
-                                          },
-                                          child: Text(
-                                            'Choose ur Camera',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16),
-                                          ))
-                                    ],
-                                  ),
-                                );
-                              });
-                        },
-                  child: Container(
-                     height: 130,
-                      width: 135,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle
-                      ),
-                    child: Image.asset(
-                      'assets/images/settingprofile.png',
-                      fit: BoxFit.fitWidth,
-                      width: 110,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 95, left: 50),
-              child: Row(
+          Stack(
+            children: [
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  
-                  Icon(Icons.camera_alt_outlined,shadows: [
-                    BoxShadow(
-                      offset: Offset(0.0, 0.75),
-                      blurRadius: 1,
-                      color:kgrey 
-                    )
-                  ],)
-
-                ]
+                  imageprofile != null
+                      ? Container(
+                          decoration: BoxDecoration(shape: BoxShape.circle),
+                          height: 130,
+                          width: 135,
+                          child: Image.file(imageprofile!))
+                      : InkWell(
+                          onTap: () {
+                            profileimage();
+                          },
+                          child: Container(
+                            height: 130,
+                            width: 135,
+                            decoration: BoxDecoration(shape: BoxShape.circle),
+                            child: Image.asset(
+                              'assets/images/settingprofile.png',
+                              fit: BoxFit.fitWidth,
+                              width: 110,
+                            ),
                           ),
-                  )
+                        ),
                 ],
               ),
-          
-          
+              Padding(
+                padding: const EdgeInsets.only(top: 95, left: 50),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Icon(
+                    Icons.camera_alt_outlined,
+                    shadows: [
+                      BoxShadow(
+                          offset: Offset(0.0, 0.75),
+                          blurRadius: 1,
+                          color: kgrey)
+                    ],
+                  )
+                ]),
+              )
+            ],
+          ),
           ksizedbox20,
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15),

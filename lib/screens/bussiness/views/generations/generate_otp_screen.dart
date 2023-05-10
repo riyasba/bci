@@ -28,11 +28,11 @@ class BusinessGenerate_otp extends StatelessWidget {
           ksizedbox20,
           Text(
             'We will send you an One Time Password',
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 18),
           ),
           Text(
             'on this mobile number',
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 18),
           ),
           ksizedbox40,
           Padding(
@@ -53,7 +53,7 @@ class BusinessGenerate_otp extends StatelessWidget {
             child: InkWell(onTap: (){Get.to(BusinessOtpvarification());},
               child: Container(
                 width: double.infinity,
-                height: 65,
+                height: 55,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(

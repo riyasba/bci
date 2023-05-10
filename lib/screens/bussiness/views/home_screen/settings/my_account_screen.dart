@@ -44,18 +44,18 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
     }
   }
 
-  Future imagepic() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.camera);
-      if (image == null) return;
-      final imagetemp = File(image.path);
-      setState(() {
-        this.image = imagetemp;
-      });
-    } catch (e) {
-      print('Failed to pick image:$e');
-    }
-  }
+  // Future imagepic() async {
+  //   try {
+  //     final image = await ImagePicker().pickImage(source: ImageSource.camera);
+  //     if (image == null) return;
+  //     final imagetemp = File(image.path);
+  //     setState(() {
+  //       this.image = imagetemp;
+  //     });                               this is camera picking code 
+  //   } catch (e) {
+  //     print('Failed to pick image:$e');
+  //   }
+  // }
 
   Future pickerimage2() async {
     try {
@@ -70,18 +70,18 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
     }
   }
 
-  Future imagepic2() async {
-    try {
-      final image2 = await ImagePicker().pickImage(source: ImageSource.camera);
-      if (image2 == null) return;
-      final imagetemp2 = File(image2.path);
-      setState(() {
-        this.image2 = imagetemp2;
-      });
-    } catch (e) {
-      print('Failed to pick image:$e');
-    }
-  }
+  // Future imagepic2() async {
+  //   try {
+  //     final image2 = await ImagePicker().pickImage(source: ImageSource.camera);
+  //     if (image2 == null) return;
+  //     final imagetemp2 = File(image2.path);
+  //     setState(() {
+  //       this.image2 = imagetemp2;
+  //     });
+  //   } catch (e) {
+  //     print('Failed to pick image:$e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -258,38 +258,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                           height: 130, width: 135, child: Image.file(image!))
                       : InkWell(
                           onTap: () {
-                            showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return Container(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        TextButton(
-                                            onPressed: () {
-                                              pickerimage();
-                                            },
-                                            child: Text(
-                                              'Choose ur gallery',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16),
-                                            )),
-                                        TextButton(
-                                            onPressed: () {
-                                              imagepic();
-                                            },
-                                            child: Text(
-                                              'Choose ur Camera',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16),
-                                            ))
-                                      ],
-                                    ),
-                                  );
-                                });
+                            pickerimage();
                           },
                           child: Container(
                               height: 130,
@@ -303,38 +272,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                           height: 130, width: 135, child: Image.file(image2!))
                       : InkWell(
                           onTap: () {
-                            showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return Container(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        TextButton(
-                                            onPressed: () {
-                                              pickerimage2();
-                                            },
-                                            child: Text(
-                                              'Choose ur gallery',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16),
-                                            )),
-                                        TextButton(
-                                            onPressed: () {
-                                              imagepic2();
-                                            },
-                                            child: Text(
-                                              'Choose ur Camera',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16),
-                                            ))
-                                      ],
-                                    ),
-                                  );
-                                });
+                            pickerimage2();
                           },
                           child: Container(
                               height: 130,
