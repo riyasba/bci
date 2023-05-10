@@ -15,7 +15,7 @@ class Dropdown_hotel extends StatefulWidget {
 
 class _Dropdown_hotelState extends State<Dropdown_hotel> {
   var _selectedOption ;
- final List<String> options = [''];
+ final List<String> options = ['1','2','3'];
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -45,7 +45,7 @@ class _Dropdown_hotelState extends State<Dropdown_hotel> {
           items: options.map((option) {
             return DropdownMenuItem<String>(
               value: option,
-              child: Text(option),
+              child: Text(option,style: TextStyle(color: Colors.black),),
             );
           }).toList(),
         ),

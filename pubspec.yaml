@@ -54,7 +54,7 @@ dependencies:
   flutter_custom_clippers: ^2.1.0
   date_picker_widget: ^0.0.4
   calendar_date_picker2: ^0.5.2
-  table_calendar: ^3.0.1
+  table_calendar: ^3.0.8
   flutter_screenutil: ^5.7.0
 
 dev_dependencies:

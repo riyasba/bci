@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 import '../../../constands/constands.dart';
 
@@ -20,9 +21,13 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF9F8FD),
-      body: ListView(physics: BouncingScrollPhysics(), children: [
-        Image.asset('assets/images/Group 5823(1).png',
-            height: 500, fit: BoxFit.cover),
+      body: ListView(physics: BouncingScrollPhysics(), children: [TableCalendar(
+  firstDay: DateTime.utc(2010, 10, 16),
+  lastDay: DateTime.utc(2030, 3, 14),
+  focusedDay: DateTime.now(),
+),
+   ksizedbox30,   //  Image.asset('assets/images/Group 5823(1).png',
+       //     height: 500, fit: BoxFit.cover),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -74,7 +79,7 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
           ),
         ),
         Dropdown_hotel(
-          options: [],
+          options: ['option1 ','otion2'],
           label: 'Room Choose Ac or Non Ac',
         ),
         ksizedbox40,
@@ -103,7 +108,7 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
                 ),
               ),
               child: Text(
-                'PLay',
+                'Play',
                 style: TextStyle(
                     fontSize: 17,
                     color: Colors.white,

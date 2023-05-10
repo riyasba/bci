@@ -3,6 +3,7 @@ import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -20,7 +21,7 @@ class Otc_payment extends StatelessWidget {
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 150,
+              height: 150.h,
               color: kblue,
               child: Padding(
                 padding: const EdgeInsets.all(15),
@@ -36,7 +37,7 @@ class Otc_payment extends StatelessWidget {
                       child: Text(
                         'OTC Payment',
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
@@ -62,14 +63,14 @@ class Otc_payment extends StatelessWidget {
               children: [
                 Text(
                   'OTC PAYMENTS',
-                  style: TextStyle(fontSize: 28),
+                  style: TextStyle(fontSize: 28.sp),
                 ),
               ],
             ),
             ksizedbox20,
             Text(
               "Lorem Ipsum is simply dummy text of the printing and \ntypesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16.sp),
             ),ksizedbox30,
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -78,7 +79,7 @@ class Otc_payment extends StatelessWidget {
           
                   decoration: InputDecoration(
                       hintText: 'Enter Coupon',
-                      hintStyle: TextStyle(fontSize: 17, color: kgrey),
+                      hintStyle: TextStyle(fontSize: 17.sp, color: kgrey),
                       fillColor: kwhite,
                       focusColor: kwhite,
                       isDense: true,
@@ -96,7 +97,7 @@ class Otc_payment extends StatelessWidget {
           
                   decoration: InputDecoration(
                       hintText: 'Enter Coupon',
-                      hintStyle: TextStyle(fontSize: 17, color: kgrey),
+                      hintStyle: TextStyle(fontSize: 17.sp, color: kgrey),
                       fillColor: kwhite,
                       focusColor: kwhite,
                       isDense: true,
@@ -115,7 +116,7 @@ class Otc_payment extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     width: double.infinity,
-                    height: 50,
+                    height: 50.h,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
@@ -133,7 +134,7 @@ class Otc_payment extends StatelessWidget {
                     child: Text(
                       'Proceed To Payment',
                       style: TextStyle(
-                          fontSize: 28,
+                          fontSize: 28.sp,
                           color: Colors.white,
                           fontWeight: FontWeight.w700),
                     ),

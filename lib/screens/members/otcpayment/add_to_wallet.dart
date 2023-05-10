@@ -5,6 +5,7 @@ import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 
@@ -21,7 +22,7 @@ class Add_walet_screen extends StatelessWidget {
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 150,
+              height: 150.h,
               color: kblue,
               child: Padding(
                 padding: const EdgeInsets.all(15),
@@ -37,7 +38,7 @@ class Add_walet_screen extends StatelessWidget {
                       child: Text(
                         'Add to Wallet',
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
@@ -68,7 +69,7 @@ class Add_walet_screen extends StatelessWidget {
           Text(
             'Add To Wallet Amounts or Default Amount Choose Payment Methods...',
             textAlign: TextAlign.center,
-            style: TextStyle(color: kblue, fontSize: 22),
+            style: TextStyle(color: kblue, fontSize: 22.sp),
           ),
           ksizedbox30,
           Padding(
@@ -78,11 +79,11 @@ class Add_walet_screen extends StatelessWidget {
                 child: Text(
                   '₹1990.00',
                   style: TextStyle(
-                      fontSize: 30, fontWeight: FontWeight.w800, color: kwhite),
+                      fontSize: 30.sp, fontWeight: FontWeight.w800, color: kwhite),
                 ),
               ),
-              height: 50,
-              width: 220,
+              height: 50.h,
+              width: 220.w,
               decoration: BoxDecoration(
                   color: kblue, borderRadius: BorderRadius.circular(4)),
             ),
@@ -92,7 +93,7 @@ class Add_walet_screen extends StatelessWidget {
             children: [
               Text(
                 'Others Amounts',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+                style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w700),
               ),
             ],
           ),
@@ -106,13 +107,13 @@ class Add_walet_screen extends StatelessWidget {
                   child: Text(
                     '+2000',
                     style: TextStyle(
-                        fontSize: 19,
+                        fontSize: 19.sp,
                         fontWeight: FontWeight.w500,
                         color: kblue),
                   ),
                 ),
-                height: 50,
-                width: 120,
+                height: 50.h,
+                width: 120.w,
               ),
               Container(
                 decoration: BoxDecoration(border: Border.all(color: kblue)),
@@ -120,13 +121,13 @@ class Add_walet_screen extends StatelessWidget {
                   child: Text(
                     '+2000',
                     style: TextStyle(
-                        fontSize: 19,
+                        fontSize: 19.sp,
                         fontWeight: FontWeight.w500,
                         color: kblue),
                   ),
                 ),
-                height: 50,
-                width: 120,
+                height: 50.h,
+                width: 120.w,
               ),
             ],
           ),ksizedbox30 ,  Row(
@@ -138,13 +139,13 @@ class Add_walet_screen extends StatelessWidget {
                   child: Text(
                     '+2000',
                     style: TextStyle(
-                        fontSize: 19,
+                        fontSize: 19.sp,
                         fontWeight: FontWeight.w500,
                         color: kblue),
                   ),
                 ),
-                height: 50,
-                width: 120,
+                height: 50.h,
+                width: 120.w,
               ),
               Container(
                 decoration: BoxDecoration(border: Border.all(color: kblue)),
@@ -152,13 +153,13 @@ class Add_walet_screen extends StatelessWidget {
                   child: Text(
                     '+2000',
                     style: TextStyle(
-                        fontSize: 19,
+                        fontSize: 19.sp,
                         fontWeight: FontWeight.w500,
                         color: kblue),
                   ),
                 ),
-                height: 50,
-                width: 120,
+                height: 50.h,
+                width: 120.w,
               ),
             ],
           ),ksizedbox40,
@@ -171,7 +172,7 @@ class Add_walet_screen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     width: double.infinity,
-                    height: 50,
+                    height: 50.h,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
@@ -189,7 +190,7 @@ class Add_walet_screen extends StatelessWidget {
                     child: Text(
                       'Next',
                       style: TextStyle(
-                          fontSize: 28,
+                          fontSize: 28.sp,
                           color: Colors.white,
                           fontWeight: FontWeight.w500),
                     ),
@@ -203,7 +204,7 @@ class Add_walet_screen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     width: double.infinity,
-                    height: 50,
+                    height: 50.h,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(border:Border.all(color: Colors.black),
                       borderRadius: BorderRadius.circular(
@@ -221,7 +222,7 @@ class Add_walet_screen extends StatelessWidget {
                     child: Text(
                       'Cancel',
                       style: TextStyle(
-                          fontSize: 28,
+                          fontSize: 28.sp,
                           color: Colors.black,
                           fontWeight: FontWeight.w500),
                     ),

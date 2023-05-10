@@ -6,6 +6,7 @@ import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -27,20 +28,20 @@ class verified_Screen extends StatelessWidget {
           Text(
             "Welcome :)",
             style: TextStyle(
-                fontSize: 22, color: Colors.black, fontWeight: FontWeight.w700),
+                fontSize: 22.sp, color: Colors.black, fontWeight: FontWeight.w700),
           ),
           ksizedbox30,
           Text(
             "Your account has been verified",
             style: TextStyle(
-              fontSize: 19,
+              fontSize: 19.sp,
               color: Colors.black,
             ),
           ),
           Text(
             "Successfully",
             style: TextStyle(
-              fontSize: 19,
+              fontSize: 19.sp,
               color: Colors.black,
             ),
           ),
@@ -54,7 +55,7 @@ class verified_Screen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Container(
                 width: double.infinity,
-                height: 65,
+                height: 65.h,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
@@ -72,7 +73,7 @@ class verified_Screen extends StatelessWidget {
                 child: Text(
                   'Done',
                   style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 22.sp,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),

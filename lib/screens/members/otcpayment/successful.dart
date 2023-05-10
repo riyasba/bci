@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -25,7 +26,7 @@ class Sucessful_screen_otc extends StatelessWidget {
         title: Text(
           'Payment Completed',
           style: TextStyle(
-              fontSize: 27, fontWeight: FontWeight.w800, color: kblue),
+              fontSize: 27.sp, fontWeight: FontWeight.w800, color: kblue),
         ),
       ),
       body: Center(
@@ -36,21 +37,21 @@ class Sucessful_screen_otc extends StatelessWidget {
             Text(
               'Payment Successful',
               style: TextStyle(
-                  color: kblue, fontSize: 28, fontWeight: FontWeight.w700),
+                  color: kblue, fontSize: 28.sp, fontWeight: FontWeight.w700),
             ),
             ksizedbox10,
             Text(
               'Thank you! Your payment is complete',
               style: TextStyle(
-                  fontSize: 22, fontWeight: FontWeight.w600, color: kblue),
+                  fontSize: 22.sp, fontWeight: FontWeight.w600, color: kblue),
             ),ksizedbox40,ksizedbox40,
             
         InkWell(onTap: (){Get.to(UpgradeScreen());},
                 child: Container(
-                  width: 150,
-                  height: 45,
+                  width: 150.w,
+                  height: 45.h,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
+                  decoration: BoxDecoration( 
                     borderRadius: BorderRadius.circular(
                       4,
                     ),
@@ -66,7 +67,7 @@ class Sucessful_screen_otc extends StatelessWidget {
                   child: Text(
                     'Done',
                     style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 17.sp,
                         color: Colors.white,
                         fontWeight: FontWeight.w600),
                   ),

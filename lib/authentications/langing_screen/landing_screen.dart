@@ -4,6 +4,7 @@ import 'package:bci/screens/bussiness/views/generations/generate_otp_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -19,8 +20,8 @@ class landing_screen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      height: size.height,
-      width: size.width,
+      height: size.height.h,
+      width: size.width.w,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
@@ -41,7 +42,7 @@ class landing_screen extends StatelessWidget {
         padding: const EdgeInsets.only(right: 20,left: 20),
         child: Container(
           width:double.infinity,
-          height: 65,
+          height: 65.h,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
@@ -56,9 +57,8 @@ class landing_screen extends StatelessWidget {
               ],
             ),
           ),
-      child:const Text('Member Login', 
-                style: TextStyle(
-                               fontSize: 22,
+      child: Text('Member Login',           style: TextStyle(
+                               fontSize: 22.sp,
                                color: Colors.white,
                                fontWeight: FontWeight.bold),),
         ),
@@ -92,7 +92,7 @@ class landing_screen extends StatelessWidget {
               // ),
               ksizedbox20,
               SizedBox(
-                height: 65,
+                height: 65.h,
                 width: double.infinity,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
@@ -110,7 +110,7 @@ class landing_screen extends StatelessWidget {
                       child: Text(
                         'Bussiness login',
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 22.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       )),

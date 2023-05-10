@@ -2,6 +2,7 @@ import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
 import 'package:bci/screens/bussiness/views/home_screen/wallet/bank_deatails.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../constands/constands.dart';
@@ -90,25 +91,26 @@ class _WalletScreenState extends State<WalletScreen> {
               ],
             ),
             Row(
+              
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 15, top: 10),
                   child: Container(
-                    height: 110,
-                    width: 245,
+                    height: 110.h,
+                    width: 235.w,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 20, right: 40),
+                      padding: const EdgeInsets.only(top: 20, right: 20),
                       child: Column(
                         children: [
                           Text(
                             'Total Wallet Amount',
-                            style: TextStyle(color: kwhite, fontSize: 17),
+                            style: TextStyle(color: kwhite, fontSize: 17.sp),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10, right: 70),
                             child: Text(
                               '₹1990.0',
-                              style: TextStyle(fontSize: 21, color: kwhite),
+                              style: TextStyle(fontSize: 21.sp, color: kwhite),
                             ),
                           )
                         ],
@@ -187,8 +189,8 @@ class _WalletScreenState extends State<WalletScreen> {
                           decoration: BoxDecoration(
                               color: kyellow,
                               border: Border.all(color: kOrange, width: 1)),
-                          height: _mediaQuery.height>700?108:110,
-                          width: _mediaQuery.width>700?90:95,
+                          height: _mediaQuery.height > 700 ? 108.h : 110.h,
+                          width: _mediaQuery.width > 700 ? 90.w : 95.w,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -196,7 +198,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                 padding: const EdgeInsets.only(top: 11),
                                 child: CircleAvatar(
                                   backgroundColor: kwhite,
-                                  radius: 25,
+                                  radius: 25.h,
                                   child: Image.asset(
                                     'assets/images/cirlewallet.png',
                                     fit: BoxFit.contain,
@@ -208,7 +210,8 @@ class _WalletScreenState extends State<WalletScreen> {
                               ),
                               Text(
                                 'Withdraw \nCash',
-                                style: TextStyle(fontSize: 16, color: kwhite),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 16.sp, color: kwhite),
                               )
                             ],
                           ),

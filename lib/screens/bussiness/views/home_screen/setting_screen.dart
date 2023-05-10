@@ -44,7 +44,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           )),
-      body: Column(
+      body: ListView(
         children: [
           InkWell(
             onTap: () {

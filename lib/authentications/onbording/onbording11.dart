@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -159,12 +160,12 @@ class _riyasandiState extends State<riyasandi> {
         Text(
           'ALL IN ONE PRESTIGIOUS ',
           style: TextStyle(
-              fontSize: 27, fontWeight: FontWeight.w700, color: kwhite),
+              fontSize: 27.sp, fontWeight: FontWeight.w700, color: kwhite),
         ),
         Text(
           'MEMBERSHIP',
           style: TextStyle(
-              fontSize: 27, fontWeight: FontWeight.w700, color: kwhite),
+              fontSize: 27.sp, fontWeight: FontWeight.w700, color: kwhite),
         ),
         ksizedbox40,
         Image.asset('assets/images/Group 111111.png'),
@@ -193,12 +194,12 @@ class _riyasnadi2State extends State<riyasnadi2> {
         Text(
           'HOTELS & SERVICES',
           style: TextStyle(
-              fontSize: 27, fontWeight: FontWeight.w700, color: kwhite),
+              fontSize: 27.sp, fontWeight: FontWeight.w700, color: kwhite),
         ),
         Text(
           'BCI Prestigious Members Can Access our Amazing\n Discounts Coupons @ Our Associate Hotels / Resorts / Spas / Saloons / Services Apartments / \nMarriage Halls / Tours & Travels.',
           style: TextStyle(
-              color: kwhite, fontWeight: FontWeight.w600, fontSize: 17),
+              color: kwhite, fontWeight: FontWeight.w600, fontSize: 17.sp),
           textAlign: TextAlign.center,
         ),
         ksizedbox30,
@@ -219,12 +220,12 @@ class Onbording3 extends StatelessWidget {
         Text(
           'ESSENTIAL BAZZAR',
           style: TextStyle(
-              fontSize: 27, fontWeight: FontWeight.w700, color: kwhite),
+              fontSize: 27.sp, fontWeight: FontWeight.w700, color: kwhite),
         ),
         Text(
           'BCI Prestigious Members Can Access our Amazing\n Discounts Coupons @ Our Associate Provision / \nRestaurant / Jewellery / Textile / Complimentary\n Coupon.',
           style: TextStyle(
-              color: kwhite, fontWeight: FontWeight.w600, fontSize: 17),
+              color: kwhite, fontWeight: FontWeight.w600, fontSize: 17.sp),
           textAlign: TextAlign.center,
         ),
         ksizedbox30,
@@ -246,12 +247,12 @@ class Onbording4 extends StatelessWidget {
           'A TO Z UTILITY SERVICE &\n ONLINE DISCOUNTS',
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontSize: 27, fontWeight: FontWeight.w700, color: kwhite),
+              fontSize: 27.sp, fontWeight: FontWeight.w700, color: kwhite),
         ),
         Text(
           'BCI Prestigious Members Can Access our Amazing\n Discounts Coupons @ Our Associate Utility Service Providers / Online Shopping / Online Recharge / Online Cinema Tickets.',
           style: TextStyle(
-              color: kwhite, fontWeight: FontWeight.w600, fontSize: 17),
+              color: kwhite, fontWeight: FontWeight.w600, fontSize: 17.sp),
           textAlign: TextAlign.center,
         ),
         ksizedbox30,
@@ -266,12 +267,26 @@ class Onbording5 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        Positioned(top: 3,left: 10,right: 10,
-          child: Image.asset('assets/images/onbord55.png',height: 500,)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+              'MEMBER CAN AVAIL',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 27.sp, fontWeight: FontWeight.w700, color: kwhite),
+                    ),
+            ],
+          ),
+        Positioned(top: 40,left: 10,right: 10,
+          child: Image.asset('assets/images/onbord55.png',height: 400.h,)),
         Positioned(bottom: 0,
-          child: Image.asset('assets/images/onbording5.png'))
+          child: Image.asset('assets/images/onbording5.png',height: 300.h,
+          width: size.width,
+          fit: BoxFit.fitWidth,))
       ],
     );
   }

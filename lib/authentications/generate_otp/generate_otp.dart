@@ -1,6 +1,9 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/screens/members/sign_up_view/sign_up_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../otp_verification/otp_verification.dart';
 

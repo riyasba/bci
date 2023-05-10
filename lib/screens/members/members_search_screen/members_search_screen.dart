@@ -20,7 +20,7 @@ class Members_search_screen extends StatefulWidget {
 }
 
 class _Members_search_screenState extends State<Members_search_screen> {
-  final List<String> options = ['Catogory', 'Hotel', 'Club''Resort''Saloon''Parour''Service Apartment''Textile''SPA'];
+  //final List<String> options = ['Catogory', 'Hotel', 'Club''Resort''Saloon''Parour''Service Apartment''Textile''SPA'];
 
   @override
   Widget build(BuildContext context) {

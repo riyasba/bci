@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/instance_manager.dart';
 
@@ -21,11 +22,15 @@ class otp_varification extends StatelessWidget {
           Text(
             'OTP Verification',
             style: TextStyle(
-                fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold),
-          ),ksizedbox10, Text(
-            'Enter the OTP sent to +91 9633749714',
-            style: TextStyle(
-                fontSize: 22, color: Colors.black, ),
+                fontSize: 22.sp, color: Colors.black, fontWeight: FontWeight.bold),
+          ),ksizedbox10, Row(mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Enter the OTP sent to +91 9633749714',
+                style: TextStyle(
+                    fontSize: 22.sp, color: Colors.black, ),
+              ),
+            ],
           ),ksizedbox20,   SingleChildScrollView(
             child: OtpTextField(
                       numberOfFields: 5,
@@ -54,20 +59,20 @@ class otp_varification extends StatelessWidget {
                       Text(
             "Don't Recive OTP ",
             style: TextStyle(
-                fontSize: 19, color: Colors.black, ),
+                fontSize: 19.sp, color: Colors.black, ),
           ),     Text(
             "Resent",
             style: TextStyle(
-                fontSize: 19, color: Colors.red, ),
+                fontSize: 19.sp, color: Colors.red, ),
           ),
-                  ksizedbox20 ,  ],
-                  ),ksizedbox30,
+                  ],
+                  ),  ksizedbox20 ,ksizedbox30,
      InkWell(onTap: (){Get.to(verified_Screen());},
               child: Padding(
                 padding: const EdgeInsets.only(left: 20,right:20 ),
                 child: Container(
                   width: double.infinity,
-                  height: 65,
+                  height: 65.h,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
@@ -85,7 +90,7 @@ class otp_varification extends StatelessWidget {
                   child: Text(
                     'Verify',
                     style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 22.sp,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),

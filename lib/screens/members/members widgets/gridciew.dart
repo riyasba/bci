@@ -1,3 +1,4 @@
+import 'package:bci/constands/constands.dart';
 import 'package:flutter/material.dart';
 
 class MyGridView extends StatelessWidget {
@@ -26,13 +27,20 @@ class MyGridView extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 8,
+            crossAxisSpacing: 12,
             mainAxisSpacing: 8,
           ),
           itemCount: image.length,
           itemBuilder: (BuildContext context, int index) {
             return Center(
-              child: Image.asset(image[index].toString())
+              child: Column(children:[
+                 Image.asset(image[index].toString()),
+                 Row(
+                   children: [kwidth10,
+                     Text('Hotel Place',style: TextStyle(fontSize: 17,color: kblue,fontWeight: FontWeight.w700),),
+                   ],
+                 )
+                 ])
             );
           },
         ),

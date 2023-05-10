@@ -61,7 +61,7 @@ class _SettingScreenState extends State<SettingScreen> {
           )),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
+        child: ListView(
           children: [
             InkWell(onTap: (){
               Get.to(const MyAccount());
