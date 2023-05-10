@@ -44,7 +44,7 @@ class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
           style: TabStyle.reactCircle,
           items: [
             TabItem(icon: Icons.home, title: 'Home'),
-            TabItem(icon: Icons.search, title: 'Notification'),
+            TabItem(icon: Icons.search, title: 'Search'),
             TabItem(icon: Icons.wallet, title: 'Wallet'),
             TabItem(icon: Icons.book_online, title: 'Booking'),
             TabItem(icon: Icons.settings, title: 'Settings'),

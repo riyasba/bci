@@ -74,7 +74,7 @@ class _OnbordingState extends State<Onbording> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        InkWell(
+                        GestureDetector(
                             onTap: () {
                               _pageController.previousPage(
                                 duration: Duration(milliseconds: 300),
@@ -97,7 +97,7 @@ class _OnbordingState extends State<Onbording> {
                             ),
                           ],
                         ),
-                        InkWell(
+                        GestureDetector(
                             onTap: () {
                               setState(() {
                                 isPageViewEnabled = true;
@@ -121,7 +121,7 @@ class _OnbordingState extends State<Onbording> {
               Positioned(
                   right: 7,
                   top: 7,
-                  child: InkWell(
+                  child: GestureDetector(
                       onTap: () {
                         Get.to(HelloConvexAppBar());
                       },
