@@ -1,4 +1,6 @@
 import 'package:bci/screens/bussiness/views/home_screen/contact_admin.dart';
+import 'package:bci/screens/members/otcpayment/successful.dart';
+import 'package:bci/screens/members/settings_views/upgrade_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -162,7 +164,8 @@ class Add_walet_screen extends StatelessWidget {
           ),ksizedbox40,
       InkWell(
                 onTap: () {
-                      Get.to(Add_walet_screen());
+   
+                      Get.to(Sucessful_screen_otc());
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -194,7 +197,7 @@ class Add_walet_screen extends StatelessWidget {
                 ),
               ),ksizedbox10, InkWell(
                 onTap: () {
-                      Get.to(Add_walet_screen());
+                    
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

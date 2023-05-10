@@ -13,6 +13,7 @@ import '../../bussiness/views/home_screen/setting_screen.dart';
 import '../../bussiness/views/home_screen/settings/my_account_screen.dart';
 import '../home_screen/Members_home_screen.dart';
 import '../members_search_screen/members_search_screen.dart';
+import '../wallet/Wallet_members.dart';
 
 class HelloConvexAppBar extends StatefulWidget {
   @override
@@ -26,7 +27,7 @@ class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
       title: 'Search Result',
       items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
     ),
-    WalletScreen(),
+    WalletScreen_members (),
     Members_booking(),
     SettingScreen(),
   ];

@@ -5,14 +5,15 @@ import 'package:get/get.dart';
 
 import '../../../../../constands/constands.dart';
 
-class DashBoardScreen extends StatefulWidget {
-  const DashBoardScreen({super.key});
+class DashBoardScreen_menbers extends StatefulWidget {
+  const DashBoardScreen_menbers({super.key});
 
   @override
-  State<DashBoardScreen> createState() => _DashBoardScreenState();
+  State<DashBoardScreen_menbers> createState() =>
+      _DashBoardScreen_menbersState();
 }
 
-class _DashBoardScreenState extends State<DashBoardScreen> {
+class _DashBoardScreen_menbersState extends State<DashBoardScreen_menbers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,7 +134,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Container(
-                height: 140,
+                height: 160,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(color: kwhite, boxShadow: <BoxShadow>[
                   BoxShadow(
@@ -147,62 +148,28 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 8, top: 15),
                           child: Text(
-                            'Earnings',
+                            'Your Coupons',
                             style: TextStyle(fontSize: 20, color: kblue),
                           ),
                         ),
                         Padding(
-                            padding: const EdgeInsets.only(right: 10, top: 15),
-                            child: Text(
-                              'view',
-                              style: TextStyle(color: kyellow, fontSize: 15),
-                            )),
+                          padding: const EdgeInsets.only(right: 10, top: 15),
+                          child: Text(
+                            'view',
+                            style: TextStyle(color: kyellow, fontSize: 15),
+                          ),
+                        )
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            height: 30,
-                            width: 100,
-                            decoration: BoxDecoration(
-                                color: kOrange,
-                                borderRadius: BorderRadius.circular(4)),
-                            child: Center(
-                                child: Text(
-                              '0',
-                              style: TextStyle(color: kwhite),
-                            )),
-                          ),
-                          Container(
-                            height: 30,
-                            width: 100,
-                            decoration: BoxDecoration(
-                                color: kOrange,
-                                borderRadius: BorderRadius.circular(4)),
-                            child: Center(
-                                child: Text(
-                              '0',
-                              style: TextStyle(color: kwhite),
-                            )),
-                          ),
-                          Container(
-                            height: 30,
-                            width: 100,
-                            decoration: BoxDecoration(
-                                color: kOrange,
-                                borderRadius: BorderRadius.circular(4)),
-                            child: Center(
-                                child: Text(
-                              '0',
-                              style: TextStyle(color: kwhite),
-                            )),
-                          ),
-                        ],
-                      ),
-                    ),
+                        padding: const EdgeInsets.only(top: 15),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset('assets/images/circle.png'),
+                            Image.asset('assets/images/circle.png'),
+                            Image.asset('assets/images/circle.png'),
+                          ],
+                        )),
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: Row(
@@ -231,7 +198,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Container(
-                height: 140,
+                height: 160,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(color: kwhite, boxShadow: <BoxShadow>[
                   BoxShadow(
@@ -245,7 +212,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 8, top: 15),
                           child: Text(
-                            'Bookings',
+                            'Your Referals',
                             style: TextStyle(fontSize: 20, color: kblue),
                           ),
                         ),
@@ -259,49 +226,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            height: 30,
-                            width: 100,
-                            decoration: BoxDecoration(
-                                color: kOrange,
-                                borderRadius: BorderRadius.circular(4)),
-                            child: Center(
-                                child: Text(
-                              '0',
-                              style: TextStyle(color: kwhite),
-                            )),
-                          ),
-                          Container(
-                            height: 30,
-                            width: 100,
-                            decoration: BoxDecoration(
-                                color: kOrange,
-                                borderRadius: BorderRadius.circular(4)),
-                            child: Center(
-                                child: Text(
-                              '0',
-                              style: TextStyle(color: kwhite),
-                            )),
-                          ),
-                          Container(
-                            height: 30,
-                            width: 100,
-                            decoration: BoxDecoration(
-                                color: kOrange,
-                                borderRadius: BorderRadius.circular(4)),
-                            child: Center(
-                                child: Text(
-                              '0',
-                              style: TextStyle(color: kwhite),
-                            )),
-                          ),
-                        ],
-                      ),
-                    ),
+                        padding: const EdgeInsets.only(top: 15),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset('assets/images/circle.png'),
+                            Image.asset('assets/images/circle.png'),
+                            Image.asset('assets/images/circle.png'),
+                          ],
+                        )),
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: Row(
@@ -327,104 +259,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               ),
             ),
             ksizedbox20,
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Container(
-                height: 140,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(color: kwhite, boxShadow: <BoxShadow>[
-                  BoxShadow(
-                      offset: Offset(0.0, 0.75), color: kgrey, blurRadius: 5)
-                ]),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8, top: 15),
-                          child: Text(
-                            'Referrals',
-                            style: TextStyle(fontSize: 20, color: kblue),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10, top: 15),
-                          child: Text(
-                            'view',
-                            style: TextStyle(color: kyellow, fontSize: 15),
-                          ),
-                        )
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            height: 30,
-                            width: 100,
-                            decoration: BoxDecoration(
-                                color: kOrange,
-                                borderRadius: BorderRadius.circular(4)),
-                            child: Center(
-                                child: Text(
-                              '0',
-                              style: TextStyle(color: kwhite),
-                            )),
-                          ),
-                          Container(
-                            height: 30,
-                            width: 100,
-                            decoration: BoxDecoration(
-                                color: kOrange,
-                                borderRadius: BorderRadius.circular(4)),
-                            child: Center(
-                                child: Text(
-                              '0',
-                              style: TextStyle(color: kwhite),
-                            )),
-                          ),
-                          Container(
-                            height: 30,
-                            width: 100,
-                            decoration: BoxDecoration(
-                                color: kOrange,
-                                borderRadius: BorderRadius.circular(4)),
-                            child: Center(
-                                child: Text(
-                              '0',
-                              style: TextStyle(color: kwhite),
-                            )),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            'Today',
-                            style: TextStyle(color: kblue, fontSize: 14.5),
-                          ),
-                          Text(
-                            'Paid',
-                            style: TextStyle(fontSize: 14.5, color: kblue),
-                          ),
-                          Text(
-                            'Unpaid',
-                            style: TextStyle(color: kblue, fontSize: 14.5),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
             ksizedbox30
           ],
         ),

@@ -31,113 +31,116 @@ class Add_cart extends StatelessWidget {
                 'assets/images/23456.png',
                 height: 500,
               )),
-          ListView(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'CHARDONNAY',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
-              ),
-              ksizedbox10,
-              Text(
-                'Barefoot Wine',
-                style: TextStyle(fontSize: 16),
-              ),
-              ksizedbox40,
-              Text('Tastes like...'),
-              ksizedbox20,
-              Text(
-                'Apple, Rich, Vanilla',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-              ),
-              ksizedbox40,
-              Text(
-                'White Wine',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-              ),
-              ksizedbox40,
-              Text('Size'),
-              ksizedbox20,
-              // Container(
-              //   child: Center(
-              //       child: Text(
-              //     '1.5 L',
-              //     style: TextStyle(fontSize: 16),
-              //   )),
-              //   height: 35,
-              //   width: 150,
-              //   decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(7), color: kgrey),
-              // ),
-              ksizedbox30,
-              // Container(
-              //   child: Center(
-              //       child: Text(
-              //     '+        02      _',
-              //     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-              //   )),
-              //   height: 35,
-              //   width: 150,
-              //   decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(7), color: kgrey),
-              // ),
-              ksizedbox40,
-              Text(
-                'About',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-              ),
-              ksizedbox10,
-              Text(
-                'Packing big, bold flavor with a smooth finish, Barefoot Chardonnay brings tempting flavors to every bottle, with notes of crisp, green apples and sweet peaches. Accented with hints of honey and vanilla, our medium-bodied Chardonnay pairs perfectly with fresh fruit, pasta, chicken, and salmon.',
-                style: TextStyle(fontSize: 11, color: kgrey),
-              ),
-              ksizedbox20,
-              Text(
-                'Delivery Information',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-              ),
-              ksizedbox10,
-              Text(
-                'Direct selling for delivery service our order club and Bar.',
-                style: TextStyle(fontSize: 11, color: kgrey),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: InkWell(onTap: (){Get.to(cart_screen());},
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [kwidth5,
-                        Text(
-                          'Total - ₹ 16.80',
-                          style: TextStyle(color: kwhite, fontSize: 18),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            child: Center(
-                                child: Text(
-                              'Add To Cart',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w700),
-                            )),
-                            height: 65,
-                            width: 160,
-                            decoration: BoxDecoration(
-                                color: kwhite,
-                                borderRadius: BorderRadius.circular(16)),
-                          ),
-                        ),
-                      ],
-                    ),
-                    height: 70,
-                    width: 100,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16), color: kyellow),
-                  ),
+          Padding(
+            padding: const EdgeInsets.all(13.0),
+            child: ListView(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'CHARDONNAY',
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
                 ),
-              )
-            ],
+                ksizedbox10,
+                Text(
+                  'Barefoot Wine',
+                  style: TextStyle(fontSize: 16),
+                ),
+                ksizedbox40,
+                Text('Tastes like...'),
+                ksizedbox20,
+                Text(
+                  'Apple, Rich, Vanilla',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
+                ksizedbox40,
+                Text(
+                  'White Wine',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
+                ksizedbox40,
+                Text('Size'),
+                ksizedbox20,
+                // Container(
+                //   child: Center(
+                //       child: Text(
+                //     '1.5 L',
+                //     style: TextStyle(fontSize: 16),
+                //   )),
+                //   height: 35,
+                //   width: 150,
+                //   decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(7), color: kgrey),
+                // ),
+                ksizedbox30,
+                // Container(
+                //   child: Center(
+                //       child: Text(
+                //     '+        02      _',
+                //     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                //   )),
+                //   height: 35,
+                //   width: 150,
+                //   decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(7), color: kgrey),
+                // ),
+                ksizedbox40,
+                Text(
+                  'About',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
+                ksizedbox10,
+                Text(
+                  'Packing big, bold flavor with a smooth finish, Barefoot Chardonnay brings tempting flavors to every bottle, with notes of crisp, green apples and sweet peaches. Accented with hints of honey and vanilla, our medium-bodied Chardonnay pairs perfectly with fresh fruit, pasta, chicken, and salmon.',
+                  style: TextStyle(fontSize: 11, color: kgrey),
+                ),
+                ksizedbox20,
+                Text(
+                  'Delivery Information',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
+                ksizedbox10,
+                Text(
+                  'Direct selling for delivery service our order club and Bar.',
+                  style: TextStyle(fontSize: 11, color: kgrey),
+                ),ksizedbox40,
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: InkWell(onTap: (){Get.to(cart_screen());},
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [kwidth5,
+                          Text(
+                            'Total - ₹ 16.80',
+                            style: TextStyle(color: kwhite, fontSize: 18),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              child: Center(
+                                  child: Text(
+                                'Add To Cart',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w700),
+                              )),
+                              height: 65,
+                              width: 160,
+                              decoration: BoxDecoration(
+                                  color: kwhite,
+                                  borderRadius: BorderRadius.circular(16)),
+                            ),
+                          ),
+                        ],
+                      ),
+                      height: 70,
+                      width: 100,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16), color: kyellow),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ],
       ),

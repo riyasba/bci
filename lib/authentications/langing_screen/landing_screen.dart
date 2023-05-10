@@ -24,7 +24,7 @@ class landing_screen extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
-            'assets/images/01 Login Screen Options.png',
+            'assets/images/Login Screen Options.png',
           ),
           fit: BoxFit.cover,
         ),
@@ -33,7 +33,7 @@ class landing_screen extends StatelessWidget {
           body: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Image.asset('assets/images/onbording3.png'),ksizedbox40,
+          //    Image.asset('assets/images/onbording3.png'),ksizedbox40,
               InkWell(
               
       onTap: (){Get.off(Generate_otp());},

@@ -82,21 +82,21 @@ class _OnbordingState extends State<Onbording> {
                               );
                             },
                             child: Image.asset(
-                                'assets/images/onbordingbackbutton.png')),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     AnimatedSmoothIndicator(
-                        //       activeIndex: isPageViewEnabled ? _pageController.page!.toInt() : 0,
-                        //       count: 5,
-                        //       effect: ScaleEffect(
-                        //           dotHeight: 9.0,
-                        //           dotWidth: 9.0,
-                        //           dotColor: kgrey,
-                        //           activeDotColor: korange),
-                        //     ),
-                        //   ],
-                        // ),
+                                'assets/images/jaba.png')),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AnimatedSmoothIndicator(
+                              activeIndex: isPageViewEnabled ? _pageController.page!.toInt() : 0,
+                              count: 5,
+                              effect: ScaleEffect(
+                                  dotHeight: 9.0,
+                                  dotWidth: 9.0,
+                                  dotColor: kgrey,
+                                  activeDotColor: korange),
+                            ),
+                          ],
+                        ),
                         InkWell(
                             onTap: () {
                               setState(() {

@@ -81,7 +81,7 @@ class _OnbordingState extends State<Onbording> {
                               );
                             },
                             child: Image.asset(
-                                'assets/images/backarrowonboarding.png')),
+                                'assets/images/jaba.png')),
                         // Row(
                         //   mainAxisAlignment: MainAxisAlignment.center,
                         //   children: [

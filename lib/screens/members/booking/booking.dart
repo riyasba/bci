@@ -1,3 +1,4 @@
+import 'package:bci/screens/members/booking/widget/Flight_view.dart';
 import 'package:bci/screens/members/booking/widget/booking_hotels_containers.dart';
 import 'package:bci/screens/members/booking/widget/holiday_containers.dart';
 import 'package:custom_clippers/custom_clippers.dart';
@@ -90,10 +91,10 @@ class _Members_bookingState extends State<Members_booking> {
                 ),
               ],
             )),
-        body: TabBarView(children: [
+        body: TabBarView(children: [Flight_widget (),
           bookings_containers(),
           Holiays_containors(),
-          Holiays_containors()
+          
         ]),
       ),
     );

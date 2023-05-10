@@ -47,7 +47,8 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                 child: Column(
                   children: [
                     Row(children: [
-                      Image.asset('assets/images/parflaightback.png'),
+                      InkWell(onTap: (){Get.back();},
+                        child: Image.asset('assets/images/parflaightback.png')),
                       Text(
                         'PAR - NYC',
                         style: TextStyle(color: kwhite, fontSize: 20),
