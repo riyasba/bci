@@ -22,7 +22,7 @@ class landing_screen extends StatelessWidget {
     return Container(
       height: size.height.h,
       width: size.width.w,
-      decoration: BoxDecoration(
+      decoration:const BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
             'assets/images/Login Screen Options.png',
@@ -37,7 +37,7 @@ class landing_screen extends StatelessWidget {
               //    Image.asset('assets/images/onbording3.png'),ksizedbox40,
               InkWell(
                 onTap: () {
-                  Get.off(const MemberLoginScreen());
+                  Get.to(const MemberLoginScreen());
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20, left: 20),
@@ -101,30 +101,65 @@ class landing_screen extends StatelessWidget {
               //   ),
               // ),
               ksizedbox20,
-              SizedBox(
-                height: 50.h,
-                width: double.infinity,
+              InkWell(
+                onTap: () {
+                  Get.to(const BusinessLoginScreen());
+                },
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(0, 246, 246, 246),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                      ),
-                      onPressed: () {
-                        Get.to(BusinessLoginScreen());
-                      },
+                  padding: const EdgeInsets.only(right: 20, left: 20),
+                  child: Container(
+                    height: 50.h,
+                    width: double.infinity.w,
+                    decoration: BoxDecoration(
+                      color: kblue,
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(color: Colors.white),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.white,
+                          blurRadius: 3.0,
+                        )
+                      ],
+                     
+                    ),
+                    child: Center(
                       child: Text(
-                        'Bussiness login',
+                        "Bussiness login",
                         style: TextStyle(
                             fontSize: 22.sp,
                             color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      )),
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ),
                 ),
               ),
+              // SizedBox(
+              //   height: 50.h,
+              //   width: double.infinity,
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(left: 20, right: 20),
+              //     child: ElevatedButton(
+              //         style: ElevatedButton.styleFrom(
+              //           backgroundColor:const Color.fromARGB(0, 246, 246, 246),
+              //           shape: RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(4.0),
+              //           ),
+              //         ),
+              //         onPressed: () {
+              //           Get.to(const BusinessLoginScreen());
+              //         },
+              //         child: Text(
+              //           'Bussiness login',
+              //           style: TextStyle(
+              //               fontSize: 22.sp,
+              //               color: Colors.white,
+              //               fontWeight: FontWeight.bold),
+              //         )),
+              //   ),
+              // ),
+              ksizedbox30,
+              ksizedbox30,
               ksizedbox30
             ],
           ),

@@ -51,6 +51,31 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                              borderRadius: BorderRadius.circular(2),
                              border: Border.all(color:const Color(0xff707070)),
                              color:Colors.white),
+                             child: Padding(
+                               padding: const EdgeInsets.only(left: 15,right: 15),
+                               child: Row(
+                                children: [
+                                Text("Merchant Category Name",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: kblue,
+                                 fontWeight: FontWeight.w400,
+                                ),),
+                                const Icon(Icons.keyboard_arrow_down),
+                               ],),
+                             ),
+                       ),
+                  ),
+               
+               Padding(
+                           padding: const EdgeInsets.only(top: 15),
+                           child: Container(
+                             height: 40,
+                             width: size.width,
+                             decoration: BoxDecoration(
+                             borderRadius: BorderRadius.circular(2),
+                             border: Border.all(color:const Color(0xff707070)),
+                             color:Colors.white),
                              alignment: Alignment.center,
                              child: Padding(
                               padding:const EdgeInsets.only(left: 15, right: 10),
@@ -60,7 +85,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                               isCollapsed: true,
                               isDense: true,
                               border: InputBorder.none,
-                              hintText: "User Name",
+                              hintText: "Sub Category",
                                hintStyle: TextStyle(
                                color: kblue,
                                fontWeight: FontWeight.w400,
@@ -87,34 +112,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                               isCollapsed: true,
                               isDense: true,
                               border: InputBorder.none,
-                              hintText: "Merchant display Name",
-                               hintStyle: TextStyle(
-                               color: kblue,
-                               fontWeight: FontWeight.w400,
-                             )),
-                          ),
-                       ),
-                  ),
-               ),
-               Padding(
-                           padding: const EdgeInsets.only(top: 15),
-                           child: Container(
-                             height: 40,
-                             width: size.width,
-                             decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(2),
-                             border: Border.all(color:const Color(0xff707070)),
-                             color:Colors.white),
-                             alignment: Alignment.center,
-                             child: Padding(
-                              padding:const EdgeInsets.only(left: 15, right: 10),
-                              child: TextField(
-                              //controller: usernamecontroller,
-                              decoration: InputDecoration(
-                              isCollapsed: true,
-                              isDense: true,
-                              border: InputBorder.none,
-                              hintText: "Business Address",
+                              hintText: "Merchant Display Name",
                                hintStyle: TextStyle(
                                color: kblue,
                                fontWeight: FontWeight.w400,
@@ -141,7 +139,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                               isCollapsed: true,
                               isDense: true,
                               border: InputBorder.none,
-                              hintText: "State",
+                              hintText: "Email ID",
                                hintStyle: TextStyle(
                                color: kblue,
                                fontWeight: FontWeight.w400,
@@ -168,88 +166,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                               isCollapsed: true,
                               isDense: true,
                               border: InputBorder.none,
-                              hintText: "City",
-                               hintStyle: TextStyle(
-                               color: kblue,
-                               fontWeight: FontWeight.w400,
-                             )),
-                          ),
-                       ),
-                  ),
-               ),
-               Padding(
-                           padding: const EdgeInsets.only(top: 15),
-                           child: Container(
-                             height: 40,
-                             width: size.width,
-                             decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(2),
-                             border: Border.all(color:const Color(0xff707070)),
-                             color:Colors.white),
-                             alignment: Alignment.center,
-                             child: Padding(
-                              padding:const EdgeInsets.only(left: 15, right: 10),
-                              child: TextField(
-                              //controller: usernamecontroller,
-                              decoration: InputDecoration(
-                              isCollapsed: true,
-                              isDense: true,
-                              border: InputBorder.none,
-                              hintText: "Authorized signature Name",
-                               hintStyle: TextStyle(
-                               color: kblue,
-                               fontWeight: FontWeight.w400,
-                             )),
-                          ),
-                       ),
-                  ),
-               ),
-               Padding(
-                           padding: const EdgeInsets.only(top: 15),
-                           child: Container(
-                             height: 40,
-                             width: size.width,
-                             decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(2),
-                             border: Border.all(color:const Color(0xff707070)),
-                             color:Colors.white),
-                             alignment: Alignment.center,
-                             child: Padding(
-                              padding:const EdgeInsets.only(left: 15, right: 10),
-                              child: TextField(
-                              //controller: usernamecontroller,
-                              decoration: InputDecoration(
-                              isCollapsed: true,
-                              isDense: true,
-                              border: InputBorder.none,
-                              hintText: "Contact Person",
-                               hintStyle: TextStyle(
-                               color: kblue,
-                               fontWeight: FontWeight.w400,
-                             )),
-                          ),
-                       ),
-                  ),
-               ),
-               Padding(
-                           padding: const EdgeInsets.only(top: 15),
-                           child: Container(
-                             height: 40,
-                             width: size.width,
-                             decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(2),
-                             border: Border.all(color:const Color(0xff707070)),
-                             color:Colors.white),
-                             alignment: Alignment.center,
-                             child: Padding(
-                              padding:const EdgeInsets.only(left: 15, right: 10),
-                              child: TextField(
-                              //controller: usernamecontroller,
-                              decoration: InputDecoration(
-                              isCollapsed: true,
-                              isDense: true,
-                              border: InputBorder.none,
-                              hintText: "Mobile Number",
+                              hintText: "Phone Number",
                                hintStyle: TextStyle(
                                color: kblue,
                                fontWeight: FontWeight.w400,
@@ -285,6 +202,72 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                        ),
                   ),
                ),
+                        Padding(
+                           padding: const EdgeInsets.only(top: 15),
+                           child: Container(
+                             height: 40,
+                             width: size.width,
+                             decoration: BoxDecoration(
+                             borderRadius: BorderRadius.circular(2),
+                             border: Border.all(color:const Color(0xff707070)),
+                             color:Colors.white),
+                             alignment: Alignment.center,
+                             child: Padding(
+                              padding:const EdgeInsets.only(left: 15, right: 10),
+                              child: TextField(
+                              //controller: usernamecontroller,
+                              decoration: InputDecoration(
+                              isCollapsed: true,
+                              isDense: true,
+                              border: InputBorder.none,
+                              hintText: "Bussiness Address",
+                               hintStyle: TextStyle(
+                               color: kblue,
+                               fontWeight: FontWeight.w400,
+                             )),
+                          ),
+                       ),
+                  ),
+               ),
+               const SizedBox(height: 15,),
+               Row(
+                children: [
+                  Container(
+                    height: 17,
+                    width: 17,
+                    decoration: BoxDecoration(
+                      color: kblue,
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                  ),
+                  const SizedBox(width: 7,),
+                  Text(
+                    "Yes",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 17,
+                    fontWeight: FontWeight.w400,
+                    color: kblue),
+                  ),
+                  const SizedBox(width: 15,),
+                  Container(
+                    height: 17,
+                    width: 17,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: kblue),
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                  ),
+                  const SizedBox(width: 7,),
+                  Text(
+                    "No",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 17,
+                    fontWeight: FontWeight.w400,
+                    color: kblue),
+                  ),
+                ],
+               ),
                Padding(
                            padding: const EdgeInsets.only(top: 15),
                            child: Container(
@@ -312,32 +295,59 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                        ),
                   ),
                ),
-               Padding(
-                           padding: const EdgeInsets.only(top: 15),
-                           child: Container(
-                             height: 40,
-                             width: size.width,
-                             decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(2),
-                             border: Border.all(color:const Color(0xff707070)),
-                             color:Colors.white),
-                             alignment: Alignment.center,
-                             child: Padding(
-                              padding:const EdgeInsets.only(left: 15, right: 10),
-                              child: TextField(
-                              //controller: usernamecontroller,
-                              decoration: InputDecoration(
-                              isCollapsed: true,
-                              isDense: true,
-                              border: InputBorder.none,
-                              hintText: "User Name",
-                               hintStyle: TextStyle(
-                               color: kblue,
-                               fontWeight: FontWeight.w400,
-                             )),
-                          ),
-                       ),
+               const SizedBox(height: 15,),
+               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 130,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          color:const Color.fromARGB(255, 215, 215, 213),
+                          borderRadius: BorderRadius.circular(3)
+                        ),
+                        child:const  Center(
+                          child: Icon(Icons.cloud_upload,color: Colors.grey,size: 45,),
+                        ),
+                      ),
+                      const SizedBox(height: 5,),
+                      Text(
+                    "Aadhaar Card",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 17,
+                    fontWeight: FontWeight.w400,
+                    color: kblue),
                   ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 130,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          color:const Color.fromARGB(255, 215, 215, 213),
+                          borderRadius: BorderRadius.circular(3)
+                        ),
+                        child:const  Center(
+                          child: Icon(Icons.cloud_upload,color: Colors.grey,size: 45,),
+                        ),
+                      ),
+                      const SizedBox(height: 5,),
+                      Text(
+                    "Pan Card",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 17,
+                    fontWeight: FontWeight.w400,
+                    color: kblue),
+                  ),
+                    ],
+                  ),
+                ],
                ),
                ksizedbox40,
                InkWell(
