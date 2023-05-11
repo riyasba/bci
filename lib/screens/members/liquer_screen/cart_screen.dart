@@ -3,6 +3,7 @@ import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -14,7 +15,7 @@ class cart_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: kwhite  ,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(250),
           child: ClipPath(
@@ -60,57 +61,57 @@ class cart_screen extends StatelessWidget {
           ),
           Orders(
             bottleimg: 'assets/images/Group 5833.png',
-          ),
+          ),Divider(thickness: 1,),
           Expanded(
               child: Container(
-            height: 200,
+            height: 200.h,
             width: double.infinity,
-            color: Color(003366),
+            color: kwhite,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: [ksizedbox40,
                     Text(
                       'Support',
                       style:
-                          TextStyle(fontSize: 29, fontWeight: FontWeight.w700),
+                          TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w600),
                     ),
-                    ksizedbox10,
+                    ksizedbox20,
                     Text(
                       'Member ID Number:',
                       style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w400,
                           color: korange),
                     ),
                     Text(
                       'BCI123456QWE',
-                      style: TextStyle(fontSize: 21),
+                      style: TextStyle(fontSize: 15.sp),
                     ),
                     ksizedbox10,
                     Text(
                       'Phone Number:',
                       style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w400,
                           color: korange),
                     ),
                     Text(
                       '92345 43453',
-                      style: TextStyle(fontSize: 21),
+                      style: TextStyle(fontSize: 15.sp),
                     ),
                     ksizedbox10,
                     Text(
                       'Delivery Address:',
                       style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w400,
                           color: korange),
                     ),
                     Text(
                       '2A,Street Nager, Anna Nagar, Chennai, 600021.',
-                      style: TextStyle(fontSize: 21),
+                      style: TextStyle(fontSize: 15.sp),
                     ),
                   ]),
             ),

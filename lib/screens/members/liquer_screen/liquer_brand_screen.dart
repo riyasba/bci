@@ -90,11 +90,11 @@ class liqor_brands extends StatelessWidget {
                   child: TextField(
                     // controller: _controller,
 
-                    decoration: InputDecoration(
+                    decoration: InputDecoration(disabledBorder: OutlineInputBorder(),
                       fillColor: Colors.grey[200],
                       focusColor: Colors.grey[200],
                       isDense: true,
-                      filled: true,
+                      filled: true,labelText: 'Search',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(23.0),
                       ),

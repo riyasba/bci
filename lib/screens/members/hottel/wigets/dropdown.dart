@@ -19,18 +19,37 @@ class _Dropdown_hotelState extends State<Dropdown_hotel> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(height: 40,
-        child: DropdownButtonFormField<String>(style: TextStyle(color: Colors.grey),
+      padding: const EdgeInsets.only(left: 30,right: 30),
+      child: Container(
+       height: 50,
+       color: Colors.white,
+        child: DropdownButtonFormField<String>(
+       
+          style: TextStyle(color: Colors.grey),
           decoration: InputDecoration( 
       
             floatingLabelBehavior: FloatingLabelBehavior
                                       .never,
         fillColor: kwhite,
         focusColor: kwhite,
-        isDense: true,
-        filled: true,
+       isDense: true,
+      //  enabledBorder: ,
         border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.black
+          ),
+          borderRadius: BorderRadius.circular(2),
+        ),
+        enabledBorder:OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.black
+          ),
+          borderRadius: BorderRadius.circular(2),
+        ) ,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.black
+          ),
           borderRadius: BorderRadius.circular(2),
         ),
             labelText: widget.label,

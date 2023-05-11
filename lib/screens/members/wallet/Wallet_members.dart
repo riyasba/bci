@@ -86,7 +86,7 @@ class _WalletScreen_membersState extends State<WalletScreen_members> {
                   padding: const EdgeInsets.only(left: 10, top: 5),
                   child: Text(
                     'Total Wallet',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
                   ),
                 )
               ],
@@ -147,7 +147,7 @@ class _WalletScreen_membersState extends State<WalletScreen_members> {
                                 padding: const EdgeInsets.only(top: 11),
                                 child: CircleAvatar(
                                   backgroundColor: kwhite,
-                                  radius: 25.r,
+                                  radius: 22.r,
                                   child: Image.asset(
                                     'assets/images/cirlewallet.png',
                                     fit: BoxFit.contain,
@@ -159,7 +159,7 @@ class _WalletScreen_membersState extends State<WalletScreen_members> {
                               ),
                               Text(
                                 'Deposit \nCash',
-                                style: TextStyle(fontSize: 16.sp, color: kwhite),
+                                style: TextStyle(fontSize: 15.sp, color: kwhite),
                               )
                             ],
                           ),
@@ -180,7 +180,7 @@ class _WalletScreen_membersState extends State<WalletScreen_members> {
                   padding: const EdgeInsets.only(right: 40),
                   child: Text(
                     'Transaction History',
-                    style: TextStyle(fontSize: 25, color: kblue),
+                    style: TextStyle(fontSize: 25.sp, color: kblue),
                   ),
                 ),
                 Image.asset('assets/images/transactionicon.png')
@@ -192,16 +192,16 @@ class _WalletScreen_membersState extends State<WalletScreen_members> {
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     'Today Transaction',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 16.sp),
                   ),
                 ),
               ],
             ),
             SizedBox(
-              height: 10,
+              height: 10.h,
             ),
             Container(
-              height: 250,
+              height: 250.h,
               child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: amountimage.length,

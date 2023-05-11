@@ -8,6 +8,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../constands/constands.dart';
+import 'wigets/dropdown_smal.dart';
 
 class Datepicker_screen_hotel extends StatefulWidget {
   const Datepicker_screen_hotel({super.key});
@@ -60,10 +61,31 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
           child: Row(
             children: [
               Text(
-                "Adult  3   children's  2",
+                "Adult",
                 style: TextStyle(color: kblue),
-              )
-            ],
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Container(
+                width: 60,
+                height: 30,
+                child: Dropdown_Small(
+                   options: ['01 ','02'],
+                   label: '0',
+                ),
+              ),SizedBox(width: 30,),
+       Text('Children')    , SizedBox(
+                width: 5,
+              ),
+              Container(
+                width: 60,
+                height: 30,
+                child: Dropdown_Small(
+                   options: ['01 ','02'],
+                   label: '0',
+                ),
+              ), ],
           ),
         ),
         Padding(
@@ -78,9 +100,12 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
             ],
           ),
         ),
-        Dropdown_hotel(
-          options: ['option1 ','otion2'],
-          label: 'Room Choose Ac or Non Ac',
+        Container(
+          width: 100,
+          child: Dropdown_hotel(
+            options: ['option1 ','otion2'],
+            label: 'Room Choose Ac or Non Ac',
+          ),
         ),
         ksizedbox40,
         ksizedbox20,

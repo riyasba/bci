@@ -58,6 +58,7 @@ dependencies:
   flutter_screenutil: ^5.7.0
   paged_vertical_calendar: ^1.1.6
   syncfusion_flutter_datepicker: ^21.2.3
+  share_plus: ^7.0.0
 
 dev_dependencies:
   flutter_test:

@@ -16,6 +16,7 @@ class Add_walet_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(250),
@@ -54,7 +55,8 @@ class Add_walet_screen extends StatelessWidget {
               ),
             ),
           )),
-      body: ListView(physics: BouncingScrollPhysics(),
+      body: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -79,7 +81,9 @@ class Add_walet_screen extends StatelessWidget {
                 child: Text(
                   '₹1990.00',
                   style: TextStyle(
-                      fontSize: 30.sp, fontWeight: FontWeight.w800, color: kwhite),
+                      fontSize: 30.sp,
+                      fontWeight: FontWeight.w800,
+                      color: kwhite),
                 ),
               ),
               height: 50.h,
@@ -130,7 +134,9 @@ class Add_walet_screen extends StatelessWidget {
                 width: 120.w,
               ),
             ],
-          ),ksizedbox30 ,  Row(
+          ),
+          ksizedbox30,
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
@@ -162,73 +168,224 @@ class Add_walet_screen extends StatelessWidget {
                 width: 120.w,
               ),
             ],
-          ),ksizedbox40,
-      InkWell(
-                onTap: () {
-   
-                      Get.to(Sucessful_screen_otc());
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 50.h,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        4,
-                      ),
-                      gradient: const LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          Color(0xFFFF5C29),
-                          Color(0xFFFFCD38),
-                        ],
-                      ),
-                    ),
-                    child: Text(
-                      'Next',
-                      style: TextStyle(
-                          fontSize: 28.sp,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500),
-                    ),
+          ),
+          ksizedbox40,
+          InkWell(
+            onTap: () {
+              Get.to(Sucessful_screen_otc());
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: double.infinity,
+                height: 50.h,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    4,
+                  ),
+                  gradient: const LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color(0xFFFF5C29),
+                      Color(0xFFFFCD38),
+                    ],
                   ),
                 ),
-              ),ksizedbox10, InkWell(
-                onTap: () {
-                    
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 50.h,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(border:Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(
-                        4,
-                      ),
-                      gradient: const LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          Color(0xFFE4E4E4),
-                          Color(0xFFE4E4E4),
-                        ],
-                      ),
-                    ),
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(
-                          fontSize: 28.sp,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500),
-                    ),
+                child: Text(
+                  'Next',
+                  style: TextStyle(
+                      fontSize: 28.sp,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+          ),
+          ksizedbox10,
+          InkWell(
+            onTap: () {
+              {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 180, bottom: 120),
+                        child: Dialog(
+                          child: Container(
+                            height: 200.h,
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Cancel Transaction',
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'Are you sure you want to Cancel transaction',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    color: kgrey,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                ksizedbox20,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            minimumSize: Size(
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.1,
+                                                40),
+                                            backgroundColor: kOrange),
+                                            
+                                        onPressed: () {Get.back();
+
+                                          showModalBottomSheet(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.vertical(
+                                                top: Radius.circular(26.0),
+                                              )),
+                                              context: context,
+                                              builder: (context) {
+                                                return Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10, right: 10),
+                                                  child: Container(
+                                                    height: 300.h,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    child: Column(
+                                                      children: [
+                                                        Image.asset(
+                                                            'assets/images/cancel.png'),
+                                                        ksizedbox20,
+                                                        Text(
+                                                          'Payment has been Declined',
+                                                          style: TextStyle(
+                                                              fontSize: 25),
+                                                        ),
+                                                        ksizedbox10,
+                                                        InkWell(
+                                                          onTap: () {
+                                                            Get.back();
+                                                          },
+                                                          child: Container(
+                                                            height: 45.h,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.5,
+                                                            decoration: BoxDecoration(
+                                                                color: kblue,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                'Try Again',
+                                                                style: TextStyle(
+                                                                    color:
+                                                                        kwhite,
+                                                                    fontSize:
+                                                                        25.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              });
+                                        },
+                                        child: Text(
+                                          'Yes',
+                                          style: TextStyle(fontSize: 23.sp),
+                                        )),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            minimumSize: Size(
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.1,
+                                                40),
+                                            backgroundColor: kOrange),
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        child: Text(
+                                          'No',
+                                          style: TextStyle(fontSize: 23.sp),
+                                        )),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    });
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: double.infinity,
+                height: 50.h,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(
+                    4,
+                  ),
+                  gradient: const LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color(0xFFE4E4E4),
+                      Color(0xFFE4E4E4),
+                    ],
                   ),
                 ),
-              ) ,ksizedbox40 ],
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(
+                      fontSize: 28.sp,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+          ),
+          ksizedbox40
+        ],
       ),
     );
   }

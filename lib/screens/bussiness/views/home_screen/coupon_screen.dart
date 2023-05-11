@@ -159,7 +159,7 @@ class _CouponScreenState extends State<CouponScreen> {
                   'APPLY',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20),
-                ))
+                )),
           ],
         ),
         bottomNavigationBar: Padding(

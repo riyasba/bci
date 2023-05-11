@@ -2,6 +2,7 @@ import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -27,13 +28,13 @@ class _Members_search_screenState extends State<Members_search_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(240),
+          preferredSize: Size.fromHeight(250.h),
           child: Column(
             children: [
               ClipPath(
                 clipper: SinCosineWaveClipper(),
                 child: Container(
-                  height: 150,
+                  height: 150.h,
                   color: kblue,
                   child: Padding(
                     padding: const EdgeInsets.all(15),
@@ -49,7 +50,7 @@ class _Members_search_screenState extends State<Members_search_screen> {
                           child: Text(
                             'Search',
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 20.sp,
                                 fontWeight: FontWeight.bold,
                                 color: kwhite),
                           ),
@@ -72,7 +73,7 @@ class _Members_search_screenState extends State<Members_search_screen> {
                 child: TextField(
                   // controller: _controller,
 
-                  decoration: InputDecoration(
+                  decoration: InputDecoration(disabledBorder: OutlineInputBorder(),
                       hintText: 'Search',
                       fillColor: kwhite,
                       focusColor: kwhite,
@@ -149,9 +150,14 @@ class _Members_search_screenState extends State<Members_search_screen> {
       //       ],
       //     )),
       body: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           MyGridView(title: 'Search Result', image: [
             'assets/images/NoPath - Copy (32).png',
+            'assets/images/NoPath - Copy (33).png',
+            'assets/images/NoPath - Copy (34).png',
+          //  'assets/images/NoPath - Copy (35).png'
+                'assets/images/NoPath - Copy (32).png',
             'assets/images/NoPath - Copy (33).png',
             'assets/images/NoPath - Copy (34).png',
             'assets/images/NoPath - Copy (35).png'

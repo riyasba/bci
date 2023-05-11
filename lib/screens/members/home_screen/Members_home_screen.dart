@@ -160,7 +160,7 @@ class _Home_screen1State extends State<Home_screen1> {
             ],
           ),
           ksizedbox20,
-          Row(
+          Row(crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               InkWell(
@@ -307,7 +307,10 @@ class _Home_screen1State extends State<Home_screen1> {
                     child: Container(
                       height: 106,
                       width: 144,
-                      child: Image.asset('assets/images/aaaa.png'),
+                      child: InkWell(onTap: () {Get.to(offer_screen()); 
+                        
+                      },
+                        child: Image.asset('assets/images/aaaa.png')),
                     ),
                   );
                 }),

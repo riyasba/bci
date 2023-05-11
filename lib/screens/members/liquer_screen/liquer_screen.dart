@@ -2,6 +2,7 @@ import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -23,7 +24,7 @@ class liquer_screen extends StatelessWidget {
               ClipPath(
                 clipper: SinCosineWaveClipper(),
                 child: Container(
-                  height: 150,
+                  height: 150.h,
                   color: kblue,
                   child: Padding(
                     padding: const EdgeInsets.all(15),
@@ -64,7 +65,7 @@ class liquer_screen extends StatelessWidget {
                   child: TextFormField(
                     // controller: _controller,
 
-                    decoration: InputDecoration(
+                    decoration: InputDecoration(disabledBorder: OutlineInputBorder(),
                         hintText: 'Search',
                         fillColor: Colors.grey[200],
                         focusColor: Colors.grey[200],

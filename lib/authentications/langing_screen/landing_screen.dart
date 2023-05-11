@@ -125,7 +125,13 @@ class landing_screen extends StatelessWidget {
                     child: Center(
                       child: Text(
                         "Bussiness login",
-                        style: TextStyle(
+                        style: TextStyle(shadows: [
+                        Shadow(
+                        blurRadius: 5.0,
+                         color: Color(0xff707070),
+                         offset: Offset(3.0, 3.0),
+                          ),
+        ],
                             fontSize: 22.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.w500),

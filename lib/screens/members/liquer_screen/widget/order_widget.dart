@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../constands/constands.dart';
 
@@ -33,7 +34,7 @@ final String bottleimg;
                           Text(
                             'Red Wine',
                             style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.w700),
+                                fontSize: 22, fontWeight: FontWeight.w600),
                           ),
                           Text('Bare Foot Wine'),
                           Text('270 ml')
@@ -45,7 +46,7 @@ final String bottleimg;
                       Text(
                         '₹ 750',
                         style: TextStyle(
-                            fontSize: 29,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.w600,
                             color: kyellow),
                       )

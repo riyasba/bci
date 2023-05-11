@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../constands/constands.dart';
+import '../hottel/wigets/dropdown_smal.dart';
 
 class Holiday_booking extends StatelessWidget {
   const Holiday_booking({super.key});
@@ -106,14 +107,38 @@ class Holiday_booking extends StatelessWidget {
               ],
             ),
           ),
-          Row(
-            children: [
-              Text(
-                '    Adult  5   children   6',
-                style: TextStyle(color: Color(0xFF003366), fontSize: 13),
-              )
-            ],
-          ),
+         Padding(
+           padding: const EdgeInsets.all(10.0),
+           child: Row(
+              children: [
+                Text(
+                  "Adult",
+                  style: TextStyle(color: kblue),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Container(
+                  width: 60,
+                  height: 30,
+                  child: Dropdown_Small(
+                     options: ['01 ','02'],
+                     label: '0',
+                  ),
+                ),SizedBox(width: 30,),
+                Text('Children')    , SizedBox(
+                  width: 5,
+                ),
+                Container(
+                  width: 60,
+                  height: 30,
+                  child: Dropdown_Small(
+                     options: ['01 ','02'],
+                     label: '0',
+                  ),
+                ), ],
+            ),
+         ),
           ksizedbox30,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
