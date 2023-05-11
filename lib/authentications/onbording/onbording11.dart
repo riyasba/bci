@@ -82,22 +82,42 @@ class _OnbordingState extends State<Onbording> {
                                 curve: Curves.decelerate,
                               );
                             },
-                            child: Image.asset(
-                                'assets/images/jaba.png')),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            AnimatedSmoothIndicator(
-                              activeIndex: isPageViewEnabled ? _pageController.page!.toInt() : 0,
-                              count: 5,
-                              effect: ScaleEffect(
-                                  dotHeight: 9.0,
-                                  dotWidth: 9.0,
-                                  dotColor: kgrey,
-                                  activeDotColor: korange),
-                            ),
-                          ],
+                            child: Image.asset('assets/images/jaba.png')),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SmoothPageIndicator(
+                                controller: _pageController,
+                                count: 5,
+                                axisDirection: Axis.horizontal,
+                                effect: SlideEffect(
+                                  activeDotColor: kOrange,
+                                  dotHeight: 10.sp,
+                                  dotColor: Colors.white,
+                                  dotWidth: 10.sp,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     AnimatedSmoothIndicator(
+                        //       activeIndex: isPageViewEnabled
+                        //           ? _pageController.page!.toInt()
+                        //           : 0,
+                        //       count: 5,
+                        //       effect: ScaleEffect(
+                        //           dotHeight: 9.0,
+                        //           dotWidth: 9.0,
+                        //           dotColor: kgrey,
+                        //           activeDotColor: korange),
+                        //     ),
+                        //   ],
+                        // ),
                         GestureDetector(
                             onTap: () {
                               setState(() {
@@ -270,23 +290,33 @@ class Onbording5 extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Stack(
       children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
               'MEMBER CAN AVAIL',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 27.sp, fontWeight: FontWeight.w700, color: kwhite),
-                    ),
-            ],
-          ),
-        Positioned(top: 40,left: 10,right: 10,
-          child: Image.asset('assets/images/onbord55.png',height: 400.h,)),
-        Positioned(bottom: 0,
-          child: Image.asset('assets/images/onbording5.png',height: 300.h,
-          width: size.width,
-          fit: BoxFit.fitWidth,))
+            ),
+          ],
+        ),
+        Positioned(
+            top: 40,
+            left: 10,
+            right: 10,
+            child: Image.asset(
+              'assets/images/onbord55.png',
+              height: 400.h,
+            )),
+        Positioned(
+            bottom: 0,
+            child: Image.asset(
+              'assets/images/onbording5.png',
+              height: 300.h,
+              width: size.width,
+              fit: BoxFit.fitWidth,
+            ))
       ],
     );
   }

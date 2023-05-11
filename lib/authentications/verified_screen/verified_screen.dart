@@ -28,7 +28,9 @@ class verified_Screen extends StatelessWidget {
           Text(
             "Welcome :)",
             style: TextStyle(
-                fontSize: 22.sp, color: Colors.black, fontWeight: FontWeight.w700),
+                fontSize: 22.sp,
+                color: Colors.black,
+                fontWeight: FontWeight.w700),
           ),
           ksizedbox30,
           Text(
@@ -54,13 +56,17 @@ class verified_Screen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Container(
-                width: double.infinity,
-                height: 65.h,
-                alignment: Alignment.center,
+                height: 50.h,
+                width: double.infinity.w,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    4,
-                  ),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: const Color(0xffFFBF7E)),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0xFFFF5C29),
+                      blurRadius: 3.0,
+                    )
+                  ],
                   gradient: const LinearGradient(
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
@@ -70,12 +76,14 @@ class verified_Screen extends StatelessWidget {
                     ],
                   ),
                 ),
-                child: Text(
-                  'Done',
-                  style: TextStyle(
-                      fontSize: 22.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+                child: Center(
+                  child: Text(
+                    "Done",
+                    style: TextStyle(
+                        fontSize: 22.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
             ),

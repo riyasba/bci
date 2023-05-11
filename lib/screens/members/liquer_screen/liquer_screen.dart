@@ -14,7 +14,8 @@ class liquer_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: kwhite,
+    return Scaffold(
+      backgroundColor: kwhite,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(210),
           child: Column(
@@ -43,10 +44,14 @@ class liquer_screen extends StatelessWidget {
                                 color: kwhite),
                           ),
                         ),
-                     IconButton(onPressed: (){Get.to(NotificationScreen());}, icon:   Icon(
-                    Icons.notifications,
-                    color: kwhite,
-                  ))
+                        IconButton(
+                            onPressed: () {
+                              Get.to(NotificationScreen());
+                            },
+                            icon: Icon(
+                              Icons.notifications,
+                              color: kwhite,
+                            ))
                       ],
                     ),
                   ),
@@ -54,12 +59,13 @@ class liquer_screen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(height: 55,
+                child: Container(
+                  height: 55,
                   child: TextFormField(
                     // controller: _controller,
-                    
-                
-                    decoration: InputDecoration(hintText: 'Search',
+
+                    decoration: InputDecoration(
+                        hintText: 'Search',
                         fillColor: Colors.grey[200],
                         focusColor: Colors.grey[200],
                         isDense: true,
@@ -83,7 +89,7 @@ class liquer_screen extends StatelessWidget {
             itemBuilder: (context, index) {
               return const Padding(
                 padding: EdgeInsets.all(8.0),
-                child:Card(child: members_liquer_container()) ,
+                child: Card(child: members_liquer_container()),
               );
             }),
       ),

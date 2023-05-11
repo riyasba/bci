@@ -34,36 +34,46 @@ class landing_screen extends StatelessWidget {
           body: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-          //    Image.asset('assets/images/onbording3.png'),ksizedbox40,
+              //    Image.asset('assets/images/onbording3.png'),ksizedbox40,
               InkWell(
-              
-      onTap: (){Get.off(const MemberLoginScreen());},
-      child: Padding(
-        padding: const EdgeInsets.only(right: 20,left: 20),
-        child: Container(
-          width:double.infinity,
-          height: 65.h,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              4,
-            ),
-            gradient: const LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Color(0xFFFF5C29),
-                Color(0xFFFFCD38),
-              ],
-            ),
-          ),
-      child: Text('Member Login',           style: TextStyle(
-                               fontSize: 22.sp,
-                               color: Colors.white,
-                               fontWeight: FontWeight.bold),),
-        ),
-      ),
-    ),
+                onTap: () {
+                  Get.off(const MemberLoginScreen());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20, left: 20),
+                  child: Container(
+                    height: 50.h,
+                    width: double.infinity.w,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(color: const Color(0xffFFBF7E)),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0xFFFF5C29),
+                          blurRadius: 3.0,
+                        )
+                      ],
+                      gradient: const LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          Color(0xFFFF5C29),
+                          Color(0xFFFFCD38),
+                        ],
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Members Login",
+                        style: TextStyle(
+                            fontSize: 22.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               // SizedBox(
               //   height: 65,
               //   width: double.infinity,
@@ -92,7 +102,7 @@ class landing_screen extends StatelessWidget {
               // ),
               ksizedbox20,
               SizedBox(
-                height: 65.h,
+                height: 50.h,
                 width: double.infinity,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
@@ -104,8 +114,7 @@ class landing_screen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        Get.to(BusinessLoginScreen
-                        ());
+                        Get.to(BusinessLoginScreen());
                       },
                       child: Text(
                         'Bussiness login',

@@ -17,15 +17,13 @@ class Final_booking extends StatelessWidget {
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
-          Stack(
-            children: [
+          Stack(children: [
             Image.asset('assets/images/Mask Group 1.png'),
             InkWell(
                 onTap: () {
                   Get.back();
                 },
-                child: Positioned(
-                  child: Image.asset('assets/images/Group 5814.png'))),
+                child: Image.asset('assets/images/Group 5814.png')),
           ]),
           Padding(
             padding: const EdgeInsets.only(top: 20, left: 20),
@@ -160,7 +158,7 @@ class Final_booking extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                       Get.to(Datepicker_screen_hotel());
+                        Get.to(Datepicker_screen_hotel());
                         // Get.to(BusinessGenerate_otp
                         // ());
                       },
