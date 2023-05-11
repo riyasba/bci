@@ -10,6 +10,7 @@ import 'package:bci/screens/bussiness/views/home_screen/wallet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -238,44 +239,51 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 )
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 45),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30),
-                    child: InkWell(
-                      onTap: () {
-                        Get.to(AvailabilityScreen());
-                      },
-                      child: Container(
-                        child: Column(
-                          children: [
-                            Image.asset('assets/images/availability.png'),
-                            Text('Availability')
-                          ],
-                        ),
-                      ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Get.to(AvailabilityScreen());
+                  },
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/availability.png'),
+                        Text('Availability')
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 45),
-                    child: InkWell(
-                      onTap: () {
-                        Get.to(MyAccountScreen());
-                      },
-                      child: Container(
-                        child: Column(
-                          children: [
-                            Image.asset('assets/images/jhon.png'),
-                            Text('Jhon')
-                          ],
-                        ),
-                      ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Get.to(MyAccountScreen());
+                  },
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/jhon.png'),
+                        Text('Jhon')
+                      ],
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    
+                  },
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Container(
+                        
+                          width: 80.w,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             )
           ],
         ),

@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bci/screens/bussiness/views/business/business_home_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 import '../business/notification_screen.dart';
@@ -49,59 +50,63 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: List2[selectedpage],
-      bottomNavigationBar: ConvexAppBar(
-          activeColor:kwhite,
-
-          backgroundColor: kblue,
-          color: kwhite,
-          style: TabStyle.reactCircle,
-
-          items: [
-            TabItem(icon: Icons.home, title: 'Home',),
-            TabItem(
-              icon: ImageIcon(
-                AssetImage(
-                  'assets/images/notificationimage.png',
+      bottomNavigationBar: StyleProvider(
+        style: Style(),
+        child: ConvexAppBar(
+            activeColor:kwhite,
+      
+            backgroundColor: kblue,
+            color: kwhite,
+            style: TabStyle.reactCircle,
+      
+            items: [
+              TabItem(
+                icon: Icons.home, title: 'Home'),
+              TabItem(
+                icon: ImageIcon(
+                  AssetImage(
+                    'assets/images/notificationimage.png',
+                  ),
+                  color: selectedpage == 1 ?kblue : kwhite,
                 ),
-                color: selectedpage == 1 ?kblue : kwhite,
+                title: 'Notification',
               ),
-              title: 'Notification',
-            ),
-            TabItem(
-                icon: ImageIcon(
-                  AssetImage(
-                    'assets/images/bottomwallet.png',
+              TabItem(
+                  icon: ImageIcon(
+                    AssetImage(
+                      'assets/images/bottomwallet.png',
+                    ),
+                    color: selectedpage == 2 ? kblue : kwhite,
                   ),
-                  color: selectedpage == 2 ? kblue : kwhite,
-                ),
-                title: 'Wallet'),
-            TabItem(
-                icon: ImageIcon(
-                  AssetImage(
-                    'assets/images/bottombooking.png',
+                  title: 'Wallet'),
+              TabItem(
+                  icon: ImageIcon(
+                    AssetImage(
+                      'assets/images/bottombooking.png',
+                    ),
+                    color: selectedpage == 3 ? kblue : kwhite,
                   ),
-                  color: selectedpage == 3 ? kblue : kwhite,
-                ),
-                title: 'Booking'),
-            TabItem(
-              
-                icon: ImageIcon(
-                  
-                  AssetImage(
-                    'assets/images/bottomsetting.png',
+                  title: 'Booking'),
+              TabItem(
+                
+                  icon: ImageIcon(
+                    
+                    AssetImage(
+                      'assets/images/bottomsetting.png',
+                      
+                    ),
+                    color: selectedpage == 4 ? kblue : kwhite,
                     
                   ),
-                  color: selectedpage == 4 ? kblue : kwhite,
-                  
-                ),
-                title: 'Settings'),
-          ],
-          initialActiveIndex: selectedpage,
-          onTap: (int index) {
-            setState(() {
-              selectedpage = index;
-            });
-          }),
+                  title: 'Settings'),
+            ],
+            initialActiveIndex: selectedpage,
+            onTap: (int index) {
+              setState(() {
+                selectedpage = index;
+              });
+            }),
+      ),
     );
   }
 }
@@ -148,5 +153,24 @@ class p5 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold();
+  }
+}
+
+
+
+class Style extends StyleHook {
+  @override
+  double get activeIconSize => 40;
+
+  @override
+  double get activeIconMargin => 10;
+
+  @override
+  double get iconSize => 20;
+
+  
+  @override
+  TextStyle textStyle(Color color,String ) {
+    return TextStyle(fontSize: 12.sp, color: color);
   }
 }

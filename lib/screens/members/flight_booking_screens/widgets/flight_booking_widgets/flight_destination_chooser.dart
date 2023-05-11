@@ -1,6 +1,10 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
+import 'package:bci/screens/members/flight_booking_screens/flaight_screen_choose.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../flaight_screen_choose2.dart';
 
 class FlightDestinationChooser extends StatefulWidget {
   const FlightDestinationChooser({super.key});
@@ -28,15 +32,20 @@ class _FlightDestinationChooserState extends State<FlightDestinationChooser> {
                     color: kblue, fontSize: 16, fontWeight: FontWeight.w500),
               ),
               ksizedbox20,
-              Container(
-                height: 30,
-                width: 90,
-                decoration: BoxDecoration(
-                    color: kblue, borderRadius: BorderRadius.circular(7)),
-                alignment: Alignment.center,
-                child: Text(
-                  "Choose",
-                  style: primaryFont.copyWith(color: Colors.white),
+              InkWell(
+                onTap: () {
+                  Get.to(flightScreenChoose());
+                },
+                child: Container(
+                  height: 30,
+                  width: 90,
+                  decoration: BoxDecoration(
+                      color: kblue, borderRadius: BorderRadius.circular(7)),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Choose",
+                    style: primaryFont.copyWith(color: Colors.white),
+                  ),
                 ),
               )
             ],
@@ -79,15 +88,20 @@ class _FlightDestinationChooserState extends State<FlightDestinationChooser> {
                     color: kblue, fontSize: 16, fontWeight: FontWeight.w500),
               ),
               ksizedbox20,
-              Container(
-                height: 30,
-                width: 90,
-                decoration: BoxDecoration(
-                    color: kblue, borderRadius: BorderRadius.circular(7)),
-                alignment: Alignment.center,
-                child: Text(
-                  "Choose",
-                  style: primaryFont.copyWith(color: Colors.white),
+              InkWell(
+                onTap: (){
+                  Get.to(flightScreenChoose2());
+                },
+                child: Container(
+                  height: 30,
+                  width: 90,
+                  decoration: BoxDecoration(
+                      color: kblue, borderRadius: BorderRadius.circular(7)),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Choose",
+                    style: primaryFont.copyWith(color: Colors.white),
+                  ),
                 ),
               )
             ],

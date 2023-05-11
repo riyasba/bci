@@ -56,6 +56,8 @@ dependencies:
   calendar_date_picker2: ^0.5.2
   table_calendar: ^3.0.8
   flutter_screenutil: ^5.7.0
+  paged_vertical_calendar: ^1.1.6
+  syncfusion_flutter_datepicker: ^21.2.3
 
 dev_dependencies:
   flutter_test:

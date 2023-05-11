@@ -1,6 +1,10 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../flaight_depareture.dart';
+import '../../flaight_returnscreen.dart';
 
 class FlightDateRange extends StatefulWidget {
   const FlightDateRange({super.key});
@@ -27,15 +31,20 @@ class _FlightDestinationChooserState extends State<FlightDateRange> {
                     color: kblue, fontSize: 16, fontWeight: FontWeight.w500),
               ),
               ksizedbox20,
-              Container(
-                height: 30,
-                width: 90,
-                decoration: BoxDecoration(
-                    color: kblue, borderRadius: BorderRadius.circular(7)),
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.date_range,
-                  color: kwhite,
+              InkWell(
+                onTap: () {
+                  Get.to(FlightDeparetureSCreen());
+                },
+                child: Container(
+                  height: 30,
+                  width: 90,
+                  decoration: BoxDecoration(
+                      color: kblue, borderRadius: BorderRadius.circular(7)),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.date_range,
+                    color: kwhite,
+                  ),
                 ),
               )
             ],
@@ -78,15 +87,20 @@ class _FlightDestinationChooserState extends State<FlightDateRange> {
                     color: kblue, fontSize: 16, fontWeight: FontWeight.w500),
               ),
               ksizedbox20,
-              Container(
-                height: 30,
-                width: 90,
-                decoration: BoxDecoration(
-                    color: kblue, borderRadius: BorderRadius.circular(7)),
-                alignment: Alignment.center,
-                child: Text(
-                  "Choose",
-                  style: primaryFont.copyWith(color: Colors.white),
+              InkWell(
+                onTap: () {
+                  Get.to(FlaightReturnScreen());
+                },
+                child: Container(
+                  height: 30,
+                  width: 90,
+                  decoration: BoxDecoration(
+                      color: kblue, borderRadius: BorderRadius.circular(7)),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Choose",
+                    style: primaryFont.copyWith(color: Colors.white),
+                  ),
                 ),
               )
             ],
