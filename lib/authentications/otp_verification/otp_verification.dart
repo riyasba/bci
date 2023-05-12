@@ -72,10 +72,11 @@ class otp_varification extends StatelessWidget {
             children: [
               Text(
                 "Don't Recive OTP ",
-                style: TextStyle(
-                  fontSize: 19.sp,
-                  color: Colors.black,
-                ),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    //   decoration: TextDecoration.underline,
+                    color: kblue),
               ),
               Text(
                 "Resent",
@@ -121,10 +122,10 @@ class otp_varification extends StatelessWidget {
                 ),
                 child: Text(
                   'Verify',
-                  style: TextStyle(
-                      fontSize: 22.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+               style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
                 ),
               ),
             ),

@@ -27,25 +27,25 @@ class verified_Screen extends StatelessWidget {
           Center(child: Image.asset('assets/images/Group 5817.png')),
           Text(
             "Welcome :)",
-            style: TextStyle(
-                fontSize: 22.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.w700),
+          style: TextStyle(
+                fontSize: 22, color: kblue, fontWeight: FontWeight.w700),
           ),
           ksizedbox30,
           Text(
             "Your account has been verified",
-            style: TextStyle(
-              fontSize: 19.sp,
-              color: Colors.black,
-            ),
+           style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    //   decoration: TextDecoration.underline,
+                    color: kblue),
           ),
           Text(
             "Successfully",
             style: TextStyle(
-              fontSize: 19.sp,
-              color: Colors.black,
-            ),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    //   decoration: TextDecoration.underline,
+                    color: kblue),
           ),
           ksizedbox40,
           ksizedbox40,
