@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../constands/constands.dart';
 import 'like.dart';
@@ -11,13 +12,13 @@ final String wineimg;
   @override
   Widget build(BuildContext context) {
     return     Container(
-                    height: 250,
+                    height: 270.h,
                     child: Stack(
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 40),
                           child: Container(
-                            height: 250,
+                            height: 250.h,
                             width: 170,
                             decoration: BoxDecoration(
                                 color: Color(0xffFFF4D6),
@@ -60,10 +61,14 @@ final String wineimg;
                                     '₹ 8.54',
                                     style:
                                         TextStyle(fontWeight: FontWeight.w700),
-                                  )
+                                  ),
+                                  ksizedbox20
                                 ],
+                                
                               ),
-                            ))
+                              
+                            )),
+                            
                       ],
                     ),
                   );

@@ -36,7 +36,7 @@ class _FlightDeparetureSCreenState extends State<FlightDeparetureSCreen> {
         
         body: SafeArea(
             child: ListView(children: [
-          Column(children: [
+          Stack(children: [
       
             Container(
               height: 200,
@@ -123,11 +123,21 @@ class _FlightDeparetureSCreenState extends State<FlightDeparetureSCreen> {
                             
               ksizedbox10,
             Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15),
+                padding: const EdgeInsets.only(left: 15, right: 15,top: 175),
                 child: Container(
                   height: 700.h,
                   width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        offset: Offset(0.0,0.75),
+                        blurRadius: 5,
+                        color: kgrey
+                      )
+                    ],
+                    color: kwhite
+                  ),
                   child: Padding(
                       padding:
                           const EdgeInsets.only(top: 10, bottom: 10),
@@ -136,7 +146,10 @@ class _FlightDeparetureSCreenState extends State<FlightDeparetureSCreen> {
                         selectionColor: kOrange,
                         endRangeSelectionColor: kOrange,
                         startRangeSelectionColor: kOrange,
-                      
+                      headerStyle: DateRangePickerHeaderStyle(
+                        textStyle: TextStyle(color: kOrange),
+                        
+                      ),
                         selectionMode: DateRangePickerSelectionMode.multiRange,
         view: DateRangePickerView.month,
           monthFormat: 'MMM',monthCellStyle: DateRangePickerMonthCellStyle(

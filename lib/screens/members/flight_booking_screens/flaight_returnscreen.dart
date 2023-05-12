@@ -34,7 +34,7 @@ class _FlaightReturnScreenState extends State<FlaightReturnScreen> {
     return Scaffold(
  body: SafeArea(
             child: ListView(children: [
-          Column(children: [
+          Stack(children: [
       
             Container(
               height: 200,
@@ -116,12 +116,15 @@ class _FlaightReturnScreenState extends State<FlaightReturnScreen> {
                               )
                             ],
                           ),
-                          Image.asset(
-                            'assets/images/pardoubleflaight.png',
-                            color: kwhite,
-                            fit: BoxFit.fitWidth,
-                            width: 35,
-                            height: 50,
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 20),
+                            child: Image.asset(
+                              'assets/images/pardoubleflaight.png',
+                              color: kwhite,
+                              fit: BoxFit.fitWidth,
+                              width: 35,
+                              height: 50,
+                            ),
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,13 +158,24 @@ class _FlaightReturnScreenState extends State<FlaightReturnScreen> {
 
          
                             
-              ksizedbox10,
+              ksizedbox40,
+            
             Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15),
+                padding: const EdgeInsets.only(left: 15, right: 15,top: 175),
                 child: Container(
-                  height: 700.h,
+                  height: 650.h,
                   width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        offset: Offset(0.0, 0.75),
+                        blurRadius: 5,
+                        color: kwhite
+                      )
+                    ],
+                    color: kwhite
+                  ),
                   child: Padding(
                       padding:
                           const EdgeInsets.only(top: 10, bottom: 10),
@@ -172,22 +186,22 @@ class _FlaightReturnScreenState extends State<FlaightReturnScreen> {
                         startRangeSelectionColor: kOrange,
                       
                         selectionMode: DateRangePickerSelectionMode.multiRange,
-        view: DateRangePickerView.month,
-          monthFormat: 'MMM',monthCellStyle: DateRangePickerMonthCellStyle(
+                  view: DateRangePickerView.month,
+                    monthFormat: 'MMM',monthCellStyle: DateRangePickerMonthCellStyle(
             selectionColor: kOrange
-          ),
-
-
-      // headerStyle: DateRangePickerHeaderStyle(
-      //   textStyle: TextStyle(
-      //     fontSize: 16 
-      //   )
-      // ),
-      
-           navigationDirection: DateRangePickerNavigationDirection.vertical,
-        enableMultiView: true,
-       
-      )),
+                    ),
+            
+            
+                // headerStyle: DateRangePickerHeaderStyle(
+                //   textStyle: TextStyle(
+                //     fontSize: 16 
+                //   )
+                // ),
+                
+                     navigationDirection: DateRangePickerNavigationDirection.vertical,
+                  enableMultiView: true,
+                 
+                )),
                 ))
           ]
           )

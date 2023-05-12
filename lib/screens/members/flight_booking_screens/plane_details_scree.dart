@@ -44,167 +44,162 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
               ),
               ksizedbox20,
               Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15),
+                padding: const EdgeInsets.only(left: 30, right: 30),
                 child: Stack(
                   children: [
                     InkWell(
                       onTap: () {
                         Get.to(PlaneEconomyDetailsScreen());
                       },
-                      child: Container(
-                        height: 850.h,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(),
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: Container(
-                              height: 210,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  color: kwhite,
-                                  boxShadow: <BoxShadow>[
-                                    BoxShadow(
-                                        offset: Offset(0.0, 0.75),
-                                        blurRadius: 5,
-                                        color: kwhite),
-                                  ],
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, top: 40),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'BGR Air',
-                                          style: TextStyle(
-                                              fontSize: 22.5.sp,
-                                              color: kblue,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, top: 10),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Boeing 683-321',
-                                          style: TextStyle(
-                                              fontSize: 19.sp, color: kblue),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, top: 40),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Customer Rating',
-                                          style: TextStyle(
-                                              fontSize: 19.sp, color: kyellow),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, top: 10),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.star,
-                                          color: kyellow,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: kyellow,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: kyellow,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: kyellow,
-                                        ),
-                                        Icon(
-                                          Icons.star_half,
-                                          color: kyellow,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  ksizedbox10,
-                                  Divider(),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, top: 20),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Model \nBoeing 683-321',
-                                          style: TextStyle(
-                                            fontSize: 19.sp,
-                                            color: kblue,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, top: 30),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Class \nEconomy & Business',
-                                          style: TextStyle(
-                                            fontSize: 19.sp,
-                                            color: kblue,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, top: 30),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Age \n44',
-                                          style: TextStyle(
-                                            fontSize: 19.sp,
-                                            color: kblue,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, top: 30),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Type \nSingle',
-                                          style: TextStyle(
-                                            fontSize: 19.sp,
-                                            color: kblue,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
+                        child: Container(
+                            height: MediaQuery.of(context).size.height*0.65,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                color: kwhite,
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                      offset: Offset(0.0, 0.75),
+                                      blurRadius: 5,
+                                      color: kwhite),
                                 ],
-                              )),
-                        ),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 20, top: 40),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'BGR Air',
+                                        style: TextStyle(
+                                            fontSize: 22.5.sp,
+                                            color: kblue,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 20, top: 10),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Boeing 683-321',
+                                        style: TextStyle(
+                                            fontSize: 19.sp, color: kblue),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 20, top: 30),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Customer Rating',
+                                        style: TextStyle(
+                                            fontSize: 19.sp, color: kyellow),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 20, top: 10),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.star,
+                                        color: kyellow,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: kyellow,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: kyellow,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: kyellow,
+                                      ),
+                                      Icon(
+                                        Icons.star_half,
+                                        color: kyellow,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                ksizedbox10,
+                                Divider(),
+                                Padding(
+                                  padding:  EdgeInsets.only(
+                                      left: 20, top: 20.h),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Model \nBoeing 683-321',
+                                        style: TextStyle(
+                                          fontSize: 19.sp,
+                                          color: kblue,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding:  EdgeInsets.only(
+                                      left: 20, top: 30.h),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Class \nEconomy & Business',
+                                        style: TextStyle(
+                                          fontSize: 19.sp,
+                                          color: kblue,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding:  EdgeInsets.only(
+                                      left: 20, top: 30.h),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Age \n44',
+                                        style: TextStyle(
+                                          fontSize: 19.sp,
+                                          color: kblue,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding:  EdgeInsets.only(
+                                      left: 20, top: 30.h),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Type \nSingle',
+                                        style: TextStyle(
+                                          fontSize: 19.sp,
+                                          color: kblue,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            )),
                       ),
                     ),
                     Positioned(
@@ -221,7 +216,7 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
           ),
         ),
         bottomNavigationBar: Container(
-          height: 90,
+          height: 100.h,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(color: kwhite),
           child: Column(

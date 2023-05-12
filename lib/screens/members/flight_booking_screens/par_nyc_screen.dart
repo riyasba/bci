@@ -32,6 +32,7 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: ListView(children: [
@@ -43,14 +44,18 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(12),
                         bottomRight: Radius.circular(12))),
-                height:200.h,
+                height: _mediaQuery.height>700?210:250.h,        
                 width: MediaQuery.of(context).size.width,
-                child: ListView(
-                  children:[ Column(
+                child: ListView(children: [
+                  Column(
                     children: [
                       Row(children: [
-                        InkWell(onTap: (){Get.back();},
-                          child: Image.asset('assets/images/parflaightback.png')),
+                        InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Image.asset(
+                                'assets/images/parflaightback.png')),
                         Text(
                           'PAR - NYC',
                           style: TextStyle(color: kwhite, fontSize: 20),
@@ -131,8 +136,8 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                                 style: TextStyle(color: kwhite, fontSize: 14),
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(bottom: 20, right: 10),
+                                padding: const EdgeInsets.only(
+                                    bottom: 20, right: 10),
                                 child: Text(
                                     formatDate(selectedDate, [dd, MM, yyyy]),
                                     style:
@@ -142,7 +147,6 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                           ),
                         ],
                       ),
-                      
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Row(
@@ -170,11 +174,11 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                             )
                           ],
                         ),
-                      )
+                      ),
+                      ksizedbox30
                     ],
                   ),
-                  ]
-                ),
+                ]),
               ),
               ksizedbox30,
               Padding(

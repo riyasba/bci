@@ -115,8 +115,8 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                     Row(
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 28, top: 19),
+                                          padding:  EdgeInsets.only(
+                                              left: 28, top: 19.h),
                                           child: Text(
                                             'John F. Kennedy \nAirport',
                                             style: TextStyle(
@@ -124,8 +124,8 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                           ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 22, top: 5),
+                                          padding:  EdgeInsets.only(
+                                              left: 22, top: 5.h),
                                           child: Text(
                                             'Abbotsford National \nAirport',
                                             style: TextStyle(
@@ -171,8 +171,8 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                           ),
                                         ]),
                                         Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 95, top: 120),
+                                          padding:  EdgeInsets.only(
+                                              right: 95, top: 120.h),
                                           child: Container(
                                             child: Transform.rotate(
                                               angle: -math.pi / 2.0,
@@ -204,7 +204,7 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                         ),
                                         Positioned(
                                           left: 120,
-                                          top: 20,
+                                          top: 20.h,
                                           child: Column(
                                             children: [
                                               Padding(
@@ -218,8 +218,8 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 35, top: 5),
+                                                padding:  EdgeInsets.only(
+                                                    right: 35, top: 5.h),
                                                 child: Row(
                                                   children: [
                                                     Icon(
@@ -241,8 +241,8 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            left: 27, top: 30),
+                                                         EdgeInsets.only(
+                                                            left: 27, top: 30.h),
                                                     child: Text(
                                                       'Duration: 2h 55min',
                                                       style: TextStyle(
@@ -263,8 +263,8 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            right: 18, top: 50),
+                                                         EdgeInsets.only(
+                                                            right: 18, top: 50.h),
                                                     child: Text(
                                                       '31 October',
                                                       style: TextStyle(

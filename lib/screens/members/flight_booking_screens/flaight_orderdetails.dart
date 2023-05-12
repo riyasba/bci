@@ -1,5 +1,6 @@
 import 'package:bci/constands/constands.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class FlaightOrderDetailsScreen extends StatefulWidget {
@@ -407,7 +408,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 15,right: 15,top: 30),
                       child: Container(
-                        height: MediaQuery.of(context).size.height*0.2,
+                        
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
@@ -428,6 +429,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                                     ],
                                   ),
                                 ),
+                                
                                 Padding(
                                   padding: const EdgeInsets.only(left: 20,top: 30),
                                   child: Row(
@@ -444,7 +446,8 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                                       Text(' 81280089900',style: TextStyle(fontSize: 18,),)
                                     ],
                                   ),
-                                )
+                                ),
+                                ksizedbox20
                               ],
                             ),
                       ),
@@ -452,7 +455,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                     Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15, top: 5),
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.5,
+                    height: 420,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(),
                     child: Padding(

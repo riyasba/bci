@@ -12,7 +12,7 @@ final String bottleimg;
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        height: 110,
+        height: 150,
         color: kwhite,
         child: Column(
           children: [
@@ -28,6 +28,10 @@ final String bottleimg;
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Column(
+
+
+
+
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
