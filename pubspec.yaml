@@ -59,6 +59,8 @@ dependencies:
   paged_vertical_calendar: ^1.1.6
   syncfusion_flutter_datepicker: ^21.2.3
   share_plus: ^7.0.0
+  dio: ^5.1.2
+  shared_preferences: ^2.1.1
 
 dev_dependencies:
   flutter_test:

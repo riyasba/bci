@@ -80,7 +80,7 @@ class MemberLoginScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
                   onTap: () {
-                    Get.to(const otp_varification());
+                    Get.to(OtpVerificationView());
                   },
                   child: Container(
                     width: size.width,

@@ -1,5 +1,6 @@
 import 'package:bci/authentications/generate_otp/generate_otp.dart';
 import 'package:bci/authentications/otp_verification/otp_verification.dart';
+import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/screens/members/sign_up_view/residential_address_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class MemberSignUpScreen extends StatefulWidget {
 }
 
 class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -42,221 +44,278 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
             ksizedbox30,
             Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: Container(
-                height: 40,
-                width: size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    border: Border.all(color: const Color(0xff707070)),
-                    color: Colors.white),
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 10),
-                  child: TextField(
-                    //controller: usernamecontroller,
-                    decoration: InputDecoration(
-                        isCollapsed: true,
-                        isDense: true,
-                        border: InputBorder.none,
-                        hintText: "User Name",
-                        hintStyle: TextStyle(
-                          color: kblue,
-                          fontWeight: FontWeight.w400,
-                        )),
-                  ),
-                ),
+              child: TextFormField(
+                // controller: merchantDistplaynameController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "User name can't be empty";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    isCollapsed: false,
+                    isDense: true,
+                    contentPadding:
+                        const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    hintText: "User Name",
+                    hintStyle: TextStyle(
+                      color: kblue,
+                      fontWeight: FontWeight.w400,
+                    )),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: Container(
-                height: 40,
-                width: size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    border: Border.all(color: const Color(0xff707070)),
-                    color: Colors.white),
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 10),
-                  child: TextField(
-                    //controller: usernamecontroller,
-                    decoration: InputDecoration(
-                        isCollapsed: true,
-                        isDense: true,
-                        border: InputBorder.none,
-                        hintText: "Date of birth",
-                        hintStyle: TextStyle(
-                          color: kblue,
-                          fontWeight: FontWeight.w400,
-                        )),
-                  ),
-                ),
+              child: TextFormField(
+                // controller: merchantDistplaynameController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Date of Birth can't be empty";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    isCollapsed: false,
+                    isDense: true,
+                    contentPadding:
+                        const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    hintText: "Date of Birth",
+                    hintStyle: TextStyle(
+                      color: kblue,
+                      fontWeight: FontWeight.w400,
+                    )),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: Container(
-                height: 40,
-                width: size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    border: Border.all(color: const Color(0xff707070)),
-                    color: Colors.white),
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 10),
-                  child: TextField(
-                    //controller: usernamecontroller,
-                    decoration: InputDecoration(
-                        isCollapsed: true,
-                        isDense: true,
-                        border: InputBorder.none,
-                        hintText: "Email",
-                        hintStyle: TextStyle(
-                          color: kblue,
-                          fontWeight: FontWeight.w400,
-                        )),
-                  ),
-                ),
+              child: TextFormField(
+                // controller: merchantDistplaynameController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Email can't be empty";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    isCollapsed: false,
+                    isDense: true,
+                    contentPadding:
+                        const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    hintText: "Email",
+                    hintStyle: TextStyle(
+                      color: kblue,
+                      fontWeight: FontWeight.w400,
+                    )),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: Container(
-                height: 40,
-                width: size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    border: Border.all(color: const Color(0xff707070)),
-                    color: Colors.white),
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 10),
-                  child: TextField(
-                    //controller: usernamecontroller,
-                    decoration: InputDecoration(
-                        isCollapsed: true,
-                        isDense: true,
-                        border: InputBorder.none,
-                        hintText: "Mobile Number",
-                        hintStyle: TextStyle(
-                          color: kblue,
-                          fontWeight: FontWeight.w400,
-                        )),
-                  ),
-                ),
+              child: TextFormField(
+                // controller: merchantDistplaynameController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Mobile Number can't be empty";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    isCollapsed: false,
+                    isDense: true,
+                    contentPadding:
+                        const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    hintText: "Mobile Number",
+                    hintStyle: TextStyle(
+                      color: kblue,
+                      fontWeight: FontWeight.w400,
+                    )),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: Container(
-                height: 40,
-                width: size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    border: Border.all(color: const Color(0xff707070)),
-                    color: Colors.white),
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 10),
-                  child: TextField(
-                    //controller: usernamecontroller,
-                    decoration: InputDecoration(
-                        isCollapsed: true,
-                        isDense: true,
-                        border: InputBorder.none,
-                        hintText: "Occupation",
-                        hintStyle: TextStyle(
-                          color: kblue,
-                          fontWeight: FontWeight.w400,
-                        )),
-                  ),
-                ),
+              child: TextFormField(
+                // controller: merchantDistplaynameController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Occupation can't be empty";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    isCollapsed: false,
+                    isDense: true,
+                    contentPadding:
+                        const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    hintText: "Occupation",
+                    hintStyle: TextStyle(
+                      color: kblue,
+                      fontWeight: FontWeight.w400,
+                    )),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: Container(
-                height: 40,
-                width: size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    border: Border.all(color: const Color(0xff707070)),
-                    color: Colors.white),
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 10),
-                  child: TextField(
-                    //controller: usernamecontroller,
-                    decoration: InputDecoration(
-                        isCollapsed: true,
-                        isDense: true,
-                        border: InputBorder.none,
-                        hintText: "Father Name",
-                        hintStyle: TextStyle(
-                          color: kblue,
-                          fontWeight: FontWeight.w400,
-                        )),
-                  ),
-                ),
+              child: TextFormField(
+                // controller: merchantDistplaynameController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    isCollapsed: false,
+                    isDense: true,
+                    contentPadding:
+                        const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    hintText: "Father Name",
+                    hintStyle: TextStyle(
+                      color: kblue,
+                      fontWeight: FontWeight.w400,
+                    )),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: Container(
-                height: 40,
-                width: size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    border: Border.all(color: const Color(0xff707070)),
-                    color: Colors.white),
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 10),
-                  child: TextField(
-                    //controller: usernamecontroller,
-                    decoration: InputDecoration(
-                        isCollapsed: true,
-                        isDense: true,
-                        border: InputBorder.none,
-                        hintText: "Mother Name",
-                        hintStyle: TextStyle(
-                          color: kblue,
-                          fontWeight: FontWeight.w400,
-                        )),
-                  ),
-                ),
+              child: TextFormField(
+                // controller: merchantDistplaynameController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    isCollapsed: false,
+                    isDense: true,
+                    contentPadding:
+                        const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: const Color(0xff707070))),
+                    hintText: "Mother Name",
+                    hintStyle: TextStyle(
+                      color: kblue,
+                      fontWeight: FontWeight.w400,
+                    )),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: Container(
-                height: 40,
-                width: size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    border: Border.all(color: const Color(0xff707070)),
-                    color: Colors.white),
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 10),
-                  child: TextField(
-                    //controller: usernamecontroller,
-                    decoration: InputDecoration(
-                        isCollapsed: true,
-                        isDense: true,
-                        border: InputBorder.none,
-                        hintText: "Married",
-                        hintStyle: TextStyle(
-                          color: kblue,
-                          fontWeight: FontWeight.w400,
-                        )),
+              padding: const EdgeInsets.only(top: 10, left: 10),
+              child: Row(
+                children: [
+                  Text(
+                    "Married :",
+                    style: primaryFont.copyWith(color: kblue, fontSize: 16),
                   ),
-                ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Checkbox(
+                    checkColor: Colors.white,
+                    fillColor: MaterialStateProperty.all(kblue),
+                    value: isChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isChecked = value!;
+                      });
+                    },
+                  )
+                ],
               ),
             ),
-            ksizedbox40,
+            ksizedbox20,
             InkWell(
               onTap: () {
                 Get.to(const ResidentialAddressScreen());
@@ -284,7 +343,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    "Create Account",
+                    "Next",
                     style: TextStyle(
                         fontSize: 22.sp,
                         color: Colors.white,
