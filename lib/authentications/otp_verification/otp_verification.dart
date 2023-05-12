@@ -19,13 +19,14 @@ class otp_varification extends StatelessWidget {
       body: Column(
         children: [
           ksizedbox30,
-          Image.asset('assets/images/Group 5816.png'),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('assets/images/Group 5816.png'),
+          ),
           Text(
             'OTP Verification',
             style: TextStyle(
-                fontSize: 22.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.bold),
+                fontSize: 22, color: kblue, fontWeight: FontWeight.w700),
           ),
           ksizedbox10,
           Row(
@@ -34,13 +35,14 @@ class otp_varification extends StatelessWidget {
               Text(
                 'Enter the OTP sent to +91 9633749714',
                 style: TextStyle(
-                  fontSize: 22.sp,
-                  color: Colors.black,
-                ),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    //   decoration: TextDecoration.underline,
+                    color: kblue),
               ),
             ],
           ),
-          ksizedbox20,
+          ksizedbox40,
           SingleChildScrollView(
             child: OtpTextField(
               numberOfFields: 5,
@@ -64,7 +66,7 @@ class otp_varification extends StatelessWidget {
               }, // end onSubmit
             ),
           ),
-          ksizedbox30,
+          ksizedbox10,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -78,14 +80,15 @@ class otp_varification extends StatelessWidget {
               Text(
                 "Resent",
                 style: TextStyle(
-                  fontSize: 19.sp,
-                  color: Colors.red,
-                ),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    decoration: TextDecoration.underline,
+                    color: kOrange),
               ),
             ],
           ),
-          ksizedbox20,
-          ksizedbox30,
+          ksizedbox10,
+          // ksizedbox30,
           InkWell(
             onTap: () {
               Get.to(verified_Screen());

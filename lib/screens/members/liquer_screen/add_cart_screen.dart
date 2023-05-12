@@ -1,3 +1,4 @@
+import 'package:bci/screens/members/liquer_screen/widget/add_buttton.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -9,9 +10,14 @@ import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
 import 'cart_screen.dart';
 
-class Add_cart extends StatelessWidget {
+class Add_cart extends StatefulWidget {
   const Add_cart({super.key});
 
+  @override
+  State<Add_cart> createState() => _Add_cartState();
+}
+
+class _Add_cartState extends State<Add_cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +64,31 @@ class Add_cart extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                 ),
                 ksizedbox40,
-                Text('Size'),
+                Text('Size'), ksizedbox30,
+                Row(
+                  children: [
+                    Container(
+                      height: 30,
+                      width: 130,
+                      decoration: BoxDecoration(
+                          color: kwhite,
+                          borderRadius: BorderRadius.circular(4)),
+                      child: Center(
+                        child: Text(
+                          '2L',
+                          style: TextStyle(
+                            fontSize: 17,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    AddSubtractScreen(),
+                  ],
+                ), // AddSubtractScreen(),
                 ksizedbox20,
                 // Container(
                 //   child: Center(
@@ -71,7 +101,7 @@ class Add_cart extends StatelessWidget {
                 //   decoration: BoxDecoration(
                 //       borderRadius: BorderRadius.circular(7), color: kgrey),
                 // ),
-                ksizedbox30,
+                //  ksizedbox30,
                 // Container(
                 //   child: Center(
                 //       child: Text(
@@ -83,7 +113,7 @@ class Add_cart extends StatelessWidget {
                 //   decoration: BoxDecoration(
                 //       borderRadius: BorderRadius.circular(7), color: kgrey),
                 // ),
-                ksizedbox40,
+                // ksizedbox40,
                 Text(
                   'About',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
@@ -102,14 +132,19 @@ class Add_cart extends StatelessWidget {
                 Text(
                   'Direct selling for delivery service our order club and Bar.',
                   style: TextStyle(fontSize: 11, color: kgrey),
-                ),ksizedbox40,
+                ),
+                ksizedbox40,
                 Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: InkWell(onTap: (){Get.to(cart_screen());},
+                  child: InkWell(
+                    onTap: () {
+                      Get.to(cart_screen());
+                    },
                     child: Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [kwidth5,
+                        children: [
+                          kwidth5,
                           Text(
                             'Total - ₹ 16.80',
                             style: TextStyle(color: kwhite, fontSize: 18),
@@ -135,7 +170,8 @@ class Add_cart extends StatelessWidget {
                       height: 70,
                       width: 100,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16), color: kyellow),
+                          borderRadius: BorderRadius.circular(16),
+                          color: kyellow),
                     ),
                   ),
                 )

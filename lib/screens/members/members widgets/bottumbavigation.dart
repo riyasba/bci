@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import '../../bussiness/views/home_screen/setting_screen.dart';
 import '../../bussiness/views/home_screen/settings/my_account_screen.dart';
 import '../home_screen/Members_home_screen.dart';
+import '../liquer_screen/widget/add_buttton.dart';
 import '../members_search_screen/members_search_screen.dart';
 import '../wallet/Wallet_members.dart';
 
@@ -27,9 +28,9 @@ class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
       title: 'Search Result',
       items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
     ),
-    WalletScreen_members (),
-    Members_booking(),
-    SettingScreen(),
+    WalletScreen_members(),
+    Members_booking(), AddSubtractScreen()
+    //  SettingScreen(),
   ];
 
   int selectedpage = 0;

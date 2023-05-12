@@ -27,12 +27,13 @@ class MemberLoginScreen extends StatelessWidget {
                   height: 250,
                 ),
               ),
-              const SizedBox(height: 50,),
-               Text(
+              const SizedBox(
+                height: 50,
+              ),
+              Text(
                 'Enter Your Phone Number',
-                style: TextStyle(fontSize: 22,
-                color: kblue,
-                 fontWeight: FontWeight.w700),
+                style: TextStyle(
+                    fontSize: 22, color: kblue, fontWeight: FontWeight.w700),
               ),
               ksizedbox20,
               Row(
@@ -41,21 +42,22 @@ class MemberLoginScreen extends StatelessWidget {
                   Text(
                     'We will send you an ',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18,color: kblue),
+                    style: TextStyle(fontSize: 18, color: kblue),
                   ),
                   Text(
                     'One Time Password',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: kblue),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: kblue),
                   ),
                 ],
               ),
               Text(
                 'on this mobile number',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18,color: kblue),
+                style: TextStyle(fontSize: 18, color: kblue),
               ),
               ksizedbox40,
               Padding(
@@ -68,7 +70,7 @@ class MemberLoginScreen extends StatelessWidget {
                       suffixIcon: Image.asset('assets/images/Path 471.png'),
                       hintText: 'Enter your username',
                       labelText: '+91 9633749714',
-                      border:const OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                     ),
                   ),
                 ),
@@ -76,19 +78,23 @@ class MemberLoginScreen extends StatelessWidget {
               ksizedbox10,
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: InkWell(onTap: (){
-                  Get.to(const otp_varification());},
+                child: InkWell(
+                  onTap: () {
+                    Get.to(const otp_varification());
+                  },
                   child: Container(
                     width: size.width,
                     height: 50,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4,),
-                      border: Border.all(color:const Color(0xffFFBF7E)),
-                      boxShadow:const [
+                      borderRadius: BorderRadius.circular(
+                        4,
+                      ),
+                      border: Border.all(color: const Color(0xffFFBF7E)),
+                      boxShadow: const [
                         BoxShadow(
-                          color:Color(0xFFFF5C29),
-                          blurRadius: 3.0, 
+                          color: Color(0xFFFF5C29),
+                          blurRadius: 3.0,
                         )
                       ],
                       gradient: const LinearGradient(
@@ -100,7 +106,7 @@ class MemberLoginScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    child:const Text(
+                    child: const Text(
                       'Genarate OTP',
                       style: TextStyle(
                           fontSize: 22,
@@ -117,19 +123,20 @@ class MemberLoginScreen extends StatelessWidget {
                   Text(
                     "Dont't have an account? ",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18,color: kblue),
+                    style: TextStyle(fontSize: 18, color: kblue),
                   ),
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       Get.to(const MemberSignUpScreen());
                     },
                     child: Text(
                       'Sign up',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      decoration: TextDecoration.underline,
-                      color: kOrange),
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline,
+                          color: kOrange),
                     ),
                   ),
                 ],
