@@ -5,6 +5,8 @@ import 'package:bci/models/category_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/merchants_register_model.dart';
 import 'package:bci/models/sub_category_model.dart';
+import 'package:bci/screens/bussiness/views/generations/otp_verification_screen.dart';
+import 'package:bci/screens/bussiness/views/generations/verified_screen.dart';
 import 'package:bci/services/network/auth_api_services/get_otp_api_services.dart';
 import 'package:bci/services/network/auth_api_services/login_api_services.dart';
 import 'package:bci/services/network/auth_api_services/merchant_api_services.dart';
@@ -47,7 +49,7 @@ class AuthController extends GetxController {
         .merchantRegister(merchantRegisterModel: merchantRegisterModel);
     isLoading(false);
     if (response.statusCode == 201) {
-      Get.to(OtpVerificationView(
+      Get.to(BusinessOtpvarification(
         phoneNumber: merchantRegisterModel.mobile,
         otp: response.data["user"]["otp"].toString(),
       ));
@@ -61,14 +63,22 @@ class AuthController extends GetxController {
     }
   }
 
-  registerMember({required MemberRegisterModel memberRegisterModel}) async {
-    dio.Response<dynamic> response = await memberRegisterApiServices
-        .memberRegister(memberRegisterModel: memberRegisterModel);
-
+  registerMember({
+    required MemberRegisterModel memberRegisterModel,
+    required AddressModel residentialAddress,
+    required AddressModel officialAddress,
+  }) async {
+    isLoading(true);
+    dio.Response<dynamic> response =
+        await memberRegisterApiServices.memberRegister(
+            memberRegisterModel: memberRegisterModel,
+            officialAddress: officialAddress,
+            residentialAddress: residentialAddress);
+    isLoading(false);
     if (response.statusCode == 201) {
       Get.to(OtpVerificationView(
         phoneNumber: memberRegisterModel.mobile,
-        otp: response.data["user"]["otp"],
+        otp: response.data["user"]["otp"].toString(),
       ));
     } else {
       Get.rawSnackbar(
@@ -81,14 +91,45 @@ class AuthController extends GetxController {
   }
 
   getOtpFunction({required String mobileNumber}) async {
+    isLoading(true);
+
     dio.Response<dynamic> response =
         await getOTPApiServices.getOtpApi(mobileNumber: mobileNumber);
+    isLoading(false);
 
     if (response.statusCode == 200) {
       Get.to(OtpVerificationView(
         phoneNumber: mobileNumber,
         otp: response.data["otp"].toString(),
       ));
+    } else if (response.statusCode == 404) {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "User not found",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+  }
+
+  getOtpFunctionBusiness({required String mobileNumber}) async {
+    isLoading(true);
+    dio.Response<dynamic> response =
+        await getOTPApiServices.getOtpApi(mobileNumber: mobileNumber);
+    isLoading(false);
+
+    if (response.statusCode == 200) {
+      Get.to(BusinessOtpvarification(
+        phoneNumber: mobileNumber,
+        otp: response.data["otp"].toString(),
+      ));
+    } else if (response.statusCode == 404) {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "User not found",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
     }
   }
 
@@ -96,11 +137,37 @@ class AuthController extends GetxController {
     isLoading(true);
     dio.Response<dynamic> response =
         await loginApiServices.loginApi(mobile: mobile, otp: otp);
-    isLoading(true);
+    isLoading(false);
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", response.data["token"]);
       Get.offAll(const verified_Screen());
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Invalid OTP",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+  }
+
+  loginUsersbusiness({required String mobile, required String otp}) async {
+    isLoading(true);
+    dio.Response<dynamic> response =
+        await loginApiServices.loginApi(mobile: mobile, otp: otp);
+    isLoading(false);
+    if (response.statusCode == 200) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("auth_token", response.data["token"]);
+      Get.offAll(const BusinessverifiedScreen());
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Invalid OTP",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
     }
   }
 

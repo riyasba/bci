@@ -1,22 +1,33 @@
+import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/screens/members/sign_up_view/sign_up_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../otp_verification/otp_verification.dart';
 
-class MemberLoginScreen extends StatelessWidget {
+class MemberLoginScreen extends StatefulWidget {
   const MemberLoginScreen({super.key});
 
+  @override
+  State<MemberLoginScreen> createState() => _MemberLoginScreenState();
+}
+
+class _MemberLoginScreenState extends State<MemberLoginScreen> {
+  var phoneNumberController = TextEditingController();
+
+  final authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -65,55 +76,105 @@ class MemberLoginScreen extends StatelessWidget {
                 child: Container(
                   height: 50,
                   child: TextFormField(
+                    controller: phoneNumberController,
+                     keyboardType: TextInputType.phone,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(10),
+                      FilteringTextInputFormatter.digitsOnly,
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    ],
                     decoration: InputDecoration(
                       prefixIcon: Image.asset('assets/images/Image 8.png'),
-                      suffixIcon: Image.asset('assets/images/Path 471.png'),
+                      // suffixIcon: Image.asset('assets/images/Path 471.png'),
                       hintText: 'Enter your username',
-                      labelText: '+91 9633749714',
                       border: const OutlineInputBorder(),
                     ),
                   ),
                 ),
               ),
               ksizedbox10,
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  onTap: () {
-                    Get.to(OtpVerificationView());
-                  },
-                  child: Container(
-                    width: size.width,
-                    height: 50,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        4,
-                      ),
-                      border: Border.all(color: const Color(0xffFFBF7E)),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color(0xFFFF5C29),
-                          blurRadius: 3.0,
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: authController.isLoading.isTrue
+                      ? Container(
+                          width: size.width,
+                          height: 50,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              4,
+                            ),
+                            border: Border.all(color: const Color(0xffFFBF7E)),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0xFFFF5C29),
+                                blurRadius: 3.0,
+                              )
+                            ],
+                            gradient: const LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                Color(0xFFFF5C29),
+                                Color(0xFFFFCD38),
+                              ],
+                            ),
+                          ),
+                          child: const CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
                         )
-                      ],
-                      gradient: const LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          Color(0xFFFF5C29),
-                          Color(0xFFFFCD38),
-                        ],
-                      ),
-                    ),
-                    child: const Text(
-                      'Genarate OTP',
-                      style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                      : InkWell(
+                          onTap: () {
+                            if (phoneNumberController.text.isNotEmpty) {
+                              authController.getOtpFunction(
+                                  mobileNumber: phoneNumberController.text);
+                            } else {
+                              Get.rawSnackbar(
+                                backgroundColor: Colors.red,
+                                messageText: Text(
+                                  "Please Enter your number",
+                                  style:
+                                      primaryFont.copyWith(color: Colors.white),
+                                ),
+                              );
+                            }
+                          },
+                          child: Container(
+                            width: size.width,
+                            height: 50,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                4,
+                              ),
+                              border:
+                                  Border.all(color: const Color(0xffFFBF7E)),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color(0xFFFF5C29),
+                                  blurRadius: 3.0,
+                                )
+                              ],
+                              gradient: const LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [
+                                  Color(0xFFFF5C29),
+                                  Color(0xFFFFCD38),
+                                ],
+                              ),
+                            ),
+                            child: const Text(
+                              'Genarate OTP',
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
                 ),
               ),
               ksizedbox10,

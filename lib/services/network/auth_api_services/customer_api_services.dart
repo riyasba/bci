@@ -6,6 +6,8 @@ import 'package:dio/dio.dart';
 class MemberRegisterApiServices extends BaseApiService {
   Future memberRegister({
     required MemberRegisterModel memberRegisterModel,
+    required AddressModel residentialAddress,
+    required AddressModel officialAddress,
   }) async {
     dynamic responseJson;
     try {
@@ -28,26 +30,10 @@ class MemberRegisterApiServices extends BaseApiService {
             "father_name": memberRegisterModel.fatherName,
             "mother_name": memberRegisterModel.motherName,
             "is_married": "0",
-            "residential_address": {
-              "door_no": memberRegisterModel.residentialAddress.doorNo,
-              "building_name":
-                  memberRegisterModel.residentialAddress.buildingName,
-              "address": memberRegisterModel.residentialAddress.address,
-              "city": memberRegisterModel.residentialAddress.city,
-              "state": memberRegisterModel.residentialAddress.state,
-              "personal_id": memberRegisterModel.residentialAddress.personalId,
-              "aadhr_id": memberRegisterModel.residentialAddress.aadhrId
-            },
-            "official_address": {
-              "door_no": memberRegisterModel.officialAddress.doorNo,
-              "building_name":
-                  memberRegisterModel.residentialAddress.buildingName,
-              "address": memberRegisterModel.residentialAddress.address,
-              "city": memberRegisterModel.residentialAddress.city,
-              "state": memberRegisterModel.residentialAddress.state,
-            },
-            "pan_no":  memberRegisterModel.panNo,
-            "aadhar_no":  memberRegisterModel.residentialAddress.aadhrId,
+            "residential_address": "null",
+            "official_address": "null",
+            "pan_no": memberRegisterModel.panNo,
+            "aadhar_no": residentialAddress.aadhrId,
             "role_id": "3",
             "password": "1234567",
             "password_confirmation": "1234567"

@@ -51,7 +51,7 @@ class cart_screen extends StatelessWidget {
               ),
             ),
           )),
-      body: ListView(physics: BouncingScrollPhysics(),
+      body: Column(
         children: [
           Orders(
             bottleimg: 'assets/images/Group 5831.png',

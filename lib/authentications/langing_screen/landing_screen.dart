@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constands/constands.dart';
 import '../../screens/members/members widgets/bottumbavigation.dart';
@@ -22,7 +23,7 @@ class landing_screen extends StatelessWidget {
     return Container(
       height: size.height.h,
       width: size.width.w,
-      decoration:const BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
             'assets/images/Login Screen Options.png',
@@ -36,7 +37,9 @@ class landing_screen extends StatelessWidget {
             children: [
               //    Image.asset('assets/images/onbording3.png'),ksizedbox40,
               InkWell(
-                onTap: () {
+                onTap: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setString("role", "0");
                   Get.to(const MemberLoginScreen());
                 },
                 child: Padding(
@@ -65,13 +68,7 @@ class landing_screen extends StatelessWidget {
                     child: Center(
                       child: Text(
                         "Members Login",
-                        style: TextStyle(shadows: [
-                        Shadow(
-                        blurRadius: 5.0,
-                         color: Color(0xff0000007A),
-                         offset: Offset(3.0, 3.0),
-                          ),
-        ],
+                        style: TextStyle(
                             fontSize: 22.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.w500),
@@ -108,7 +105,9 @@ class landing_screen extends StatelessWidget {
               // ),
               ksizedbox20,
               InkWell(
-                onTap: () {
+                onTap: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setString("role", "1");
                   Get.to(const BusinessLoginScreen());
                 },
                 child: Padding(
@@ -126,18 +125,18 @@ class landing_screen extends StatelessWidget {
                           blurRadius: 3.0,
                         )
                       ],
-                     
                     ),
                     child: Center(
                       child: Text(
                         "Bussiness login",
-                        style: TextStyle(shadows: [
-                        Shadow(
-                        blurRadius: 5.0,
-                         color: Color(0xff707070),
-                         offset: Offset(3.0, 3.0),
-                          ),
-        ],
+                        style: TextStyle(
+                            shadows: [
+                              Shadow(
+                                blurRadius: 5.0,
+                                color: Color(0xff707070),
+                                offset: Offset(3.0, 3.0),
+                              ),
+                            ],
                             fontSize: 22.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.w500),

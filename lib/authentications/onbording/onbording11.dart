@@ -63,8 +63,8 @@ class _OnbordingState extends State<Onbording> {
                 children: [
                   Expanded(
                       child: PageView(controller: _pageController, children: [
-                    onbordings1(),
-                    onbordings2(),
+                    riyasandi(),
+                    riyasnadi2(),
                     Onbording3(),
                     Onbording4(),
                     Onbording5()
@@ -144,7 +144,7 @@ class _OnbordingState extends State<Onbording> {
                   top: 7,
                   child: GestureDetector(
                       onTap: () {
-                        Get.offAll(HelloConvexAppBar());
+                        Get.to(HelloConvexAppBar());
                       },
                       child: Text(
                         "Skip",
@@ -158,26 +158,23 @@ class _OnbordingState extends State<Onbording> {
   }
 }
 
-class onbordings1 extends StatefulWidget {
-  const onbordings1({
+class riyasandi extends StatefulWidget {
+  const riyasandi({
     super.key,
   });
 
   @override
-  State<onbordings1> createState() => _onbordings1State();
+  State<riyasandi> createState() => _riyasandiState();
 }
 
-class _onbordings1State extends State<onbordings1> {
+class _riyasandiState extends State<riyasandi> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            'assets/images/onbordin1.png',
-          ),
+        Image.asset(
+          'assets/images/onbordin1.png',
         ),
         ksizedbox30,
         Text(
@@ -197,25 +194,22 @@ class _onbordings1State extends State<onbordings1> {
   }
 }
 
-class onbordings2 extends StatefulWidget {
-  const onbordings2({
+class riyasnadi2 extends StatefulWidget {
+  const riyasnadi2({
     super.key,
   });
 
   @override
-  State<onbordings2> createState() => _onbordings2State();
+  State<riyasnadi2> createState() => _riyasnadi2State();
 }
 
-class _onbordings2State extends State<onbordings2> {
+class _riyasnadi2State extends State<riyasnadi2> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            'assets/images/onbording2.png',
-          ),
+        Image.asset(
+          'assets/images/onbording2.png',
         ),
         Text(
           'HOTELS & SERVICES',
@@ -242,10 +236,7 @@ class Onbording3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset('assets/images/onbording3.png'),
-        ),
+        Image.asset('assets/images/onbording3.png'),
         Text(
           'ESSENTIAL BAZZAR',
           style: TextStyle(
@@ -271,10 +262,7 @@ class Onbording4 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset('assets/images/onbording4.png'),
-        ),
+        Image.asset('assets/images/onbording4.png'),
         Text(
           'A TO Z UTILITY SERVICE &\n ONLINE DISCOUNTS',
           textAlign: TextAlign.center,
