@@ -97,10 +97,11 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
             children: [
               Text(
                 "Don't Recive OTP ",
-                style: TextStyle(
-                  fontSize: 19.sp,
-                  color: Colors.black,
-                ),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    //   decoration: TextDecoration.underline,
+                    color: kblue),
               ),
               Text(
                 "Resent",
