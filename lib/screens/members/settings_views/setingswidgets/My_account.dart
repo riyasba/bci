@@ -2,6 +2,7 @@ import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/screens/bussiness/views/home_screen/contact_admin.dart';
 import 'package:custom_clippers/custom_clippers.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +19,25 @@ class _MyAccountState extends State<MyAccount> {
   var nameController = TextEditingController();
   var emailController = TextEditingController();
   var phoneController = TextEditingController();
+  var occupationController = TextEditingController();
+  var fatherNameController = TextEditingController();
+  var motherNameController = TextEditingController();
+  var dateOfBirthController = TextEditingController();
+  bool isMarried = false;
+
+  var oDoorNumberCN = TextEditingController();
+  var oBuildingNumberCN = TextEditingController();
+  var oAddressCN = TextEditingController();
+  var oCityCN = TextEditingController();
+  var oStateCN = TextEditingController();
+
+  var rDoorNumberCN = TextEditingController();
+  var rBuildingNumberCN = TextEditingController();
+  var rAddressCN = TextEditingController();
+  var rCityCN = TextEditingController();
+  var rStateCN = TextEditingController();
+  var rpersonalIdCN = TextEditingController();
+  var rAadhrCN = TextEditingController();
 
   final settingsController = Get.find<SettingsController>();
 
@@ -29,12 +49,83 @@ class _MyAccountState extends State<MyAccount> {
     setDefault();
   }
 
+  DateTime date = DateTime.now().subtract(const Duration(days: 6570));
+
+  _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: date,
+      initialDatePickerMode: DatePickerMode.day,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      firstDate: DateTime(1910),
+      locale: const Locale('en', 'IN'),
+      lastDate: DateTime.now().subtract(const Duration(days: 6570)),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: kblue, // <-- SEE HERE
+              onPrimary: Colors.white, // <-- SEE HERE
+              onSurface: Colors.blueAccent, // <-- SEE HERE
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: kblue, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null)
+      setState(() {
+        date = picked;
+        dateOfBirthController.text = formatDate(date, [dd, "/", mm, "/", yyyy]);
+      });
+  }
+
   setDefault() async {
     await profileController.getProfile();
     if (profileController.profileData.isNotEmpty) {
       nameController.text = profileController.profileData.first.name;
       phoneController.text = profileController.profileData.first.mobile;
       emailController.text = profileController.profileData.first.email;
+      occupationController.text =
+          profileController.profileData.first.occupation;
+      fatherNameController.text =
+          profileController.profileData.first.fatherName;
+      motherNameController.text =
+          profileController.profileData.first.motherName;
+      // dateOfBirthController.text =
+      //     formatDate(date, profileController.profileData.first.dob);
+
+      oDoorNumberCN.text =
+          profileController.profileData.first.officialAddress.doorNo;
+      oBuildingNumberCN.text =
+          profileController.profileData.first.officialAddress.buildingName;
+      oAddressCN.text =
+          profileController.profileData.first.officialAddress.address;
+
+      oCityCN.text = profileController.profileData.first.officialAddress.city;
+      oStateCN.text = profileController.profileData.first.officialAddress.state;
+
+      rDoorNumberCN.text =
+          profileController.profileData.first.residentialAddress.doorNo;
+      rBuildingNumberCN.text =
+          profileController.profileData.first.residentialAddress.buildingName;
+      rAddressCN.text =
+          profileController.profileData.first.residentialAddress.address;
+
+      rCityCN.text =
+          profileController.profileData.first.residentialAddress.city;
+      rStateCN.text =
+          profileController.profileData.first.residentialAddress.state;
+      rpersonalIdCN.text =
+          profileController.profileData.first.residentialAddress.personalId;
+      rAadhrCN.text =
+          profileController.profileData.first.residentialAddress.aadharId;
     }
   }
 
@@ -115,7 +206,7 @@ class _MyAccountState extends State<MyAccount> {
                 Padding(
                   padding: const EdgeInsets.only(top: 5),
                   child: Container(
-                    height: 800,
+                    height: 600,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -138,7 +229,7 @@ class _MyAccountState extends State<MyAccount> {
                               const Padding(
                                 padding: EdgeInsets.only(bottom: 40),
                                 child: Text(
-                                  "Edit",
+                                  "",
                                   style: TextStyle(
                                       color: Color(0xffFF5003),
                                       fontSize: 16,
@@ -249,7 +340,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: occupationController,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -278,7 +369,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: fatherNameController,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -307,7 +398,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: motherNameController,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -335,17 +426,27 @@ class _MyAccountState extends State<MyAccount> {
                               child: Padding(
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
-                                child: TextField(
-                                  //controller: usernamecontroller,
-                                  decoration: InputDecoration(
-                                      isCollapsed: true,
-                                      isDense: true,
-                                      border: InputBorder.none,
-                                      hintText: "Married Unmarried",
-                                      hintStyle: TextStyle(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Married :",
+                                      style: TextStyle(
                                         color: kblue,
                                         fontWeight: FontWeight.w400,
-                                      )),
+                                      ),
+                                    ),
+                                    Checkbox(
+                                      checkColor: Colors.white,
+                                      fillColor:
+                                          MaterialStateProperty.all(kblue),
+                                      value: isMarried,
+                                      onChanged: (bool? value) {
+                                        setState(() {
+                                          isMarried = value!;
+                                        });
+                                      },
+                                    )
+                                  ],
                                 ),
                               ),
                             ),
@@ -365,65 +466,11 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
-                                  decoration: InputDecoration(
-                                      isCollapsed: true,
-                                      isDense: true,
-                                      border: InputBorder.none,
-                                      hintText: "Wedding Date",
-                                      hintStyle: TextStyle(
-                                        color: kblue,
-                                        fontWeight: FontWeight.w400,
-                                      )),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Container(
-                              height: 37,
-                              width: size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  border: Border.all(
-                                      color: const Color(0xff707070)),
-                                  color: const Color(0xffF9F8FD)),
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 10),
-                                child: TextField(
-                                  //controller: usernamecontroller,
-                                  decoration: InputDecoration(
-                                      isCollapsed: true,
-                                      isDense: true,
-                                      border: InputBorder.none,
-                                      hintText: "Spouse Name",
-                                      hintStyle: TextStyle(
-                                        color: kblue,
-                                        fontWeight: FontWeight.w400,
-                                      )),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Container(
-                              height: 37,
-                              width: size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  border: Border.all(
-                                      color: const Color(0xff707070)),
-                                  color: const Color(0xffF9F8FD)),
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 10),
-                                child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: dateOfBirthController,
+                                  readOnly: true,
+                                  onTap: () {
+                                    _selectDate(context);
+                                  },
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -438,86 +485,30 @@ class _MyAccountState extends State<MyAccount> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Container(
-                              height: 37,
-                              width: size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  border: Border.all(
-                                      color: const Color(0xff707070)),
-                                  color: const Color(0xffF9F8FD)),
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 10),
-                                child: TextField(
-                                  //controller: usernamecontroller,
-                                  decoration: InputDecoration(
-                                      isCollapsed: true,
-                                      isDense: true,
-                                      border: InputBorder.none,
-                                      hintText: "No.of Childrens",
-                                      hintStyle: TextStyle(
-                                        color: kblue,
-                                        fontWeight: FontWeight.w400,
-                                      )),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Container(
-                              height: 37,
-                              width: size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  border: Border.all(
-                                      color: const Color(0xff707070)),
-                                  color: const Color(0xffF9F8FD)),
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 10),
-                                child: TextField(
-                                  //controller: usernamecontroller,
-                                  decoration: InputDecoration(
-                                      isCollapsed: true,
-                                      isDense: true,
-                                      border: InputBorder.none,
-                                      hintText: "18 yrs",
-                                      //suffixIcon:const Icon(Icons.upload),
-                                      hintStyle: TextStyle(
-                                        color: kblue,
-                                        fontWeight: FontWeight.w400,
-                                      )),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
                             padding: const EdgeInsets.only(top: 20),
-                            child: Container(
-                              height: 50,
-                              width: size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3),
-                                  border: Border.all(
-                                      color: const Color(0xffFF9021)),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Color(0xffFF5003),
-                                      blurRadius: 2.0,
-                                    ),
-                                  ]),
-                              child: const Center(
-                                child: Text(
-                                  "Submit",
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500),
+                            child: InkWell(
+                              onTap: () {},
+                              child: Container(
+                                height: 50,
+                                width: size.width,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(3),
+                                    border: Border.all(
+                                        color: const Color(0xffFF9021)),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Color(0xffFF5003),
+                                        blurRadius: 2.0,
+                                      ),
+                                    ]),
+                                child: const Center(
+                                  child: Text(
+                                    "Submit",
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ),
                             ),
@@ -577,7 +568,7 @@ class _MyAccountState extends State<MyAccount> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: const [
                               Text(
-                                "Edit",
+                                "",
                                 style: TextStyle(
                                     color: Color(0xffFF5003),
                                     fontSize: 16,
@@ -600,7 +591,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: oDoorNumberCN,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -629,7 +620,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: oBuildingNumberCN,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -658,7 +649,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: oAddressCN,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -687,7 +678,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: oCityCN,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -716,7 +707,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: oStateCN,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -811,7 +802,7 @@ class _MyAccountState extends State<MyAccount> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: const [
                               Text(
-                                "Edit",
+                                "",
                                 style: TextStyle(
                                     color: Color(0xffFF5003),
                                     fontSize: 16,
@@ -834,7 +825,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: rDoorNumberCN,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -863,7 +854,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: rBuildingNumberCN,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -892,7 +883,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: rAddressCN,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -921,7 +912,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: rCityCN,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -950,7 +941,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: rStateCN,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -979,7 +970,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: rpersonalIdCN,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -1008,7 +999,7 @@ class _MyAccountState extends State<MyAccount> {
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
-                                  //controller: usernamecontroller,
+                                  controller: rAadhrCN,
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,

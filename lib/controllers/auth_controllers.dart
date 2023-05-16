@@ -1,3 +1,4 @@
+import 'package:bci/authentications/generate_otp/generate_otp.dart';
 import 'package:bci/authentications/langing_screen/landing_screen.dart';
 import 'package:bci/authentications/otp_verification/otp_verification.dart';
 import 'package:bci/authentications/verified_screen/verified_screen.dart';
@@ -186,7 +187,7 @@ class AuthController extends GetxController {
         //       "Login As Member",
         //       style: primaryFont.copyWith(color: Colors.white),
         //     ));
-          Get.rawSnackbar(
+        Get.rawSnackbar(
             backgroundColor: Colors.red,
             messageText: Text(
               "Invalid Login",
@@ -228,6 +229,6 @@ class AuthController extends GetxController {
   logout() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString("auth_token", "null");
-    Get.to(landing_screen());
+    Get.to(const MemberLoginScreen());
   }
 }

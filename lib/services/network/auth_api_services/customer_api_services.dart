@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/services/base_urls/base_urls.dart';
@@ -12,7 +13,6 @@ class MemberRegisterApiServices extends BaseApiService {
     dynamic responseJson;
     try {
       var dio = Dio();
-
       var response = await dio.post(registerURl,
           options: Options(
               headers: {
@@ -30,8 +30,22 @@ class MemberRegisterApiServices extends BaseApiService {
             "father_name": memberRegisterModel.fatherName,
             "mother_name": memberRegisterModel.motherName,
             "is_married": "0",
-            "residential_address": "null",
-            "official_address": "null",
+            "residential_address": jsonEncode({
+              "door_no": residentialAddress.doorNo,
+              "address": residentialAddress.address,
+              "building_name": residentialAddress.buildingName,
+              "state": residentialAddress.state,
+              "city": residentialAddress.city,
+              "personal_id": residentialAddress.personalId,
+              "aadhar_id": residentialAddress.aadhrId
+            }),
+            "official_address": jsonEncode({
+              "door_no": officialAddress.doorNo,
+              "address": officialAddress.address,
+              "building_name": officialAddress.buildingName,
+              "state": officialAddress.state,
+              "city": officialAddress.city,
+            }),
             "pan_no": memberRegisterModel.panNo,
             "aadhar_no": residentialAddress.aadhrId,
             "role_id": "3",

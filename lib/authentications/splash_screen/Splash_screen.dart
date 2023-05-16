@@ -1,3 +1,4 @@
+import 'package:bci/authentications/generate_otp/generate_otp.dart';
 import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:flutter/material.dart';
@@ -25,13 +26,13 @@ class _splashState extends State<splash> {
     checkForAuth();
   }
 
-  toHomePage() async {
-    await Future.delayed(const Duration(seconds: 2));
+  // toHomePage() async {
+  //   await Future.delayed(const Duration(seconds: 2));
 
-    Get.offAll(
-      () => HomeBottomnavigationBar(),
-    );
-  }
+  //   Get.offAll(
+  //     () => HomeBottomnavigationBar(),
+  //   );
+  // }
 
   toHomePageMember() async {
     await Future.delayed(const Duration(seconds: 2));
@@ -43,9 +44,8 @@ class _splashState extends State<splash> {
 
   toLoginPage() async {
     await Future.delayed(const Duration(seconds: 2));
-
     Get.offAll(
-      () => landing_screen(),
+      () => MemberLoginScreen(),
     );
   }
 
@@ -58,11 +58,7 @@ class _splashState extends State<splash> {
     if (authtoken == "null" || authtoken == null) {
       toLoginPage();
     } else {
-      if (role == "0") {
-        toHomePageMember();
-      } else {
-        toHomePage();
-      }
+      toHomePageMember();
     }
   }
 
