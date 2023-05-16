@@ -88,7 +88,6 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
 
   @override
   void initState() {
-
     super.initState();
     setDefault();
   }
@@ -98,6 +97,8 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
     if (profileController.profileData.isNotEmpty) {
       nameController.text = profileController.profileData.first.name;
       numberController.text = profileController.profileData.first.mobile;
+      displayNameController.text = profileController.profileData.first.name;
+      displayNameController.text = profileController.profileData.first.name;
     }
   }
 

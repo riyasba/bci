@@ -6,6 +6,7 @@ import 'package:bci/models/category_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/merchants_register_model.dart';
 import 'package:bci/models/sub_category_model.dart';
+import 'package:bci/screens/bussiness/views/generations/generate_otp_screen.dart';
 import 'package:bci/screens/bussiness/views/generations/otp_verification_screen.dart';
 import 'package:bci/screens/bussiness/views/generations/verified_screen.dart';
 import 'package:bci/services/network/auth_api_services/get_otp_api_services.dart';
@@ -186,7 +187,7 @@ class AuthController extends GetxController {
         //       "Login As Member",
         //       style: primaryFont.copyWith(color: Colors.white),
         //     ));
-          Get.rawSnackbar(
+        Get.rawSnackbar(
             backgroundColor: Colors.red,
             messageText: Text(
               "Invalid Login",
@@ -228,6 +229,6 @@ class AuthController extends GetxController {
   logout() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString("auth_token", "null");
-    Get.to(landing_screen());
+    Get.to(BusinessLoginScreen());
   }
 }
