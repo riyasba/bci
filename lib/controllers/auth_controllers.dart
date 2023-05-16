@@ -1,3 +1,4 @@
+import 'package:bci/authentications/langing_screen/landing_screen.dart';
 import 'package:bci/authentications/otp_verification/otp_verification.dart';
 import 'package:bci/authentications/verified_screen/verified_screen.dart';
 import 'package:bci/constands/app_fonts.dart';
@@ -141,7 +142,17 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", response.data["token"]);
-      Get.offAll(const verified_Screen());
+
+      if (response.data["user"]["role_id"] == "3") {
+        Get.offAll(const verified_Screen());
+      } else {
+        Get.rawSnackbar(
+            backgroundColor: Colors.red,
+            messageText: Text(
+              "Login As Business",
+              style: primaryFont.copyWith(color: Colors.white),
+            ));
+      }
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -160,7 +171,16 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", response.data["token"]);
-      Get.offAll(const BusinessverifiedScreen());
+      if (response.data["user"]["role_id"] == "5") {
+        Get.offAll(const BusinessverifiedScreen());
+      } else {
+        Get.rawSnackbar(
+            backgroundColor: Colors.red,
+            messageText: Text(
+              "Login As Member",
+              style: primaryFont.copyWith(color: Colors.white),
+            ));
+      }
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -191,5 +211,11 @@ class AuthController extends GetxController {
       subCategoryList = subCategoryModel.data;
     }
     update();
+  }
+
+  logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("auth_token", "null");
+    Get.to(landing_screen());
   }
 }

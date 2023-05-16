@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/bussiness/views/home_screen/settings/edit_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   //     final imagetemp = File(image.path);
   //     setState(() {
   //       this.image = imagetemp;
-  //     });                               this is camera picking code 
+  //     });                               this is camera picking code
   //   } catch (e) {
   //     print('Failed to pick image:$e');
   //   }
@@ -82,6 +83,23 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   //     print('Failed to pick image:$e');
   //   }
   // }
+
+  final profileController = Get.find<ProfileController>();
+
+  @override
+  void initState() {
+
+    super.initState();
+    setDefault();
+  }
+
+  setDefault() async {
+    await profileController.getProfile();
+    if (profileController.profileData.isNotEmpty) {
+      nameController.text = profileController.profileData.first.name;
+      numberController.text = profileController.profileData.first.mobile;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -176,26 +194,26 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                     border: OutlineInputBorder()),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: TextField(
-                controller: signatureController,
-                decoration: InputDecoration(
-                    hintText: '  Authorized signature name',
-                    hintStyle: TextStyle(fontSize: 20, color: kblue),
-                    border: OutlineInputBorder()),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: TextField(
-                controller: contactController,
-                decoration: InputDecoration(
-                    hintText: '  Contact Person',
-                    hintStyle: TextStyle(fontSize: 20, color: kblue),
-                    border: OutlineInputBorder()),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+            //   child: TextField(
+            //     controller: signatureController,
+            //     decoration: InputDecoration(
+            //         hintText: '  Authorized signature name',
+            //         hintStyle: TextStyle(fontSize: 20, color: kblue),
+            //         border: OutlineInputBorder()),
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+            //   child: TextField(
+            //     controller: contactController,
+            //     decoration: InputDecoration(
+            //         hintText: '  Contact Person',
+            //         hintStyle: TextStyle(fontSize: 20, color: kblue),
+            //         border: OutlineInputBorder()),
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
               child: TextField(

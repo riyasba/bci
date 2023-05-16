@@ -1,4 +1,5 @@
 import 'package:bci/authentications/langing_screen/landing_screen.dart';
+import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/screens/bussiness/views/business/business_home_screen.dart';
 import 'package:bci/screens/bussiness/views/home_screen/contact_admin.dart';
 import 'package:bci/screens/bussiness/views/home_screen/settings/dashboard_screen.dart';
@@ -252,7 +253,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
           ),
           InkWell(
             onTap: () {
-              Get.to(landing_screen());
+              Get.find<AuthController>().logout();
             },
             child: Container(
               width: MediaQuery.of(context).size.width,

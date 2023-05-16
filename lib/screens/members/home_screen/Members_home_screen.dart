@@ -1,3 +1,4 @@
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_booking_landing_screen.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -26,7 +27,15 @@ class Home_screen1 extends StatefulWidget {
 
 class _Home_screen1State extends State<Home_screen1> {
   CarouselController sliderController = CarouselController();
+  final profileController = Get.find<ProfileController>();
   int activeIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    profileController.getProfile();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,19 +50,23 @@ class _Home_screen1State extends State<Home_screen1> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Image.asset('assets/images/projectlogo.png'),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Text(
-                      'Hello,Jhon',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
+                  GetBuilder<ProfileController>(builder: (_) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: profileController.profileData.isEmpty
+                          ? Container()
+                          : Text(
+                              'Hello, ${profileController.profileData.first.name}',
+                              style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                    );
+                  }),
                   IconButton(
                       onPressed: () {
-                        Get.to(NotificationScreen());
+                        Get.to(const NotificationScreen());
                       },
                       icon: Icon(
                         Icons.notifications,
@@ -130,8 +143,11 @@ class _Home_screen1State extends State<Home_screen1> {
               ),
             ],
           ),
-          InkWell(onTap: (){Get.to(UpgradeScreen());},
-            child: Image.asset('assets/images/Group 5826.png')),
+          InkWell(
+              onTap: () {
+                Get.to(UpgradeScreen());
+              },
+              child: Image.asset('assets/images/Group 5826.png')),
           Row(
             children: [
               kwidth10,
@@ -160,7 +176,8 @@ class _Home_screen1State extends State<Home_screen1> {
             ],
           ),
           ksizedbox20,
-          Row(crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               InkWell(
@@ -205,7 +222,10 @@ class _Home_screen1State extends State<Home_screen1> {
                   ],
                 ),
               ),
-              InkWell(onTap: (){Get.to(Holiday_Home());},
+              InkWell(
+                onTap: () {
+                  Get.to(Holiday_Home());
+                },
                 child: Column(
                   children: [
                     Image.asset('assets/images/Group 5829.png'),
@@ -231,8 +251,7 @@ class _Home_screen1State extends State<Home_screen1> {
                 Container(
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image:
-                              AssetImage('assets/images/Group 5781.png'))),
+                          image: AssetImage('assets/images/Group 5781.png'))),
                 ),
               ],
               options: CarouselOptions(
@@ -307,10 +326,11 @@ class _Home_screen1State extends State<Home_screen1> {
                     child: Container(
                       height: 106,
                       width: 144,
-                      child: InkWell(onTap: () {Get.to(offer_screen()); 
-                        
-                      },
-                        child: Image.asset('assets/images/aaaa.png')),
+                      child: InkWell(
+                          onTap: () {
+                            Get.to(offer_screen());
+                          },
+                          child: Image.asset('assets/images/aaaa.png')),
                     ),
                   );
                 }),

@@ -17,4 +17,8 @@ abstract class BaseApiService {
   //sub category URL
   final String subCategoryURL =
       "https://bci.batechnology.in.net/api/sub_category";
+
+  //get profile api
+  final String getProfileURL =
+      "https://bci.batechnology.in.net/api/auth/profile";
 }

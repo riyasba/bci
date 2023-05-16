@@ -23,7 +23,7 @@ class Home_screen1 extends StatelessWidget {
                 children: [
                   Image.asset('assets/images/projectlogo.png'),
                   Padding(
-                    padding: const EdgeInsets.only(right: 20),
+                    padding: EdgeInsets.only(right: 20),
                     child: Text(
                       'Hello,Jhon',
                       style: TextStyle(

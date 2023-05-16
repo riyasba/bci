@@ -20,7 +20,8 @@ class CategoryModel {
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
         message: json["message"],
-        data: List<CategoryList>.from(json["data"].map((x) => CategoryList.fromJson(x))),
+        data: List<CategoryList>.from(
+            json["data"].map((x) => CategoryList.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

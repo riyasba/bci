@@ -1,5 +1,6 @@
 import 'package:bci/authentications/langing_screen/landing_screen.dart';
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/screens/members/settings_views/offers_screen.dart';
 import 'package:bci/screens/members/settings_views/our_partner_screen.dart';
@@ -26,8 +27,6 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,9 +62,10 @@ class _SettingScreenState extends State<SettingScreen> {
         padding: const EdgeInsets.all(20.0),
         child: ListView(
           children: [
-            InkWell(onTap: (){
-              Get.to(const MyAccount());
-            },
+            InkWell(
+              onTap: () {
+                Get.to(const MyAccount());
+              },
               child: Row(
                 children: const [
                   Image(
@@ -185,7 +185,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 color: Colors.grey,
               ),
             ),
-            InkWell(onTap: (){Get.to(Additional_coupons());},
+            InkWell(
+              onTap: () {
+                Get.to(Additional_coupons());
+              },
               child: Row(
                 children: const [
                   Image(
@@ -341,7 +344,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 color: Colors.grey,
               ),
             ),
-            InkWell(onTap: (){Get.to(landing_screen());},
+            InkWell(
+              onTap: () {
+                Get.find<AuthController>().logout();
+              },
               child: Row(
                 children: const [
                   Image(

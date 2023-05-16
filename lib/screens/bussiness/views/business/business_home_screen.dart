@@ -1,4 +1,5 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/offer%20screen/offer_screen_grid.dart';
 import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:bci/screens/bussiness/views/home_screen/availability_scree.dart';
@@ -28,6 +29,15 @@ class BusinessHomeScreen extends StatefulWidget {
 class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
   CarouselController sliderController = CarouselController();
   int activeIndex = 0;
+
+  final profileController = Get.find<ProfileController>();
+
+  @override
+  void initState() {
+    super.initState();
+    profileController.getProfile();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,17 +52,21 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Image.asset('assets/images/projectlogo.png'),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Text(
-                      'Hello,Jhon',
-                      style: TextStyle(
-                          fontSize: 23,
-                          //fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
-                 IconButton(
+                  GetBuilder<ProfileController>(builder: (_) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: profileController.profileData.isEmpty
+                          ? Container()
+                          : Text(
+                              'Hello, ${profileController.profileData.first.name}',
+                              style: const TextStyle(
+                                  fontSize: 23,
+                                  //fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                    );
+                  }),
+                  IconButton(
                       onPressed: () {
                         Get.to(NotificationScreen());
                       },
@@ -269,14 +283,11 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    
-                  },
+                  onTap: () {},
                   child: Container(
                     child: Column(
                       children: [
                         Container(
-                        
                           width: 80.w,
                         )
                       ],
