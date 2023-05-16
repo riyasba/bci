@@ -146,10 +146,16 @@ class AuthController extends GetxController {
       if (response.data["user"]["role_id"] == "3") {
         Get.offAll(const verified_Screen());
       } else {
+        // Get.rawSnackbar(
+        //     backgroundColor: Colors.red,
+        //     messageText: Text(
+        //       "Login As Business",
+        //       style: primaryFont.copyWith(color: Colors.white),
+        //     ));
         Get.rawSnackbar(
             backgroundColor: Colors.red,
             messageText: Text(
-              "Login As Business",
+              "Invalid Login",
               style: primaryFont.copyWith(color: Colors.white),
             ));
       }
@@ -174,10 +180,16 @@ class AuthController extends GetxController {
       if (response.data["user"]["role_id"] == "5") {
         Get.offAll(const BusinessverifiedScreen());
       } else {
-        Get.rawSnackbar(
+        // Get.rawSnackbar(
+        //     backgroundColor: Colors.red,
+        //     messageText: Text(
+        //       "Login As Member",
+        //       style: primaryFont.copyWith(color: Colors.white),
+        //     ));
+          Get.rawSnackbar(
             backgroundColor: Colors.red,
             messageText: Text(
-              "Login As Member",
+              "Invalid Login",
               style: primaryFont.copyWith(color: Colors.white),
             ));
       }
