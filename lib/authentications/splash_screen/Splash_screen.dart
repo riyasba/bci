@@ -1,4 +1,5 @@
 import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
+import 'package:bci/screens/bussiness/views/generations/generate_otp_screen.dart';
 import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -33,19 +34,19 @@ class _splashState extends State<splash> {
     );
   }
 
-  toHomePageMember() async {
-    await Future.delayed(const Duration(seconds: 2));
+  // toHomePageMember() async {
+  //   await Future.delayed(const Duration(seconds: 2));
 
-    Get.offAll(
-      () => HelloConvexAppBar(),
-    );
-  }
+  //   Get.offAll(
+  //     () => HelloConvexAppBar(),
+  //   );
+  // }
 
   toLoginPage() async {
     await Future.delayed(const Duration(seconds: 2));
 
     Get.offAll(
-      () => landing_screen(),
+      () => BusinessLoginScreen(),
     );
   }
 
@@ -58,11 +59,7 @@ class _splashState extends State<splash> {
     if (authtoken == "null" || authtoken == null) {
       toLoginPage();
     } else {
-      if (role == "0") {
-        toHomePageMember();
-      } else {
-        toHomePage();
-      }
+      toHomePage();
     }
   }
 
