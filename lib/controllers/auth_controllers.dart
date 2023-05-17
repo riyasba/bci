@@ -141,10 +141,9 @@ class AuthController extends GetxController {
         await loginApiServices.loginApi(mobile: mobile, otp: otp);
     isLoading(false);
     if (response.statusCode == 200) {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString("auth_token", response.data["token"]);
-
       if (response.data["user"]["role_id"] == "3") {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString("auth_token", response.data["token"]);
         Get.offAll(const verified_Screen());
       } else {
         // Get.rawSnackbar(
@@ -176,17 +175,11 @@ class AuthController extends GetxController {
         await loginApiServices.loginApi(mobile: mobile, otp: otp);
     isLoading(false);
     if (response.statusCode == 200) {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString("auth_token", response.data["token"]);
       if (response.data["user"]["role_id"] == "5") {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString("auth_token", response.data["token"]);
         Get.offAll(const BusinessverifiedScreen());
       } else {
-        // Get.rawSnackbar(
-        //     backgroundColor: Colors.red,
-        //     messageText: Text(
-        //       "Login As Member",
-        //       style: primaryFont.copyWith(color: Colors.white),
-        //     ));
         Get.rawSnackbar(
             backgroundColor: Colors.red,
             messageText: Text(

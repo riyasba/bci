@@ -21,4 +21,8 @@ abstract class BaseApiService {
   //get profile api
   final String getProfileURL =
       "https://bci.batechnology.in.net/api/auth/profile";
+
+//profile update API URL
+  final String profileUpdateURL =
+      "https://bci.batechnology.in.net/api/auth/profile_update";
 }

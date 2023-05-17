@@ -1,7 +1,12 @@
 import 'dart:io';
 
+import 'package:bci/controllers/auth_controllers.dart';
+import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/models/category_model.dart';
+import 'package:bci/models/merchant_update_profile.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -30,6 +35,44 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
   File? image;
   File? image2;
   File? imageprofile;
+
+  final profileController = Get.find<ProfileController>();
+
+  final authController = Get.find<AuthController>();
+
+  var merchantCategory;
+
+  @override
+  void initState() {
+    super.initState();
+    setDefault();
+  }
+
+  getCategorybyID() {
+    authController.categoryList.forEach((element) {
+      if (element.id.toString() ==
+          profileController.profileData.first.category) {
+        setState(() {
+          merchantCategory = element;
+        });
+      }
+    });
+  }
+
+  setDefault() async {
+    await profileController.getProfile();
+    if (profileController.profileData.isNotEmpty) {
+      numberController.text = profileController.profileData.first.mobile;
+      displayNameController.text = profileController.profileData.first.name;
+      addressController.text =
+          profileController.profileData.first.address ?? "";
+      aleternativeController.text =
+          profileController.profileData.first.alternateMobile ?? "";
+      gstnoController.text = profileController.profileData.first.gstNo ?? "";
+      categoryController.text = profileController.profileData.first.category;
+      getCategorybyID();
+    }
+  }
 
   Future pickerimage() async {
     try {
@@ -89,6 +132,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
           await ImagePicker().pickImage(source: ImageSource.gallery);
       if (imageprofile == null) return;
       final imageprofiletemp = File(imageprofile.path);
+      profileController.updateProfilePic(imageprofiletemp);
       setState(() {
         this.imageprofile = imageprofiletemp;
       });
@@ -113,6 +157,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(250),
@@ -150,32 +195,45 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
         children: [
           Stack(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  imageprofile != null
-                      ? Container(
-                          decoration: BoxDecoration(shape: BoxShape.circle),
-                          height: 130,
-                          width: 135,
-                          child: Image.file(imageprofile!))
-                      : InkWell(
-                          onTap: () {
-                            profileimage();
-                          },
-                          child: Container(
+              GetBuilder<ProfileController>(builder: (_) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    imageprofile != null
+                        ? Container(
+                            decoration:
+                                const BoxDecoration(shape: BoxShape.circle),
                             height: 130,
                             width: 135,
-                            decoration: BoxDecoration(shape: BoxShape.circle),
-                            child: Image.asset(
-                              'assets/images/settingprofile.png',
-                              fit: BoxFit.fitWidth,
-                              width: 110,
-                            ),
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(60),
+                                child: Image.file(imageprofile!)))
+                        : InkWell(
+                            onTap: () {
+                              profileimage();
+                            },
+                            child: profileController.profileData.isEmpty
+                                ? Container()
+                                : Container(
+                                    height: 130,
+                                    width: 135,
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle),
+                                    child: profileController.profileData.first
+                                                .profilePicture ==
+                                            null
+                                        ? Image.asset(
+                                            'assets/images/settingprofile.png',
+                                            fit: BoxFit.fitWidth,
+                                            width: 110,
+                                          )
+                                        : Image.network(profileController
+                                            .profileData.first.profilePicture),
+                                  ),
                           ),
-                        ),
-                ],
-              ),
+                  ],
+                );
+              }),
               Padding(
                 padding: const EdgeInsets.only(top: 95, left: 50),
                 child:
@@ -195,23 +253,13 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
           ),
           ksizedbox20,
           Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: TextField(
-              controller: nameController,
-              decoration: InputDecoration(
-                  hintText: '  User Name',
-                  hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: OutlineInputBorder()),
-            ),
-          ),
-          Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
             child: TextField(
               controller: displayNameController,
               decoration: InputDecoration(
                   hintText: '  Merchant display name',
                   hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: OutlineInputBorder()),
+                  border: const OutlineInputBorder()),
             ),
           ),
           Padding(
@@ -221,80 +269,86 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               decoration: InputDecoration(
                   hintText: '  Business Address',
                   hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: OutlineInputBorder()),
+                  border: const OutlineInputBorder()),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-            child: TextField(
-              controller: signatureController,
-              decoration: InputDecoration(
-                  hintText: '  Authorized signature name',
-                  hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: OutlineInputBorder()),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-            child: TextField(
-              controller: contactController,
-              decoration: InputDecoration(
-                  hintText: '  Contact Person',
-                  hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: OutlineInputBorder()),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+          //   child: TextField(
+          //     controller: contactController,
+          //     decoration: InputDecoration(
+          //         hintText: '  Contact Person',
+          //         hintStyle: TextStyle(fontSize: 20, color: kblue),
+          //         border: const OutlineInputBorder()),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
             child: TextField(
               controller: numberController,
+              keyboardType: TextInputType.phone,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(10),
+                FilteringTextInputFormatter.digitsOnly,
+                FilteringTextInputFormatter.deny(RegExp(r'\s')),
+              ],
               decoration: InputDecoration(
                   hintText: '  Mobile Number',
                   hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: OutlineInputBorder()),
+                  border: const OutlineInputBorder()),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
             child: TextField(
               controller: aleternativeController,
+              keyboardType: TextInputType.phone,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(10),
+                FilteringTextInputFormatter.digitsOnly,
+                FilteringTextInputFormatter.deny(RegExp(r'\s')),
+              ],
               decoration: InputDecoration(
                   hintText: '  Alternate Phone Number',
                   hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: OutlineInputBorder()),
+                  border: const OutlineInputBorder()),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
             child: TextField(
               controller: gstnoController,
+              keyboardType: TextInputType.phone,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(15),
+              ],
               decoration: InputDecoration(
                   hintText: '  GST No.',
                   hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: OutlineInputBorder()),
+                  border: const OutlineInputBorder()),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-            child: TextField(
-              controller: gstcategoryController,
-              decoration: InputDecoration(
-                  suffixIcon: Icon(Icons.arrow_drop_down),
-                  hintText: '  We are GST exempted category',
-                  hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: OutlineInputBorder()),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-            child: TextField(
-              controller: weblinkController,
-              decoration: InputDecoration(
-                  hintText: '  Weblink',
-                  hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: OutlineInputBorder()),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+          //   child: TextField(
+          //     controller: gstcategoryController,
+          //     decoration: InputDecoration(
+          //         suffixIcon: const Icon(Icons.arrow_drop_down),
+          //         hintText: '  We are GST exempted category',
+          //         hintStyle: TextStyle(fontSize: 20, color: kblue),
+          //         border: OutlineInputBorder()),
+          //   ),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+          //   child: TextField(
+          //     controller: weblinkController,
+          //     decoration: InputDecoration(
+          //         hintText: '  Weblink',
+          //         hintStyle: TextStyle(fontSize: 20, color: kblue),
+          //         border: OutlineInputBorder()),
+          //   ),
+          // ),
           ksizedbox40,
           Padding(
             padding: const EdgeInsets.only(left: 20),
@@ -318,7 +372,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                           onPressed: () {
                                             pickerimage();
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             'Choose ur gallery',
                                             style: TextStyle(
                                                 color: Colors.black,
@@ -328,7 +382,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                           onPressed: () {
                                             imagepic();
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             'Choose ur Camera',
                                             style: TextStyle(
                                                 color: Colors.black,
@@ -342,7 +396,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                         child: Container(
                             height: 130,
                             width: 135,
-                            color: Color(0xffE4E4E4),
+                            color: const Color(0xffE4E4E4),
                             child:
                                 Image.asset('assets/images/imageupload.png')),
                       ),
@@ -363,7 +417,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                           onPressed: () {
                                             pickerimage2();
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             'Choose ur gallery',
                                             style: TextStyle(
                                                 color: Colors.black,
@@ -373,7 +427,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                           onPressed: () {
                                             imagepic2();
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             'Choose ur Camera',
                                             style: TextStyle(
                                                 color: Colors.black,
@@ -387,7 +441,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                         child: Container(
                             height: 130,
                             width: 135,
-                            color: Color(0xffE4E4E4),
+                            color: const Color(0xffE4E4E4),
                             child:
                                 Image.asset('assets/images/imageupload.png')),
                       ),
@@ -408,43 +462,90 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               )
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-            child: TextField(
-              controller: digitController,
-              decoration: InputDecoration(
-                  hintText: '  0.0,0.0',
-                  hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: OutlineInputBorder()),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-            child: TextField(
-              controller: categoryController,
-              decoration: InputDecoration(
-                  hintText: '  Merchant Category',
-                  hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: OutlineInputBorder()),
-            ),
-          ),
-          ksizedbox30,
-          Padding(
-            padding: const EdgeInsets.only(left: 12, right: 12),
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: kOrange,
-                    minimumSize:
-                        Size(MediaQuery.of(context).size.width * 0.5, 45)),
-                onPressed: () {
-                  Get.back();
-                },
-                child: Text(
-                  'Submit',
-                  style: TextStyle(
-                    fontSize: 24,
+          ksizedbox10,
+          GetBuilder<AuthController>(builder: (_) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+              child: Container(
+                height: 55,
+                width: size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 5, 5, 5)
+                            .withOpacity(0.8))),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
+                  child: DropdownButton<CategoryList>(
+                    value: merchantCategory,
+                    isExpanded: true,
+                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                    elevation: 0,
+                    itemHeight: 55,
+                    isDense: true,
+                    dropdownColor: Colors.grey[250],
+                    style: const TextStyle(color: Colors.black54),
+                    hint: Text(
+                      "Merchant Category Name",
+                      style: TextStyle(fontSize: 16, color: kblue),
+                    ),
+                    onChanged: (CategoryList? value) {
+                      setState(() {
+                        merchantCategory = value!;
+                        categoryController.text = value.id.toString();
+                      });
+                    },
+                    items: authController.categoryList
+                        .map<DropdownMenuItem<CategoryList>>(
+                            (CategoryList value) {
+                      return DropdownMenuItem<CategoryList>(
+                        value: value,
+                        child: Text(value.title),
+                      );
+                    }).toList(),
                   ),
-                )),
+                ),
+              ),
+            );
+          }),
+          ksizedbox30,
+          Obx(
+            () => profileController.isLoading.isTrue
+                ? ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: kOrange,
+                        minimumSize:
+                            Size(MediaQuery.of(context).size.width * 0.5, 45)),
+                    onPressed: () {},
+                    child: const CircularProgressIndicator(
+                      color: Colors.white,
+                    ))
+                : Padding(
+                    padding: const EdgeInsets.only(left: 12, right: 12),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: kOrange,
+                            minimumSize: Size(
+                                MediaQuery.of(context).size.width * 0.5, 45)),
+                        onPressed: () {
+                          MerchantUpdateModel merchantUpdateModel =
+                              MerchantUpdateModel(
+                                  address: addressController.text,
+                                  alternateMobile: aleternativeController.text,
+                                  categoryId: categoryController.text,
+                                  gstNo: gstnoController.text,
+                                  mobile: numberController.text,
+                                  name: displayNameController.text);
+                          profileController.updateProfile(
+                              merchantUpdateModel: merchantUpdateModel);
+                        },
+                        child: const Text(
+                          'Submit',
+                          style: TextStyle(
+                            fontSize: 24,
+                          ),
+                        )),
+                  ),
           ),
           ksizedbox20
         ],

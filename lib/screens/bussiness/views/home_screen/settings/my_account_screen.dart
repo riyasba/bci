@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/models/category_model.dart';
 import 'package:bci/screens/bussiness/views/home_screen/settings/edit_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,6 @@ class MyAccountScreen extends StatefulWidget {
 }
 
 class _MyAccountScreenState extends State<MyAccountScreen> {
-  var nameController = TextEditingController();
   var displayNameController = TextEditingController();
   var addressController = TextEditingController();
   var signatureController = TextEditingController();
@@ -31,6 +32,10 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   var categoryController = TextEditingController();
   File? image;
   File? image2;
+
+  final authController = Get.find<AuthController>();
+
+  var merchantCategory;
 
   Future pickerimage() async {
     try {
@@ -89,24 +94,42 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   @override
   void initState() {
     super.initState();
+    authController.getCategoryList();
     setDefault();
   }
 
   setDefault() async {
     await profileController.getProfile();
     if (profileController.profileData.isNotEmpty) {
-      nameController.text = profileController.profileData.first.name;
       numberController.text = profileController.profileData.first.mobile;
       displayNameController.text = profileController.profileData.first.name;
-      displayNameController.text = profileController.profileData.first.name;
+      addressController.text =
+          profileController.profileData.first.address ?? "";
+      aleternativeController.text =
+          profileController.profileData.first.alternateMobile ?? "";
+      gstnoController.text = profileController.profileData.first.gstNo ?? "";
+      categoryController.text = profileController.profileData.first.category;
+      getCategorybyID();
     }
+  }
+
+  getCategorybyID() {
+    authController.categoryList.forEach((element) {
+      if (element.id.toString() ==
+          profileController.profileData.first.category) {
+        setState(() {
+          merchantCategory = element;
+        });
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -141,12 +164,25 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
         Column(
           children: [
             Stack(children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('assets/images/settingprofile.png'),
-                ],
-              ),
+              if (profileController.profileData.isNotEmpty)
+                GetBuilder<ProfileController>(builder: (_) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      profileController.profileData.first.profilePicture == null
+                          ? Image.asset('assets/images/settingprofile.png')
+                          : Container(
+                              height: 80,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: NetworkImage(profileController
+                                          .profileData.first.profilePicture)),
+                                  borderRadius: BorderRadius.circular(50)),
+                            ),
+                    ],
+                  );
+                }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -166,19 +202,10 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
             ]),
             ksizedbox20,
             Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              child: TextField(
-                controller: nameController,
-                decoration: InputDecoration(
-                    hintText: '  User Name',
-                    hintStyle: TextStyle(fontSize: 20, color: kblue),
-                    border: OutlineInputBorder()),
-              ),
-            ),
-            Padding(
               padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
               child: TextField(
                 controller: displayNameController,
+                readOnly: true,
                 decoration: InputDecoration(
                     hintText: '  Merchant display name',
                     hintStyle: TextStyle(fontSize: 20, color: kblue),
@@ -189,10 +216,11 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
               child: TextField(
                 controller: addressController,
+                readOnly: true,
                 decoration: InputDecoration(
                     hintText: '  Business Address',
                     hintStyle: TextStyle(fontSize: 20, color: kblue),
-                    border: OutlineInputBorder()),
+                    border: const OutlineInputBorder()),
               ),
             ),
             // Padding(
@@ -219,6 +247,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
               child: TextField(
                 controller: numberController,
+                readOnly: true,
                 decoration: InputDecoration(
                     hintText: '  Mobile Number',
                     hintStyle: TextStyle(fontSize: 20, color: kblue),
@@ -229,114 +258,73 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
               child: TextField(
                 controller: aleternativeController,
+                readOnly: true,
                 decoration: InputDecoration(
                     hintText: '  Alternate Phone Number',
                     hintStyle: TextStyle(fontSize: 20, color: kblue),
-                    border: OutlineInputBorder()),
+                    border: const OutlineInputBorder()),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
               child: TextField(
                 controller: gstnoController,
+                readOnly: true,
                 decoration: InputDecoration(
                     hintText: '  GST No.',
                     hintStyle: TextStyle(fontSize: 20, color: kblue),
-                    border: OutlineInputBorder()),
+                    border: const OutlineInputBorder()),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: TextField(
-                controller: gstcategoryController,
-                decoration: InputDecoration(
-                    suffixIcon: Icon(Icons.arrow_drop_down),
-                    hintText: '  We are GST exempted category',
-                    hintStyle: TextStyle(fontSize: 20, color: kblue),
-                    border: OutlineInputBorder()),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: TextField(
-                controller: weblinkController,
-                decoration: InputDecoration(
-                    hintText: '  Weblink',
-                    hintStyle: TextStyle(fontSize: 20, color: kblue),
-                    border: OutlineInputBorder()),
-              ),
-            ),
-            ksizedbox40,
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  image != null
-                      ? Container(
-                          height: 130, width: 135, child: Image.file(image!))
-                      : InkWell(
-                          onTap: () {
-                            pickerimage();
-                          },
-                          child: Container(
-                              height: 130,
-                              width: 135,
-                              color: Color(0xffE4E4E4),
-                              child:
-                                  Image.asset('assets/images/imageupload.png')),
-                        ),
-                  image2 != null
-                      ? Container(
-                          height: 130, width: 135, child: Image.file(image2!))
-                      : InkWell(
-                          onTap: () {
-                            pickerimage2();
-                          },
-                          child: Container(
-                              height: 130,
-                              width: 135,
-                              color: Color(0xffE4E4E4),
-                              child:
-                                  Image.asset('assets/images/imageupload.png')),
-                        ),
-                ],
-              ),
-            ),
+
             ksizedbox10,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  'Aadhar Card',
-                  style: TextStyle(fontSize: 16, color: kblue),
+
+            GetBuilder<AuthController>(builder: (_) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+                child: Container(
+                  height: 55,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(3),
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 5, 5, 5)
+                              .withOpacity(0.8))),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10, top: 15),
+                    child: DropdownButton<CategoryList>(
+                      value: merchantCategory,
+                      isExpanded: true,
+                      icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                      elevation: 0,
+                      itemHeight: 55,
+                      isDense: true,
+                      dropdownColor: Colors.grey[250],
+                      style: const TextStyle(color: Colors.black54),
+                      hint: Text(
+                        "Merchant Category Name",
+                        style: TextStyle(fontSize: 16, color: kblue),
+                      ),
+                      onChanged: (CategoryList? value) {
+                        setState(() {
+                          merchantCategory = value!;
+                          categoryController.text = value.id.toString();
+                        });
+                      },
+                      items: authController.categoryList
+                          .map<DropdownMenuItem<CategoryList>>(
+                              (CategoryList value) {
+                        return DropdownMenuItem<CategoryList>(
+                          value: value,
+                          child: Text(value.title),
+                        );
+                      }).toList(),
+                    ),
+                  ),
                 ),
-                Text(
-                  'Pan Card',
-                  style: TextStyle(fontSize: 16, color: kblue),
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: TextField(
-                controller: digitController,
-                decoration: InputDecoration(
-                    hintText: '  0.0,0.0',
-                    hintStyle: TextStyle(fontSize: 20, color: kblue),
-                    border: OutlineInputBorder()),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: TextField(
-                controller: categoryController,
-                decoration: InputDecoration(
-                    hintText: '  Merchant Category',
-                    hintStyle: TextStyle(fontSize: 20, color: kblue),
-                    border: OutlineInputBorder()),
-              ),
-            ),
+              );
+            }),
             ksizedbox20
           ],
         ),

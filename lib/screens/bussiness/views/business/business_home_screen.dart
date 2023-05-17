@@ -42,7 +42,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
