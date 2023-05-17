@@ -146,12 +146,6 @@ class AuthController extends GetxController {
         await prefs.setString("auth_token", response.data["token"]);
         Get.offAll(const verified_Screen());
       } else {
-        // Get.rawSnackbar(
-        //     backgroundColor: Colors.red,
-        //     messageText: Text(
-        //       "Login As Business",
-        //       style: primaryFont.copyWith(color: Colors.white),
-        //     ));
         Get.rawSnackbar(
             backgroundColor: Colors.red,
             messageText: Text(

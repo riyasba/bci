@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
+import 'package:bci/models/member_profile_update_model.dart';
+import 'package:bci/models/members_register_model.dart';
 import 'package:bci/screens/bussiness/views/home_screen/contact_admin.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../constands/constands.dart';
 
@@ -98,8 +104,6 @@ class _MyAccountState extends State<MyAccount> {
           profileController.profileData.first.fatherName;
       motherNameController.text =
           profileController.profileData.first.motherName;
-      // dateOfBirthController.text =
-      //     formatDate(date, profileController.profileData.first.dob);
 
       oDoorNumberCN.text =
           profileController.profileData.first.officialAddress.doorNo;
@@ -126,6 +130,29 @@ class _MyAccountState extends State<MyAccount> {
           profileController.profileData.first.residentialAddress.personalId;
       rAadhrCN.text =
           profileController.profileData.first.residentialAddress.aadharId;
+
+      setState(() {
+        isMarried =
+            profileController.profileData.first.isMarried == "0" ? false : true;
+      });
+      dateOfBirthController.text = profileController.profileData.first.dob;
+    }
+  }
+
+  File? imageprofile;
+
+  Future profileimage() async {
+    try {
+      final imageprofile =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (imageprofile == null) return;
+      final imageprofiletemp = File(imageprofile.path);
+      profileController.updateProfilePic(imageprofiletemp);
+      setState(() {
+        this.imageprofile = imageprofiletemp;
+      });
+    } catch (e) {
+      print('Failed to pick image:$e');
     }
   }
 
@@ -221,23 +248,47 @@ class _MyAccountState extends State<MyAccount> {
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(""),
-                              Image.asset('assets/images/settingprofile.png'),
-                              const Padding(
-                                padding: EdgeInsets.only(bottom: 40),
-                                child: Text(
-                                  "",
-                                  style: TextStyle(
-                                      color: Color(0xffFF5003),
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
+                          GetBuilder<ProfileController>(builder: (_) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(""),
+                                if (profileController.profileData.isNotEmpty)
+                                  InkWell(
+                                      onTap: () {
+                                        profileimage();
+                                      },
+                                      child: profileController.profileData.first
+                                                  .profilePicture ==
+                                              null
+                                          ? Image.asset(
+                                              'assets/images/settingprofile.png')
+                                          : Container(
+                                              height: 60,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(50),
+                                                  image: DecorationImage(
+                                                      image: NetworkImage(
+                                                          profileController
+                                                              .profileData
+                                                              .first
+                                                              .profilePicture))),
+                                            )),
+                                const Padding(
+                                  padding: EdgeInsets.only(bottom: 40),
+                                  child: Text(
+                                    "",
+                                    style: TextStyle(
+                                        color: Color(0xffFF5003),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            );
+                          }),
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: Container(
@@ -312,6 +363,13 @@ class _MyAccountState extends State<MyAccount> {
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
                                   controller: phoneController,
+                                  keyboardType: TextInputType.phone,
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(10),
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    FilteringTextInputFormatter.deny(
+                                        RegExp(r'\s')),
+                                  ],
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -412,45 +470,45 @@ class _MyAccountState extends State<MyAccount> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Container(
-                              height: 37,
-                              width: size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  border: Border.all(
-                                      color: const Color(0xff707070)),
-                                  color: const Color(0xffF9F8FD)),
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 10),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "Married :",
-                                      style: TextStyle(
-                                        color: kblue,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    Checkbox(
-                                      checkColor: Colors.white,
-                                      fillColor:
-                                          MaterialStateProperty.all(kblue),
-                                      value: isMarried,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          isMarried = value!;
-                                        });
-                                      },
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(top: 10),
+                          //   child: Container(
+                          //     height: 37,
+                          //     width: size.width,
+                          //     decoration: BoxDecoration(
+                          //         borderRadius: BorderRadius.circular(2),
+                          //         border: Border.all(
+                          //             color: const Color(0xff707070)),
+                          //         color: const Color(0xffF9F8FD)),
+                          //     alignment: Alignment.center,
+                          //     child: Padding(
+                          //       padding:
+                          //           const EdgeInsets.only(left: 15, right: 10),
+                          //       child: Row(
+                          //         children: [
+                          //           Text(
+                          //             "Married :",
+                          //             style: TextStyle(
+                          //               color: kblue,
+                          //               fontWeight: FontWeight.w400,
+                          //             ),
+                          //           ),
+                          //           Checkbox(
+                          //             checkColor: Colors.white,
+                          //             fillColor:
+                          //                 MaterialStateProperty.all(kblue),
+                          //             value: isMarried,
+                          //             onChanged: (bool? value) {
+                          //               setState(() {
+                          //                 isMarried = value!;
+                          //               });
+                          //             },
+                          //           )
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: Container(
@@ -484,33 +542,76 @@ class _MyAccountState extends State<MyAccount> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: InkWell(
-                              onTap: () {},
-                              child: Container(
-                                height: 50,
-                                width: size.width,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(3),
-                                    border: Border.all(
-                                        color: const Color(0xffFF9021)),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Color(0xffFF5003),
-                                        blurRadius: 2.0,
+                          Obx(
+                            () => Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: profileController.isLoading.isTrue
+                                  ? Container(
+                                      height: 50,
+                                      width: size.width,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(3),
+                                          border: Border.all(
+                                              color: const Color(0xffFF9021)),
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              color: Color(0xffFF5003),
+                                              blurRadius: 2.0,
+                                            ),
+                                          ]),
+                                      child: const Center(
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
                                       ),
-                                    ]),
-                                child: const Center(
-                                  child: Text(
-                                    "Submit",
-                                    style: TextStyle(
-                                        fontSize: 22,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                              ),
+                                    )
+                                  : InkWell(
+                                      onTap: () {
+                                        MemberProfileUpdateModel
+                                            memberProfileUpdateModel =
+                                            MemberProfileUpdateModel(
+                                          name: nameController.text,
+                                          email: emailController.text,
+                                          dateOfBirth:
+                                              dateOfBirthController.text,
+                                          fatherName: fatherNameController.text,
+                                          isMarried:
+                                              isMarried == true ? "1" : "0",
+                                          mobile: phoneController.text,
+                                          motherName: motherNameController.text,
+                                          occupation: occupationController.text,
+                                        );
+
+                                        profileController.updateProfile(
+                                            memberProfileUpdateModel:
+                                                memberProfileUpdateModel);
+                                      },
+                                      child: Container(
+                                        height: 50,
+                                        width: size.width,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                            border: Border.all(
+                                                color: const Color(0xffFF9021)),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Color(0xffFF5003),
+                                                blurRadius: 2.0,
+                                              ),
+                                            ]),
+                                        child: const Center(
+                                          child: Text(
+                                            "Submit",
+                                            style: TextStyle(
+                                                fontSize: 22,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                             ),
                           ),
                         ],
@@ -721,31 +822,71 @@ class _MyAccountState extends State<MyAccount> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: Container(
-                              height: 50,
-                              width: size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3),
-                                  border: Border.all(
-                                      color: const Color(0xffFF9021)),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Color(0xffFF5003),
-                                      blurRadius: 2.0,
+                          Obx(
+                            () => profileController.isLoading.isTrue
+                                ? Container(
+                                    height: 50,
+                                    width: size.width,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(3),
+                                        border: Border.all(
+                                            color: const Color(0xffFF9021)),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Color(0xffFF5003),
+                                            blurRadius: 2.0,
+                                          ),
+                                        ]),
+                                    child: const Center(
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ]),
-                              child: const Center(
-                                child: Text(
-                                  "Submit",
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                            ),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: InkWell(
+                                      onTap: () {
+                                        AddressModel addressModel =
+                                            AddressModel(
+                                          aadhrId: "",
+                                          address: oAddressCN.text,
+                                          buildingName: oBuildingNumberCN.text,
+                                          city: oCityCN.text,
+                                          doorNo: oDoorNumberCN.text,
+                                          personalId: "",
+                                          state: oStateCN.text,
+                                        );
+
+                                        profileController.updateOfficalAddress(
+                                            officialAddress: addressModel);
+                                      },
+                                      child: Container(
+                                        height: 50,
+                                        width: size.width,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                            border: Border.all(
+                                                color: const Color(0xffFF9021)),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Color(0xffFF5003),
+                                                blurRadius: 2.0,
+                                              ),
+                                            ]),
+                                        child: const Center(
+                                          child: Text(
+                                            "Submit",
+                                            style: TextStyle(
+                                                fontSize: 22,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                           ),
                         ],
                       ),
@@ -1000,6 +1141,13 @@ class _MyAccountState extends State<MyAccount> {
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: TextField(
                                   controller: rAadhrCN,
+                                  keyboardType: TextInputType.phone,
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(15),
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    FilteringTextInputFormatter.deny(
+                                        RegExp(r'\s')),
+                                  ],
                                   decoration: InputDecoration(
                                       isCollapsed: true,
                                       isDense: true,
@@ -1014,30 +1162,72 @@ class _MyAccountState extends State<MyAccount> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: Container(
-                              height: 50,
-                              width: size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3),
-                                  border: Border.all(
-                                      color: const Color(0xffFF9021)),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Color(0xffFF5003),
-                                      blurRadius: 2.0,
+                          Obx(
+                            () => Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: profileController.isLoading.isTrue
+                                  ? Container(
+                                      height: 50,
+                                      width: size.width,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(3),
+                                          border: Border.all(
+                                              color: const Color(0xffFF9021)),
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              color: Color(0xffFF5003),
+                                              blurRadius: 2.0,
+                                            ),
+                                          ]),
+                                      child: const Center(
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )
+                                  : InkWell(
+                                      onTap: () {
+                                        AddressModel addressModel =
+                                            AddressModel(
+                                                aadhrId: rAadhrCN.text,
+                                                address: rAddressCN.text,
+                                                buildingName:
+                                                    rBuildingNumberCN.text,
+                                                city: rCityCN.text,
+                                                doorNo: rDoorNumberCN.text,
+                                                personalId: rpersonalIdCN.text,
+                                                state: rStateCN.text);
+                                        profileController
+                                            .updateRecidencyAddress(
+                                                residentialAddress:
+                                                    addressModel);
+                                      },
+                                      child: Container(
+                                        height: 50,
+                                        width: size.width,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                            border: Border.all(
+                                                color: const Color(0xffFF9021)),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Color(0xffFF5003),
+                                                blurRadius: 2.0,
+                                              ),
+                                            ]),
+                                        child: const Center(
+                                          child: Text(
+                                            "Submit",
+                                            style: TextStyle(
+                                                fontSize: 22,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ]),
-                              child: const Center(
-                                child: Text(
-                                  "Submit",
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
                             ),
                           ),
                         ],
