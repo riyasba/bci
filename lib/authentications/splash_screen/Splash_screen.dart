@@ -22,7 +22,6 @@ class _splashState extends State<splash> {
   @override
   void initState() {
     super.initState();
-
     checkForAuth();
   }
 
@@ -67,9 +66,7 @@ class _splashState extends State<splash> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Container(
-          child: Image.asset(splashImage),
-        ),
+        child: Image.asset(splashImage),
       ),
     );
   }

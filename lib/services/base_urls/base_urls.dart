@@ -22,8 +22,27 @@ abstract class BaseApiService {
   final String getProfileURL =
       "https://bci.batechnology.in.net/api/auth/profile";
 
-
 //profile update API URL
   final String profileUpdateURL =
       "https://bci.batechnology.in.net/api/auth/profile_update";
+
+  //sliders Api
+  final String getSliderURL =
+      "https://bci.generation360tech.in/api/auth/get_slider";
+
+  //Get plan list
+  final String getPlanList =
+      "https://bci.generation360tech.in/api/auth/get_plan_list";
+
+  //get plan detsila
+  final String getPlanDetailsURL =
+      "https://bci.generation360tech.in/api/auth/get_plan_details";
+
+      
+   //add subscription plan
+  final String addPlanUrl =
+      "https://bci.generation360tech.in/api/auth/add_subscription_plan";
+
+
+  
 }
