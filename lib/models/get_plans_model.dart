@@ -40,7 +40,6 @@ class PlansData {
   String referalCommision;
   String amc;
   String amcCommision;
-  String couponDetails;
   String cardNo;
   String planImage;
   String planDescription;
@@ -62,7 +61,6 @@ class PlansData {
     required this.referalCommision,
     required this.amc,
     required this.amcCommision,
-    required this.couponDetails,
     required this.cardNo,
     required this.planImage,
     required this.planDescription,
@@ -85,7 +83,6 @@ class PlansData {
         referalCommision: json["referal_commision"],
         amc: json["amc"],
         amcCommision: json["amc_commision"],
-        couponDetails: json["coupon_details"],
         cardNo: json["card_no"],
         planImage: json["plan_image"],
         planDescription: json["plan_description"],
@@ -108,7 +105,6 @@ class PlansData {
         "referal_commision": referalCommision,
         "amc": amc,
         "amc_commision": amcCommision,
-        "coupon_details": couponDetails,
         "card_no": cardNo,
         "plan_image": planImage,
         "plan_description": planDescription,

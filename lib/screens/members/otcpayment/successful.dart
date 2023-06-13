@@ -1,3 +1,6 @@
+import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
+import 'package:bci/screens/members/home_screen/home_screen.dart';
+import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -16,7 +19,7 @@ class Sucessful_screen_otc extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFF9F8FD),
+        backgroundColor: const Color(0xFFF9F8FD),
         elevation: 0,
         leading: InkWell(
             onTap: () {
@@ -44,35 +47,42 @@ class Sucessful_screen_otc extends StatelessWidget {
               'Thank you! Your payment is complete',
               style: TextStyle(
                   fontSize: 22.sp, fontWeight: FontWeight.w600, color: kblue),
-            ),ksizedbox40,ksizedbox40,
-            
-        InkWell(onTap: (){Get.to(UpgradeScreen());},
-                child: Container(
-                  width: 150.w,
-                  height: 45.h,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration( 
-                    borderRadius: BorderRadius.circular(
-                      4,
-                    ),
-                    gradient: const LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        Color(0xFFFF5C29),
-                        Color(0xFFFFCD38),
-                      ],
-                    ),
+            ),
+            ksizedbox40,
+            ksizedbox40,
+            InkWell(
+              onTap: () {
+                Get.offAll(
+                  () => HelloConvexAppBar(),
+                );
+              },
+              child: Container(
+                width: 150.w,
+                height: 45.h,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    4,
                   ),
-                  child: Text(
-                    'Done',
-                    style: TextStyle(
-                        fontSize: 17.sp,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600),
+                  gradient: const LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color(0xFFFF5C29),
+                      Color(0xFFFFCD38),
+                    ],
                   ),
                 ),
-              ),  ],
+                child: Text(
+                  'Done',
+                  style: TextStyle(
+                      fontSize: 17.sp,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
