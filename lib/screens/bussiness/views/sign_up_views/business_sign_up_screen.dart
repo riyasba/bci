@@ -316,7 +316,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       hintText: "Alternate Phone Number",
                       hintStyle: TextStyle(
                         color: kblue,

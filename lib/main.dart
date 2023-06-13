@@ -1,6 +1,7 @@
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/flights_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/controllers/services_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,6 +15,7 @@ void main() {
   Get.put(SettingsController());
   Get.put(AuthController());
   Get.put(ProfileController());
+  Get.put(ServicesController());
   runApp(const MyApp());
 }
 

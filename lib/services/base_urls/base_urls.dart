@@ -25,4 +25,11 @@ abstract class BaseApiService {
 //profile update API URL
   final String profileUpdateURL =
       "https://bci.batechnology.in.net/api/auth/profile_update";
+
+  //Add services
+  final String addServicesURL =
+      "https://bci.batechnology.in.net/api/auth/merchant_create_service";
+
+
+  
 }

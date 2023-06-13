@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bci/constands/app_fonts.dart';
+import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/models/business_user_profile.dart';
 import 'package:bci/models/merchant_update_profile.dart';
 import 'package:bci/models/profile_model.dart';
@@ -30,6 +31,12 @@ class ProfileController extends GetxController {
           BusinessProfileModel.fromJson(response.data);
       profileData.add(profileModel.user);
       update();
+    } else if (response.statusCode == 401) {
+      Get.snackbar("Session has expired", "",
+          colorText: Colors.white,
+          backgroundColor: Colors.red,
+          snackPosition: SnackPosition.BOTTOM);
+      Get.find<AuthController>().logout();
     }
   }
 
@@ -39,7 +46,7 @@ class ProfileController extends GetxController {
         .profileUpdate(merchantUpdateModel: merchantUpdateModel);
     isLoading(false);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      Get.off(() => MyAccountScreen());
+      Get.off(() => const MyAccountScreen());
       Get.rawSnackbar(
           backgroundColor: Colors.green,
           messageText: Text(

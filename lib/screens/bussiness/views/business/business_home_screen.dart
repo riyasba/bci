@@ -2,7 +2,7 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/offer%20screen/offer_screen_grid.dart';
 import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
-import 'package:bci/screens/bussiness/views/home_screen/availability_scree.dart';
+import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/availability_scree.dart';
 import 'package:bci/screens/bussiness/views/home_screen/bookings_screen.dart';
 import 'package:bci/screens/bussiness/views/home_screen/offers_screen.dart';
 import 'package:bci/screens/bussiness/views/home_screen/service_booking_screen.dart';
@@ -295,6 +295,9 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(
+              height: 50,
             )
           ],
         ),
