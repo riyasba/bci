@@ -20,10 +20,8 @@ class _MyDropdownState extends State<MyDropdown> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: DropdownButtonFormField<String>(style: TextStyle(color: Colors.grey),
-        decoration: InputDecoration( 
-
-          floatingLabelBehavior: FloatingLabelBehavior
-                                    .never,
+      decoration: InputDecoration( 
+      floatingLabelBehavior: FloatingLabelBehavior.never,
       fillColor: kblue,
       focusColor: kblue,
       isDense: true,

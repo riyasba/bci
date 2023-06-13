@@ -1,3 +1,4 @@
+import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_booking_landing_screen.dart';
 import 'package:carousel_slider/carousel_options.dart';
@@ -28,12 +29,14 @@ class Home_screen1 extends StatefulWidget {
 class _Home_screen1State extends State<Home_screen1> {
   CarouselController sliderController = CarouselController();
   final profileController = Get.find<ProfileController>();
+  final homeController = Get.find<HomeController>();
   int activeIndex = 0;
 
   @override
   void initState() {
     super.initState();
     profileController.getProfile();
+    homeController.getSlider();
   }
 
   @override
@@ -242,17 +245,24 @@ class _Home_screen1State extends State<Home_screen1> {
           CarouselSlider(
               carouselController: sliderController,
               items: [
-                Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image:
-                              AssetImage('assets/images/Scroll Group 10.png'))),
+                for (int i = 0;
+                                i < homeController.sliderList.length;
+                                i++)
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                         // fit: BoxFit.fill,
+                            image: NetworkImage(homeController.sliderList[i].image), 
+                                )),
+                  ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/Group 5781.png'))),
-                ),
+                // Container(
+                //   decoration: BoxDecoration(
+                //       image: DecorationImage(
+                //           image: AssetImage('assets/images/Group 5781.png'))),
+                // ),
               ],
               options: CarouselOptions(
                 height: 170,

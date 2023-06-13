@@ -138,7 +138,7 @@ class _Add_cartState extends State<Add_cart> {
                   padding: const EdgeInsets.all(15.0),
                   child: InkWell(
                     onTap: () {
-                      Get.to(cart_screen());
+                      Get.to(CartScreen());
                     },
                     child: Container(
                       child: Row(

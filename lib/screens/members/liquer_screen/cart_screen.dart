@@ -1,3 +1,4 @@
+import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/screens/members/liquer_screen/widget/order_widget.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,23 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
 
-class cart_screen extends StatelessWidget {
-  const cart_screen({super.key});
+class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+
+  final homeController = Get.find<HomeController>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    homeController.getCartdetails();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,25 +75,25 @@ class cart_screen extends StatelessWidget {
           Orders(
             bottleimg: 'assets/images/Group 5833.png',
           ),
-          Orders(
-            bottleimg: 'assets/images/Group 5833.png',
-          ),Divider(thickness: 1,),
+         
+          Divider(thickness: 1,),
           Expanded(
               child: Container(
-            height: 200.h,
+            height: 100.h,
             width: double.infinity,
             color: kwhite,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [ksizedbox40,
+                  children: [
+                   // ksizedbox40,
                     Text(
                       'Support',
                       style:
                           TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w600),
                     ),
-                    ksizedbox20,
+                    ksizedbox10,
                     Text(
                       'Member ID Number:',
                       style: TextStyle(

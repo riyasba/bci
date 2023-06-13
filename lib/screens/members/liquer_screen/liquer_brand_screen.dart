@@ -34,7 +34,7 @@ class liqor_brands extends StatelessWidget {
                     padding: const EdgeInsets.all(15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: [  
                         InkWell(
                             onTap: Get.back,
                             child: Image.asset(
@@ -79,7 +79,7 @@ class liqor_brands extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 33, fontWeight: FontWeight.w600),
                     ),
-                    InkWell(onTap: (){Get.to(cart_screen());},
+                    InkWell(onTap: (){Get.to(CartScreen());},
                       child: Image.asset('assets/images/Cart.png'))
                   ],
                 ),

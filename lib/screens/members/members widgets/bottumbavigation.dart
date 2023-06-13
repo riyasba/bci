@@ -24,7 +24,7 @@ class HelloConvexAppBar extends StatefulWidget {
 class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
   final List1 = [
     Home_screen1(),
-    Members_search_screen(
+    MembersSearchScreen(
       title: 'Search Result',
       items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
     ),

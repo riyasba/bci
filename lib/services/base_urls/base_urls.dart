@@ -42,7 +42,18 @@ abstract class BaseApiService {
    //add subscription plan
   final String addPlanUrl =
       "https://bci.generation360tech.in/api/auth/add_subscription_plan";
+  
+  //service list
+  final String serviceListApiUrl = "https://bci.generation360tech.in/api/auth/service_list";
 
+  //add to cart
+  final String addToCartApiUrl = "https://bci.generation360tech.in/api/auth/addtocart";
+
+  //delete cart
+  final String deleteCartApiUrl = "https://bci.generation360tech.in/api/auth/deletecart";
+
+  //get cart list
+  final String getCartListApiUrl = "https://bci.generation360tech.in/api/auth/cartlists";
 
   
 }

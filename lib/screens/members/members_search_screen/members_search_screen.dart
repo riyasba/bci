@@ -1,3 +1,7 @@
+import 'package:bci/controllers/auth_controllers.dart';
+import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/models/category_model.dart';
+import 'package:bci/screens/members/members_search_screen/member_service_view_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -12,17 +16,41 @@ import '../../bussiness/views/home_screen/contact_admin.dart';
 import '../members widgets/bropdown.dart';
 import '../members widgets/gridciew.dart';
 
-class Members_search_screen extends StatefulWidget {
-  Members_search_screen({super.key, required this.title, required this.items});
+class MembersSearchScreen extends StatefulWidget {
+  MembersSearchScreen({super.key, required this.title, required this.items});
   final String title;
   final List<String> items;
 
   @override
-  State<Members_search_screen> createState() => _Members_search_screenState();
+  State<MembersSearchScreen> createState() => _MembersSearchScreenState();
 }
 
-class _Members_search_screenState extends State<Members_search_screen> {
+class _MembersSearchScreenState extends State<MembersSearchScreen> {
   //final List<String> options = ['Catogory', 'Hotel', 'Club''Resort''Saloon''Parour''Service Apartment''Textile''SPA'];
+  
+  final homeController = Get.find<HomeController>();
+
+  final searchController = TextEditingController();
+
+  var merchantCategory;
+  final authController = Get.find<AuthController>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    authController.getCategoryList();
+    searchController.addListener(searchUsers);
+  }
+
+   searchUsers() {
+    if (searchController.text.trim().isNotEmpty) {
+      homeController.searchServiceList(searchKey: searchController.text);
+    } else {
+      homeController.searchServiceListData.clear();
+      homeController.update();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,10 +97,9 @@ class _Members_search_screenState extends State<Members_search_screen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 10,right: 10),
                 child: TextField(
-                  // controller: _controller,
-
+                   controller: searchController,
                   decoration: InputDecoration(disabledBorder: OutlineInputBorder(),
                       hintText: 'Search',
                       fillColor: kwhite,
@@ -85,10 +112,55 @@ class _Members_search_screenState extends State<Members_search_screen> {
                       suffixIcon: Image.asset('assets/images/XMLID_223_.png')),
                 ),
               ),
-              MyDropdown(
-                label: 'Result',
-                options: [],
-              ),
+              // MyDropdown(
+              //   label: 'Result',
+              //   options: [],
+              // ),
+              GetBuilder<AuthController>(builder: (_) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 15,left: 10,right: 10),
+                  child: Container(
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: kgrey,
+                        borderRadius: BorderRadius.circular(3),
+                        border: Border.all(
+                            color: const Color.fromARGB(255, 5, 5, 5)
+                                .withOpacity(0.8))),
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 10, right: 10, top: 10),
+                      child: DropdownButton<CategoryList>(
+                        value: merchantCategory,
+                        isExpanded: true,
+                        icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                        elevation: 1,
+                        itemHeight: 55,
+                        isDense: true,
+                        dropdownColor: Colors.white,
+                        style: const TextStyle(color: Colors.black54),
+                        hint:const Text(
+                          "Merchant Category Name",
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                        onChanged: (CategoryList? value) {
+                          setState(() {
+                            merchantCategory = value!;
+                          });
+                        },
+                        items: authController.categoryList
+                            .map<DropdownMenuItem<CategoryList>>(
+                                (CategoryList value) {
+                          return DropdownMenuItem<CategoryList>(
+                            value: value,
+                            child: Text(value.title),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                );
+              }),
             ],
           )),
       //  backgroundColor: kwhite,
@@ -149,21 +221,66 @@ class _Members_search_screenState extends State<Members_search_screen> {
       //         ),
       //       ],
       //     )),
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          MyGridView(title: 'Search Result', image: [
-            'assets/images/NoPath - Copy (32).png',
-            'assets/images/NoPath - Copy (33).png',
-            'assets/images/NoPath - Copy (34).png',
-          //  'assets/images/NoPath - Copy (35).png'
-                'assets/images/NoPath - Copy (32).png',
-            'assets/images/NoPath - Copy (33).png',
-            'assets/images/NoPath - Copy (34).png',
-            'assets/images/NoPath - Copy (35).png'
-          ]),
-        ],
-      ),
+      body: GetBuilder<HomeController>(builder: (_) {
+        return homeController.searchServiceListData.isEmpty && searchController.text.isNotEmpty
+            ?  Center(
+                child: Column(
+                  children: [
+                    const Image(image: AssetImage("assets/icons/search.png")),
+                    Text('No result found',
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w500,
+                                color: kblue),
+                          ),
+                          const SizedBox(height: 5,),
+                          Text('''we can't find any item matching\nyour search''',
+                          textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 15.sp,
+                                height: 1.5,
+                                color: kblue),
+                          ),
+                  ],
+                ),
+              )
+            : GridView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: homeController.searchServiceListData.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      onTap: (){
+                          Get.to(MemberSearchViewScreen(searchServicelist: homeController.searchServiceListData[index],));
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: 100,
+                            width: 150,
+                            child: Image.network(homeController.searchServiceListData[index].image),
+                          ),
+                          Text(homeController.searchServiceListData[index].title,
+                                style: TextStyle(
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: kblue
+                                    ),
+                              ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+      }),
     );
   }
 }

@@ -28,10 +28,6 @@ final String bottleimg;
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Column(
-
-
-
-
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
