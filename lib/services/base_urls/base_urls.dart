@@ -1,35 +1,37 @@
 abstract class BaseApiService {
-  final String baseUrl = "https://bci.batechnology.in.net";
+  final String baseUrl = "https://bci.generation360tech.in";
 
   //register url
   final String registerURl =
-      "https://bci.batechnology.in.net/api/register_user";
+      "https://bci.generation360tech.in/api/register_user";
 
   //login url
-  final String getOtpUrl = "https://bci.batechnology.in.net/api/get_otp";
+  final String getOtpUrl = "https://bci.generation360tech.in/api/get_otp";
 
   //login url
-  final String loginURL = "https://bci.batechnology.in.net/api/login";
+  final String loginURL = "https://bci.generation360tech.in/api/login";
 
   //category url
-  final String categoryURL = "https://bci.batechnology.in.net/api/category";
+  final String categoryURL = "https://bci.generation360tech.in/api/category";
 
   //sub category URL
   final String subCategoryURL =
-      "https://bci.batechnology.in.net/api/sub_category";
+      "https://bci.generation360tech.in/api/sub_category";
 
   //get profile api
   final String getProfileURL =
-      "https://bci.batechnology.in.net/api/auth/profile";
+      "https://bci.generation360tech.in/api/auth/profile";
 
 //profile update API URL
   final String profileUpdateURL =
-      "https://bci.batechnology.in.net/api/auth/profile_update";
+      "https://bci.generation360tech.in/api/auth/profile_update";
 
   //Add services
   final String addServicesURL =
-      "https://bci.batechnology.in.net/api/auth/merchant_create_service";
+      "https://bci.generation360tech.in/api/auth/merchant_create_service";
 
+  //get Services
+  final String getServicesURL =
+      "https://bci.generation360tech.in/api/auth/service_list";
 
-  
 }

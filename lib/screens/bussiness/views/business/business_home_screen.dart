@@ -211,7 +211,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     child: Column(
                       children: [
                         Image.asset('assets/images/booking.png'),
-                        Text(
+                       const Text(
                           'Bookings\n\n',
                           textAlign: TextAlign.center,
                         )
@@ -227,7 +227,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     child: Column(
                       children: [
                         Image.asset('assets/images/offers.png'),
-                        Text(
+                       const Text(
                           'Offers\n\n',
                           textAlign: TextAlign.center,
                         )
@@ -243,7 +243,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     child: Column(
                       children: [
                         Image.asset('assets/images/servicebooking.png'),
-                        Text(
+                       const Text(
                           'Service\nBookings\nRequest',
                           textAlign: TextAlign.center,
                         )
@@ -264,14 +264,14 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     child: Column(
                       children: [
                         Image.asset('assets/images/availability.png'),
-                        Text('Availability')
+                        const Text('Availability')
                       ],
                     ),
                   ),
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(MyAccountScreen());
+                    Get.to(const MyAccountScreen());
                   },
                   child: Container(
                     child: Column(

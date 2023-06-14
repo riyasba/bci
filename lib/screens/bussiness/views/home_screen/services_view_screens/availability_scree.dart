@@ -1,4 +1,8 @@
+import 'package:bci/controllers/auth_controllers.dart';
+import 'package:bci/controllers/services_controller.dart';
+import 'package:bci/models/category_model.dart';
 import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/add_services_view.dart';
+import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/update_services_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,7 +50,20 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
       });
   }
 
+  final servicesController = Get.find<ServicesController>();
+
+  @override
+  void initState() {
+    super.initState();
+    servicesController.getServicesByVendor();
+  }
+
+  var merchantCategory;
+
+  var authController = Get.find<AuthController>();
+
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(250),
@@ -242,33 +259,77 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
             ksizedbox30,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                GetBuilder<AuthController>(builder: (_) {
+                  return Container(
                     height: 40,
                     width: 160,
                     decoration: BoxDecoration(
-                        color: Color(0xffE4E4E4),
+                        color: const Color(0xffE4E4E4),
                         border: Border.all(color: kblue, width: 1),
                         borderRadius: BorderRadius.circular(8)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5),
-                          child: Text(
-                            'All Services',
-                            style: TextStyle(fontSize: 18, color: kblue),
-                          ),
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 10, right: 10, top: 10),
+                      child: DropdownButton<CategoryList>(
+                        value: merchantCategory,
+                        isExpanded: true,
+                        icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                        elevation: 0,
+                        itemHeight: 55,
+                        isDense: true,
+                        dropdownColor: Colors.grey[250],
+                        style: const TextStyle(color: Colors.black54),
+                        hint: Text(
+                          "All Services",
+                          style: TextStyle(fontSize: 16, color: kblue),
                         ),
-                        ksizedbox10,
-                        kwidth10,
-                        Padding(
-                          padding: const EdgeInsets.only(right: 5),
-                          child: Image.asset(
-                              'assets/images/availabilitycircle2.png'),
-                        )
-                      ],
-                    )),
+                        onChanged: (CategoryList? value) {
+                          setState(() {
+                            merchantCategory = value!;
+                          });
+                          servicesController.getServicesByCategory(
+                              categoryId: value!.id.toString());
+                        },
+                        items: authController.categoryList
+                            .map<DropdownMenuItem<CategoryList>>(
+                                (CategoryList value) {
+                          return DropdownMenuItem<CategoryList>(
+                            value: value,
+                            child: Text(value.title),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  );
+                }),
+                // Container(
+                //     height: 40,
+                //     width: 160,
+                //     decoration: BoxDecoration(
+                //         color: const Color(0xffE4E4E4),
+                //         border: Border.all(color: kblue, width: 1),
+                //         borderRadius: BorderRadius.circular(8)),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+                //         Padding(
+                //           padding: const EdgeInsets.only(left: 5),
+                //           child: Text(
+                //             'All Services',
+                //             style: TextStyle(fontSize: 18, color: kblue),
+                //           ),
+                //         ),
+                //         ksizedbox10,
+                //         kwidth10,
+                //         Padding(
+                //           padding: const EdgeInsets.only(right: 5),
+                //           child: Image.asset(
+                //               'assets/images/availabilitycircle2.png'),
+                //         )
+                //       ],
+                //     )),
                 Container(
                     height: 40,
                     width: 160,
@@ -302,80 +363,128 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                     )),
               ],
             ),
-            ListView.builder(
-                itemCount: serviceimage.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Stack(children: [
-                      Column(
-                        children: [
-                          Container(
-                            height: 140,
-                            width: MediaQuery.of(context).size.width,
-                            color: Colors.white,
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 180,
-                                  width: 140,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10,
-                                        left: 5,
-                                        right: 10,
-                                        bottom: 10),
-                                    child: Image.asset(
-                                      serviceimage[index],
-                                      fit: BoxFit.contain,
+            GetBuilder<ServicesController>(builder: (_) {
+              return servicesController.serviceDataList.isEmpty
+                  ? const Padding(
+                      padding: EdgeInsets.only(top: 200),
+                      child: Center(
+                        child: Text("No Service Added"),
+                      ),
+                    )
+                  : Container(
+                      height: size.height * 0.65,
+                      child: ListView.builder(
+                          itemCount: servicesController.serviceDataList.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Stack(children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: 140,
+                                      width: MediaQuery.of(context).size.width,
+                                      color: Colors.white,
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: 180,
+                                            width: 140,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10,
+                                                  left: 5,
+                                                  right: 10,
+                                                  bottom: 10),
+                                              child: Image.network(
+                                                servicesController
+                                                    .serviceDataList[index]
+                                                    .image,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 10,
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  width: 169,
+                                                  child: Text(
+                                                    servicesController
+                                                        .serviceDataList[index]
+                                                        .title,
+                                                    style: const TextStyle(
+                                                        fontSize: 17,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Container(
+                                                    width: 169,
+                                                    child: Text(
+                                                      servicesController
+                                                          .serviceDataList[
+                                                              index]
+                                                          .description,
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          color: kgrey),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
+                                    const Divider(
+                                      thickness: 1.5,
+                                    )
+                                  ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 10,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        title[index].toString(),
-                                        style: const TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 5),
-                                        child: Text(
-                                          description[index].toString(),
-                                          style: TextStyle(
-                                              fontSize: 13, color: kgrey),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    PopupMenuButton(
+                                      // Callback that sets the selected popup menu item.
+                                      onSelected: (var item) {
+                                        Get.to(() => UpdateServicesView(
+                                            serviceData: servicesController
+                                                .serviceDataList[index]));
+                                      },
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry>[
+                                        const PopupMenuItem(
+                                          value: 1,
+                                          child: Text('Edit'),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          const Divider(
-                            thickness: 1.5,
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.more_vert)),
-                        ],
-                      ),
-                    ]),
-                  );
-                }),
+                                      ],
+                                    ),
+                                    // IconButton(
+                                    //     onPressed: () {
+                                    //       Get.to(() => UpdateServicesView(
+                                    //           serviceData: servicesController
+                                    //               .serviceDataList[index]));
+                                    //     },
+                                    //     icon: const Icon(Icons.more_vert)),
+                                  ],
+                                ),
+                              ]),
+                            );
+                          }),
+                    );
+            }),
           ],
         ),
       ]),

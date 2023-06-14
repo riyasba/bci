@@ -5,8 +5,7 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/services_controller.dart';
 import 'package:bci/models/category_model.dart';
-import 'package:bci/models/create_services_model.dart';
-import 'package:bci/models/sub_category_model.dart';
+import 'package:bci/models/service_list_model.dart' as ss;
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,16 +13,20 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
-class AddServicesView extends StatefulWidget {
-  const AddServicesView({super.key});
+import '../../../../../models/create_services_model.dart';
+
+class UpdateServicesView extends StatefulWidget {
+  ss.ServiceData serviceData;
+  UpdateServicesView({super.key, required this.serviceData});
 
   @override
-  State<AddServicesView> createState() => _AddServicesViewState();
+  State<UpdateServicesView> createState() => _AddServicesViewState();
 }
 
-class _AddServicesViewState extends State<AddServicesView> {
+class _AddServicesViewState extends State<UpdateServicesView> {
   final authController = Get.find<AuthController>();
   final serviceController = Get.find<ServicesController>();
+  List<String>? initialTags = [];
 
   var merchantCategory;
   var serviceImage;
@@ -41,6 +44,7 @@ class _AddServicesViewState extends State<AddServicesView> {
     super.initState();
     authController.getCategoryList();
     authController.getSubCategoryList();
+    setDefault();
     _controller = TextfieldTagsController();
   }
 
@@ -61,6 +65,17 @@ class _AddServicesViewState extends State<AddServicesView> {
 
   bool isOfferEligible = false;
   bool isCouponEligible = false;
+
+  setDefault() {
+    serviceTitleController.text = widget.serviceData.title;
+    saleAmountController.text = widget.serviceData.saleAmount;
+    actualAmountController.text = widget.serviceData.actualAmount;
+    bvcAmountController.text = widget.serviceData.bvcAmount;
+    descriptionController.text = widget.serviceData.description;
+    couponAmountController.text = widget.serviceData.couponAmount ?? "";
+    offerAmountController.text = widget.serviceData.offerUptoAmount ?? "";
+    offerPercentageController.text = widget.serviceData.offerPercentage ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -791,8 +806,10 @@ class _AddServicesViewState extends State<AddServicesView> {
                           listTags.add(Amenty(value: tagsList[i]));
                         }
 
-                        CategoryList categoryModel =
-                            merchantCategory as CategoryList;
+                        CategoryList? categoryModel;
+                        if (merchantCategory != null) {
+                          categoryModel = merchantCategory as CategoryList;
+                        }
 
                         CreateServiceModel createServiceModel =
                             CreateServiceModel(
@@ -806,9 +823,13 @@ class _AddServicesViewState extends State<AddServicesView> {
                                     ? "1"
                                     : "0",
                                 bvcAmount: bvcAmountController.text,
-                                category: categoryModel.id.toString(),
+                                category: categoryModel == null
+                                    ? widget.serviceData.categoryId
+                                    : categoryModel.id.toString(),
                                 description: descriptionController.text,
-                                image: serviceImage.path,
+                                image: serviceImage == null
+                                    ? "null"
+                                    : serviceImage.path,
                                 isCouponsAvailable:
                                     isCouponEligible ? "1" : "0",
                                 isOfferAvailable: isOfferEligible ? "1" : "0",
@@ -822,8 +843,9 @@ class _AddServicesViewState extends State<AddServicesView> {
                                     ? null
                                     : offerAmountController.text);
 
-                        serviceController.addServices(
-                            createServiceModel: createServiceModel);
+                        serviceController.updateServices(
+                            createServiceModel: createServiceModel,
+                            id: widget.serviceData.id);
                       },
                       child: Container(
                         height: 55,
@@ -833,7 +855,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                             color: kblue),
                         alignment: Alignment.center,
                         child: Text(
-                          "Submit",
+                          "update",
                           style: primaryFont.copyWith(
                               color: Colors.white,
                               fontSize: 17,
