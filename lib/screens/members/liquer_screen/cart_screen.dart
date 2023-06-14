@@ -31,7 +31,9 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: kwhite  ,
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: kwhite  ,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(250),
           child: ClipPath(
@@ -69,14 +71,100 @@ class _CartScreenState extends State<CartScreen> {
           )),
       body: Column(
         children: [
-          Orders(
-            bottleimg: 'assets/images/Group 5831.png',
-          ),
-          Orders(
-            bottleimg: 'assets/images/Group 5833.png',
+          GetBuilder<HomeController>(
+            builder: (_) {
+              return Container(
+                height: size.height * 0.5,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: homeController.cartListData.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Container(
+                      width: double.infinity,
+                      height: 110,
+                      decoration: BoxDecoration(
+                      color: kwhite,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                      BoxShadow(
+                         color: kgrey,
+                         blurRadius: 0.5,
+                        ),
+                              ]
+                            ),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Image.network(
+                                          homeController.cartListData[index].image,
+                                          height: 50,
+                                          width: 60,
+                                          fit: BoxFit.cover,
+                                            ),
+                                             kwidth10,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              homeController.cartListData[index].serviceName,
+                              style:const TextStyle(
+                                  fontSize: 20,color: Colors.black, fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              width: 230,
+                              child: Text(homeController.cartListData[index].description,maxLines: 3,)),
+                            Text("Qty: ${homeController.cartListData[index].quantity}"),
+                          ],
+                        ),
+                      ],
+                         ),
+                                      Row(
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: [
+                                              InkWell(
+                                                onTap: (){
+                                                  homeController.deleteToCart(serviceid: homeController.cartListData[index].serviceId.toString());
+                                                },
+                                                child:const Icon(Icons.delete,color: Colors.redAccent,)),
+                                              ksizedbox10,
+                                              Text(
+                                        '₹ ${homeController.cartListData[index].price}',
+                                         style: TextStyle(
+                                         fontSize: 17.sp,
+                                         fontWeight: FontWeight.w600,
+                                        color: kyellow),
+                                      ),
+                                            ],
+                                          ),
+
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            )),
+                    );
+                  },
+                  ),
+              );
+            }
           ),
          
-          Divider(thickness: 1,),
+         
+          const Divider(thickness: 1,),
           Expanded(
               child: Container(
             height: 100.h,
@@ -131,7 +219,34 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ]),
             ),
-          ))
+          )),
+          InkWell(
+            onTap: (){
+              for(int i = 0; i < homeController.cartListData.length; i++){
+                homeController.addBooking(
+                serviceid: homeController.cartListData[i].serviceId, 
+                qty: homeController.cartListData[i].quantity, 
+                offerOrCoupon: "", 
+                couponcode: "", 
+                amount: homeController.cartListData[i].price
+                );
+              }
+              
+            },
+            child: Container(
+              height: 40,
+              width: 150,
+              decoration: BoxDecoration(
+                color: kblue,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text("Book Now",
+                style: TextStyle(fontSize: 15.sp,color: Colors.white,fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

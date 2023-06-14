@@ -12,8 +12,8 @@ import '../../../constands/constands.dart';
 import '../settings_views/upgrade_screen.dart';
 //import 'holiday_home.dart';
 
-class Sucessful_screen_otc extends StatelessWidget {
-  const Sucessful_screen_otc({super.key});
+class SucessfulScreenOtc extends StatelessWidget {
+  const SucessfulScreenOtc({super.key});
 
   @override
   Widget build(BuildContext context) {

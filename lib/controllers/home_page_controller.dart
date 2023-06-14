@@ -5,6 +5,9 @@ import 'package:bci/models/get_plans_model.dart';
 import 'package:bci/models/get_service_list_model.dart';
 import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/models/slider_model.dart';
+import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
+import 'package:bci/screens/members/otcpayment/successful.dart';
+import 'package:bci/services/network/categorys_api_services/add_booking_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/add_to_cart_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/delete_cart_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_cart_list_api_services.dart';
@@ -70,6 +73,7 @@ class HomeController extends GetxController {
         await addSubscriptionApiServices.addSubscription(planId: planId);
 
     if (response.statusCode == 200) {
+      Get.to(const SucessfulScreenOtc());
       Get.rawSnackbar(
           backgroundColor: Colors.green,
           messageText: Text(
@@ -141,6 +145,7 @@ class HomeController extends GetxController {
       dio.Response<dynamic> response = await 
       addToCartApiServices.addToCartApiServices(serviceid: serviceid);
       if(response.statusCode == 201){
+        Get.to(const CartScreen());
         Get.rawSnackbar(message: response.data["message"], backgroundColor: Colors.green);
       } else {
         Get.rawSnackbar(
@@ -160,7 +165,7 @@ class HomeController extends GetxController {
     dio.Response<dynamic> response = await 
     deleteCartApiServices.deleteCartApiServices(serviceid: serviceid);
     if(response.statusCode == 200){
-
+       getCartdetails();
       } else {
         Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -173,24 +178,52 @@ class HomeController extends GetxController {
 
   //get cart list
   GetCartListApiServices getCartListApiServices = GetCartListApiServices();
-  List<GetCartList> getCartList = [];
+  List<CartListData> cartListData = [];
 
   getCartdetails() async {
 
     dio.Response<dynamic> response = await getServiceListApiServices.getServiceListApiServices();
     
-    if(response.statusCode == 200){
-       List<GetCartList> test = getCartListFromJson(response.data);
-       getCartList = test;
+    if(response.statusCode == 201){
+      GetCartList getCartList = GetCartList.fromJson(response.data);
+      cartListData = getCartList.data;
     } else {
         Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            response.data["message"],
+            "Something went wrong",
             style: primaryFont.copyWith(color: Colors.white),
       ));
     }
     update();
+  }
+
+  //add booking api
+  AddBookingApiServices addBookingApiServices = AddBookingApiServices();
+
+  addBooking({
+    required String serviceid,
+    required String qty,
+    required String offerOrCoupon,
+    required String couponcode,
+    required String amount
+  }) async {
+
+    dio.Response<dynamic> response = await addBookingApiServices.addBookingApiServices(
+      serviceid: serviceid, qty: qty, 
+      offerOrCoupon: offerOrCoupon, 
+      couponcode: couponcode, amount: amount);
+      if(response.statusCode == 200){
+         Get.rawSnackbar(message: response.data["message"],backgroundColor: Colors.green);
+      } else {
+        Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+      ));
+    }
+    
   }
 
 }

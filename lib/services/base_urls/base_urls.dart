@@ -55,5 +55,11 @@ abstract class BaseApiService {
   //get cart list
   final String getCartListApiUrl = "https://bci.generation360tech.in/api/auth/cartlists";
 
+  //add booking api
+  final String addBookingApiUrl = "https://bci.generation360tech.in/api/auth/addbooking";
+
+  //our coupons api
+  final String couponsApiUrl = "https://bci.generation360tech.in/api/auth/getUserCoupons";
+
   
 }

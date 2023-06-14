@@ -100,6 +100,13 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                                       fontWeight: FontWeight.w400,
                                       color: kgrey),
                                 ),
+                                ksizedbox20,
+                                Text("₹ ${widget.searchServicelist.actualAmount}",
+                                  style: TextStyle(
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: kOrange),
+                                ),
                                  ksizedbox40,
                    
                   ],
@@ -109,47 +116,63 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                    child: Center(
                      child: Column(
                       children: [
-                        InkWell(
-                          onTap: () {
-                            Get.to(CartScreen());
-                          },
-                          child: Container(
-                            height: 70,
-                            width: 300,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                color: kyellow),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                kwidth5,
-                                Text(
-                                  'Total - ₹ ${widget.searchServicelist.actualAmount}',
-                                  style: TextStyle(color: kwhite, fontSize: 18),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: InkWell(
-                                    onTap: (){
-                                      homeController.addToCart(serviceid: widget.searchServicelist.id.toString());
-                                    },
-                                    child: Container(
-                                      height: 65,
-                                      width: 160,
-                                      decoration: BoxDecoration(
-                                          color: kwhite,
-                                          borderRadius: BorderRadius.circular(16)),
-                                      child: Center(
-                                          child: Text(
-                                        "Add To Cart",
-                                        style:const TextStyle(
-                                            fontSize: 18, fontWeight: FontWeight.w700),
-                                      )),
-                                    ),
+                        Container(
+                          height: 70,
+                          width: 335,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: kyellow),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                             Padding(
+                               padding: const EdgeInsets.all(8.0),
+                               child: InkWell(
+                                onTap: (){
+                                  homeController.addBooking(
+                                    serviceid: widget.searchServicelist.id.toString(), 
+                                    qty: "1", 
+                                    offerOrCoupon: "", 
+                                    couponcode: "", 
+                                    amount: widget.searchServicelist.actualAmount);
+                                },
+                                 child: Container(
+                                        height: 65,
+                                        width: 150,
+                                        decoration: BoxDecoration(
+                                            color: kwhite,
+                                            borderRadius: BorderRadius.circular(16)),
+                                        child:const Center(
+                                            child: Text(
+                                          "Book Now",
+                                          style: TextStyle(
+                                              fontSize: 18, fontWeight: FontWeight.w700),
+                                        )),
+                                      ),
+                               ),
+                             ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: InkWell(
+                                  onTap: (){
+                                    homeController.addToCart(serviceid: widget.searchServicelist.id.toString());
+                                  },
+                                  child: Container(
+                                    height: 65,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                        color: kwhite,
+                                        borderRadius: BorderRadius.circular(16)),
+                                    child: Center(
+                                        child: Text(
+                                      "Add To Cart",
+                                      style:const TextStyle(
+                                          fontSize: 18, fontWeight: FontWeight.w700),
+                                    )),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ],

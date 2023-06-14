@@ -1,4 +1,5 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/models/get_plans_model.dart';
 import 'package:bci/screens/members/otcpayment/successful.dart';
 import 'package:custom_clippers/custom_clippers.dart';
@@ -12,9 +13,17 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../bussiness/views/home_screen/contact_admin.dart';
 import 'add_to_wallet.dart';
 
-class Otc_payment extends StatelessWidget {
+class OtcPayment extends StatefulWidget {
   PlansData plansData;
-  Otc_payment({super.key, required this.plansData});
+  OtcPayment({super.key, required this.plansData});
+
+  @override
+  State<OtcPayment> createState() => _OtcPaymentState();
+}
+
+class _OtcPaymentState extends State<OtcPayment> {
+
+  final homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -62,21 +71,21 @@ class Otc_payment extends StatelessWidget {
           physics: BouncingScrollPhysics(),
           children: [
             Image.network(
-              plansData.cardImg,
+              widget.plansData.cardImg,
               height: 200,
             ),
             ksizedbox30,
             Row(
               children: [
                 Text(
-                  plansData.title,
+                  widget.plansData.title,
                   style: TextStyle(fontSize: 28.sp),
                 ),
               ],
             ),
             ksizedbox20,
             Text(
-              plansData.planDescription,
+              widget.plansData.planDescription,
               style: TextStyle(fontSize: 16.sp),
             ),
             ksizedbox30,
@@ -104,7 +113,8 @@ class Otc_payment extends StatelessWidget {
             ksizedbox40,
             InkWell(
               onTap: () {
-                Get.to(Sucessful_screen_otc());
+                homeController.addSubscription(planId: widget.plansData.id);
+                
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),

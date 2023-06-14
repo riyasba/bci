@@ -172,7 +172,7 @@ class Add_walet_screen extends StatelessWidget {
           ksizedbox40,
           InkWell(
             onTap: () {
-              Get.to(Sucessful_screen_otc());
+              Get.to(SucessfulScreenOtc());
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),

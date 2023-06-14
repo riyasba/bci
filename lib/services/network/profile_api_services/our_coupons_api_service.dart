@@ -3,16 +3,16 @@ import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DeleteCartApiServices extends BaseApiService {
-  Future deleteCartApiServices({required String serviceid}) async {
+class OurCouponsApiServices extends BaseApiService {
+  Future ourCouponsApiServices() async {
     dynamic responseJson;
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(
-        deleteCartApiUrl,
+      var response = await dio.get(
+        couponsApiUrl,
         options: Options(
             headers: {
               'Accept': 'application/json',
@@ -22,11 +22,8 @@ class DeleteCartApiServices extends BaseApiService {
             validateStatus: (status) {
               return status! <= 500;
             }),
-            data: {
-              "service_id" : serviceid
-            }
       );
-      print("::::::::<delete Cart Api Services Api>::::::::status code::::::::::");
+      print("::::::::<get coupons-list Api>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

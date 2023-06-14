@@ -1,6 +1,7 @@
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_booking_landing_screen.dart';
+import 'package:bci/screens/members/home_screen/others_service_screen.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_clippers/custom_clippers.dart';
@@ -232,8 +233,31 @@ class _Home_screen1State extends State<Home_screen1> {
                 child: Column(
                   children: [
                     Image.asset('assets/images/Group 5829.png'),
-                    Text(
+                    const Text(
                       'Holiday\nPackage',
+                      style: TextStyle(fontWeight: FontWeight.w700),
+                    )
+                  ],
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Get.to(const OthersServiceScreen());
+                },
+                child: Column(
+                  children: [
+                    const SizedBox(height: 6,),
+                    Container(
+                      height: 58,
+                      width: 55,
+                      decoration: BoxDecoration(
+                        color: kblue,
+                        borderRadius: BorderRadius.circular(3)
+                      ),
+                      child:const Icon(Icons.open_with,color: Colors.white,)),
+                      ksizedbox10,
+                   const Text(
+                      'Others',
                       style: TextStyle(fontWeight: FontWeight.w700),
                     )
                   ],

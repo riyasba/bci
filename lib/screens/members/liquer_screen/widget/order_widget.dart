@@ -5,9 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../constands/constands.dart';
 
-class Orders extends StatelessWidget {
+class Orders extends StatefulWidget {
   const Orders({super.key, required this.bottleimg});
 final String bottleimg;
+
+  @override
+  State<Orders> createState() => _OrdersState();
+}
+
+class _OrdersState extends State<Orders> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +27,7 @@ final String bottleimg;
               child: Row(
                 children: [
                   Image.asset(
-                    bottleimg,
+                    widget.bottleimg,
                   ),
                   kwidth10,
                   Row(

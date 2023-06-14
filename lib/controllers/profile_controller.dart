@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/auth_controllers.dart';
+import 'package:bci/models/get_coupons_model.dart';
 import 'package:bci/models/member_profile_model.dart';
 import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/profile_model.dart';
+import 'package:bci/services/network/profile_api_services/our_coupons_api_service.dart';
 import 'package:bci/services/network/profile_api_services/profile_api_services.dart';
 import 'package:bci/services/network/profile_api_services/profile_pic_update_api_services.dart';
 import 'package:bci/services/network/profile_api_services/profile_update_api_services.dart';
@@ -96,4 +98,25 @@ class ProfileController extends GetxController {
 
     getProfile();
   }
+
+  //coupons list
+  OurCouponsApiServices ourCouponsApiServices = OurCouponsApiServices();
+  List<CouponsData> couponsData = [];
+
+  getCoupons() async {
+    dio.Response<dynamic> response = await ourCouponsApiServices.ourCouponsApiServices();
+    if(response.statusCode == 200){
+      GetCouponsList getCouponsList = GetCouponsList.fromJson(response.data);
+      couponsData = getCouponsList.data;
+    }else {
+        Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            response.data["message"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+  }
+
 }

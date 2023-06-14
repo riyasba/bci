@@ -3,8 +3,14 @@ import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DeleteCartApiServices extends BaseApiService {
-  Future deleteCartApiServices({required String serviceid}) async {
+class AddBookingApiServices extends BaseApiService {
+  Future addBookingApiServices({
+    required String serviceid,
+    required String qty,
+    required String offerOrCoupon,
+    required String couponcode,
+    required String amount
+    }) async {
     dynamic responseJson;
     try {
       var dio = Dio();
@@ -12,7 +18,7 @@ class DeleteCartApiServices extends BaseApiService {
       String? authtoken = prefs.getString("auth_token");
 
       var response = await dio.post(
-        deleteCartApiUrl,
+        addBookingApiUrl,
         options: Options(
             headers: {
               'Accept': 'application/json',
@@ -23,10 +29,15 @@ class DeleteCartApiServices extends BaseApiService {
               return status! <= 500;
             }),
             data: {
-              "service_id" : serviceid
+              "service_id" : serviceid,
+              "quantity":qty,
+              "offer_or_coupon": "offer",
+              "coupon_code": "4356565",
+              "amount": amount
             }
       );
-      print("::::::::<delete Cart Api Services Api>::::::::status code::::::::::");
+      print("::::::::<Add booking Api Services Api>::::::::status code::::::::::");
+      print("....<$serviceid>...<$qty>...<$amount>..***");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

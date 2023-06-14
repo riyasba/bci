@@ -39,7 +39,7 @@ class GetServiceListData {
     String description;
     String isBooking;
     String status;
-    List<String> amenties;
+    //List<String> amenties;
     String image;
     DateTime createdAt;
     DateTime updatedAt;
@@ -55,25 +55,25 @@ class GetServiceListData {
         required this.description,
         required this.isBooking,
         required this.status,
-        required this.amenties,
+       // required this.amenties,
         required this.image,
         required this.createdAt,
         required this.updatedAt,
     });
 
     factory GetServiceListData.fromJson(Map<String, dynamic> json) => GetServiceListData(
-        id: json["id"],
-        categoryId: json["category_id"],
-        vendorId: json["vendor_id"],
-        title: json["title"],
-        actualAmount: json["actual_amount"],
-        bvcAmount: json["bvc_amount"],
-        saleAmount: json["sale_amount"],
-        description: json["description"],
-        isBooking: json["is_booking"],
-        status: json["status"],
-        amenties: List<String>.from(json["amenties"].map((x) => x)),
-        image: json["image"],
+        id: json["id"]?? 0,
+        categoryId: json["category_id"]?? 0,
+        vendorId: json["vendor_id"]?? "",
+        title: json["title"]?? "",
+        actualAmount: json["actual_amount"]?? "",
+        bvcAmount: json["bvc_amount"]?? "",
+        saleAmount: json["sale_amount"]?? "",
+        description: json["description"]?? "",
+        isBooking: json["is_booking"]?? "",
+        status: json["status"]?? "",
+        //amenties: List<String>.from(json["amenties"].map((x) => x)),
+        image: json["image"]?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );
@@ -89,7 +89,7 @@ class GetServiceListData {
         "description": description,
         "is_booking": isBooking,
         "status": status,
-        "amenties": List<dynamic>.from(amenties.map((x) => x)),
+       // "amenties": List<dynamic>.from(amenties.map((x) => x)),
         "image": image,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),

@@ -475,7 +475,7 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                 children: [
                   InkWell(
                       onTap: () {
-                        Get.to(Otc_payment(
+                        Get.to(OtcPayment(
                           plansData: plansController
                               .plansdataList[settingsController.index.value],
                         ));
