@@ -1,4 +1,5 @@
 import 'package:bci/constands/app_fonts.dart';
+import 'package:bci/models/get_booking_list_model.dart';
 import 'package:bci/models/get_cart_list_model.dart';
 import 'package:bci/models/get_plan_details_model.dart';
 import 'package:bci/models/get_plans_model.dart';
@@ -10,6 +11,7 @@ import 'package:bci/screens/members/otcpayment/successful.dart';
 import 'package:bci/services/network/categorys_api_services/add_booking_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/add_to_cart_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/delete_cart_api_services.dart';
+import 'package:bci/services/network/categorys_api_services/get_booking_list_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_cart_list_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_service_list_api_service.dart';
 import 'package:bci/services/network/categorys_api_services/search_service_list_api_services.dart';
@@ -224,6 +226,27 @@ class HomeController extends GetxController {
       ));
     }
     
+  }
+
+  //get booking api
+  GetBookingListApiServices getBookingListApiServices = GetBookingListApiServices();
+  List<BookingListData> bookingListData = [];
+
+  getBooking() async {
+
+    dio.Response<dynamic> response = await getBookingListApiServices.getBookingListApiServices();
+    if(response.statusCode == 200){
+      GetBookingList getBookingList = GetBookingList.fromJson(response.data);
+      bookingListData = getBookingList.data;
+    } else {
+        Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+      ));
+    }
+    update();
   }
 
 }

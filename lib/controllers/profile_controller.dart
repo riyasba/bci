@@ -11,6 +11,7 @@ import 'package:bci/services/network/profile_api_services/our_coupons_api_servic
 import 'package:bci/services/network/profile_api_services/profile_api_services.dart';
 import 'package:bci/services/network/profile_api_services/profile_pic_update_api_services.dart';
 import 'package:bci/services/network/profile_api_services/profile_update_api_services.dart';
+import 'package:bci/services/network/profile_api_services/redeem_coupons_api_services.dart';
 import 'package:bci/services/network/profile_api_services/update_official_address_api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -117,6 +118,29 @@ class ProfileController extends GetxController {
           ));
     }
     update();
+  }
+
+  //redeem coupon
+  RedeemCouponApiServices redeemCouponApiServices = RedeemCouponApiServices();
+
+  redeemCoupon({required String couponcode}) async {
+
+    dio.Response<dynamic> response = await redeemCouponApiServices.redeemCouponApiServices(couponcode: couponcode);
+    if(response.statusCode == 200){
+      Get.rawSnackbar(
+      message: response.data["message"],
+      backgroundColor: Colors.green);
+    } else if(response.statusCode == 400){
+      Get.rawSnackbar(
+      message: response.data["error"],
+      backgroundColor: Colors.red);
+    } else{
+      Get.rawSnackbar(
+      message: response.data["error"],
+      backgroundColor: Colors.red);
+    }
+
+
   }
 
 }

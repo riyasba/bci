@@ -61,5 +61,11 @@ abstract class BaseApiService {
   //our coupons api
   final String couponsApiUrl = "https://bci.generation360tech.in/api/auth/getUserCoupons";
 
+  //coupons redeem api
+  final String redeemCouponsApiUrl = "https://bci.generation360tech.in/api/auth/redeemCoupon";
+
+  //get booking list
+  final String bookingListApiUrl = "https://bci.generation360tech.in/api/auth/booking_list";
+
   
 }

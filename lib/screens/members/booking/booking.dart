@@ -1,6 +1,7 @@
 import 'package:bci/screens/members/booking/widget/Flight_view.dart';
 import 'package:bci/screens/members/booking/widget/booking_hotels_containers.dart';
 import 'package:bci/screens/members/booking/widget/holiday_containers.dart';
+import 'package:bci/screens/members/booking/widget/others_bookings_view.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -12,23 +13,23 @@ import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
 import '../../bussiness/views/home_screen/contact_admin.dart';
 
-class Members_booking extends StatefulWidget {
-  const Members_booking({super.key});
+class MembersBooking extends StatefulWidget {
+  const MembersBooking({super.key});
 
   @override
-  State<Members_booking> createState() => _Members_bookingState();
+  State<MembersBooking> createState() => _MembersBookingState();
 }
 
-class _Members_bookingState extends State<Members_booking> {
+class _MembersBookingState extends State<MembersBooking> {
   int index = 0;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         backgroundColor: kwhite,
         appBar: PreferredSize(
-            preferredSize: Size.fromHeight(200),
+            preferredSize:const Size.fromHeight(200),
             child: Column(
               children: [
                 ClipPath(
@@ -53,7 +54,7 @@ class _Members_bookingState extends State<Members_booking> {
                           ),
                           InkWell(
                               onTap: () {
-                                Get.to(ContactAdmin());
+                                Get.to(const ContactAdmin());
                               },
                               child: Image.asset(
                                   'assets/images/3669173_help_ic_icon.png'))
@@ -66,7 +67,7 @@ class _Members_bookingState extends State<Members_booking> {
                   padding: const EdgeInsets.all(8.0),
                   child: TabBar(
                       automaticIndicatorColorAdjustment: true,
-                      //  isScrollable: true,
+                        isScrollable: true,
                       labelColor: kwhite,
                       unselectedLabelColor: Colors.black,
                       indicator: BoxDecoration(
@@ -77,7 +78,7 @@ class _Members_bookingState extends State<Members_booking> {
                           index = value;
                         });
                       },
-                      tabs: [
+                      tabs:const [
                         Tab(
                           text: "Flight",
                         ),
@@ -86,15 +87,20 @@ class _Members_bookingState extends State<Members_booking> {
                         ),
                         Tab(
                           text: "Holidays",
+                        ),
+                        Tab(
+                          text: "Others",
                         )
                       ]),
                 ),
               ],
             )),
-        body: TabBarView(children: [Flight_widget (),
+        body:const TabBarView(
+          children: [
+          Flight_widget (),
           bookings_containers(),
           Holiays_containors(),
-          
+          OthersBookingsView(),
         ]),
       ),
     );
