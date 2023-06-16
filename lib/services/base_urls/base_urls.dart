@@ -31,7 +31,10 @@ abstract class BaseApiService {
       "https://bci.generation360tech.in/api/auth/merchant_create_service";
 
   //get Services
-  final String getServicesURL =
-      "https://bci.generation360tech.in/api/auth/service_list";
+  final String getServicesURL = "https://bci.generation360tech.in/api/auth/service_list";
+
+  //get booking list
+  final String bookingListApiUrl = "https://bci.generation360tech.in/api/auth/vendor_booking_list";
+
 
 }
