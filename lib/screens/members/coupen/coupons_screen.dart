@@ -72,7 +72,7 @@ class _Coupens_membersState extends State<Coupens_members> {
         padding: const EdgeInsets.all(10.0),
         child: ListView(
           children: [
-            const Row(
+             Row(
               children: [
                 Text(
                   'Dress Coupones',
@@ -122,7 +122,7 @@ class _Coupens_membersState extends State<Coupens_members> {
                                       fontWeight: FontWeight.w400
                                     ),
                                     ),
-                                     Text(profileController.couponsData[index].couponcode,
+                                  Text(profileController.couponsData[index].couponcode,
                                     style: TextStyle(
                                       color: korange,
                                       fontSize: 16,

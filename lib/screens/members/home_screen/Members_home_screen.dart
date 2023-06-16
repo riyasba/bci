@@ -83,75 +83,92 @@ class _Home_screen1State extends State<Home_screen1> {
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
-          // CarouselSlider(
-          //     carouselController: sliderController,
-          //     items: [
-          //       Container(
-          //         decoration: BoxDecoration(
-          //             image: DecorationImage(
-          //                 image:
-          //                     AssetImage('assets/images/Scroll Group 11.png'))),
-          //       ),
-          //       Container(
-          //         decoration: BoxDecoration(
-          //             image: DecorationImage(
-          //                 image: AssetImage('assets/images/Group 5767.png'))),
-          //       ),
-          //       Container(
-          //         decoration: BoxDecoration(
-          //             image: DecorationImage(
-          //                 image: AssetImage('assets/images/Group 5807.png'))),
-          //       ),
-          //     ],
-          //     options: CarouselOptions(
-          //       height: 170,
-          //       onPageChanged: (index, reason) {
-          //         setState(() {
-          //           activeIndex = index;
-          //         });
-          //       },
-          //       aspectRatio: 16 / 9,
-          //       viewportFraction: 1,
-          //       initialPage: 0,
-          //       enableInfiniteScroll: true,
-          //       reverse: false,
-          //       autoPlay: true,
-          //       autoPlayInterval: Duration(seconds: 3),
-          //       autoPlayAnimationDuration: Duration(milliseconds: 800),
-          //       autoPlayCurve: Curves.fastOutSlowIn,
-          //       enlargeCenterPage: true,
-          //       enlargeFactor: 0.3,
-          //       scrollDirection: Axis.horizontal,
-          //     )),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     AnimatedSmoothIndicator(
-          //       activeIndex: activeIndex,
-          //       count: 3,
-          //       effect: ScaleEffect(
-          //           dotHeight: 9.0,
-          //           dotWidth: 9.0,
-          //           dotColor: kgrey,
-          //           activeDotColor: kblue),
-          //     ),
-          //   ],
-          // ),
-          Row(
-            children: [
-              kwidth10,
-              Text(
-                'Subscribe Pakages',
-                style: TextStyle(
-                    color: knavblue, fontSize: 22, fontWeight: FontWeight.w700),
-              ),
-            ],
+         Obx(()=>  Column(
+              children: [
+             profileController.isSubscribed.isTrue ?   Column(
+                 children: [
+                   CarouselSlider(
+                        carouselController: sliderController,
+                        items: [
+                          Container(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/Scroll Group 11.png'))),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/images/Group 5767.png'))),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/images/Group 5807.png'))),
+                          ),
+                        ],
+                        options: CarouselOptions(
+                          height: 170,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              activeIndex = index;
+                            });
+                          },
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 1,
+                          initialPage: 0,
+                          enableInfiniteScroll: true,
+                          reverse: false,
+                          autoPlay: true,
+                          autoPlayInterval: Duration(seconds: 3),
+                          autoPlayAnimationDuration: Duration(milliseconds: 800),
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enlargeCenterPage: true,
+                          enlargeFactor: 0.3,
+                          scrollDirection: Axis.horizontal,
+                        )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AnimatedSmoothIndicator(
+                          activeIndex: activeIndex,
+                          count: 3,
+                          effect: ScaleEffect(
+                              dotHeight: 9.0,
+                              dotWidth: 9.0,
+                              dotColor: kgrey,
+                              activeDotColor: kblue),
+                        ),
+                      ],
+                    ),
+                 ],
+               ) : 
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        kwidth10,
+                        Text(
+                          'Subscribe Pakages',
+                          style: TextStyle(
+                              color: knavblue,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ],
+                    ),
+                    InkWell(
+                        onTap: () {
+                          Get.to(UpgradeScreen());
+                        },
+                        child: Image.asset('assets/images/Group 5826.png')),
+                  ],
+                ),
+              ],
+            ),
           ),
-          InkWell(
-              onTap: () {
-                Get.to(UpgradeScreen());
-              },
-              child: Image.asset('assets/images/Group 5826.png')),
           Row(
             children: [
               kwidth10,
@@ -246,17 +263,21 @@ class _Home_screen1State extends State<Home_screen1> {
                 },
                 child: Column(
                   children: [
-                    const SizedBox(height: 6,),
+                    const SizedBox(
+                      height: 6,
+                    ),
                     Container(
-                      height: 58,
-                      width: 55,
-                      decoration: BoxDecoration(
-                        color: kblue,
-                        borderRadius: BorderRadius.circular(3)
-                      ),
-                      child:const Icon(Icons.open_with,color: Colors.white,)),
-                      ksizedbox10,
-                   const Text(
+                        height: 58,
+                        width: 55,
+                        decoration: BoxDecoration(
+                            color: kblue,
+                            borderRadius: BorderRadius.circular(3)),
+                        child: const Icon(
+                          Icons.open_with,
+                          color: Colors.white,
+                        )),
+                    ksizedbox10,
+                    const Text(
                       'Others',
                       style: TextStyle(fontWeight: FontWeight.w700),
                     )
@@ -269,19 +290,17 @@ class _Home_screen1State extends State<Home_screen1> {
           CarouselSlider(
               carouselController: sliderController,
               items: [
-                for (int i = 0;
-                                i < homeController.sliderList.length;
-                                i++)
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                         // fit: BoxFit.fill,
-                            image: NetworkImage(homeController.sliderList[i].image), 
-                                )),
+                for (int i = 0; i < homeController.sliderList.length; i++)
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        // fit: BoxFit.fill,
+                        image: NetworkImage(homeController.sliderList[i].image),
+                      )),
+                    ),
                   ),
-                ),
                 // Container(
                 //   decoration: BoxDecoration(
                 //       image: DecorationImage(

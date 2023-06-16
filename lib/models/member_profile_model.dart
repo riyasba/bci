@@ -14,7 +14,7 @@ class MemberProfileModel {
   String message;
   bool subscription;
   int remainingDays;
-  int percentage;
+  dynamic percentage;
   String planId;
   MemberUser user;
 

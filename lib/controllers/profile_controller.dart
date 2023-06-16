@@ -27,10 +27,11 @@ class ProfileController extends GetxController {
   UpdateOfficialApiServices updateOfficialApiServices =
       UpdateOfficialApiServices();
 
-  ProfilePIcUpdateApiServices profilePIcUpdateApiServices =
-      ProfilePIcUpdateApiServices();
+  ProfilePIcUpdateApiServices profilePIcUpdateApiServices =  ProfilePIcUpdateApiServices();
 
   List<MemberUser> profileData = [];
+
+  RxBool isSubscribed = false.obs;
 
   RxBool isLoading = false.obs;
 
@@ -40,6 +41,7 @@ class ProfileController extends GetxController {
     if (response.statusCode == 200) {
       MemberProfileModel profileModel =
           MemberProfileModel.fromJson(response.data);
+      isSubscribed(profileModel.subscription);
       profileData.add(profileModel.user);
       update();
     } else if (response.statusCode == 401) {
@@ -105,12 +107,13 @@ class ProfileController extends GetxController {
   List<CouponsData> couponsData = [];
 
   getCoupons() async {
-    dio.Response<dynamic> response = await ourCouponsApiServices.ourCouponsApiServices();
-    if(response.statusCode == 200){
+    dio.Response<dynamic> response =
+        await ourCouponsApiServices.ourCouponsApiServices();
+    if (response.statusCode == 200) {
       GetCouponsList getCouponsList = GetCouponsList.fromJson(response.data);
       couponsData = getCouponsList.data;
-    }else {
-        Get.rawSnackbar(
+    } else {
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             response.data["message"],
@@ -124,23 +127,17 @@ class ProfileController extends GetxController {
   RedeemCouponApiServices redeemCouponApiServices = RedeemCouponApiServices();
 
   redeemCoupon({required String couponcode}) async {
-
-    dio.Response<dynamic> response = await redeemCouponApiServices.redeemCouponApiServices(couponcode: couponcode);
-    if(response.statusCode == 200){
+    dio.Response<dynamic> response = await redeemCouponApiServices
+        .redeemCouponApiServices(couponcode: couponcode);
+    if (response.statusCode == 200) {
       Get.rawSnackbar(
-      message: response.data["message"],
-      backgroundColor: Colors.green);
-    } else if(response.statusCode == 400){
+          message: response.data["message"], backgroundColor: Colors.green);
+    } else if (response.statusCode == 400) {
       Get.rawSnackbar(
-      message: response.data["error"],
-      backgroundColor: Colors.red);
-    } else{
+          message: response.data["error"], backgroundColor: Colors.red);
+    } else {
       Get.rawSnackbar(
-      message: response.data["error"],
-      backgroundColor: Colors.red);
+          message: response.data["error"], backgroundColor: Colors.red);
     }
-
-
   }
-
 }
