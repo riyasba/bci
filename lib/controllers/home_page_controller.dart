@@ -184,7 +184,7 @@ class HomeController extends GetxController {
 
   getCartdetails() async {
 
-    dio.Response<dynamic> response = await getServiceListApiServices.getServiceListApiServices();
+    dio.Response<dynamic> response = await getCartListApiServices.getCartListApiServices();
     
     if(response.statusCode == 201){
       GetCartList getCartList = GetCartList.fromJson(response.data);

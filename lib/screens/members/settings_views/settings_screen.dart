@@ -2,6 +2,7 @@ import 'package:bci/authentications/langing_screen/landing_screen.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/settings_controllers.dart';
+import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
 import 'package:bci/screens/members/settings_views/offers_screen.dart';
 import 'package:bci/screens/members/settings_views/our_partner_screen.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/My_account.dart';
@@ -59,7 +60,7 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
           )),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 20),
         child: ListView(
           children: [
             InkWell(
@@ -170,6 +171,33 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                   Text(
                     "Your Coupons",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff003366)),
+                  )
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 5, bottom: 10),
+              child: Divider(
+                thickness: 1,
+                color: Colors.grey,
+              ),
+            ),
+             InkWell(
+              onTap: () {
+                Get.to(const CartScreen());
+              },
+              child: Row(
+                children: const [
+                  Icon(Icons.shopping_cart,color:  Color(0xff003366),),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "View Cart",
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,

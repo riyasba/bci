@@ -35,7 +35,7 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       backgroundColor: kwhite  ,
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize:const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(

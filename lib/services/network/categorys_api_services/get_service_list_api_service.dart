@@ -23,7 +23,7 @@ class GetServiceListApiServices extends BaseApiService {
               return status! <= 500;
             }),
       );
-      print("::::::::<get service-list Api>::::::::status code::::::::::");
+      print("::::::::<get cart service-list Api>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

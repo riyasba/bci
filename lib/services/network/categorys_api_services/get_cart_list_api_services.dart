@@ -12,7 +12,7 @@ class GetCartListApiServices extends BaseApiService {
       String? authtoken = prefs.getString("auth_token");
 
       var response = await dio.post(
-        serviceListApiUrl,
+        getCartListApiUrl,
         options: Options(
             headers: {
               'Accept': 'application/json',
