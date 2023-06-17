@@ -12,7 +12,7 @@ class GetCouponsList {
     String message;
     List<CouponsData> data;
 
-    GetCouponsList({
+    GetCouponsList({ 
         required this.message,
         required this.data,
     });
