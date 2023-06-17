@@ -50,6 +50,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(280),
@@ -117,77 +118,73 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
           ])),
       body: GetBuilder<ServicesController>(
         builder: (_) {
-          return Column(
-            children: [
-              serviceController.bookingListData.isEmpty ? 
-              const Center(
-                child: Text("No Data Found"),
-                ) :
-              ListView.builder(
-                  itemCount: serviceController.bookingListData.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 140,
-                            width: MediaQuery.of(context).size.width,
-                            color: Colors.white,
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 180,
-                                  width: 150,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10, left: 5, right: 10, bottom: 10),
-                                        child: Image.network(serviceController.bookingListData[index].image,fit: BoxFit.contain,),
-                                    // child: Image.asset(
-                                    //   bookingimage[index],
-                                    //   fit: BoxFit.contain,
-                                    // ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 20,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        serviceController.bookingListData[index].service,
-                                        style: TextStyle(
-                                            fontSize: 19,
-                                            fontWeight: FontWeight.bold,color: kblue),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 6),
-                                        child: Container(
-                                          width: 210,
-                                          child: Text(
-                                            serviceController.bookingListData[index].description,
-                                            maxLines: 5,
-                                            style:
-                                                TextStyle(fontSize: 12, color: kblue),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
+          return serviceController.bookingListData.isEmpty ? 
+          const Center(
+            child: Text("No Data Found"),
+            ) :
+          ListView.builder(
+              itemCount: serviceController.bookingListData.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 140,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.white,
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 180,
+                              width: 150,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 10, left: 5, right: 10, bottom: 10),
+                                    child: Image.network(serviceController.bookingListData[index].image,fit: BoxFit.contain,),
+                                // child: Image.asset(
+                                //   bookingimage[index],
+                                //   fit: BoxFit.contain,
+                                // ),
+                              ),
                             ),
-                          ),
-                         
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 20,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    serviceController.bookingListData[index].service,
+                                    style: TextStyle(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.bold,color: kblue),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 6),
+                                    child: Container(
+                                      width: 210,
+                                      child: Text(
+                                        serviceController.bookingListData[index].description,
+                                        maxLines: 5,
+                                        style:
+                                            TextStyle(fontSize: 12, color: kblue),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    );
-                  }),
-            ],
-          );
+                     
+                    ],
+                  ),
+                );
+              });
         }
       ),
     );
