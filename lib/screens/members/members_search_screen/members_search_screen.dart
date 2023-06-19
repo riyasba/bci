@@ -147,6 +147,7 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                           setState(() {
                             merchantCategory = value!;
                           });
+                          homeController.filter(category: value!.id.toString());
                         },
                         items: authController.categoryList
                             .map<DropdownMenuItem<CategoryList>>(

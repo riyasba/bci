@@ -3,6 +3,7 @@
 //     final getCouponsList = getCouponsListFromJson(jsonString);
 
 import 'dart:convert';
+import 'dart:math';
 
 GetCouponsList getCouponsListFromJson(String str) => GetCouponsList.fromJson(json.decode(str));
 
@@ -40,6 +41,7 @@ class CouponsData {
     DateTime createdAt;
     DateTime updatedAt;
     Name name;
+    int colorIndex;
 
     CouponsData({
         required this.id,
@@ -53,6 +55,7 @@ class CouponsData {
         required this.createdAt,
         required this.updatedAt,
         required this.name,
+        required this.colorIndex,
     });
 
     factory CouponsData.fromJson(Map<String, dynamic> json) => CouponsData(
@@ -67,6 +70,7 @@ class CouponsData {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         name: nameValues.map[json["name"]]!,
+        colorIndex: Random().nextInt(4),
     );
 
     Map<String, dynamic> toJson() => {

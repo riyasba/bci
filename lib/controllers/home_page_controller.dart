@@ -13,6 +13,7 @@ import 'package:bci/services/network/categorys_api_services/add_to_cart_api_serv
 import 'package:bci/services/network/categorys_api_services/delete_cart_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_booking_list_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_cart_list_api_services.dart';
+import 'package:bci/services/network/categorys_api_services/get_filter_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_service_list_api_service.dart';
 import 'package:bci/services/network/categorys_api_services/search_service_list_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/add_subscription_api_services.dart';
@@ -248,5 +249,29 @@ class HomeController extends GetxController {
     }
     update();
   }
+
+  //get filter api
+  FilterServiceListApiServices filterServiceListApiServices = FilterServiceListApiServices();
+  List<SearchServiceListData> filterServiceListData = [];
+
+  filter({required String category}) async {
+
+    dio.Response<dynamic> response = await filterServiceListApiServices.
+    filterServiceListApiServices(category: category);
+
+    if(response.statusCode == 200){
+      SearchServiceList filterServiceList = SearchServiceList.fromJson(response.data);
+      filterServiceListData = filterServiceList.data;
+    } else {
+        Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+      ));
+    }
+    update();
+  }
+
 
 }

@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:bci/controllers/profile_controller.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import '../../../constands/constands.dart';
@@ -27,12 +31,16 @@ class _Coupens_membersState extends State<Coupens_members> {
     profileController.update();
   }
 
+  List colors = [const Color(0xffFCE2E2),const Color(0xffE4E4E4),const Color(0xffF8AC61),const Color(0xff8DC6FF),
+   const Color(0xffEDD076), const Color(0xff90E79C), const Color(0xff00D8E0), const Color(0xff396DB4), const Color(0xffD9908A),
+  ];
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize:const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -73,7 +81,7 @@ class _Coupens_membersState extends State<Coupens_members> {
         child: ListView(
           children: [
              Row(
-              children: [
+              children:const [
                 Text(
                   'Dress Coupones',
                   style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
@@ -95,7 +103,7 @@ class _Coupens_membersState extends State<Coupens_members> {
                         child: Container(
                           height: 90,
                           decoration: BoxDecoration(
-                            color: Colors.blueGrey[200],
+                            color: colors[Random().nextInt(9)],
                             borderRadius: BorderRadius.circular(5)
                           ),
                           child: Row(
@@ -130,7 +138,22 @@ class _Coupens_membersState extends State<Coupens_members> {
                                     ),
                                     ),
                                     const SizedBox(width: 5,),
-                                    const Icon(Icons.copy,size: 15,)
+                                    InkWell(
+                                      onTap: (){
+                                        FlutterClipboard.copy(profileController.couponsData[index].couponcode).then((value) => 
+                                        Fluttertoast.showToast(
+                                         msg: "Copy to clipboard",
+                                         toastLength: Toast.LENGTH_SHORT,
+                                         gravity: ToastGravity.CENTER,
+                                         timeInSecForIosWeb: 1,
+                                         backgroundColor: Colors.white,
+                                         textColor: Colors.black,
+                                         fontSize: 16.0
+                                          ),
+                                        //print("code copied")
+                                        );
+                                      },
+                                      child: const Icon(Icons.copy,size: 15,))
                                       ],
                                     ),
                                   ],
