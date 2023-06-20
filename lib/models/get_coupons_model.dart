@@ -40,7 +40,7 @@ class CouponsData {
     DateTime expiryAt;
     DateTime createdAt;
     DateTime updatedAt;
-    Name name;
+    String name;
     int colorIndex;
 
     CouponsData({
@@ -69,7 +69,7 @@ class CouponsData {
         expiryAt: DateTime.parse(json["expiry_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        name: nameValues.map[json["name"]]!,
+        name: json["name"],
         colorIndex: Random().nextInt(4),
     );
 
@@ -84,25 +84,8 @@ class CouponsData {
         "expiry_at": expiryAt.toIso8601String(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "name": nameValues.reverse[name],
+        "name": name,
     };
 }
 
-enum Name { THE_25_OFF_IN_MY_SHOP, THE_55_OFF_IN_MY_SHOP }
 
-final nameValues = EnumValues({
-    "25% Off In My Shop": Name.THE_25_OFF_IN_MY_SHOP,
-    "55% Off In My Shop": Name.THE_55_OFF_IN_MY_SHOP
-});
-
-class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-        reverseMap = map.map((k, v) => MapEntry(v, k));
-        return reverseMap;
-    }
-}

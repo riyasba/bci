@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.bci">
+    package="com.member.bci"
+    xmlns:tools="http://schemas.android.com/tools">
    <application
-        android:label="bci"
+        tools:replace="android:label"
+        android:label="BCI Member"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -30,5 +32,16 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+
+       
     </application>
+     <queries>
+            <package android:name="com.google.android.apps.nbu.paisa.user" />
+            <package android:name="net.one97.paytm" />
+            <package android:name="com.phonepe.app" />
+            <package android:name="in.org.npci.upiapp" />
+            <package android:name="in.amazon.mShop.android.shopping" />
+            <package android:name="com.whatsapp" />
+        </queries>
 </manifest>

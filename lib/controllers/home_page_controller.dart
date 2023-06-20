@@ -7,6 +7,7 @@ import 'package:bci/models/get_service_list_model.dart';
 import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/models/slider_model.dart';
 import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
+import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:bci/screens/members/otcpayment/successful.dart';
 import 'package:bci/services/network/categorys_api_services/add_booking_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/add_to_cart_api_services.dart';
@@ -71,9 +72,9 @@ class HomeController extends GetxController {
     update();
   }
 
-  addSubscription({required int planId}) async {
-    dio.Response<dynamic> response =
-        await addSubscriptionApiServices.addSubscription(planId: planId);
+  addSubscription({required int planId, required int customerId}) async {
+    dio.Response<dynamic> response = await addSubscriptionApiServices
+        .addSubscription(planId: planId, customerId: customerId);
 
     if (response.statusCode == 200) {
       Get.to(const SucessfulScreenOtc());
@@ -94,17 +95,18 @@ class HomeController extends GetxController {
   }
 
   //get service list
-  GetServiceListApiServices getServiceListApiServices = GetServiceListApiServices();
+  GetServiceListApiServices getServiceListApiServices =
+      GetServiceListApiServices();
   List<GetServiceListData> serviceListData = [];
 
   serviceList() async {
+    dio.Response<dynamic> response =
+        await getServiceListApiServices.getServiceListApiServices();
 
-     dio.Response<dynamic> response = await getServiceListApiServices.getServiceListApiServices();
-
-     if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       GetServiceList getServiceList = GetServiceList.fromJson(response.data);
       serviceListData = getServiceList.data;
-     } else {
+    } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
@@ -113,20 +115,20 @@ class HomeController extends GetxController {
           ));
     }
     update();
-
   }
 
   //search service list
-  SearchServiceListApiServices searchServiceListApiServices = SearchServiceListApiServices();
+  SearchServiceListApiServices searchServiceListApiServices =
+      SearchServiceListApiServices();
   List<SearchServiceListData> searchServiceListData = [];
 
   searchServiceList({required String searchKey}) async {
+    dio.Response<dynamic> response = await searchServiceListApiServices
+        .searchServiceListApiServices(searchKey: searchKey);
 
-    dio.Response<dynamic> response = await 
-    searchServiceListApiServices.searchServiceListApiServices(searchKey: searchKey);
-
-    if(response.statusCode == 200){
-      SearchServiceList searchServiceList = SearchServiceList.fromJson(response.data);
+    if (response.statusCode == 200) {
+      SearchServiceList searchServiceList =
+          SearchServiceList.fromJson(response.data);
       searchServiceListData = searchServiceList.data;
     } else {
       Get.rawSnackbar(
@@ -137,21 +139,26 @@ class HomeController extends GetxController {
           ));
     }
     update();
-
   }
 
   //add to cart
   AddToCartApiServices addToCartApiServices = AddToCartApiServices();
 
-  addToCart({required String serviceid}) async {
+  RxBool isLoading = false.obs;
 
-      dio.Response<dynamic> response = await 
-      addToCartApiServices.addToCartApiServices(serviceid: serviceid);
-      if(response.statusCode == 201){
-        Get.to(const CartScreen());
-        Get.rawSnackbar(message: response.data["message"], backgroundColor: Colors.green);
-      } else {
-        Get.rawSnackbar(
+  addToCart({required String serviceid}) async {
+    isLoading(true);
+
+    dio.Response<dynamic> response =
+        await addToCartApiServices.addToCartApiServices(serviceid: serviceid);
+    isLoading(false);
+
+    if (response.statusCode == 201) {
+      Get.off(CartScreen());
+      Get.rawSnackbar(
+          message: response.data["message"], backgroundColor: Colors.green);
+    } else {
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             response.data["message"],
@@ -164,13 +171,12 @@ class HomeController extends GetxController {
   DeleteCartApiServices deleteCartApiServices = DeleteCartApiServices();
 
   deleteToCart({required String serviceid}) async {
-
-    dio.Response<dynamic> response = await 
-    deleteCartApiServices.deleteCartApiServices(serviceid: serviceid);
-    if(response.statusCode == 200){
-       getCartdetails();
-      } else {
-        Get.rawSnackbar(
+    dio.Response<dynamic> response =
+        await deleteCartApiServices.deleteCartApiServices(serviceid: serviceid);
+    if (response.statusCode == 200) {
+      getCartdetails();
+    } else {
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             response.data["message"],
@@ -184,19 +190,28 @@ class HomeController extends GetxController {
   List<CartListData> cartListData = [];
 
   getCartdetails() async {
+    dio.Response<dynamic> response =
+        await getCartListApiServices.getCartListApiServices();
 
-    dio.Response<dynamic> response = await getCartListApiServices.getCartListApiServices();
-    
-    if(response.statusCode == 201){
+    if (response.statusCode == 201) {
       GetCartList getCartList = GetCartList.fromJson(response.data);
       cartListData = getCartList.data;
-    } else {
-        Get.rawSnackbar(
+    } else if (response.statusCode == 200) {
+      cartListData.clear();
+      update();
+      Get.rawSnackbar(
+          backgroundColor: Colors.black,
+          messageText: Text(
+            response.data["message"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }  else {
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             "Something went wrong",
             style: primaryFont.copyWith(color: Colors.white),
-      ));
+          ));
     }
     update();
   }
@@ -204,74 +219,84 @@ class HomeController extends GetxController {
   //add booking api
   AddBookingApiServices addBookingApiServices = AddBookingApiServices();
 
-  addBooking({
-    required String serviceid,
-    required String qty,
-    required String offerOrCoupon,
-    required String couponcode,
-    required String amount
-  }) async {
-
-    dio.Response<dynamic> response = await addBookingApiServices.addBookingApiServices(
-      serviceid: serviceid, qty: qty, 
-      offerOrCoupon: offerOrCoupon, 
-      couponcode: couponcode, amount: amount);
-      if(response.statusCode == 200){
-         Get.rawSnackbar(message: response.data["message"],backgroundColor: Colors.green);
-      } else {
-        Get.rawSnackbar(
+  addBooking(
+      {required String serviceid,
+      required String qty,
+      required String offerOrCoupon,
+      required String couponcode,
+      required String amount}) async {
+    isLoading(true);
+    dio.Response<dynamic> response =
+        await addBookingApiServices.addBookingApiServices(
+            serviceid: serviceid,
+            qty: qty,
+            offerOrCoupon: offerOrCoupon,
+            couponcode: couponcode,
+            amount: amount);
+    isLoading(false);
+    if (response.statusCode == 200) {
+      Get.rawSnackbar(
+          message: response.data["message"], backgroundColor: Colors.green);
+    } else if (response.statusCode == 400) {
+      Get.rawSnackbar(
+          backgroundColor: Colors.black,
+          messageText: Text(
+            response.data["error"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    } else {
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             "Something went wrong",
             style: primaryFont.copyWith(color: Colors.white),
-      ));
+          ));
     }
-    
   }
 
   //get booking api
-  GetBookingListApiServices getBookingListApiServices = GetBookingListApiServices();
+  GetBookingListApiServices getBookingListApiServices =
+      GetBookingListApiServices();
   List<BookingListData> bookingListData = [];
 
   getBooking() async {
-
-    dio.Response<dynamic> response = await getBookingListApiServices.getBookingListApiServices();
-    if(response.statusCode == 200){
+    dio.Response<dynamic> response =
+        await getBookingListApiServices.getBookingListApiServices();
+    if (response.statusCode == 200) {
       GetBookingList getBookingList = GetBookingList.fromJson(response.data);
       bookingListData = getBookingList.data;
     } else {
-        Get.rawSnackbar(
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             "Something went wrong",
             style: primaryFont.copyWith(color: Colors.white),
-      ));
+          ));
     }
     update();
   }
 
   //get filter api
-  FilterServiceListApiServices filterServiceListApiServices = FilterServiceListApiServices();
+  FilterServiceListApiServices filterServiceListApiServices =
+      FilterServiceListApiServices();
   List<SearchServiceListData> filterServiceListData = [];
 
   filter({required String category}) async {
+    dio.Response<dynamic> response = await filterServiceListApiServices
+        .filterServiceListApiServices(category: category);
 
-    dio.Response<dynamic> response = await filterServiceListApiServices.
-    filterServiceListApiServices(category: category);
-
-    if(response.statusCode == 200){
-      SearchServiceList filterServiceList = SearchServiceList.fromJson(response.data);
-      filterServiceListData = filterServiceList.data;
+    if (response.statusCode == 200) {
+      SearchServiceList filterServiceList =
+          SearchServiceList.fromJson(response.data);
+      searchServiceListData = filterServiceList.data;
     } else {
-        Get.rawSnackbar(
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             "Something went wrong",
             style: primaryFont.copyWith(color: Colors.white),
-      ));
+          ));
     }
     update();
   }
-
-
 }

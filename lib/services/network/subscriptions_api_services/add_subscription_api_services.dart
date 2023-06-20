@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddSubscriptionApiServices extends BaseApiService {
-  Future addSubscription({required int planId}) async {
+  Future addSubscription({required int planId, required int customerId}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
@@ -21,8 +21,9 @@ class AddSubscriptionApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"plan_id": planId});
-      print("::::::::<Get plan details Api>::::::::status code::::::::::");
+          data: {"plan_id": planId, "user_id": customerId});
+      print(
+          "::::::::<Get plan details Api>::::::::status code::::::$planId::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

@@ -1,4 +1,5 @@
 import 'package:bci/constands/app_fonts.dart';
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_plan_details_model.dart';
 import 'package:bci/models/get_plans_model.dart';
 import 'package:bci/models/slider_model.dart';
@@ -59,7 +60,9 @@ class PlanController extends GetxController {
 
   addSubscription({required int planId}) async {
     dio.Response<dynamic> response =
-        await addSubscriptionApiServices.addSubscription(planId: planId);
+        await addSubscriptionApiServices.addSubscription(
+            planId: planId,
+            customerId: Get.find<ProfileController>().profileData.first.id);
 
     if (response.statusCode == 200) {
       Get.rawSnackbar(

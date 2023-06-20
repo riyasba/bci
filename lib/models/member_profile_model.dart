@@ -72,8 +72,8 @@ class MemberUser {
   dynamic fatherName;
   dynamic motherName;
   dynamic isMarried;
-  dynamic residentialAddress;
-  dynamic officialAddress;
+ ResidentialAddress residentialAddress;
+  OfficialAddress officialAddress;
   dynamic panNo;
   dynamic aadharNo;
   dynamic bio;
@@ -81,9 +81,7 @@ class MemberUser {
   dynamic city;
   dynamic state;
   String status;
-  DateTime createdAt;
-  DateTime updatedAt;
-
+ 
   MemberUser({
     required this.id,
     required this.roleId,
@@ -110,8 +108,8 @@ class MemberUser {
     this.fatherName,
     this.motherName,
     this.isMarried,
-    this.residentialAddress,
-    this.officialAddress,
+    required this.residentialAddress,
+    required this.officialAddress,
     this.panNo,
     this.aadharNo,
     this.bio,
@@ -119,8 +117,7 @@ class MemberUser {
     this.city,
     this.state,
     required this.status,
-    required this.createdAt,
-    required this.updatedAt,
+    
   });
 
   factory MemberUser.fromJson(Map<String, dynamic> json) => MemberUser(
@@ -133,11 +130,11 @@ class MemberUser {
         otp: json["otp"],
         category: json["category"] ?? "",
         subCategory: json["sub_category"] ?? "",
-        alternateMobile: json["alternate_mobile"],
+        alternateMobile: json["alternate_mobile"] ?? "",
         gstNo: json["gst_no"] ?? "",
         adharProof: json["adhar_proof"] ?? '',
         panProof: json["pan_proof"] ?? '',
-        profilePicture: json["profile_picture"],
+        profilePicture: json["profile_picture"] ?? "",
         clientSecret: json["client_secret"],
         clientId: json["client_id"],
         keyName: json["Key_name"],
@@ -149,8 +146,9 @@ class MemberUser {
         fatherName: json["father_name"],
         motherName: json["mother_name"],
         isMarried: json["is_married"],
-        residentialAddress: json["residential_address"],
-        officialAddress: json["official_address"],
+        residentialAddress:
+            ResidentialAddress.fromJson(json["residential_address"]),
+        officialAddress: OfficialAddress.fromJson(json["official_address"]),
         panNo: json["pan_no"],
         aadharNo: json["aadhar_no"],
         bio: json["bio"],
@@ -158,8 +156,7 @@ class MemberUser {
         city: json["city"],
         state: json["state"],
         status: json["status"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+     
       );
 
   Map<String, dynamic> toJson() => {
@@ -197,7 +194,82 @@ class MemberUser {
         "city": city,
         "state": state,
         "status": status,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
       };
 }
+
+
+
+class OfficialAddress {
+  String doorNo;
+  String address;
+  String buildingName;
+  String state;
+  String city;
+
+  OfficialAddress({
+    required this.doorNo,
+    required this.address,
+    required this.buildingName,
+    required this.state,
+    required this.city,
+  });
+
+  factory OfficialAddress.fromJson(Map<String, dynamic> json) =>
+      OfficialAddress(
+        doorNo: json["door_no"],
+        address: json["address"],
+        buildingName: json["building_name"],
+        state: json["state"],
+        city: json["city"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "door_no": doorNo,
+        "address": address,
+        "building_name": buildingName,
+        "state": state,
+        "city": city,
+      };
+}
+
+class ResidentialAddress {
+  String doorNo;
+  String address;
+  String buildingName;
+  String state;
+  String city;
+  String personalId;
+  String aadharId;
+
+  ResidentialAddress({
+    required this.doorNo,
+    required this.address,
+    required this.buildingName,
+    required this.state,
+    required this.city,
+    required this.personalId,
+    required this.aadharId,
+  });
+
+  factory ResidentialAddress.fromJson(Map<String, dynamic> json) =>
+      ResidentialAddress(
+        doorNo: json["door_no"],
+        address: json["address"],
+        buildingName: json["building_name"],
+        state: json["state"],
+        city: json["city"],
+        personalId: json["personal_id"],
+        aadharId: json["aadhar_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "door_no": doorNo,
+        "address": address,
+        "building_name": buildingName,
+        "state": state,
+        "city": city,
+        "personal_id": personalId,
+        "aadhar_id": aadharId,
+      };
+}
+

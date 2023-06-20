@@ -26,7 +26,7 @@ class DeleteCartApiServices extends BaseApiService {
               "service_id" : serviceid
             }
       );
-      print("::::::::<delete Cart Api Services Api>::::::::status code::::::::::");
+      print("::::::::<delete Cart Api Services Api>::::::::status code::::${serviceid}::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

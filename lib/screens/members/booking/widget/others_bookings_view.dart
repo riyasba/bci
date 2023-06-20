@@ -11,7 +11,6 @@ class OthersBookingsView extends StatefulWidget {
 }
 
 class _OthersBookingsViewState extends State<OthersBookingsView> {
-
   final homeController = Get.find<HomeController>();
 
   @override
@@ -19,69 +18,82 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
     // TODO: implement initState
     super.initState();
     homeController.getBooking();
-    homeController.update();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-      builder: (_) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: homeController.bookingListData.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: Container(
-                    height: 127,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: kwhite,
-                       borderRadius: BorderRadius.circular(5),
+    return GetBuilder<HomeController>(builder: (_) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: homeController.bookingListData.isEmpty
+            ? const Center(
+                child: Text("No bookings found"),
+              )
+            : ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: homeController.bookingListData.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: Container(
+                      height: 127,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: kwhite,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: Image.network(
+                                  homeController.bookingListData[index].image,
+                                  height: 100,
+                                  width: 100,
+                                  fit: BoxFit.cover,
+                                )),
+                          ),
+                          kwidth10,
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ksizedbox10,
+                              Text(
+                                homeController.bookingListData[index].service
+                                    .toString(),
+                                style: const TextStyle(fontSize: 21),
+                              ),
+                              Container(
+                                width: 250,
+                                child: Text(
+                                  '${homeController.bookingListData[index].description}',
+                                  maxLines: 3,
+                                  style: TextStyle(color: kblue),
+                                ),
+                              ),
+                              // Text(
+                              //   'Check in : 03:44PM Check Out 03:43 PM',
+                              //   style: TextStyle(color: kblue),
+                              // ),
+                              // Text(
+                              //   'Total Person : 5 Members',
+                              //   style: TextStyle(color: kblue),
+                              // ),
+                              // Text(
+                              //   'Ac Rooms',
+                              //   style: TextStyle(color: kblue),
+                              // ),
+                              ksizedbox10
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: 
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Image.network(homeController.bookingListData[index].image,height: 100,width: 100,fit: BoxFit.cover,)),
-                        ),
-                        kwidth10,
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ksizedbox10,
-                            Text(
-                              homeController.bookingListData[index].service.toString(),
-                              style:const TextStyle(fontSize: 21),
-                            ),
-                            Text(
-                              'Date : 15/04/2023 to 16/04/2023',
-                              style: TextStyle(color: kblue),
-                            ),  Text(
-                              'Check in : 03:44PM Check Out 03:43 PM',
-                              style: TextStyle(color: kblue),
-                            ),  Text(
-                              'Total Person : 5 Members',
-                              style: TextStyle(color: kblue),
-                            ),  Text(
-                              'Ac Rooms',
-                              style: TextStyle(color: kblue),
-                            ),
-                            ksizedbox10
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              }),
-        );
-      }
-    );
+                  );
+                }),
+      );
+    });
   }
 }

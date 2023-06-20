@@ -1,5 +1,6 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
 import 'package:bci/screens/members/members_search_screen/member_service_view_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
@@ -16,7 +17,6 @@ class OthersServiceScreen extends StatefulWidget {
 }
 
 class _OthersServiceScreenState extends State<OthersServiceScreen> {
- 
   final homeController = Get.find<HomeController>();
 
   @override
@@ -73,7 +73,7 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
               ),
             ],
           )),
-          body: GetBuilder<HomeController>(builder: (_) {
+      body: GetBuilder<HomeController>(builder: (_) {
         return homeController.serviceListData.isEmpty
             ? const Center(
                 child: Text("No Data Found"),
@@ -90,8 +90,37 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
-                      onTap: (){
-                          //Get.to(MemberSearchViewScreen(searchServicelist: homeController.serviceListData[index],));
+                      onTap: () {
+                        SearchServiceListData searchServiceListData =
+                            SearchServiceListData(
+                                actualAmount: homeController
+                                    .serviceListData[index].actualAmount,
+                                bvcAmount: homeController
+                                    .serviceListData[index].bvcAmount,
+                                categoryId: homeController
+                                    .serviceListData[index].categoryId,
+                                createdAt: homeController
+                                    .serviceListData[index].createdAt,
+                                description: homeController
+                                    .serviceListData[index].description,
+                                id: homeController.serviceListData[index].id,
+                                image:
+                                    homeController.serviceListData[index].image,
+                                isBooking: homeController
+                                    .serviceListData[index].isBooking,
+                                saleAmount: homeController
+                                    .serviceListData[index].saleAmount,
+                                status: homeController
+                                    .serviceListData[index].status,
+                                title:
+                                    homeController.serviceListData[index].title,
+                                updatedAt: homeController
+                                    .serviceListData[index].updatedAt,
+                                vendorId: homeController
+                                    .serviceListData[index].vendorId);
+                        Get.to(MemberSearchViewScreen(
+                          searchServicelist: searchServiceListData,
+                        ));
                       },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -99,15 +128,16 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                           Container(
                             height: 100,
                             width: 150,
-                            child: Image.network(homeController.serviceListData[index].image),
+                            child: Image.network(
+                                homeController.serviceListData[index].image),
                           ),
-                          Text(homeController.serviceListData[index].title,
-                                style: TextStyle(
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: kblue
-                                    ),
-                              ),
+                          Text(
+                            homeController.serviceListData[index].title,
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.bold,
+                                color: kblue),
+                          ),
                         ],
                       ),
                     ),

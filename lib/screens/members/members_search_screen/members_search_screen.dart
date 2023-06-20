@@ -27,7 +27,7 @@ class MembersSearchScreen extends StatefulWidget {
 
 class _MembersSearchScreenState extends State<MembersSearchScreen> {
   //final List<String> options = ['Catogory', 'Hotel', 'Club''Resort''Saloon''Parour''Service Apartment''Textile''SPA'];
-  
+
   final homeController = Get.find<HomeController>();
 
   final searchController = TextEditingController();
@@ -43,7 +43,7 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
     searchController.addListener(searchUsers);
   }
 
-   searchUsers() {
+  searchUsers() {
     if (searchController.text.trim().isNotEmpty) {
       homeController.searchServiceList(searchKey: searchController.text);
     } else {
@@ -97,10 +97,11 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10,right: 10),
+                padding: const EdgeInsets.only(left: 10, right: 10),
                 child: TextField(
-                   controller: searchController,
-                  decoration: InputDecoration(disabledBorder: OutlineInputBorder(),
+                  controller: searchController,
+                  decoration: InputDecoration(
+                      disabledBorder: OutlineInputBorder(),
                       hintText: 'Search',
                       fillColor: kwhite,
                       focusColor: kwhite,
@@ -118,11 +119,11 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
               // ),
               GetBuilder<AuthController>(builder: (_) {
                 return Padding(
-                  padding: const EdgeInsets.only(top: 15,left: 10,right: 10),
+                  padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
                   child: Container(
                     height: 44,
                     decoration: BoxDecoration(
-                      color: kgrey,
+                        color: kgrey,
                         borderRadius: BorderRadius.circular(3),
                         border: Border.all(
                             color: const Color.fromARGB(255, 5, 5, 5)
@@ -139,7 +140,7 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                         isDense: true,
                         dropdownColor: Colors.white,
                         style: const TextStyle(color: Colors.black54),
-                        hint:const Text(
+                        hint: const Text(
                           "Merchant Category Name",
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
@@ -223,25 +224,28 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
       //       ],
       //     )),
       body: GetBuilder<HomeController>(builder: (_) {
-        return homeController.searchServiceListData.isEmpty && searchController.text.isNotEmpty
-            ?  Center(
+        return homeController.searchServiceListData.isEmpty &&
+                searchController.text.isNotEmpty
+            ? Center(
                 child: Column(
                   children: [
                     const Image(image: AssetImage("assets/icons/search.png")),
-                    Text('No result found',
-                            style: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w500,
-                                color: kblue),
-                          ),
-                          const SizedBox(height: 5,),
-                          Text('''we can't find any item matching\nyour search''',
-                          textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 15.sp,
-                                height: 1.5,
-                                color: kblue),
-                          ),
+                    Text(
+                      'No result found',
+                      style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w500,
+                          color: kblue),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      '''we can't find any item matching\nyour search''',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 15.sp, height: 1.5, color: kblue),
+                    ),
                   ],
                 ),
               )
@@ -257,24 +261,28 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
-                      onTap: (){
-                          Get.to(MemberSearchViewScreen(searchServicelist: homeController.searchServiceListData[index],));
+                      onTap: () {
+                        Get.to(MemberSearchViewScreen(
+                          searchServicelist:
+                              homeController.searchServiceListData[index],
+                        ));
                       },
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
                             height: 100,
                             width: 150,
-                            child: Image.network(homeController.searchServiceListData[index].image),
+                            child: Image.network(homeController
+                                .searchServiceListData[index].image),
                           ),
-                          Text(homeController.searchServiceListData[index].title,
-                                style: TextStyle(
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: kblue
-                                    ),
-                              ),
+                          Text(
+                            homeController.searchServiceListData[index].title,
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.bold,
+                                color: kblue),
+                          ),
                         ],
                       ),
                     ),

@@ -30,14 +30,14 @@ class ProfileController extends GetxController {
   UpdateOfficialApiServices updateOfficialApiServices =
       UpdateOfficialApiServices();
 
-  ProfilePIcUpdateApiServices profilePIcUpdateApiServices =  ProfilePIcUpdateApiServices();
+  ProfilePIcUpdateApiServices profilePIcUpdateApiServices =
+      ProfilePIcUpdateApiServices();
 
   List<MemberUser> profileData = [];
 
   RxBool isSubscribed = false.obs;
 
   RxBool isLoading = false.obs;
-
 
   getProfile() async {
     profileData.clear();
@@ -145,22 +145,19 @@ class ProfileController extends GetxController {
     }
   }
 
-  
   //easebuzz
 
   static MethodChannel _channel = MethodChannel('easebuzz');
   EaseBuzzTokenApiService easeBuzzApi = EaseBuzzTokenApiService();
 
-   payUseingEaseBuzz(
-      {
-      required dynamic id,
-      required String customerid,
+  payUseingEaseBuzz(
+      {required int id,
       required String amount,
       required String customerName,
       required String email,
       required String phone,
-      required dynamic status
-      }) async {
+      required dynamic status}) async {
+    Get.find<ProfileController>().getProfile();
     var response = await easeBuzzApi.getPaymentToken(
         amount: amount,
         customerName: customerName,
@@ -180,9 +177,10 @@ class ProfileController extends GetxController {
     print(payment_response);
     isLoading(false);
     if (payment_response["result"] == "payment_successfull") {
+      Get.find<HomeController>().addSubscription(
+          planId: id,
+          customerId: Get.find<ProfileController>().profileData.first.id);
 
-      Get.find<HomeController>().addSubscription(planId: id);
-      
       //need to give id
       Get.snackbar(
         "Payment Successfully Paid",
@@ -199,7 +197,7 @@ class ProfileController extends GetxController {
         dismissDirection: DismissDirection.horizontal,
         forwardAnimationCurve: Curves.easeOutBack,
       );
-      
+
       print(response);
     } else {
       Get.closeAllSnackbars();
@@ -210,5 +208,4 @@ class ProfileController extends GetxController {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
-
 }

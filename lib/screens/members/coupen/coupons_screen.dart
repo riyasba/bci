@@ -28,7 +28,6 @@ class _Coupens_membersState extends State<Coupens_members> {
     // TODO: implement initState
     super.initState();
     profileController.getCoupons();
-    profileController.update();
   }
 
   List colors = [const Color(0xffFCE2E2),const Color(0xffE4E4E4),const Color(0xffF8AC61),const Color(0xff8DC6FF),
