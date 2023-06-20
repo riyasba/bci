@@ -26,6 +26,7 @@ class UpdateServicesApiServices extends BaseApiService {
           "category": createServiceModel.category.toString(),
         "sale_amount": createServiceModel.saleAmount,
         "actual_amount": createServiceModel.actualAmount,
+        "share": createServiceModel.share,
         "bvc_amount": createServiceModel.bvcAmount,
         "booking": createServiceModel.booking,
         "amenties": ameneity.toString(),

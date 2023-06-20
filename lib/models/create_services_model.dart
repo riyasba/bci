@@ -3,6 +3,7 @@ class CreateServiceModel {
   String category;
   String saleAmount;
   String actualAmount;
+  String share;
   String bvcAmount;
   String booking;
   List<Amenty> amenities;
@@ -19,6 +20,7 @@ class CreateServiceModel {
       required this.category,
       required this.saleAmount,
       required this.actualAmount,
+      required this.share,
       required this.amenities,
       required this.booking,
       required this.bvcAmount,

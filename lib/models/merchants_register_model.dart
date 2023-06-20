@@ -12,7 +12,7 @@ String merchantRegisterModelToJson(MerchantRegisterModel data) =>
 
 class MerchantRegisterModel {
   String categoryId;
-  String subcategoryId;
+  //String subcategoryId;
   String name;
   String email;
   String mobile;
@@ -27,7 +27,7 @@ class MerchantRegisterModel {
 
   MerchantRegisterModel({
     required this.categoryId,
-    required this.subcategoryId,
+    //required this.subcategoryId,
     required this.name,
     required this.email,
     required this.mobile,
@@ -44,7 +44,7 @@ class MerchantRegisterModel {
   factory MerchantRegisterModel.fromJson(Map<String, dynamic> json) =>
       MerchantRegisterModel(
         categoryId: json["category_id"],
-        subcategoryId: json["subcategory_id"],
+        //subcategoryId: json["subcategory_id"],
         name: json["name"],
         email: json["email"],
         mobile: json["mobile"],
@@ -60,7 +60,7 @@ class MerchantRegisterModel {
 
   Map<String, dynamic> toJson() => {
         "category_id": categoryId,
-        "subcategory_id": subcategoryId,
+        //"subcategory_id": subcategoryId,
         "name": name,
         "email": email,
         "mobile": mobile,

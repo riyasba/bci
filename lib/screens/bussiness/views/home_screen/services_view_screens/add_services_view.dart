@@ -62,6 +62,10 @@ class _AddServicesViewState extends State<AddServicesView> {
   bool isOfferEligible = false;
   bool isCouponEligible = false;
 
+  List share = ["fixed","percentage"];
+
+  var shareValue;
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -271,13 +275,54 @@ class _AddServicesViewState extends State<AddServicesView> {
           ),
           ksizedbox10,
           Padding(
+              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+              child: Container(
+                height: 44,
+                width: 330,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 5, 5, 5)
+                            .withOpacity(0.8))),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                  child: DropdownButton<dynamic>(
+                    value: shareValue,
+                    isExpanded: true,
+                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                    elevation: 0,
+                    itemHeight: 55,
+                    isDense: true,
+                    dropdownColor: Colors.grey[250],
+                    style: const TextStyle(color: Colors.black54),
+                    hint: Text(
+                      "Select",
+                      style: TextStyle(fontSize: 16, color: kblue),
+                    ),
+                    onChanged: (dynamic value) {
+                      setState(() {
+                        shareValue = value!;
+                      });
+                    },
+                    items: share
+                        .map<DropdownMenuItem<dynamic>>(
+                            (dynamic value) {
+                      return DropdownMenuItem<dynamic>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ))),
+                ksizedbox10,
+          Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
               controller: bvcAmountController,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return "BVC amount Can't be Empty";
+                  return "BCI amount Can't be Empty";
                 }
                 return null;
               },
@@ -303,7 +348,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
-                  hintText: "BVC Amount",
+                  hintText: "BCI Amount",
                   hintStyle: TextStyle(
                     color: kblue,
                     fontWeight: FontWeight.w400,
@@ -802,6 +847,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                                         : offerPercentageController.text,
                                 actualAmount: actualAmountController.text,
                                 amenities: listTags,
+                                share: shareValue,
                                 booking: authController.isGstAvailable.isTrue
                                     ? "1"
                                     : "0",
