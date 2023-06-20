@@ -115,7 +115,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                             child: Text(value.title),
                           );
                         }).toList(),
-                      ),
+                      ), 
                     ),
                   ),
                 );
@@ -632,13 +632,12 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                                             alternativeMobileController.text,
                                         categoryId:
                                             merchantCategory.id.toString(),
-                                        subcategoryId:
-                                            "",
+                                        // subcategoryId:
+                                        //     merchantSubCategory.id.toString(),
                                         email: emailIdController.text,
                                         gstNo: gstNoController.text,
                                         mobile: phoneNumberController.text,
-                                        name:
-                                            merchantDistplaynameController.text,
+                                        name: merchantDistplaynameController.text,
                                         panProof: panCardImage!.path,
                                         password: "12345678",
                                         passwordConfirmation: "12345678",

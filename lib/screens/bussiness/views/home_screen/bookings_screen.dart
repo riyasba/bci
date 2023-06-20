@@ -1,3 +1,4 @@
+import 'package:bci/controllers/services_controller.dart';
 import 'package:calender_picker/calender_picker.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
@@ -13,6 +14,24 @@ class BusinessBookingScreen extends StatefulWidget {
 }
 
 class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
+
+  final serviceController = Get.find<ServicesController>();
+
+  final fromDateController = TextEditingController();
+  final toDateController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    serviceController.getBooking();
+    serviceController.update();
+    serviceController.dateFilterBooking(
+      fromdate: _dateTime.toString(), 
+      todate: _dateTime.toString(),
+      );
+  }
+
   DateTime _dateTime = DateTime.now();
   List bookingimage = [
     'assets/images/bookingcar.png',
@@ -31,6 +50,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(280),
@@ -49,8 +69,8 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25),
+                   const Padding(
+                      padding: EdgeInsets.only(left: 25),
                       child: Text(
                         'Bookings',
                         style: TextStyle(fontSize: 23, color: Colors.white),
@@ -96,10 +116,14 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
               ),
             ),
           ])),
-      body: Column(
-        children: [
+      body: GetBuilder<ServicesController>(
+        builder: (_) {
+          return serviceController.bookingListData.isEmpty ? 
+          const Center(
+            child: Text("No Data Found"),
+            ) :
           ListView.builder(
-              itemCount: bookingimage.length,
+              itemCount: serviceController.bookingListData.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Padding(
@@ -118,10 +142,11 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                               child: Padding(
                                 padding: const EdgeInsets.only(
                                     top: 10, left: 5, right: 10, bottom: 10),
-                                child: Image.asset(
-                                  bookingimage[index],
-                                  fit: BoxFit.contain,
-                                ),
+                                    child: Image.network(serviceController.bookingListData[index].image,fit: BoxFit.contain,),
+                                // child: Image.asset(
+                                //   bookingimage[index],
+                                //   fit: BoxFit.contain,
+                                // ),
                               ),
                             ),
                             Padding(
@@ -132,21 +157,23 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    bookingtitle[index].toString(),
+                                    serviceController.bookingListData[index].service,
                                     style: TextStyle(
                                         fontSize: 19,
                                         fontWeight: FontWeight.bold,color: kblue),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 6),
-                                    child: Text(
-                                      bookingdescription[index].toString(),
-                                      style:
-                                          TextStyle(fontSize: 12, color: kblue),
-
+                                    child: Container(
+                                      width: 210,
+                                      child: Text(
+                                        serviceController.bookingListData[index].description,
+                                        maxLines: 5,
+                                        style:
+                                            TextStyle(fontSize: 12, color: kblue),
+                                      ),
                                     ),
                                   ),
-                                  
                                 ],
                               ),
                             )
@@ -157,8 +184,8 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                     ],
                   ),
                 );
-              }),
-        ],
+              });
+        }
       ),
     );
   }

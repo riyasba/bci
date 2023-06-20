@@ -819,6 +819,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                                         : offerPercentageController.text,
                                 actualAmount: actualAmountController.text,
                                 amenities: listTags,
+                                share: "",
                                 booking: authController.isGstAvailable.isTrue
                                     ? "1"
                                     : "0",
