@@ -29,14 +29,15 @@ class AddServicesApiServices extends BaseApiService {
         "booking": createServiceModel.booking,
         "amenties": ameneity.toString(),
         "editor-value": createServiceModel.description,
+        "share": "fixed",
         "isOffer": createServiceModel.isOfferAvailable,
         "isCoupon": createServiceModel.isCouponsAvailable,
-        if (createServiceModel.offerPercentage != null)
-          "offerPercentage": "${createServiceModel.offerPercentage}%",
-        if (createServiceModel.offerAmount != null)
-          "offerUpto_amount": createServiceModel.offerAmount,
-        if (createServiceModel.couponAmount != null)
-          "coupon_amount": createServiceModel.couponAmount
+        // if (createServiceModel.offerPercentage != null)
+        //   "offerPercentage": "${createServiceModel.offerPercentage}%",
+        // if (createServiceModel.offerAmount != null)
+        //   "offerUpto_amount": createServiceModel.offerAmount,
+        // if (createServiceModel.couponAmount != null)
+        //   "coupon_amount": createServiceModel.couponAmount
       });
 
       print(formData.fields);

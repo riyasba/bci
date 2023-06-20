@@ -146,18 +146,16 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                //
                 InkWell(
                   onTap: () {
-                    Get.to(CouponScreen());
+                    Get.to(AvailabilityScreen());
                   },
                   child: Container(
                     child: Column(
                       children: [
-                        Image.asset('assets/images/cupenimage.png'),
-                        Text(
-                          'Coupon\nRedemention',
-                          textAlign: TextAlign.center,
-                        ),
+                        Image.asset('assets/images/availability.png'),
+                        const Text('Availability')
                       ],
                     ),
                   ),
@@ -211,7 +209,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     child: Column(
                       children: [
                         Image.asset('assets/images/booking.png'),
-                       const Text(
+                        const Text(
                           'Bookings\n\n',
                           textAlign: TextAlign.center,
                         )
@@ -227,7 +225,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     child: Column(
                       children: [
                         Image.asset('assets/images/offers.png'),
-                       const Text(
+                        const Text(
                           'Offers\n\n',
                           textAlign: TextAlign.center,
                         )
@@ -243,7 +241,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     child: Column(
                       children: [
                         Image.asset('assets/images/servicebooking.png'),
-                       const Text(
+                        const Text(
                           'Service\nBookings\nRequest',
                           textAlign: TextAlign.center,
                         )
@@ -256,6 +254,22 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                InkWell(
+                  onTap: () {
+                    Get.to(CouponScreen());
+                  },
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/cupenimage.png'),
+                        Text(
+                          'Coupon\nRedemention',
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 InkWell(
                   onTap: () {
                     Get.to(AvailabilityScreen());

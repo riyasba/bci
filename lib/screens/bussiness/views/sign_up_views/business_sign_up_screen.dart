@@ -120,53 +120,53 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                   ),
                 );
               }),
-              GetBuilder<AuthController>(builder: (_) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: Container(
-                    height: 44,
-                    width: 330,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(
-                            color: const Color.fromARGB(255, 5, 5, 5)
-                                .withOpacity(0.8))),
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 10, right: 10, top: 10),
-                      child: DropdownButton<SubCategoryModelList>(
-                        value: merchantSubCategory,
-                        isExpanded: true,
-                        icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                        elevation: 0,
-                        itemHeight: 55,
-                        isDense: true,
-                        dropdownColor: Colors.grey[250],
-                        style: const TextStyle(color: Colors.black54),
-                        hint: Text(
-                          "Sub Category",
-                          style: TextStyle(fontSize: 16, color: kblue),
-                        ),
-                        onChanged: (SubCategoryModelList? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            // authController.isDesignationSelected(false);
-                            merchantSubCategory = value!;
-                          });
-                        },
-                        items: authController.subCategoryList
-                            .map<DropdownMenuItem<SubCategoryModelList>>(
-                                (SubCategoryModelList value) {
-                          return DropdownMenuItem<SubCategoryModelList>(
-                            value: value,
-                            child: Text(value.title),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ),
-                );
-              }),
+              // GetBuilder<AuthController>(builder: (_) {
+              //   return Padding(
+              //     padding: const EdgeInsets.only(top: 15),
+              //     child: Container(
+              //       height: 44,
+              //       width: 330,
+              //       decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(3),
+              //           border: Border.all(
+              //               color: const Color.fromARGB(255, 5, 5, 5)
+              //                   .withOpacity(0.8))),
+              //       child: Padding(
+              //         padding:
+              //             const EdgeInsets.only(left: 10, right: 10, top: 10),
+              //         child: DropdownButton<SubCategoryModelList>(
+              //           value: merchantSubCategory,
+              //           isExpanded: true,
+              //           icon: const Icon(Icons.keyboard_arrow_down_outlined),
+              //           elevation: 0,
+              //           itemHeight: 55,
+              //           isDense: true,
+              //           dropdownColor: Colors.grey[250],
+              //           style: const TextStyle(color: Colors.black54),
+              //           hint: Text(
+              //             "Sub Category",
+              //             style: TextStyle(fontSize: 16, color: kblue),
+              //           ),
+              //           onChanged: (SubCategoryModelList? value) {
+              //             // This is called when the user selects an item.
+              //             setState(() {
+              //               // authController.isDesignationSelected(false);
+              //               merchantSubCategory = value!;
+              //             });
+              //           },
+              //           items: authController.subCategoryList
+              //               .map<DropdownMenuItem<SubCategoryModelList>>(
+              //                   (SubCategoryModelList value) {
+              //             return DropdownMenuItem<SubCategoryModelList>(
+              //               value: value,
+              //               child: Text(value.title),
+              //             );
+              //           }).toList(),
+              //         ),
+              //       ),
+              //     ),
+              //   );
+              // }),
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
@@ -606,8 +606,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                     : InkWell(
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
-                            if (merchantCategory != null &&
-                                merchantSubCategory != null) {
+                            if (merchantCategory != null) {
                               if (aadharCardImage == null) {
                                 Get.rawSnackbar(
                                     backgroundColor: Colors.red,
@@ -634,7 +633,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                                         categoryId:
                                             merchantCategory.id.toString(),
                                         subcategoryId:
-                                            merchantSubCategory.id.toString(),
+                                            "",
                                         email: emailIdController.text,
                                         gstNo: gstNoController.text,
                                         mobile: phoneNumberController.text,

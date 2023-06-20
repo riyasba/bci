@@ -23,7 +23,7 @@ class GetServicesByCategoryApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"category_id": categoryId});
+          data: {"category": categoryId});
       print(
           "::::::::<get services by category URL>::::::::status code::::::::::");
       print(response.statusCode);

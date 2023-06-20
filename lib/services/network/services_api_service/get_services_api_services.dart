@@ -24,8 +24,8 @@ class GetServicesApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"vendor_id": vendorId});
-      print("::::::::<get services URL>::::::::status code::::::::::");
+          data: {"vendor": vendorId});
+      print("::::::::<get services URL>::::::::status code::::::::$vendorId::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

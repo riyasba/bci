@@ -39,8 +39,8 @@ class BusinessUser {
   String mobile;
   String isVerrifiedMobile;
   String otp;
-  String category;
-  String subCategory;
+  dynamic category;
+  dynamic subCategory;
   dynamic alternateMobile;
   dynamic gstNo;
   dynamic adharProof;

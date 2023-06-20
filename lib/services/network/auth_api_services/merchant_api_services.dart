@@ -13,7 +13,7 @@ class MerchantRegisterApiServices extends BaseApiService {
       var dio = Dio();
       FormData formData = FormData.fromMap({
         "category_id": merchantRegisterModel.categoryId,
-        "subcategory_id": merchantRegisterModel.subcategoryId,
+        // "subcategory_id": merchantRegisterModel.subcategoryId,
         "name": merchantRegisterModel.name,
         "email": merchantRegisterModel.email,
         "mobile": merchantRegisterModel.mobile,
