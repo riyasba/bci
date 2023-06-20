@@ -632,8 +632,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                                             alternativeMobileController.text,
                                         categoryId:
                                             merchantCategory.id.toString(),
-                                        // subcategoryId:
-                                        //     merchantSubCategory.id.toString(),
+                                       
                                         email: emailIdController.text,
                                         gstNo: gstNoController.text,
                                         mobile: phoneNumberController.text,
