@@ -1,6 +1,7 @@
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/models/category_model.dart';
+import 'package:bci/screens/members/members_search_screen/member_service_details_screen.dart';
 import 'package:bci/screens/members/members_search_screen/member_service_view_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,7 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(250.h),
@@ -262,28 +264,53 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
                       onTap: () {
-                        Get.to(MemberSearchViewScreen(
+                        Get.to(ServiceDetailsScreen(
                           searchServicelist:
                               homeController.searchServiceListData[index],
                         ));
                       },
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 100,
-                            width: 150,
-                            child: Image.network(homeController
-                                .searchServiceListData[index].image),
-                          ),
-                          Text(
-                            homeController.searchServiceListData[index].title,
-                            style: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.bold,
-                                color: kblue),
-                          ),
-                        ],
+                      child: Container(
+                        height: 130,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: kgrey,
+                              blurRadius: 0.5
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(15)
+                              ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(homeController
+                                  .searchServiceListData[index].image,
+                                  height: 130,
+                                  width:size.width,
+                                  fit: BoxFit.fill,
+                                  ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Container(
+                                width: size.width,
+                                child: Text(
+                                  homeController.searchServiceListData[index].title,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: 20.sp,
+                                      
+                                      fontWeight: FontWeight.bold,
+                                      color: kblue),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );
