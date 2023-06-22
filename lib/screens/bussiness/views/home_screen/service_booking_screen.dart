@@ -108,7 +108,7 @@ class _ServiceBookingScreenState extends State<ServiceBookingScreen> {
                               color: kwhite,
                               boxShadow: <BoxShadow>[
                                 BoxShadow(
-                                    offset: Offset(0.0, 0.75),
+                                    offset: const Offset(0.0, 0.75),
                                     blurRadius: 5,
                                     color: kgrey)
                               ]),

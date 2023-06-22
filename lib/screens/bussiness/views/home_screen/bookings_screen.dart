@@ -130,63 +130,218 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Container(
-                        height: 140,
-                        width: MediaQuery.of(context).size.width,
-                        color: Colors.white,
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 180,
-                              width: 150,
-                              child: Padding(
+                      InkWell(
+                        onTap: (){
+                            dialogBuilder(
+                              context, 
+                              serviceController.bookingListData[index].image, 
+                              serviceController.bookingListData[index].service, 
+                              serviceController.bookingListData[index].description, 
+                              serviceController.bookingListData[index].purchasePrice,
+                              serviceController.bookingListData[index].quantity
+                              );
+                        },
+                        child: Container(
+                          height: 140,
+                          width: MediaQuery.of(context).size.width,
+                          color: Colors.white,
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 180,
+                                width: 150,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, left: 5, right: 10, bottom: 10),
+                                      child: Image.network(serviceController.bookingListData[index].image,fit: BoxFit.contain,),
+                                  // child: Image.asset(
+                                  //   bookingimage[index],
+                                  //   fit: BoxFit.contain,
+                                  // ),
+                                ),
+                              ),
+                              Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 10, left: 5, right: 10, bottom: 10),
-                                    child: Image.network(serviceController.bookingListData[index].image,fit: BoxFit.contain,),
-                                // child: Image.asset(
-                                //   bookingimage[index],
-                                //   fit: BoxFit.contain,
-                                // ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 20,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    serviceController.bookingListData[index].service,
-                                    style: TextStyle(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.bold,color: kblue),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 6),
-                                    child: Container(
-                                      width: 210,
-                                      child: Text(
-                                        serviceController.bookingListData[index].description,
-                                        maxLines: 5,
-                                        style:
-                                            TextStyle(fontSize: 12, color: kblue),
+                                  top: 20,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      serviceController.bookingListData[index].service,
+                                      style: TextStyle(
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.bold,color: kblue),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 6),
+                                      child: Container(
+                                        width: 210,
+                                        child: Text(
+                                          serviceController.bookingListData[index].description,
+                                          maxLines: 5,
+                                          style:
+                                              TextStyle(fontSize: 12, color: kblue),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                     
                     ],
                   ),
                 );
               });
         }
       ),
+    );
+  }
+
+  Future<void> dialogBuilder(BuildContext context,String img, String tit, String date, String amt, String qty) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context, ) {
+        return AlertDialog(
+          title: Container(
+            height: 400,
+            width: 300,
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                       Row(
+                         children: [
+                          Icon(Icons.arrow_back_ios,color: kblue,size: 15,),
+                          const SizedBox(width: 10,),
+                           Text(
+                            'Tourist Details',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                         ],
+                       ),
+                       Row(
+                         children: [
+                          Image.network(img,height: 50,width: 60, fit: BoxFit.cover,),
+                          const SizedBox(width: 10,),
+                           Column(
+                             children: [
+                               Text(
+                                tit,
+                                style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                      Text( 'Date : 17/30/34',
+                                style: TextStyle(fontSize: 12, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                             ],
+                           ),
+                         ],
+                       ),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Place',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            tit,
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Date',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            '19/06/23',
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Trip',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            '03.54 PM',
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Country',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            'India',
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Adult',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            '10',
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Quantity',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            qty,
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       Divider(thickness: 1,),
+                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Price',
+                            style: TextStyle(fontSize: 16, color: Colors.green,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            amt,
+                            style: TextStyle(fontSize: 15, color: Colors.green,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

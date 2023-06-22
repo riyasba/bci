@@ -140,7 +140,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     fontSize: 23, color: kblue, fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -149,13 +149,13 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 //
                 InkWell(
                   onTap: () {
-                    Get.to(AvailabilityScreen());
+                    Get.to(const AvailabilityScreen());
                   },
                   child: Container(
                     child: Column(
                       children: [
                         Image.asset('assets/images/availability.png'),
-                        const Text('Availability')
+                        const Text('Availability\n')
                       ],
                     ),
                   ),
@@ -170,7 +170,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     child: Column(
                       children: [
                         Image.asset('assets/images/wallet.png'),
-                        Text(
+                        const Text(
                           'Wallet\n',
                           textAlign: TextAlign.center,
                         ),
@@ -180,13 +180,13 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(ContactAdmin());
+                    Get.to(const ContactAdmin());
                   },
                   child: Container(
                       child: Column(
                     children: [
                       Image.asset('assets/images/contactadmin.png'),
-                      Text(
+                      const Text(
                         'Contact\n Admin',
                         textAlign: TextAlign.center,
                       )
@@ -195,7 +195,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Row(
@@ -203,7 +203,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    Get.to(BusinessBookingScreen());
+                    Get.to(const BusinessBookingScreen());
                   },
                   child: Container(
                     child: Column(
@@ -219,7 +219,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(OffersScreen());
+                    Get.to(const OffersScreen());
                   },
                   child: Container(
                     child: Column(
@@ -235,7 +235,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(ServiceBookingScreen());
+                    Get.to(const ServiceBookingScreen());
                   },
                   child: Container(
                     child: Column(
@@ -251,18 +251,21 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 )
               ],
             ),
+             const SizedBox(
+              height: 15,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 InkWell(
                   onTap: () {
-                    Get.to(CouponScreen());
+                    Get.to(const CouponScreen());
                   },
                   child: Container(
                     child: Column(
                       children: [
                         Image.asset('assets/images/cupenimage.png'),
-                        Text(
+                        const Text(
                           'Coupon\nRedemention',
                           textAlign: TextAlign.center,
                         ),
@@ -272,13 +275,13 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(AvailabilityScreen());
+                    Get.to(const AvailabilityScreen());
                   },
                   child: Container(
                     child: Column(
                       children: [
                         Image.asset('assets/images/availability.png'),
-                        const Text('Availability')
+                        const Text('Availability\n')
                       ],
                     ),
                   ),
@@ -291,23 +294,23 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     child: Column(
                       children: [
                         Image.asset('assets/images/jhon.png'),
-                        Text('Jhon')
+                        const Text('Jhon\n')
                       ],
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 80.w,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                // InkWell(
+                //   onTap: () {},
+                //   child: Container(
+                //     child: Column(
+                //       children: [
+                //         Container(
+                //           width: 80.w,
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                // ),
               ],
             ),
             const SizedBox(

@@ -45,6 +45,6 @@ class Amenty {
       );
 
   Map<String, dynamic> toJson() => {
-        "value": value,
+        "\"value\"": "\"$value\"",
       };
 }
