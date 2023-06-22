@@ -315,6 +315,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                           profileController.redeemCoupon(
                               couponcode: redeemCouponcontroller.text);
                           homeController.addBooking(
+                              cartid: widget.searchServicelist.id.toString(),
                               serviceid: widget.searchServicelist.id.toString(),
                               qty: "1",
                               offerOrCoupon: "",
@@ -323,6 +324,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                         } else {
                           print(">>>>>>>>>>>>>>>222222222222222222");
                           homeController.addBooking(
+                            cartid: widget.searchServicelist.id.toString(),
                               serviceid: widget.searchServicelist.id.toString(),
                               qty: "1",
                               offerOrCoupon: "",

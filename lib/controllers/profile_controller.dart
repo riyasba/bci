@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/models/get_cart_list_model.dart';
 import 'package:bci/models/get_coupons_model.dart';
 import 'package:bci/models/member_profile_model.dart';
 import 'package:bci/models/member_profile_update_model.dart';
@@ -152,12 +153,16 @@ class ProfileController extends GetxController {
   EaseBuzzTokenApiService easeBuzzApi = EaseBuzzTokenApiService();
 
   payUseingEaseBuzz(
-      {required int id,
+      {
+      required int id,
       required String amount,
       required String customerName,
       required String email,
       required String phone,
-      required dynamic status}) async {
+      required dynamic status,
+      
+
+      }) async {
     Get.find<ProfileController>().getProfile();
     var response = await easeBuzzApi.getPaymentToken(
         amount: amount,
@@ -178,9 +183,22 @@ class ProfileController extends GetxController {
     print(payment_response);
     isLoading(false);
     if (payment_response["result"] == "payment_successfull") {
-      Get.find<HomeController>().addSubscription(
-          planId: id,
-          customerId: Get.find<ProfileController>().profileData.first.id);
+        
+        final homeController = Get.find<HomeController>();
+         for(int i = 0; i < homeController.cartListData.length; i++){
+                homeController.addBooking(
+                serviceid: homeController.cartListData[i].serviceId, 
+                cartid: homeController.cartListData[i].id.toString(),
+                qty: homeController.cartListData[i].quantity, 
+                offerOrCoupon: "", 
+                couponcode: "", 
+                amount: homeController.cartListData[i].price
+                );
+              }
+
+      // Get.find<HomeController>().addSubscription(
+      //     planId: id,
+      //     customerId: Get.find<ProfileController>().profileData.first.id);
 
       //need to give id
       Get.snackbar(

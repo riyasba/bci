@@ -1,4 +1,5 @@
 import 'package:bci/constands/app_fonts.dart';
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_booking_list_model.dart';
 import 'package:bci/models/get_cart_list_model.dart';
 import 'package:bci/models/get_plan_details_model.dart';
@@ -220,7 +221,9 @@ class HomeController extends GetxController {
   AddBookingApiServices addBookingApiServices = AddBookingApiServices();
 
   addBooking(
-      {required String serviceid,
+      {
+      required String serviceid,
+      required String cartid,
       required String qty,
       required String offerOrCoupon,
       required String couponcode,
@@ -229,12 +232,18 @@ class HomeController extends GetxController {
     dio.Response<dynamic> response =
         await addBookingApiServices.addBookingApiServices(
             serviceid: serviceid,
+            cartid: cartid,
             qty: qty,
             offerOrCoupon: offerOrCoupon,
             couponcode: couponcode,
             amount: amount);
     isLoading(false);
     if (response.statusCode == 200) {
+
+       deleteToCart(serviceid: serviceid);
+
+      
+
       Get.rawSnackbar(
           message: response.data["message"], backgroundColor: Colors.green);
     } else if (response.statusCode == 400) {

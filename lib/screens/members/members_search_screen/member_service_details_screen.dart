@@ -152,7 +152,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                       Padding(
                         padding: const EdgeInsets.only(left: 15),
                         child: Text(
-                          "Total : ₹${widget.searchServicelist.actualAmount}",
+                          "Total : ₹${widget.searchServicelist.saleAmount}",
                           style: primaryFont.copyWith(
                               color: Colors.white,
                               fontSize: 17,

@@ -125,7 +125,7 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                           Icon(Icons.arrow_back_ios,color: kblue,size: 15,),
                           const SizedBox(width: 10,),
                            Text(
-                            'Tourist Details',
+                            'Details',
                             style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
                       ),
                          ],

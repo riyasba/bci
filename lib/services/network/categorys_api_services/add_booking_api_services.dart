@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AddBookingApiServices extends BaseApiService {
   Future addBookingApiServices({
     required String serviceid,
+    required String cartid,
     required String qty,
     required String offerOrCoupon,
     required String couponcode,
@@ -30,6 +31,7 @@ class AddBookingApiServices extends BaseApiService {
             }),
             data: {
               "service_id" : serviceid,
+              "cart_id": cartid,
               "quantity":qty,
               "offer_or_coupon": "offer",
               "coupon_code": couponcode,
@@ -37,7 +39,7 @@ class AddBookingApiServices extends BaseApiService {
             }
       );
       print("::::::::<Add booking Api Services Api>::::::::status code::::::::::");
-      print("....<$serviceid>...<$qty>...<$amount>...<$couponcode>...***");
+      print("....<$serviceid>...<$cartid>...<$qty>...<$amount>...<$couponcode>...***");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

@@ -1,4 +1,5 @@
 import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/liquer_screen/widget/order_widget.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,8 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
 
   final homeController = Get.find<HomeController>();
+
+  final profileController = Get.find<ProfileController>();
 
   @override
   void initState() {
@@ -75,7 +78,7 @@ class _CartScreenState extends State<CartScreen> {
             builder: (_) {
               return Container(
                 height: size.height * 0.5,
-                child: ListView.builder(
+                child:homeController.cartListData.isEmpty ? const Center(child: Text("No Items In Your Cart"),) : ListView.builder(
                   shrinkWrap: true,
                   itemCount: homeController.cartListData.length,
                   itemBuilder: (context, index) {
@@ -222,15 +225,25 @@ class _CartScreenState extends State<CartScreen> {
           )),
           InkWell(
             onTap: (){
-              for(int i = 0; i < homeController.cartListData.length; i++){
-                homeController.addBooking(
-                serviceid: homeController.cartListData[i].serviceId, 
-                qty: homeController.cartListData[i].quantity, 
-                offerOrCoupon: "", 
-                couponcode: "", 
-                amount: homeController.cartListData[i].price
+
+              profileController.payUseingEaseBuzz(
+                id: 0, 
+                amount: "300", 
+                customerName: "Anasnaji", 
+                email: "anasnaji@gmail.com", 
+                phone: "9657898765", 
+                status: ""
                 );
-              }
+
+              // for(int i = 0; i < homeController.cartListData.length; i++){
+              //   homeController.addBooking(
+              //   serviceid: homeController.cartListData[i].serviceId, 
+              //   qty: homeController.cartListData[i].quantity, 
+              //   offerOrCoupon: "", 
+              //   couponcode: "", 
+              //   amount: homeController.cartListData[i].price
+              //   );
+              // }
               
             },
             child: Container(
