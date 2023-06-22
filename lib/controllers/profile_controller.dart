@@ -138,7 +138,8 @@ class ProfileController extends GetxController {
           message: response.data["message"], backgroundColor: Colors.green);
     } else if (response.statusCode == 400) {
       Get.rawSnackbar(
-          message: response.data["error"], backgroundColor: Colors.red);
+          message: response.data["errors"]["coupon_code"].first,
+          backgroundColor: Colors.red);
     } else {
       Get.rawSnackbar(
           message: response.data["error"], backgroundColor: Colors.red);

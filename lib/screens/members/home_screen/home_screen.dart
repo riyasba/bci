@@ -1,8 +1,6 @@
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
 import '../../../constands/constands.dart';
 
 class Home_screen1 extends StatelessWidget {
@@ -12,7 +10,7 @@ class Home_screen1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -22,7 +20,7 @@ class Home_screen1 extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Image.asset('assets/images/projectlogo.png'),
-                  Padding(
+                 const Padding(
                     padding: EdgeInsets.only(right: 20),
                     child: Text(
                       'Hello,Jhon',

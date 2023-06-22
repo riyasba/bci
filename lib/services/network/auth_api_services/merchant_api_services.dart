@@ -30,7 +30,6 @@ class MerchantRegisterApiServices extends BaseApiService {
         "password": "1234567",
         "password_confirmation": "1234567"
       });
-
       var response = await dio.post(registerURl,
           options: Options(
               headers: {

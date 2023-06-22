@@ -67,7 +67,7 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                   height: 150.h,
                   color: kblue,
                   child: Padding(
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.only(left: 20,right: 15,bottom: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -75,19 +75,16 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                             onTap: Get.back,
                             child: Image.asset(
                                 'assets/images/chevron-left (2).png')),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Text(
-                            'Search',
-                            style: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.bold,
-                                color: kwhite),
-                          ),
+                        Text(
+                          'Search',
+                          style: TextStyle(
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold,
+                              color: kwhite),
                         ),
                         IconButton(
                             onPressed: () {
-                              Get.to(NotificationScreen());
+                              Get.to(const NotificationScreen());
                             },
                             icon: Icon(
                               Icons.notifications,
@@ -103,7 +100,7 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                 child: TextField(
                   controller: searchController,
                   decoration: InputDecoration(
-                      disabledBorder: OutlineInputBorder(),
+                      disabledBorder: const OutlineInputBorder(),
                       hintText: 'Search',
                       fillColor: kwhite,
                       focusColor: kwhite,

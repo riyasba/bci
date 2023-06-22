@@ -72,14 +72,13 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
           SingleChildScrollView(
             child: OtpTextField(
               numberOfFields: 4,
-              borderColor: Color(0xFF512DA8),
+              borderColor: const Color(0xFF512DA8),
               showFieldAsBox: true,
               onCodeChanged: (String code) {},
               onSubmit: (String verificationCode) {
                 setState(() {
                   otpString = verificationCode;
                 });
-
                 // showDialog(
                 //     context: context,
                 //     builder: (context) {
@@ -155,7 +154,7 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       child: Container(
-                        width: double.infinity.h,
+                        width: double.infinity,
                         height: 50.h,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(

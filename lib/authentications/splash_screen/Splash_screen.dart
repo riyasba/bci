@@ -44,7 +44,7 @@ class _splashState extends State<splash> {
   toLoginPage() async {
     await Future.delayed(const Duration(seconds: 2));
     Get.offAll(
-      () => MemberLoginScreen(),
+      () => const MemberLoginScreen(),
     );
   }
 

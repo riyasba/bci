@@ -47,7 +47,7 @@ class _OnbordingState extends State<Onbording> {
     return Container(
       height: size.height,
       width: size.width,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           image: DecorationImage(
         image: AssetImage(
           'assets/images/01 Login Screen Options.png',
@@ -78,7 +78,7 @@ class _OnbordingState extends State<Onbording> {
                         GestureDetector(
                             onTap: () {
                               _pageController.previousPage(
-                                duration: Duration(milliseconds: 300),
+                                duration: const Duration(milliseconds: 300),
                                 curve: Curves.decelerate,
                               );
                             },
@@ -123,12 +123,11 @@ class _OnbordingState extends State<Onbording> {
                               setState(() {
                                 isPageViewEnabled = true;
                               });
-
                               if (_pageController.page!.toInt() == 4) {
-                                Get.to(HelloConvexAppBar());
+                                Get.offAll(HelloConvexAppBar());
                               } else {
                                 _pageController.nextPage(
-                                  duration: Duration(milliseconds: 300),
+                                  duration: const Duration(milliseconds: 300),
                                   curve: Curves.decelerate,
                                 );
                               }
@@ -144,9 +143,9 @@ class _OnbordingState extends State<Onbording> {
                   top: 7,
                   child: GestureDetector(
                       onTap: () {
-                        Get.to(HelloConvexAppBar());
+                        Get.offAll(HelloConvexAppBar());
                       },
-                      child: Text(
+                      child: const Text(
                         "Skip",
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       )))
