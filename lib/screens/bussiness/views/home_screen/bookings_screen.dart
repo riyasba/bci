@@ -49,8 +49,8 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 25),
                       child: Text(
                         'Bookings',
                         style: TextStyle(fontSize: 23, color: Colors.white),
@@ -67,7 +67,6 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
             Positioned(
               top: 150,
               child: Container(
-              
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
@@ -143,23 +142,164 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                                       bookingdescription[index].toString(),
                                       style:
                                           TextStyle(fontSize: 12, color: kblue),
-
                                     ),
                                   ),
-                                  
                                 ],
                               ),
                             )
                           ],
                         ),
                       ),
-                     
                     ],
                   ),
                 );
               }),
         ],
       ),
+    );
+  }
+
+  Future<void> dialogBuilder(BuildContext context,String img, String tit, String date, String amt, String qty) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context, ) {
+        return AlertDialog(
+          title: Container(
+            height: 400,
+            width: 300,
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                       Row(
+                         children: [
+                          Icon(Icons.arrow_back_ios,color: kblue,size: 15,),
+                          const SizedBox(width: 10,),
+                           Text(
+                            'Tourist Details',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                         ],
+                       ),
+                       Row(
+                         children: [
+                          Image.network(img,height: 50,width: 60, fit: BoxFit.cover,),
+                          const SizedBox(width: 10,),
+                           Column(
+                             children: [
+                               Text(
+                                tit,
+                                style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                      Text( 'Date : 17/30/34',
+                                style: TextStyle(fontSize: 12, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                             ],
+                           ),
+                         ],
+                       ),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Place',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            tit,
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       const Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Date',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            '19/06/23',
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       const Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Trip',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            '03.54 PM',
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       const Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Country',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            'India',
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       const Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Adult',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            '10',
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       const Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Quantity',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            qty,
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       const Divider(thickness: 1,),
+                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         const Text(
+                            'Price',
+                            style: TextStyle(fontSize: 16, color: Colors.green,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            amt,
+                            style:const TextStyle(fontSize: 15, color: Colors.green,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

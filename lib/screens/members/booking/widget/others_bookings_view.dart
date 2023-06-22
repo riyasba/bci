@@ -34,66 +34,225 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                 itemCount: homeController.bookingListData.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    child: Container(
-                      height: 127,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: kwhite,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(5),
-                                child: Image.network(
-                                  homeController.bookingListData[index].image,
-                                  height: 100,
-                                  width: 100,
-                                  fit: BoxFit.cover,
-                                )),
-                          ),
-                          kwidth10,
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ksizedbox10,
-                              Text(
-                                homeController.bookingListData[index].service
-                                    .toString(),
-                                style: const TextStyle(fontSize: 21),
-                              ),
-                              Container(
-                                width: 250,
-                                child: Text(
-                                  '${homeController.bookingListData[index].description}',
-                                  maxLines: 3,
-                                  style: TextStyle(color: kblue),
+                    child: InkWell(
+                      onTap: (){
+                        dialogBuilder(context, 
+                        homeController.bookingListData[index].image, 
+                        homeController.bookingListData[index].service, 
+                        homeController.bookingListData[index].description, 
+                        homeController.bookingListData[index].purchasePrice, 
+                        homeController.bookingListData[index].quantity
+                        );
+                      },
+                      child: Container(
+                        height: 127,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: kwhite,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.network(
+                                    homeController.bookingListData[index].image,
+                                    height: 100,
+                                    width: 100,
+                                    fit: BoxFit.cover,
+                                  )),
+                            ),
+                            kwidth10,
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ksizedbox10,
+                                Text(
+                                  homeController.bookingListData[index].service
+                                      .toString(),
+                                  style: const TextStyle(fontSize: 21),
                                 ),
-                              ),
-                              // Text(
-                              //   'Check in : 03:44PM Check Out 03:43 PM',
-                              //   style: TextStyle(color: kblue),
-                              // ),
-                              // Text(
-                              //   'Total Person : 5 Members',
-                              //   style: TextStyle(color: kblue),
-                              // ),
-                              // Text(
-                              //   'Ac Rooms',
-                              //   style: TextStyle(color: kblue),
-                              // ),
-                              ksizedbox10
-                            ],
-                          )
-                        ],
+                                Container(
+                                  width: 250,
+                                  child: Text(
+                                    '${homeController.bookingListData[index].description}',
+                                    maxLines: 3,
+                                    style: TextStyle(color: kblue),
+                                  ),
+                                ),
+                                // Text(
+                                //   'Check in : 03:44PM Check Out 03:43 PM',
+                                //   style: TextStyle(color: kblue),
+                                // ),
+                                // Text(
+                                //   'Total Person : 5 Members',
+                                //   style: TextStyle(color: kblue),
+                                // ),
+                                // Text(
+                                //   'Ac Rooms',
+                                //   style: TextStyle(color: kblue),
+                                // ),
+                                ksizedbox10
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   );
                 }),
       );
     });
+  }
+
+  Future<void> dialogBuilder(BuildContext context,String img, String tit, String date, String amt, String qty) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context, ) {
+        return AlertDialog(
+          title: Container(
+            height: 400,
+            width: 300,
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                       Row(
+                         children: [
+                          Icon(Icons.arrow_back_ios,color: kblue,size: 15,),
+                          const SizedBox(width: 10,),
+                           Text(
+                            'Tourist Details',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                         ],
+                       ),
+                       const SizedBox(height: 5,),
+                       Row(
+                         children: [
+                          Image.network(img,height: 50,width: 60, fit: BoxFit.cover,),
+                          const SizedBox(width: 10,),
+                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                             children: [
+                               Text(
+                                tit,
+                                style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 5,),
+                      Text( 'Date : 17/30/34',
+                                style: TextStyle(fontSize: 12, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                             ],
+                           ),
+                         ],
+                       ),
+                       const SizedBox(height: 5,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Place',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            tit,
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       const Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Date',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            '19/06/23',
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       const Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Trip',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            '03.54 PM',
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       const Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Country',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            'India',
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       const Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Adult',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            '10',
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       const Divider(thickness: 1,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         Text(
+                            'Quantity',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            qty,
+                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+                       const Divider(thickness: 1,),
+                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                         const Text(
+                            'Price',
+                            style: TextStyle(fontSize: 16, color: Colors.green,fontWeight: FontWeight.bold),
+                      ),
+                           Text(
+                            amt,
+                            style:const TextStyle(fontSize: 15, color: Colors.green,fontWeight: FontWeight.w500),
+                      ),
+                         ],
+                       ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

@@ -64,7 +64,7 @@ class _MembersBookingState extends State<MembersBooking> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(5.0),
                   child: TabBar(
                       automaticIndicatorColorAdjustment: true,
                         isScrollable: true,
@@ -90,14 +90,14 @@ class _MembersBookingState extends State<MembersBooking> {
                         ),
                         Tab(
                           text: "Others",
-                        )
+                        ),
                       ]),
                 ),
               ],
             )),
         body:const TabBarView(
           children: [
-          Flight_widget (),
+          Flight_widget (), 
           bookings_containers(),
           Holiays_containors(),
           OthersBookingsView(),
