@@ -242,6 +242,8 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                                     : InkWell(
                                         onTap: () {
                                           homeController.addToCart(
+                                              amount: widget.searchServicelist
+                                                  .actualAmount,
                                               serviceid: widget
                                                   .searchServicelist.id
                                                   .toString());
@@ -324,7 +326,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                         } else {
                           print(">>>>>>>>>>>>>>>222222222222222222");
                           homeController.addBooking(
-                            cartid: widget.searchServicelist.id.toString(),
+                              cartid: widget.searchServicelist.id.toString(),
                               serviceid: widget.searchServicelist.id.toString(),
                               qty: "1",
                               offerOrCoupon: "",

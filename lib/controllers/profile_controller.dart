@@ -134,9 +134,11 @@ class ProfileController extends GetxController {
   RedeemCouponApiServices redeemCouponApiServices = RedeemCouponApiServices();
 
   redeemCoupon({required String couponcode}) async {
+    String tempAmount = "0";
     dio.Response<dynamic> response = await redeemCouponApiServices
         .redeemCouponApiServices(couponcode: couponcode);
     if (response.statusCode == 200) {
+      tempAmount = response.data["amount"].toString();
       Get.rawSnackbar(
           message: response.data["message"], backgroundColor: Colors.green);
     } else if (response.statusCode == 400) {
@@ -147,6 +149,8 @@ class ProfileController extends GetxController {
       Get.rawSnackbar(
           message: response.data["error"], backgroundColor: Colors.red);
     }
+
+    return tempAmount;
   }
 
   //easebuzz

@@ -147,17 +147,24 @@ class HomeController extends GetxController {
 
   RxBool isLoading = false.obs;
 
-  addToCart({required String serviceid}) async {
+  addToCart({required String serviceid, required String amount}) async {
     isLoading(true);
 
-    dio.Response<dynamic> response =
-        await addToCartApiServices.addToCartApiServices(serviceid: serviceid);
+    dio.Response<dynamic> response = await addToCartApiServices
+        .addToCartApiServices(serviceid: serviceid, amount: amount);
     isLoading(false);
 
     if (response.statusCode == 201) {
       Get.off(const CartScreen());
       Get.rawSnackbar(
           message: response.data["message"], backgroundColor: Colors.green);
+    } else if (response.statusCode == 400) {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            response.data["error"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -206,7 +213,7 @@ class HomeController extends GetxController {
             response.data["message"],
             style: primaryFont.copyWith(color: Colors.white),
           ));
-    }  else {
+    } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
@@ -221,8 +228,7 @@ class HomeController extends GetxController {
   AddBookingApiServices addBookingApiServices = AddBookingApiServices();
 
   addBooking(
-      {
-      required String serviceid,
+      {required String serviceid,
       required String cartid,
       required String qty,
       required String offerOrCoupon,
@@ -239,10 +245,7 @@ class HomeController extends GetxController {
             amount: amount);
     isLoading(false);
     if (response.statusCode == 200) {
-
-       deleteToCart(serviceid: serviceid);
-
-      
+      deleteToCart(serviceid: serviceid);
 
       Get.rawSnackbar(
           message: response.data["message"], backgroundColor: Colors.green);

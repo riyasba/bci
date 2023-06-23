@@ -119,9 +119,24 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                           borderRadius: BorderRadius.circular(6.0),
                         ),
                         child: InkWell(
-                          onTap: () {
-                            profileController.redeemCoupon(
-                                couponcode: redeemCouponcontroller.text);
+                          onTap: () async {
+                            String tempSaleAmount =
+                                widget.searchServicelist.saleAmount;
+                            String amount =
+                                await profileController.redeemCoupon(
+                                    couponcode: redeemCouponcontroller.text);
+
+                            double tAmount = double.parse(amount);
+                            double tempSaleAmounz =
+                                double.parse(tempSaleAmount);
+
+                            double totalAmountTobeAdded =
+                                tempSaleAmounz - tAmount;
+
+                            setState(() {
+                              widget.searchServicelist.saleAmount =
+                                  totalAmountTobeAdded.toStringAsFixed(2);
+                            });
                           },
                           child: Center(
                             child: Text(
@@ -178,6 +193,8 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                               : InkWell(
                                   onTap: () {
                                     homeController.addToCart(
+                                        amount:
+                                            widget.searchServicelist.saleAmount,
                                         serviceid: widget.searchServicelist.id
                                             .toString());
                                   },
