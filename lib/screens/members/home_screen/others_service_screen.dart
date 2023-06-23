@@ -2,6 +2,7 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
+import 'package:bci/screens/members/members_search_screen/member_service_details_screen.dart';
 import 'package:bci/screens/members/members_search_screen/member_service_view_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,6 +30,7 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(150.h),
@@ -118,27 +120,38 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                                     .serviceListData[index].updatedAt,
                                 vendorId: homeController
                                     .serviceListData[index].vendorId);
-                        Get.to(MemberSearchViewScreen(
+                        Get.to(ServiceDetailsScreen(
                           searchServicelist: searchServiceListData,
                         ));
                       },
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 100,
-                            width: 150,
-                            child: Image.network(
-                                homeController.serviceListData[index].image),
-                          ),
-                          Text(
-                            homeController.serviceListData[index].title,
-                            style: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.bold,
-                                color: kblue),
-                          ),
-                        ],
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(color: kgrey, blurRadius: 0.5),
+                            ],
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                homeController.serviceListData[index].image,
+                                height: 130,
+                                width: size.width,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            Text(
+                              homeController.serviceListData[index].title,
+                              style: TextStyle(
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: kblue),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );

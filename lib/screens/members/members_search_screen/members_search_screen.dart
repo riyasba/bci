@@ -67,7 +67,8 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                   height: 150.h,
                   color: kblue,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 20,right: 15,bottom: 30),
+                    padding:
+                        const EdgeInsets.only(left: 20, right: 15, bottom: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -270,37 +271,34 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                         height: 130,
                         width: 150,
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: kgrey,
-                              blurRadius: 0.5
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(15)
-                              ),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(color: kgrey, blurRadius: 0.5),
+                            ],
+                            borderRadius: BorderRadius.circular(15)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(15),
-                              child: Image.network(homeController
-                                  .searchServiceListData[index].image,
-                                  height: 130,
-                                  width:size.width,
-                                  fit: BoxFit.fill,
-                                  ),
+                              child: Image.network(
+                                homeController
+                                    .searchServiceListData[index].image,
+                                height: 130,
+                                width: size.width,
+                                fit: BoxFit.fill,
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: Container(
                                 width: size.width,
                                 child: Text(
-                                  homeController.searchServiceListData[index].title,
+                                  homeController
+                                      .searchServiceListData[index].title,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       fontSize: 20.sp,
-                                      
                                       fontWeight: FontWeight.bold,
                                       color: kblue),
                                 ),

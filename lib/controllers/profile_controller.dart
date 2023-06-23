@@ -42,7 +42,9 @@ class ProfileController extends GetxController {
 
   getProfile() async {
     profileData.clear();
+    isLoading(true);
     dio.Response<dynamic> response = await getProfileApiServices.getProfile();
+    isLoading(false);
     if (response.statusCode == 200) {
       MemberProfileModel profileModel =
           MemberProfileModel.fromJson(response.data);

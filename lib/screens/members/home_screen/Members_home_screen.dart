@@ -80,34 +80,251 @@ class _Home_screen1State extends State<Home_screen1> {
               ),
             ),
           )),
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-         Obx(()=>  Column(
-              children: [
-             profileController.isSubscribed.isTrue ?   Column(
-                 children: [
-                   CarouselSlider(
+      body: Obx(
+        () => profileController.isLoading.isTrue
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: kblue,
+                ),
+              )
+            : ListView(
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  Obx(
+                    () => Column(
+                      children: [
+                        profileController.isSubscribed.isTrue
+                            ? Column(
+                                children: [
+                                  CarouselSlider(
+                                      carouselController: sliderController,
+                                      items: [
+                                        Container(
+                                          decoration: const BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: AssetImage(
+                                                      'assets/images/Scroll Group 11.png'))),
+                                        ),
+                                        Container(
+                                          decoration: const BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: AssetImage(
+                                                      'assets/images/Group 5767.png'))),
+                                        ),
+                                        Container(
+                                          decoration: const BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: AssetImage(
+                                                      'assets/images/Group 5807.png'))),
+                                        ),
+                                      ],
+                                      options: CarouselOptions(
+                                        height: 170,
+                                        onPageChanged: (index, reason) {
+                                          setState(() {
+                                            activeIndex = index;
+                                          });
+                                        },
+                                        aspectRatio: 16 / 9,
+                                        viewportFraction: 1,
+                                        initialPage: 0,
+                                        enableInfiniteScroll: true,
+                                        reverse: false,
+                                        autoPlay: true,
+                                        autoPlayInterval: Duration(seconds: 3),
+                                        autoPlayAnimationDuration:
+                                            Duration(milliseconds: 800),
+                                        autoPlayCurve: Curves.fastOutSlowIn,
+                                        enlargeCenterPage: true,
+                                        enlargeFactor: 0.3,
+                                        scrollDirection: Axis.horizontal,
+                                      )),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      AnimatedSmoothIndicator(
+                                        activeIndex: activeIndex,
+                                        count: 3,
+                                        effect: ScaleEffect(
+                                            dotHeight: 9.0,
+                                            dotWidth: 9.0,
+                                            dotColor: kgrey,
+                                            activeDotColor: kblue),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      kwidth10,
+                                      Text(
+                                        'Subscribe Pakages',
+                                        style: TextStyle(
+                                            color: knavblue,
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ],
+                                  ),
+                                  InkWell(
+                                      onTap: () {
+                                        Get.to(UpgradeScreen());
+                                      },
+                                      child: Image.asset(
+                                          'assets/images/Group 5826.png')),
+                                ],
+                              ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      kwidth10,
+                      Text(
+                        'Coupons',
+                        style: TextStyle(
+                            color: knavblue,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ],
+                  ),
+                  ksizedbox20,
+                  InkWell(
+                      onTap: () {
+                        Get.to(Coupens_members());
+                      },
+                      child: Image.asset('assets/images/Group 5755.png')),
+                  ksizedbox20,
+                  Row(
+                    children: [
+                      kwidth10,
+                      Text(
+                        'Add Booking',
+                        style: TextStyle(
+                            color: knavblue,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ],
+                  ),
+                  ksizedbox20,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => const FlightBookingLandingScreen());
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset('assets/images/Group 5778.png'),
+                            const Text(
+                              'Flight',
+                              style: TextStyle(fontWeight: FontWeight.w700),
+                            )
+                          ],
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(Hotel());
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset('assets/images/Group 5827.png'),
+                            Text(
+                              'Hotel',
+                              style: TextStyle(fontWeight: FontWeight.w700),
+                            )
+                          ],
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(const liquer_screen());
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset('assets/images/Group 5828.png'),
+                            const Text(
+                              'Liqueur',
+                              style: TextStyle(fontWeight: FontWeight.w700),
+                            )
+                          ],
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(const Holiday_Home());
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset('assets/images/Group 5829.png'),
+                            const Text(
+                              'Holiday\nPackage',
+                              style: TextStyle(fontWeight: FontWeight.w700),
+                            )
+                          ],
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(const OthersServiceScreen());
+                        },
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            Container(
+                                height: 58,
+                                width: 55,
+                                decoration: BoxDecoration(
+                                    color: kblue,
+                                    borderRadius: BorderRadius.circular(3)),
+                                child: const Icon(
+                                  Icons.open_with,
+                                  color: Colors.white,
+                                )),
+                            ksizedbox10,
+                            const Text(
+                              'Others',
+                              style: TextStyle(fontWeight: FontWeight.w700),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  ksizedbox30,
+                  if (homeController.sliderList.isNotEmpty)
+                    CarouselSlider(
                         carouselController: sliderController,
                         items: [
-                          Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/Scroll Group 11.png'))),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/Group 5767.png'))),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/Group 5807.png'))),
-                          ),
+                          for (int i = 0;
+                              i < homeController.sliderList.length;
+                              i++)
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                  // fit: BoxFit.fill,
+                                  image: NetworkImage(
+                                      homeController.sliderList[i].image),
+                                )),
+                              ),
+                            ),
+                          // Container(
+                          //   decoration: BoxDecoration(
+                          //       image: DecorationImage(
+                          //           image: AssetImage('assets/images/Group 5781.png'))),
+                          // ),
                         ],
                         options: CarouselOptions(
                           height: 170,
@@ -122,273 +339,78 @@ class _Home_screen1State extends State<Home_screen1> {
                           enableInfiniteScroll: true,
                           reverse: false,
                           autoPlay: true,
-                          autoPlayInterval: Duration(seconds: 3),
-                          autoPlayAnimationDuration: Duration(milliseconds: 800),
+                          autoPlayInterval: const Duration(seconds: 3),
+                          autoPlayAnimationDuration:
+                              const Duration(milliseconds: 800),
                           autoPlayCurve: Curves.fastOutSlowIn,
                           enlargeCenterPage: true,
                           enlargeFactor: 0.3,
                           scrollDirection: Axis.horizontal,
                         )),
+                  if (homeController.sliderList.isNotEmpty)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AnimatedSmoothIndicator(
                           activeIndex: activeIndex,
-                          count: 3,
+                          count: homeController.sliderList.length,
                           effect: ScaleEffect(
                               dotHeight: 9.0,
                               dotWidth: 9.0,
                               dotColor: kgrey,
-                              activeDotColor: kblue),
+                              activeDotColor: Colors.yellow),
                         ),
                       ],
                     ),
-                 ],
-               ) : 
-                Column(
-                  children: [
-                    Row(
+                  ksizedbox10,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        kwidth10,
                         Text(
-                          'Subscribe Pakages',
+                          'Today Offer',
                           style: TextStyle(
                               color: knavblue,
                               fontSize: 22,
                               fontWeight: FontWeight.w700),
                         ),
-                      ],
-                    ),
-                    InkWell(
-                        onTap: () {
-                          Get.to(UpgradeScreen());
-                        },
-                        child: Image.asset('assets/images/Group 5826.png')),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Row(
-            children: [
-              kwidth10,
-              Text(
-                'Coupons',
-                style: TextStyle(
-                    color: knavblue, fontSize: 22, fontWeight: FontWeight.w700),
-              ),
-            ],
-          ),
-          ksizedbox20,
-          InkWell(
-              onTap: () {
-                Get.to(Coupens_members());
-              },
-              child: Image.asset('assets/images/Group 5755.png')),
-          ksizedbox20,
-          Row(
-            children: [
-              kwidth10,
-              Text(
-                'Add Booking',
-                style: TextStyle(
-                    color: knavblue, fontSize: 22, fontWeight: FontWeight.w700),
-              ),
-            ],
-          ),
-          ksizedbox20,
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InkWell(
-                onTap: () {
-                  Get.to(() => const FlightBookingLandingScreen());
-                },
-                child: Column(
-                  children: [
-                    Image.asset('assets/images/Group 5778.png'),
-                    const Text(
-                      'Flight',
-                      style: TextStyle(fontWeight: FontWeight.w700),
-                    )
-                  ],
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Get.to(Hotel());
-                },
-                child: Column(
-                  children: [
-                    Image.asset('assets/images/Group 5827.png'),
-                    Text(
-                      'Hotel',
-                      style: TextStyle(fontWeight: FontWeight.w700),
-                    )
-                  ],
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Get.to(liquer_screen());
-                },
-                child: Column(
-                  children: [
-                    Image.asset('assets/images/Group 5828.png'),
-                    Text(
-                      'Liquer',
-                      style: TextStyle(fontWeight: FontWeight.w700),
-                    )
-                  ],
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Get.to(Holiday_Home());
-                },
-                child: Column(
-                  children: [
-                    Image.asset('assets/images/Group 5829.png'),
-                    const Text(
-                      'Holiday\nPackage',
-                      style: TextStyle(fontWeight: FontWeight.w700),
-                    )
-                  ],
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Get.to(const OthersServiceScreen());
-                },
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 6,
-                    ),
-                    Container(
-                        height: 58,
-                        width: 55,
-                        decoration: BoxDecoration(
-                            color: kblue,
-                            borderRadius: BorderRadius.circular(3)),
-                        child: const Icon(
-                          Icons.open_with,
-                          color: Colors.white,
-                        )),
-                    ksizedbox10,
-                    const Text(
-                      'Others',
-                      style: TextStyle(fontWeight: FontWeight.w700),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-          ksizedbox30,
-          CarouselSlider(
-              carouselController: sliderController,
-              items: [
-                for (int i = 0; i < homeController.sliderList.length; i++)
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                        // fit: BoxFit.fill,
-                        image: NetworkImage(homeController.sliderList[i].image),
-                      )),
-                    ),
-                  ),
-                // Container(
-                //   decoration: BoxDecoration(
-                //       image: DecorationImage(
-                //           image: AssetImage('assets/images/Group 5781.png'))),
-                // ),
-              ],
-              options: CarouselOptions(
-                height: 170,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    activeIndex = index;
-                  });
-                },
-                aspectRatio: 16 / 9,
-                viewportFraction: 1,
-                initialPage: 0,
-                enableInfiniteScroll: true,
-                reverse: false,
-                autoPlay: true,
-                autoPlayInterval: const Duration(seconds: 3),
-                autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                autoPlayCurve: Curves.fastOutSlowIn,
-                enlargeCenterPage: true,
-                enlargeFactor: 0.3,
-                scrollDirection: Axis.horizontal,
-              )),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AnimatedSmoothIndicator(
-                activeIndex: activeIndex,
-                count: 2,
-                effect: ScaleEffect(
-                    dotHeight: 9.0,
-                    dotWidth: 9.0,
-                    dotColor: kgrey,
-                    activeDotColor: Colors.yellow),
-              ),
-            ],
-          ),
-          ksizedbox10,
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Today Offer',
-                  style: TextStyle(
-                      color: knavblue,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700),
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.to(offer_screen());
-                  },
-                  child: Text(
-                    'See All',
-                    style: TextStyle(color: korange),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            height: 150,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                itemCount: 6,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 106,
-                      width: 144,
-                      child: InkWell(
+                        InkWell(
                           onTap: () {
                             Get.to(offer_screen());
                           },
-                          child: Image.asset('assets/images/aaaa.png')),
+                          child: Text(
+                            'See All',
+                            style: TextStyle(color: korange),
+                          ),
+                        )
+                      ],
                     ),
-                  );
-                }),
-          )
-        ],
+                  ),
+                  Container(
+                    height: 150,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: 6,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 106,
+                              width: 144,
+                              child: InkWell(
+                                  onTap: () {
+                                    Get.to(offer_screen());
+                                  },
+                                  child: Image.asset('assets/images/aaaa.png')),
+                            ),
+                          );
+                        }),
+                  )
+                ],
+              ),
       ),
     );
   }

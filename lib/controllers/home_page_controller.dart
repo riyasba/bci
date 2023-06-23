@@ -155,7 +155,7 @@ class HomeController extends GetxController {
     isLoading(false);
 
     if (response.statusCode == 201) {
-      Get.off(CartScreen());
+      Get.off(const CartScreen());
       Get.rawSnackbar(
           message: response.data["message"], backgroundColor: Colors.green);
     } else {
