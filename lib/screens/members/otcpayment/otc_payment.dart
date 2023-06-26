@@ -120,7 +120,7 @@ class _OtcPaymentState extends State<OtcPayment> {
               onTap: () async {
                 print(
                     ">>>>>>>>>>>>>>>>>..............easebuzz start..........>>>>>>>>>>${widget.plansData.id}");
-                profileController.payUseingEaseBuzz(
+                profileController.payUseingEaseBuzzSubs(
                     id: widget.plansData.id,
                     amount: widget.plansData.saleAmount,
                     customerName: "sanucf",

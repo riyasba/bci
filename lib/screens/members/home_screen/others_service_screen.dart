@@ -118,6 +118,8 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                                     homeController.serviceListData[index].title,
                                 updatedAt: homeController
                                     .serviceListData[index].updatedAt,
+                                    amenties: homeController
+                                    .serviceListData[index].amenties,
                                 vendorId: homeController
                                     .serviceListData[index].vendorId);
                         Get.to(ServiceDetailsScreen(
@@ -140,7 +142,7 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                                 homeController.serviceListData[index].image,
                                 height: 130,
                                 width: size.width,
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                             ),
                             Text(

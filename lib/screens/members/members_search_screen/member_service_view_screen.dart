@@ -315,7 +315,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                         if (redeemCouponcontroller.text.isNotEmpty) {
                           print(">>>>>>>>>>>11111111111111111111");
                           profileController.redeemCoupon(
-                              couponcode: redeemCouponcontroller.text);
+                              couponcode: redeemCouponcontroller.text,serviceId: widget.searchServicelist.id.toString());
                           homeController.addBooking(
                               cartid: widget.searchServicelist.id.toString(),
                               serviceid: widget.searchServicelist.id.toString(),

@@ -133,17 +133,17 @@ class ProfileController extends GetxController {
   //redeem coupon
   RedeemCouponApiServices redeemCouponApiServices = RedeemCouponApiServices();
 
-  redeemCoupon({required String couponcode}) async {
+  redeemCoupon({required String couponcode, required String serviceId}) async {
     String tempAmount = "0";
     dio.Response<dynamic> response = await redeemCouponApiServices
-        .redeemCouponApiServices(couponcode: couponcode);
+        .redeemCouponApiServices(couponcode: couponcode,serviceId: serviceId);
     if (response.statusCode == 200) {
       tempAmount = response.data["amount"].toString();
       Get.rawSnackbar(
           message: response.data["message"], backgroundColor: Colors.green);
     } else if (response.statusCode == 400) {
       Get.rawSnackbar(
-          message: response.data["errors"]["coupon_code"].first,
+          message: response.data["error"],
           backgroundColor: Colors.red);
     } else {
       Get.rawSnackbar(
@@ -158,17 +158,14 @@ class ProfileController extends GetxController {
   static MethodChannel _channel = MethodChannel('easebuzz');
   EaseBuzzTokenApiService easeBuzzApi = EaseBuzzTokenApiService();
 
-  payUseingEaseBuzz(
-      {
-      required int id,
-      required String amount,
-      required String customerName,
-      required String email,
-      required String phone,
-      required dynamic status,
-      
-
-      }) async {
+  payUseingEaseBuzz({
+    required int id,
+    required String amount,
+    required String customerName,
+    required String email,
+    required String phone,
+    required dynamic status,
+  }) async {
     Get.find<ProfileController>().getProfile();
     var response = await easeBuzzApi.getPaymentToken(
         amount: amount,
@@ -189,22 +186,82 @@ class ProfileController extends GetxController {
     print(payment_response);
     isLoading(false);
     if (payment_response["result"] == "payment_successfull") {
-        
-        final homeController = Get.find<HomeController>();
-         for(int i = 0; i < homeController.cartListData.length; i++){
-                homeController.addBooking(
-                serviceid: homeController.cartListData[i].serviceId, 
-                cartid: homeController.cartListData[i].id.toString(),
-                qty: homeController.cartListData[i].quantity, 
-                offerOrCoupon: "", 
-                couponcode: "", 
-                amount: homeController.cartListData[i].price
-                );
-              }
+      final homeController = Get.find<HomeController>();
+      for (int i = 0; i < homeController.cartListData.length; i++) {
+        homeController.addBooking(
+            serviceid: homeController.cartListData[i].serviceId,
+            cartid: homeController.cartListData[i].id.toString(),
+            qty: homeController.cartListData[i].quantity,
+            offerOrCoupon: "",
+            couponcode: "",
+            amount: homeController.cartListData[i].price);
+      }
 
       // Get.find<HomeController>().addSubscription(
       //     planId: id,
       //     customerId: Get.find<ProfileController>().profileData.first.id);
+
+      //need to give id
+      Get.snackbar(
+        "Payment Successfully Paid",
+        "",
+        icon: const Icon(Icons.check_circle_outline_outlined,
+            color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+
+      print(response);
+    } else {
+      Get.closeAllSnackbars();
+      Get.snackbar(
+          "The last transaction has been cancelled!", "Please try again!",
+          colorText: Colors.white,
+          backgroundColor: Colors.red,
+          snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+
+  payUseingEaseBuzzSubs({
+    required int id,
+    required String amount,
+    required String customerName,
+    required String email,
+    required String phone,
+    required dynamic status,
+  }) async {
+    Get.find<ProfileController>().getProfile();
+    var response = await easeBuzzApi.getPaymentToken(
+        amount: amount,
+        customerName: customerName,
+        email: email,
+        id: "07889${DateTime.now().microsecond}${DateTime.now().second}",
+        phone: phone);
+
+    String access_key = response["data"];
+    String pay_mode = "test";
+
+    print("access_key >>$access_key");
+    Object parameters = {"access_key": access_key, "pay_mode": pay_mode};
+    // isPayLoading(false);
+    isLoading(false);
+    final payment_response =
+        await _channel.invokeMethod("payWithEasebuzz", parameters);
+    print(payment_response);
+    isLoading(false);
+    if (payment_response["result"] == "payment_successfull") {
+      final homeController = Get.find<HomeController>();
+
+      Get.find<HomeController>().addSubscription(
+          planId: id,
+          customerId: Get.find<ProfileController>().profileData.first.id);
 
       //need to give id
       Get.snackbar(

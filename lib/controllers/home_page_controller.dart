@@ -224,6 +224,20 @@ class HomeController extends GetxController {
     update();
   }
 
+  double getGrandTotal()  {
+    double grandTotal = 0.0;
+
+    for (var i = 0; i < cartListData.length; i++) {
+      double amount = double.parse(cartListData[i].amount);
+      int qty = int.parse(cartListData[i].quantity);
+      double tempTotalAmount = amount * qty;
+
+      grandTotal = grandTotal + tempTotalAmount;
+    }
+
+    return grandTotal;
+  }
+
   //add booking api
   AddBookingApiServices addBookingApiServices = AddBookingApiServices();
 

@@ -67,11 +67,11 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
           )),
       body: GetBuilder<PlanController>(builder: (_) {
         return ListView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           //  crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 15),
+           const Padding(
+              padding:  EdgeInsets.only(left: 15),
               child: const Text(
                 "All Select Membership Cards\nChoose Anything",
                 style: TextStyle(

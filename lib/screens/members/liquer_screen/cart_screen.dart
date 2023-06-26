@@ -20,7 +20,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-
   final homeController = Get.find<HomeController>();
 
   final profileController = Get.find<ProfileController>();
@@ -36,9 +35,9 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: kwhite  ,
+      backgroundColor: kwhite,
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -63,10 +62,14 @@ class _CartScreenState extends State<CartScreen> {
                             color: kwhite),
                       ),
                     ),
-                   IconButton(onPressed: (){Get.to(NotificationScreen());}, icon:   Icon(
-                    Icons.notifications,
-                    color: kwhite,
-                  ))
+                    IconButton(
+                        onPressed: () {
+                          Get.to(const NotificationScreen());
+                        },
+                        icon: Icon(
+                          Icons.notifications,
+                          color: kwhite,
+                        ))
                   ],
                 ),
               ),
@@ -74,100 +77,127 @@ class _CartScreenState extends State<CartScreen> {
           )),
       body: Column(
         children: [
-          GetBuilder<HomeController>(
-            builder: (_) {
-              return Container(
-                height: size.height * 0.5,
-                child:homeController.cartListData.isEmpty ? const Center(child: Text("No Items In Your Cart"),) : ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: homeController.cartListData.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Container(
-                      width: double.infinity,
-                      height: 110,
-                      decoration: BoxDecoration(
-                      color: kwhite,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                      BoxShadow(
-                         color: kgrey,
-                         blurRadius: 0.5,
-                        ),
-                              ]
-                            ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Image.network(
-                                          homeController.cartListData[index].image,
-                                          height: 50,
-                                          width: 60,
-                                          fit: BoxFit.cover,
+          GetBuilder<HomeController>(builder: (_) {
+            return Container(
+              height: size.height * 0.5,
+              child: homeController.cartListData.isEmpty
+                  ? const Center(
+                      child: Text("No Items In Your Cart"),
+                    )
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: homeController.cartListData.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Container(
+                              width: double.infinity,
+                              height: 110,
+                              decoration: BoxDecoration(
+                                  color: kwhite,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: kgrey,
+                                      blurRadius: 0.5,
+                                    ),
+                                  ]),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Image.network(
+                                              homeController
+                                                  .cartListData[index].image,
+                                              height: 50,
+                                              width: 60,
+                                              fit: BoxFit.cover,
                                             ),
-                                             kwidth10,
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              homeController.cartListData[index].serviceName,
-                              style:const TextStyle(
-                                  fontSize: 20,color: Colors.black, fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              width: 230,
-                              child: Text(homeController.cartListData[index].description,maxLines: 3,)),
-                            Text("Qty: ${homeController.cartListData[index].quantity}"),
-                          ],
-                        ),
-                      ],
-                         ),
-                                      Row(
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                            children: [
-                                              InkWell(
-                                                onTap: (){
-                                                  homeController.deleteToCart(serviceid: homeController.cartListData[index].serviceId.toString());
-                                                },
-                                                child:const Icon(Icons.delete,color: Colors.redAccent,)),
-                                              ksizedbox10,
-                                              Text(
-                                        '₹ ${homeController.cartListData[index].price}',
-                                         style: TextStyle(
-                                         fontSize: 17.sp,
-                                         fontWeight: FontWeight.w600,
-                                        color: kyellow),
-                                      ),
-                                            ],
-                                          ),
-
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            )),
-                    );
-                  },
-                  ),
-              );
-            }
+                                            kwidth10,
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Text(
+                                                  homeController
+                                                      .cartListData[index]
+                                                      .serviceName,
+                                                  style: const TextStyle(
+                                                      fontSize: 20,
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                                SizedBox(
+                                                    width: 230,
+                                                    child: Text(
+                                                      homeController
+                                                          .cartListData[index]
+                                                          .description,
+                                                      maxLines: 3,
+                                                    )),
+                                                Text(
+                                                    "Qty: ${homeController.cartListData[index].quantity}"),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                InkWell(
+                                                    onTap: () {
+                                                      homeController.deleteToCart(
+                                                          serviceid:
+                                                              homeController
+                                                                  .cartListData[
+                                                                      index]
+                                                                  .serviceId
+                                                                  .toString());
+                                                    },
+                                                    child: const Icon(
+                                                      Icons.delete,
+                                                      color: Colors.redAccent,
+                                                    )),
+                                                ksizedbox10,
+                                                Text(
+                                                  '₹ ${homeController.cartListData[index].amount}',
+                                                  style: TextStyle(
+                                                      fontSize: 17.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: kyellow),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )),
+                        );
+                      },
+                    ),
+            );
+          }),
+          const Divider(
+            thickness: 1,
           ),
-         
-         
-          const Divider(thickness: 1,),
           Expanded(
               child: Container(
             height: 100.h,
@@ -178,11 +208,11 @@ class _CartScreenState extends State<CartScreen> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                   // ksizedbox40,
+                    // ksizedbox40,
                     Text(
                       'Support',
-                      style:
-                          TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                          fontSize: 25.sp, fontWeight: FontWeight.w600),
                     ),
                     ksizedbox10,
                     Text(
@@ -224,27 +254,26 @@ class _CartScreenState extends State<CartScreen> {
             ),
           )),
           InkWell(
-            onTap: (){
-
+            onTap: () {
+              var tempAmount = homeController.getGrandTotal();
               profileController.payUseingEaseBuzz(
-                id: 0, 
-                amount: "300", 
-                customerName: "Anasnaji", 
-                email: "anasnaji@gmail.com", 
-                phone: "9657898765", 
-                status: ""
-                );
+                  id: 0,
+                  amount: tempAmount.toStringAsFixed(2),
+                  customerName: profileController.profileData.first.name,
+                  email:
+                      "${profileController.profileData.first.name}@gmail.com",
+                  phone: profileController.profileData.first.mobile,
+                  status: "");
 
               // for(int i = 0; i < homeController.cartListData.length; i++){
               //   homeController.addBooking(
-              //   serviceid: homeController.cartListData[i].serviceId, 
-              //   qty: homeController.cartListData[i].quantity, 
-              //   offerOrCoupon: "", 
-              //   couponcode: "", 
+              //   serviceid: homeController.cartListData[i].serviceId,
+              //   qty: homeController.cartListData[i].quantity,
+              //   offerOrCoupon: "",
+              //   couponcode: "",
               //   amount: homeController.cartListData[i].price
               //   );
               // }
-              
             },
             child: Container(
               height: 40,
@@ -254,8 +283,12 @@ class _CartScreenState extends State<CartScreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
-                child: Text("Book Now",
-                style: TextStyle(fontSize: 15.sp,color: Colors.white,fontWeight: FontWeight.w500),
+                child: Text(
+                  "Book Now",
+                  style: TextStyle(
+                      fontSize: 15.sp,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500),
                 ),
               ),
             ),

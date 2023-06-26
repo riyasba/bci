@@ -77,28 +77,31 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                       color: Colors.black),
                 ),
                 ksizedbox10,
-                Row(
-                  children: [
-                    Container(
-                      height: 10,
-                      width: 10,
-                      decoration: BoxDecoration(
-                        color: kgrey,
-                        borderRadius: BorderRadius.circular(5),
+                for (int i = 0;
+                    i < widget.searchServicelist.amenties!.length;
+                    i++)
+                  Row(
+                    children: [
+                      Container(
+                        height: 10,
+                        width: 10,
+                        decoration: BoxDecoration(
+                          color: kgrey,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      '',
-                      style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
-                          color: kgrey),
-                    ),
-                  ],
-                ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        widget.searchServicelist.amenties![i].value,
+                        style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                            color: kgrey),
+                      ),
+                    ],
+                  ),
                 ksizedbox20,
                 TextField(
                   controller: redeemCouponcontroller,
@@ -124,19 +127,28 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                 widget.searchServicelist.saleAmount;
                             String amount =
                                 await profileController.redeemCoupon(
-                                    couponcode: redeemCouponcontroller.text);
+                                    couponcode: redeemCouponcontroller.text,
+                                    serviceId:
+                                        widget.searchServicelist.id.toString());
 
                             double tAmount = double.parse(amount);
                             double tempSaleAmounz =
                                 double.parse(tempSaleAmount);
 
-                            double totalAmountTobeAdded =
-                                tempSaleAmounz - tAmount;
+                            if (tAmount < tempSaleAmounz) {
+                              double totalAmountTobeAdded =
+                                  tempSaleAmounz - tAmount;
 
-                            setState(() {
-                              widget.searchServicelist.saleAmount =
-                                  totalAmountTobeAdded.toStringAsFixed(2);
-                            });
+                              setState(() {
+                                widget.searchServicelist.saleAmount =
+                                    totalAmountTobeAdded.toStringAsFixed(2);
+                              });
+                            } else {
+                              Get.rawSnackbar(
+                                  message:
+                                      "Coupon is not applicable for this service",
+                                  backgroundColor: Colors.red);
+                            }
                           },
                           child: Center(
                             child: Text(

@@ -39,7 +39,7 @@ class SearchServiceListData {
     String description;
     String isBooking;
     String status;
-    //List<String>? amenties;
+    List<Amenty> amenties;
     String image;
     DateTime createdAt;
     DateTime updatedAt;
@@ -55,7 +55,7 @@ class SearchServiceListData {
         required this.description,
         required this.isBooking,
         required this.status,
-        //this.amenties,
+        required this.amenties,
         required this.image,
         required this.createdAt,
         required this.updatedAt,
@@ -72,7 +72,10 @@ class SearchServiceListData {
         description: json["description"],
         isBooking: json["is_booking"],
         status: json["status"],
-        //amenties: json["amenties"] == null ? [] : List<String>.from(json["amenties"]!.map((x) => x)),
+        amenties: json["amenties"] == null
+            ? []
+            : List<Amenty>.from(
+                json["amenties"]!.map((x) => Amenty.fromJson(x))),
         image: json["image"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
@@ -94,4 +97,21 @@ class SearchServiceListData {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
     };
+}
+
+
+class Amenty {
+  String value;
+
+  Amenty({
+    required this.value,
+  });
+
+  factory Amenty.fromJson(Map<String, dynamic> json) => Amenty(
+        value: json["value"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "value": value,
+      };
 }
