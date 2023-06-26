@@ -49,7 +49,7 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Enter the OTP sent to ${widget.phoneNumber}',
+                    'Enter the OTP send to ${widget.phoneNumber}',
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -95,14 +95,14 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Don't Recive OTP ",
+                "Didn't Receive OTP ",
                 style: TextStyle(
                   fontSize: 19.sp,
                   color: Colors.black,
                 ),
               ),
               Text(
-                "Resent",
+                "Resend",
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,

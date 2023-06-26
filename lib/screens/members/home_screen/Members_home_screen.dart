@@ -161,7 +161,7 @@ class _Home_screen1State extends State<Home_screen1> {
                                     children: [
                                       kwidth10,
                                       Text(
-                                        'Subscribe Pakages',
+                                        'Subscribe Packages',
                                         style: TextStyle(
                                             color: knavblue,
                                             fontSize: 22,
@@ -252,7 +252,7 @@ class _Home_screen1State extends State<Home_screen1> {
                           children: [
                             Image.asset('assets/images/Group 5828.png'),
                             const Text(
-                              'Liqueur',
+                              'Liquors',
                               style: TextStyle(fontWeight: FontWeight.w700),
                             )
                           ],

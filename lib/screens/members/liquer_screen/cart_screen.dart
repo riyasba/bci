@@ -92,7 +92,7 @@ class _CartScreenState extends State<CartScreen> {
                         return Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Container(
-                              width: double.infinity,
+                              width: size.width,
                               height: 110,
                               decoration: BoxDecoration(
                                   color: kwhite,
@@ -103,92 +103,84 @@ class _CartScreenState extends State<CartScreen> {
                                       blurRadius: 0.5,
                                     ),
                                   ]),
-                              child: Column(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Image.network(
+                                          homeController
+                                              .cartListData[index].image,
+                                          height: 50,
+                                          width: 60,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      kwidth10,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            homeController.cartListData[index]
+                                                .serviceName,
+                                            style: const TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          SizedBox(
+                                              width: 200,
+                                              child: Text(
+                                                homeController
+                                                    .cartListData[index]
+                                                    .description,
+                                                maxLines: 3,
+                                              )),
+                                          Text(
+                                              "Qty: ${homeController.cartListData[index].quantity}"),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
                                           children: [
-                                            Image.network(
-                                              homeController
-                                                  .cartListData[index].image,
-                                              height: 50,
-                                              width: 60,
-                                              fit: BoxFit.cover,
-                                            ),
-                                            kwidth10,
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Text(
-                                                  homeController
-                                                      .cartListData[index]
-                                                      .serviceName,
-                                                  style: const TextStyle(
-                                                      fontSize: 20,
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                ),
-                                                SizedBox(
-                                                    width: 230,
-                                                    child: Text(
-                                                      homeController
+                                            InkWell(
+                                                onTap: () {
+                                                  homeController.deleteToCart(
+                                                      serviceid: homeController
                                                           .cartListData[index]
-                                                          .description,
-                                                      maxLines: 3,
-                                                    )),
-                                                Text(
-                                                    "Qty: ${homeController.cartListData[index].quantity}"),
-                                              ],
+                                                          .serviceId
+                                                          .toString());
+                                                },
+                                                child: const Icon(
+                                                  Icons.delete,
+                                                  color: Colors.redAccent,
+                                                )),
+                                            ksizedbox10,
+                                            Text(
+                                              '₹ ${homeController.cartListData[index].amount}',
+                                              style: TextStyle(
+                                                  fontSize: 17.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: kyellow),
                                             ),
                                           ],
                                         ),
-                                        Row(
-                                          children: [
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                InkWell(
-                                                    onTap: () {
-                                                      homeController.deleteToCart(
-                                                          serviceid:
-                                                              homeController
-                                                                  .cartListData[
-                                                                      index]
-                                                                  .serviceId
-                                                                  .toString());
-                                                    },
-                                                    child: const Icon(
-                                                      Icons.delete,
-                                                      color: Colors.redAccent,
-                                                    )),
-                                                ksizedbox10,
-                                                Text(
-                                                  '₹ ${homeController.cartListData[index].amount}',
-                                                  style: TextStyle(
-                                                      fontSize: 17.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: kyellow),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  )
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               )),
                         );
@@ -259,8 +251,9 @@ class _CartScreenState extends State<CartScreen> {
             children: [
               GetBuilder<HomeController>(builder: (_) {
                 return Text(
-                  homeController.getGrandTotal().toStringAsFixed(2),
-                  style: primaryFont.copyWith(color: kblue),
+                  "₹${homeController.getGrandTotal().toStringAsFixed(2)}",
+                  style: primaryFont.copyWith(
+                      color: kblue, fontSize: 15, fontWeight: FontWeight.w500),
                 );
               }),
               InkWell(

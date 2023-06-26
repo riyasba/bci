@@ -234,7 +234,7 @@ class HomeController extends GetxController {
 
       grandTotal = grandTotal + tempTotalAmount;
     }
-   
+
     return grandTotal;
   }
 
@@ -261,8 +261,8 @@ class HomeController extends GetxController {
     if (response.statusCode == 200) {
       deleteToCart(serviceid: serviceid);
 
-      Get.rawSnackbar(
-          message: response.data["message"], backgroundColor: Colors.green);
+      // Get.rawSnackbar(
+      //     message: response.data["message"], backgroundColor: Colors.green);
     } else if (response.statusCode == 400) {
       Get.rawSnackbar(
           backgroundColor: Colors.black,

@@ -51,9 +51,9 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                             child: Image.asset(
                                 'assets/images/chevron-left (2).png')),
                         Padding(
-                          padding: const EdgeInsets.only(right: 20),
+                          padding: const EdgeInsets.only(right: 0),
                           child: Text(
-                            '',
+                            'Services',
                             style: TextStyle(
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.bold,
@@ -118,7 +118,7 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                                     homeController.serviceListData[index].title,
                                 updatedAt: homeController
                                     .serviceListData[index].updatedAt,
-                                    amenties: homeController
+                                amenties: homeController
                                     .serviceListData[index].amenties,
                                 vendorId: homeController
                                     .serviceListData[index].vendorId);

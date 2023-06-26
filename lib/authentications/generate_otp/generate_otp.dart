@@ -86,7 +86,7 @@ class _MemberLoginScreenState extends State<MemberLoginScreen> {
                     decoration: InputDecoration(
                       prefixIcon: Image.asset('assets/images/Image 8.png'),
                       // suffixIcon: Image.asset('assets/images/Path 471.png'),
-                      hintText: 'Enter your username',
+                      hintText: 'Enter your Mobile number',
                       border: const OutlineInputBorder(),
                     ),
                   ),
@@ -182,7 +182,7 @@ class _MemberLoginScreenState extends State<MemberLoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Dont't have an account? ",
+                    "Don't have an account? ",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18, color: kblue),
                   ),

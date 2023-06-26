@@ -9,6 +9,7 @@ import 'package:bci/models/member_profile_model.dart';
 import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/profile_model.dart';
+import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:bci/services/network/profile_api_services/our_coupons_api_service.dart';
 import 'package:bci/services/network/profile_api_services/profile_api_services.dart';
 import 'package:bci/services/network/profile_api_services/profile_pic_update_api_services.dart';
@@ -136,15 +137,14 @@ class ProfileController extends GetxController {
   redeemCoupon({required String couponcode, required String serviceId}) async {
     String tempAmount = "0";
     dio.Response<dynamic> response = await redeemCouponApiServices
-        .redeemCouponApiServices(couponcode: couponcode,serviceId: serviceId);
+        .redeemCouponApiServices(couponcode: couponcode, serviceId: serviceId);
     if (response.statusCode == 200) {
       tempAmount = response.data["amount"].toString();
       Get.rawSnackbar(
           message: response.data["message"], backgroundColor: Colors.green);
     } else if (response.statusCode == 400) {
       Get.rawSnackbar(
-          message: response.data["error"],
-          backgroundColor: Colors.red);
+          message: response.data["error"], backgroundColor: Colors.red);
     } else {
       Get.rawSnackbar(
           message: response.data["error"], backgroundColor: Colors.red);
@@ -196,6 +196,10 @@ class ProfileController extends GetxController {
             couponcode: "",
             amount: homeController.cartListData[i].price);
       }
+
+      Get.offAll(
+        () => HelloConvexAppBar(),
+      );
 
       // Get.find<HomeController>().addSubscription(
       //     planId: id,

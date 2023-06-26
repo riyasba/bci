@@ -28,9 +28,14 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: Icon(
-          Icons.arrow_back,
-          color: kblue,
+        leading: InkWell(
+          onTap: (){
+            Get.back();
+          },
+          child: Icon(
+            Icons.arrow_back,
+            color: kblue,
+          ),
         ),
         titleSpacing: 10,
         title: Text(
