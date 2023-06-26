@@ -38,6 +38,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
   var couponAmountController = TextEditingController();
   var offerAmountController = TextEditingController();
   var offerPercentageController = TextEditingController();
+  var shareOptionController = TextEditingController();
 
   @override
   void initState() {
@@ -75,7 +76,14 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     couponAmountController.text = widget.serviceData.couponAmount ?? "";
     offerAmountController.text = widget.serviceData.offerUptoAmount ?? "";
     offerPercentageController.text = widget.serviceData.offerPercentage ?? "";
+    setState(() {
+      shareValue = widget.serviceData.shareOption;
+    });
   }
+
+  List share = ["fixed","percentage"];
+
+  var shareValue;
 
   @override
   Widget build(BuildContext context) {
@@ -285,6 +293,47 @@ class _AddServicesViewState extends State<UpdateServicesView> {
             ),
           ),
           ksizedbox10,
+          ksizedbox10,
+          Padding(
+              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+              child: Container(
+                height: 44,
+                width: 330,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 5, 5, 5)
+                            .withOpacity(0.8))),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                  child: DropdownButton<dynamic>(
+                    value: shareValue,
+                    isExpanded: true,
+                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                    elevation: 0,
+                    itemHeight: 55,
+                    isDense: true,
+                    dropdownColor: Colors.grey[250],
+                    style: const TextStyle(color: Colors.black54),
+                    hint: Text(
+                      "Share Options",
+                      style: TextStyle(fontSize: 16, color: kblue),
+                    ),
+                    onChanged: (dynamic value) {
+                      setState(() {
+                        shareValue = value!;
+                      });
+                    },
+                    items: share
+                        .map<DropdownMenuItem<dynamic>>(
+                            (dynamic value) {
+                      return DropdownMenuItem<dynamic>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ))),
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
@@ -589,63 +638,63 @@ class _AddServicesViewState extends State<UpdateServicesView> {
             ),
           ),
           ksizedbox20,
-          Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Row(
-              children: [
-                Container(
-                  width: 150,
-                  child: Text(
-                    "Offers Available: ",
-                    style: primaryFont.copyWith(
-                        color: kblue,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Checkbox(
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.all(kblue),
-                  value: isOfferEligible,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isOfferEligible = value!;
-                      isCouponEligible = !value;
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 15),
+          //   child: Row(
+          //     children: [
+          //       Container(
+          //         width: 150,
+          //         child: Text(
+          //           "Offers Available: ",
+          //           style: primaryFont.copyWith(
+          //               color: kblue,
+          //               fontSize: 17,
+          //               fontWeight: FontWeight.bold),
+          //         ),
+          //       ),
+          //       Checkbox(
+          //         checkColor: Colors.white,
+          //         fillColor: MaterialStateProperty.all(kblue),
+          //         value: isOfferEligible,
+          //         onChanged: (bool? value) {
+          //           setState(() {
+          //             isOfferEligible = value!;
+          //             isCouponEligible = !value;
+          //           });
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
           // ksizedbox20,
-          Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Row(
-              children: [
-                Container(
-                  width: 150,
-                  child: Text(
-                    "Coupons Available: ",
-                    style: primaryFont.copyWith(
-                        color: kblue,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Checkbox(
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.all(kblue),
-                  value: isCouponEligible,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isCouponEligible = value!;
-                      isOfferEligible = !value;
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 15),
+          //   child: Row(
+          //     children: [
+          //       Container(
+          //         width: 150,
+          //         child: Text(
+          //           "Coupons Available: ",
+          //           style: primaryFont.copyWith(
+          //               color: kblue,
+          //               fontSize: 17,
+          //               fontWeight: FontWeight.bold),
+          //         ),
+          //       ),
+          //       Checkbox(
+          //         checkColor: Colors.white,
+          //         fillColor: MaterialStateProperty.all(kblue),
+          //         value: isCouponEligible,
+          //         onChanged: (bool? value) {
+          //           setState(() {
+          //             isCouponEligible = value!;
+          //             isOfferEligible = !value;
+          //           });
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
           if (isOfferEligible)
             Column(
               children: [
@@ -819,7 +868,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                                         : offerPercentageController.text,
                                 actualAmount: actualAmountController.text,
                                 amenities: listTags,
-                                share: "",
+                                share: shareValue,
                                 booking: authController.isGstAvailable.isTrue
                                     ? "1"
                                     : "0",

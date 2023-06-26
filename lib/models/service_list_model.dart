@@ -52,6 +52,7 @@ class ServiceData {
   String image;
   DateTime createdAt;
   DateTime updatedAt;
+  String shareOption;
 
   ServiceData({
     required this.id,
@@ -73,6 +74,7 @@ class ServiceData {
     required this.image,
     required this.createdAt,
     required this.updatedAt,
+    required this.shareOption,
   });
 
   factory ServiceData.fromJson(Map<String, dynamic> json) => ServiceData(
@@ -98,6 +100,7 @@ class ServiceData {
         image: json["image"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        shareOption: json["share_option"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -122,6 +125,7 @@ class ServiceData {
         "image": image,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
+        "share_option": shareOption
       };
 }
 

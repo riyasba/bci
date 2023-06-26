@@ -32,7 +32,7 @@ class _BusinessOtpvarificationState extends State<BusinessOtpvarification> {
         children: [
           ksizedbox30,
           Image.asset('assets/images/Group 5816.png'),
-          Text(
+          const Text(
             'OTP Verification',
             style: TextStyle(
                 fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold),
@@ -42,15 +42,15 @@ class _BusinessOtpvarificationState extends State<BusinessOtpvarification> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Enter the OTP sent to ${widget.phoneNumber}',
-                style: TextStyle(
+                'Enter the OTP send to ${widget.phoneNumber}',
+                style:const TextStyle(
                   fontSize: 22,
                   color: Colors.black,
                 ),
               ),
               Text(
                 'Otp is ${widget.otp}',
-                style: TextStyle(
+                style:const TextStyle(
                   fontSize: 12,
                   color: Colors.black,
                 ),
@@ -61,7 +61,7 @@ class _BusinessOtpvarificationState extends State<BusinessOtpvarification> {
           SingleChildScrollView(
             child: OtpTextField(
               numberOfFields: 4,
-              borderColor: Color(0xFF512DA8),
+              borderColor:const Color(0xFF512DA8),
               //set to true to show as box or false to show as dash
               showFieldAsBox: true,
               //runs when a code is typed in
@@ -81,14 +81,14 @@ class _BusinessOtpvarificationState extends State<BusinessOtpvarification> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Don't Recive OTP ",
+                "Don't Receive OTP ",
                 style: TextStyle(
                   fontSize: 19,
                   color: Colors.black,
                 ),
               ),
               Text(
-                "Resent",
+                "Resend",
                 style: TextStyle(
                   fontSize: 19,
                   color: Colors.red,

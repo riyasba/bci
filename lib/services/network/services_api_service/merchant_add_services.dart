@@ -30,7 +30,6 @@ class AddServicesApiServices extends BaseApiService {
         "booking": createServiceModel.booking,
         "amenties": ameneity.toString(),
         "editor-value": createServiceModel.description,
-        "share": "fixed",
         "isOffer": createServiceModel.isOfferAvailable,
         "isCoupon": createServiceModel.isCouponsAvailable,
         // if (createServiceModel.offerPercentage != null)

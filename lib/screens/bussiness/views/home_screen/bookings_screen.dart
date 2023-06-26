@@ -20,6 +20,104 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
   final fromDateController = TextEditingController();
   final toDateController = TextEditingController();
 
+   DateTime date1 = DateTime.now();
+  DateTime date = DateTime.now();
+
+  String selectdt =
+      formatDate(DateTime.now().subtract(Duration(days: 1)), [
+    yyyy,
+    "-",
+    mm,
+    "-",
+    dd,
+  ]);
+
+  String selectdt1 = formatDate(
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+      [yyyy, "-", mm, "-", dd]);
+
+  _showDatePicker(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2030),
+        builder: ((context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.light(
+                primary: kblue,
+                onPrimary: Colors.white,
+                onSurface: Colors.blue,
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  primary: Color.fromARGB(255, 42, 59, 158),
+                ),
+              ),
+            ),
+            child: child!,
+          );
+        }));
+
+    if (picked != null) {
+      setState(() {
+        date1 = picked;
+        selectdt = formatDate(date1.subtract(Duration(days: 1)), [
+          yyyy,
+          "-",
+          mm,
+          "-",
+          dd,
+        ]);
+      });
+      serviceController.dateFilterBooking(
+          fromdate: selectdt,
+          todate: selectdt1);
+    }
+  }
+
+  _showDatePicker1(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2030),
+        builder: ((context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.light(
+                primary: kblue,
+                onPrimary: Colors.white,
+                onSurface: Colors.blue,
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  primary: Color.fromARGB(255, 42, 59, 158),
+                ),
+              ),
+            ),
+            child: child!,
+          );
+        }));
+
+    if (picked != null) {
+      setState(() {
+        date = picked;
+        selectdt1 = formatDate(date.add(const Duration(days: 1)), [
+          yyyy,
+          "-",
+          mm,
+          "-",
+          dd,
+        ]);
+      });
+      serviceController.dateFilterBooking(
+          fromdate: selectdt,
+          todate: selectdt1);
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -27,12 +125,13 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
     serviceController.getBooking();
     serviceController.update();
     serviceController.dateFilterBooking(
-      fromdate: _dateTime.toString(), 
-      todate: _dateTime.toString(),
+      fromdate: selectdt,
+      todate: selectdt1
       );
   }
 
   DateTime _dateTime = DateTime.now();
+  DateTime dateTime1 = DateTime(2100);
   List bookingimage = [
     'assets/images/bookingcar.png',
     'assets/images/bookingflight.png',
@@ -89,29 +188,100 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
               child: Container(
               
                 width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: [
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(),
-                        child: Text(formatDate(_dateTime, [M,',',yyyy,  ],),style: TextStyle(color: kwhite,fontSize: 18) ,),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5),
-                      child: CalenderPicker(
-                        DateTime.now(),
-                        initialSelectedDate: DateTime.now(),
-                        selectionColor: kOrange,
-                        selectedTextColor: kblue,
-                        onDateChange: (date) {
-                          setState(() {
-                            _dateTime = date;
-                          });
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20,right: 50),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("From Date:",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),),
+                            const SizedBox(width: 10,),
+                      InkWell(
+                        onTap: (){
+                          _showDatePicker(context);
                         },
+                        child: Container(
+                          height: 35,
+                          width: 120,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(selectdt),
+                              const Icon(Icons.edit_calendar)
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                        ],
+                      ),
+                      ksizedbox10,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("To Date:",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),),
+                             const SizedBox(width: 10,),
+                       InkWell(
+                        onTap: (){
+                          _showDatePicker1(context);
+                        },
+                         child: Container(
+                          height: 35,
+                          width: 120,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(selectdt1),
+                              const Icon(Icons.edit_calendar)
+                            ],
+                          ),
+                                             ),
+                       ),
+                        ],
+                      ),
+                       
+                      // Center(
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.only(),
+                      //     child: Text(formatDate(_dateTime, [M,',',yyyy,  ],),style: TextStyle(color: kwhite,fontSize: 18) ,),
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 5),
+                      //   child: CalenderPicker(
+                      //     DateTime.now().subtract(Duration(days: 50)),
+                      //     initialSelectedDate: DateTime.now(),
+                      //     selectionColor: kOrange,
+                      //     selectedTextColor: kblue,
+                      //     onDateChange: (date) {
+                      //       setState(() {
+                      //         _dateTime = date;
+                      //         serviceController.dateFilterBooking(
+                      //         fromdate: _dateTime.toString(), 
+                      //          todate: DateTime(_dateTime.year,_dateTime.month,_dateTime.day +1).toString(),
+                      //            );
+                      //       });
+                      //     },
+                      //   ),
+                      // ),
+                    ],
+                  ),
                 ),
               ),
             ),

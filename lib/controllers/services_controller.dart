@@ -155,7 +155,7 @@ class ServicesController extends GetxController {
       if(response.statusCode == 200){
 
         GetBookingList getDateFBookingList = GetBookingList.fromJson(response.data);
-        dateFilterBookingListData = getDateFBookingList.data;
+        bookingListData = getDateFBookingList.data;
 
       } else {
         Get.rawSnackbar(

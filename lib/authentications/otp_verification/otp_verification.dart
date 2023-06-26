@@ -49,7 +49,7 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Enter the OTP sent to ${widget.phoneNumber}',
+                    'Enter the OTP send to ${widget.phoneNumber}',
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -72,7 +72,7 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
           SingleChildScrollView(
             child: OtpTextField(
               numberOfFields: 4,
-              borderColor: Color(0xFF512DA8),
+              borderColor:const Color(0xFF512DA8),
               showFieldAsBox: true,
               onCodeChanged: (String code) {},
               onSubmit: (String verificationCode) {
@@ -96,14 +96,14 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Don't Recive OTP ",
+                "Don't Receive OTP ",
                 style: TextStyle(
                   fontSize: 19.sp,
                   color: Colors.black,
                 ),
               ),
               Text(
-                "Resent",
+                "Resend",
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,

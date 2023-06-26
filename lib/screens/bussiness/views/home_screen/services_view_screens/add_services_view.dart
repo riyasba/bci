@@ -296,7 +296,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                     dropdownColor: Colors.grey[250],
                     style: const TextStyle(color: Colors.black54),
                     hint: Text(
-                      "Select",
+                      "Share Options",
                       style: TextStyle(fontSize: 16, color: kblue),
                     ),
                     onChanged: (dynamic value) {
@@ -619,63 +619,63 @@ class _AddServicesViewState extends State<AddServicesView> {
             ),
           ),
           ksizedbox20,
-          Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Row(
-              children: [
-                Container(
-                  width: 150,
-                  child: Text(
-                    "Offers Available: ",
-                    style: primaryFont.copyWith(
-                        color: kblue,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Checkbox(
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.all(kblue),
-                  value: isOfferEligible,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isOfferEligible = value!;
-                      isCouponEligible = !value;
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 15),
+          //   child: Row(
+          //     children: [
+          //       Container(
+          //         width: 150,
+          //         child: Text(
+          //           "Offers Available: ",
+          //           style: primaryFont.copyWith(
+          //               color: kblue,
+          //               fontSize: 17,
+          //               fontWeight: FontWeight.bold),
+          //         ),
+          //       ),
+          //       Checkbox(
+          //         checkColor: Colors.white,
+          //         fillColor: MaterialStateProperty.all(kblue),
+          //         value: isOfferEligible,
+          //         onChanged: (bool? value) {
+          //           setState(() {
+          //             isOfferEligible = value!;
+          //             isCouponEligible = !value;
+          //           });
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
           // ksizedbox20,
-          Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Row(
-              children: [
-                Container(
-                  width: 150,
-                  child: Text(
-                    "Coupons Available: ",
-                    style: primaryFont.copyWith(
-                        color: kblue,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Checkbox(
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.all(kblue),
-                  value: isCouponEligible,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isCouponEligible = value!;
-                      isOfferEligible = !value;
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 15),
+          //   child: Row(
+          //     children: [
+          //       Container(
+          //         width: 150,
+          //         child: Text(
+          //           "Coupons Available: ",
+          //           style: primaryFont.copyWith(
+          //               color: kblue,
+          //               fontSize: 17,
+          //               fontWeight: FontWeight.bold),
+          //         ),
+          //       ),
+          //       Checkbox(
+          //         checkColor: Colors.white,
+          //         fillColor: MaterialStateProperty.all(kblue),
+          //         value: isCouponEligible,
+          //         onChanged: (bool? value) {
+          //           setState(() {
+          //             isCouponEligible = value!;
+          //             isOfferEligible = !value;
+          //           });
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
           if (isOfferEligible)
             Column(
               children: [
