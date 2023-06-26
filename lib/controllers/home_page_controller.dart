@@ -224,7 +224,7 @@ class HomeController extends GetxController {
     update();
   }
 
-  double getGrandTotal()  {
+  double getGrandTotal() {
     double grandTotal = 0.0;
 
     for (var i = 0; i < cartListData.length; i++) {
@@ -234,7 +234,7 @@ class HomeController extends GetxController {
 
       grandTotal = grandTotal + tempTotalAmount;
     }
-
+   
     return grandTotal;
   }
 

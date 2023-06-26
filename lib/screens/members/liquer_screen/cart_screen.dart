@@ -1,3 +1,4 @@
+import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/liquer_screen/widget/order_widget.dart';
@@ -253,45 +254,56 @@ class _CartScreenState extends State<CartScreen> {
                   ]),
             ),
           )),
-          InkWell(
-            onTap: () {
-              var tempAmount = homeController.getGrandTotal();
-              profileController.payUseingEaseBuzz(
-                  id: 0,
-                  amount: tempAmount.toStringAsFixed(2),
-                  customerName: profileController.profileData.first.name,
-                  email:
-                      "${profileController.profileData.first.name}@gmail.com",
-                  phone: profileController.profileData.first.mobile,
-                  status: "");
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              GetBuilder<HomeController>(builder: (_) {
+                return Text(
+                  homeController.getGrandTotal().toStringAsFixed(2),
+                  style: primaryFont.copyWith(color: kblue),
+                );
+              }),
+              InkWell(
+                onTap: () {
+                  var tempAmount = homeController.getGrandTotal();
+                  profileController.payUseingEaseBuzz(
+                      id: 0,
+                      amount: tempAmount.toStringAsFixed(2),
+                      customerName: profileController.profileData.first.name,
+                      email:
+                          "${profileController.profileData.first.name}@gmail.com",
+                      phone: profileController.profileData.first.mobile,
+                      status: "");
 
-              // for(int i = 0; i < homeController.cartListData.length; i++){
-              //   homeController.addBooking(
-              //   serviceid: homeController.cartListData[i].serviceId,
-              //   qty: homeController.cartListData[i].quantity,
-              //   offerOrCoupon: "",
-              //   couponcode: "",
-              //   amount: homeController.cartListData[i].price
-              //   );
-              // }
-            },
-            child: Container(
-              height: 40,
-              width: 150,
-              decoration: BoxDecoration(
-                color: kblue,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Text(
-                  "Book Now",
-                  style: TextStyle(
-                      fontSize: 15.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500),
+                  // for(int i = 0; i < homeController.cartListData.length; i++){
+                  //   homeController.addBooking(
+                  //   serviceid: homeController.cartListData[i].serviceId,
+                  //   qty: homeController.cartListData[i].quantity,
+                  //   offerOrCoupon: "",
+                  //   couponcode: "",
+                  //   amount: homeController.cartListData[i].price
+                  //   );
+                  // }
+                },
+                child: Container(
+                  height: 40,
+                  width: 150,
+                  decoration: BoxDecoration(
+                    color: kblue,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Book Now",
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
         ],
       ),
