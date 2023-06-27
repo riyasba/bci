@@ -42,6 +42,7 @@ class AuthController extends GetxController {
 
   RxBool isGstAvailable = true.obs;
   RxBool isLoading = false.obs;
+  RxBool isOTPLoading = false.obs;
 
 //api callings
   registerMerchants(
@@ -114,6 +115,20 @@ class AuthController extends GetxController {
     }
   }
 
+  Future<String> rendOtpFunction({required String mobileNumber}) async {
+    String otpCode = "null";
+    isOTPLoading(true);
+
+    dio.Response<dynamic> response =
+        await getOTPApiServices.getOtpApi(mobileNumber: mobileNumber);
+    isOTPLoading(false);
+
+    if (response.statusCode == 200) {
+      otpCode = response.data["otp"].toString();
+    }
+    return otpCode;
+  }
+
   getOtpFunctionBusiness({required String mobileNumber}) async {
     isLoading(true);
     dio.Response<dynamic> response =
@@ -140,14 +155,12 @@ class AuthController extends GetxController {
     dio.Response<dynamic> response =
         await loginApiServices.loginApi(mobile: mobile, otp: otp);
     isLoading(false);
-    
+
     print("start testing...................>>>>>>>>>>>>>>");
     print(response.data);
     print(response.statusCode);
     print(response.statusMessage);
     print("end testing...................>>>>>>>>>>>>>>");
-
-
 
     if (response.statusCode == 200) {
       if (response.data["user"]["role_id"] == "3") {
@@ -166,23 +179,23 @@ class AuthController extends GetxController {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "The otp field is required", 
+            "The otp field is required",
             style: primaryFont.copyWith(color: Colors.white),
           ));
-    } else if(response.statusCode == 401) {
+    } else if (response.statusCode == 401) {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "Invalid OTP", 
+            "Invalid OTP",
             style: primaryFont.copyWith(color: Colors.white),
           ));
     } else {
-        Get.rawSnackbar(
-            backgroundColor: Colors.red,
-            messageText: Text(
-              "something went wrong",
-              style: primaryFont.copyWith(color: Colors.white),
-            ));
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
     }
   }
 

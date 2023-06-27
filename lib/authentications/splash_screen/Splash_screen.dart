@@ -35,7 +35,6 @@ class _splashState extends State<splash> {
 
   toHomePageMember() async {
     await Future.delayed(const Duration(seconds: 2));
-
     Get.offAll(
       () => HelloConvexAppBar(),
     );

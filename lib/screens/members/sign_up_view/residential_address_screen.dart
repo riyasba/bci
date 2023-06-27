@@ -251,10 +251,8 @@ class _ResidentialAddressScreenState extends State<ResidentialAddressScreen> {
                     }
                     return null;
                   },
-                 
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(15),
-                   
                   ],
                   decoration: InputDecoration(
                       fillColor: Colors.white,
@@ -326,71 +324,126 @@ class _ResidentialAddressScreenState extends State<ResidentialAddressScreen> {
                 ),
               ),
               ksizedbox40,
-              InkWell(
-                onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    AddressModel addressModel = AddressModel(
-                        doorNo: doorNumberController.text,
-                        buildingName: buildingNameController.text,
-                        address: addressController.text,
-                        city: cityController.text,
-                        state: stateController.text,
-                        personalId: personalIDController.text,
-                        aadhrId: aadharController.text);
-
-                    MemberRegisterModel tempMemberRegisterModel =
-                        MemberRegisterModel(
-                            aadharNo: aadharController.text,
-                            email: widget.memberRegisterModel.email,
-                            fatherName: widget.memberRegisterModel.fatherName,
-                            isMarried: widget.memberRegisterModel.isMarried,
-                            mobile: widget.memberRegisterModel.mobile,
-                            motherName: widget.memberRegisterModel.motherName,
-                            name: widget.memberRegisterModel.name,
-                            occupation: widget.memberRegisterModel.occupation,
-                            panNo: personalIDController.text,
-                            password: widget.memberRegisterModel.password,
-                            passwordConfirmation:
-                                widget.memberRegisterModel.password,
-                            roleId: widget.memberRegisterModel.roleId);
-
-                    Get.to(OfficeAddressScreen(
-                      addressModel: addressModel,
-                      memberRegisterModel: tempMemberRegisterModel,
-                    ));
-                  }
-                },
-                child: Container(
-                  height: 50,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    border: Border.all(color: const Color(0xffFFBF7E)),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0xFFFF5C29),
-                        blurRadius: 3.0,
-                      )
-                    ],
-                    gradient: const LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        Color(0xFFFF5C29),
-                        Color.fromARGB(255, 255, 123, 34),
-                      ],
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Container(
+                          height: 50,
+                          width: size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: const Color(0xffFFBF7E)),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 41, 98, 255),
+                                blurRadius: 3.0,
+                              )
+                            ],
+                            gradient: LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                kblue,
+                                Color.fromARGB(255, 54, 99, 248),
+                              ],
+                            ),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Back",
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  child: const Center(
-                    child: Text(
-                      "Next",
-                      style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: InkWell(
+                        onTap: () {
+                          if (_formKey.currentState!.validate()) {
+                            AddressModel addressModel = AddressModel(
+                                doorNo: doorNumberController.text,
+                                buildingName: buildingNameController.text,
+                                address: addressController.text,
+                                city: cityController.text,
+                                state: stateController.text,
+                                personalId: personalIDController.text,
+                                aadhrId: aadharController.text);
+
+                            MemberRegisterModel tempMemberRegisterModel =
+                                MemberRegisterModel(
+                                    aadharNo: aadharController.text,
+                                    email: widget.memberRegisterModel.email,
+                                    fatherName:
+                                        widget.memberRegisterModel.fatherName,
+                                    isMarried:
+                                        widget.memberRegisterModel.isMarried,
+                                    mobile: widget.memberRegisterModel.mobile,
+                                    motherName:
+                                        widget.memberRegisterModel.motherName,
+                                    name: widget.memberRegisterModel.name,
+                                    occupation:
+                                        widget.memberRegisterModel.occupation,
+                                    panNo: personalIDController.text,
+                                    password:
+                                        widget.memberRegisterModel.password,
+                                    passwordConfirmation:
+                                        widget.memberRegisterModel.password,
+                                    roleId: widget.memberRegisterModel.roleId);
+
+                            Get.to(OfficeAddressScreen(
+                              addressModel: addressModel,
+                              memberRegisterModel: tempMemberRegisterModel,
+                            ));
+                          }
+                        },
+                        child: Container(
+                          height: 50,
+                          width: size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: const Color(0xffFFBF7E)),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0xFFFF5C29),
+                                blurRadius: 3.0,
+                              )
+                            ],
+                            gradient: const LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                Color(0xFFFF5C29),
+                                Color.fromARGB(255, 255, 123, 34),
+                              ],
+                            ),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Next",
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
               ksizedbox10,
             ],

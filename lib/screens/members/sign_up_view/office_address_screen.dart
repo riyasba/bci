@@ -278,7 +278,7 @@ class _OfficeAddressScreenState extends State<OfficeAddressScreen> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       hintText: "State",
                       hintStyle: TextStyle(
                         color: kblue,
@@ -287,51 +287,14 @@ class _OfficeAddressScreenState extends State<OfficeAddressScreen> {
                 ),
               ),
               ksizedbox40,
-              Obx(
-                () => authController.isLoading.isTrue
-                    ? Container(
-                        height: 50,
-                        width: size.width,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          border: Border.all(color: const Color(0xffFFBF7E)),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color(0xFFFF5C29),
-                              blurRadius: 3.0,
-                            )
-                          ],
-                          gradient: const LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [
-                              Color(0xFFFF5C29),
-                              Color.fromARGB(255, 255, 123, 34),
-                            ],
-                          ),
-                        ),
-                        child: const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
-                    : InkWell(
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: InkWell(
                         onTap: () {
-                          if (_formKey.currentState!.validate()) {
-                            AddressModel oficeaddressModel = AddressModel(
-                                doorNo: doorNumberController.text,
-                                buildingName: buildingNameController.text,
-                                address: addressController.text,
-                                city: cityController.text,
-                                state: stateController.text,
-                                personalId: "",
-                                aadhrId: "");
-                            authController.registerMember(
-                                memberRegisterModel: widget.memberRegisterModel,
-                                officialAddress: oficeaddressModel,
-                                residentialAddress: widget.addressModel);
-                          }
+                          Get.back();
                         },
                         child: Container(
                           height: 50,
@@ -341,22 +304,22 @@ class _OfficeAddressScreenState extends State<OfficeAddressScreen> {
                             border: Border.all(color: const Color(0xffFFBF7E)),
                             boxShadow: const [
                               BoxShadow(
-                                color: Color(0xFFFF5C29),
+                                color: Color.fromARGB(255, 41, 98, 255),
                                 blurRadius: 3.0,
                               )
                             ],
-                            gradient: const LinearGradient(
+                            gradient: LinearGradient(
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,
                               colors: [
-                                Color(0xFFFF5C29),
-                                Color.fromARGB(255, 255, 123, 34),
+                                kblue,
+                                Color.fromARGB(255, 54, 99, 248),
                               ],
                             ),
                           ),
                           child: const Center(
                             child: Text(
-                              "Create Account",
+                              "Back",
                               style: TextStyle(
                                   fontSize: 22,
                                   color: Colors.white,
@@ -365,6 +328,93 @@ class _OfficeAddressScreenState extends State<OfficeAddressScreen> {
                           ),
                         ),
                       ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Obx(
+                      () => authController.isLoading.isTrue
+                          ? Container(
+                            height: 50,
+                            width: size.width,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6),
+                              border:
+                                  Border.all(color: const Color(0xffFFBF7E)),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color(0xFFFF5C29),
+                                  blurRadius: 3.0,
+                                )
+                              ],
+                              gradient: const LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [
+                                  Color(0xFFFF5C29),
+                                  Color.fromARGB(255, 255, 123, 34),
+                                ],
+                              ),
+                            ),
+                            child: const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                          : InkWell(
+                              onTap: () {
+                                if (_formKey.currentState!.validate()) {
+                                  AddressModel oficeaddressModel = AddressModel(
+                                      doorNo: doorNumberController.text,
+                                      buildingName: buildingNameController.text,
+                                      address: addressController.text,
+                                      city: cityController.text,
+                                      state: stateController.text,
+                                      personalId: "",
+                                      aadhrId: "");
+                                  authController.registerMember(
+                                      memberRegisterModel:
+                                          widget.memberRegisterModel,
+                                      officialAddress: oficeaddressModel,
+                                      residentialAddress: widget.addressModel);
+                                }
+                              },
+                              child: Container(
+                                height: 50,
+                                width: size.width,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6),
+                                  border: Border.all(
+                                      color: const Color(0xffFFBF7E)),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Color(0xFFFF5C29),
+                                      blurRadius: 3.0,
+                                    )
+                                  ],
+                                  gradient: const LinearGradient(
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                    colors: [
+                                      Color(0xFFFF5C29),
+                                      Color.fromARGB(255, 255, 123, 34),
+                                    ],
+                                  ),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    "Create Account",
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                              ),
+                            ),
+                    ),
+                  ),
+                ],
               ),
               ksizedbox10,
             ],

@@ -202,7 +202,7 @@ class _CartScreenState extends State<CartScreen> {
                                                   //         .serviceId
                                                   //         .toString());
                                                 },
-                                                child:const Row(
+                                                child: Row(
                                                   children: [
                                                      Icon(
                                                       CupertinoIcons.delete,

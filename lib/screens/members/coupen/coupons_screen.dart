@@ -70,7 +70,7 @@ class _Coupens_membersState extends State<Coupens_members> {
                     ),
                     IconButton(
                         onPressed: () {
-                          Get.to(NotificationScreen());
+                          Get.to(const NotificationScreen());
                         },
                         icon: Icon(
                           Icons.notifications,
@@ -97,94 +97,107 @@ class _Coupens_membersState extends State<Coupens_members> {
             GetBuilder<ProfileController>(builder: (_) {
               return Container(
                 height: size.height * 0.75,
-                child: ListView.builder(
-                  itemCount: profileController.couponsData.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 5, bottom: 5),
-                      child: ClipPath(
-                        clipper: TicketPassClipper(),
-                        child: Container(
-                          height: 90,
-                          decoration: BoxDecoration(
-                              color: colors[Random().nextInt(9)],
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                child: profileController.couponsData.isEmpty
+                    ? Center(
+                        child: Text("No Coupons Available"),
+                      )
+                    : ListView.builder(
+                        itemCount: profileController.couponsData.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 5, bottom: 5),
+                            child: ClipPath(
+                              clipper: TicketPassClipper(),
+                              child: Container(
+                                height: 90,
+                                decoration: BoxDecoration(
+                                    color: colors[Random().nextInt(9)],
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Row(
                                   children: [
-                                    Text(
-                                      profileController.couponsData[index].name
-                                          .toString(),
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    Row(
-                                      children: [
-                                        const Text(
-                                          "Coupons Code:",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                        Text(
-                                          profileController
-                                              .couponsData[index].couponcode,
-                                          style: TextStyle(
-                                              color: korange,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        InkWell(
-                                            onTap: () {
-                                              FlutterClipboard.copy(
-                                                      profileController
-                                                          .couponsData[index]
-                                                          .couponcode)
-                                                  .then(
-                                                (value) =>
-                                                    Fluttertoast.showToast(
-                                                        msg:
-                                                            "Copy to clipboard",
-                                                        toastLength:
-                                                            Toast.LENGTH_SHORT,
-                                                        gravity:
-                                                            ToastGravity.CENTER,
-                                                        timeInSecForIosWeb: 1,
-                                                        backgroundColor:
-                                                            Colors.white,
-                                                        textColor: Colors.black,
-                                                        fontSize: 16.0),
-                                                //print("code copied")
-                                              );
-                                            },
-                                            child: const Icon(
-                                              Icons.copy,
-                                              size: 15,
-                                            ))
-                                      ],
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text(
+                                            profileController
+                                                .couponsData[index].name
+                                                .toString(),
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                "Coupons Code:",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                              Text(
+                                                profileController
+                                                    .couponsData[index]
+                                                    .couponcode,
+                                                style: TextStyle(
+                                                    color: korange,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              InkWell(
+                                                  onTap: () {
+                                                    FlutterClipboard.copy(
+                                                            profileController
+                                                                .couponsData[
+                                                                    index]
+                                                                .couponcode)
+                                                        .then(
+                                                      (value) => Fluttertoast
+                                                          .showToast(
+                                                              msg:
+                                                                  "Copy to clipboard",
+                                                              toastLength: Toast
+                                                                  .LENGTH_SHORT,
+                                                              gravity:
+                                                                  ToastGravity
+                                                                      .CENTER,
+                                                              timeInSecForIosWeb:
+                                                                  1,
+                                                              backgroundColor:
+                                                                  Colors.white,
+                                                              textColor:
+                                                                  Colors.black,
+                                                              fontSize: 16.0),
+                                                      //print("code copied")
+                                                    );
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.copy,
+                                                    size: 15,
+                                                  ))
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               );
             }),
             //Image.asset('assets/images/Group 5789.png'),ksizedbox30,

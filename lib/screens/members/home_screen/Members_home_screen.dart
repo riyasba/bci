@@ -131,9 +131,10 @@ class _Home_screen1State extends State<Home_screen1> {
                                         enableInfiniteScroll: true,
                                         reverse: false,
                                         autoPlay: true,
-                                        autoPlayInterval: Duration(seconds: 3),
+                                        autoPlayInterval:
+                                            const Duration(seconds: 3),
                                         autoPlayAnimationDuration:
-                                            Duration(milliseconds: 800),
+                                            const Duration(milliseconds: 800),
                                         autoPlayCurve: Curves.fastOutSlowIn,
                                         enlargeCenterPage: true,
                                         enlargeFactor: 0.3,
@@ -341,7 +342,7 @@ class _Home_screen1State extends State<Home_screen1> {
                           autoPlay: true,
                           autoPlayInterval: const Duration(seconds: 3),
                           autoPlayAnimationDuration:
-                              const Duration(milliseconds: 800),
+                              const Duration(milliseconds: 1800),
                           autoPlayCurve: Curves.fastOutSlowIn,
                           enlargeCenterPage: true,
                           enlargeFactor: 0.3,
@@ -377,7 +378,7 @@ class _Home_screen1State extends State<Home_screen1> {
                         ),
                         InkWell(
                           onTap: () {
-                            Get.to(offer_screen());
+                            Get.to(const offer_screen());
                           },
                           child: Text(
                             'See All',
@@ -396,13 +397,13 @@ class _Home_screen1State extends State<Home_screen1> {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: Container(
                               height: 106,
                               width: 144,
                               child: InkWell(
                                   onTap: () {
-                                    Get.to(offer_screen());
+                                    Get.to(const offer_screen());
                                   },
                                   child: Image.asset('assets/images/aaaa.png')),
                             ),

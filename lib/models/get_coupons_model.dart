@@ -60,16 +60,16 @@ class CouponsData {
 
     factory CouponsData.fromJson(Map<String, dynamic> json) => CouponsData(
         id: json["id"],
-        userId: json["user_id"],
-        cId: json["c_id"],
-        planId: json["plan_id"],
-        couponcode: json["couponcode"],
-        amount: json["amount"],
-        isRedeemed: json["is_redeemed"],
+        userId: json["user_id"] ?? "",
+        cId: json["c_id"] ?? "",
+        planId: json["plan_id"] ?? "",
+        couponcode: json["couponcode"] ?? "",
+        amount: json["amount"] ?? "",
+        isRedeemed: json["is_redeemed"] ?? "",
         expiryAt: DateTime.parse(json["expiry_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        name: json["name"],
+        name: json["name"] ?? "",
         colorIndex: Random().nextInt(4),
     );
 
