@@ -38,6 +38,7 @@ class _Home_screen1State extends State<Home_screen1> {
     super.initState();
     profileController.getProfile();
     homeController.getSlider();
+    homeController.todayOffers();
   }
 
   @override
@@ -215,7 +216,7 @@ class _Home_screen1State extends State<Home_screen1> {
                   ksizedbox20,
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       InkWell(
                         onTap: () {
@@ -300,6 +301,7 @@ class _Home_screen1State extends State<Home_screen1> {
                           ],
                         ),
                       ),
+                      kwidth10
                     ],
                   ),
                   ksizedbox30,
@@ -340,7 +342,7 @@ class _Home_screen1State extends State<Home_screen1> {
                           enableInfiniteScroll: true,
                           reverse: false,
                           autoPlay: true,
-                          autoPlayInterval: const Duration(seconds: 3),
+                          autoPlayInterval: const Duration(seconds: 4),
                           autoPlayAnimationDuration:
                               const Duration(milliseconds: 1800),
                           autoPlayCurve: Curves.fastOutSlowIn,
@@ -349,19 +351,23 @@ class _Home_screen1State extends State<Home_screen1> {
                           scrollDirection: Axis.horizontal,
                         )),
                   if (homeController.sliderList.isNotEmpty)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AnimatedSmoothIndicator(
-                          activeIndex: activeIndex,
-                          count: homeController.sliderList.length,
-                          effect: ScaleEffect(
-                              dotHeight: 9.0,
-                              dotWidth: 9.0,
-                              dotColor: kgrey,
-                              activeDotColor: Colors.yellow),
-                        ),
-                      ],
+                   
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AnimatedSmoothIndicator(
+                            activeIndex: activeIndex,
+                            count: homeController.sliderList.length,
+                            effect: ScaleEffect(
+                                dotHeight: 9.0,
+                                dotWidth: 9.0,
+                                dotColor: kgrey,
+                                activeDotColor: Colors.yellow),
+                          ),
+                        ],
+                      ),
                     ),
                   ksizedbox10,
                   Padding(
@@ -378,7 +384,7 @@ class _Home_screen1State extends State<Home_screen1> {
                         ),
                         InkWell(
                           onTap: () {
-                            Get.to(const offer_screen());
+                            Get.to(const TodayOfferScreen());
                           },
                           child: Text(
                             'See All',
@@ -390,25 +396,28 @@ class _Home_screen1State extends State<Home_screen1> {
                   ),
                   Container(
                     height: 150,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 6,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              height: 106,
-                              width: 144,
-                              child: InkWell(
-                                  onTap: () {
-                                    Get.to(const offer_screen());
-                                  },
-                                  child: Image.asset('assets/images/aaaa.png')),
-                            ),
-                          );
-                        }),
+                    child: GetBuilder<HomeController>(
+                      builder: (_) {
+                        return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: homeController.todayOfferListData.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding:const EdgeInsets.all(8.0),
+                                child: Container(
+                                  child: InkWell(
+                                      onTap: () {
+                                        Get.to(const TodayOfferScreen());
+                                      },
+                                      child: Image.network(homeController.todayOfferListData[index].image)
+                                      ),
+                                ),
+                              );
+                            });
+                      }
+                    ),
                   )
                 ],
               ),

@@ -25,7 +25,7 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
     // TODO: implement initState
     super.initState();
     homeController.serviceList();
-    homeController.update();
+   
   }
 
   @override

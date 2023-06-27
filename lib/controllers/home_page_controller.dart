@@ -5,6 +5,7 @@ import 'package:bci/models/get_cart_list_model.dart';
 import 'package:bci/models/get_plan_details_model.dart';
 import 'package:bci/models/get_plans_model.dart';
 import 'package:bci/models/get_service_list_model.dart';
+import 'package:bci/models/get_today_offers_list_model.dart';
 import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/models/slider_model.dart';
 import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
@@ -17,6 +18,7 @@ import 'package:bci/services/network/categorys_api_services/get_booking_list_api
 import 'package:bci/services/network/categorys_api_services/get_cart_list_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_filter_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_service_list_api_service.dart';
+import 'package:bci/services/network/categorys_api_services/get_today_offers_list_api_service.dart';
 import 'package:bci/services/network/categorys_api_services/search_service_list_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/add_subscription_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plan_details_api_services.dart';
@@ -123,9 +125,9 @@ class HomeController extends GetxController {
       SearchServiceListApiServices();
   List<SearchServiceListData> searchServiceListData = [];
 
-  searchServiceList({required String searchKey}) async {
+  searchServiceList({required String searchKey,dynamic categoryid}) async {
     dio.Response<dynamic> response = await searchServiceListApiServices
-        .searchServiceListApiServices(searchKey: searchKey);
+        .searchServiceListApiServices(searchKey: searchKey,categoryid: categoryid);
 
     if (response.statusCode == 200) {
       SearchServiceList searchServiceList =
@@ -324,5 +326,29 @@ class HomeController extends GetxController {
           ));
     }
     update();
+  }
+
+  //get today offers list
+  GetTodayOffersListApiServices getTodayOffersListApiServices = GetTodayOffersListApiServices();
+  List<TodayOfferListData> todayOfferListData = [];
+
+  todayOffers() async {
+
+    dio.Response<dynamic> response = await getTodayOffersListApiServices.getTodayOffersListApiServices();
+    if(response.statusCode == 200){
+      
+      GetTodayOffersList getTodayOffersList = GetTodayOffersList.fromJson(response.data);
+      todayOfferListData = getTodayOffersList.message;
+
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+
   }
 }

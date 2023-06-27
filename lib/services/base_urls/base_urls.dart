@@ -67,4 +67,7 @@ abstract class BaseApiService {
   //get booking list
   final String bookingListApiUrl = "https://bci.generation360tech.in/api/auth/booking_list";
 
+  //get today offers list
+  final String todayOffersListApiUrl = "https://bci.generation360tech.in/api/auth/today_offers_list";
+
 }

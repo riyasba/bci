@@ -4,6 +4,7 @@ import 'package:bci/models/category_model.dart';
 import 'package:bci/screens/members/members_search_screen/member_service_details_screen.dart';
 import 'package:bci/screens/members/members_search_screen/member_service_view_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -44,9 +45,11 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
     searchController.addListener(searchUsers);
   }
 
+  var id;
+
   searchUsers() {
     if (searchController.text.trim().isNotEmpty) {
-      homeController.searchServiceList(searchKey: searchController.text);
+      homeController.searchServiceList(searchKey: searchController.text,categoryid: id);
     } else {
       homeController.searchServiceListData.clear();
       homeController.update();
@@ -100,6 +103,11 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: TextField(
                   controller: searchController,
+                  onChanged: (val){
+                    setState(() {
+                      
+                    });
+                  },
                   decoration: InputDecoration(
                       disabledBorder: const OutlineInputBorder(),
                       hintText: 'Search',
@@ -110,7 +118,15 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4.0),
                       ),
-                      suffixIcon: Image.asset('assets/images/XMLID_223_.png')),
+                      prefixIcon: Image.asset('assets/images/XMLID_223_.png'),
+                      
+                      suffixIcon:searchController.text.length > 1 ? InkWell(
+                        onTap: (){
+                          searchController.clear();
+                        },
+                        child: Icon(CupertinoIcons.clear,color: Colors.grey,),
+                        ) : Icon(CupertinoIcons.clear,color: Colors.white,),
+                        ),
                 ),
               ),
               // MyDropdown(
@@ -120,46 +136,62 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
               GetBuilder<AuthController>(builder: (_) {
                 return Padding(
                   padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
-                  child: Container(
-                    height: 44,
-                    decoration: BoxDecoration(
-                        color: kgrey,
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(
-                            color: const Color.fromARGB(255, 5, 5, 5)
-                                .withOpacity(0.8))),
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 10, right: 10, top: 10),
-                      child: DropdownButton<CategoryList>(
-                        value: merchantCategory,
-                        isExpanded: true,
-                        icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                        elevation: 1,
-                        itemHeight: 55,
-                        isDense: true,
-                        dropdownColor: Colors.white,
-                        style: const TextStyle(color: Colors.black54),
-                        hint: const Text(
-                          "Merchant Category Name",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 44,
+                        width: 300,
+                        decoration: BoxDecoration(
+                            color: kgrey,
+                            borderRadius: BorderRadius.circular(3),
+                            border: Border.all(
+                                color: const Color.fromARGB(255, 5, 5, 5)
+                                    .withOpacity(0.8))),
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.only(left: 10, right: 10, top: 10),
+                          child: DropdownButton<CategoryList>(
+                            value: merchantCategory,
+                            isExpanded: true,
+                            icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                            elevation: 1,
+                            itemHeight: 55,
+                            isDense: true,
+                            dropdownColor: Colors.white,
+                            style: const TextStyle(color: Colors.black54),
+                            hint: const Text(
+                              "Merchant Category Name",
+                              style: TextStyle(fontSize: 16, color: Colors.white),
+                            ),
+                            onChanged: (CategoryList? value) {
+                              setState(() {
+                                merchantCategory = value!;
+                                id = value.id;
+                              });
+                              homeController.filter(category: value!.id.toString());
+                            },
+                            items: authController.categoryList
+                                .map<DropdownMenuItem<CategoryList>>(
+                                    (CategoryList value) {
+                              return DropdownMenuItem<CategoryList>(
+                                value: value,
+                                child: Text(value.title),
+                              );
+                            }).toList(),
+                          ),
                         ),
-                        onChanged: (CategoryList? value) {
-                          setState(() {
-                            merchantCategory = value!;
-                          });
-                          homeController.filter(category: value!.id.toString());
-                        },
-                        items: authController.categoryList
-                            .map<DropdownMenuItem<CategoryList>>(
-                                (CategoryList value) {
-                          return DropdownMenuItem<CategoryList>(
-                            value: value,
-                            child: Text(value.title),
-                          );
-                        }).toList(),
                       ),
-                    ),
+                      kwidth10,
+                      InkWell(
+                        onTap: (){
+                           setState(() {
+                             merchantCategory = null;
+                             id = null;
+                             homeController.searchServiceListData.clear();
+                           });
+                                    },
+                        child:const Icon(CupertinoIcons.clear,color: Colors.grey,)),
+                    ],
                   ),
                 );
               }),

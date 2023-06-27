@@ -3,8 +3,8 @@ import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SearchServiceListApiServices extends BaseApiService {
-  Future searchServiceListApiServices({required String searchKey,dynamic categoryid}) async {
+class GetTodayOffersListApiServices extends BaseApiService {
+  Future getTodayOffersListApiServices() async {
     dynamic responseJson;
     try {
       var dio = Dio();
@@ -12,22 +12,17 @@ class SearchServiceListApiServices extends BaseApiService {
       String? authtoken = prefs.getString("auth_token");
 
       var response = await dio.post(
-        serviceListApiUrl,
+        todayOffersListApiUrl,
         options: Options(
             headers: {
-              'Accept': 'application/json',
               'Authorization': 'Bearer $authtoken'
             },
             followRedirects: false,
             validateStatus: (status) {
               return status! <= 500;
             }),
-            data: {
-              "title" : searchKey,
-              "category": categoryid
-            }
       );
-      print("::::::::<search service-list Api>::::::::status code::::::::::");
+      print("::::::::<get today-offers-list Api>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;
