@@ -3,12 +3,14 @@ import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/liquer_screen/widget/order_widget.dart';
 import 'package:custom_clippers/custom_clippers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
@@ -111,62 +113,107 @@ class _CartScreenState extends State<CartScreen> {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Image.network(
-                                          homeController
-                                              .cartListData[index].image,
-                                          height: 50,
-                                          width: 60,
-                                          fit: BoxFit.cover,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(5),
+                                          child: Image.network(
+                                            homeController
+                                                .cartListData[index].image,
+                                            height: 100,
+                                            width: 70,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
-                                      kwidth10,
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            homeController.cartListData[index]
-                                                .serviceName,
-                                            style: const TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          SizedBox(
-                                              width: 180,
-                                              child: Text(
-                                                homeController
-                                                    .cartListData[index]
-                                                    .description,
-                                                maxLines: 3,
-                                              )),
-                                          Text(
-                                              "Qty: ${homeController.cartListData[index].quantity}"),
-                                        ],
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 5,bottom: 5,left: 5,right: 5),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              homeController.cartListData[index].serviceName,
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            const SizedBox(height: 5,),
+                                            Container(
+                                                width: 150,
+                                                child: Text(
+                                                  homeController.cartListData[index].description,
+                                                  maxLines: 3,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style:const TextStyle(color: Colors.black54),
+                                                )),
+                                                const SizedBox(height: 5,),
+                                            Text(
+                                                "Qty: ${homeController.cartListData[index].quantity}"),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                        padding: const EdgeInsets.only(right: 10,top: 10),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           children: [
-                                            
                                             InkWell(
                                                 onTap: () {
-                                                  homeController.deleteToCart(
-                                                      serviceid: homeController
-                                                          .cartListData[index]
-                                                          .serviceId
-                                                          .toString());
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (BuildContext context) {
+                                                    return AlertDialog(
+      backgroundColor: Colors.white,
+      title: Text("Remove Item", style: boldTextStyle(color: Colors.black)),
+      content: Text(
+        "Are you sure you want to remove this item?",
+        style: secondaryTextStyle(color: Colors.black),
+      ),
+      actions: [
+        TextButton(
+          child: Text(
+            "cancel",
+            style: primaryTextStyle(color: Colors.grey),
+          ),
+          onPressed: () {
+            Get.back();
+           //Get.find<AuthController>().logout();
+          },
+        ),
+        TextButton(
+          child: Text("Remove", style: primaryTextStyle(color: Colors.grey)),
+          onPressed: () {
+             homeController.deleteToCart(
+             serviceid: homeController.cartListData[index].serviceId.toString());
+            Get.back();
+          },
+        ),
+      ],
+    );
+                                                    });
+                                                  // homeController.deleteToCart(
+                                                  //     serviceid: homeController
+                                                  //         .cartListData[index]
+                                                  //         .serviceId
+                                                  //         .toString());
                                                 },
-                                                child: const Icon(
-                                                  Icons.delete,
-                                                  color: Colors.redAccent,
+                                                child:const Row(
+                                                  children: [
+                                                     Icon(
+                                                      CupertinoIcons.delete,
+                                                      color: Colors.grey,
+                                                      size: 15,
+                                                    ),
+                                                    SizedBox(width: 5,),
+                                                    Text("Remove",style: TextStyle(color: Colors.grey),)
+                                                  ],
                                                 )),
+
                                             ksizedbox10,
                                             Text(
                                               '₹ ${double.parse(homeController.cartListData[index].amount).toStringAsFixed(2)}',
@@ -305,4 +352,6 @@ class _CartScreenState extends State<CartScreen> {
        
     );
   }
+
+  // AlertDialog mAlertItem2 = ;
 }
