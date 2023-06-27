@@ -76,11 +76,9 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ),
           )),
-      body: Column(
-        children: [
+      body: 
           GetBuilder<HomeController>(builder: (_) {
             return Container(
-              height: size.height * 0.5,
               child: homeController.cartListData.isEmpty
                   ? const Center(
                       child: Text("No Items In Your Cart"),
@@ -135,7 +133,7 @@ class _CartScreenState extends State<CartScreen> {
                                                 fontWeight: FontWeight.w600),
                                           ),
                                           SizedBox(
-                                              width: 200,
+                                              width: 180,
                                               child: Text(
                                                 homeController
                                                     .cartListData[index]
@@ -156,6 +154,7 @@ class _CartScreenState extends State<CartScreen> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           children: [
+                                            
                                             InkWell(
                                                 onTap: () {
                                                   homeController.deleteToCart(
@@ -170,7 +169,7 @@ class _CartScreenState extends State<CartScreen> {
                                                 )),
                                             ksizedbox10,
                                             Text(
-                                              '₹ ${homeController.cartListData[index].amount}',
+                                              '₹ ${double.parse(homeController.cartListData[index].amount).toStringAsFixed(2)}',
                                               style: TextStyle(
                                                   fontSize: 17.sp,
                                                   fontWeight: FontWeight.w600,
@@ -188,118 +187,122 @@ class _CartScreenState extends State<CartScreen> {
                     ),
             );
           }),
-          const Divider(
-            thickness: 1,
-          ),
-          Expanded(
-              child: Container(
-            height: 100.h,
-            width: double.infinity,
-            color: kwhite,
+          // const Divider(
+          //   thickness: 1,
+          // ),
+          // Expanded(
+          //     child: Container(
+          //   height: 100.h,
+          //   width: double.infinity,
+          //   color: kwhite,
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //     child: Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           // ksizedbox40,
+          //           Text(
+          //             'Support',
+          //             style: TextStyle(
+          //                 fontSize: 25.sp, fontWeight: FontWeight.w600),
+          //           ),
+          //           ksizedbox10,
+          //           Text(
+          //             'Member ID Number:',
+          //             style: TextStyle(
+          //                 fontSize: 20.sp,
+          //                 fontWeight: FontWeight.w400,
+          //                 color: korange),
+          //           ),
+          //           Text(
+          //             'BCI123456QWE',
+          //             style: TextStyle(fontSize: 15.sp),
+          //           ),
+          //           ksizedbox10,
+          //           Text(
+          //             'Phone Number:',
+          //             style: TextStyle(
+          //                 fontSize: 20.sp,
+          //                 fontWeight: FontWeight.w400,
+          //                 color: korange),
+          //           ),
+          //           Text(
+          //             '92345 43453',
+          //             style: TextStyle(fontSize: 15.sp),
+          //           ),
+          //           ksizedbox10,
+          //           Text(
+          //             'Delivery Address:',
+          //             style: TextStyle(
+          //                 fontSize: 20.sp,
+          //                 fontWeight: FontWeight.w400,
+          //                 color: korange),
+          //           ),
+          //           Text(
+          //             '2A,Street Nager, Anna Nagar, Chennai, 600021.',
+          //             style: TextStyle(fontSize: 15.sp),
+          //           ),
+          //         ]),
+          //   ),
+          // )),
+          bottomNavigationBar: Container(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // ksizedbox40,
-                    Text(
-                      'Support',
-                      style: TextStyle(
-                          fontSize: 25.sp, fontWeight: FontWeight.w600),
+              padding: const EdgeInsets.only(top: 5),
+              child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GetBuilder<HomeController>(builder: (_) {
+                  return Text(
+                    "₹${homeController.getGrandTotal().toStringAsFixed(2)}",
+                    style: primaryFont.copyWith(
+                        color: kblue, fontSize: 15, fontWeight: FontWeight.w500),
+                  );
+                }),
+                InkWell(
+                  onTap: () {
+                    var tempAmount = homeController.getGrandTotal();
+                    profileController.payUseingEaseBuzz(
+                        id: 0,
+                        amount: tempAmount.toStringAsFixed(2),
+                        customerName: profileController.profileData.first.name,
+                        email:
+                            "${profileController.profileData.first.name}@gmail.com",
+                        phone: profileController.profileData.first.mobile,
+                        status: "");
+              
+                    // for(int i = 0; i < homeController.cartListData.length; i++){
+                    //   homeController.addBooking(
+                    //   serviceid: homeController.cartListData[i].serviceId,
+                    //   qty: homeController.cartListData[i].quantity,
+                    //   offerOrCoupon: "",
+                    //   couponcode: "",
+                    //   amount: homeController.cartListData[i].price
+                    //   );
+                    // }
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      color: kblue,
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    ksizedbox10,
-                    Text(
-                      'Member ID Number:',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w400,
-                          color: korange),
-                    ),
-                    Text(
-                      'BCI123456QWE',
-                      style: TextStyle(fontSize: 15.sp),
-                    ),
-                    ksizedbox10,
-                    Text(
-                      'Phone Number:',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w400,
-                          color: korange),
-                    ),
-                    Text(
-                      '92345 43453',
-                      style: TextStyle(fontSize: 15.sp),
-                    ),
-                    ksizedbox10,
-                    Text(
-                      'Delivery Address:',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w400,
-                          color: korange),
-                    ),
-                    Text(
-                      '2A,Street Nager, Anna Nagar, Chennai, 600021.',
-                      style: TextStyle(fontSize: 15.sp),
-                    ),
-                  ]),
-            ),
-          )),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GetBuilder<HomeController>(builder: (_) {
-                return Text(
-                  "₹${homeController.getGrandTotal().toStringAsFixed(2)}",
-                  style: primaryFont.copyWith(
-                      color: kblue, fontSize: 15, fontWeight: FontWeight.w500),
-                );
-              }),
-              InkWell(
-                onTap: () {
-                  var tempAmount = homeController.getGrandTotal();
-                  profileController.payUseingEaseBuzz(
-                      id: 0,
-                      amount: tempAmount.toStringAsFixed(2),
-                      customerName: profileController.profileData.first.name,
-                      email:
-                          "${profileController.profileData.first.name}@gmail.com",
-                      phone: profileController.profileData.first.mobile,
-                      status: "");
-
-                  // for(int i = 0; i < homeController.cartListData.length; i++){
-                  //   homeController.addBooking(
-                  //   serviceid: homeController.cartListData[i].serviceId,
-                  //   qty: homeController.cartListData[i].quantity,
-                  //   offerOrCoupon: "",
-                  //   couponcode: "",
-                  //   amount: homeController.cartListData[i].price
-                  //   );
-                  // }
-                },
-                child: Container(
-                  height: 40,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    color: kblue,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Book Now",
-                      style: TextStyle(
-                          fontSize: 15.sp,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500),
+                    child: Center(
+                      child: Text(
+                        "Book Now",
+                        style: TextStyle(
+                            fontSize: 15.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+                      ),
+            ),
           ),
-        ],
-      ),
+       
     );
   }
 }

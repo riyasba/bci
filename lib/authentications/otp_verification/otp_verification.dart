@@ -148,8 +148,10 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                   )
                 : InkWell(
                     onTap: () {
+                      
                       authController.loginUsers(
-                          mobile: widget.phoneNumber, otp: widget.otp);
+                          mobile: widget.phoneNumber, 
+                          otp: otpString);
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20, right: 20),

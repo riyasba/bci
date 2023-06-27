@@ -140,6 +140,15 @@ class AuthController extends GetxController {
     dio.Response<dynamic> response =
         await loginApiServices.loginApi(mobile: mobile, otp: otp);
     isLoading(false);
+    
+    print("start testing...................>>>>>>>>>>>>>>");
+    print(response.data);
+    print(response.statusCode);
+    print(response.statusMessage);
+    print("end testing...................>>>>>>>>>>>>>>");
+
+
+
     if (response.statusCode == 200) {
       if (response.data["user"]["role_id"] == "3") {
         final prefs = await SharedPreferences.getInstance();
@@ -153,13 +162,27 @@ class AuthController extends GetxController {
               style: primaryFont.copyWith(color: Colors.white),
             ));
       }
-    } else {
+    } else if (response.statusCode == 422) {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "Invalid OTP",
+            "The otp field is required", 
             style: primaryFont.copyWith(color: Colors.white),
           ));
+    } else if(response.statusCode == 401) {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Invalid OTP", 
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    } else {
+        Get.rawSnackbar(
+            backgroundColor: Colors.red,
+            messageText: Text(
+              "something went wrong",
+              style: primaryFont.copyWith(color: Colors.white),
+            ));
     }
   }
 

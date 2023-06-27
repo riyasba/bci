@@ -10,6 +10,7 @@ import 'package:bci/screens/bussiness/views/home_screen/wallet/bank_deatails.dar
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../constands/constands.dart';
 
@@ -22,6 +23,7 @@ class BusinessSettingScreen extends StatefulWidget {
 
 class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
   @override
+  
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
@@ -253,7 +255,12 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
           ),
           InkWell(
             onTap: () {
-              Get.find<AuthController>().logout();
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return mAlertItem2;
+                });
+              //Get.find<AuthController>().logout();
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -281,4 +288,62 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
       ),
     );
   }
+
+  AlertDialog mAlertItem2 = AlertDialog(
+      backgroundColor: Colors.white,
+      title: Text("Confirmation", style: boldTextStyle(color: Colors.black)),
+      content: Text(
+        "Are you sure you want to logout?",
+        style: secondaryTextStyle(color: Colors.black),
+      ),
+      actions: [
+        TextButton(
+          child: Text(
+            "Yes",
+            style: primaryTextStyle(color: kblue),
+          ),
+          onPressed: () {
+           Get.find<AuthController>().logout();
+          },
+        ),
+        TextButton(
+          child: Text("No", style: primaryTextStyle(color: kblue)),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+      ],
+    );
+
+  // AlertDialog mAlertItem3 = AlertDialog(
+  //     backgroundColor: context.cardColor,
+  //     content: Column(
+  //       mainAxisSize: MainAxisSize.min,
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Text("Hold On", style: boldTextStyle(color: appStore.textPrimaryColor)),
+  //         16.height,
+  //         Text(
+  //           ProKitShortText,
+  //           style: secondaryTextStyle(color: appStore.textSecondaryColor),
+  //         ),
+  //         16.height,
+  //         GestureDetector(
+  //           onTap: () {
+  //             Navigator.of(context).pop();
+  //           },
+  //           child: Align(
+  //             alignment: Alignment.topRight,
+  //             child: Container(
+  //               decoration: boxDecoration(bgColor: appColorPrimary, radius: 10),
+  //               padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+  //               child: text("Ok", textColor: white, fontSize: 16.0),
+  //             ),
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //     contentPadding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topRight: Radius.circular(50), bottomLeft: Radius.circular(50))),
+  //   );
 }

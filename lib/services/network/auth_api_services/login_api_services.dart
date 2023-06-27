@@ -13,7 +13,7 @@ class LoginApiServices extends BaseApiService {
       var response = await dio.post(loginURL,
           options: Options(
               headers: {
-                'Accept': 'application/json',
+                 'Content-Type': 'application/json'
               },
               followRedirects: false,
               validateStatus: (status) {

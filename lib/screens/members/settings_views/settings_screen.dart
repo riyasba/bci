@@ -14,6 +14,7 @@ import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../bussiness/views/home_screen/settings/my_account_screen.dart';
 import '../coupen/coupons_screen.dart';
@@ -374,7 +375,12 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             InkWell(
               onTap: () {
-                Get.find<AuthController>().logout();
+                showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return mAlertItem2;
+                });
+                //Get.find<AuthController>().logout();
               },
               child: Row(
                 children: const [
@@ -400,4 +406,31 @@ class _SettingScreenState extends State<SettingScreen> {
       ),
     );
   }
+
+  AlertDialog mAlertItem2 = AlertDialog(
+      backgroundColor: Colors.white,
+      title: Text("Confirmation", style: boldTextStyle(color: Colors.black)),
+      content: Text(
+        "Are you sure you want to logout?",
+        style: secondaryTextStyle(color: Colors.black),
+      ),
+      actions: [
+        TextButton(
+          child: Text(
+            "Yes",
+            style: primaryTextStyle(color: kblue),
+          ),
+          onPressed: () {
+           Get.find<AuthController>().logout();
+          },
+        ),
+        TextButton(
+          child: Text("No", style: primaryTextStyle(color: kblue)),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+      ],
+    );
+
 }
