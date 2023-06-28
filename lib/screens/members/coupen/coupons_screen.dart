@@ -185,7 +185,23 @@ class _Coupens_membersState extends State<Coupens_members> {
                                                   child: const Icon(
                                                     Icons.copy,
                                                     size: 15,
-                                                  ))
+                                                  )),
+                                                  if(profileController.couponsData[index].isRedeemed == "1")
+
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(left: 5),
+                                                    child: Container(
+                                                      height: 25,
+                                                      width: 70,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius: BorderRadius.circular(3)
+                                                      ),
+                                                      child:const Center(
+                                                        child: Text("Redeemed",style: TextStyle(color: Colors.green,fontSize: 12,fontWeight: FontWeight.w500),),
+                                                      ),
+                                                    ),
+                                                  ),
                                             ],
                                           ),
                                         ],

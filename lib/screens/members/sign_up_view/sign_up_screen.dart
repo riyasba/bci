@@ -67,6 +67,9 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
 
   var _formKey = GlobalKey<FormState>();
 
+  FocusNode emailFocusNode = FocusNode();
+  FocusNode mobileNumberFocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -99,6 +102,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: usernamecontroller,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -136,6 +140,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: dateOfBirthController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -177,6 +182,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: emailController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -214,6 +220,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: mobileController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -257,6 +264,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: occupationController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -294,6 +302,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: fatherNameController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
@@ -325,6 +334,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.none,
                   controller: motherNameController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
@@ -333,11 +343,11 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       isCollapsed: false,
                       isDense: true,
                       contentPadding:
@@ -345,7 +355,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       hintText: "Mother Name",
                       hintStyle: TextStyle(
                         color: kblue,

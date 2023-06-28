@@ -22,6 +22,7 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return GetBuilder<HomeController>(builder: (_) {
       return Padding(
         padding: const EdgeInsets.only(top: 20),
@@ -44,61 +45,64 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                         homeController.bookingListData[index].quantity
                         );
                       },
-                      child: Container(
-                        height: 127,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: kwhite,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Image.network(
-                                    homeController.bookingListData[index].image,
-                                    height: 100,
-                                    width: 100,
-                                    fit: BoxFit.cover,
-                                  )),
-                            ),
-                            kwidth10,
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ksizedbox10,
-                                Text(
-                                  homeController.bookingListData[index].service
-                                      .toString(),
-                                  style: const TextStyle(fontSize: 21),
-                                ),
-                                Container(
-                                  width: 250,
-                                  child: Text(
-                                    '${homeController.bookingListData[index].description}',
-                                    maxLines: 3,
-                                    style: TextStyle(color: kblue),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          height: 125,
+                          width: size.width,
+                          decoration: BoxDecoration(
+                            color: kwhite,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(5),
+                                    child: Image.network(
+                                      homeController.bookingListData[index].image,
+                                      height: 100,
+                                      width: 100,
+                                      fit: BoxFit.cover,
+                                    )),
+                              ),
+                              kwidth10,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ksizedbox10,
+                                  Text(
+                                    homeController.bookingListData[index].service
+                                        .toString(),
+                                    style: const TextStyle(fontSize: 21),
                                   ),
-                                ),
-                                // Text(
-                                //   'Check in : 03:44PM Check Out 03:43 PM',
-                                //   style: TextStyle(color: kblue),
-                                // ),
-                                // Text(
-                                //   'Total Person : 5 Members',
-                                //   style: TextStyle(color: kblue),
-                                // ),
-                                // Text(
-                                //   'Ac Rooms',
-                                //   style: TextStyle(color: kblue),
-                                // ),
-                                ksizedbox10
-                              ],
-                            )
-                          ],
+                                  Container(
+                                    width: 200,
+                                    child: Text(
+                                      '${homeController.bookingListData[index].description}',
+                                      maxLines: 4,
+                                      style: TextStyle(color: kblue),
+                                    ),
+                                  ),
+                                  // Text(
+                                  //   'Check in : 03:44PM Check Out 03:43 PM',
+                                  //   style: TextStyle(color: kblue),
+                                  // ),
+                                  // Text(
+                                  //   'Total Person : 5 Members',
+                                  //   style: TextStyle(color: kblue),
+                                  // ),
+                                  // Text(
+                                  //   'Ac Rooms',
+                                  //   style: TextStyle(color: kblue),
+                                  // ),
+                                  ksizedbox10
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

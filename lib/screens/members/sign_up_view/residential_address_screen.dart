@@ -58,6 +58,7 @@ class _ResidentialAddressScreenState extends State<ResidentialAddressScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: doorNumberController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   // validator: (value) {
@@ -95,6 +96,7 @@ class _ResidentialAddressScreenState extends State<ResidentialAddressScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: buildingNameController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -132,6 +134,7 @@ class _ResidentialAddressScreenState extends State<ResidentialAddressScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: addressController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -169,6 +172,7 @@ class _ResidentialAddressScreenState extends State<ResidentialAddressScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: cityController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -206,6 +210,7 @@ class _ResidentialAddressScreenState extends State<ResidentialAddressScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: stateController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -243,6 +248,7 @@ class _ResidentialAddressScreenState extends State<ResidentialAddressScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: personalIDController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -283,6 +289,7 @@ class _ResidentialAddressScreenState extends State<ResidentialAddressScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.none,
                   controller: aadharController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
