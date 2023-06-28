@@ -41,6 +41,8 @@ class ProfileController extends GetxController {
 
   RxBool isLoading = false.obs;
 
+  RxString planid = "".obs;
+
   getProfile() async {
     profileData.clear();
     isLoading(true);
@@ -50,6 +52,7 @@ class ProfileController extends GetxController {
       MemberProfileModel profileModel =
           MemberProfileModel.fromJson(response.data);
       isSubscribed(profileModel.subscription);
+      planid(profileModel.planId);
       profileData.add(profileModel.user);
       update();
     } else if (response.statusCode == 401) {

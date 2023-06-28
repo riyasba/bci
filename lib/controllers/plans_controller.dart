@@ -1,6 +1,7 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_plan_details_model.dart';
+import 'package:bci/models/get_plan_details_model.dart';
 import 'package:bci/models/get_plans_model.dart';
 import 'package:bci/models/slider_model.dart';
 import 'package:bci/services/network/subscriptions_api_services/add_subscription_api_services.dart';
@@ -23,7 +24,8 @@ class PlanController extends GetxController {
 
   List<SliderPost> sliderList = [];
   List<PlansData> plansdataList = [];
-  List<PlansDetailsModel> planDetailsList = [];
+  //List<PlansData> planDetailsList = [];
+  List<SubscribePlansData> subscribePlansData = [];
 
   getSlider() async {
     dio.Response<dynamic> response = await getSliderApiServices.getSlider();
@@ -45,7 +47,7 @@ class PlanController extends GetxController {
   }
 
   getPlanDetails({required int id}) async {
-    planDetailsList.clear();
+    subscribePlansData.clear();
     dio.Response<dynamic> response =
         await getPlansDetailsApiServices.getPlansDetails(planId: id);
 
@@ -53,7 +55,7 @@ class PlanController extends GetxController {
       PlansDetailsModel plansDetailsModel =
           PlansDetailsModel.fromJson(response.data);
 
-      planDetailsList.add(plansDetailsModel);
+      subscribePlansData.add(plansDetailsModel.plan);
     }
     update();
   }

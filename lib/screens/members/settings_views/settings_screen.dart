@@ -3,6 +3,7 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
+import 'package:bci/screens/members/settings_views/my_subcriptions_screen.dart';
 import 'package:bci/screens/members/settings_views/offers_screen.dart';
 import 'package:bci/screens/members/settings_views/our_partner_screen.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/My_account.dart';
@@ -40,11 +41,11 @@ class _SettingScreenState extends State<SettingScreen> {
             child: Container(
               height: 150,
               color: kblue,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
+              child:const Padding(
+                padding:  EdgeInsets.only(left: 20, right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children:  [
                     Padding(
                       padding: EdgeInsets.only(right: 20),
                       child: Text(
@@ -68,8 +69,8 @@ class _SettingScreenState extends State<SettingScreen> {
               onTap: () {
                 Get.to(const MyAccount());
               },
-              child: Row(
-                children: const [
+              child:const Row(
+                children: [
                   Image(
                     image: AssetImage("assets/icons/myaccount.png"),
                     width: 20,
@@ -96,10 +97,40 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             InkWell(
               onTap: () {
-                Get.to(DashBoardScreen_menbers());
+                Get.to(const MySubcriptionScreen());
               },
-              child: Row(
-                children: const [
+              child:const Row(
+                children: [
+                  Image(
+                    image: AssetImage("assets/icons/additionalCoupons.png"),
+                    width: 20,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "My Subscriptions",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff003366)),
+                  )
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 5, bottom: 10),
+              child: Divider(
+                thickness: 1,
+                color: Colors.grey,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Get.to(const DashBoardScreen_menbers());
+              },
+              child:const Row(
+                children:  [
                   Image(
                     image: AssetImage("assets/icons/dashboard.png"),
                     width: 20,
@@ -131,8 +162,8 @@ class _SettingScreenState extends State<SettingScreen> {
                     MaterialPageRoute(
                         builder: (context) => const OfferScreen()));
               },
-              child: Row(
-                children: const [
+              child:const Row(
+                children:  [
                   Image(
                     image: AssetImage("assets/icons/offers.png"),
                     width: 20,
@@ -161,8 +192,8 @@ class _SettingScreenState extends State<SettingScreen> {
               onTap: () {
                 Get.to(Coupens_members());
               },
-              child: Row(
-                children: const [
+              child:const Row(
+                children:  [
                   Image(
                     image: AssetImage("assets/icons/coupans.png"),
                     width: 20,
@@ -191,8 +222,8 @@ class _SettingScreenState extends State<SettingScreen> {
               onTap: () {
                 Get.to(const CartScreen());
               },
-              child: Row(
-                children: const [
+              child:const Row(
+                children:  [
                   Icon(Icons.shopping_cart,color:  Color(0xff003366),),
                   SizedBox(
                     width: 10,
@@ -214,36 +245,36 @@ class _SettingScreenState extends State<SettingScreen> {
                 color: Colors.grey,
               ),
             ),
-            InkWell(
-              onTap: () {
-                Get.to(Additional_coupons());
-              },
-              child: Row(
-                children: const [
-                  Image(
-                    image: AssetImage("assets/icons/additionalCoupons.png"),
-                    width: 20,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Additional Coupons",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff003366)),
-                  )
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 5, bottom: 10),
-              child: Divider(
-                thickness: 1,
-                color: Colors.grey,
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {
+            //     Get.to(Additional_coupons());
+            //   },
+            //   child: Row(
+            //     children: const [
+            //       Image(
+            //         image: AssetImage("assets/icons/additionalCoupons.png"),
+            //         width: 20,
+            //       ),
+            //       SizedBox(
+            //         width: 10,
+            //       ),
+            //       Text(
+            //         "Additional Coupons",
+            //         style: TextStyle(
+            //             fontSize: 20,
+            //             fontWeight: FontWeight.w500,
+            //             color: Color(0xff003366)),
+            //       )
+            //     ],
+            //   ),
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.only(top: 5, bottom: 10),
+            //   child: Divider(
+            //     thickness: 1,
+            //     color: Colors.grey,
+            //   ),
+            // ),
             InkWell(
               onTap: () {
                 Navigator.push(
