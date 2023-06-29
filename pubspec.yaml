@@ -62,6 +62,7 @@ dependencies:
   dio: ^5.1.2
   shared_preferences: ^2.1.1
   textfield_tags: ^2.0.2
+  nb_utils: ^5.0.8
 
 dev_dependencies:
   flutter_test:

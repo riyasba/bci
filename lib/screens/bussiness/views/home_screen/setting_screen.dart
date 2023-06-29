@@ -10,6 +10,7 @@ import 'package:bci/screens/bussiness/views/home_screen/wallet/bank_deatails.dar
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../constands/constands.dart';
 
@@ -253,7 +254,12 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
           ),
           InkWell(
             onTap: () {
-              Get.find<AuthController>().logout();
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return mAlertItem2;
+                });
+              //Get.find<AuthController>().logout();
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -281,4 +287,31 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
       ),
     );
   }
+
+ AlertDialog mAlertItem2 = AlertDialog(
+      backgroundColor: Colors.white,
+      title: Text("Confirmation", style: boldTextStyle(color: Colors.black)),
+      content: Text(
+        "Are you sure you want to logout?",
+        style: secondaryTextStyle(color: Colors.black),
+      ),
+      actions: [
+        TextButton(
+          child: Text(
+            "Yes",
+            style: primaryTextStyle(color: kblue),
+          ),
+          onPressed: () {
+           Get.find<AuthController>().logout();
+          },
+        ),
+        TextButton(
+          child: Text("No", style: primaryTextStyle(color: kblue)),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+      ],
+    );
+
 }
