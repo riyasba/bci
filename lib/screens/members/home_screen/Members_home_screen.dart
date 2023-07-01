@@ -49,16 +49,16 @@ class _Home_screen1State extends State<Home_screen1> {
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 150,
+              height: 140,
               color: kblue,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Image.asset('assets/images/projectlogo.png'),
-                  GetBuilder<ProfileController>(builder: (_) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: profileController.profileData.isEmpty
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 22, left: 15, right: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.asset('assets/images/projectlogo.png'),
+                    GetBuilder<ProfileController>(builder: (_) {
+                      return profileController.profileData.isEmpty
                           ? Container()
                           : Text(
                               'Hello, ${profileController.profileData.first.name}',
@@ -66,18 +66,18 @@ class _Home_screen1State extends State<Home_screen1> {
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
-                            ),
-                    );
-                  }),
-                  IconButton(
-                      onPressed: () {
-                        Get.to(const NotificationScreen());
-                      },
-                      icon: Icon(
-                        Icons.notifications,
-                        color: kwhite,
-                      ))
-                ],
+                            );
+                    }),
+                    IconButton(
+                        onPressed: () {
+                          Get.to(const NotificationScreen());
+                        },
+                        icon: Icon(
+                          Icons.notifications,
+                          color: kwhite,
+                        ))
+                  ],
+                ),
               ),
             ),
           )),
@@ -214,96 +214,236 @@ class _Home_screen1State extends State<Home_screen1> {
                     ],
                   ),
                   ksizedbox20,
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Get.to(() => const FlightBookingLandingScreen());
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset('assets/images/Group 5778.png'),
-                            const Text(
-                              'Flight',
-                              style: TextStyle(fontWeight: FontWeight.w700),
-                            )
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.to(Hotel());
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset('assets/images/Group 5827.png'),
-                            Text(
-                              'Hotel',
-                              style: TextStyle(fontWeight: FontWeight.w700),
-                            )
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.to(const liquer_screen());
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset('assets/images/Group 5828.png'),
-                            const Text(
-                              'Liquors',
-                              style: TextStyle(fontWeight: FontWeight.w700),
-                            )
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.to(const Holiday_Home());
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset('assets/images/Group 5829.png'),
-                            const Text(
-                              'Holiday\nPackage',
-                              style: TextStyle(fontWeight: FontWeight.w700),
-                            )
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.to(const OthersServiceScreen());
-                        },
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 6,
-                            ),
-                            Container(
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Get.to(() => const FlightBookingLandingScreen());
+                          },
+                          child: Column(
+                            children: [
+                              Container(
                                 height: 58,
-                                width: 55,
+                                width: 58,
                                 decoration: BoxDecoration(
-                                    color: kblue,
-                                    borderRadius: BorderRadius.circular(3)),
-                                child: const Icon(
-                                  Icons.open_with,
-                                  color: Colors.white,
-                                )),
-                            ksizedbox10,
-                            const Text(
-                              'Others',
-                              style: TextStyle(fontWeight: FontWeight.w700),
-                            )
-                          ],
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: kblue),
+                                child:
+                                    Image.asset("assets/icons/icons (1).png"),
+                              ),
+                              const SizedBox(
+                                height: 7,
+                              ),
+                              const Text(
+                                'Flight',
+                                style: TextStyle(fontWeight: FontWeight.w700),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      kwidth10
-                    ],
+                        //
+                        InkWell(
+                          onTap: () {
+                            Get.to(Hotel());
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 58,
+                                width: 58,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: kblue),
+                                child:
+                                    Image.asset("assets/icons/icons (4).png"),
+                              ),
+                              const SizedBox(
+                                height: 7,
+                              ),
+                              const Text(
+                                'Hotels',
+                                style: TextStyle(fontWeight: FontWeight.w700),
+                              )
+                            ],
+                          ),
+                        ),
+                        //
+                        InkWell(
+                          onTap: () {
+                            Get.to(const liquer_screen());
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 58,
+                                width: 58,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: kblue),
+                                child:
+                                    Image.asset("assets/icons/icons (3).png"),
+                              ),
+                              const SizedBox(
+                                height: 7,
+                              ),
+                              const Text(
+                                'Liquors',
+                                style: TextStyle(fontWeight: FontWeight.w700),
+                              )
+                            ],
+                          ),
+                        ),
+                        //
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12),
+                          child: InkWell(
+                            onTap: () {
+                              Get.to(const Holiday_Home());
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 58,
+                                  width: 58,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: kblue),
+                                  child:
+                                      Image.asset("assets/icons/icons (5).png"),
+                                ),
+                                const SizedBox(
+                                  height: 7,
+                                ),
+                                const Text(
+                                  'Holiday\nPackage',
+                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                )
+                              ],
+                            ),
+                          ),
+                        ), //
+                        InkWell(
+                          onTap: () {
+                            Get.to(const OthersServiceScreen());
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 58,
+                                width: 58,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: kblue),
+                                child:
+                                    Image.asset("assets/icons/icons (2).png"),
+                              ),
+                              const SizedBox(
+                                height: 7,
+                              ),
+                              const Text(
+                                'Others',
+                                style: TextStyle(fontWeight: FontWeight.w700),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                  // ksizedbox20,
+                  // Row(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   children: [
+                  //     InkWell(
+                  //       onTap: () {
+                  //         Get.to(() => const FlightBookingLandingScreen());
+                  //       },
+                  //       child: Column(
+                  //         children: [
+                  //           Image.asset('assets/images/Group 5778.png'),
+                  //           const Text(
+                  //             'Flight',
+                  //             style: TextStyle(fontWeight: FontWeight.w700),
+                  //           )
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     InkWell(
+                  //       onTap: () {
+                  //         Get.to(Hotel());
+                  //       },
+                  //       child: Column(
+                  //         children: [
+                  //           Image.asset('assets/images/Group 5827.png'),
+                  //           Text(
+                  //             'Hotel',
+                  //             style: TextStyle(fontWeight: FontWeight.w700),
+                  //           )
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     InkWell(
+                  //       onTap: () {
+                  //         Get.to(const liquer_screen());
+                  //       },
+                  //       child: Column(
+                  //         children: [
+                  //           Image.asset('assets/images/Group 5828.png'),
+                  //           const Text(
+                  //             'Liquors',
+                  //             style: TextStyle(fontWeight: FontWeight.w700),
+                  //           )
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     InkWell(
+                  //       onTap: () {
+                  //         Get.to(const Holiday_Home());
+                  //       },
+                  //       child: Column(
+                  //         children: [
+                  //           Image.asset('assets/images/Group 5829.png'),
+                  //           const Text(
+                  //             'Holiday\nPackage',
+                  //             style: TextStyle(fontWeight: FontWeight.w700),
+                  //           )
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     InkWell(
+                  //       onTap: () {
+                  //         Get.to(const OthersServiceScreen());
+                  //       },
+                  //       child: Column(
+                  //         children: [
+                  //           const SizedBox(
+                  //             height: 6,
+                  //           ),
+                  //           Container(
+                  //               height: 58,
+                  //               width: 55,
+                  //               decoration: BoxDecoration(
+                  //                   color: kblue,
+                  //                   borderRadius: BorderRadius.circular(3)),
+                  //               child: const Icon(
+                  //                 Icons.open_with,
+                  //                 color: Colors.white,
+                  //               )),
+                  //           ksizedbox10,
+                  //           const Text(
+                  //             'Others',
+                  //             style: TextStyle(fontWeight: FontWeight.w700),
+                  //           )
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     kwidth10
+                  //   ],
+                  // ),
                   ksizedbox30,
                   if (homeController.sliderList.isNotEmpty)
                     CarouselSlider(
@@ -314,14 +454,19 @@ class _Home_screen1State extends State<Home_screen1> {
                               i++)
                             ClipRRect(
                               borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                decoration: BoxDecoration(image: 
-                                DecorationImage(image: 
-                                NetworkImage(homeController.sliderList[i].image),
-                                )),
-                              ),
+                              // child: Container(
+                              //   decoration: BoxDecoration(
+                              //     borderRadius: BorderRadius.circular(10),
+                              //     color: Colors.red,
+                              //       image: DecorationImage(
+                              //     image: NetworkImage(
+                              //         homeController.sliderList[i].image),
+                              //   )),
+                              // ),
+                              child: Image.network(
+                                  homeController.sliderList[i].image),
                             ),
-                          // Container( 
+                          // Container(
                           //   decoration: BoxDecoration(
                           //       image: DecorationImage(
                           //           image: AssetImage('assets/images/Group 5781.png'))),
@@ -349,7 +494,6 @@ class _Home_screen1State extends State<Home_screen1> {
                           scrollDirection: Axis.horizontal,
                         )),
                   if (homeController.sliderList.isNotEmpty)
-                   
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: Row(
@@ -368,35 +512,38 @@ class _Home_screen1State extends State<Home_screen1> {
                       ),
                     ),
                   ksizedbox10,
-                  homeController.todayOfferListData.isEmpty ? Container(height: 20,) :
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Today Offer',
-                          style: TextStyle(
-                              color: knavblue,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.to(const TodayOfferScreen());
-                          },
-                          child: Text(
-                            'See All',
-                            style: TextStyle(color: korange),
-                          ),
+                  homeController.todayOfferListData.isEmpty
+                      ? Container(
+                          height: 20,
                         )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: 150,
-                    child: GetBuilder<HomeController>(
-                      builder: (_) {
+                      : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Today Offer',
+                                style: TextStyle(
+                                    color: knavblue,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Get.to(const TodayOfferScreen());
+                                },
+                                child: Text(
+                                  'See All',
+                                  style: TextStyle(color: korange),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                  if (homeController.todayOfferListData.isNotEmpty)
+                    Container(
+                      height: 150,
+                      child: GetBuilder<HomeController>(builder: (_) {
                         return ListView.builder(
                             scrollDirection: Axis.horizontal,
                             physics: const BouncingScrollPhysics(),
@@ -404,20 +551,19 @@ class _Home_screen1State extends State<Home_screen1> {
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               return Padding(
-                                padding:const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Container(
                                   child: InkWell(
                                       onTap: () {
                                         Get.to(const TodayOfferScreen());
                                       },
-                                      child: Image.network(homeController.todayOfferListData[index].image)
-                                      ),
+                                      child: Image.network(homeController
+                                          .todayOfferListData[index].image)),
                                 ),
                               );
                             });
-                      }
-                    ),
-                  )
+                      }),
+                    )
                 ],
               ),
       ),

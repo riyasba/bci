@@ -141,7 +141,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                                   color: Colors.green,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child:const Center(
+                                child: Center(
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,

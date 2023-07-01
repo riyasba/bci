@@ -21,7 +21,7 @@ class OfferWidgets extends StatelessWidget {
               child: Image.asset('assets/images/NoPath - Copy (7).png'),
             ),
             kwidth10,
-            const Column(mainAxisAlignment: MainAxisAlignment.spaceAround,
+             Column(mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [ksizedbox10,
                 Text('JK Stores Offer For ',style: TextStyle(fontSize: 25),),

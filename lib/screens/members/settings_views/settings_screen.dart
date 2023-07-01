@@ -41,11 +41,11 @@ class _SettingScreenState extends State<SettingScreen> {
             child: Container(
               height: 150,
               color: kblue,
-              child:const Padding(
-                padding:  EdgeInsets.only(left: 20, right: 20),
+              child: Padding(
+                padding: EdgeInsets.only(left: 20, right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children:  [
+                  children: [
                     Padding(
                       padding: EdgeInsets.only(right: 20),
                       child: Text(
@@ -62,14 +62,15 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
           )),
       body: Padding(
-        padding: const EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 20),
+        padding:
+            const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 20),
         child: ListView(
           children: [
             InkWell(
               onTap: () {
                 Get.to(const MyAccount());
               },
-              child:const Row(
+              child: Row(
                 children: [
                   Image(
                     image: AssetImage("assets/icons/myaccount.png"),
@@ -99,7 +100,7 @@ class _SettingScreenState extends State<SettingScreen> {
               onTap: () {
                 Get.to(const MySubcriptionScreen());
               },
-              child:const Row(
+              child: Row(
                 children: [
                   Image(
                     image: AssetImage("assets/icons/additionalCoupons.png"),
@@ -129,8 +130,8 @@ class _SettingScreenState extends State<SettingScreen> {
               onTap: () {
                 Get.to(const DashBoardScreenMenbers());
               },
-              child:const Row(
-                children:  [
+              child: Row(
+                children: [
                   Image(
                     image: AssetImage("assets/icons/dashboard.png"),
                     width: 20,
@@ -162,8 +163,8 @@ class _SettingScreenState extends State<SettingScreen> {
                     MaterialPageRoute(
                         builder: (context) => const OfferScreen()));
               },
-              child:const Row(
-                children:  [
+              child: Row(
+                children: [
                   Image(
                     image: AssetImage("assets/icons/offers.png"),
                     width: 20,
@@ -192,8 +193,8 @@ class _SettingScreenState extends State<SettingScreen> {
               onTap: () {
                 Get.to(Coupens_members());
               },
-              child:const Row(
-                children:  [
+              child: Row(
+                children: [
                   Image(
                     image: AssetImage("assets/icons/coupans.png"),
                     width: 20,
@@ -218,13 +219,16 @@ class _SettingScreenState extends State<SettingScreen> {
                 color: Colors.grey,
               ),
             ),
-             InkWell(
+            InkWell(
               onTap: () {
                 Get.to(const CartScreen());
               },
-              child:const Row(
-                children:  [
-                  Icon(Icons.shopping_cart,color:  Color(0xff003366),),
+              child: Row(
+                children: const [
+                  Icon(
+                    Icons.shopping_cart,
+                    color: Color(0xff003366),
+                  ),
                   SizedBox(
                     width: 10,
                   ),
@@ -407,10 +411,10 @@ class _SettingScreenState extends State<SettingScreen> {
             InkWell(
               onTap: () {
                 showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return mAlertItem2;
-                });
+                    context: context,
+                    builder: (BuildContext context) {
+                      return mAlertItem2;
+                    });
                 //Get.find<AuthController>().logout();
               },
               child: Row(
@@ -439,29 +443,28 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   AlertDialog mAlertItem2 = AlertDialog(
-      backgroundColor: Colors.white,
-      title: Text("Confirmation", style: boldTextStyle(color: Colors.black)),
-      content: Text(
-        "Are you sure you want to logout?",
-        style: secondaryTextStyle(color: Colors.black),
+    backgroundColor: Colors.white,
+    title: Text("Confirmation", style: boldTextStyle(color: Colors.black)),
+    content: Text(
+      "Are you sure you want to logout?",
+      style: secondaryTextStyle(color: Colors.black),
+    ),
+    actions: [
+      TextButton(
+        child: Text(
+          "Yes",
+          style: primaryTextStyle(color: kblue),
+        ),
+        onPressed: () {
+          Get.find<AuthController>().logout();
+        },
       ),
-      actions: [
-        TextButton(
-          child: Text(
-            "Yes",
-            style: primaryTextStyle(color: kblue),
-          ),
-          onPressed: () {
-           Get.find<AuthController>().logout();
-          },
-        ),
-        TextButton(
-          child: Text("No", style: primaryTextStyle(color: kblue)),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-      ],
-    );
-
+      TextButton(
+        child: Text("No", style: primaryTextStyle(color: kblue)),
+        onPressed: () {
+          Get.back();
+        },
+      ),
+    ],
+  );
 }

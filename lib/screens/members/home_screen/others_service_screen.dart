@@ -42,14 +42,18 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                   height: 150.h,
                   color: kblue,
                   child: Padding(
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.only(left: 5,right: 5,bottom: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
                             onTap: Get.back,
-                            child: Image.asset(
-                                'assets/images/chevron-left (2).png')),
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              child: Image.asset(
+                                  'assets/images/chevron-left (2).png'),
+                            )),
                         Padding(
                           padding: const EdgeInsets.only(right: 0),
                           child: Text(
@@ -145,6 +149,7 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                                 fit: BoxFit.cover,
                               ),
                             ),
+                            ksizedbox10,
                             Text(
                               homeController.serviceListData[index].title,
                               style: TextStyle(

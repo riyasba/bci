@@ -121,7 +121,7 @@ class _OffersScreenState extends State<OffersScreen> {
               ),
             ),
             ksizedbox10,
-            const Padding(
+             Padding(
               padding: EdgeInsets.only(left: 20),
               child: Row(
                 children: [

@@ -17,6 +17,7 @@ import 'package:bci/services/network/profile_api_services/profile_update_api_ser
 import 'package:bci/services/network/profile_api_services/redeem_coupons_api_services.dart';
 import 'package:bci/services/network/profile_api_services/update_official_address_api.dart';
 import 'package:bci/services/network/subscriptions_api_services/ease_buzz_payment_api_services.dart';
+import 'package:bci/widgets/home_widgets/loading_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -169,7 +170,9 @@ class ProfileController extends GetxController {
     required String phone,
     required dynamic status,
   }) async {
+    isLoading(true);
     Get.find<ProfileController>().getProfile();
+
     var response = await easeBuzzApi.getPaymentToken(
         amount: amount,
         customerName: customerName,
@@ -201,7 +204,7 @@ class ProfileController extends GetxController {
       }
 
       Get.offAll(
-        () => HelloConvexAppBar(),
+        () => LoadingWidgets(),
       );
 
       // Get.find<HomeController>().addSubscription(
