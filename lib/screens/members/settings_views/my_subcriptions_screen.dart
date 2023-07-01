@@ -81,7 +81,7 @@ class _MySubcriptionScreenState extends State<MySubcriptionScreen> {
                 children: [
                    Column(
                     children: [
-                      plansController.subscribePlansData.isEmpty ? Image(image: AssetImage("assets/images/Group 4930.png"),height: 200,) :
+                      plansController.subscribePlansData.isEmpty ? const Image(image: AssetImage("assets/images/Group 4930.png"),height: 200,) :
                       Image.network(plansController.subscribePlansData.first.cardImg,height: 200,),
                       //const Image(image: AssetImage("assets/images/Group 4930.png"),height: 200,),
                       ksizedbox10,
@@ -134,7 +134,7 @@ class _MySubcriptionScreenState extends State<MySubcriptionScreen> {
                             ),
                             ksizedbox10,
                             // const Icon(CupertinoIcons.suit_diamond,color: Colors.white,),
-                              plansController.subscribePlansData.isEmpty? Container() : Container(
+                              plansController.subscribePlansData.isEmpty? Container() :  Container(
                                 width: size.width,
                                 child: Text(plansController.subscribePlansData.first.planDescription,
                                     maxLines: 13,

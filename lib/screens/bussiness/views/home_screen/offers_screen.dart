@@ -39,8 +39,8 @@ class _OffersScreenState extends State<OffersScreen> {
                           color: kwhite,
                         )),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 20),
                     child: Text(
                       'Offers',
                       style: TextStyle(
@@ -95,7 +95,7 @@ class _OffersScreenState extends State<OffersScreen> {
               child: Container(
                 height: MediaQuery.of(context).size.width * 0.4,
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(color: Color(0xffD2CDCD)),
+                decoration:const BoxDecoration(color: Color(0xffD2CDCD)),
                 child: Column(
                   children: [
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -121,8 +121,8 @@ class _OffersScreenState extends State<OffersScreen> {
               ),
             ),
             ksizedbox10,
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
               child: Row(
                 children: [
                   Text('Description'),
@@ -151,7 +151,7 @@ class _OffersScreenState extends State<OffersScreen> {
                       minimumSize:
                           Size(MediaQuery.of(context).size.width * 0.8, 50)),
                   onPressed: () {
-                    Get.to(LastOffers());
+                    Get.to(const LastOffers());
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -160,7 +160,7 @@ class _OffersScreenState extends State<OffersScreen> {
                         'Last Offers',
                         style: TextStyle(fontSize: 21, color: kwhite),
                       ),
-                      Icon(Icons.arrow_forward)
+                      const Icon(Icons.arrow_forward)
                     ],
                   )),
             )
@@ -178,7 +178,7 @@ class _OffersScreenState extends State<OffersScreen> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             boxShadow: <BoxShadow>[
-              BoxShadow(offset: Offset(0.0, 0.75), blurRadius: 5, color: kgrey)
+              BoxShadow(offset:const Offset(0.0, 0.75), blurRadius: 5, color: kgrey)
             ],
             color: kwhite,
             border: Border.all(color: kgrey)),

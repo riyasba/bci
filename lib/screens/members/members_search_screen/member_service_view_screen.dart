@@ -58,7 +58,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                         ),
                         IconButton(
                             onPressed: () {
-                              Get.to(NotificationScreen());
+                              Get.to(const NotificationScreen());
                             },
                             icon: Icon(
                               Icons.notifications,
@@ -141,11 +141,11 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                                   color: Colors.green,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: Center(
+                                child:const Center(
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
-                                    children: const [
+                                    children:  [
                                       Text(
                                         "View Cart",
                                         style: TextStyle(

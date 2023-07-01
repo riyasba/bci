@@ -341,12 +341,12 @@ class HomeController extends GetxController {
       todayOfferListData = getTodayOffersList.message;
 
     } else {
-      Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            "Something went wrong",
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
+      // Get.rawSnackbar(
+      //     backgroundColor: Colors.red,
+      //     messageText: Text(
+      //       "Something went wrong",
+      //       style: primaryFont.copyWith(color: Colors.white),
+      //     ));
     }
     update();
 

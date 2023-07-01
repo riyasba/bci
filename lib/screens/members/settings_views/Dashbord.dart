@@ -5,20 +5,20 @@ import 'package:get/get.dart';
 
 import '../../../../../constands/constands.dart';
 
-class DashBoardScreen_menbers extends StatefulWidget {
-  const DashBoardScreen_menbers({super.key});
+class DashBoardScreenMenbers extends StatefulWidget {
+  const DashBoardScreenMenbers({super.key});
 
   @override
-  State<DashBoardScreen_menbers> createState() =>
-      _DashBoardScreen_menbersState();
+  State<DashBoardScreenMenbers> createState() =>
+      _DashBoardScreenMenbersState();
 }
 
-class _DashBoardScreen_menbersState extends State<DashBoardScreen_menbers> {
+class _DashBoardScreenMenbersState extends State<DashBoardScreenMenbers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize:const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -38,8 +38,8 @@ class _DashBoardScreen_menbersState extends State<DashBoardScreen_menbers> {
                           color: kwhite,
                         )),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 120),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 120),
                     child: Text(
                       'Dashboard',
                       style: TextStyle(fontSize: 23, color: Colors.white),
@@ -74,7 +74,7 @@ class _DashBoardScreen_menbersState extends State<DashBoardScreen_menbers> {
                 padding: const EdgeInsets.only(top: 56, left: 20),
                 child: InkWell(
                   onTap: () {
-                    Get.to(MyAccountScreen());
+                    Get.to(const MyAccountScreen());
                   },
                   child: Row(
                     children: [
@@ -101,8 +101,8 @@ class _DashBoardScreen_menbersState extends State<DashBoardScreen_menbers> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 0),
+                   const Padding(
+                      padding: EdgeInsets.only(right: 0),
                       child: Image(
                         image: AssetImage(
                           'assets/images/cirlewallet.png',
@@ -138,7 +138,7 @@ class _DashBoardScreen_menbersState extends State<DashBoardScreen_menbers> {
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(color: kwhite, boxShadow: <BoxShadow>[
                   BoxShadow(
-                      offset: Offset(0.0, 0.75), blurRadius: 5, color: kgrey)
+                      offset:const Offset(0.0, 0.75), blurRadius: 5, color: kgrey)
                 ]),
                 child: Column(
                   children: [
@@ -202,7 +202,7 @@ class _DashBoardScreen_menbersState extends State<DashBoardScreen_menbers> {
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(color: kwhite, boxShadow: <BoxShadow>[
                   BoxShadow(
-                      offset: Offset(0.0, 0.75), blurRadius: 5, color: kgrey)
+                      offset:const Offset(0.0, 0.75), blurRadius: 5, color: kgrey)
                 ]),
                 child: Column(
                   children: [

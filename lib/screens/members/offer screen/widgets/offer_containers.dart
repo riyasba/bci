@@ -5,8 +5,8 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../../../constands/constands.dart';
 
-class offer_widgets extends StatelessWidget {
-  const offer_widgets({super.key});
+class OfferWidgets extends StatelessWidget {
+  const OfferWidgets({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class offer_widgets extends StatelessWidget {
               child: Image.asset('assets/images/NoPath - Copy (7).png'),
             ),
             kwidth10,
-            Column(mainAxisAlignment: MainAxisAlignment.spaceAround,
+            const Column(mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [ksizedbox10,
                 Text('JK Stores Offer For ',style: TextStyle(fontSize: 25),),

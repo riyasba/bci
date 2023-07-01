@@ -6,9 +6,7 @@ import 'package:bci/screens/bussiness/views/home_screen/wallet_screen.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 // import '../../../views/home_screen/wallet_screen.dart';
-
 import '../../bussiness/views/home_screen/setting_screen.dart';
 import '../../bussiness/views/home_screen/settings/my_account_screen.dart';
 import '../home_screen/Members_home_screen.dart';
@@ -23,14 +21,14 @@ class HelloConvexAppBar extends StatefulWidget {
 
 class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
   final List1 = [
-    Home_screen1(),
+   const Home_screen1(),
     MembersSearchScreen(
       title: 'Search Result',
       items: const ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
     ),
-    WalletScreen_members(),
-    MembersBooking(),
-    SettingScreen(),
+   const WalletScreen_members(),
+   const MembersBooking(),
+   const SettingScreen(),
   ];
 
   int selectedpage = 0;
@@ -43,7 +41,7 @@ class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
           backgroundColor: kblue,
           color: kwhite,
           style: TabStyle.reactCircle,
-          items: [
+          items:const [
             TabItem(icon: Icons.home, title: 'Home'),
             TabItem(icon: Icons.search, title: 'Search'),
             TabItem(icon: Icons.wallet, title: 'Wallet'),

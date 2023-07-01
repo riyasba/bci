@@ -11,8 +11,8 @@ import 'package:get/instance_manager.dart';
 
 import '../../../constands/constands.dart';
 
-class Add_walet_screen extends StatelessWidget {
-  const Add_walet_screen({super.key});
+class AddWaletScreen extends StatelessWidget {
+  const AddWaletScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class Add_walet_screen extends StatelessWidget {
                     ),
                     InkWell(
                         onTap: () {
-                          Get.to(ContactAdmin());
+                          Get.to(const ContactAdmin());
                         },
                         child: Image.asset(
                             'assets/images/3669173_help_ic_icon.png'))
@@ -56,7 +56,7 @@ class Add_walet_screen extends StatelessWidget {
             ),
           )),
       body: ListView(
-        physics: BouncingScrollPhysics(),
+        physics:const BouncingScrollPhysics(),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +107,7 @@ class Add_walet_screen extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(border: Border.all(color: kblue)),
-                child: Center(
+                child:Center(
                   child: Text(
                     '+2000',
                     style: TextStyle(
@@ -172,7 +172,7 @@ class Add_walet_screen extends StatelessWidget {
           ksizedbox40,
           InkWell(
             onTap: () {
-              Get.to(SucessfulScreenOtc());
+              Get.to(const SucessfulScreenOtc());
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -237,7 +237,7 @@ class Add_walet_screen extends StatelessWidget {
                                     color: kgrey,
                                   ),
                                 ),
-                                SizedBox(
+                               const SizedBox(
                                   height: 5,
                                 ),
                                 ksizedbox20,
@@ -258,7 +258,7 @@ class Add_walet_screen extends StatelessWidget {
                                         onPressed: () {Get.back();
 
                                           showModalBottomSheet(
-                                              shape: RoundedRectangleBorder(
+                                              shape:const RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.vertical(
                                                 top: Radius.circular(26.0),
@@ -280,7 +280,7 @@ class Add_walet_screen extends StatelessWidget {
                                                         Image.asset(
                                                             'assets/images/cancel.png'),
                                                         ksizedbox20,
-                                                        Text(
+                                                        const Text(
                                                           'Payment has been Declined',
                                                           style: TextStyle(
                                                               fontSize: 25),

@@ -20,7 +20,7 @@ class OffersDetail extends StatelessWidget {
     var size = MediaQuery.of(context);
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize:const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(

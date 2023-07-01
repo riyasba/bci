@@ -127,7 +127,7 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             InkWell(
               onTap: () {
-                Get.to(const DashBoardScreen_menbers());
+                Get.to(const DashBoardScreenMenbers());
               },
               child:const Row(
                 children:  [

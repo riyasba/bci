@@ -133,7 +133,7 @@ class _WalletScreen_membersState extends State<WalletScreen_members> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 20, top: 10),
-                      child: InkWell(onTap: (){Get.to( Add_walet_screen());},
+                      child: InkWell(onTap: (){Get.to( AddWaletScreen());},
                         child: Container(
                           decoration: BoxDecoration(
                               color: kyellow,

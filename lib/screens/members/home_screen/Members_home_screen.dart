@@ -313,17 +313,15 @@ class _Home_screen1State extends State<Home_screen1> {
                               i < homeController.sliderList.length;
                               i++)
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(20),
                               child: Container(
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                  // fit: BoxFit.fill,
-                                  image: NetworkImage(
-                                      homeController.sliderList[i].image),
+                                decoration: BoxDecoration(image: 
+                                DecorationImage(image: 
+                                NetworkImage(homeController.sliderList[i].image),
                                 )),
                               ),
                             ),
-                          // Container(
+                          // Container( 
                           //   decoration: BoxDecoration(
                           //       image: DecorationImage(
                           //           image: AssetImage('assets/images/Group 5781.png'))),
@@ -370,6 +368,7 @@ class _Home_screen1State extends State<Home_screen1> {
                       ),
                     ),
                   ksizedbox10,
+                  homeController.todayOfferListData.isEmpty ? Container(height: 20,) :
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(

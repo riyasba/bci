@@ -9,21 +9,21 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../constands/constands.dart';
 import '../../bussiness/views/home_screen/contact_admin.dart';
 
-class Additional_coupons extends StatefulWidget {
-  const Additional_coupons({super.key});
+class AdditionalCoupons extends StatefulWidget {
+  const AdditionalCoupons({super.key});
 
   @override
-  State<Additional_coupons> createState() => _Additional_couponsState();
+  State<AdditionalCoupons> createState() => _AdditionalCouponsState();
 }
 
-class _Additional_couponsState extends State<Additional_coupons> {
+class _AdditionalCouponsState extends State<AdditionalCoupons> {
   int index = 0;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold( appBar: PreferredSize(
-              preferredSize: Size.fromHeight(250),
+              preferredSize:const Size.fromHeight(250),
               child: Column(
                 children: [
                   ClipPath(
@@ -49,7 +49,7 @@ class _Additional_couponsState extends State<Additional_coupons> {
                             ),
                             InkWell(
                                 onTap: () {
-                                  Get.to(ContactAdmin());
+                                  Get.to(const ContactAdmin());
                                 },
                                 child: Image.asset(
                                     'assets/images/3669173_help_ic_icon.png'))
@@ -73,7 +73,7 @@ class _Additional_couponsState extends State<Additional_coupons> {
                             index = value;
                           });
                         },
-                        tabs: [
+                        tabs:const [
                           Tab(
                             text: "Other Coupons",
                           ),
@@ -83,8 +83,8 @@ class _Additional_couponsState extends State<Additional_coupons> {
                           
                         ]),
                   ),
-               Divider(thickness: 3,) ],
-              )),body:TabBarView(children: [Others_continers(),Others_continers()]) , ),
+              const Divider(thickness: 3,) ],
+              )),body: const TabBarView(children: [Others_continers(),Others_continers()]) , ),
     );
   }
 }

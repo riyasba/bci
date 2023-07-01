@@ -31,10 +31,10 @@ class _MyGridViewState extends State<MyGridView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding:const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
             widget.title,
-            style: TextStyle(
+            style:const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
@@ -42,8 +42,8 @@ class _MyGridViewState extends State<MyGridView> {
         ),
         GridView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          physics:const NeverScrollableScrollPhysics(),
+          gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 12,
             mainAxisSpacing: 8,
