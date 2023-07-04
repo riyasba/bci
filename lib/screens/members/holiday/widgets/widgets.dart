@@ -6,7 +6,7 @@ import '../../../../constands/constands.dart';
 Container Holiday_containors() {
   return Container(
     child: Column(
-      children: [ksizedbox10,
+      children: [
         Image.asset(
           'assets/images/pexels-alex-azabache-4094259.png',
           fit: BoxFit.cover,
@@ -26,7 +26,6 @@ Container Holiday_containors() {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-            
               Image.asset('assets/images/location-svgrepo-com (1).png'),kwidth5,
             Text(
                 'Jordan',
@@ -36,7 +35,7 @@ Container Holiday_containors() {
         )
       ],
     ),
-    height: 235.h,
+    height: 250.h,
     width: 165.w,
     decoration:
         BoxDecoration(color: kwhite, borderRadius: BorderRadius.circular(19)),
