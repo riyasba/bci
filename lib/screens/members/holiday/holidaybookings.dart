@@ -4,10 +4,12 @@ import 'package:bci/screens/members/holiday/widgets/day_wise_itnerary.dart';
 import 'package:bci/screens/members/holiday/widgets/enquiry_now.dart';
 import 'package:bci/screens/members/holiday/widgets/hoteldetails.dart';
 import 'package:bci/screens/members/holiday/widgets/overview.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../constands/constands.dart';
@@ -21,12 +23,16 @@ class HolidayScreen extends StatefulWidget {
 
 class _HolidayScreenState extends State<HolidayScreen> {
   final holidayController = Get.find<HolidayController>();
+  
+  CarouselController sliderController = CarouselController();
+  int activeIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFF9F8FD),
+        backgroundColor:const Color(0xFFF9F8FD),
         elevation: 0,
         leading: InkWell(
             onTap: () {
@@ -34,9 +40,9 @@ class _HolidayScreenState extends State<HolidayScreen> {
             },
             child: Image.asset('assets/images/Icon awesome-arrow-right.png')),
         title: Text(
-          'Increadible Mauritius (Ex - Delhi)',
+          'Increadible Mauritius(Ex - Delhi)',
           style: TextStyle(
-              fontSize: 25, fontWeight: FontWeight.w700, color: kblue),
+              fontSize: 20, fontWeight: FontWeight.w700, color: kblue),
         ),
       ),
       body:SingleChildScrollView(
@@ -52,7 +58,74 @@ class _HolidayScreenState extends State<HolidayScreen> {
                   width: size.width * 0.9,
                   child: Column(
                     children: [
-                      Image.asset('assets/images/NoPath - Copy (13).png'),
+                      // Image.asset('assets/images/NoPath - Copy (13).png'),
+                      Stack(
+                        children: [
+                          CarouselSlider(
+                                          carouselController: sliderController,
+                                          items: [
+                                            Container(
+                                              decoration: const BoxDecoration(
+                                                  image: DecorationImage(fit: BoxFit.fill,
+                                                      image: AssetImage(
+                                                          'assets/images/munnar1.jpg',))),
+                                            ),
+                                            Container(
+                                              decoration: const BoxDecoration(
+                                                  image: DecorationImage(fit: BoxFit.fill,
+                                                      image: AssetImage(
+                                                          'assets/images/munnar2.jpg'))),
+                                            ),
+                                            Container(
+                                              decoration: const BoxDecoration(
+                                                  image: DecorationImage(fit: BoxFit.fill,
+                                                      image: AssetImage(
+                                                          'assets/images/munnar3.jpg'))),
+                                            ),
+                                          ],
+                                          options: CarouselOptions(
+                                            height: 170,
+                                            onPageChanged: (index, reason) {
+                                              setState(() {
+                                                activeIndex = index;
+                                              });
+                                            },
+                                            aspectRatio: 16 / 9,
+                                            viewportFraction: 1,
+                                            initialPage: 0,
+                                            enableInfiniteScroll: true,
+                                            reverse: false,
+                                            autoPlay: true,
+                                            autoPlayInterval:
+                                                const Duration(seconds: 3),
+                                            autoPlayAnimationDuration:
+                                                const Duration(milliseconds: 800),
+                                            autoPlayCurve: Curves.fastOutSlowIn,
+                                            enlargeCenterPage: true,
+                                            enlargeFactor: 0.3,
+                                            scrollDirection: Axis.horizontal,
+                                          )),
+                                           Positioned(
+                                            bottom: 10,
+                                            left: 0,
+                                            right: 0,
+                                             child: Row(
+                                               mainAxisAlignment: MainAxisAlignment.center,
+                                                 children: [
+                                                 AnimatedSmoothIndicator(
+                                                  activeIndex: activeIndex,
+                                                  count: 3,
+                                                  effect: ScaleEffect(
+                                              dotHeight: 9.0,
+                                              dotWidth: 9.0,
+                                              dotColor: kgrey,
+                                              activeDotColor: Colors.white),
+                                       ),
+                                 ],
+                             ),
+                        ),
+                        ],
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -65,6 +138,7 @@ class _HolidayScreenState extends State<HolidayScreen> {
                                   .blue900
                                   .make()
                                   .p2(),
+                                  ksizedbox10,
                               Text(''' ₹ 6999''').text.bold.xl2.blue900.make()
                             ],
                           ),
@@ -77,6 +151,7 @@ class _HolidayScreenState extends State<HolidayScreen> {
                                   .blue900
                                   .make()
                                   .p2(),
+                                  ksizedbox10,
                               InkWell(onTap: (){Get.to(EnquiryNowWidget());},
                                 child: Container(
                                   height: 40.h,

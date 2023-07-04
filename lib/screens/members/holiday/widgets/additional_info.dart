@@ -132,6 +132,7 @@ class _AdditionalInfoWidgetState extends State<AdditionalInfoWidget> {
                               height: 1.5,
                             fontWeight: FontWeight.w400),
                 ),
+                ksizedbox20,
         ],
       
     );

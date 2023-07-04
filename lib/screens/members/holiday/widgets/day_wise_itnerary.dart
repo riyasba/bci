@@ -328,6 +328,7 @@ class _DayWiseItineraryState extends State<DayWiseItinerary> {
                          height: 1.5,
                        fontWeight: FontWeight.w400),
            ),
+           ksizedbox20
         ],
       
     );

@@ -73,7 +73,7 @@ class _OverviewWidgetState extends State<OverviewWidget> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 20, top: 10),
+            padding: const EdgeInsets.only(right: 0, top: 10),
             child: Container(
               height: 120,
               width: size.width,
@@ -416,6 +416,7 @@ class _OverviewWidgetState extends State<OverviewWidget> {
                 color: Colors.black,
                 fontWeight: FontWeight.w400),
           ),
+          ksizedbox20
         ],
       );
   }

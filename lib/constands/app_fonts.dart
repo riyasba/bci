@@ -7,4 +7,4 @@ var headingholi = TextStyle(
   fontWeight: FontWeight.w600, color: kblue
 );
 var discription1 =
-    TextStyle(fontSize: 15, fontWeight: FontWeight.w500,);
+    TextStyle(fontSize: 15, fontWeight: FontWeight.w400,color: Colors.black);
