@@ -3,10 +3,11 @@ import 'package:bci/screens/members/holiday/booking.dart';
 import 'package:bci/screens/members/holiday/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+
+import 'holidaybookings.dart';
 
 class Holiday_Home extends StatefulWidget {
   const Holiday_Home({super.key});
@@ -182,7 +183,7 @@ class _Holiday_HomeState extends State<Holiday_Home> {
             ],
           ),
           ksizedbox40,
-          InkWell(onTap: (){Get.to(Holiday_booking());},
+          InkWell(onTap: (){Get.to(HolidayScreen());},
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

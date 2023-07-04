@@ -4,7 +4,7 @@ import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
-import 'package:bci/widgets/home_widgets/loading_widgets.dart';
+import 'package:bci/screens/members/holiday/controllers/holidaycontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -19,6 +19,7 @@ void main() {
   Get.put(ProfileController());
   Get.put(PlanController());
   Get.put(HomeController());
+  Get.put(HolidayController());
   runApp(const MyApp());
 }
 
