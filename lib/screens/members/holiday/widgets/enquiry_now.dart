@@ -20,7 +20,6 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Container(
-                height: size.height,
                 width: size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -67,13 +66,216 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                                       color: kblue,
                                     fontWeight: FontWeight.w500),
                                   ),
+                                  ksizedbox10,
                                   Container(
-                  height: 50,
+                  height: 40,
                   width: size.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
                       border: Border.all(),
-                      color:const Color(0xffF2F1F1)),
+                      color:const Color.fromARGB(255, 254, 252, 252)),
+                  alignment: Alignment.center,
+                  child:const Padding(
+                    padding: EdgeInsets.only(left: 15, right: 10),
+                    child: TextField(
+                      //controller: usernamecontroller,
+                      decoration: InputDecoration(
+                          isCollapsed: true,
+                          isDense: true,
+                          border: InputBorder.none,
+                         // hintText: "Your Name",
+                          hintStyle: TextStyle(
+                            color: Color(0xff6E6D6E),
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ),
+                ),
+                ksizedbox20,
+                Text('City of Departure',
+                                    style: TextStyle(
+                                      fontSize: 20.sp, 
+                                      color: kblue,
+                                    fontWeight: FontWeight.w500),
+                                  ),
+                                  ksizedbox10,
+                                  Container(
+                  height: 40,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      border: Border.all(),
+                      color:const Color.fromARGB(255, 254, 252, 252)),
+                  alignment: Alignment.center,
+                  child:const Padding(
+                    padding: EdgeInsets.only(left: 15, right: 10),
+                    child: TextField(
+                      //controller: usernamecontroller,
+                      decoration: InputDecoration(
+                          isCollapsed: true,
+                          isDense: true,
+                          border: InputBorder.none,
+                         // hintText: "Your Name",
+                          hintStyle: TextStyle(
+                            color: Color(0xff6E6D6E),
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ),
+                ),
+                ksizedbox20,
+                Text('Date of Departure',
+                                    style: TextStyle(
+                                      fontSize: 20.sp, 
+                                      color: kblue,
+                                    fontWeight: FontWeight.w500),
+                                  ),
+                                  ksizedbox10,
+                   Container(
+                  height: 40,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      border: Border.all(),
+                      color:const Color.fromARGB(255, 254, 252, 252)),
+                  alignment: Alignment.center,
+                  child:const Padding(
+                    padding: EdgeInsets.only(left: 15, right: 10),
+                    child: TextField(
+                      //controller: usernamecontroller,
+                      decoration: InputDecoration(
+                          isCollapsed: true,
+                          isDense: true,
+                          border: InputBorder.none,
+                         // hintText: "Your Name",
+                          hintStyle: TextStyle(
+                            color: Color(0xff6E6D6E),
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ),
+                ),
+                ksizedbox20,
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        Text('Adult',
+                          style: TextStyle(
+                          fontSize: 20.sp, 
+                          color: kblue,
+                          fontWeight: FontWeight.w500),
+                  ),
+                  ksizedbox10,
+                  Container(
+                    height: 25,
+                    width: 75,
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Icon(Icons.remove,size: 20,),
+                        Container(
+                          height: 25,
+                          width: 25,
+                          color: Colors.orange,
+                          child:const Center(
+                              child: Text("1",style: TextStyle(color: Colors.white),),
+                          ),
+                        ),
+                        const Icon(Icons.add,size: 20,),
+                      ],
+                    ),
+                  ),
+                      ],
+                    ),
+                    kwidth10,
+                    Column(
+                      children: [
+                        Text('Child',
+                          style: TextStyle(
+                          fontSize: 20.sp, 
+                          color: kblue,
+                          fontWeight: FontWeight.w500),
+                  ),
+                  ksizedbox10,
+                  Container(
+                    height: 25,
+                    width: 75,
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Icon(Icons.remove,size: 20,),
+                        Container(
+                          height: 25,
+                          width: 25,
+                          color: Colors.orange,
+                          child:const Center(
+                              child: Text("1",style: TextStyle(color: Colors.white),),
+                          ),
+                        ),
+                        const Icon(Icons.add,size: 20,),
+                      ],
+                    ),
+                  ),
+                      ],
+                    ),
+                    kwidth10,
+                    Column(
+                      children: [
+                        Text('Infant',
+                          style: TextStyle(
+                          fontSize: 20.sp, 
+                          color: kblue,
+                          fontWeight: FontWeight.w500),
+                  ),
+                  ksizedbox10,
+                  Container(
+                    height: 25,
+                    width: 75,
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Icon(Icons.remove,size: 20,),
+                        Container(
+                          height: 25,
+                          width: 25,
+                          color: Colors.orange,
+                          child:const Center(
+                              child: Text("2",style: TextStyle(color: Colors.white),),
+                          ),
+                        ),
+                        const Icon(Icons.add,size: 20,),
+                      ],
+                    ),
+                  ),
+                      ],
+                    ),
+                  ],
+                ),
+                ksizedbox20,
+                Text('Contact Details',
+                          style: TextStyle(
+                          fontSize: 20.sp, 
+                          color: kblue,
+                          fontWeight: FontWeight.w500),
+                  ),
+                  ksizedbox10,
+                   Container(
+                  height: 40,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      border: Border.all(),
+                      color:const Color.fromARGB(255, 254, 252, 252)),
                   alignment: Alignment.center,
                   child:const Padding(
                     padding: EdgeInsets.only(left: 15, right: 10),
@@ -91,6 +293,151 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                     ),
                   ),
                 ),
+                ksizedbox20,
+                 Container(
+                  height: 40,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      border: Border.all(),
+                      color:const Color.fromARGB(255, 254, 252, 252)),
+                  alignment: Alignment.center,
+                  child:const Padding(
+                    padding: EdgeInsets.only(left: 15, right: 10),
+                    child: TextField(
+                      //controller: usernamecontroller,
+                      decoration: InputDecoration(
+                          isCollapsed: true,
+                          isDense: true,
+                          border: InputBorder.none,
+                          hintText: "Email",
+                          hintStyle: TextStyle(
+                            color: Color(0xff6E6D6E),
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ),
+                ),
+                ksizedbox20,
+                Container(
+                  height: 40,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      border: Border.all(),
+                      color:const Color.fromARGB(255, 254, 252, 252)),
+                  alignment: Alignment.center,
+                  child:const Padding(
+                    padding: EdgeInsets.only(left: 15, right: 10),
+                    child: TextField(
+                      //controller: usernamecontroller,
+                      decoration: InputDecoration(
+                          isCollapsed: true,
+                          isDense: true,
+                          border: InputBorder.none,
+                          hintText: "Phone Number",
+                          hintStyle: TextStyle(
+                            color: Color(0xff6E6D6E),
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ),
+                ),
+                ksizedbox30,
+                Container(
+                          height: 35,
+                          width: size.width,
+                          decoration: BoxDecoration(
+                            color: kOrange,
+                            borderRadius: BorderRadius.circular(8)
+                          ),
+                          child:const Center(
+                              child: Text("Send Query",style: TextStyle(color: Colors.white),),
+                          ),
+                        ),
+                        ksizedbox20,
+                        Row(
+                          children: [
+                            Icon(Icons.punch_clock_sharp,color: kOrange,),
+                            Text('Duration :6 Nights & 7 Days',
+                          style: TextStyle(
+                          fontSize: 18.sp, 
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500),
+                  ),
+                          ],
+                        ),
+                        ksizedbox10,
+                         Row(
+                          children: [
+                            Icon(Icons.location_city,color: kOrange,),
+                            Text('Places to Visit :06N Mauritius',
+                          style: TextStyle(
+                          fontSize: 18.sp, 
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500),
+                  ),
+                          ],
+                        ),
+                        ksizedbox30,
+                        Text('Packages Include',
+                          style: TextStyle(
+                          fontSize: 20.sp, 
+                          color: kblue,
+                          fontWeight: FontWeight.w500),
+                         ),
+                         ksizedbox10,
+                         Row(
+                          children: [
+                            Column(
+                              children: [
+                                Icon(Icons.flight_outlined,color: kgrey,),
+                                Text('Flights',
+                          style: TextStyle(
+                          fontSize: 10.sp, 
+                          color: kgrey,
+                          fontWeight: FontWeight.w500),
+                         ),
+                              ],
+                            ),
+                            kwidth5,
+                            Column(
+                              children: [
+                                Icon(Icons.hotel,color: kgrey,),
+                                Text('Hotels',
+                          style: TextStyle(
+                          fontSize: 10.sp, 
+                          color: kgrey,
+                          fontWeight: FontWeight.w500),
+                         ),
+                              ],
+                            ),
+                            kwidth5,
+                            Column(
+                              children: [
+                                Icon(Icons.car_rental,color: kgrey,),
+                                Text('Travel',
+                          style: TextStyle(
+                          fontSize: 10.sp, 
+                          color: kgrey,
+                          fontWeight: FontWeight.w500),
+                         ),
+                              ],
+                            ),
+                            kwidth5,
+                            Column(
+                              children: [
+                                Icon(Icons.food_bank,color: kgrey,),
+                                Text('Meals',
+                          style: TextStyle(
+                          fontSize: 10.sp, 
+                          color: kgrey,
+                          fontWeight: FontWeight.w500),
+                         ),
+                              ],
+                            ),
+                          ],
+                         ),
                         ],
                       ),
                     ),
