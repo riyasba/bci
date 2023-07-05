@@ -1,7 +1,9 @@
+import 'package:bci/controllers/flights_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 //import 'package:simpa/constands/constands.dart';
 //import 'package:simpa/constands/constands.dart';
 
@@ -14,14 +16,15 @@ class search extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child:  Container(
+      child: Container(
         height: 50,
-        width: double.infinity,   decoration: BoxDecoration(
-          color: Color(0xFFEFEEEE),
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(blurRadius: 5, color: Colors.grey.withOpacity(0.5)),
-          ]),
+        width: double.infinity,
+        decoration: BoxDecoration(
+            color: Color(0xFFEFEEEE),
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(blurRadius: 5, color: Colors.grey.withOpacity(0.5)),
+            ]),
         // decoration: BoxDecoration(
         //     color: Color(0xFFEFEEEE),
         //     borderRadius: BorderRadius.circular(15),
@@ -37,13 +40,17 @@ class search extends StatelessWidget {
             SizedBox(
               width: 10,
             ),
-          Icon(Icons.search,color:Colors.grey ,),
+            Icon(
+              Icons.search,
+              color: Colors.grey,
+            ),
             SizedBox(
               width: 10,
             ),
             Expanded(
               child: TextField(
-                  decoration: InputDecoration.collapsed(hintText: "Search for hotels")),
+                  decoration:
+                      InputDecoration.collapsed(hintText: "Search for hotels")),
             ),
           ],
         ),
@@ -51,21 +58,23 @@ class search extends StatelessWidget {
     );
   }
 }
+
 class search2 extends StatelessWidget {
   const search2({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10,right: 10),
-      child:  Container(
+      padding: const EdgeInsets.only(left: 10, right: 10),
+      child: Container(
         height: 50,
-        width: double.infinity,   decoration: BoxDecoration(
-          color: Color(0xFFEFEEEE),
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(blurRadius: 5, color: Colors.grey.withOpacity(0.5)),
-          ]),
+        width: double.infinity,
+        decoration: BoxDecoration(
+            color: Color(0xFFEFEEEE),
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(blurRadius: 5, color: Colors.grey.withOpacity(0.5)),
+            ]),
         // decoration: BoxDecoration(
         //     color: Color(0xFFEFEEEE),
         //     borderRadius: BorderRadius.circular(15),
@@ -78,16 +87,27 @@ class search2 extends StatelessWidget {
         //     ]),
         child: Row(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
-          Icon(Icons.search,color:Colors.grey ,),
-            SizedBox(
+            const Icon(
+              Icons.search,
+              color: Colors.grey,
+            ),
+            const SizedBox(
               width: 10,
             ),
             Expanded(
               child: TextField(
-                  decoration: InputDecoration.collapsed(hintText: "City, Country, Airport")),
+                  onChanged: (value) async {
+                    if (value.length > 1) {
+                      await Future.delayed(const Duration(milliseconds: 200));
+                      Get.find<FlightsController>()
+                          .seachAirport(keyWord: value);
+                    }
+                  },
+                  decoration: const InputDecoration.collapsed(
+                      hintText: "City, Country, Airports")),
             ),
           ],
         ),

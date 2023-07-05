@@ -38,36 +38,50 @@ abstract class BaseApiService {
   final String getPlanDetailsURL =
       "https://bci.generation360tech.in/api/auth/get_plan_details";
 
-      
-   //add subscription plan
+  //add subscription plan
   final String addPlanUrl =
       "https://bci.generation360tech.in/api/auth/add_subscription_plan";
-  
+
   //service list
-  final String serviceListApiUrl = "https://bci.generation360tech.in/api/auth/service_list";
+  final String serviceListApiUrl =
+      "https://bci.generation360tech.in/api/auth/service_list";
 
   //add to cart
-  final String addToCartApiUrl = "https://bci.generation360tech.in/api/auth/addtocart";
+  final String addToCartApiUrl =
+      "https://bci.generation360tech.in/api/auth/addtocart";
 
   //delete cart
-  final String deleteCartApiUrl = "https://bci.generation360tech.in/api/auth/deletecart";
+  final String deleteCartApiUrl =
+      "https://bci.generation360tech.in/api/auth/deletecart";
 
   //get cart list
-  final String getCartListApiUrl = "https://bci.generation360tech.in/api/auth/cartlists";
+  final String getCartListApiUrl =
+      "https://bci.generation360tech.in/api/auth/cartlists";
 
   //add booking api
-  final String addBookingApiUrl = "https://bci.generation360tech.in/api/auth/addbooking";
+  final String addBookingApiUrl =
+      "https://bci.generation360tech.in/api/auth/addbooking";
 
   //our coupons api
-  final String couponsApiUrl = "https://bci.generation360tech.in/api/auth/getUserCoupons";
+  final String couponsApiUrl =
+      "https://bci.generation360tech.in/api/auth/getUserCoupons";
 
   //coupons redeem api
-  final String redeemCouponsApiUrl = "https://bci.generation360tech.in/api/auth/redeemCoupon";
+  final String redeemCouponsApiUrl =
+      "https://bci.generation360tech.in/api/auth/redeemCoupon";
 
   //get booking list
-  final String bookingListApiUrl = "https://bci.generation360tech.in/api/auth/booking_list";
+  final String bookingListApiUrl =
+      "https://bci.generation360tech.in/api/auth/booking_list";
 
   //get today offers list
-  final String todayOffersListApiUrl = "https://bci.generation360tech.in/api/auth/today_offers_list";
+  final String todayOffersListApiUrl =
+      "https://bci.generation360tech.in/api/auth/today_offers_list";
 
+  // ----------- Flight bookings  ----------- //
+
+  final String airSearchUrl =
+      "https://bci.generation360tech.in/api/auth/flight_search";
+
+  final String airportSearch = "https://openflights.org/php/apsearch.php";
 }

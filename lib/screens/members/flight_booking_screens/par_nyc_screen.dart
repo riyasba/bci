@@ -1,4 +1,6 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/flights_controller.dart';
+import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_details_screen.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
@@ -8,27 +10,15 @@ import 'package:get/get.dart';
 import '../../../constands/app_fonts.dart';
 
 class ParNycSCreen extends StatefulWidget {
-  const ParNycSCreen({super.key});
+  FlightSearchDataModel flightSearchDataModel;
+  ParNycSCreen({super.key, required this.flightSearchDataModel});
 
   @override
   State<ParNycSCreen> createState() => _ParNycSCreenState();
 }
 
 class _ParNycSCreenState extends State<ParNycSCreen> {
-  DateTime selectedDate = DateTime.now();
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
-    );
-    if (picked != null && picked != selectedDate)
-      setState(() {
-        selectedDate = picked;
-      });
-  }
+  final flightsController = Get.find<FlightsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +31,10 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
               Container(
                 decoration: BoxDecoration(
                     color: kblue,
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(12),
                         bottomRight: Radius.circular(12))),
-                height: _mediaQuery.height>700?210:250.h,        
+                height: _mediaQuery.height > 700 ? 210 : 250.h,
                 width: MediaQuery.of(context).size.width,
                 child: ListView(children: [
                   Column(
@@ -57,7 +47,7 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                             child: Image.asset(
                                 'assets/images/parflaightback.png')),
                         Text(
-                          'PAR - NYC',
+                          '${widget.flightSearchDataModel.fromIata} - ${widget.flightSearchDataModel.toIata}',
                           style: TextStyle(color: kwhite, fontSize: 20),
                         )
                       ]),
@@ -67,18 +57,20 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 20, left: 15),
                             child: GestureDetector(
-                              onTap: () {
-                                _selectDate(context);
-                              },
+                              onTap: () {},
                               child: Image.asset(
                                   'assets/images/parflaightcalendar.png'),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20, right: 60),
-                            child: Image.asset(
-                                'assets/images/parflaightcalendar.png'),
-                          ),
+                          if (widget
+                                  .flightSearchDataModel.isOneWayOrRoundTrip ==
+                              1)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 20, right: 60),
+                              child: Image.asset(
+                                  'assets/images/parflaightcalendar.png'),
+                            ),
                         ],
                       ),
                       ksizedbox10,
@@ -94,7 +86,7 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                                 ),
                                 child: Text(
                                   formatDate(
-                                    selectedDate,
+                                    widget.flightSearchDataModel.depatureDate,
                                     [
                                       '',
                                       DD,
@@ -108,43 +100,55 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                                 padding:
                                     const EdgeInsets.only(left: 10, bottom: 20),
                                 child: Text(
-                                    formatDate(selectedDate, [dd, MM, yyyy]),
+                                    formatDate(
+                                        widget
+                                            .flightSearchDataModel.depatureDate,
+                                        [dd, MM, yyyy]),
                                     style:
                                         TextStyle(color: kwhite, fontSize: 14)),
                               )
                             ],
                           ),
-                          Image.asset(
-                            'assets/images/pardoubleflaight.png',
-                            color: kwhite,
-                            fit: BoxFit.fitWidth,
-                            width: 35,
-                            height: 50,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                formatDate(
-                                  selectedDate,
-                                  [
-                                    '',
-                                    DD,
-                                    '',
-                                  ],
+                          if (widget
+                                  .flightSearchDataModel.isOneWayOrRoundTrip ==
+                              1)
+                            Image.asset(
+                              'assets/images/pardoubleflaight.png',
+                              color: kwhite,
+                              fit: BoxFit.fitWidth,
+                              width: 35,
+                              height: 50,
+                            ),
+                          if (widget
+                                  .flightSearchDataModel.isOneWayOrRoundTrip ==
+                              1)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  formatDate(
+                                    widget.flightSearchDataModel.returnDate,
+                                    [
+                                      '',
+                                      DD,
+                                      '',
+                                    ],
+                                  ),
+                                  style: TextStyle(color: kwhite, fontSize: 14),
                                 ),
-                                style: TextStyle(color: kwhite, fontSize: 14),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    bottom: 20, right: 10),
-                                child: Text(
-                                    formatDate(selectedDate, [dd, MM, yyyy]),
-                                    style:
-                                        TextStyle(color: kwhite, fontSize: 14)),
-                              )
-                            ],
-                          ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: 20, right: 10),
+                                  child: Text(
+                                      formatDate(
+                                          widget
+                                              .flightSearchDataModel.returnDate,
+                                          [dd, MM, yyyy]),
+                                      style: TextStyle(
+                                          color: kwhite, fontSize: 14)),
+                                )
+                              ],
+                            ),
                         ],
                       ),
                       Padding(
@@ -165,11 +169,19 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '1 Adult',
+                              '${widget.flightSearchDataModel.adultsCount} Adult',
                               style: TextStyle(color: kwhite),
                             ),
                             Text(
-                              'Economy',
+                              widget.flightSearchDataModel.cabinClass == 0
+                                  ? 'Economy'
+                                  : widget.flightSearchDataModel.cabinClass == 1
+                                      ? "Business"
+                                      : widget.flightSearchDataModel
+                                                  .cabinClass ==
+                                              2
+                                          ? "First Class"
+                                          : "",
                               style: TextStyle(color: kwhite),
                             )
                           ],
@@ -180,380 +192,155 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                   ),
                 ]),
               ),
-              ksizedbox30,
-              Padding(
-                padding: const EdgeInsets.only(right: 10, left: 10),
-                child: Stack(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.to(FlightDetailsScreen());
-                      },
-                      child: Container(
-                        height: 240.h,
-                        width: MediaQuery.of(context).size.width,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: Container(
-                            height: 210.h,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                color: kwhite,
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                      offset: Offset(0.0, 0.75),
-                                      blurRadius: 5,
-                                      color: kgrey),
-                                ],
-                                borderRadius: BorderRadius.circular(5)),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            'BGR 1565145',
-                            style: TextStyle(fontSize: 18.sp, color: kblue),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 120, left: 20),
-                      child: Row(
-                        children: [
-                          Image.asset('assets/images/parflaight.png'),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 10.h,
-                                  width: 10.w,
-                                  decoration: BoxDecoration(
-                                      color: korange.withOpacity(0.8),
-                                      borderRadius: BorderRadius.circular(10)),
-                                ),
-                                Text(
-                                  " -------------------------- ",
-                                  style: primaryFont.copyWith(
-                                      letterSpacing: 4,
-                                      color: Colors.grey.withOpacity(0.5)),
-                                ),
-                                Container(
-                                  height: 10.h,
-                                  width: 10.w,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: kblue),
-                                      borderRadius: BorderRadius.circular(10)),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                        left: 145,
-                        top: 110,
-                        child: Text(
-                          'Duration : 2h 55min',
-                          style: TextStyle(color: Color(0xff8C8AAF)),
-                        )),
-                    Positioned(
-                        left: 170,
-                        top: 125,
-                        child: Text('Non stop',
-                            style: TextStyle(color: Color(0xff8C8AAF)))),
-                    Positioned(left: 95, top: 155, child: Text('21:00')),
-                    Positioned(left: 310, top: 155, child: Text('00:25')),
-                    Positioned(
-                      top: -5,
-                      right: 2,
-                      child: Column(children: [
-                        Image.asset('assets/images/parflaightclipath.png'),
-                      ]),
-                    ),
-                    Positioned(
-                        top: 20,
-                        right: 3,
-                        child: Text(
-                          '₹ 186',
-                          style: TextStyle(color: kwhite, fontSize: 18),
-                        )),
-                    Positioned(
-                      bottom: -9,
-                      left: 160,
-                      child: Container(
-                        height: 60,
-                        width: 30,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: kblue,
-                        ),
-                        child: Center(
-                            child: Icon(
-                          Icons.expand_less,
-                          color: kwhite,
-                        )),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               ksizedbox20,
-              Padding(
-                padding: const EdgeInsets.only(right: 10, left: 10),
-                child: Stack(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.to(FlightDetailsScreen());
-                      },
-                      child: Container(
-                        height: 240,
-                        width: MediaQuery.of(context).size.width,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: Container(
-                            height: 210,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                color: kwhite,
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                      offset: Offset(0.0, 0.75),
-                                      blurRadius: 5,
-                                      color: kgrey),
-                                ],
-                                borderRadius: BorderRadius.circular(5)),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            'BGR 1565153',
-                            style: TextStyle(fontSize: 18, color: kblue),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 120, left: 20),
-                      child: Row(
-                        children: [
-                          Image.asset('assets/images/parflaight.png'),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 10,
-                                  width: 10,
-                                  decoration: BoxDecoration(
-                                      color: korange.withOpacity(0.8),
-                                      borderRadius: BorderRadius.circular(10)),
-                                ),
-                                Text(
-                                  " -------------------------- ",
-                                  style: primaryFont.copyWith(
-                                      letterSpacing: 4,
-                                      color: Colors.grey.withOpacity(0.5)),
-                                ),
-                                Container(
-                                  height: 10,
-                                  width: 10,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: kblue),
-                                      borderRadius: BorderRadius.circular(10)),
-                                ),
-                              ],
+              for (int i = 0; i < flightsController.flightList.length; i++)
+                Padding(
+                  padding: const EdgeInsets.only(right: 10, left: 10),
+                  child: Stack(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Get.to(FlightDetailsScreen());
+                        },
+                        child: Container(
+                          height: 240,
+                          width: MediaQuery.of(context).size.width,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 10, bottom: 10),
+                            child: Container(
+                              height: 210,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  color: kwhite,
+                                  boxShadow: <BoxShadow>[
+                                    BoxShadow(
+                                        offset: Offset(0.0, 0.75),
+                                        blurRadius: 5,
+                                        color: kgrey),
+                                  ],
+                                  borderRadius: BorderRadius.circular(5)),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                        left: 145,
-                        top: 110,
-                        child: Text(
-                          'Duration : 2h 55min',
-                          style: TextStyle(color: Color(0xff8C8AAF)),
-                        )),
-                    Positioned(
-                        left: 170,
-                        top: 125,
-                        child: Text('Non stop',
-                            style: TextStyle(color: Color(0xff8C8AAF)))),
-                    Positioned(left: 95, top: 155, child: Text('14:00')),
-                    Positioned(left: 310, top: 155, child: Text('17:25')),
-                    Positioned(
-                      bottom: 160,
-                      right: 2,
-                      child: Column(children: [
-                        Image.asset('assets/images/parflaightclipath.png'),
-                      ]),
-                    ),
-                    Positioned(
-                        top: 20,
-                        right: 3,
-                        child: Text(
-                          '₹ 125',
-                          style: TextStyle(color: kwhite, fontSize: 18),
-                        )),
-                    Positioned(
-                      top: 200,
-                      bottom: 0,
-                      left: 160,
-                      child: Container(
-                        height: 60,
-                        width: 30,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: kblue,
                         ),
-                        child: Center(
-                            child: Icon(
-                          Icons.expand_less,
-                          color: kwhite,
-                        )),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              ksizedbox20,
-              Padding(
-                padding: const EdgeInsets.only(right: 10, left: 10),
-                child: Stack(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.to(FlightDetailsScreen());
-                      },
-                      child: Container(
-                        height: 240,
-                        width: MediaQuery.of(context).size.width,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: Container(
-                            height: 210,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                color: kwhite,
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                      offset: Offset(0.0, 0.75),
-                                      blurRadius: 5,
-                                      color: kgrey),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15, top: 20),
+                        child: Row(
+                          children: [
+                            Text(
+                              flightsController
+                              .flightList[i].segments.first.airlineName,
+                              style: TextStyle(fontSize: 18, color: kblue),
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 120, left: 20),
+                        child: Row(
+                          children: [
+                            Image.asset('assets/images/parflaight.png',height: 30,),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 10,
+                                    width: 10,
+                                    decoration: BoxDecoration(
+                                        color: korange.withOpacity(0.8),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                  ),
+                                  Text(
+                                    " -------------------------- ",
+                                    style: primaryFont.copyWith(
+                                        letterSpacing: 4,
+                                        color: Colors.grey.withOpacity(0.5)),
+                                  ),
+                                  Container(
+                                    height: 10,
+                                    width: 10,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(color: kblue),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                  ),
                                 ],
-                                borderRadius: BorderRadius.circular(5)),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            'BGR 1565153',
-                            style: TextStyle(fontSize: 18, color: kblue),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 120, left: 20),
-                      child: Row(
-                        children: [
-                          Image.asset('assets/images/parflaight.png'),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 10,
-                                  width: 10,
-                                  decoration: BoxDecoration(
-                                      color: korange.withOpacity(0.8),
-                                      borderRadius: BorderRadius.circular(10)),
-                                ),
-                                Text(
-                                  " -------------------------- ",
-                                  style: primaryFont.copyWith(
-                                      letterSpacing: 4,
-                                      color: Colors.grey.withOpacity(0.5)),
-                                ),
-                                Container(
-                                  height: 10,
-                                  width: 10,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: kblue),
-                                      borderRadius: BorderRadius.circular(10)),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                        left: 145,
-                        top: 110,
-                        child: Text(
-                          'Duration : 2h 55min',
-                          style: TextStyle(color: Color(0xff8C8AAF)),
-                        )),
-                    Positioned(
-                        left: 170,
-                        top: 125,
-                        child: Text('Non stop',
-                            style: TextStyle(color: Color(0xff8C8AAF)))),
-                    Positioned(left: 95, top: 155, child: Text('14:00')),
-                    Positioned(left: 310, top: 155, child: Text('17:25')),
-                    Positioned(
-                      bottom: 160,
-                      right: 2,
-                      child: Column(children: [
-                        Image.asset('assets/images/parflaightclipath.png'),
-                      ]),
-                    ),
-                    Positioned(
-                        top: 20,
-                        right: 3,
-                        child: Text(
-                          '₹ 224',
-                          style: TextStyle(color: kwhite, fontSize: 18),
-                        )),
-                    Positioned(
-                      top: 200,
-                      bottom: 0,
-                      left: 160,
-                      child: Container(
-                        height: 60,
-                        width: 30,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: kblue,
+                          ],
                         ),
-                        child: Center(
-                            child: Icon(
-                          Icons.expand_less,
-                          color: kwhite,
-                        )),
                       ),
-                    ),
-                  ],
+                      Positioned(
+                          left: 0,
+                          right: 0,
+                          top: 110,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Duration : ${flightsController.flightList[i].segments.first.duration}',
+                                style: const TextStyle(color: Color(0xff8C8AAF)),
+                              ),
+                            ],
+                          )),
+                      // Positioned(
+                      //     left: 170,
+                      //     top: 125,
+                      //     child: Text('Non stop',
+                      //         style: TextStyle(color: Color(0xff8C8AAF)))),
+                      Positioned(
+                          left: 90,
+                          top: 155,
+                          child: Text(flightsController
+                              .flightList[i].segments.first.departureDateTime.split(" ").last)),
+                      Positioned(
+                          left: 310,
+                          top: 155,
+                          child: Text(flightsController
+                              .flightList[i].segments.first.arrivalDateTime
+                              .split(" ")
+                              .last)),
+                      Positioned(
+                        bottom: 160,
+                        right: 2,
+                        child: Column(children: [
+                          Image.asset('assets/images/parflaightclipath.png'),
+                        ]),
+                      ),
+                      Positioned(
+                          top: 15,
+                          right: 10,
+                          child: Text(
+                            '₹ ${flightsController.flightList[i].fares.first.fareDetails.first.totalAmount}',
+                            style: TextStyle(color: kwhite, fontSize: 14),
+                          )),
+                      Positioned(
+                        top: 200,
+                        bottom: 0,
+                        left: 0,
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 60,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: kblue,
+                              ),
+                              child: Center(
+                                  child: Icon(
+                                Icons.expand_less,
+                                color: kwhite,
+                              )),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
             ],
           ),
         ]),

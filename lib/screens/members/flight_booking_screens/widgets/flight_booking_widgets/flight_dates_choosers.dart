@@ -1,5 +1,6 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/flights_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,8 @@ class FlightDateRange extends StatefulWidget {
 }
 
 class _FlightDestinationChooserState extends State<FlightDateRange> {
+  final flightsController = Get.find<FlightsController>();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,7 +38,7 @@ class _FlightDestinationChooserState extends State<FlightDateRange> {
                 onTap: () {
                   Get.to(FlightDeparetureSCreen());
                 },
-                child: Container(
+                child:  Container(
                   height: 30,
                   width: 90,
                   decoration: BoxDecoration(
@@ -89,7 +92,7 @@ class _FlightDestinationChooserState extends State<FlightDateRange> {
               ksizedbox20,
               InkWell(
                 onTap: () {
-                  Get.to(FlaightReturnScreen());
+                  Get.to(const FlaightReturnScreen());
                 },
                 child: Container(
                   height: 30,
@@ -97,9 +100,9 @@ class _FlightDestinationChooserState extends State<FlightDateRange> {
                   decoration: BoxDecoration(
                       color: kblue, borderRadius: BorderRadius.circular(7)),
                   alignment: Alignment.center,
-                  child: Text(
-                    "Choose",
-                    style: primaryFont.copyWith(color: Colors.white),
+                  child: Icon(
+                    Icons.date_range,
+                    color: kwhite,
                   ),
                 ),
               )

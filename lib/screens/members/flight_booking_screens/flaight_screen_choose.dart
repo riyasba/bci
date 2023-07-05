@@ -1,3 +1,4 @@
+import 'package:bci/controllers/flights_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/screens/members/flight_booking_screens/plane_details_scree.dart';
@@ -16,6 +17,22 @@ class flightScreenChoose extends StatefulWidget {
 }
 
 class _flightScreenChooseState extends State<flightScreenChoose> {
+  final flightsController = Get.find<FlightsController>();
+
+  @override
+  void initState() {
+    super.initState();
+    setDefault();
+  }
+
+  setDefault() async {
+    WidgetsBinding.instance.addPostFrameCallback((timings) {
+      flightsController.airports.clear();
+      flightsController.airPortFound(false);
+      flightsController.update();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final _mediaQurey = MediaQuery.of(context).size;
@@ -53,433 +70,125 @@ class _flightScreenChooseState extends State<flightScreenChoose> {
                       Padding(
                           padding: const EdgeInsets.only(top: 10, bottom: 10),
                           child: Container(
-                            height: _mediaQurey.height>700? 600:540.h,
+                            height: _mediaQurey.height > 700 ? 600 : 540.h,
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                                 color: kwhite,
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
-                                      offset: Offset(0.0, 0.75),
+                                      offset: const Offset(0.0, 0.75),
                                       blurRadius: 5,
                                       color: kwhite),
                                 ],
                                 borderRadius: BorderRadius.circular(5)),
-                            child: Column(children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 15, left: 20),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Recently Searched',
-                                      style:
-                                          TextStyle(fontSize: 21, color: kblue),
+                            child: GetBuilder<FlightsController>(builder: (_) {
+                              return flightsController.airports.isEmpty &&
+                                      flightsController.airPortFound.isTrue
+                                  ? const Center(
+                                      child: Text("No airports found"),
                                     )
-                                  ],
-                                ),
-                              ),
-                              ksizedbox10,
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                minimumSize: Size(30, 25),
-                                                backgroundColor: kblue),
-                                            onPressed: () {},
-                                            child: Text(
-                                              'PRG',
+                                  : flightsController.airports.isEmpty
+                                      ? const Center(
+                                          child: Text("Search City, Airports"),
+                                        )
+                                      : Column(children: [
+                                          // Padding(
+                                          //   padding:
+                                          //       const EdgeInsets.only(top: 15, left: 20),
+                                          //   child: Row(
+                                          //     children: [
+                                          //       Text(
+                                          //         'Recently Searched',
+                                          //         style:
+                                          //             TextStyle(fontSize: 21, color: kblue),
+                                          //       )
+                                          //     ],
+                                          //   ),
+                                          // ),
+                                          ksizedbox10,
+                                          for (int i = 0;
+                                              i <
+                                                  flightsController
+                                                      .airports.length;
+                                              i++)
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 15, right: 15),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  flightsController.origin(
+                                                      flightsController
+                                                          .airports[i].iata);
+
+                                                  Get.back();
+                                                },
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.2,
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          ElevatedButton(
+                                                            style: ElevatedButton
+                                                                .styleFrom(
+                                                                    minimumSize:
+                                                                        const Size(
+                                                                            30,
+                                                                            25),
+                                                                    backgroundColor:
+                                                                        kblue),
+                                                            onPressed: () {},
+                                                            child: Text(
+                                                              flightsController
+                                                                  .airports[i]
+                                                                  .iata,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.4,
+                                                      child: Text(
+                                                        flightsController
+                                                            .airports[i].name,
+                                                        style: TextStyle(
+                                                            fontSize: 15.sp),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.1,
+                                                        child: Text(
+                                                            flightsController
+                                                                .airports[i]
+                                                                .dst,
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    15.sp)))
+                                                  ],
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text(
-                                        'Prag, Czechia',
-                                        style: TextStyle(fontSize: 17.sp),
-                                      ),
-                                    ),
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.1,
-                                        child: Text('A',
-                                            style: TextStyle(fontSize: 17.sp)))
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                backgroundColor: kblue,
-                                                minimumSize: Size(30, 25)),
-                                            onPressed: () {},
-                                            child: Text('PRG'),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.3,
-                                        child: Text('Paris, France',
-                                            style: TextStyle(fontSize: 17.sp))),
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.1,
-                                        child: Text('B',
-                                            style: TextStyle(fontSize: 17.sp)))
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                backgroundColor: kblue,
-                                                minimumSize: Size(30, 25)),
-                                            onPressed: () {},
-                                            child: Text('NYC'),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text('New York, USA',
-                                          style: TextStyle(fontSize: 17.sp)),
-                                    ),
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.1,
-                                        child: Text('C',
-                                            style: TextStyle(fontSize: 17.sp)))
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                backgroundColor: kblue,
-                                                minimumSize: Size(30, 25)),
-                                            onPressed: () {},
-                                            child: Text(
-                                              'ROM',
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text('Rome, Italy',
-                                          style: TextStyle(fontSize: 17.sp)),
-                                    ),
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.1,
-                                        child: Text('D',
-                                            style: TextStyle(fontSize: 17.sp)))
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  backgroundColor: kblue,
-                                                  minimumSize: Size(30, 25)),
-                                              onPressed: () {},
-                                              child: Text(
-                                                'PRG',
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text('Istanbul, Turkey',
-                                          style: TextStyle(fontSize: 17.sp)),
-                                    ),
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.1,
-                                        child: Text('E',
-                                            style: TextStyle(fontSize: 17.sp)))
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  backgroundColor: kblue,
-                                                  minimumSize: Size(30, 25)),
-                                              onPressed: () {},
-                                              child: Text(
-                                                'PRG',
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text('Vienne, Austria',
-                                          style: TextStyle(fontSize: 17.sp)),
-                                    ),
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.1,
-                                        child: Text('F',
-                                            style: TextStyle(fontSize: 17.sp)))
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  backgroundColor: kblue,
-                                                  minimumSize: Size(30, 25)),
-                                              onPressed: () {},
-                                              child: Text('CDG')),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text('Paris, France',
-                                          style: TextStyle(fontSize: 17.sp)),
-                                    ),
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.1,
-                                        child: Text('G',
-                                            style: TextStyle(fontSize: 17.sp)))
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  backgroundColor: kblue,
-                                                  minimumSize: Size(30, 25)),
-                                              onPressed: () {},
-                                              child: Text(
-                                                'TXL',
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text('Berlin, Germany',
-                                          style: TextStyle(fontSize: 17.sp)),
-                                    ),
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.1,
-                                        child: Text('H',
-                                            style: TextStyle(fontSize: 17.sp)))
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  backgroundColor: kblue,
-                                                  minimumSize: Size(30, 25)),
-                                              onPressed: () {},
-                                              child: Text(
-                                                'LAX',
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text('Los Angeles, USA',
-                                          style: TextStyle(fontSize: 17.sp)),
-                                    ),
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.1,
-                                        child: Text('I',
-                                            style: TextStyle(fontSize: 17.sp)))
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  backgroundColor: kblue,
-                                                  minimumSize: Size(30, 25)),
-                                              onPressed: () {},
-                                              child: Text(
-                                                'LGW',
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text('Londan, England',
-                                          style: TextStyle(fontSize: 17.sp)),
-                                    ),
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.1,
-                                        child: Text('J',
-                                            style: TextStyle(fontSize: 17.sp)))
-                                  ],
-                                ),
-                              ),
-                            ]),
+                                        ]);
+                            }),
                           ))
                     ]))
               ])

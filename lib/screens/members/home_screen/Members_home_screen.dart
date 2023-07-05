@@ -173,7 +173,7 @@ class _Home_screen1State extends State<Home_screen1> {
                                   ),
                                   InkWell(
                                       onTap: () {
-                                        Get.to(UpgradeScreen());
+                                        Get.to(const UpgradeScreen());
                                       },
                                       child: Image.asset(
                                           'assets/images/Group 5826.png')),
@@ -197,7 +197,7 @@ class _Home_screen1State extends State<Home_screen1> {
                   ksizedbox20,
                   InkWell(
                       onTap: () {
-                        Get.to(Coupens_members());
+                        Get.to(const Coupens_members());
                       },
                       child: Image.asset('assets/images/Group 5755.png')),
                   ksizedbox20,
