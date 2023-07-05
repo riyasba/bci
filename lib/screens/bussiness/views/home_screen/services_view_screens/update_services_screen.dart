@@ -71,7 +71,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     serviceTitleController.text = widget.serviceData.title;
     saleAmountController.text = widget.serviceData.saleAmount;
     actualAmountController.text = widget.serviceData.actualAmount;
-    bvcAmountController.text = widget.serviceData.bvcAmount;
+    // bvcAmountController.text = widget.serviceData.bvcAmount;
     descriptionController.text = widget.serviceData.description;
     couponAmountController.text = widget.serviceData.couponAmount ?? "";
     offerAmountController.text = widget.serviceData.offerUptoAmount ?? "";
@@ -868,11 +868,11 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                                         : offerPercentageController.text,
                                 actualAmount: actualAmountController.text,
                                 amenities: listTags,
-                                share: shareValue,
+                                // share: shareValue,
                                 booking: authController.isGstAvailable.isTrue
                                     ? "1"
                                     : "0",
-                                bvcAmount: bvcAmountController.text,
+                                // bvcAmount: bvcAmountController.text,
                                 category: categoryModel == null
                                     ? widget.serviceData.categoryId
                                     : categoryModel.id.toString(),

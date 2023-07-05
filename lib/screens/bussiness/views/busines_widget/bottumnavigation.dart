@@ -60,7 +60,7 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
             style: TabStyle.reactCircle,
       
             items: [
-              TabItem(
+             const TabItem(
                 icon: Icons.home, title: 'Home'),
               TabItem(
                 icon: ImageIcon(

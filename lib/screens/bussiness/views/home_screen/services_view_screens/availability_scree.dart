@@ -436,6 +436,7 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                                                           .serviceDataList[
                                                               index]
                                                           .description,
+                                                      maxLines: 4,
                                                       style: TextStyle(
                                                           fontSize: 13,
                                                           color: kgrey),

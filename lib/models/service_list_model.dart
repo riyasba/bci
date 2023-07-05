@@ -38,7 +38,7 @@ class ServiceData {
   String vendorId;
   String title;
   String actualAmount;
-  String bvcAmount;
+  // String bvcAmount;
   String saleAmount;
   String isOffer;
   String? offerPercentage;
@@ -60,7 +60,7 @@ class ServiceData {
     required this.vendorId,
     required this.title,
     required this.actualAmount,
-    required this.bvcAmount,
+    // required this.bvcAmount,
     required this.saleAmount,
     required this.isOffer,
     this.offerPercentage,
@@ -83,7 +83,7 @@ class ServiceData {
         vendorId: json["vendor_id"],
         title: json["title"],
         actualAmount: json["actual_amount"],
-        bvcAmount: json["bvc_amount"],
+        
         saleAmount: json["sale_amount"],
         isOffer: json["isOffer"],
         offerPercentage: json["offerPercentage"],
@@ -109,7 +109,7 @@ class ServiceData {
         "vendor_id": vendorId,
         "title": title,
         "actual_amount": actualAmount,
-        "bvc_amount": bvcAmount,
+        // "bvc_amount": bvcAmount,
         "sale_amount": saleAmount,
         "isOffer": isOffer,
         "offerPercentage": offerPercentage,
