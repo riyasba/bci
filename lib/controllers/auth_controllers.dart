@@ -42,6 +42,8 @@ class AuthController extends GetxController {
 
   RxBool isGstAvailable = true.obs;
   RxBool isLoading = false.obs;
+  RxBool isOTPLoading = false.obs;
+
 
 //api callings
   registerMerchants(
@@ -187,11 +189,25 @@ class AuthController extends GetxController {
               style: primaryFont.copyWith(color: Colors.white),
             ));
       }
-    } else {
+    }  else if (response.statusCode == 422) {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "The otp field is required",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    } else if (response.statusCode == 401) {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             "Invalid OTP",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "something went wrong",
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }
@@ -223,5 +239,19 @@ class AuthController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString("auth_token", "null");
     Get.to(BusinessLoginScreen());
+  }
+
+  Future<String> rendOtpFunction({required String mobileNumber}) async {
+    String otpCode = "null";
+    isOTPLoading(true);
+
+    dio.Response<dynamic> response =
+        await getOTPApiServices.getOtpApi(mobileNumber: mobileNumber);
+    isOTPLoading(false);
+
+    if (response.statusCode == 200) {
+      otpCode = response.data["otp"].toString();
+    }
+    return otpCode;
   }
 }

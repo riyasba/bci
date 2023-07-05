@@ -68,7 +68,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                   }),
                   IconButton(
                       onPressed: () {
-                        Get.to(NotificationScreen());
+                        Get.to(const NotificationScreen());
                       },
                       icon: Icon(
                         Icons.notifications,
@@ -85,19 +85,19 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 carouselController: sliderController,
                 items: [
                   Container(
-                    decoration: BoxDecoration(
+                    decoration:const BoxDecoration(
                         image: DecorationImage(
                             image:
                                 AssetImage('assets/images/sliderimage1.png'))),
                   ),
                   Container(
-                    decoration: BoxDecoration(
+                    decoration:const BoxDecoration(
                         image: DecorationImage(
                             image:
                                 AssetImage('assets/images/sliderimage2.png'))),
                   ),
                   Container(
-                    decoration: BoxDecoration(
+                    decoration:const BoxDecoration(
                         image: DecorationImage(
                             image:
                                 AssetImage('assets/images/sliderimage3.png'))),
@@ -203,7 +203,10 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    Get.to(const BusinessBookingScreen());
+                    Get.offAll(HomeBottomnavigationBar(
+                      index: 3,
+                    ));
+                    //Get.to(const BusinessBookingScreen());
                   },
                   child: Container(
                     child: Column(

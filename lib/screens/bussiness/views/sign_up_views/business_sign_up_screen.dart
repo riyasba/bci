@@ -170,6 +170,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: merchantDistplaynameController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -207,6 +208,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: emailIdController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -244,6 +246,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: phoneNumberController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -290,6 +293,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: alternativeMobileController,
                   keyboardType: TextInputType.phone,
                   inputFormatters: [
@@ -327,6 +331,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   controller: businessAddressController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -438,6 +443,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
+                  textInputAction: TextInputAction.none,
                   //controller: usernamecontroller,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
