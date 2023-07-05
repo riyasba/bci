@@ -62,7 +62,7 @@ class _AddServicesViewState extends State<AddServicesView> {
   bool isOfferEligible = false;
   bool isCouponEligible = false;
 
-  List share = ["fixed","percentage"];
+  // List share = ["fixed","percentage"];
 
   var shareValue;
 
@@ -273,88 +273,88 @@ class _AddServicesViewState extends State<AddServicesView> {
                   )),
             ),
           ),
-          ksizedbox10,
-          Padding(
-              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-              child: Container(
-                height: 44,
-                width: 330,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 5, 5, 5)
-                            .withOpacity(0.8))),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: DropdownButton<dynamic>(
-                    value: shareValue,
-                    isExpanded: true,
-                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                    elevation: 0,
-                    itemHeight: 55,
-                    isDense: true,
-                    dropdownColor: Colors.grey[250],
-                    style: const TextStyle(color: Colors.black54),
-                    hint: Text(
-                      "Share Options",
-                      style: TextStyle(fontSize: 16, color: kblue),
-                    ),
-                    onChanged: (dynamic value) {
-                      setState(() {
-                        shareValue = value!;
-                      });
-                    },
-                    items: share
-                        .map<DropdownMenuItem<dynamic>>(
-                            (dynamic value) {
-                      return DropdownMenuItem<dynamic>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ))),
-                ksizedbox10,
-          Padding(
-            padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-            child: TextFormField(
-              controller: bvcAmountController,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "BCI amount Can't be Empty";
-                }
-                return null;
-              },
-              keyboardType: TextInputType.phone,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(10),
-                FilteringTextInputFormatter.digitsOnly,
-                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-              ],
-              decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: const BorderSide(color: Color(0xff707070))),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: const BorderSide(color: Color(0xff707070))),
-                  isCollapsed: false,
-                  isDense: true,
-                  contentPadding:
-                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: const BorderSide(color: Color(0xff707070))),
-                  hintText: "BCI Amount",
-                  hintStyle: TextStyle(
-                    color: kblue,
-                    fontWeight: FontWeight.w400,
-                  )),
-            ),
-          ),
+          // ksizedbox10,
+          // Padding(
+          //     padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+          //     child: Container(
+          //       height: 44,
+          //       width: 330,
+          //       decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(3),
+          //           border: Border.all(
+          //               color: const Color.fromARGB(255, 5, 5, 5)
+          //                   .withOpacity(0.8))),
+          //       child: Padding(
+          //         padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+          //         child: DropdownButton<dynamic>(
+          //           value: shareValue,
+          //           isExpanded: true,
+          //           icon: const Icon(Icons.keyboard_arrow_down_outlined),
+          //           elevation: 0,
+          //           itemHeight: 55,
+          //           isDense: true,
+          //           dropdownColor: Colors.grey[250],
+          //           style: const TextStyle(color: Colors.black54),
+          //           hint: Text(
+          //             "Share Options",
+          //             style: TextStyle(fontSize: 16, color: kblue),
+          //           ),
+          //           onChanged: (dynamic value) {
+          //             setState(() {
+          //               shareValue = value!;
+          //             });
+          //           },
+          //           items: share
+          //               .map<DropdownMenuItem<dynamic>>(
+          //                   (dynamic value) {
+          //             return DropdownMenuItem<dynamic>(
+          //               value: value,
+          //               child: Text(value),
+          //             );
+          //           }).toList(),
+          //         ),
+          //       ))),
+          //       ksizedbox10,
+          // Padding(
+          //   padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+          //   child: TextFormField(
+          //     controller: bvcAmountController,
+          //     autovalidateMode: AutovalidateMode.onUserInteraction,
+          //     validator: (value) {
+          //       if (value!.isEmpty) {
+          //         return "BCI amount Can't be Empty";
+          //       }
+          //       return null;
+          //     },
+          //     keyboardType: TextInputType.phone,
+          //     inputFormatters: [
+          //       LengthLimitingTextInputFormatter(10),
+          //       FilteringTextInputFormatter.digitsOnly,
+          //       FilteringTextInputFormatter.deny(RegExp(r'\s')),
+          //     ],
+          //     decoration: InputDecoration(
+          //         fillColor: Colors.white,
+          //         filled: true,
+          //         enabledBorder: OutlineInputBorder(
+          //             borderRadius: BorderRadius.circular(5),
+          //             borderSide: const BorderSide(color: Color(0xff707070))),
+          //         focusedBorder: OutlineInputBorder(
+          //             borderRadius: BorderRadius.circular(5),
+          //             borderSide: const BorderSide(color: Color(0xff707070))),
+          //         isCollapsed: false,
+          //         isDense: true,
+          //         contentPadding:
+          //             const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+          //         border: OutlineInputBorder(
+          //             borderRadius: BorderRadius.circular(5),
+          //             borderSide: const BorderSide(color: Color(0xff707070))),
+          //         hintText: "BCI Amount",
+          //         hintStyle: TextStyle(
+          //           color: kblue,
+          //           fontWeight: FontWeight.w400,
+          //         )),
+          //   ),
+          // ),
           ksizedbox20,
           Obx(
             () => Row(
@@ -847,11 +847,11 @@ class _AddServicesViewState extends State<AddServicesView> {
                                         : offerPercentageController.text,
                                 actualAmount: actualAmountController.text,
                                 amenities: listTags,
-                                share: shareValue,
+                                // share: shareValue,
                                 booking: authController.isGstAvailable.isTrue
                                     ? "1"
                                     : "0",
-                                bvcAmount: bvcAmountController.text,
+                                // bvcAmount: bvcAmountController.text,
                                 category: categoryModel.id.toString(),
                                 description: descriptionController.text,
                                 image: serviceImage.path,
