@@ -148,13 +148,13 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    Get.to(CouponScreen());
+                    Get.to(const CouponScreen());
                   },
                   child: Container(
                     child: Column(
                       children: [
-                        Image.asset('assets/images/cupenimage.png'),
-                        Text(
+                       Image.asset('assets/images/cupenimage.png'),
+                       const Text(
                           'Coupon\nRedemention',
                           textAlign: TextAlign.center,
                         ),
@@ -227,7 +227,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     child: Column(
                       children: [
                         Image.asset('assets/images/offers.png'),
-                        Text(
+                      const  Text(
                           'Offers\n\n',
                           textAlign: TextAlign.center,
                         )

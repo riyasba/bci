@@ -55,7 +55,7 @@ class _EconomyBoardingScreenState extends State<EconomyBoardingScreen> {
                             color: kwhite,
                             boxShadow: <BoxShadow>[
                               BoxShadow(
-                                  offset: Offset(0.0, 0.75),
+                                  offset: const  Offset(0.0, 0.75),
                                   blurRadius: 10,
                                   color: kwhite),
                             ],
@@ -224,7 +224,7 @@ class _EconomyBoardingScreenState extends State<EconomyBoardingScreen> {
                 ksizedbox20,
                 InkWell(
                   onTap: () {
-                    Get.to(FlaightOrderDetailsScreen());
+                    // Get.to(FlaightOrderDetailsScreen());
                   },
                   child: Container(
                     decoration: BoxDecoration(

@@ -22,6 +22,17 @@ class FlightBookingLandingScreen extends StatefulWidget {
 class _FlightBookingLandingScreenState
     extends State<FlightBookingLandingScreen> {
   final flightBookingController = Get.find<FlightsController>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  setDefault() async {
+    flightBookingController.adultsCount(1);
+    flightBookingController.childsCount(0);
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -156,7 +167,18 @@ class _FlightBookingLandingScreenState
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
-                    '1 Adult',
+                    '${flightBookingController.adultsCount.value} Adult',
+                    style: TextStyle(fontSize: 15, color: kgrey),
+                  ),
+                ),
+                Image.asset('assets/images/Group 447.png'),
+                const SizedBox(
+                  width: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    '${flightBookingController.childsCount.value} Children',
                     style: TextStyle(fontSize: 15, color: kgrey),
                   ),
                 ),
@@ -164,7 +186,7 @@ class _FlightBookingLandingScreenState
               ],
             ),
             ksizedbox20,
-            Divider(
+            const Divider(
               thickness: 1,
             ),
             ksizedbox10,
@@ -198,8 +220,15 @@ class _FlightBookingLandingScreenState
                           FlightSearchDataModel flightSearchDataModel =
                               FlightSearchDataModel(
                                   adultsCount: 1,
-                                  cabinClass: flightBookingController
-                                      .cabinClassIndex.value,
+                                  cabinClass:
+                                      flightBookingController
+                                          .cabinClassIndex.value,
+                                  fromName:
+                                      flightBookingController
+                                          .originFullName.value,
+                                  toName:
+                                      flightBookingController.destinationFullName
+                                          .value,
                                   childCount: 0,
                                   depatureDate:
                                       flightBookingController.depatureDate,

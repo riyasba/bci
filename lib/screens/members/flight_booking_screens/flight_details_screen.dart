@@ -1,5 +1,8 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/models/flight_booking_models/air_search_model.dart';
+import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
 import 'package:bci/screens/members/flight_booking_screens/plane_details_scree.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -7,7 +10,10 @@ import 'dart:math' as math;
 import '../../../constands/app_fonts.dart';
 
 class FlightDetailsScreen extends StatefulWidget {
-  const FlightDetailsScreen({super.key});
+  Flight flight;
+  FlightSearchDataModel flightSearchDataModel;
+  FlightDetailsScreen(
+      {super.key, required this.flight, required this.flightSearchDataModel});
 
   @override
   State<FlightDetailsScreen> createState() => _FlightDetailsScreenState();
@@ -22,8 +28,8 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
-          child: ListView(
-            children:[ Column(
+          child: ListView(children: [
+            Column(
               children: [
                 ksizedbox40,
                 Padding(
@@ -34,7 +40,8 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                           onTap: () {
                             Get.back();
                           },
-                          child: Image.asset('assets/images/parflaightback.png')),
+                          child:
+                              Image.asset('assets/images/parflaightback.png')),
                       Text(
                         'Flight Details',
                         style: TextStyle(fontSize: 20, color: kwhite),
@@ -96,16 +103,17 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                           padding: const EdgeInsets.only(
                                               left: 30, top: 19),
                                           child: Text(
-                                            'JFK',
+                                            widget
+                                                .flightSearchDataModel.fromIata,
                                             style: TextStyle(
                                                 fontSize: 15, color: kblue),
                                           ),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(
-                                              left: 108, top: 20),
+                                              left: 105, top: 20),
                                           child: Text(
-                                            'BTJ',
+                                            widget.flightSearchDataModel.toIata,
                                             style: TextStyle(
                                                 color: kblue, fontSize: 15),
                                           ),
@@ -115,21 +123,33 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                     Row(
                                       children: [
                                         Padding(
-                                          padding:  EdgeInsets.only(
+                                          padding: EdgeInsets.only(
                                               left: 28, top: 19.h),
-                                          child: Text(
-                                            'John F. Kennedy \nAirport',
-                                            style: TextStyle(
-                                                fontSize: 15, color: kblue),
+                                          child: Container(
+                                            width: 120,
+                                            alignment: Alignment.topCenter,
+                                            child: Text(
+                                              widget.flightSearchDataModel
+                                                  .fromName,
+                                              maxLines: 2,
+                                              style: TextStyle(
+                                                  fontSize: 13, color: kblue),
+                                            ),
                                           ),
                                         ),
                                         Padding(
-                                          padding:  EdgeInsets.only(
-                                              left: 22, top: 5.h),
-                                          child: Text(
-                                            'Abbotsford National \nAirport',
-                                            style: TextStyle(
-                                                color: kblue, fontSize: 15),
+                                          padding: EdgeInsets.only(
+                                              left: 22, top: 19.h),
+                                          child: Container(
+                                            width: 120,
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              widget
+                                                  .flightSearchDataModel.toName,
+                                              maxLines: 2,
+                                              style: TextStyle(
+                                                  color: kblue, fontSize: 13),
+                                            ),
                                           ),
                                         )
                                       ],
@@ -146,32 +166,36 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                         ],
                                       ),
                                     ),
-                                    Divider(),
+                                    const Divider(),
                                     ksizedbox30,
                                     Stack(
                                       children: [
-                                        Column(children: [
-                                          Image.asset(
-                                            'assets/images/parflaightdown1.png',
-                                            color: kblue,
-                                          ),
-                                          SizedBox(
-                                            height: 65,
-                                          ),
-                                          Image.asset(
-                                            'assets/images/parflaightdown3.png',
-                                            color: kblue,
-                                          ),
-                                          SizedBox(
-                                            height: 65,
-                                          ),
-                                          Image.asset(
-                                            'assets/images/parflaightdown.png',
-                                            color: kblue,
-                                          ),
-                                        ]),
                                         Padding(
-                                          padding:  EdgeInsets.only(
+                                          padding:
+                                              const EdgeInsets.only(left: 15),
+                                          child: Column(children: [
+                                            Image.asset(
+                                              'assets/images/parflaightdown1.png',
+                                              color: kblue,
+                                            ),
+                                            const SizedBox(
+                                              height: 65,
+                                            ),
+                                            Image.asset(
+                                              'assets/images/parflaightdown3.png',
+                                              color: kblue,
+                                            ),
+                                            const SizedBox(
+                                              height: 65,
+                                            ),
+                                            Image.asset(
+                                              'assets/images/parflaightdown.png',
+                                              color: kblue,
+                                            ),
+                                          ]),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
                                               right: 95, top: 120.h),
                                           child: Container(
                                             child: Transform.rotate(
@@ -207,91 +231,138 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                           top: 20.h,
                                           child: Column(
                                             children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 18),
-                                                child: Text(
-                                                  '24 October',
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Color(0xff8C8AAf)),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:  EdgeInsets.only(
-                                                    right: 35, top: 5.h),
-                                                child: Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.schedule,
-                                                      size: 13,
-                                                    ),
-                                                    Text(
-                                                      '19:00',
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              Color(0xff8C8AAf)),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              ksizedbox40,
                                               Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  Padding(
-                                                    padding:
-                                                         EdgeInsets.only(
-                                                            left: 27, top: 30.h),
-                                                    child: Text(
-                                                      'Duration: 2h 55min',
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              Color(0xff8C8AAf)),
-                                                    ),
-                                                  ),
-                                                  Text('Non Stop',
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              Color(0xff8C8AAf)))
-                                                ],
-                                              ),
-                                              ksizedbox40,
-                                              Column(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                         EdgeInsets.only(
-                                                            right: 18, top: 50.h),
-                                                    child: Text(
-                                                      '31 October',
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          color:
-                                                              Color(0xff8C8AAf)),
-                                                    ),
-                                                  ),
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
-                                                            right: 40),
+                                                            right: 18),
+                                                    child: Text(
+                                                      widget
+                                                          .flight
+                                                          .segments
+                                                          .first
+                                                          .departureDateTime
+                                                          .split(" ")
+                                                          .first,
+                                                      style: const TextStyle(
+                                                          fontSize: 14,
+                                                          color: Color(
+                                                              0xff8C8AAf)),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        right: 35, top: 5.h),
                                                     child: Row(
                                                       children: [
                                                         Icon(
                                                           Icons.schedule,
                                                           size: 13,
                                                         ),
-                                                        Text('21:55',
-                                                            style: TextStyle(
-                                                                fontSize: 14,
-                                                                color: Color(
-                                                                    0xff8C8AAf))),
+                                                        Text(
+                                                          widget
+                                                              .flight
+                                                              .segments
+                                                              .first
+                                                              .departureDateTime
+                                                              .split(" ")
+                                                              .last,
+                                                          style: TextStyle(
+                                                              fontSize: 14,
+                                                              color: Color(
+                                                                  0xff8C8AAf)),
+                                                        ),
                                                       ],
                                                     ),
+                                                  ),
+                                                ],
+                                              ),
+                                              ksizedbox40,
+                                              Column(
+                                                children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 10, top: 30.h),
+                                                    child: Text(
+                                                      'Duration: ${widget.flight.segments.first.duration}',
+                                                      style: const TextStyle(
+                                                          fontSize: 14,
+                                                          color: Color(
+                                                              0xff8C8AAf)),
+                                                    ),
+                                                  ),
+                                                  Center(
+                                                    child: widget
+                                                                .flight
+                                                                .segments
+                                                                .length ==
+                                                            1
+                                                        ? const Text('Non stop',
+                                                            style: TextStyle(
+                                                                color: Color(
+                                                                    0xff8C8AAF)))
+                                                        : Padding(
+                                                          padding: const EdgeInsets.only(left: 12),
+                                                          child: Text(
+                                                              '${widget.flight.segments.length - 1} stop, via ${widget.flight.segments.first.destinationCity} ',
+                                                              style: const TextStyle(
+                                                                fontSize: 11,
+                                                                  color: Color(
+                                                                      0xff8C8AAF))),
+                                                        ),
                                                   )
                                                 ],
+                                              ),
+                                              ksizedbox40,
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 50, left: 30),
+                                                child: Container(
+                                                  width: 120,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        widget
+                                                            .flight
+                                                            .segments
+                                                            .first
+                                                            .arrivalDateTime
+                                                            .split(" ")
+                                                            .first,
+                                                        style: const TextStyle(
+                                                            fontSize: 14,
+                                                            color: Color(
+                                                                0xff8C8AAf)),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          const Icon(
+                                                            Icons.schedule,
+                                                            size: 13,
+                                                          ),
+                                                          Text(
+                                                              widget
+                                                                  .flight
+                                                                  .segments
+                                                                  .first
+                                                                  .arrivalDateTime
+                                                                  .split(" ")
+                                                                  .last,
+                                                              style: const TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: Color(
+                                                                      0xff8C8AAf))),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
                                               )
                                             ],
                                           ),
@@ -323,80 +394,83 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                 ksizedbox10,
                 InkWell(
                   onTap: () {
-                    showModalBottomSheet(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(26.0),
-                        )),
-                        context: context,
-                        builder: (context) {
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Container(
-                              height: 340.h,
-                              width: MediaQuery.of(context).size.width,
-                              child: Column(
-                                children: [
-                                  ksizedbox40,
-                                  Text(
-                                    'Flights Details',
-                                    style: TextStyle(
-                                        fontSize: 21,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  ksizedbox20,
-                                  Text(
-                                    'Enter your mobile phone number',
-                                    style: TextStyle(fontSize: 17),
-                                  ),
-                                  ksizedbox40,
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 40, right: 25),
-                                    child: TextField(
-                                      controller: numberController,
-                                      decoration: InputDecoration(
-                                          prefixIcon: Image.asset(
-                                              'assets/images/flaightindiaimage.png'),
-                                          suffixIcon: Image.asset(
-                                              'assets/images/flaightcorrectimage.png'),
-                                          hintText: '(+91) 9876543210',
-                                          helperStyle:
-                                              TextStyle(color: Colors.black)),
-                                    ),
-                                  ),
-                                  ksizedbox40,
-                                  InkWell(
-                                    onTap: () {
-                                      Get.to(PlaneDetailsScreen());
-                                    },
-                                    child: Container(
-                                      height: 45,
-                                      width:
-                                          MediaQuery.of(context).size.width * 0.7,
-                                      decoration: BoxDecoration(
-                                          gradient: LinearGradient(colors: [
-                                            kyellow,
-                                            kOrange,
-                                          ]),
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      child: Center(
-                                        child: Text(
-                                          'Send ',
-                                          style: TextStyle(
-                                              color: kwhite, fontSize: 18),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        });
+                    Get.to(PlaneDetailsScreen(
+                      flight: widget.flight,
+                      flightSearchDataModel: widget.flightSearchDataModel,
+                    ));
+                    // showModalBottomSheet(
+                    //     shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.vertical(
+                    //       top: Radius.circular(26.0),
+                    //     )),
+                    //     context: context,
+                    //     builder: (context) {
+                    //       return Padding(
+                    //         padding: const EdgeInsets.only(left: 10, right: 10),
+                    //         child: Container(
+                    //           height: 340.h,
+                    //           width: MediaQuery.of(context).size.width,
+                    //           child: Column(
+                    //             children: [
+                    //               ksizedbox40,
+                    //               Text(
+                    //                 'Flights Details',
+                    //                 style: TextStyle(
+                    //                     fontSize: 21,
+                    //                     fontWeight: FontWeight.bold),
+                    //               ),
+                    //               ksizedbox20,
+                    //               Text(
+                    //                 'Enter your mobile phone number',
+                    //                 style: TextStyle(fontSize: 17),
+                    //               ),
+                    //               ksizedbox40,
+                    //               Padding(
+                    //                 padding: const EdgeInsets.only(
+                    //                     left: 40, right: 25),
+                    //                 child: TextField(
+                    //                   controller: numberController,
+                    //                   decoration: InputDecoration(
+                    //                       prefixIcon: Image.asset(
+                    //                           'assets/images/flaightindiaimage.png'),
+                    //                       suffixIcon: Image.asset(
+                    //                           'assets/images/flaightcorrectimage.png'),
+                    //                       hintText: '(+91) 9876543210',
+                    //                       helperStyle:
+                    //                           TextStyle(color: Colors.black)),
+                    //                 ),
+                    //               ),
+                    //               ksizedbox40,
+                    //               InkWell(
+                    //                 onTap: () {
+
+                    //                 },
+                    //                 child: Container(
+                    //                   height: 45,
+                    //                   width: MediaQuery.of(context).size.width *
+                    //                       0.7,
+                    //                   decoration: BoxDecoration(
+                    //                       gradient: LinearGradient(colors: [
+                    //                         kyellow,
+                    //                         kOrange,
+                    //                       ]),
+                    //                       borderRadius:
+                    //                           BorderRadius.circular(15)),
+                    //                   child: Center(
+                    //                     child: Text(
+                    //                       'Send ',
+                    //                       style: TextStyle(
+                    //                           color: kwhite, fontSize: 18),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       );
+                    //     });
                   },
-                  
                   child: Container(
                     height: 45,
                     width: MediaQuery.of(context).size.width * 0.7,
@@ -408,16 +482,16 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                         borderRadius: BorderRadius.circular(15)),
                     child: Center(
                       child: Text(
-                        'Send Me',
+                        'Next',
                         style: TextStyle(color: kwhite, fontSize: 18),
                       ),
                     ),
                   ),
-                )
+                ),
+                ksizedbox10,
               ],
             ),
-            ]
-          ),
+          ]),
         ),
       ),
     );

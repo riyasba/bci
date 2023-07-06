@@ -119,7 +119,11 @@ class _flightScreenChoose2State extends State<flightScreenChoose2> {
                                                   flightsController.destination(
                                                       flightsController
                                                           .airports[i].iata);
-
+                                                  flightsController
+                                                      .destinationFullName(
+                                                          flightsController
+                                                              .airports[i]
+                                                              .name);
                                                   Get.back();
                                                 },
                                                 child: Row(

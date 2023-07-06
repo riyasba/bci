@@ -119,6 +119,9 @@ class _flightScreenChooseState extends State<flightScreenChoose> {
                                                   flightsController.origin(
                                                       flightsController
                                                           .airports[i].iata);
+                                                  flightsController.originFullName(
+                                                      flightsController
+                                                          .airports[i].name);
 
                                                   Get.back();
                                                 },

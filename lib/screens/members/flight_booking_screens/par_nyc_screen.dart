@@ -200,7 +200,10 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.to(FlightDetailsScreen());
+                          Get.to(FlightDetailsScreen(
+                            flight: flightsController.flightList[i],
+                            flightSearchDataModel: widget.flightSearchDataModel,
+                          ));
                         },
                         child: Container(
                           height: 240,
@@ -214,7 +217,7 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                                   color: kwhite,
                                   boxShadow: <BoxShadow>[
                                     BoxShadow(
-                                        offset: Offset(0.0, 0.75),
+                                        offset: const Offset(0.0, 0.75),
                                         blurRadius: 5,
                                         color: kgrey),
                                   ],
@@ -229,7 +232,7 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                           children: [
                             Text(
                               flightsController
-                              .flightList[i].segments.first.airlineName,
+                                  .flightList[i].segments.first.airlineName,
                               style: TextStyle(fontSize: 18, color: kblue),
                             )
                           ],
@@ -239,7 +242,10 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                         padding: const EdgeInsets.only(top: 120, left: 20),
                         child: Row(
                           children: [
-                            Image.asset('assets/images/parflaight.png',height: 30,),
+                            Image.asset(
+                              'assets/images/parflaight.png',
+                              height: 30,
+                            ),
                             Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: Row(
@@ -275,31 +281,44 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                       Positioned(
                           left: 0,
                           right: 0,
-                          top: 110,
+                          top: 95,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Duration : ${flightsController.flightList[i].segments.first.duration}',
-                                style: const TextStyle(color: Color(0xff8C8AAF)),
+                                'Duration : ${flightsController.flightList[i].segments.last.duration}',
+                                style:
+                                    const TextStyle(color: Color(0xff8C8AAF)),
                               ),
                             ],
                           )),
-                      // Positioned(
-                      //     left: 170,
-                      //     top: 125,
-                      //     child: Text('Non stop',
-                      //         style: TextStyle(color: Color(0xff8C8AAF)))),
                       Positioned(
-                          left: 90,
+                          left: 0,
+                          right: 0,
+                          top: 110,
+                          child: Center(
+                            child: flightsController
+                                        .flightList[i].segments.length ==
+                                    1
+                                ? const Text('Non stop',
+                                    style: TextStyle(color: Color(0xff8C8AAF)))
+                                : Text(
+                                    '${flightsController.flightList[i].segments.length - 1} stop, via ${flightsController.flightList[i].segments.first.destinationCity} ',
+                                    style: const TextStyle(
+                                        color: Color(0xff8C8AAF))),
+                          )),
+                      Positioned(
+                          left: 62,
                           top: 155,
                           child: Text(flightsController
-                              .flightList[i].segments.first.departureDateTime.split(" ").last)),
+                              .flightList[i].segments.first.departureDateTime
+                              .split(" ")
+                              .last)),
                       Positioned(
-                          left: 310,
+                          right: 50,
                           top: 155,
                           child: Text(flightsController
-                              .flightList[i].segments.first.arrivalDateTime
+                              .flightList[i].segments.last.arrivalDateTime
                               .split(" ")
                               .last)),
                       Positioned(
@@ -317,10 +336,11 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                             style: TextStyle(color: kwhite, fontSize: 14),
                           )),
                       Positioned(
-                        top: 200,
-                        bottom: 0,
+                        bottom: -10,
                         left: 0,
+                        right: 0,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
                               height: 60,
