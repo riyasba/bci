@@ -11,7 +11,8 @@ import '../../../constands/app_fonts.dart';
 
 class ParNycSCreen extends StatefulWidget {
   FlightSearchDataModel flightSearchDataModel;
-  ParNycSCreen({super.key, required this.flightSearchDataModel});
+  String searchKey;
+  ParNycSCreen({super.key, required this.flightSearchDataModel,required this.searchKey});
 
   @override
   State<ParNycSCreen> createState() => _ParNycSCreenState();
@@ -193,6 +194,10 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                 ]),
               ),
               ksizedbox20,
+              if (flightsController.flightList.isEmpty)
+                const Center(
+                  child: Text("No flights For the Selected Options"),
+                ),
               for (int i = 0; i < flightsController.flightList.length; i++)
                 Padding(
                   padding: const EdgeInsets.only(right: 10, left: 10),
@@ -203,6 +208,7 @@ class _ParNycSCreenState extends State<ParNycSCreen> {
                           Get.to(FlightDetailsScreen(
                             flight: flightsController.flightList[i],
                             flightSearchDataModel: widget.flightSearchDataModel,
+                            searchKey: widget.searchKey,
                           ));
                         },
                         child: Container(

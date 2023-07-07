@@ -4,6 +4,7 @@ import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/flight_booking_models/air_search_model.dart';
 import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
 import 'package:bci/models/flight_booking_models/passenger_model.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -663,7 +664,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                                       child: Container(
                                         width: 115,
                                         child: Text(
-                                          'John F. Kennedy Airport',
+                                          widget.flightSearchDataModel.fromName,
                                           style: TextStyle(
                                               fontSize: 15, color: kblue),
                                         ),
@@ -675,7 +676,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                                       child: Container(
                                         width: 150,
                                         child: Text(
-                                          'Abbotsford National \nAirport',
+                                          widget.flightSearchDataModel.toName,
                                           style: TextStyle(
                                               fontSize: 15, color: kblue),
                                         ),
@@ -703,7 +704,8 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                                             height: 5,
                                           ),
                                           Text(
-                                            '54',
+                                            widget.flight.segments.first
+                                                .destinationTerminal,
                                             style: TextStyle(
                                                 fontSize: 15, color: kblue),
                                           ),
@@ -728,7 +730,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                                             height: 5,
                                           ),
                                           Text(
-                                            '12',
+                                            "",
                                             style: TextStyle(
                                                 fontSize: 15, color: kblue),
                                           ),
@@ -779,7 +781,10 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                                             height: 5,
                                           ),
                                           Text(
-                                            '30.10.2019',
+                                            formatDate(
+                                                widget.flightSearchDataModel
+                                                    .depatureDate,
+                                                [dd, "-", mm, "-", yyyy]),
                                             style: TextStyle(
                                                 fontSize: 15, color: kblue),
                                           ),
@@ -804,7 +809,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                                             height: 5,
                                           ),
                                           Text(
-                                            "Tk 2765",
+                                            "${widget.flight.segments.first.airlineCode} ${widget.flight.segments.first.flightNumber}",
                                             style: TextStyle(
                                                 fontSize: 15, color: kblue),
                                           ),
@@ -815,6 +820,59 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                                 ),
                               ],
                             )),
+                      ),
+                    ),
+                  ),
+                  ksizedbox20,
+                  InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Dialog(
+                              child: Container(
+                                height: MediaQuery.of(context).size.width * 0.9,
+                                width: MediaQuery.of(context).size.width,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 60),
+                                      child: Image.asset(
+                                          'assets/images/ordercomplete.png'),
+                                    ),
+                                    const Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Text(
+                                        'Successful!',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.green),
+                                      ),
+                                    ),
+                                    ksizedbox20,
+                                    const Padding(
+                                      padding: EdgeInsets.only(left: 20),
+                                      child: Text(
+                                          'Your flight booking is successfull'
+                                          ''),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(colors: [kyellow, korange]),
+                          borderRadius: BorderRadius.circular(15)),
+                      height: 45,
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: Center(
+                        child: Text(
+                          'Complete',
+                          style: TextStyle(fontSize: 18, color: kwhite),
+                        ),
                       ),
                     ),
                   ),
@@ -1019,7 +1077,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                                     child: Image.asset(
                                         'assets/images/ordercomplete.png'),
                                   ),
-                                  Padding(
+                                  const Padding(
                                     padding: const EdgeInsets.only(top: 10),
                                     child: Text(
                                       'Successful!',

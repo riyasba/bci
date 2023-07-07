@@ -171,7 +171,56 @@ class _FlightBookingLandingScreenState
                     style: TextStyle(fontSize: 15, color: kgrey),
                   ),
                 ),
-                Image.asset('assets/images/Group 447.png'),
+                PopupMenuButton(
+                  child: Image.asset('assets/images/Group 447.png'),
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                      value:
+                          'Adults ${flightBookingController.adultsCount.value}',
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              const Text(
+                                'Adults',
+                                style: TextStyle(fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    flightBookingController
+                                        .decreaseAdultCount();
+                                    flightBookingController.update();
+                                  },
+                                  icon: Icon(Icons.do_not_disturb_on_outlined)),
+                              Obx(() => Text(
+                                    '${flightBookingController.adultsCount.value}',
+                                    style: TextStyle(fontSize: 14),
+                                  )),
+                              IconButton(
+                                  onPressed: () {
+                                    flightBookingController
+                                        .increaseAdultCount();
+                                    flightBookingController.update();
+                                  },
+                                  icon: const Icon(
+                                      Icons.add_circle_outline_outlined))
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  onSelected: (value) {
+                    setState(() {
+                      // dropvalue1 = value.toString();
+                    });
+                  },
+                ),
                 const SizedBox(
                   width: 10,
                 ),
@@ -182,7 +231,56 @@ class _FlightBookingLandingScreenState
                     style: TextStyle(fontSize: 15, color: kgrey),
                   ),
                 ),
-                Image.asset('assets/images/Group 447.png'),
+                PopupMenuButton(
+                  child: Image.asset('assets/images/Group 447.png'),
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                      value:
+                          'Childrens ${flightBookingController.adultsCount.value}',
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              const Text(
+                                'Childrens',
+                                style: TextStyle(fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    flightBookingController
+                                        .decreaseChildCount();
+                                    flightBookingController.update();
+                                  },
+                                  icon: Icon(Icons.do_not_disturb_on_outlined)),
+                              Obx(() => Text(
+                                    '${flightBookingController.childsCount.value}',
+                                    style: TextStyle(fontSize: 14),
+                                  )),
+                              IconButton(
+                                  onPressed: () {
+                                    flightBookingController
+                                        .increaseChildCount();
+                                    flightBookingController.update();
+                                  },
+                                  icon: const Icon(
+                                      Icons.add_circle_outline_outlined))
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  onSelected: (value) {
+                    setState(() {
+                      // dropvalue1 = value.toString();
+                    });
+                  },
+                ),
               ],
             ),
             ksizedbox20,
@@ -219,17 +317,17 @@ class _FlightBookingLandingScreenState
                         onTap: () {
                           FlightSearchDataModel flightSearchDataModel =
                               FlightSearchDataModel(
-                                  adultsCount: 1,
-                                  cabinClass:
-                                      flightBookingController
-                                          .cabinClassIndex.value,
-                                  fromName:
-                                      flightBookingController
-                                          .originFullName.value,
+                                  adultsCount: flightBookingController
+                                      .adultsCount.value,
+                                  cabinClass: flightBookingController
+                                      .cabinClassIndex.value,
+                                  fromName: flightBookingController
+                                      .originFullName.value,
                                   toName:
-                                      flightBookingController.destinationFullName
-                                          .value,
-                                  childCount: 0,
+                                      flightBookingController
+                                          .destinationFullName.value,
+                                  childCount:
+                                      flightBookingController.childsCount.value,
                                   depatureDate:
                                       flightBookingController.depatureDate,
                                   fromIata:

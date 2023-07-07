@@ -12,8 +12,9 @@ import '../../../constands/app_fonts.dart';
 class FlightDetailsScreen extends StatefulWidget {
   Flight flight;
   FlightSearchDataModel flightSearchDataModel;
+  String searchKey;
   FlightDetailsScreen(
-      {super.key, required this.flight, required this.flightSearchDataModel});
+      {super.key, required this.flight, required this.flightSearchDataModel,required this.searchKey});
 
   @override
   State<FlightDetailsScreen> createState() => _FlightDetailsScreenState();

@@ -31,7 +31,7 @@ class AirSearchApiServices extends BaseApiService {
             "destination": flightSearchModel.toIata,
             "travel_date": formatDate(
                 flightSearchModel.depatureDate, [mm, "/", dd, "/", yyyy]),
-            "travel_type": 0,
+            "travel_type": 1,
             "booking_type": flightSearchModel.isOneWayOrRoundTrip,
             "adult_count": "${flightSearchModel.adultsCount}",
             "child_count": "${flightSearchModel.childCount}",
