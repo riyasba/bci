@@ -35,6 +35,9 @@ class _AddServicesViewState extends State<AddServicesView> {
   var couponAmountController = TextEditingController();
   var offerAmountController = TextEditingController();
   var offerPercentageController = TextEditingController();
+  var unitController = TextEditingController();
+  var quantityController = TextEditingController();
+
 
   @override
   void initState() {
@@ -170,7 +173,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                     dropdownColor: Colors.grey[250],
                     style: const TextStyle(color: Colors.black54),
                     hint: Text(
-                      "Merchant Category Name",
+                      "Product Category Name",
                       style: TextStyle(fontSize: 16, color: kblue),
                     ),
                     onChanged: (CategoryList? value) {
@@ -191,47 +194,6 @@ class _AddServicesViewState extends State<AddServicesView> {
               ),
             );
           }),
-          ksizedbox10,
-          Padding(
-            padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-            child: TextFormField(
-              controller: saleAmountController,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Sale Amount Can't be Empty";
-                }
-                return null;
-              },
-              keyboardType: TextInputType.phone,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(10),
-                FilteringTextInputFormatter.digitsOnly,
-                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-              ],
-              decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: const BorderSide(color: Color(0xff707070))),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: const BorderSide(color: Color(0xff707070))),
-                  isCollapsed: false,
-                  isDense: true,
-                  contentPadding:
-                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: const BorderSide(color: Color(0xff707070))),
-                  hintText: "Sale Amount",
-                  hintStyle: TextStyle(
-                    color: kblue,
-                    fontWeight: FontWeight.w400,
-                  )),
-            ),
-          ),
           ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -273,6 +235,120 @@ class _AddServicesViewState extends State<AddServicesView> {
                   )),
             ),
           ),
+          ksizedbox10,
+          Padding(
+            padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+            child: TextFormField(
+              controller: saleAmountController,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Sale Amount Can't be Empty";
+                }
+                return null;
+              },
+              keyboardType: TextInputType.phone,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(10),
+                FilteringTextInputFormatter.digitsOnly,
+                FilteringTextInputFormatter.deny(RegExp(r'\s')),
+              ],
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  isCollapsed: false,
+                  isDense: true,
+                  contentPadding:
+                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  hintText: "Sale Amount",
+                  hintStyle: TextStyle(
+                    color: kblue,
+                    fontWeight: FontWeight.w400,
+                  )),
+            ),
+          ),
+          
+           ksizedbox10,
+          Padding(
+            padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+            child: TextFormField(
+              controller: quantityController,
+              keyboardType: TextInputType.number,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Quantity Can't be Empty";
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  isCollapsed: false,
+                  isDense: true,
+                  contentPadding:
+                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  hintText: "Quantity",
+                  hintStyle: TextStyle(
+                    color: kblue,
+                    fontWeight: FontWeight.w400,
+                  )),
+            ),
+          ),
+          ksizedbox10,
+          Padding(
+            padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+            child: TextFormField(
+              controller: unitController,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Unit Can't be Empty";
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  isCollapsed: false,
+                  isDense: true,
+                  contentPadding:
+                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  hintText: "Unit",
+                  hintStyle: TextStyle(
+                    color: kblue,
+                    fontWeight: FontWeight.w400,
+                  )),
+            ),
+          ),
+         
           // ksizedbox10,
           // Padding(
           //     padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -355,85 +431,85 @@ class _AddServicesViewState extends State<AddServicesView> {
           //         )),
           //   ),
           // ),
-          ksizedbox20,
-          Obx(
-            () => Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: Text(
-                    "Booking Available",
-                    style: primaryFont.copyWith(color: kblue),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    authController.isGstAvailable(true);
-                  },
-                  child: Container(
-                    height: 17,
-                    width: 17,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: kblue),
-                        color: authController.isGstAvailable.isTrue
-                            ? kblue
-                            : Colors.white,
-                        borderRadius: BorderRadius.circular(10)),
-                  ),
-                ),
-                const SizedBox(
-                  width: 7,
-                ),
-                InkWell(
-                  onTap: () {
-                    authController.isGstAvailable(true);
-                  },
-                  child: Text(
-                    "Yes",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w400,
-                        color: kblue),
-                  ),
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                InkWell(
-                  onTap: () {
-                    authController.isGstAvailable(false);
-                  },
-                  child: Container(
-                    height: 17,
-                    width: 17,
-                    decoration: BoxDecoration(
-                        color: authController.isGstAvailable.isFalse
-                            ? kblue
-                            : Colors.white,
-                        border: Border.all(color: kblue),
-                        borderRadius: BorderRadius.circular(10)),
-                  ),
-                ),
-                const SizedBox(
-                  width: 7,
-                ),
-                InkWell(
-                  onTap: () {
-                    authController.isGstAvailable(false);
-                  },
-                  child: Text(
-                    "No",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w400,
-                        color: kblue),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          //ksizedbox20,
+          // Obx(
+          //   () => Row(
+          //     children: [
+          //       Padding(
+          //         padding: const EdgeInsets.only(left: 20, right: 20),
+          //         child: Text(
+          //           "Booking Available",
+          //           style: primaryFont.copyWith(color: kblue),
+          //         ),
+          //       ),
+          //       InkWell(
+          //         onTap: () {
+          //           authController.isGstAvailable(true);
+          //         },
+          //         child: Container(
+          //           height: 17,
+          //           width: 17,
+          //           decoration: BoxDecoration(
+          //               border: Border.all(color: kblue),
+          //               color: authController.isGstAvailable.isTrue
+          //                   ? kblue
+          //                   : Colors.white,
+          //               borderRadius: BorderRadius.circular(10)),
+          //         ),
+          //       ),
+          //       const SizedBox(
+          //         width: 7,
+          //       ),
+          //       InkWell(
+          //         onTap: () {
+          //           authController.isGstAvailable(true);
+          //         },
+          //         child: Text(
+          //           "Yes",
+          //           textAlign: TextAlign.center,
+          //           style: TextStyle(
+          //               fontSize: 17,
+          //               fontWeight: FontWeight.w400,
+          //               color: kblue),
+          //         ),
+          //       ),
+          //       const SizedBox(
+          //         width: 15,
+          //       ),
+          //       InkWell(
+          //         onTap: () {
+          //           authController.isGstAvailable(false);
+          //         },
+          //         child: Container(
+          //           height: 17,
+          //           width: 17,
+          //           decoration: BoxDecoration(
+          //               color: authController.isGstAvailable.isFalse
+          //                   ? kblue
+          //                   : Colors.white,
+          //               border: Border.all(color: kblue),
+          //               borderRadius: BorderRadius.circular(10)),
+          //         ),
+          //       ),
+          //       const SizedBox(
+          //         width: 7,
+          //       ),
+          //       InkWell(
+          //         onTap: () {
+          //           authController.isGstAvailable(false);
+          //         },
+          //         child: Text(
+          //           "No",
+          //           textAlign: TextAlign.center,
+          //           style: TextStyle(
+          //               fontSize: 17,
+          //               fontWeight: FontWeight.w400,
+          //               color: kblue),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           ksizedbox20,
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15),
@@ -468,7 +544,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                           ),
                           ksizedbox10,
                           Text(
-                            "Service Image",
+                            "Product Image",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 17,
@@ -866,7 +942,9 @@ class _AddServicesViewState extends State<AddServicesView> {
                                         : couponAmountController.text,
                                 offerAmount: offerAmountController.text.isEmpty
                                     ? null
-                                    : offerAmountController.text);
+                                    : offerAmountController.text,
+                                    unit: unitController.text,
+                                    quantity: quantityController.text);
 
                         serviceController.addServices(
                             createServiceModel: createServiceModel);

@@ -38,6 +38,8 @@ class ServiceData {
   String vendorId;
   String title;
   String actualAmount;
+  String quantity;
+  String unit;
   // String bvcAmount;
   String saleAmount;
   String isOffer;
@@ -60,6 +62,8 @@ class ServiceData {
     required this.vendorId,
     required this.title,
     required this.actualAmount,
+    required this.quantity,
+    required this.unit,
     // required this.bvcAmount,
     required this.saleAmount,
     required this.isOffer,
@@ -83,15 +87,16 @@ class ServiceData {
         vendorId: json["vendor_id"],
         title: json["title"],
         actualAmount: json["actual_amount"],
-        
+        quantity: json["quantity"]?? "",
+        unit: json["unit"]?? "",
         saleAmount: json["sale_amount"],
         isOffer: json["isOffer"],
-        offerPercentage: json["offerPercentage"],
-        offerUptoAmount: json["offerUpto_amount"],
+        offerPercentage: json["offerPercentage"]?? "",
+        offerUptoAmount: json["offerUpto_amount"]?? "",
         isCoupon: json["isCoupon"],
         couponAmount: json["coupon_amount"],
         description: json["description"],
-        isBooking: json["is_booking"],
+        isBooking: json["is_booking"]?? "",
         status: json["status"],
         amenties: json["amenties"] == null
             ? []
@@ -109,6 +114,8 @@ class ServiceData {
         "vendor_id": vendorId,
         "title": title,
         "actual_amount": actualAmount,
+        "quantity": quantity,
+        "unit": unit,
         // "bvc_amount": bvcAmount,
         "sale_amount": saleAmount,
         "isOffer": isOffer,

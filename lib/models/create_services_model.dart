@@ -14,6 +14,8 @@ class CreateServiceModel {
   dynamic offerPercentage;
   dynamic offerAmount;
   dynamic couponAmount;
+  dynamic unit;
+  dynamic quantity;
 
   CreateServiceModel(
       {required this.title,
@@ -30,6 +32,8 @@ class CreateServiceModel {
       required this.isCouponsAvailable,
       required this.isOfferAvailable,
       this.offerPercentage,
+      this.quantity,
+      this.unit,
       required this.image});
 }
 
