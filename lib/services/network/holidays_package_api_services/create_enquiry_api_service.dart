@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CreateEnquiryApiService extends BaseApiService {
   Future createEnquiryApiService({
     required String packageid,
+    required String vendorid,
     required String cityofdeparture,
     required String dateofdeparture,
     required String adultcount,
@@ -34,17 +35,17 @@ class CreateEnquiryApiService extends BaseApiService {
               return status! <= 500;
             }),
             data: {
-              "package_id": 1,
-              "vendor_id": 107,
-              "city_of_departure": "New York",
-              "date_of_departure": "2023-07-12",
-              "adult_count": 2,
-              "child_count": 1,
-              "infant_count": 0,
-              "name": "John Doe",
-              "email": "johndoe@example.com",
-              "mobile": "1234567890",
-              "status": "pending"
+              "package_id": packageid,
+              "vendor_id": vendorid,
+              "city_of_departure": cityofdeparture,
+              "date_of_departure": dateofdeparture,
+              "adult_count": adultcount,
+              "child_count": childcount,
+              "infant_count": infantcount,
+              "name": name,
+              "email": email,
+              "mobile": mobile,
+              "status": status
             }
       );
       print("::::::::<create enquiry Api>::::::::status code::::::::::");

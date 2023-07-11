@@ -1,5 +1,6 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/holiday_package_controller.dart';
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -15,12 +16,20 @@ class EnquiryNowWidget extends StatefulWidget {
 class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
 
   final holidayPackageController = Get.find<HolidayPackageController>();
+  final profileController = Get.find<ProfileController>();
 
   final cityOfDepController = TextEditingController();
   final dateOfDepController = TextEditingController();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final mobileController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    profileController.getProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -384,13 +393,22 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                 ksizedbox30,
                 InkWell(
                   onTap: (){
+                    print("---------testing enquiry--------------");
+                    print(widget.packageId);
+                    print(profileController.profileData);
+                    print(cityOfDepController.text);
+                    print(dateOfDepController.text);
+                    print(nameController.text);
+                    print(emailController.text);
+                    print(mobileController.text);
                          holidayPackageController.createEnquiry(
                           packageid: widget.packageId, 
+                          vendorid:"107", //profileController.profileData.first.id.toString(),
                           cityofdeparture: cityOfDepController.text, 
                           dateofdeparture: dateOfDepController.text, 
                           adultcount: holidayPackageController.adult.value.toString(), 
                           childcount: holidayPackageController.child.value.toString(), 
-                          infantcount: holidayPackageController.infant.value.toString(), 
+                          infantcount:  holidayPackageController.infant.value.toString(), 
                           name: nameController.text, 
                           email: emailController.text, 
                           mobile: mobileController.text, 
