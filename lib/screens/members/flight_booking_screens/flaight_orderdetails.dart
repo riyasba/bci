@@ -2,8 +2,10 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/flights_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/flight_booking_models/air_search_model.dart';
+import 'package:bci/models/flight_booking_models/booking_model.dart';
 import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
 import 'package:bci/models/flight_booking_models/passenger_model.dart';
+import 'package:bci/screens/members/flight_booking_screens/flight_booking_success_page.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,8 +14,12 @@ import 'package:get/get.dart';
 class FlaightOrderDetailsScreen extends StatefulWidget {
   Flight flight;
   FlightSearchDataModel flightSearchDataModel;
+  String searchKey;
   FlaightOrderDetailsScreen(
-      {super.key, required this.flight, required this.flightSearchDataModel});
+      {super.key,
+      required this.flight,
+      required this.flightSearchDataModel,
+      required this.searchKey});
 
   @override
   State<FlaightOrderDetailsScreen> createState() =>
@@ -486,15 +492,15 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                             padding: const EdgeInsets.only(left: 20, top: 10),
                             child: Row(
                               children: [
-                                Text(
+                                const Text(
                                   '(+91)',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 18,
                                   ),
                                 ),
                                 Text(
                                   ' ${profileController.profileData.first.mobile}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 18,
                                   ),
                                 )
@@ -826,41 +832,72 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                   ksizedbox20,
                   InkWell(
                     onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return Dialog(
-                              child: Container(
-                                height: MediaQuery.of(context).size.width * 0.9,
-                                width: MediaQuery.of(context).size.width,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 60),
-                                      child: Image.asset(
-                                          'assets/images/ordercomplete.png'),
-                                    ),
-                                    const Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: Text(
-                                        'Successful!',
-                                        style: TextStyle(
-                                            fontSize: 20, color: Colors.green),
-                                      ),
-                                    ),
-                                    ksizedbox20,
-                                    const Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: Text(
-                                          'Your flight booking is successfull'
-                                          ''),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
-                          });
+                      // Get.to(()=> const FlightBookingSuccessPage());
+                      PaxDetails paxDetails = PaxDetails(
+                          firstName: profileController.profileData.first.name,
+                          gender: 0,
+                          lastName: "",
+                          title: "Mr");
+
+                      BookingModel bookingModel = BookingModel(
+                          bookingRemark:
+                              "${widget.flightSearchDataModel.fromIata} - ${widget.flightSearchDataModel.toIata}",
+                          customerMobile:
+                              profileController.profileData.first.mobile,
+                          flightKey: widget.flight.flightKey,
+                          passengerEmail:
+                              profileController.profileData.first.email,
+                          passengerMobile:
+                              profileController.profileData.first.mobile,
+                          paxDetails: [paxDetails],
+                          searchKey: widget.searchKey);
+
+                      flightsController.payUseingEaseBuzzSubs(
+                          id: 0,
+                          amount: widget
+                              .flight.fares.first.fareDetails.first.totalAmount
+                              .toString(),
+                          customerName:
+                              profileController.profileData.first.name,
+                          email: profileController.profileData.first.email,
+                          phone: profileController.profileData.first.mobile,
+                          bookingModel: bookingModel);
+
+                      // showDialog(
+                      //     context: context,
+                      //     builder: (context) {
+                      //       return Dialog(
+                      //         child: Container(
+                      //           height: MediaQuery.of(context).size.width * 0.9,
+                      //           width: MediaQuery.of(context).size.width,
+                      //           child: Column(
+                      //             crossAxisAlignment: CrossAxisAlignment.center,
+                      //             children: [
+                      //               Padding(
+                      //                 padding: const EdgeInsets.only(top: 60),
+                      //                 child: Image.asset(
+                      //                     'assets/images/ordercomplete.png'),
+                      //               ),
+                      //               const Padding(
+                      //                 padding: const EdgeInsets.only(top: 10),
+                      //                 child: Text(
+                      //                   'Successful!',
+                      //                   style: TextStyle(
+                      //                       fontSize: 20, color: Colors.green),
+                      //                 ),
+                      //               ),
+                      //               ksizedbox20,
+                      //               const Padding(
+                      //                 padding: EdgeInsets.only(left: 20),
+                      //                 child: Text(
+                      //                     'Your flight booking is successfull'
+                      //                     ''),
+                      //               )
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       );
+                      //     });
                     },
                     child: Container(
                       decoration: BoxDecoration(

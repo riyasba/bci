@@ -83,6 +83,18 @@ abstract class BaseApiService {
   final String airSearchUrl =
       "https://bci.generation360tech.in/api/auth/flight_search";
 
+  final String airRepricingUrl =
+      "https://bci.generation360tech.in/api/auth/air_reprice";
+
+  final String airTicketBookingUrl =
+      "https://bci.generation360tech.in/api/auth/air_temp_booking";
+
+  final String airRePrinting =
+      "https://bci.generation360tech.in/api/auth/air_reprint";
+
+  final String airAddPayment =
+      "https://bci.generation360tech.in/api/auth/add_payment";
+
   final String airportSearch = "https://openflights.org/php/apsearch.php";
 
   //----------- holidays bookings ---------------//

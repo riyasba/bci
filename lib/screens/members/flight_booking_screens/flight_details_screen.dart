@@ -14,7 +14,10 @@ class FlightDetailsScreen extends StatefulWidget {
   FlightSearchDataModel flightSearchDataModel;
   String searchKey;
   FlightDetailsScreen(
-      {super.key, required this.flight, required this.flightSearchDataModel,required this.searchKey});
+      {super.key,
+      required this.flight,
+      required this.flightSearchDataModel,
+      required this.searchKey});
 
   @override
   State<FlightDetailsScreen> createState() => _FlightDetailsScreenState();
@@ -69,7 +72,7 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                     color: kwhite,
                                     boxShadow: <BoxShadow>[
                                       BoxShadow(
-                                          offset: Offset(0.0, 0.75),
+                                          offset: const Offset(0.0, 0.75),
                                           blurRadius: 5,
                                           color: kwhite),
                                     ],
@@ -259,7 +262,7 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                                         right: 35, top: 5.h),
                                                     child: Row(
                                                       children: [
-                                                        Icon(
+                                                        const Icon(
                                                           Icons.schedule,
                                                           size: 13,
                                                         ),
@@ -271,7 +274,7 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                                               .departureDateTime
                                                               .split(" ")
                                                               .last,
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontSize: 14,
                                                               color: Color(
                                                                   0xff8C8AAf)),
@@ -306,14 +309,18 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                                                 color: Color(
                                                                     0xff8C8AAF)))
                                                         : Padding(
-                                                          padding: const EdgeInsets.only(left: 12),
-                                                          child: Text(
-                                                              '${widget.flight.segments.length - 1} stop, via ${widget.flight.segments.first.destinationCity} ',
-                                                              style: const TextStyle(
-                                                                fontSize: 11,
-                                                                  color: Color(
-                                                                      0xff8C8AAF))),
-                                                        ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 12),
+                                                            child: Text(
+                                                                '${widget.flight.segments.length - 1} stop, via ${widget.flight.segments.first.destinationCity} ',
+                                                                style: const TextStyle(
+                                                                    fontSize:
+                                                                        11,
+                                                                    color: Color(
+                                                                        0xff8C8AAF))),
+                                                          ),
                                                   )
                                                 ],
                                               ),
@@ -398,6 +405,7 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                     Get.to(PlaneDetailsScreen(
                       flight: widget.flight,
                       flightSearchDataModel: widget.flightSearchDataModel,
+                      seachKey: widget.searchKey,
                     ));
                     // showModalBottomSheet(
                     //     shape: RoundedRectangleBorder(

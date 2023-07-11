@@ -12,8 +12,12 @@ import '../../../constands/app_fonts.dart';
 class PlaneDetailsScreen extends StatefulWidget {
   Flight flight;
   FlightSearchDataModel flightSearchDataModel;
+  String seachKey;
   PlaneDetailsScreen(
-      {super.key, required this.flight, required this.flightSearchDataModel});
+      {super.key,
+      required this.flight,
+      required this.flightSearchDataModel,
+      required this.seachKey});
   @override
   State<PlaneDetailsScreen> createState() => _PlaneDetailsScreenState();
 }
@@ -65,7 +69,7 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
                                 color: kwhite,
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
-                                      offset: Offset(0.0, 0.75),
+                                      offset: const Offset(0.0, 0.75),
                                       blurRadius: 5,
                                       color: kwhite),
                                 ],
@@ -234,6 +238,7 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
                   onTap: () {
                     Get.to(FlaightOrderDetailsScreen(
                         flight: widget.flight,
+                        searchKey: widget.seachKey,
                         flightSearchDataModel: widget.flightSearchDataModel));
                   },
                   child: Container(
