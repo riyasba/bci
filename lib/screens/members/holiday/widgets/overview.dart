@@ -1,16 +1,30 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/holiday_package_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_super_html_viewer/flutter_super_html_viewer.dart';
+import 'package:get/get.dart';
 
 class OverviewWidget extends StatefulWidget {
-  const OverviewWidget({super.key});
+  String packageid;
+  OverviewWidget({super.key,required this.packageid});
 
   @override
   State<OverviewWidget> createState() => _OverviewWidgetState();
 }
 
 class _OverviewWidgetState extends State<OverviewWidget> {
+
+  final holidayPackageController = Get.find<HolidayPackageController>();
+
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    holidayPackageController.packageDetails(packageid: widget.packageid);
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -225,70 +239,12 @@ class _OverviewWidgetState extends State<OverviewWidget> {
             ],
           ),
           ksizedbox10,
-          Text(
-            '◈ Accommodation with breakfast for 06 Nights\n    in Mauritius at Villas Mon Plaisir or similar',
-            style: TextStyle(
-                fontSize: 15.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.w400),
-          ),
-          Text(
-            '◈ Daily Breakfast & Dinner.',
-            style: TextStyle(
-                fontSize: 15.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.w400),
-          ),
-          Text(
-            '◈ North Island Tour.',
-            style: TextStyle(
-                fontSize: 15.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.w400),
-          ),
-          Text(
-            '◈ South Island Tour.',
-            style: TextStyle(
-                fontSize: 15.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.w400),
-          ),
-          Text(
-            '◈ Ile Aux Cerfs Tour and Undersea Walk.',
-            style: TextStyle(
-                fontSize: 15.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.w400),
-          ),
-          Text(
-            '◈ Return airport transfers.',
-            style: TextStyle(
-                fontSize: 15.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.w400),
-          ),
-          Text(
-            '◈ All Transfers and Tours on a sharing basis.',
-            style: TextStyle(
-                fontSize: 15.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.w400),
-          ),
-          Text(
-            '◈ Limited Time Offer : Complimentary 02 Lunches.',
-            style: TextStyle(
-                fontSize: 15.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.w400),
-          ),
-          Text(
-            '◈ Return economy airfare on Air Mauritius (Ex-Del).',
-            style: TextStyle(
-                fontSize: 15.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.w400),
-          ),
-          ksizedbox20,
+           HtmlContentViewer(
+                        htmlContent: holidayPackageController.getPackageDetailsData.first.inclusion,
+                        initialContentHeight:
+                            MediaQuery.of(context).size.height,
+                        initialContentWidth: MediaQuery.of(context).size.width,
+                      ),
           Row(
             children: [
               Text(

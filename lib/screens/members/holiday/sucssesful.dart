@@ -45,7 +45,7 @@ class Sucessful_screen extends StatelessWidget {
                   fontSize: 22.sp, fontWeight: FontWeight.w600, color: kblue),
             ),ksizedbox40,ksizedbox40,
             
-        InkWell(onTap: (){Get.to(Holiday_Home());},
+        InkWell(onTap: (){Get.to(HolidayHome());},
                 child: Container(
                   width: 150.w,
                   height: 45.h,

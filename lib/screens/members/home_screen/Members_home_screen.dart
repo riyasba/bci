@@ -301,7 +301,7 @@ class _Home_screen1State extends State<Home_screen1> {
                           padding: const EdgeInsets.only(top: 12),
                           child: InkWell(
                             onTap: () {
-                              Get.to(const Holiday_Home());
+                              Get.to(const HolidayHome());
                             },
                             child: Column(
                               children: [

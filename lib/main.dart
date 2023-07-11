@@ -1,5 +1,6 @@
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/flights_controller.dart';
+import 'package:bci/controllers/holiday_package_controller.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
@@ -20,6 +21,7 @@ void main() {
   Get.put(PlanController());
   Get.put(HomeController());
   Get.put(HolidayController());
+  Get.put(HolidayPackageController());
   runApp(const MyApp());
 }
 

@@ -1,15 +1,27 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/holiday_package_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class EnquiryNowWidget extends StatefulWidget {
-  const EnquiryNowWidget({super.key});
+  String packageId;
+  EnquiryNowWidget({super.key,required this.packageId});
 
   @override
   State<EnquiryNowWidget> createState() => _EnquiryNowWidgetState();
 }
 
 class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
+
+  final holidayPackageController = Get.find<HolidayPackageController>();
+
+  final cityOfDepController = TextEditingController();
+  final dateOfDepController = TextEditingController();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final mobileController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -107,11 +119,11 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                       border: Border.all(),
                       color:const Color.fromARGB(255, 254, 252, 252)),
                   alignment: Alignment.center,
-                  child:const Padding(
-                    padding: EdgeInsets.only(left: 15, right: 10),
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
                     child: TextField(
-                      //controller: usernamecontroller,
-                      decoration: InputDecoration(
+                      controller: cityOfDepController,
+                      decoration:const InputDecoration(
                           isCollapsed: true,
                           isDense: true,
                           border: InputBorder.none,
@@ -139,11 +151,11 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                       border: Border.all(),
                       color:const Color.fromARGB(255, 254, 252, 252)),
                   alignment: Alignment.center,
-                  child:const Padding(
-                    padding: EdgeInsets.only(left: 15, right: 10),
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
                     child: TextField(
-                      //controller: usernamecontroller,
-                      decoration: InputDecoration(
+                      controller: dateOfDepController,
+                      decoration:const InputDecoration(
                           isCollapsed: true,
                           isDense: true,
                           border: InputBorder.none,
@@ -156,110 +168,136 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                   ),
                 ),
                 ksizedbox20,
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        Text('Adult',
-                          style: TextStyle(
-                          fontSize: 20.sp, 
-                          color: kblue,
-                          fontWeight: FontWeight.w500),
-                  ),
-                  ksizedbox10,
-                  Container(
-                    height: 25,
-                    width: 75,
-                    decoration: BoxDecoration(
-                      border: Border.all(),
+                Obx( () =>
+                   Row(
+                    children: [
+                      Column(
+                        children: [
+                          Text('Adult',
+                            style: TextStyle(
+                            fontSize: 20.sp, 
+                            color: kblue,
+                            fontWeight: FontWeight.w500),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Icon(Icons.remove,size: 20,),
-                        Container(
-                          height: 25,
-                          width: 25,
-                          color: Colors.orange,
-                          child:const Center(
-                              child: Text("1",style: TextStyle(color: Colors.white),),
+                    ksizedbox10,
+                    Container(
+                      height: 25,
+                      width: 75,
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap: (){
+                              holidayPackageController.adult--;
+                            },
+                            child: const Icon(Icons.remove,size: 20,)),
+                          Container(
+                            height: 25,
+                            width: 25,
+                            color: Colors.orange,
+                            child: Center(
+                                child: Text(holidayPackageController.adult.value.toString(),style: const TextStyle(color: Colors.white),),
+                            ),
                           ),
-                        ),
-                        const Icon(Icons.add,size: 20,),
-                      ],
+                          InkWell(
+                            onTap: (){
+                              holidayPackageController.adult++;
+                            },
+                            child: const Icon(Icons.add,size: 20,)),
+                        ],
+                      ),
                     ),
-                  ),
-                      ],
+                        ],
+                      ),
+                      kwidth10,
+                      Column(
+                        children: [
+                          Text('Child',
+                            style: TextStyle(
+                            fontSize: 20.sp, 
+                            color: kblue,
+                            fontWeight: FontWeight.w500),
                     ),
-                    kwidth10,
-                    Column(
-                      children: [
-                        Text('Child',
-                          style: TextStyle(
-                          fontSize: 20.sp, 
-                          color: kblue,
-                          fontWeight: FontWeight.w500),
-                  ),
-                  ksizedbox10,
-                  Container(
-                    height: 25,
-                    width: 75,
-                    decoration: BoxDecoration(
-                      border: Border.all(),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Icon(Icons.remove,size: 20,),
-                        Container(
-                          height: 25,
-                          width: 25,
-                          color: Colors.orange,
-                          child:const Center(
-                              child: Text("1",style: TextStyle(color: Colors.white),),
+                    ksizedbox10,
+                    Container(
+                      height: 25,
+                      width: 75,
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                         InkWell(
+                            onTap: (){
+                              holidayPackageController.child--;
+                            },
+                            child: const Icon(Icons.remove,size: 20,)),
+                          Container(
+                            height: 25,
+                            width: 25,
+                            color: Colors.orange,
+                            child: Center(
+                                child: Text(holidayPackageController.child.value.toString(),style: const TextStyle(color: Colors.white),),
+                            ),
                           ),
-                        ),
-                        const Icon(Icons.add,size: 20,),
-                      ],
+                          InkWell(
+                            onTap: (){
+                              holidayPackageController.child++;
+                            },
+                            child: const Icon(Icons.add,size: 20,)),
+                        ],
+                      ),
                     ),
-                  ),
-                      ],
+                        ],
+                      ),
+                      kwidth10,
+                      Column(
+                        children: [
+                          Text('Infant',
+                            style: TextStyle(
+                            fontSize: 20.sp, 
+                            color: kblue,
+                            fontWeight: FontWeight.w500),
                     ),
-                    kwidth10,
-                    Column(
-                      children: [
-                        Text('Infant',
-                          style: TextStyle(
-                          fontSize: 20.sp, 
-                          color: kblue,
-                          fontWeight: FontWeight.w500),
-                  ),
-                  ksizedbox10,
-                  Container(
-                    height: 25,
-                    width: 75,
-                    decoration: BoxDecoration(
-                      border: Border.all(),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Icon(Icons.remove,size: 20,),
-                        Container(
-                          height: 25,
-                          width: 25,
-                          color: Colors.orange,
-                          child:const Center(
-                              child: Text("2",style: TextStyle(color: Colors.white),),
+                    ksizedbox10,
+                    Container(
+                      height: 25,
+                      width: 75,
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap: (){
+                              holidayPackageController.infant--;
+                            },
+                            child: const Icon(Icons.remove,size: 20,)),
+                          Container(
+                            height: 25,
+                            width: 25,
+                            color: Colors.orange,
+                            child: Center(
+                                child: Text(holidayPackageController.infant.value.toString(),style: const TextStyle(color: Colors.white),),
+                            ),
                           ),
-                        ),
-                        const Icon(Icons.add,size: 20,),
-                      ],
+                          InkWell(
+                            onTap: (){
+                              holidayPackageController.infant++;
+                            },
+                            child: const Icon(Icons.add,size: 20,)),
+                        ],
+                      ),
                     ),
+                        ],
+                      ),
+                    ],
                   ),
-                      ],
-                    ),
-                  ],
                 ),
                 ksizedbox20,
                 Text('Contact Details',
@@ -277,11 +315,11 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                       border: Border.all(),
                       color:const Color.fromARGB(255, 254, 252, 252)),
                   alignment: Alignment.center,
-                  child:const Padding(
-                    padding: EdgeInsets.only(left: 15, right: 10),
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
                     child: TextField(
-                      //controller: usernamecontroller,
-                      decoration: InputDecoration(
+                      controller: nameController,
+                      decoration:const InputDecoration(
                           isCollapsed: true,
                           isDense: true,
                           border: InputBorder.none,
@@ -302,11 +340,11 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                       border: Border.all(),
                       color:const Color.fromARGB(255, 254, 252, 252)),
                   alignment: Alignment.center,
-                  child:const Padding(
-                    padding: EdgeInsets.only(left: 15, right: 10),
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
                     child: TextField(
-                      //controller: usernamecontroller,
-                      decoration: InputDecoration(
+                      controller: emailController,
+                      decoration:const InputDecoration(
                           isCollapsed: true,
                           isDense: true,
                           border: InputBorder.none,
@@ -327,11 +365,11 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                       border: Border.all(),
                       color:const Color.fromARGB(255, 254, 252, 252)),
                   alignment: Alignment.center,
-                  child:const Padding(
-                    padding: EdgeInsets.only(left: 15, right: 10),
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
                     child: TextField(
-                      //controller: usernamecontroller,
-                      decoration: InputDecoration(
+                      controller: mobileController,
+                      decoration:const InputDecoration(
                           isCollapsed: true,
                           isDense: true,
                           border: InputBorder.none,
@@ -344,17 +382,33 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                   ),
                 ),
                 ksizedbox30,
-                Container(
-                          height: 35,
-                          width: size.width,
-                          decoration: BoxDecoration(
-                            color: kOrange,
-                            borderRadius: BorderRadius.circular(8)
+                InkWell(
+                  onTap: (){
+                         holidayPackageController.createEnquiry(
+                          packageid: widget.packageId, 
+                          cityofdeparture: cityOfDepController.text, 
+                          dateofdeparture: dateOfDepController.text, 
+                          adultcount: holidayPackageController.adult.value.toString(), 
+                          childcount: holidayPackageController.child.value.toString(), 
+                          infantcount: holidayPackageController.infant.value.toString(), 
+                          name: nameController.text, 
+                          email: emailController.text, 
+                          mobile: mobileController.text, 
+                          status: "pending",
+                          );
+                  },
+                  child: Container(
+                            height: 35,
+                            width: size.width,
+                            decoration: BoxDecoration(
+                              color: kOrange,
+                              borderRadius: BorderRadius.circular(8)
+                            ),
+                            child:const Center(
+                                child: Text("Send Query",style: TextStyle(color: Colors.white),),
+                            ),
                           ),
-                          child:const Center(
-                              child: Text("Send Query",style: TextStyle(color: Colors.white),),
-                          ),
-                        ),
+                ),
                         ksizedbox20,
                         Row(
                           children: [
