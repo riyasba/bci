@@ -124,6 +124,13 @@ class _flightScreenChoose2State extends State<flightScreenChoose2> {
                                                           flightsController
                                                               .airports[i]
                                                               .name);
+
+                                                  flightsController
+                                                      .destinationCountry(
+                                                          flightsController
+                                                              .airports[i]
+                                                              .country);
+
                                                   Get.back();
                                                 },
                                                 child: Row(

@@ -1,13 +1,15 @@
 import 'dart:io';
+import 'package:bci/models/flight_booking_models/air_search_model.dart';
 import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
 import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:date_format/date_format.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AirSearchApiServices extends BaseApiService {
-  Future airSearchApiServices({
-    required FlightSearchDataModel flightSearchModel,
+class AirRePrintingServices extends BaseApiService {
+  Future airRePrintingApi({
+    required String refrenceNo,
+    required String clientReferneNo,
   }) async {
     dynamic responseJson;
     try {
@@ -15,7 +17,7 @@ class AirSearchApiServices extends BaseApiService {
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(airSearchUrl,
+      var response = await dio.post(airRepricingUrl,
           options: Options(
               headers: {
                 'Accept': 'application/json',
@@ -26,21 +28,12 @@ class AirSearchApiServices extends BaseApiService {
                 return status! <= 500;
               }),
           data: {
-            "imei_number": "64654546546546",
-            "origin": flightSearchModel.fromIata,
-            "destination": flightSearchModel.toIata,
-            "travel_date": formatDate(
-                flightSearchModel.depatureDate, [mm, "/", dd, "/", yyyy]),
-            "travel_type": flightSearchModel.isDomOrINTL,
-            "booking_type": flightSearchModel.isOneWayOrRoundTrip,
-            "adult_count": "${flightSearchModel.adultsCount}",
-            "child_count": "${flightSearchModel.childCount}",
-            "infant_count": "0",
-            "class_of_travel": "${flightSearchModel.cabinClass}",
-            "inventory_type": 0,
-            "airline_code": ""
-          });
-      print("::::::::<--Air search-->::::::::status code::::::::::");
+            "IMEI_Number": "64654546546546",
+            "Booking_RefNo": refrenceNo,
+            "Airline_PNR": clientReferneNo,
+          }
+          );
+      print("::::::::<-- Air Ticket printing -->::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

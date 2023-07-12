@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'authentications/splash_screen/Splash_screen.dart';
+import 'screens/members/flight_booking_screens/flight_booking_success_page.dart';
 
 void main() {
   Get.put(FlightsController());
@@ -40,7 +41,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          // home:  LoadingWidgets(),
+          // home:  FlightBookingSuccessPage(
+          // ),
           home: const splash(),
         );
       },

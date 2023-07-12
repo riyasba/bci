@@ -23,6 +23,8 @@ class _FlightDestinationChooserState extends State<FlightDestinationChooser> {
     super.initState();
     flightController.origin("Choose");
     flightController.destination("Choose");
+    flightController.originCountry("Choose");
+    flightController.destinationCountry("Choose");
   }
 
   @override

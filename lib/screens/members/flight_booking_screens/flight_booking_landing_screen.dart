@@ -315,6 +315,16 @@ class _FlightBookingLandingScreenState
                       )
                     : InkWell(
                         onTap: () {
+                          int domORIntl = 0;
+
+                          if (flightBookingController.originCountry.value ==
+                              flightBookingController
+                                  .destinationCountry.value) {
+                            domORIntl = 0;
+                          } else {
+                            domORIntl = 1;
+                          }
+
                           FlightSearchDataModel flightSearchDataModel =
                               FlightSearchDataModel(
                                   adultsCount: flightBookingController
@@ -323,19 +333,24 @@ class _FlightBookingLandingScreenState
                                       .cabinClassIndex.value,
                                   fromName: flightBookingController
                                       .originFullName.value,
-                                  toName:
+                                  toName: flightBookingController
+                                      .destinationFullName.value,
+                                  childCount: flightBookingController
+                                      .childsCount.value,
+                                  depatureDate: flightBookingController
+                                      .depatureDate,
+                                  fromIata: flightBookingController
+                                      .origin.value,
+                                  isOneWayOrRoundTrip: flightBookingController
+                                      .wayIndex.value,
+                                  fromCountry:
                                       flightBookingController
-                                          .destinationFullName.value,
-                                  childCount:
-                                      flightBookingController.childsCount.value,
-                                  depatureDate:
-                                      flightBookingController.depatureDate,
-                                  fromIata:
-                                      flightBookingController.origin.value,
-                                  isOneWayOrRoundTrip:
-                                      flightBookingController.wayIndex.value,
+                                          .originCountry.value,
+                                  toCountry: flightBookingController
+                                      .destinationCountry.value,
                                   returnDate:
                                       flightBookingController.returnDate,
+                                  isDomOrINTL: domORIntl,
                                   toIata: flightBookingController
                                       .destination.value);
 
