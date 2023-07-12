@@ -147,7 +147,7 @@ class _HolidayScreenState extends State<HolidayScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Starting From')
+                                  Text('Starting From ${widget.packageId}')
                                       .text
                                       .semiBold
                                       .blue900

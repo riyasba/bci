@@ -93,7 +93,7 @@ abstract class BaseApiService {
 
   final String getPackageDetailsApiUrl = "https://bci.generation360tech.in/api/auth/get_package_details";
 
-  final String createEnquiry = "https://bci.generation360tech.in/api/auth/create_enquiry";
+  final String createEnquiryApiUrl = "https://bci.generation360tech.in/api/auth/create_enquiry";
 
   final String searchPackageListApiUrl = "https://bci.generation360tech.in/api/auth/search_packages";
 }

@@ -2,6 +2,7 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/holiday_package_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -29,6 +30,9 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
     // TODO: implement initState
     super.initState();
     profileController.getProfile();
+    holidayPackageController.adult(0);
+    holidayPackageController.child(0);
+    holidayPackageController.infant(0);
   }
 
   @override
@@ -328,6 +332,7 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                     padding:const EdgeInsets.only(left: 15, right: 10),
                     child: TextField(
                       controller: nameController,
+                      keyboardType: TextInputType.name,
                       decoration:const InputDecoration(
                           isCollapsed: true,
                           isDense: true,
@@ -353,6 +358,7 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                     padding:const EdgeInsets.only(left: 15, right: 10),
                     child: TextField(
                       controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
                       decoration:const InputDecoration(
                           isCollapsed: true,
                           isDense: true,
@@ -378,6 +384,12 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                     padding:const EdgeInsets.only(left: 15, right: 10),
                     child: TextField(
                       controller: mobileController,
+                      keyboardType: TextInputType.phone,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(10),
+                      FilteringTextInputFormatter.digitsOnly,
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    ],
                       decoration:const InputDecoration(
                           isCollapsed: true,
                           isDense: true,
@@ -395,7 +407,6 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                   onTap: (){
                     print("---------testing enquiry--------------");
                     print(widget.packageId);
-                    print(profileController.profileData);
                     print(cityOfDepController.text);
                     print(dateOfDepController.text);
                     print(nameController.text);
@@ -403,7 +414,6 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                     print(mobileController.text);
                          holidayPackageController.createEnquiry(
                           packageid: widget.packageId, 
-                          vendorid:"107", //profileController.profileData.first.id.toString(),
                           cityofdeparture: cityOfDepController.text, 
                           dateofdeparture: dateOfDepController.text, 
                           adultcount: holidayPackageController.adult.value.toString(), 

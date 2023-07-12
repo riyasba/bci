@@ -10,14 +10,14 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../constands/constands.dart';
 import '../../screens/members/members widgets/bottumbavigation.dart';
 
-class Onbording extends StatefulWidget {
-  const Onbording({super.key});
+class MemberOnbordingScreen extends StatefulWidget {
+  const MemberOnbordingScreen({super.key});
 
   @override
-  State<Onbording> createState() => _OnbordingState();
+  State<MemberOnbordingScreen> createState() => _MemberOnbordingScreenState();
 }
 
-class _OnbordingState extends State<Onbording> {
+class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
   bool isPageViewEnabled = false;
   late PageController _pageController;
   // @override
@@ -173,7 +173,7 @@ class _riyasandiState extends State<riyasandi> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image.asset(
-          'assets/images/onbordin1.png',
+          'assets/images/introimg.png',
         ),
         ksizedbox30,
         Text(
@@ -306,7 +306,7 @@ class Onbording5 extends StatelessWidget {
             right: 10,
             child: Image.asset(
               'assets/images/onbord55.png',
-              height: 400.h,
+              height: 530.h,
             )),
         Positioned(
             bottom: 0,

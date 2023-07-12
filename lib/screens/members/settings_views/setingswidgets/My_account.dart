@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/models/member_profile_update_model.dart';
@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../../constands/constands.dart';
 
 class MyAccount extends StatefulWidget {
@@ -46,13 +45,15 @@ class _MyAccountState extends State<MyAccount> {
   var rAadhrCN = TextEditingController();
 
   final settingsController = Get.find<SettingsController>();
-
+  final plansController = Get.find<PlanController>();
   final profileController = Get.find<ProfileController>();
 
   @override
   void initState() {
     super.initState();
     setDefault();
+    profileController.getProfile();
+    plansController.getPlanDetails(id: int.parse(profileController.planid.value));
   }
 
   DateTime date = DateTime.now().subtract(const Duration(days: 6570));
@@ -173,10 +174,13 @@ class _MyAccountState extends State<MyAccount> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
-                        onTap: Get.back,
-                        child:
-                            Image.asset('assets/images/chevron-left (2).png')),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: InkWell(
+                          onTap: Get.back,
+                          child:const Icon(Icons.arrow_back_ios,color: Colors.white,)
+                              ),
+                    ),
                     const Padding(
                       padding: EdgeInsets.only(right: 20),
                       child: Text(
@@ -1235,6 +1239,13 @@ class _MyAccountState extends State<MyAccount> {
                     ),
                   ),
                 ),
+                //
+                ksizedbox30,
+                plansController.subscribePlansData.isEmpty ? const Image(image: AssetImage("assets/images/Group 4930.png"),height: 200,) :
+                      Image.network(plansController.subscribePlansData.first.cardImg,
+                      height: 200,
+                      width: size.width,
+                      fit: BoxFit.fill,),
             ],
           );
         }),

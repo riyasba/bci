@@ -1,26 +1,18 @@
-import 'package:bci/authentications/langing_screen/landing_screen.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
-import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
-import 'package:bci/screens/members/settings_views/my_subcriptions_screen.dart';
 import 'package:bci/screens/members/settings_views/offers_screen.dart';
 import 'package:bci/screens/members/settings_views/our_partner_screen.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/My_account.dart';
 import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:bci/screens/members/settings_views/upgrade_screen.dart';
 import 'package:bci/screens/members/settings_views/your_refferal_screen.dart';
-import 'package:bci/screens/bussiness/views/home_screen/settings/your_referal_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:nb_utils/nb_utils.dart';
-
-import '../../bussiness/views/home_screen/settings/my_account_screen.dart';
 import '../coupen/coupons_screen.dart';
 import 'Dashbord.dart';
-import 'aditional_coupons.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -41,7 +33,7 @@ class _SettingScreenState extends State<SettingScreen> {
             child: Container(
               height: 150,
               color: kblue,
-              child: Padding(
+              child:const Padding(
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,7 +62,7 @@ class _SettingScreenState extends State<SettingScreen> {
               onTap: () {
                 Get.to(const MyAccount());
               },
-              child: Row(
+              child:const Row(
                 children: [
                   Image(
                     image: AssetImage("assets/icons/myaccount.png"),
@@ -96,41 +88,41 @@ class _SettingScreenState extends State<SettingScreen> {
                 color: Colors.grey,
               ),
             ),
-            InkWell(
-              onTap: () {
-                Get.to(const MySubcriptionScreen());
-              },
-              child: Row(
-                children: [
-                  Image(
-                    image: AssetImage("assets/icons/additionalCoupons.png"),
-                    width: 20,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "My Subscriptions",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff003366)),
-                  )
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 5, bottom: 10),
-              child: Divider(
-                thickness: 1,
-                color: Colors.grey,
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {
+            //     Get.to(const MySubcriptionScreen());
+            //   },
+            //   child:const Row(
+            //     children: [
+            //       Image(
+            //         image: AssetImage("assets/icons/additionalCoupons.png"),
+            //         width: 20,
+            //       ),
+            //       SizedBox(
+            //         width: 10,
+            //       ),
+            //       Text(
+            //         "My Subscriptions",
+            //         style: TextStyle(
+            //             fontSize: 20,
+            //             fontWeight: FontWeight.w500,
+            //             color: Color(0xff003366)),
+            //       )
+            //     ],
+            //   ),
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.only(top: 5, bottom: 10),
+            //   child: Divider(
+            //     thickness: 1,
+            //     color: Colors.grey,
+            //   ),
+            // ),
             InkWell(
               onTap: () {
                 Get.to(const DashBoardScreenMenbers());
               },
-              child: Row(
+              child:const Row(
                 children: [
                   Image(
                     image: AssetImage("assets/icons/dashboard.png"),
@@ -163,7 +155,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     MaterialPageRoute(
                         builder: (context) => const OfferScreen()));
               },
-              child: Row(
+              child:const Row(
                 children: [
                   Image(
                     image: AssetImage("assets/icons/offers.png"),
@@ -193,7 +185,7 @@ class _SettingScreenState extends State<SettingScreen> {
               onTap: () {
                 Get.to(Coupens_members());
               },
-              child: Row(
+              child:const Row(
                 children: [
                   Image(
                     image: AssetImage("assets/icons/coupans.png"),
@@ -223,8 +215,8 @@ class _SettingScreenState extends State<SettingScreen> {
               onTap: () {
                 Get.to(const CartScreen());
               },
-              child: Row(
-                children: const [
+              child:const Row(
+                children:  [
                   Icon(
                     Icons.shopping_cart,
                     color: Color(0xff003366),

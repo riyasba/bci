@@ -92,7 +92,6 @@ class HolidayPackageController extends GetxController{
 
   createEnquiry({
     required String packageid,
-    required String vendorid,
     required String cityofdeparture,
     required String dateofdeparture,
     required String adultcount,
@@ -105,7 +104,6 @@ class HolidayPackageController extends GetxController{
   }) async {
      dio.Response<dynamic> response = await createEnquiryApiService.createEnquiryApiService(
       packageid: packageid, 
-      vendorid: vendorid,
       cityofdeparture: cityofdeparture, 
       dateofdeparture: dateofdeparture, 
       adultcount: adultcount, 

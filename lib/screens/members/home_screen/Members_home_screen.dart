@@ -217,6 +217,7 @@ class _Home_screen1State extends State<Home_screen1> {
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
@@ -297,32 +298,29 @@ class _Home_screen1State extends State<Home_screen1> {
                           ),
                         ),
                         //
-                        Padding(
-                          padding: const EdgeInsets.only(top: 12),
-                          child: InkWell(
-                            onTap: () {
-                              Get.to(const HolidayHome());
-                            },
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 58,
-                                  width: 58,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: kblue),
-                                  child:
-                                      Image.asset("assets/icons/icons (5).png"),
-                                ),
-                                const SizedBox(
-                                  height: 7,
-                                ),
-                                const Text(
-                                  'Holiday\nPackage',
-                                  style: TextStyle(fontWeight: FontWeight.w700),
-                                )
-                              ],
-                            ),
+                        InkWell(
+                          onTap: () {
+                            Get.to(const HolidayHome());
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 58,
+                                width: 58,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: kblue),
+                                child:
+                                    Image.asset("assets/icons/icons (5).png"),
+                              ),
+                              const SizedBox(
+                                height: 7,
+                              ),
+                              const Text(
+                                'Holiday\nPackage',
+                                style: TextStyle(fontWeight: FontWeight.w700),
+                              )
+                            ],
                           ),
                         ), //
                         InkWell(
@@ -344,7 +342,7 @@ class _Home_screen1State extends State<Home_screen1> {
                                 height: 7,
                               ),
                               const Text(
-                                'Others',
+                                'BCI Direct\nPartners',
                                 style: TextStyle(fontWeight: FontWeight.w700),
                               )
                             ],

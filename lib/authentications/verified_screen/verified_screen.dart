@@ -11,12 +11,12 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../screens/members/members widgets/bottumbavigation.dart';
-import '../onbording/onbording11.dart';
+import '../onbording/Member_onbording_screen.dart';
 //import '../onbording/onbording_screen.dart';
 //import '../../widgets/bottumbavigation.dart';
 
-class verified_Screen extends StatelessWidget {
-  const verified_Screen({super.key});
+class MemberVerifiedScreen extends StatelessWidget {
+  const MemberVerifiedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class verified_Screen extends StatelessWidget {
           ksizedbox40,
           InkWell(
             onTap: () {
-              Get.offAll(Onbording());
+              Get.offAll(MemberOnbordingScreen());
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),

@@ -1,8 +1,7 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class SupportScreen extends StatefulWidget {
@@ -13,6 +12,26 @@ class SupportScreen extends StatefulWidget {
 }
 
 class _SupportScreenState extends State<SupportScreen> {
+
+  final profileController = Get.find<ProfileController>();
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final emailController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setDefault();
+  }
+
+  setDefault() async {
+    await profileController.getProfile();
+    nameController.text = profileController.profileData.first.name;
+    phoneController.text = profileController.profileData.first.mobile;
+    emailController.text = profileController.profileData.first.email;
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -62,17 +81,17 @@ class _SupportScreenState extends State<SupportScreen> {
                       borderRadius: BorderRadius.circular(4),
                       color:const Color(0xffF2F1F1)),
                   alignment: Alignment.center,
-                  child:const Padding(
-                    padding: EdgeInsets.only(left: 15, right: 10),
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
                     child: TextField(
-                      //controller: usernamecontroller,
-                      decoration: InputDecoration(
+                      controller: nameController,
+                      decoration:const InputDecoration(
                           isCollapsed: true,
                           isDense: true,
                           border: InputBorder.none,
-                          hintText: "Your Name",
+                          hintText:"Name",
                           hintStyle: TextStyle(
-                            color: Color(0xff6E6D6E),
+                            color: Colors.black,
                             fontWeight: FontWeight.w400,
                           )),
                     ),
@@ -88,17 +107,17 @@ class _SupportScreenState extends State<SupportScreen> {
                       borderRadius: BorderRadius.circular(4),
                       color:const Color(0xffF2F1F1)),
                   alignment: Alignment.center,
-                  child:const Padding(
-                    padding: EdgeInsets.only(left: 15, right: 10),
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
                     child: TextField(
-                      //controller: usernamecontroller,
-                      decoration: InputDecoration(
+                      controller: phoneController,
+                      decoration:const InputDecoration(
                           isCollapsed: true,
                           isDense: true,
                           border: InputBorder.none,
-                          hintText: "Mobile",
+                          hintText:"Mobile",
                           hintStyle: TextStyle(
-                            color: Color(0xff6E6D6E),
+                            color: Colors.black,
                             fontWeight: FontWeight.w400,
                           )),
                     ),
@@ -114,17 +133,17 @@ class _SupportScreenState extends State<SupportScreen> {
                       borderRadius: BorderRadius.circular(4),
                       color:const Color(0xffF2F1F1)),
                   alignment: Alignment.center,
-                  child:const Padding(
-                    padding: EdgeInsets.only(left: 15, right: 10),
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
                     child: TextField(
-                      //controller: usernamecontroller,
-                      decoration: InputDecoration(
+                      controller: emailController,
+                      decoration:const InputDecoration(
                           isCollapsed: true,
                           isDense: true,
                           border: InputBorder.none,
-                          hintText: "Email",
+                          hintText:"Email",
                           hintStyle: TextStyle(
-                            color: Color(0xff6E6D6E),
+                            color: Colors.black,
                             fontWeight: FontWeight.w400,
                           )),
                     ),
@@ -173,37 +192,36 @@ class _SupportScreenState extends State<SupportScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20,right: 20),
+                padding: const EdgeInsets.only(left: 20,right: 20,top: 15),
                 child: Row(
                   children: [
-                    Column(
-                      children:const [
-                        Text('Contact Admin',style: TextStyle(fontSize: 18,color: Color(0xff443C3C)),),
+                    const Column(
+                      children: [
+                        Text('Contact Admin :',style: TextStyle(fontSize: 18,color: Color(0xff443C3C)),),
                       ],
                     ),
                     Column(
                       children: [
                         const SizedBox(width: 15,),
-                        Text('+91 9914581540',style: TextStyle(fontSize: 16,color: kblue)),
+                        Text('  +91 9914581540',style: TextStyle(fontSize: 16,color: kblue)),
                       ],
                     ),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20,right: 20),
+                padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
                 child: Row(
                   children: [
-                    Row(
-                      children:const [
+                    const Row(
+                      children: [
                         Text('Admin Email :',style: TextStyle(fontSize: 18,color: Color(0xff443C3C)),),
                       ],
                     ),
                     Row(
                       children: [
-                        const Text(":"),
-                        const SizedBox(width: 15,),
-                        Text('Customer@gmail.com',style: TextStyle(fontSize: 16,color: kblue)),
+                        const SizedBox(width: 20,),
+                        Text('  Customer@gmail.com',style: TextStyle(fontSize: 16,color: kblue)),
                       ],
                     ),
                   ],

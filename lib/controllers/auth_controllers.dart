@@ -166,7 +166,8 @@ class AuthController extends GetxController {
       if (response.data["user"]["role_id"] == "3") {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString("auth_token", response.data["token"]);
-        Get.offAll(const verified_Screen());
+        await prefs.setString("id", response.data["user"]["id"].toString());
+        Get.offAll(const MemberVerifiedScreen());
       } else {
         Get.rawSnackbar(
             backgroundColor: Colors.red,
