@@ -1,7 +1,10 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/settings_controllers.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -13,6 +16,16 @@ class YourReferralScreen extends StatefulWidget {
 }
 
 class _YourReferralScreenState extends State<YourReferralScreen> {
+
+  final settingsController = Get.find<SettingsController>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    settingsController.generateRefCode();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,13 +51,13 @@ class _YourReferralScreenState extends State<YourReferralScreen> {
                           color: Colors.white,
                         )),
                     Padding(
-                      padding: EdgeInsets.only(right: 20),
+                      padding:const EdgeInsets.only(right: 20),
                       child: Text(
                         'Invite',
                         style: TextStyle(
                             fontSize: 20.sp,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xffF9F8FD)),
+                            color:const Color(0xffF9F8FD)),
                       ),
                     ),
                     Image.asset('assets/images/helps.png')
@@ -56,9 +69,9 @@ class _YourReferralScreenState extends State<YourReferralScreen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(
-          physics: BouncingScrollPhysics(),
+          physics:const BouncingScrollPhysics(),
           children: [
-            Image(
+           const Image(
               image: AssetImage(
                 "assets/images/pngwing.com (30).png",
               ),
@@ -70,30 +83,59 @@ class _YourReferralScreenState extends State<YourReferralScreen> {
                 child: Text(
                   'Referral Code',
                   style: TextStyle(
-                      fontSize: 28, fontWeight: FontWeight.w700, color: kblue),
+                      fontSize: 28, fontWeight: FontWeight.w600, color: kblue),
                 ),
               ),
             ),
-            Container(height: 50,
-              child: TextField(
-                // controller: _controller,
-            
-                decoration: InputDecoration(
-                    hintText: 'ABCD',
-                    hintStyle: TextStyle(
-                        fontSize: 28, color: kblue, fontWeight: FontWeight.w700),
-                    fillColor: kwhite,
-                    focusColor: kwhite,
-                    isDense: true,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: kblue),
-                      borderRadius: BorderRadius.circular(4.0),
+            Obx( () =>
+               Container(
+                height: 50,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: kblue)
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10,right: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(settingsController.referralCode.value,style: TextStyle(
+                           fontSize: 20, color: kblue, fontWeight: FontWeight.w500),),
+                        InkWell(
+                          onTap: (){
+                            FlutterClipboard.copy(settingsController.referralCode.value).then(
+                                                  (value) =>
+                                                      Fluttertoast.showToast(
+                                                          msg:
+                                                              "Copy to clipboard",
+                                                          toastLength: Toast
+                                                              .LENGTH_SHORT,
+                                                          gravity: ToastGravity
+                                                              .CENTER,
+                                                          timeInSecForIosWeb: 1,
+                                                          backgroundColor:
+                                                              kblue,
+                                                          textColor:
+                                                              Colors.white,
+                                                          fontSize: 16.0),
+                                                  //print("code copied")
+                                                );
+                          },
+                          child: Image.asset('assets/images/Icon awesome-copy.png')),
+                      ],
                     ),
-                    suffixIcon:
-                        Image.asset('assets/images/Icon awesome-copy.png')),
+                  ),
+                ),
               ),
             ),
+
+            // authController.referralcode();
+            //     String referralmsg = "Use my referral code $refferal when you sign up, and we'll both receive fantastic rewards. Don't forget to click on the link below to download the app and start enjoying the perks right away!\n\nhttps://drive.google.com/file/d/15HzAlb_iTWgtX_VN34_TXTQ4BS7KWnOR/view?usp=sharing";
+            //     Share.share('$referralmsg');
+
             ksizedbox30,
             Row(
               children: [
@@ -112,7 +154,8 @@ class _YourReferralScreenState extends State<YourReferralScreen> {
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: InkWell(
                 onTap: () {
-                  Share.share('hello');
+                  String referralmsg = "Use my referral code ${settingsController.referralCode.value} when you sign up, and we'll both receive fantastic rewards. Don't forget to click on the link below to download the app and start enjoying the perks right away!\n\n";
+                  Share.share('$referralmsg');
                 },
                 child: Container(
                   height: 50.h,

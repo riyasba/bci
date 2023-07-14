@@ -108,4 +108,12 @@ abstract class BaseApiService {
   final String createEnquiryApiUrl = "https://bci.generation360tech.in/api/auth/create_enquiry";
 
   final String searchPackageListApiUrl = "https://bci.generation360tech.in/api/auth/search_packages";
+
+  //settings api
+
+  final String createSupportApiUrl = "https://bci.generation360tech.in/api/auth/create_ticket";
+
+  final String generateReferralCodeApiUrl = "https://bci.generation360tech.in/api/auth/generateReferralCode";
+
+  final recomendedListApiUrl = "https://bci.generation360tech.in/api/auth/recomended_list";
 }

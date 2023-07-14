@@ -2,10 +2,12 @@ import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/models/holiday_package_models/get_package_category_model.dart';
 import 'package:bci/models/holiday_package_models/get_package_details_model.dart';
 import 'package:bci/models/holiday_package_models/get_package_list_model.dart';
+import 'package:bci/models/holiday_package_models/recomended_list_model.dart';
 import 'package:bci/services/network/holidays_package_api_services/create_enquiry_api_service.dart';
 import 'package:bci/services/network/holidays_package_api_services/get_package_category_api_service.dart';
 import 'package:bci/services/network/holidays_package_api_services/get_package_details_api_service.dart';
 import 'package:bci/services/network/holidays_package_api_services/get_package_list_api_service.dart';
+import 'package:bci/services/network/holidays_package_api_services/recomended_list_api_service.dart';
 import 'package:bci/services/network/holidays_package_api_services/search_package_list_api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +18,8 @@ class HolidayPackageController extends GetxController{
   RxInt child = 0.obs;
   RxInt adult = 0.obs;
   RxInt infant = 0.obs;
+  RxInt catIndex = 0.obs;
+  RxInt searchInt = 0.obs;
 
   //get package category
   GetPackageCategoryApiServices getPackageCategoryApiServices = GetPackageCategoryApiServices();
@@ -45,14 +49,14 @@ class HolidayPackageController extends GetxController{
   GetPackageListApiServices getPackageListApiServices = GetPackageListApiServices();
   List<PackageListData> packageListData = [];
 
-  getPackage() async {
+  getPackage({required String categoryId}) async {
 
-    dio.Response<dynamic> response = await getPackageListApiServices.getPackageListApiServices();
+    dio.Response<dynamic> response = await getPackageListApiServices.getPackageListApiServices(categoryId: categoryId);
     if(response.statusCode == 200){
 
       GetPackageList getPackageList =  GetPackageList.fromJson(response.data);
       packageListData = getPackageList.data;
-
+      update();
     }else{
       Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -134,10 +138,13 @@ class HolidayPackageController extends GetxController{
   //search package list api
   SearchPackageListApiService searchPackageListApiService = SearchPackageListApiService();
 
-  searchPackageList({required String name}) async {
+  searchPackageList({
+    required String name,
+    required String categoryid
+    }) async {
 
     dio.Response<dynamic> response = await searchPackageListApiService.
-    searchPackageListApiService(name: name);
+    searchPackageListApiService(name: name,categoryid: categoryid);
     if(response.statusCode == 200){
 
       GetPackageList getPackageList =  GetPackageList.fromJson(response.data);
@@ -153,5 +160,11 @@ class HolidayPackageController extends GetxController{
     }
     update();
   }
+
+  //recomended list
+  RecomendedListApiServices recomendedListApiServices = RecomendedListApiServices();
+  List<RecomendedListData> recomendedListData = [];
+
+  
 
 }

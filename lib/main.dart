@@ -9,10 +9,9 @@ import 'package:bci/screens/members/holiday/controllers/holidaycontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-
 import 'authentications/splash_screen/Splash_screen.dart';
 import 'screens/members/flight_booking_screens/flight_booking_success_page.dart';
+import 'screens/members/flight_booking_screens/flight_ticket_screen.dart';
 
 void main() {
   Get.put(FlightsController());

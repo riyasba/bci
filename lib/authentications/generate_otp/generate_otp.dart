@@ -188,7 +188,7 @@ class _MemberLoginScreenState extends State<MemberLoginScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(const MemberSignUpScreen());
+                      Get.to(MemberSignUpScreen());
                     },
                     child: Text(
                       'Sign up',

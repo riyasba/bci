@@ -369,19 +369,20 @@ class _OfficeAddressScreenState extends State<OfficeAddressScreen> {
                           : InkWell(
                               onTap: () {
                                 if (_formKey.currentState!.validate()) {
-                                  AddressModel oficeaddressModel = AddressModel(
-                                      doorNo: doorNumberController.text,
-                                      buildingName: buildingNameController.text,
-                                      address: addressController.text,
-                                      city: cityController.text,
-                                      state: stateController.text,
-                                      personalId: "",
-                                      aadhrId: "");
+                                  // AddressModel oficeaddressModel = AddressModel(
+                                  //     doorNo: doorNumberController.text,
+                                  //     buildingName: buildingNameController.text,
+                                  //     address: addressController.text,
+                                  //     city: cityController.text,
+                                  //     state: stateController.text,
+                                  //     personalId: "",
+                                  //     aadhrId: "");
                                   authController.registerMember(
                                       memberRegisterModel:
                                           widget.memberRegisterModel,
-                                      officialAddress: oficeaddressModel,
-                                      residentialAddress: widget.addressModel);
+                                      //officialAddress: oficeaddressModel,
+                                      //residentialAddress: widget.addressModel
+                                      );
                                 }
                               },
                               child: Container(

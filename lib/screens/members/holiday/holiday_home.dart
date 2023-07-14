@@ -31,16 +31,23 @@ class _HolidayHomeState extends State<HolidayHome> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    holidayPackageController.getPackageCategory();
-    holidayPackageController.getPackage();
+    getPackageList();
     searchController.addListener(searchUsers);
   }
 
-  searchUsers() {
+  getPackageList() async {
+   await holidayPackageController.getPackageCategory();
+    holidayPackageController.getPackage(categoryId: holidayPackageController.packageCategoryData.first.id.toString());
+    holidayPackageController.searchInt(holidayPackageController.packageCategoryData.first.id);
+  }
+
+  searchUsers() async {
     if (searchController.text.trim().isNotEmpty) {
-       holidayPackageController.searchPackageList(name: searchController.text);
+      await holidayPackageController.searchPackageList(
+        name: searchController.text,
+        categoryid: holidayPackageController.searchInt.value.toString());
     } else {
-      holidayPackageController.getPackage();
+      holidayPackageController.getPackage(categoryId: holidayPackageController.packageCategoryData.first.id.toString());
       holidayPackageController.update();
     }
   }
@@ -50,12 +57,10 @@ class _HolidayHomeState extends State<HolidayHome> {
     var size = MediaQuery.of(context).size;
     return GetBuilder<HolidayPackageController>(
       builder: (_) {
-        return DefaultTabController(
-          length: holidayPackageController.packageCategoryData.length,
-          child: Scaffold(
-            backgroundColor: const Color(0xFFF9F8FD),
+        return Scaffold(
+             backgroundColor: const Color(0xFFF9F8FD),
             appBar: PreferredSize(
-              preferredSize:const Size.fromHeight(250) ,
+              preferredSize:const Size.fromHeight(130) ,
               child: Column(
                 children: [
                   AppBar(
@@ -69,11 +74,11 @@ class _HolidayHomeState extends State<HolidayHome> {
                     title: Text(
                       'Plan your trip with us.',
                       style: TextStyle(
-                          fontSize: 27, fontWeight: FontWeight.w800, color: kblue),
+                          fontSize: 25, fontWeight: FontWeight.w600, color: kblue),
                     ),
                   ),
                   Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 15,right: 15,top: 7,bottom: 7),
                   child: Container(
                     height: 55,
                     child: TextFormField(
@@ -95,77 +100,64 @@ class _HolidayHomeState extends State<HolidayHome> {
                       ),
                     )),
                   ),
-                ),   ksizedbox30,
-                Row(
-                  children: [
-                    kwidth10,
-                    Text(
-                      'Categories',
-                      style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
-                    ),
-                  ],
-                ),ksizedbox10,Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TabBar(
-                          automaticIndicatorColorAdjustment: true,
-                          //  isScrollable: true,
-                          labelColor: Colors.black,
-                          unselectedLabelColor: kgrey,
-                          indicator: BoxDecoration(
-                              borderRadius: BorderRadius.circular(18),
-                              color: kwhite),
-                          onTap: (value) {
-                            setState(() {
-                               index = value;
-                            });
-                          },
-                          tabs: [
-                            for(int i = 0; i<holidayPackageController.packageCategoryData.length; i++)
-                            Tab(
-                              text: holidayPackageController.packageCategoryData[i].name,
-                            ),
-                          ]
-                          ),
-                          ),
-                          ],
-              ),
+                ),
+                ]
+            )
             ),
-            body: TabBarView(children: [ holiday_listview(), holiday_listview(), holiday_listview(),
-              
-              
-              
-            ]),
-          ),
-        );
-      }
-    );
-  }
-
-  ListView holiday_listview() {
-    return ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-      
-         
-          ksizedbox20,
-        
-          Row(
-            children: [
-              kwidth10,
-              Text(
-                'Populars',
-                style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
-              ),
-              kwidth10,
-            ],
-          ),
-          ksizedbox20,
-          // InkWell(onTap: (){
-          //   Get.to( HolidayScreen());
-          //   },
-          //   child:
-          // ),
-          Container(
+            body: Padding(
+              padding: const EdgeInsets.only(left: 15,right: 15,bottom: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                   Text(
+                        'Categories',
+                        style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
+                      ),
+                      ksizedbox20,
+                      Container(
+                        height: 40,
+                        child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: holidayPackageController.packageCategoryData.length,
+                          itemBuilder: (context,index) {
+                            return InkWell(
+                              onTap: (){
+                                holidayPackageController.catIndex(index);
+                                holidayPackageController.getPackage(
+                                categoryId: holidayPackageController.packageCategoryData[index].id.toString());
+                                holidayPackageController.searchInt(holidayPackageController.getPackageDetailsData[index].id);
+                                holidayPackageController.update();
+                                print("----------------->>>>--------------->>${holidayPackageController.getPackageDetailsData[index].id}");
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 2,right: 2),
+                                child: Container(
+                                  height: 35,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(color:holidayPackageController.catIndex.value == index ? Colors.grey : Colors.white),
+                                  ),
+                                  child: Center(
+                                    child: Text(holidayPackageController.packageCategoryData[index].name,
+                                    style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w400),     
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                        ),
+                      ),
+                      ksizedbox20,
+                      Text(
+                        'Populars',
+                        style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
+                       ),
+                       ksizedbox20,
+                       Container(
             height: 260,
             child:holidayPackageController.packageListData.isEmpty ? const Center(child: Text("No Data Found"),) : ListView.builder(
               itemCount: holidayPackageController.packageListData.length,
@@ -227,64 +219,20 @@ class _HolidayHomeState extends State<HolidayHome> {
               }
               ),
           ),
-          ksizedbox30,
-          Row(
-            children: [
-              kwidth10,
+              ksizedbox20,
               Text(
                 'Recommended',
                 style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
               ),
-            ],
-          ),
-          ksizedbox30,
-          Container(height: 70,
-            child: ListView(physics: BouncingScrollPhysics(),
-              shrinkWrap: true,scrollDirection: Axis.horizontal,
-              children: [
-               kwidth10, holiday_widget2(),kwidth10,
-                holiday_widget2(),kwidth10, holiday_widget2(),kwidth10,
-                holiday_widget2(),
-              ],
-            ),
-          )
-        ],
-      );
-  }
-
-  Container holiday_widget2() {
-    return Container(
-              decoration: BoxDecoration(
-                  color: kwhite, borderRadius: BorderRadius.circular(25)),
-              width: 200.w,
-              height: 69.h,
-              child: Row(
-                children: [kwidth5,
-                  Image.asset('assets/images/pexels-senuscape-1658967.png'),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Grindelwald',
-                          style: TextStyle(
-                              fontSize: 15.sp, fontWeight: FontWeight.w500),
-                        ),
-                        Row(
-                          children: [
-                           
-                            Image.asset(
-                                'assets/images/location-svgrepo-com (1).png'),kwidth5, Text(
-                              'Jordan',
-                              style: TextStyle(fontSize: 13.sp, color: kgrey),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
+              ksizedbox10,
+              
                 ],
               ),
+            ),
             );
-  }
-}
+         });
+        }
+      }
+
+  
+  

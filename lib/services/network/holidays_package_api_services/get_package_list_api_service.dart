@@ -4,10 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GetPackageListApiServices extends BaseApiService {
-  Future getPackageListApiServices() async {
+  Future getPackageListApiServices({required String categoryId}) async {
     dynamic responseJson;
     try {
-      var dio = Dio();
+      var dio = Dio(); 
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
@@ -21,8 +21,11 @@ class GetPackageListApiServices extends BaseApiService {
             validateStatus: (status) {
               return status! <= 500;
             }),
+            data: {
+              "category_id":categoryId
+            }
       );
-      print("::::::::<get package list Api>::::::::status code::::::::::");
+      print("::::::::<get package list Api>::::::::status code:::$categoryId:::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

@@ -26,7 +26,7 @@ class GetPackageDetailsApiServices extends BaseApiService {
               "package_id": packageid
             }
       );
-      print("::::::::<get package details Api>::::::::status code::::::::::");
+      print("::::::::<get package details Api>::::::::status code:::$packageid:::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

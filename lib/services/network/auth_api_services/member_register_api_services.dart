@@ -7,8 +7,8 @@ import 'package:dio/dio.dart';
 class MemberRegisterApiServices extends BaseApiService {
   Future memberRegister({
     required MemberRegisterModel memberRegisterModel,
-    required AddressModel residentialAddress,
-    required AddressModel officialAddress,
+    //required AddressModel residentialAddress,
+    //required AddressModel officialAddress,
   }) async {
     dynamic responseJson;
     try {
@@ -26,31 +26,29 @@ class MemberRegisterApiServices extends BaseApiService {
             "name": memberRegisterModel.name,
             "mobile": memberRegisterModel.mobile,
             "email": memberRegisterModel.email,
-            "occupation": memberRegisterModel.occupation,
-            "father_name": memberRegisterModel.fatherName,
-            "mother_name": memberRegisterModel.motherName,
-            "is_married": "0",
-            "residential_address": jsonEncode({
-              "door_no": residentialAddress.doorNo,
-              "address": residentialAddress.address,
-              "building_name": residentialAddress.buildingName,
-              "state": residentialAddress.state,
-              "city": residentialAddress.city,
-              "personal_id": residentialAddress.personalId,
-              "aadhar_id": residentialAddress.aadhrId
-            }),
-            "official_address": jsonEncode({
-              "door_no": officialAddress.doorNo,
-              "address": officialAddress.address,
-              "building_name": officialAddress.buildingName,
-              "state": officialAddress.state,
-              "city": officialAddress.city,
-            }),
-            "pan_no": memberRegisterModel.panNo,
-            "aadhar_no": residentialAddress.aadhrId,
+            //"occupation": memberRegisterModel.occupation,
+            //"father_name": memberRegisterModel.fatherName,
+            //"mother_name": memberRegisterModel.motherName,
+            //"is_married": "0",
+            // "residential_address": jsonEncode({
+            //   "door_no": residentialAddress.doorNo,
+            //   "address": residentialAddress.address,
+            //   "building_name": residentialAddress.buildingName,
+            //   "state": residentialAddress.state,
+            //   "city": residentialAddress.city,
+            //   "personal_id": residentialAddress.personalId,
+            //   "aadhar_id": residentialAddress.aadhrId
+            // }),
+            // "official_address": jsonEncode({
+            //   "door_no": officialAddress.doorNo,
+            //   "address": officialAddress.address,
+            //   "building_name": officialAddress.buildingName,
+            //   "state": officialAddress.state,
+            //   "city": officialAddress.city,
+            // }),
+            //"pan_no": memberRegisterModel.panNo,
+            //"aadhar_no": residentialAddress.aadhrId,
             "role_id": "3",
-            "password": "1234567",
-            "password_confirmation": "1234567"
           });
       print("::::::::<Register URL>::::::::status code::::::::::");
       print(response.statusCode);

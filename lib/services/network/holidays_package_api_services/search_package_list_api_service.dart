@@ -4,7 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchPackageListApiService extends BaseApiService {
-  Future searchPackageListApiService({required String name}) async {
+  Future searchPackageListApiService({
+    required String name,
+    required String categoryid,
+    }) async {
     dynamic responseJson;
     try {
       var dio = Dio();
@@ -23,10 +26,11 @@ class SearchPackageListApiService extends BaseApiService {
               return status! <= 500;
             }),
             data: {
-              "name": name
+              "name": name,
+              "category_id": categoryid
             }
       );
-      print("::::::::<search package list Api>::::::::status code::::::::::");
+      print("::::::::<search package list Api>::::::::status code:::$categoryid:::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

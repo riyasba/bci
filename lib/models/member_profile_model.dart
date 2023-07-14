@@ -121,13 +121,13 @@ class MemberUser {
   });
 
   factory MemberUser.fromJson(Map<String, dynamic> json) => MemberUser(
-        id: json["id"],
-        roleId: json["role_id"],
-        name: json["name"],
-        email: json["email"],
-        mobile: json["mobile"],
-        isVerrifiedMobile: json["is_verrified_mobile"],
-        otp: json["otp"],
+        id: json["id"]?? 0,
+        roleId: json["role_id"]?? "",
+        name: json["name"]?? "",
+        email: json["email"]?? "",
+        mobile: json["mobile"]?? "",
+        isVerrifiedMobile: json["is_verrified_mobile"]?? "",
+        otp: json["otp"]?? "",
         category: json["category"] ?? "",
         subCategory: json["sub_category"] ?? "",
         alternateMobile: json["alternate_mobile"] ?? "",
@@ -135,27 +135,26 @@ class MemberUser {
         adharProof: json["adhar_proof"] ?? '',
         panProof: json["pan_proof"] ?? '',
         profilePicture: json["profile_picture"] ?? "",
-        clientSecret: json["client_secret"],
-        clientId: json["client_id"],
-        keyName: json["Key_name"],
-        keyStatus: json["Key_status"],
+        clientSecret: json["client_secret"]?? "",
+        clientId: json["client_id"]?? "",
+        keyName: json["Key_name"]?? "",
+        keyStatus: json["Key_status"]?? "",
         emailVerifiedAt: json["email_verified_at"] ?? '',
         address: json["address"] ?? "",
         dob: json["dob"] ?? "",
-        occupation: json["occupation"],
-        fatherName: json["father_name"],
-        motherName: json["mother_name"],
-        isMarried: json["is_married"],
-        residentialAddress:
-            ResidentialAddress.fromJson(json["residential_address"]),
-        officialAddress: OfficialAddress.fromJson(json["official_address"]),
-        panNo: json["pan_no"],
-        aadharNo: json["aadhar_no"],
-        bio: json["bio"],
-        pincode: json["pincode"],
-        city: json["city"],
-        state: json["state"],
-        status: json["status"],
+        occupation: json["occupation"]?? "",
+        fatherName: json["father_name"]?? "",
+        motherName: json["mother_name"]?? "",
+        isMarried: json["is_married"]?? "",
+        residentialAddress:json["residential_address"] == null ? ResidentialAddress(doorNo: "", address: "", buildingName: "", state: "", city: "", personalId: "", aadharId: "") : ResidentialAddress.fromJson(json["residential_address"]),
+        officialAddress:json["official_address"] == null ? OfficialAddress(doorNo: "", address: "", buildingName: "", state: "", city: "") : OfficialAddress.fromJson(json["official_address"]),
+        panNo: json["pan_no"]?? "",
+        aadharNo: json["aadhar_no"]?? "",
+        bio: json["bio"]?? "",
+        pincode: json["pincode"]?? "",
+        city: json["city"]?? "",
+        state: json["state"]?? "",
+        status: json["status"]?? "",
      
       );
 
@@ -216,11 +215,11 @@ class OfficialAddress {
 
   factory OfficialAddress.fromJson(Map<String, dynamic> json) =>
       OfficialAddress(
-        doorNo: json["door_no"],
-        address: json["address"],
-        buildingName: json["building_name"],
-        state: json["state"],
-        city: json["city"],
+        doorNo: json["door_no"]?? "",
+        address: json["address"]?? "",
+        buildingName: json["building_name"]?? "",
+        state: json["state"]?? "",
+        city: json["city"]?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -253,13 +252,13 @@ class ResidentialAddress {
 
   factory ResidentialAddress.fromJson(Map<String, dynamic> json) =>
       ResidentialAddress(
-        doorNo: json["door_no"],
-        address: json["address"],
-        buildingName: json["building_name"],
-        state: json["state"],
-        city: json["city"],
-        personalId: json["personal_id"],
-        aadharId: json["aadhar_id"],
+        doorNo: json["door_no"]?? "",
+        address: json["address"]?? "",
+        buildingName: json["building_name"]?? "",
+        state: json["state"]?? "",
+        city: json["city"]?? "",
+        personalId: json["personal_id"]?? "",
+        aadharId: json["aadhar_id"]?? "",
       );
 
   Map<String, dynamic> toJson() => {

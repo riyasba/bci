@@ -389,31 +389,31 @@ class _ResidentialAddressScreenState extends State<ResidentialAddressScreen> {
                                 personalId: personalIDController.text,
                                 aadhrId: aadharController.text);
 
-                            MemberRegisterModel tempMemberRegisterModel =
-                                MemberRegisterModel(
-                                    aadharNo: aadharController.text,
-                                    email: widget.memberRegisterModel.email,
-                                    fatherName:
-                                        widget.memberRegisterModel.fatherName,
-                                    isMarried:
-                                        widget.memberRegisterModel.isMarried,
-                                    mobile: widget.memberRegisterModel.mobile,
-                                    motherName:
-                                        widget.memberRegisterModel.motherName,
-                                    name: widget.memberRegisterModel.name,
-                                    occupation:
-                                        widget.memberRegisterModel.occupation,
-                                    panNo: personalIDController.text,
-                                    password:
-                                        widget.memberRegisterModel.password,
-                                    passwordConfirmation:
-                                        widget.memberRegisterModel.password,
-                                    roleId: widget.memberRegisterModel.roleId);
+                            // MemberRegisterModel tempMemberRegisterModel =
+                            //     MemberRegisterModel(
+                            //         aadharNo: aadharController.text,
+                            //         email: widget.memberRegisterModel.email,
+                            //         fatherName:
+                            //             widget.memberRegisterModel.fatherName,
+                            //         isMarried:
+                            //             widget.memberRegisterModel.isMarried,
+                            //         mobile: widget.memberRegisterModel.mobile,
+                            //         motherName:
+                            //             widget.memberRegisterModel.motherName,
+                            //         name: widget.memberRegisterModel.name,
+                            //         occupation:
+                            //             widget.memberRegisterModel.occupation,
+                            //         panNo: personalIDController.text,
+                            //         password:
+                            //             widget.memberRegisterModel.password,
+                            //         passwordConfirmation:
+                            //             widget.memberRegisterModel.password,
+                            //         roleId: widget.memberRegisterModel.roleId);
 
-                            Get.to(OfficeAddressScreen(
-                              addressModel: addressModel,
-                              memberRegisterModel: tempMemberRegisterModel,
-                            ));
+                            // Get.to(OfficeAddressScreen(
+                            //   addressModel: addressModel,
+                            //   memberRegisterModel: tempMemberRegisterModel,
+                            // ));
                           }
                         },
                         child: Container(

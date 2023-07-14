@@ -49,8 +49,7 @@ class _HolidayScreenState extends State<HolidayScreen> {
               Get.back();
             },
             child: Image.asset('assets/images/Icon awesome-arrow-right.png')),
-        title: Text(
-          'Increadible Mauritius(Ex - Delhi)',
+        title:holidayPackageController.getPackageDetailsData.isEmpty ? Text("") : Text(holidayPackageController.getPackageDetailsData.first.title,
           style: TextStyle(
               fontSize: 20, fontWeight: FontWeight.w700, color: kblue),
         ),
@@ -147,14 +146,14 @@ class _HolidayScreenState extends State<HolidayScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Starting From ${widget.packageId}')
+                                  Text('Starting From')
                                       .text
                                       .semiBold
                                       .blue900
                                       .make()
                                       .p2(),
                                       ksizedbox10,
-                                  Text(' ₹ ${holidayPackageController.getPackageDetailsData.first.amount}').text.bold.xl2.blue900.make()
+                                 holidayPackageController.getPackageDetailsData.isEmpty ? Text("") :  Text(' ₹ ${holidayPackageController.getPackageDetailsData.first.amount}').text.bold.xl2.blue900.make()
                                 ],
                               ),
                               Column(

@@ -3,26 +3,27 @@ import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class GetPlansDetailsApiServices extends BaseApiService {
-  Future getPlansDetails({required int planId}) async {
+class RecomendedListApiServices extends BaseApiService {
+  Future recomendedListApiServices() async {
     dynamic responseJson;
     try {
-      var dio = Dio();
+      var dio = Dio(); 
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(getPlanDetailsURL,
-          options: Options(
-              headers: {
-                'Accept': 'application/json',
-                'Authorization': 'Bearer $authtoken'
-              },
-              followRedirects: false,
-              validateStatus: (status) {
-                return status! <= 500;
-              }),
-          data: {"id": planId});
-      print("::::::::<Get plan details Api>::::::::status code:::::$planId:::::");
+      var response = await dio.post(
+        recomendedListApiUrl,
+        options: Options(
+            headers: {
+              'Authorization': 'Bearer $authtoken'
+            },
+            followRedirects: false,
+            validateStatus: (status) {
+              return status! <= 500;
+            }),
+            
+      );
+      print("::::::::<recomende list Api>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

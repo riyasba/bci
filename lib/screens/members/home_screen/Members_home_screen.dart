@@ -1,3 +1,4 @@
+import 'package:bci/controllers/flights_controller.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_booking_landing_screen.dart';
@@ -31,6 +32,7 @@ class _Home_screen1State extends State<Home_screen1> {
   CarouselController sliderController = CarouselController();
   final profileController = Get.find<ProfileController>();
   final homeController = Get.find<HomeController>();
+  final flightController = Get.find<FlightsController>();
   int activeIndex = 0;
 
   @override
@@ -204,12 +206,17 @@ class _Home_screen1State extends State<Home_screen1> {
                   Row(
                     children: [
                       kwidth10,
-                      Text(
-                        'Add Booking',
-                        style: TextStyle(
-                            color: knavblue,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w700),
+                      InkWell(
+                        onTap: (){
+                          flightController.downloadFlightTicketInvoice();
+                        },
+                        child: Text(
+                          'Add Booking',
+                          style: TextStyle(
+                              color: knavblue,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700),
+                        ),
                       ),
                     ],
                   ),

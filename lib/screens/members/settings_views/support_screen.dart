@@ -1,5 +1,6 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/controllers/settings_controllers.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,9 +15,15 @@ class SupportScreen extends StatefulWidget {
 class _SupportScreenState extends State<SupportScreen> {
 
   final profileController = Get.find<ProfileController>();
+  final settingsController = Get.find<SettingsController>();
+
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
   final emailController = TextEditingController();
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
+
+  
 
   @override
   void initState() {
@@ -153,18 +160,44 @@ class _SupportScreenState extends State<SupportScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20,top: 20),
                 child: Container(
+                  height: 50,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color:const Color(0xffF2F1F1)),
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
+                    child: TextField(
+                      controller: titleController,
+                      decoration:const InputDecoration(
+                          isCollapsed: true,
+                          isDense: true,
+                          border: InputBorder.none,
+                          hintText:"Title",
+                          hintStyle: TextStyle(
+                            color: Color(0xff6E6D6E),
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20,top: 20),
+                child: Container(
                   height: 150,
                   width: size.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
                       color:const Color(0xffF2F1F1)),
                   alignment: Alignment.center,
-                  child:const Padding(
-                    padding: EdgeInsets.only(left: 15, right: 10),
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
                     child: TextField(
-                      //controller: usernamecontroller,
+                      controller: descriptionController,
                       maxLines: 100,
-                      decoration: InputDecoration(
+                      decoration:const InputDecoration(
                           isCollapsed: true,
                           isDense: true,
                           border: InputBorder.none,
@@ -179,15 +212,20 @@ class _SupportScreenState extends State<SupportScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
-                child: Container(
-                  height: 50,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                        color:const Color(0xff003366)
-                  ),
-                  child:const Center(
-                    child: Text("Submit",style: TextStyle(fontSize: 25,color: Color(0xffF9F8FD)),),
+                child: InkWell(
+                  onTap: (){
+                    settingsController.createSupport(title: titleController.text, message: descriptionController.text);
+                  },
+                  child: Container(
+                    height: 50,
+                    width: size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                          color:const Color(0xff003366)
+                    ),
+                    child:const Center(
+                      child: Text("Submit",style: TextStyle(fontSize: 25,color: Color(0xffF9F8FD)),),
+                    ),
                   ),
                 ),
               ),

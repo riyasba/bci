@@ -17,7 +17,7 @@ import 'package:bci/services/network/categorys_api_services/sub_category_api_ser
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
-import '../services/network/auth_api_services/customer_api_services.dart';
+import '../services/network/auth_api_services/member_register_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
@@ -68,15 +68,16 @@ class AuthController extends GetxController {
 
   registerMember({
     required MemberRegisterModel memberRegisterModel,
-    required AddressModel residentialAddress,
-    required AddressModel officialAddress,
+    //required AddressModel residentialAddress,
+    //required AddressModel officialAddress,
   }) async {
     isLoading(true);
     dio.Response<dynamic> response =
         await memberRegisterApiServices.memberRegister(
             memberRegisterModel: memberRegisterModel,
-            officialAddress: officialAddress,
-            residentialAddress: residentialAddress);
+            //officialAddress: officialAddress,
+            //residentialAddress: residentialAddress
+            );
     isLoading(false);
     if (response.statusCode == 201) {
       Get.to(OtpVerificationView(
