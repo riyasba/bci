@@ -1,24 +1,37 @@
+import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/screens/members/liquer_screen/wine_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
 import 'widget/liquers_containers.dart';
 
-class liquer_screen extends StatelessWidget {
-  const liquer_screen({super.key});
+class LiquorScreen extends StatefulWidget {
+  const LiquorScreen({super.key});
+
+  @override
+  State<LiquorScreen> createState() => _LiquorScreenState();
+}
+
+class _LiquorScreenState extends State<LiquorScreen> {
+
+  final homeController = Get.find<HomeController>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    homeController.liquorVendors(categoryid: "6");
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kwhite,
+      backgroundColor:const Color(0xFFF9F8FD),
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(210),
+          preferredSize:const Size.fromHeight(170),
           child: Column(
             children: [
               ClipPath(
@@ -47,7 +60,7 @@ class liquer_screen extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () {
-                              Get.to(NotificationScreen());
+                              Get.to(const NotificationScreen());
                             },
                             icon: Icon(
                               Icons.notifications,
@@ -64,7 +77,6 @@ class liquer_screen extends StatelessWidget {
                   height: 44.h,
                   child: TextFormField(
                     // controller: _controller,
-
                     decoration: InputDecoration(disabledBorder: OutlineInputBorder(),
                         hintText: 'Search',
                         fillColor: Colors.grey[200],
@@ -74,9 +86,8 @@ class liquer_screen extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(23.0),
                         ),
-                        prefixIcon: Image.asset('assets/images/622669.png'),
-                        suffixIcon: Image.asset(
-                            'assets/images/Icon material-location-on.png')),
+                        prefixIcon: Image.asset('assets/images/622669.png'),),
+                        //suffixIcon: Image.asset('assets/images/Icon material-location-on.png')),
                   ),
                 ),
               ),
@@ -84,15 +95,62 @@ class liquer_screen extends StatelessWidget {
           )),
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
-        child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              return const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Card(child: members_liquer_container()),
-              );
-            }),
+        child: GetBuilder<HomeController>(
+          builder: (_) {
+            return ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: homeController.vendorListData.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding:const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
+                    child: InkWell(
+                      onTap: (){
+                        Get.to( LiquorListScreen(vendor: homeController.vendorListData[index].vendorId,));
+                      },
+                      child: Container(
+                              height: 150,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: kwhite,
+                                borderRadius: BorderRadius.circular(5),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 0.5,
+                                    color: kgrey
+                                  )
+                                ]
+                              ),
+                              
+                              child: Row(
+                                children: [
+                                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Image.network(homeController.vendorListData[index].image)),
+                                  ),kwidth10,
+                                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(homeController.vendorListData[index].title),
+                          Container(
+                            width: 170,
+                            child: Text(homeController.vendorListData[index].description,maxLines: 3,overflow: TextOverflow.ellipsis,)),
+                          Text(homeController.vendorListData[index].saleAmount),
+                        ],
+                      ),
+                                  )
+                                ],
+                              ),
+                            ),
+                    ),
+                  );
+                });
+          }
+        ),
       ),
     );
   }

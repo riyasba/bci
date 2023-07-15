@@ -1,4 +1,5 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/settings_controllers.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -13,6 +14,16 @@ class OurPartnerScreen extends StatefulWidget {
 }
 
 class _OurPartnerScreenState extends State<OurPartnerScreen> {
+
+  final settingsController = Get.find<SettingsController>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    settingsController.ourPartner();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,39 +61,33 @@ class _OurPartnerScreenState extends State<OurPartnerScreen> {
               ),
             ),
           )),
-      body: Column(
-           children: [
-               Padding(
-                 padding: const EdgeInsets.only(top: 20),
-                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:const [
-                    Image(image: AssetImage("assets/images/NoPath - Copy (3).png"),height: 170,width: 180,),
-                    Image(image: AssetImage("assets/images/NoPath - Copy (4).png"),height: 170,width: 180,),
-                  ],
-                 ),
-               ),
-               Padding(
-                 padding: const EdgeInsets.only(top: 15),
-                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:const [
-                    Image(image: AssetImage("assets/images/NoPath - Copy (5).png"),height: 170,width: 180,),
-                    Image(image: AssetImage("assets/images/NoPath - Copy (6).png"),height: 170,width: 180,),
-                  ],
-                 ),
-               ),
-               Padding(
-                 padding: const EdgeInsets.only(top: 15),
-                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:const [
-                    Image(image: AssetImage("assets/images/NoPath - Copy (51).png"),height: 170,width: 180,),
-                    Image(image: AssetImage("assets/images/chanel.png"),height: 170,width: 180,),
-                  ],
-                 ),
-               ),
-           ],
+      body: GetBuilder<SettingsController>(
+        builder: (_) {
+          return GridView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: settingsController.ourPartnersData.length,
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                     height: 150,
+                                     width: 150,
+                                     decoration: BoxDecoration(
+                                      border: Border.all(color: kblue),
+                                      image: DecorationImage(
+                                        fit: BoxFit.fill,
+                                      image: NetworkImage(
+                                      settingsController.ourPartnersData[index].image)),
+                                     ),
+                              ),
+                            );
+                          });
+        }
       ),
     );
   }

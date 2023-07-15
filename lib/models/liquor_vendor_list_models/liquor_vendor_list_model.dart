@@ -1,39 +1,34 @@
 // To parse this JSON data, do
 //
-//     final recomendedList = recomendedListFromJson(jsonString);
+//     final liquorVendorList = liquorVendorListFromJson(jsonString);
 
 import 'dart:convert';
 
-RecomendedList recomendedListFromJson(String str) => RecomendedList.fromJson(json.decode(str));
+LiquorVendorList liquorVendorListFromJson(String str) => LiquorVendorList.fromJson(json.decode(str));
 
-String recomendedListToJson(RecomendedList data) => json.encode(data.toJson());
+String liquorVendorListToJson(LiquorVendorList data) => json.encode(data.toJson());
 
-class RecomendedList {
-    String message;
-    List<RecomendedListData> data;
+class LiquorVendorList {
+    List<VendorListData> vendors;
 
-    RecomendedList({
-        required this.message,
-        required this.data,
+    LiquorVendorList({
+        required this.vendors,
     });
 
-    factory RecomendedList.fromJson(Map<String, dynamic> json) => RecomendedList(
-        message: json["message"],
-        data: List<RecomendedListData>.from(json["data"].map((x) => RecomendedListData.fromJson(x))),
+    factory LiquorVendorList.fromJson(Map<String, dynamic> json) => LiquorVendorList(
+        vendors: List<VendorListData>.from(json["vendors"].map((x) => VendorListData.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
-        "message": message,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "vendors": List<dynamic>.from(vendors.map((x) => x.toJson())),
     };
 }
 
-class RecomendedListData {
+class VendorListData {
     int id;
     String categoryId;
     String vendorId;
     String title;
-    dynamic location;
     String actualAmount;
     String saleAmount;
     String isOffer;
@@ -42,24 +37,24 @@ class RecomendedListData {
     String isCoupon;
     dynamic couponAmount;
     String description;
-    String? quantity;
-    String? unit;
-    String isRecomended;
+    String quantity;
+    String unit;
+    String? isRecomended;
     String status;
-    List<Amenty> amenties;
+    String amenties;
     String image;
     DateTime createdAt;
     DateTime updatedAt;
     dynamic shareOption;
     dynamic bvcAmount;
-    List<String>? images;
+    String name;
+    String email;
 
-    RecomendedListData({
+    VendorListData({
         required this.id,
         required this.categoryId,
         required this.vendorId,
         required this.title,
-        this.location,
         required this.actualAmount,
         required this.saleAmount,
         required this.isOffer,
@@ -68,9 +63,9 @@ class RecomendedListData {
         required this.isCoupon,
         this.couponAmount,
         required this.description,
-        this.quantity,
-        this.unit,
-        required this.isRecomended,
+        required this.quantity,
+        required this.unit,
+        this.isRecomended,
         required this.status,
         required this.amenties,
         required this.image,
@@ -78,15 +73,15 @@ class RecomendedListData {
         required this.updatedAt,
         this.shareOption,
         this.bvcAmount,
-        this.images,
+        required this.name,
+        required this.email,
     });
 
-    factory RecomendedListData.fromJson(Map<String, dynamic> json) => RecomendedListData(
+    factory VendorListData.fromJson(Map<String, dynamic> json) => VendorListData(
         id: json["id"]?? 0,
         categoryId: json["category_id"]?? "",
         vendorId: json["vendor_id"]?? "",
         title: json["title"]?? "",
-        location: json["location"]?? "",
         actualAmount: json["actual_amount"]?? "",
         saleAmount: json["sale_amount"]?? "",
         isOffer: json["isOffer"]?? "",
@@ -99,13 +94,14 @@ class RecomendedListData {
         unit: json["unit"]?? "",
         isRecomended: json["is_recomended"]?? "",
         status: json["status"]?? "",
-        amenties:json["amenties"] == null ? [] : List<Amenty>.from(json["amenties"].map((x) => Amenty.fromJson(x))),
+        amenties: json["amenties"]?? "",
         image: json["image"]?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         shareOption: json["share_option"]?? "",
         bvcAmount: json["bvc_amount"]?? "",
-        images: json["images"] == null ? [] : List<String>.from(json["images"]!.map((x) => x)),
+        name: json["name"]?? "",
+        email: json["email"]?? "",
     );
 
     Map<String, dynamic> toJson() => {
@@ -113,7 +109,6 @@ class RecomendedListData {
         "category_id": categoryId,
         "vendor_id": vendorId,
         "title": title,
-        "location": location,
         "actual_amount": actualAmount,
         "sale_amount": saleAmount,
         "isOffer": isOffer,
@@ -126,28 +121,13 @@ class RecomendedListData {
         "unit": unit,
         "is_recomended": isRecomended,
         "status": status,
-        "amenties": List<dynamic>.from(amenties.map((x) => x.toJson())),
+        "amenties": amenties,
         "image": image,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "share_option": shareOption,
         "bvc_amount": bvcAmount,
-        "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
-    };
-}
-
-class Amenty {
-    String value;
-
-    Amenty({
-        required this.value,
-    });
-
-    factory Amenty.fromJson(Map<String, dynamic> json) => Amenty(
-        value: json["value"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "value": value,
+        "name": name,
+        "email": email,
     };
 }

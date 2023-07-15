@@ -279,7 +279,7 @@ class _HolidayScreenState extends State<HolidayScreen> {
                         children: [
                           if (holidayController.reindex.value == 0) OverviewWidget(packageid: widget.packageId,),
                           if (holidayController.reindex.value == 1) HotelDetails(packageid: widget.packageId,),
-                          if (holidayController.reindex.value == 2) DayWiseItinerary(),
+                          if (holidayController.reindex.value == 2) DayWiseItinerary(packageid: widget.packageId,),
                           if (holidayController.reindex.value == 3) AdditionalInfoWidget(),
                             
                     

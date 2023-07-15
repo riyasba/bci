@@ -1,23 +1,36 @@
-import 'package:bci/screens/members/liquer_screen/widget/popular_Wine.dart';
+import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/screens/members/liquer_screen/add_cart_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
-import 'add_cart_screen.dart';
 
-class wine_screen extends StatelessWidget {
-  const wine_screen({super.key});
+class LiquorListScreen extends StatefulWidget {
+    String vendor;
+    LiquorListScreen({super.key,required this.vendor});
+
+  @override
+  State<LiquorListScreen> createState() => _LiquorListScreenState();
+}
+
+class _LiquorListScreenState extends State<LiquorListScreen> {
+
+  final homeController = Get.find<HomeController>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    homeController.liquorService(vendor: widget.vendor, categoryid: "6");
+  }
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize:const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -30,10 +43,9 @@ class wine_screen extends StatelessWidget {
                   children: [
                     InkWell(
                         onTap: Get.back,
-                        child:
-                            Image.asset('assets/images/chevron-left (2).png')),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
+                        child: Image.asset('assets/images/chevron-left (2).png')),
+                    const Padding(
+                      padding: EdgeInsets.only(right: 20),
                       child: Text(
                         'Wine',
                         style: TextStyle(
@@ -44,7 +56,7 @@ class wine_screen extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {
-                        Get.to(NotificationScreen());
+                        Get.to(const NotificationScreen());
                       },
                       icon: Icon(
                         Icons.notifications,
@@ -57,8 +69,8 @@ class wine_screen extends StatelessWidget {
           )),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
+         const Padding(
+            padding: EdgeInsets.all(10.0),
             child: Row(
               children: [
                 Text(
@@ -68,37 +80,98 @@ class wine_screen extends StatelessWidget {
               ],
             ),
           ),
-          InkWell(onTap: (){Get.to(Add_cart());},
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Wine_widget(
-                  wineimg: 'assets/images/Layer 3442.png',
-                ),
-                Wine_widget(
-                  wineimg:
-                      'assets/images/59_Barefoot-Cellars-California-Chardonnay-750ml.png',
-                )
-              ],
-            ),
+          
+          GetBuilder<HomeController>(
+            builder: (_) {
+              return Container(
+                height: size.height * 0.70,
+                child: GridView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: homeController.searchServiceListData.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: () {
+                              Get.to(LiquorDetailScreen(searchServicelist: 
+                              homeController.searchServiceListData[index],));
+                            },
+                            child: Container(
+                              height: 130,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(color: kgrey, blurRadius: 0.5),
+                                  ],
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: Image.network(
+                                        homeController
+                                            .searchServiceListData[index].image,
+                                        height: 100,
+                                        width:150,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Container(
+                                        width: double.infinity,
+                                        child: Text(
+                                          homeController
+                                              .searchServiceListData[index].title,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: kblue),
+                                        ),
+                                      ),
+                                    ),
+                                    Text(homeController.searchServiceListData[index].actualAmount,)
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+              );
+            }
           ),
-          ksizedbox30,
-          InkWell(onTap: (){Get.to(Add_cart());},
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Wine_widget(
-                  wineimg: 'assets/images/Layer 3442.png',
-                ),
-                Wine_widget(
-                  wineimg:
-                      'assets/images/59_Barefoot-Cellars-California-Chardonnay-750ml.png',
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+              ]
+              )
+              );
+
+          // InkWell(onTap: (){
+          //   Get.to(LiquorDetailScreen());},
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //     children: [
+          //       Wine_widget(
+          //         wineimg: 'assets/images/Layer 3442.png',
+          //       ),
+          //       Wine_widget(
+          //         wineimg:
+          //             'assets/images/59_Barefoot-Cellars-California-Chardonnay-750ml.png',
+          //       )
+          //     ],
+          //   ),
+          // ),
+    
   }
 }

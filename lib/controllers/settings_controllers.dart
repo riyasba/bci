@@ -1,6 +1,8 @@
 import 'package:bci/constands/app_fonts.dart';
+import 'package:bci/models/our_partners_model.dart';
 import 'package:bci/services/network/settings_api_services/create_support_api_service.dart';
 import 'package:bci/services/network/settings_api_services/generate_referralCode_api_service.dart';
+import 'package:bci/services/network/settings_api_services/our_partners_api_service.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -57,6 +59,27 @@ class SettingsController extends GetxController{
             style: primaryFont.copyWith(color: Colors.white),
           ));
       }
+     update();
+   }
+
+   //our partners api
+   OurPartnersApiService ourPartnersApiService = OurPartnersApiService();
+   List<OurPartnersData> ourPartnersData = [];
+
+   ourPartner() async {
+     
+     dio.Response<dynamic> response = await ourPartnersApiService.ourPartnersApiService();
+     if(response.statusCode == 200){
+       OurPartnersList ourPartnersList = OurPartnersList.fromJson(response.data);
+       ourPartnersData = ourPartnersList.data;
+     } else {
+       Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+     }
      update();
    }
 

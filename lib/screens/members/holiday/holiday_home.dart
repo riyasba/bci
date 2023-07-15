@@ -33,6 +33,8 @@ class _HolidayHomeState extends State<HolidayHome> {
     super.initState();
     getPackageList();
     searchController.addListener(searchUsers);
+    holidayPackageController.recomended();
+    holidayPackageController.update();
   }
 
   getPackageList() async {
@@ -176,7 +178,7 @@ class _HolidayHomeState extends State<HolidayHome> {
                       BoxDecoration(color: kwhite, borderRadius: BorderRadius.circular(19)),
                                 child: Column(
                     children: [
-                      ClipRRect(
+                     holidayPackageController.packageListData.isEmpty ? Container() : ClipRRect(
                         borderRadius: BorderRadius.circular(19),
                         child: Image.network(holidayPackageController.packageListData[index].images.first,
                         height: 150,
@@ -204,12 +206,13 @@ class _HolidayHomeState extends State<HolidayHome> {
                               child: Row(
                                 children: [
                     Image.asset('assets/images/location-svgrepo-com (1).png'),kwidth5,
-                                Text(
-                      'Jordan',
-                      style: TextStyle(fontSize: 13.sp, color: kgrey),
-                    ),  ],
+                    //             Text(
+                    //   holidayPackageController.packageListData[index].location,
+                    //   style: TextStyle(fontSize: 13.sp, color: kgrey),
+                    // ),  
+                     ],
                               ),
-                      )
+                      ),
                     ],
                                 ),
                                 
@@ -224,8 +227,69 @@ class _HolidayHomeState extends State<HolidayHome> {
                 'Recommended',
                 style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
               ),
-              ksizedbox10,
-              
+              ksizedbox20,
+                Container(
+                  height: 80,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: holidayPackageController.recomendedListData.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: InkWell(
+                          onTap: (){
+                            Get.to(HolidayScreen(packageId: holidayPackageController.recomendedListData[index].id.toString(),));
+                          },
+                          child: Container(
+                          height: 80,
+                          width: 200,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5)
+                          ),
+                          child: Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(7),
+                                child: Image.network(holidayPackageController.recomendedListData[index].images!.first,
+                                height: 70,
+                                width: 75,
+                                        fit: BoxFit.cover,
+                                ),
+                              ),
+                                             Padding(
+                                               padding: const EdgeInsets.all(5.0),
+                                               child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                           children: [
+                             Container(
+                              width: 100,
+                              child: Text(
+                                holidayPackageController.recomendedListData[index].title,
+                                maxLines: 2,
+                                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700),
+                              ),
+                               ),
+                               Row(
+                                children: [
+                                Image.asset('assets/images/location-svgrepo-com (1).png'),kwidth5,
+                                // Text(
+                                // holidayPackageController.recomendedListData[index].location,
+                                // style: TextStyle(fontSize: 13.sp, color: kgrey),
+                                // ),  
+                                ],
+                              ),
+                           ],
+                           ),
+                         ),
+                            ],
+                          ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
                 ],
               ),
             ),

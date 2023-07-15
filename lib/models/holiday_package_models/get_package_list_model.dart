@@ -34,6 +34,7 @@ class PackageListData {
     String categoryId;
     String title;
     String description;
+    dynamic location;
     String image;
     String inclusion;
     String exclusion;
@@ -52,6 +53,7 @@ class PackageListData {
     PackageListData({
         required this.id,
         required this.vendorId,
+        this.location,
         required this.categoryId,
         required this.title,
         required this.description,
@@ -75,6 +77,7 @@ class PackageListData {
         id: json["id"]?? 0,
         vendorId: json["vendor_id"]?? "",
         categoryId: json["category_id"]?? "",
+        location: json["location"]?? "",
         title: json["title"]?? "",
         description: json["description"]?? "",
         image: json["image"]?? "",
@@ -98,6 +101,7 @@ class PackageListData {
         "vendor_id": vendorId,
         "category_id": categoryId,
         "title": title,
+        "location": location,
         "description": description,
         "image": image,
         "inclusion": inclusion,

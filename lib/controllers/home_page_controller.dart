@@ -6,6 +6,7 @@ import 'package:bci/models/get_plan_details_model.dart';
 import 'package:bci/models/get_plans_model.dart';
 import 'package:bci/models/get_service_list_model.dart';
 import 'package:bci/models/get_today_offers_list_model.dart';
+import 'package:bci/models/liquor_vendor_list_models/liquor_vendor_list_model.dart';
 import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/models/slider_model.dart';
 import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
@@ -20,6 +21,8 @@ import 'package:bci/services/network/categorys_api_services/get_filter_api_servi
 import 'package:bci/services/network/categorys_api_services/get_service_list_api_service.dart';
 import 'package:bci/services/network/categorys_api_services/get_today_offers_list_api_service.dart';
 import 'package:bci/services/network/categorys_api_services/search_service_list_api_services.dart';
+import 'package:bci/services/network/liquors_api_services/liquor_service_list.dart';
+import 'package:bci/services/network/liquors_api_services/liquor_vendor_list_api_service.dart';
 import 'package:bci/services/network/subscriptions_api_services/add_subscription_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plan_details_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plans_list_api_services.dart';
@@ -351,4 +354,54 @@ class HomeController extends GetxController {
     update();
 
   }
+
+  //liquor list api
+  LiquorVendorListApiService liquorVendorListApiService = LiquorVendorListApiService();
+  List<VendorListData> vendorListData = [];
+
+  liquorVendors({required String categoryid}) async {
+
+    dio.Response<dynamic> response = await liquorVendorListApiService.
+    liquorVendorListApiService(categoryid: categoryid);
+    if(response.statusCode == 200){
+      LiquorVendorList liquorVendorList = LiquorVendorList.fromJson(response.data);
+      vendorListData = liquorVendorList.vendors; 
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+  }
+
+  //liquor service list
+  LiquorServiceListApiService liquorServiceListApiService = LiquorServiceListApiService();
+
+  liquorService({
+    required String vendor,
+    required String categoryid
+  }) async {
+
+    dio.Response<dynamic> response = await liquorServiceListApiService.
+    liquorServiceListApiService(vendor: vendor, categoryid: categoryid);
+    if(response.statusCode == 200){
+      SearchServiceList searchServiceList =
+          SearchServiceList.fromJson(response.data);
+      searchServiceListData = searchServiceList.data;
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+
+  }
+
+
 }

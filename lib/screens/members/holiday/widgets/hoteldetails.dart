@@ -54,6 +54,7 @@ class _HotelDetailsState extends State<HotelDetails> {
           ],
         ),
         ksizedbox10,
+        holidayPackageController.getPackageDetailsData.isEmpty ? const Center(child: Text("No Data Found"),) :
         HtmlContentViewer(
                         htmlContent: holidayPackageController.getPackageDetailsData.first.description,
                         initialContentHeight:

@@ -29,6 +29,7 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    holidayPackageController.packageDetails(packageid: widget.packageId);
     profileController.getProfile();
     holidayPackageController.adult(0);
     holidayPackageController.child(0);
@@ -441,7 +442,7 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                         Row(
                           children: [
                             Icon(Icons.punch_clock_sharp,color: kOrange,),
-                            Text('Duration :6 Nights & 7 Days',
+                           holidayPackageController.getPackageDetailsData.isEmpty ? Text("") : Text(holidayPackageController.getPackageDetailsData.first.duration,
                           style: TextStyle(
                           fontSize: 18.sp, 
                           color: Colors.black,

@@ -113,7 +113,9 @@ class liqor_brands extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  InkWell(onTap: (){Get.to( wine_screen());},
+                  InkWell(onTap: (){
+                    //Get.to( LiquorListScreen());
+                    },
                     child: Container(
                       height: 150,
                       child: Stack(
@@ -151,7 +153,7 @@ class liqor_brands extends StatelessWidget {
                     ),
                   ),
                   InkWell(onTap: () {
-                    Get.to( wine_screen());
+                    //Get.to( LiquorListScreen());
                   },
                     child: Container(
                       height: 150,
@@ -189,7 +191,9 @@ class liqor_brands extends StatelessWidget {
                       ),
                     ),
                   ),
-                  InkWell(onTap: (){Get.to( wine_screen());},
+                  InkWell(onTap: (){
+                    //Get.to( LiquorListScreen());
+                    },
                     child: Container(
                       height: 150,
                       child: Stack(
@@ -239,7 +243,9 @@ class liqor_brands extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                     ),
-                    InkWell(onTap: (){Get.to( wine_screen());},
+                    InkWell(onTap: (){
+                      //Get.to( LiquorListScreen());
+                      },
                       child: Text(
                         'See ALL',
                         style: TextStyle(fontWeight: FontWeight.w700),
@@ -252,12 +258,16 @@ class liqor_brands extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  InkWell(onTap: (){Get.to( wine_screen());},
+                  InkWell(onTap: (){
+                    //Get.to( LiquorListScreen());
+                    },
                     child: Wine_widget(
                       wineimg: 'assets/images/Layer 3442.png',
                     ),
                   ),
-                  InkWell(onTap: (){Get.to(Get.to( wine_screen()));},
+                  InkWell(onTap: (){
+                   // Get.to(Get.to( LiquorListScreen()));
+                    },
                     child: Wine_widget(
                       wineimg: 'assets/images/59_Barefoot-Cellars-California-Chardonnay-750ml.png',
                     ),

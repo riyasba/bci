@@ -1,23 +1,25 @@
+import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/screens/members/liquer_screen/widget/add_buttton.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
 import 'cart_screen.dart';
 
-class Add_cart extends StatefulWidget {
-  const Add_cart({super.key});
+class LiquorDetailScreen extends StatefulWidget {
+  SearchServiceListData searchServicelist;
+  LiquorDetailScreen({super.key,required this.searchServicelist});
 
   @override
-  State<Add_cart> createState() => _Add_cartState();
+  State<LiquorDetailScreen> createState() => _LiquorDetailScreenState();
 }
 
-class _Add_cartState extends State<Add_cart> {
+class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
+
+  final homeController = Get.find<HomeController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,11 +33,14 @@ class _Add_cartState extends State<Add_cart> {
                 fit: BoxFit.cover,
               )),
           Positioned(
-              right: 1,
+              right: 10,
               top: -100,
-              child: Image.asset(
-                'assets/images/23456.png',
-                height: 500,
+              child: Image.network(
+                widget.searchServicelist.image,
+                //'assets/images/23456.png',
+                height: 400,
+                width: 100,
+                fit: BoxFit.fill,
               )),
           Padding(
             padding: const EdgeInsets.all(13.0),
@@ -43,8 +48,8 @@ class _Add_cartState extends State<Add_cart> {
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'CHARDONNAY',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
+                  widget.searchServicelist.title,
+                  style:const TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
                 ),
                 ksizedbox10,
                 Text(
@@ -120,7 +125,7 @@ class _Add_cartState extends State<Add_cart> {
                 ),
                 ksizedbox10,
                 Text(
-                  'Packing big, bold flavor with a smooth finish, Barefoot Chardonnay brings tempting flavors to every bottle, with notes of crisp, green apples and sweet peaches. Accented with hints of honey and vanilla, our medium-bodied Chardonnay pairs perfectly with fresh fruit, pasta, chicken, and salmon.',
+                  widget.searchServicelist.description,
                   style: TextStyle(fontSize: 11, color: kgrey),
                 ),
                 ksizedbox20,
@@ -138,7 +143,12 @@ class _Add_cartState extends State<Add_cart> {
                   padding: const EdgeInsets.all(15.0),
                   child: InkWell(
                     onTap: () {
-                      Get.to(CartScreen());
+                      //Get.to(CartScreen());
+                      homeController.addToCart(
+                                        amount:
+                                            widget.searchServicelist.saleAmount,
+                                        serviceid: widget.searchServicelist.id
+                                            .toString());
                     },
                     child: Container(
                       child: Row(
@@ -146,7 +156,7 @@ class _Add_cartState extends State<Add_cart> {
                         children: [
                           kwidth5,
                           Text(
-                            'Total - ₹ 16.80',
+                            'Total - ₹ ${widget.searchServicelist.saleAmount}',
                             style: TextStyle(color: kwhite, fontSize: 18),
                           ),
                           Padding(

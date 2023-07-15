@@ -115,5 +115,11 @@ abstract class BaseApiService {
 
   final String generateReferralCodeApiUrl = "https://bci.generation360tech.in/api/auth/generateReferralCode";
 
-  final recomendedListApiUrl = "https://bci.generation360tech.in/api/auth/recomended_list";
+  final String recomendedListApiUrl = "https://bci.generation360tech.in/api/auth/recomended_list";
+
+  final String ourPartnersApiUrl = "https://bci.generation360tech.in/api/getpartners";
+
+  //liquors api
+  final getVendorByCategory = "https://bci.generation360tech.in/api/auth/getVendorsByCategory";
+
 }

@@ -165,6 +165,24 @@ class HolidayPackageController extends GetxController{
   RecomendedListApiServices recomendedListApiServices = RecomendedListApiServices();
   List<RecomendedListData> recomendedListData = [];
 
+  recomended() async {
+
+    dio.Response<dynamic> response = await recomendedListApiServices.recomendedListApiServices();
+    if(response.statusCode == 200){
+      RecomendedList recomendedList = RecomendedList.fromJson(response.data);
+      recomendedListData = recomendedList.data;
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+ 
+  }
+
   
 
 }

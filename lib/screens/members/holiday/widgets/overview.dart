@@ -68,157 +68,157 @@ class _OverviewWidgetState extends State<OverviewWidget> {
                           ),
               if(holidayPackageController.getPackageDetailsData.isNotEmpty)
               ksizedbox20,
-              Row(
-                children: [
-                  Text(
-                    'Flight Detail',
-                    style: TextStyle(
-                        fontSize: 18.sp,
-                        color: kblue,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  kwidth10,
-                  Expanded(
-                    child: Container(
-                      width: size.width,
-                      child: const Divider(
-                        thickness: 0.5,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 0, top: 10),
-                child: Container(
-                  height: 120,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                  ),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 40,
-                        width: size.width,
-                        color: Colors.orange,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              'Sector',
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              'Airline',
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              'Departure Time',
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              'Arrival Time',
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 30,
-                        width: size.width,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              'DEL-MRU',
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              'MK745',
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              '08:00',
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              '14:00',
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Divider(
-                        color: Colors.black,
-                        thickness: 1,
-                      ),
-                      Container(
-                        height: 30,
-                        width: size.width,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              'DEL-MRU',
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              'MK745',
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              '08:00',
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              '14:00',
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // Row(
+              //   children: [
+              //     Text(
+              //       'Flight Detail',
+              //       style: TextStyle(
+              //           fontSize: 18.sp,
+              //           color: kblue,
+              //           fontWeight: FontWeight.w500),
+              //     ),
+              //     kwidth10,
+              //     Expanded(
+              //       child: Container(
+              //         width: size.width,
+              //         child: const Divider(
+              //           thickness: 0.5,
+              //           color: Colors.black,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 0, top: 10),
+              //   child: Container(
+              //     height: 120,
+              //     width: size.width,
+              //     decoration: BoxDecoration(
+              //       border: Border.all(color: Colors.black),
+              //     ),
+              //     child: Column(
+              //       children: [
+              //         Container(
+              //           height: 40,
+              //           width: size.width,
+              //           color: Colors.orange,
+              //           child: Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //             children: [
+              //               Text(
+              //                 'Sector',
+              //                 style: TextStyle(
+              //                     fontSize: 15.sp,
+              //                     color: Colors.white,
+              //                     fontWeight: FontWeight.w500),
+              //               ),
+              //               Text(
+              //                 'Airline',
+              //                 style: TextStyle(
+              //                     fontSize: 15.sp,
+              //                     color: Colors.white,
+              //                     fontWeight: FontWeight.w500),
+              //               ),
+              //               Text(
+              //                 'Departure Time',
+              //                 style: TextStyle(
+              //                     fontSize: 15.sp,
+              //                     color: Colors.white,
+              //                     fontWeight: FontWeight.w500),
+              //               ),
+              //               Text(
+              //                 'Arrival Time',
+              //                 style: TextStyle(
+              //                     fontSize: 15.sp,
+              //                     color: Colors.white,
+              //                     fontWeight: FontWeight.w500),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //         Container(
+              //           height: 30,
+              //           width: size.width,
+              //           child: Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //             children: [
+              //               Text(
+              //                 'DEL-MRU',
+              //                 style: TextStyle(
+              //                     fontSize: 15.sp,
+              //                     color: kblue,
+              //                     fontWeight: FontWeight.w400),
+              //               ),
+              //               Text(
+              //                 'MK745',
+              //                 style: TextStyle(
+              //                     fontSize: 15.sp,
+              //                     color: kblue,
+              //                     fontWeight: FontWeight.w400),
+              //               ),
+              //               Text(
+              //                 '08:00',
+              //                 style: TextStyle(
+              //                     fontSize: 15.sp,
+              //                     color: kblue,
+              //                     fontWeight: FontWeight.w400),
+              //               ),
+              //               Text(
+              //                 '14:00',
+              //                 style: TextStyle(
+              //                     fontSize: 15.sp,
+              //                     color: kblue,
+              //                     fontWeight: FontWeight.w400),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //         const Divider(
+              //           color: Colors.black,
+              //           thickness: 1,
+              //         ),
+              //         Container(
+              //           height: 30,
+              //           width: size.width,
+              //           child: Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //             children: [
+              //               Text(
+              //                 'DEL-MRU',
+              //                 style: TextStyle(
+              //                     fontSize: 15.sp,
+              //                     color: kblue,
+              //                     fontWeight: FontWeight.w400),
+              //               ),
+              //               Text(
+              //                 'MK745',
+              //                 style: TextStyle(
+              //                     fontSize: 15.sp,
+              //                     color: kblue,
+              //                     fontWeight: FontWeight.w400),
+              //               ),
+              //               Text(
+              //                 '08:00',
+              //                 style: TextStyle(
+              //                     fontSize: 15.sp,
+              //                     color: kblue,
+              //                     fontWeight: FontWeight.w400),
+              //               ),
+              //               Text(
+              //                 '14:00',
+              //                 style: TextStyle(
+              //                     fontSize: 15.sp,
+              //                     color: kblue,
+              //                     fontWeight: FontWeight.w400),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               ksizedbox20,
               Row(
                 children: [

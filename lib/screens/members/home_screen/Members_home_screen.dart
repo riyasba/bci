@@ -281,7 +281,7 @@ class _Home_screen1State extends State<Home_screen1> {
                         //
                         InkWell(
                           onTap: () {
-                            Get.to(const liquer_screen());
+                            Get.to(const LiquorScreen());
                           },
                           child: Column(
                             children: [

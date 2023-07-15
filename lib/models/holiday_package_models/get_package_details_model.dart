@@ -33,6 +33,7 @@ class GetPackageDetailsData {
     String vendorId;
     String categoryId;
     String title;
+    dynamic location;
     String description;
     String image;
     String inclusion;
@@ -54,6 +55,7 @@ class GetPackageDetailsData {
         required this.vendorId,
         required this.categoryId,
         required this.title,
+        this.location,
         required this.description,
         required this.image,
         required this.inclusion,
@@ -76,6 +78,7 @@ class GetPackageDetailsData {
         vendorId: json["vendor_id"]?? "",
         categoryId: json["category_id"]?? "",
         title: json["title"]?? "",
+        location: json["location"]?? "",
         description: json["description"]?? "",
         image: json["image"]?? "",
         inclusion: json["inclusion"]?? "",
@@ -98,6 +101,7 @@ class GetPackageDetailsData {
         "vendor_id": vendorId,
         "category_id": categoryId,
         "title": title,
+        "location": location,
         "description": description,
         "image": image,
         "inclusion": inclusion,
