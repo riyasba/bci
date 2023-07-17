@@ -99,7 +99,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                     const Padding(
                       padding: EdgeInsets.only(left: 0, right: 20),
                       child: Text(
-                        'Add Services',
+                        'Add Products',
                         style:
                             TextStyle(fontSize: 22, color: Color(0xffF8F9FD)),
                       ),
@@ -142,7 +142,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
-                  hintText: "Service title",
+                  hintText: "Product title",
                   hintStyle: TextStyle(
                     color: kblue,
                     fontWeight: FontWeight.w400,

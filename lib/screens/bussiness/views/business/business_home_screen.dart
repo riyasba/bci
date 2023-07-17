@@ -276,19 +276,19 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Get.to(const AvailabilityScreen());
-                  },
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Image.asset('assets/images/availability.png'),
-                        const Text('Availability\n')
-                      ],
-                    ),
-                  ),
-                ),
+                // InkWell(
+                //   onTap: () {
+                //     Get.to(const AvailabilityScreen());
+                //   },
+                //   child: Container(
+                //     child: Column(
+                //       children: [
+                //         Image.asset('assets/images/availability.png'),
+                //         const Text('Availability\n')
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 InkWell(
                   onTap: () {
                     Get.to(const MyAccountScreen());
@@ -302,6 +302,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     ),
                   ),
                 ),
+                Container(width: 90,),
                 // InkWell(
                 //   onTap: () {},
                 //   child: Container(

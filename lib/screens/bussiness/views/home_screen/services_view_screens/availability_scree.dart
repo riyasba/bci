@@ -113,7 +113,7 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  'Your Services',
+                  'Your Products',
                   style: TextStyle(
                     fontSize: 22,
                     color: kblue,
@@ -240,7 +240,7 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                           Padding(
                             padding: const EdgeInsets.only(left: 5),
                             child: Text(
-                              'Add Service',
+                              'Add Product',
                               style: TextStyle(fontSize: 18, color: kOrange),
                             ),
                           ),
@@ -282,7 +282,7 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                         dropdownColor: Colors.grey[250],
                         style: const TextStyle(color: Colors.black54),
                         hint: Text(
-                          "All Services",
+                          "All Products",
                           style: TextStyle(fontSize: 16, color: kblue),
                         ),
                         onChanged: (CategoryList? value) {
