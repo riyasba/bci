@@ -161,7 +161,7 @@ class FlightsController extends GetxController {
     if (response.statusCode == 200) {
       airReprint(refernceNo: refernceNo);
       Get.rawSnackbar(
-          message: "Payment Added Success", backgroundColor: Colors.red);
+          message: "Payment Added Success", backgroundColor: Colors.green);
     } else {}
   }
 

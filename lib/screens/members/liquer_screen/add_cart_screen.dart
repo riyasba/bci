@@ -23,6 +23,52 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar:PreferredSize(
+        preferredSize:const Size.fromHeight(250),
+        child: ClipPath(
+          clipper: SinCosineWaveClipper(),
+          child: Container(
+            height: 150,
+            color: kblue,
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                      onTap: (){
+                        Get.back();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Icon(Icons.arrow_back_ios,color: kwhite,),
+                      )
+                      ),
+                    const Padding(
+                    padding: EdgeInsets.only(right: 0),
+                    child: Text(
+                      'Wine',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Get.to(NotificationScreen());
+                    },
+                    icon: Icon(
+                      Icons.notifications,
+                      color: kwhite,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
       body: Stack(
         children: [
           Container(
@@ -97,17 +143,14 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
              Column(
                crossAxisAlignment: CrossAxisAlignment.start,
                children: [
-              Positioned(
-                right: 10,
-                top: -100,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Image.network(widget.searchServicelist.image,
-                  height: 250,
-                  width: 150,
-                  fit: BoxFit.fill,
-                              ),
-                )),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Image.network(widget.searchServicelist.image,
+                height: 250,
+                width: 150,
+                fit: BoxFit.fill,
+                            ),
+              ),
                       ],
                     )
                   ],
@@ -210,52 +253,7 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
         ],
       ),
       // backgroundColor: kwhite,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(250),
-        child: ClipPath(
-          clipper: SinCosineWaveClipper(),
-          child: Container(
-            height: 150,
-            color: kblue,
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                      onTap: (){
-                        Get.back();
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Icon(Icons.arrow_back_ios,color: kwhite,),
-                      )
-                      ),
-                    const Padding(
-                    padding: EdgeInsets.only(right: 0),
-                    child: Text(
-                      'Wine',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Get.to(NotificationScreen());
-                    },
-                    icon: Icon(
-                      Icons.notifications,
-                      color: kwhite,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
+      
     );
   }
 }
