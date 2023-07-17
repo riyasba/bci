@@ -6,6 +6,7 @@
    <application
         tools:replace="android:label"
         android:label="BCI Member"
+        android:requestLegacyExternalStorage="true"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

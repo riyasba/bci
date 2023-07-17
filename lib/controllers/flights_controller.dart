@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:permission_handler/permission_handler.dart';
@@ -40,6 +41,7 @@ class FlightsController extends GetxController {
   RxBool isreturnDateDateSelected = false.obs;
 
   RxBool isLoading = false.obs;
+  RxBool isLoading2 = false.obs;
 
   AirSearchApiServices airSearchApiServices = AirSearchApiServices();
   AirportSearchApiServices airportSearchApiServices =
@@ -90,13 +92,18 @@ class FlightsController extends GetxController {
   //air search flight list
   List<Flight> flightList = [];
 
-  airSearch({required FlightSearchDataModel flightSearchModel}) async {
+  airSearch(
+      {required FlightSearchDataModel flightSearchModel,
+      String airlineCode = ""}) async {
     isLoading(true);
+    isLoading2(true);
     flightList.clear();
     String seachKey = "";
-    dio.Response<dynamic> response = await airSearchApiServices
-        .airSearchApiServices(flightSearchModel: flightSearchModel);
+    dio.Response<dynamic> response =
+        await airSearchApiServices.airSearchApiServices(
+            flightSearchModel: flightSearchModel, airlineCode: airlineCode);
     isLoading(false);
+    isLoading2(false);
     if (response.data["Response_Header"]["Error_Code"] == "0000") {
       AirSearchModel airSearchModel = AirSearchModel.fromJson(response.data);
       flightList = airSearchModel.tripDetails.first.flights;
@@ -147,8 +154,9 @@ class FlightsController extends GetxController {
   }
 
   airAddPayment({required String refernceNo}) async {
-    dio.Response<dynamic> response = await airAddPaymentApiServices
-        .addPaymentApiServices(clientReferneNo: "", refrenceNo: refernceNo);
+    dio.Response<dynamic> response =
+        await airAddPaymentApiServices.addPaymentApiServices(
+            clientReferneNo: "Testing Team", refrenceNo: refernceNo);
 
     if (response.statusCode == 200) {
       airReprint(refernceNo: refernceNo);
@@ -214,423 +222,534 @@ class FlightsController extends GetxController {
   }
 
   //flight ticket pdf
-  Future<void> downloadFlightTicketInvoice() async {
+  Future<void> downloadFlightTicketInvoice(
+      AirReprintModel airReprintModel) async {
     final pdf = pw.Document();
 
-    pdf.addPage(
-      pw.Page(
-        build: (pw.Context context) => pw.Center(
-          child: pw.Column(
-            children: [
-               pw.Center(
-                child:pw.Text("Plane Ticket Purchase",
-              style: pw.TextStyle(
-                fontSize: 18,
-                fontWeight: pw.FontWeight.bold
-                ),)),
-                pw.SizedBox(height: 10,),
-                pw.Divider(thickness: 1.2,),
-                pw.Text("Booking Date",
-                style: pw.TextStyle(
-                fontSize: 13,
-                fontWeight:pw.FontWeight.bold
-                ),),
-                pw.SizedBox(height: 5,),
-                pw.Text("Saturday, December 3,2022",
-                style: pw.TextStyle(
-                fontSize: 11,
-                color: PdfColors.grey,
-                ),),
-                pw.SizedBox(height: 10,),
-                pw.Text("Guest Name",
-                style: pw.TextStyle(
-                fontSize: 13,
-                fontWeight: pw.FontWeight.bold
-                ),),
-                pw.SizedBox(height: 5,),
-                pw.Text("Miss Stephane Celine Linden",
-                style: pw.TextStyle(
-                fontSize: 11,
-                color: PdfColors.grey,
-                ),),
-                pw.Divider(thickness: 1.2,),
-                pw.SizedBox(height: 10,),
-                pw.Text("Flight Details",
-                style: pw.TextStyle(
-                fontSize: 14,
-                fontWeight:pw.FontWeight.bold
-                ),),
-                pw.SizedBox(height: 5,),
-                pw.Text("Route",
-                style: pw.TextStyle(
-                fontSize: 12,
-                color: PdfColors.grey,
-                ),),
-                pw.Divider(thickness: 1.2,),
-                //from
-                pw.Row(
-                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  children: [
-                    pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text("From",
-                            style: pw.TextStyle(
-                            fontSize: 11,
-                            fontWeight: pw.FontWeight.bold
-                          ),),
-                          pw.SizedBox(height: 4,),
-                        pw.Text("New York",
-                            style:pw.TextStyle(
-                            fontSize: 10,
-                            color: PdfColors.grey,
-                          ),),
-                      ],
-                    ),
-                    pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text("Airline",
-                            style: pw.TextStyle(
-                            fontSize: 11,
-                            fontWeight: pw.FontWeight.bold
-                          ),),
-                          pw.SizedBox(height: 4,),
-                        pw.Text("ACME Airlines",
-                            style: pw.TextStyle(
-                            fontSize: 10,
-                            color: PdfColors.grey,
-                          ),),
-                      ],
-                    ),
-                    pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text("Departure Date",
-                            style: pw.TextStyle(
-                            fontSize: 11,
-                            fontWeight: pw.FontWeight.bold
-                          ),),
-                          pw.SizedBox(height: 4,),
-                        pw.Text("Tuesday,\nDecember 20,\n2022 06:30",
-                            style: pw.TextStyle(
-                            fontSize: 10,
-                            color: PdfColors.grey,
-                          ),),
-                      ],
-                    ),
-                    pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text("Arrival Date",
-                            style: pw.TextStyle(
-                            fontSize: 11,
-                            fontWeight: pw.FontWeight.bold
-                          ),),
-                          pw.SizedBox(height: 4,),
-                        pw.Text("Tuesday,\nDecember 6,\n2022 23:30",
-                            style: pw.TextStyle(
-                            fontSize: 10,
-                            color: PdfColors.grey,
-                          ),),
-                      ],
-                    ),
-                  ],
-                ),
-                //to
-                pw.Padding(
-                  padding: pw.EdgeInsets.only(left: 30,right: 30,top: 10),
-                  child: pw.Divider(thickness: 1.2,),
-                ),
-                pw.SizedBox(height: 10,),
-                 pw.Row(
-                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  children: [
-                    pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text("To",
-                            style: pw.TextStyle(
-                            fontSize: 11,
-                            fontWeight: pw.FontWeight.bold
-                          ),),
-                          pw.SizedBox(height: 4,),
-                        pw.Text("London",
-                            style: pw.TextStyle(
-                            fontSize: 10,
-                            color: PdfColors.grey,
-                          ),),
-                      ],
-                    ),
-                    pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text("Flight Number",
-                            style: pw.TextStyle(
-                            fontSize: 11,
-                            fontWeight: pw.FontWeight.bold
-                          ),),
-                          pw.SizedBox(height: 4,),
-                        pw.Text("AA7755",
-                            style: pw.TextStyle(
-                            fontSize: 10,
-                            color: PdfColors.grey,
-                          ),),
-                      ],
-                    ),
-                    pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text("Departure Terminal",
-                            style: pw.TextStyle(
-                            fontSize: 11,
-                            fontWeight: pw.FontWeight.bold
-                          ),),
-                          pw.SizedBox(height: 4,),
-                        pw.Text("Terminal 1",
-                            style: pw.TextStyle(
-                            fontSize: 10,
-                            color: PdfColors.grey,
-                          ),),
-                      ],
-                    ),
-                    pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text("Arrival Terminal",
-                            style: pw.TextStyle(
-                            fontSize: 11,
-                            fontWeight: pw.FontWeight.bold
-                          ),),
-                          pw.SizedBox(height: 4,),
-                        pw.Text("Terminal 5",
-                            style: pw.TextStyle(
-                            fontSize: 10,
-                            color: PdfColors.grey,
-                          ),),
-                      ],
-                    ),
-                  ],
-                ),
-                pw.Padding(
-                  padding: pw.EdgeInsets.only(left: 30,right: 30,top: 10),
-                  child: pw.Divider(thickness: 1.2,),
-                ),
-                //class
-                pw.SizedBox(height: 10,),
-                pw.Row(
-                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  children: [
-                    pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text("Seat Class",
-                            style: pw.TextStyle(
-                            fontSize: 11,
-                            fontWeight: pw.FontWeight.bold
-                          ),),
-                          pw.SizedBox(height: 4,),
-                        pw.Container(
-                          height: 20,
-                          width: 80,
-                          decoration: pw.BoxDecoration(
-                            color: PdfColors.blueAccent100,
-                            borderRadius: pw.BorderRadius.circular(3),
-                          ),
-                          child: pw.Center(
-                            child: pw.Text("Business Class",style: pw.TextStyle(fontSize: 10),),
-                          ),
-                        ),
-                      ],
-                    ),
-                    pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text("Extra Baggage Allowance",
-                            style: pw.TextStyle(
-                            fontSize: 11,
-                            fontWeight: pw.FontWeight.bold
-                          ),),
-                          pw.SizedBox(height: 4,),
-                        pw.Container(
-                          height: 20,
-                          width: 20,
-                          decoration: pw.BoxDecoration(
-                            color: PdfColors.blueAccent100,
-                            borderRadius: pw.BorderRadius.circular(3),
-                          ),
-                          child: pw.Center(
-                            child: pw.Text("8",style: pw.TextStyle(fontSize: 10),),
-                          ),
-                        ),
-                      ],
-                    ),
-                    pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text("Seat Number",
-                            style: pw.TextStyle(
-                            fontSize: 11,
-                            fontWeight: pw.FontWeight.bold
-                          ),),
-                            pw.SizedBox(height: 4,),
-                        pw.Text("3-A",
-                            style: pw.TextStyle(
-                            fontSize: 10,
-                            color: PdfColors.grey,
-                          ),),
-                      ],
-                    ),
-                  ],
-                ),
-                pw.Padding(
-                  padding:  pw.EdgeInsets.only(top: 10,bottom: 10),
-                  child:  pw.Divider(thickness: 1.2,),
-                ),
-                //fare breakdown
-                  pw.Text("Fare  Breakdown",
-                style: pw.TextStyle(
-                fontSize: 14,
-                fontWeight: pw.FontWeight.bold
-                ),),
-                 pw.Padding(
-                  padding: pw.EdgeInsets.only(left: 0,top: 10),
-                  child: pw.Row(
-                    children: [
-                       pw.Column(
-                        crossAxisAlignment: pw.CrossAxisAlignment.start,
-                        children: [
-                          pw.Text("Base Fare",
-                              style: pw.TextStyle(
-                              fontSize: 11,
-                              fontWeight: pw.FontWeight.bold
-                            ),),
-                              pw.SizedBox(height: 10,),
-                          pw.Text("Passenger Service Charge",
-                              style: pw.TextStyle(
-                              fontSize: 11,
-                              fontWeight: pw.FontWeight.bold
-                            ),),
-                              pw.SizedBox(height: 10,),
-                          pw.Text("Surcharge",
-                              style: pw.TextStyle(
-                              fontSize: 11,
-                              fontWeight: pw.FontWeight.bold
-                            ),),
-                              pw.SizedBox(height: 10,),
-                          pw.Text("Fuel/Insurance Surcharge",
-                              style: pw.TextStyle(
-                              fontSize: 11,
-                              fontWeight: pw.FontWeight.bold
-                            ),),
-                              pw.SizedBox(height: 10,),
-                          pw.Text("Ticketing Service Charge",
-                              style: pw.TextStyle(
-                              fontSize: 11,
-                              fontWeight: pw.FontWeight.bold
-                            ),),
-                        ],
-                      ),
-                      //
-                      pw.SizedBox(height: 30,),
-                      pw.Column(
-                        crossAxisAlignment: pw.CrossAxisAlignment.start,
-                        children: [
-                          pw.Text(":     ₹ 100.00",
-                              style: pw.TextStyle(
-                              fontSize: 11,
-                              fontWeight: pw.FontWeight.bold,
-                              color: PdfColors.grey,
-                            ),),
-                              pw.SizedBox(height: 10,),
-                          pw.Text(":     ₹ 0.00",
-                              style: pw.TextStyle(
-                              fontSize: 11,
-                              fontWeight: pw.FontWeight.bold,
-                              color: PdfColors.grey,
-                            ),),
-                              pw.SizedBox(height: 10,),
-                          pw.Text(":     ₹ 80.00",
-                              style: pw.TextStyle(
-                              fontSize: 11,
-                              fontWeight: pw.FontWeight.bold,
-                              color: PdfColors.grey,
-                            ),),
-                              pw.SizedBox(height: 10,),
-                          pw.Text(":     ₹ 30.00",
-                              style: pw.TextStyle(
-                              fontSize: 11,
-                              fontWeight: pw.FontWeight.bold,
-                              color: PdfColors.grey,
-                            ),),
-                              pw.SizedBox(height: 10,),
-                          pw.Text(":     ₹ 5.00",
-                              style: pw.TextStyle(
-                              fontSize: 11,
-                              fontWeight: pw.FontWeight.bold,
-                              color: PdfColors.grey,
-                            ),),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                pw.Padding(
-                  padding: pw.EdgeInsets.only(left: 0,right: 50,top: 5,bottom: 10),
-                  child: pw.Divider(thickness: 1.2,),
-                ),
-                pw.Row(
-                 children: [
-                   pw.Column(
-                     crossAxisAlignment: pw.CrossAxisAlignment.start,
-                     children: [
-                           pw.Text("Total Amount",
-                             style: pw.TextStyle(
-                             fontSize: 11,
-                             fontWeight: pw.FontWeight.bold
-                           ),),
-                     ],
-                   ),
-                   pw.Padding(
-                     padding: pw.EdgeInsets.only(left: 93),
-                     child: pw.Column(
-                       children: [
-                         pw.Text(":     ₹ 215.00",
-                               style: pw.TextStyle(
-                               fontSize: 11,
-                               fontWeight: pw.FontWeight.bold,
-                               color: PdfColors.grey,
-                             ),),
-                       ],
-                     ),
-                   ),
-                 ],
-               ),
-                  pw.Padding(
-                  padding: pw.EdgeInsets.only(left: 0,right: 50,top: 10,bottom: 10),
-                  child: pw.Divider(thickness: 1.2,),
-                ),
-                //last
-                 pw.Text("Important Information",
-                style: pw.TextStyle(
-                fontSize: 13,
-                fontWeight: pw.FontWeight.bold
-                ),),
-                pw.SizedBox(height: 10,),
-                pw.Text("The Indian rupee is the official currency in the Republic of India. The rupee is subdivided into 100 paise. The issuance of the currency is controlled by the Reserve Bank of India.",
-                style: pw.TextStyle(
-                fontSize: 11,
-                color: PdfColors.grey,
-                ),),
-            ]
+    pdf.addPage(pw.Page(
+      build: (pw.Context context) => pw.Center(
+        child: pw.Column(children: [
+          pw.Center(
+              child: pw.Text(
+            "Plane Ticket Purchase",
+            style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold),
+          )),
+          pw.SizedBox(
+            height: 10,
           ),
-        ),
-      ));
+          pw.Divider(
+            thickness: 1.2,
+          ),
+          pw.Text(
+            "Booking Date",
+            style: pw.TextStyle(fontSize: 13, fontWeight: pw.FontWeight.bold),
+          ),
+          pw.SizedBox(
+            height: 5,
+          ),
+          pw.Text(
+            "${airReprintModel.bookingDateTime}",
+            style: pw.TextStyle(
+              fontSize: 11,
+              color: PdfColors.grey,
+            ),
+          ),
+          pw.SizedBox(
+            height: 10,
+          ),
+          pw.Text(
+            "Guest Name",
+            style: pw.TextStyle(fontSize: 13, fontWeight: pw.FontWeight.bold),
+          ),
+          pw.SizedBox(
+            height: 5,
+          ),
+          pw.Text(
+            "${airReprintModel.customerDetail.customerName}",
+            style: pw.TextStyle(
+              fontSize: 11,
+              color: PdfColors.grey,
+            ),
+          ),
+          pw.Divider(
+            thickness: 1.2,
+          ),
+          pw.SizedBox(
+            height: 10,
+          ),
+          pw.Text(
+            "Flight Details",
+            style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold),
+          ),
+          pw.SizedBox(
+            height: 5,
+          ),
+          pw.Text(
+            "Route",
+            style: pw.TextStyle(
+              fontSize: 12,
+              color: PdfColors.grey,
+            ),
+          ),
+          pw.Divider(
+            thickness: 1.2,
+          ),
+          //from
+          pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "From",
+                    style: pw.TextStyle(
+                        fontSize: 11, fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 4,
+                  ),
+                  pw.Text(
+                    airReprintModel.airPnrDetails.first.flights.first.origin,
+                    style: pw.TextStyle(
+                      fontSize: 10,
+                      color: PdfColors.grey,
+                    ),
+                  ),
+                ],
+              ),
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "Airline",
+                    style: pw.TextStyle(
+                        fontSize: 11, fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 4,
+                  ),
+                  pw.Text(
+                    "${airReprintModel.airPnrDetails.first.flights.first.airlineCode}",
+                    style: pw.TextStyle(
+                      fontSize: 10,
+                      color: PdfColors.grey,
+                    ),
+                  ),
+                ],
+              ),
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "Departure Date",
+                    style: pw.TextStyle(
+                        fontSize: 11, fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 4,
+                  ),
+                  pw.Text(
+                    "${airReprintModel.airPnrDetails.first.flights.first.travelDate}",
+                    style: pw.TextStyle(
+                      fontSize: 10,
+                      color: PdfColors.grey,
+                    ),
+                  ),
+                ],
+              ),
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "Arrival Date",
+                    style: pw.TextStyle(
+                        fontSize: 11, fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 4,
+                  ),
+                  pw.Text(
+                    "",
+                    style: pw.TextStyle(
+                      fontSize: 10,
+                      color: PdfColors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          //to
+          pw.Padding(
+            padding: pw.EdgeInsets.only(left: 30, right: 30, top: 10),
+            child: pw.Divider(
+              thickness: 1.2,
+            ),
+          ),
+          pw.SizedBox(
+            height: 10,
+          ),
+          pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "To",
+                    style: pw.TextStyle(
+                        fontSize: 11, fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 4,
+                  ),
+                  pw.Text(
+                    "${airReprintModel.airPnrDetails.first.flights.first.destination}",
+                    style: pw.TextStyle(
+                      fontSize: 10,
+                      color: PdfColors.grey,
+                    ),
+                  ),
+                ],
+              ),
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "Flight Number",
+                    style: pw.TextStyle(
+                        fontSize: 11, fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 4,
+                  ),
+                  pw.Text(
+                    "${airReprintModel.airPnrDetails.first.flights.first.flightNumbers ?? ""}",
+                    style: pw.TextStyle(
+                      fontSize: 10,
+                      color: PdfColors.grey,
+                    ),
+                  ),
+                ],
+              ),
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "Departure Terminal",
+                    style: pw.TextStyle(
+                        fontSize: 11, fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 4,
+                  ),
+                  pw.Text(
+                    "Terminal 1",
+                    style: pw.TextStyle(
+                      fontSize: 10,
+                      color: PdfColors.grey,
+                    ),
+                  ),
+                ],
+              ),
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "Arrival Terminal",
+                    style: pw.TextStyle(
+                        fontSize: 11, fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 4,
+                  ),
+                  pw.Text(
+                    "",
+                    style: pw.TextStyle(
+                      fontSize: 10,
+                      color: PdfColors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          pw.Padding(
+            padding: pw.EdgeInsets.only(left: 30, right: 30, top: 10),
+            child: pw.Divider(
+              thickness: 1.2,
+            ),
+          ),
+          //class
+          pw.SizedBox(
+            height: 10,
+          ),
+          pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "Seat Class",
+                    style: pw.TextStyle(
+                        fontSize: 11, fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 4,
+                  ),
+                  pw.Container(
+                    height: 20,
+                    width: 80,
+                    decoration: pw.BoxDecoration(
+                      color: PdfColors.blueAccent100,
+                      borderRadius: pw.BorderRadius.circular(3),
+                    ),
+                    child: pw.Center(
+                      child: pw.Text(
+                        "Business Class",
+                        style: pw.TextStyle(fontSize: 10),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "Extra Baggage Allowance",
+                    style: pw.TextStyle(
+                        fontSize: 11, fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 4,
+                  ),
+                  pw.Container(
+                    height: 20,
+                    width: 20,
+                    decoration: pw.BoxDecoration(
+                      color: PdfColors.blueAccent100,
+                      borderRadius: pw.BorderRadius.circular(3),
+                    ),
+                    child: pw.Center(
+                      child: pw.Text(
+                        "${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.freeBaggage}",
+                        style: pw.TextStyle(fontSize: 10),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "Seat Number",
+                    style: pw.TextStyle(
+                        fontSize: 11, fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 4,
+                  ),
+                  pw.Text(
+                    "",
+                    style: pw.TextStyle(
+                      fontSize: 10,
+                      color: PdfColors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          pw.Padding(
+            padding: pw.EdgeInsets.only(top: 10, bottom: 10),
+            child: pw.Divider(
+              thickness: 1.2,
+            ),
+          ),
+          //fare breakdown
+          pw.Text(
+            "Fare  Breakdown",
+            style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold),
+          ),
+          pw.Padding(
+            padding: pw.EdgeInsets.only(left: 0, top: 10),
+            child: pw.Row(
+              children: [
+                pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    pw.Text(
+                      "Base Fare",
+                      style: pw.TextStyle(
+                          fontSize: 11, fontWeight: pw.FontWeight.bold),
+                    ),
+                    pw.SizedBox(
+                      height: 10,
+                    ),
+                    pw.Text(
+                      "Passenger Service Charge",
+                      style: pw.TextStyle(
+                          fontSize: 11, fontWeight: pw.FontWeight.bold),
+                    ),
+                    pw.SizedBox(
+                      height: 10,
+                    ),
+                    pw.Text(
+                      "Airport tax",
+                      style: pw.TextStyle(
+                          fontSize: 11, fontWeight: pw.FontWeight.bold),
+                    ),
+                    pw.SizedBox(
+                      height: 10,
+                    ),
+                    // pw.Text(
+                    //   "Fuel/Insurance Surcharge",
+                    //   style: pw.TextStyle(
+                    //       fontSize: 11, fontWeight: pw.FontWeight.bold),
+                    // ),
+                    // pw.SizedBox(
+                    //   height: 10,
+                    // ),
+                    // pw.Text(
+                    //   "Ticketing Service Charge",
+                    //   style: pw.TextStyle(
+                    //       fontSize: 11, fontWeight: pw.FontWeight.bold),
+                    // ),
+                  ],
+                ),
+                //
+                pw.SizedBox(
+                  height: 30,
+                ),
+                pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    pw.Text(
+                      ":     ₹ ${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.basicAmount}",
+                      style: pw.TextStyle(
+                        fontSize: 11,
+                        fontWeight: pw.FontWeight.bold,
+                        color: PdfColors.grey,
+                      ),
+                    ),
+                    pw.SizedBox(
+                      height: 10,
+                    ),
+                    pw.Text(
+                      ":     ₹ ${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.serviceFeeAmount}",
+                      style: pw.TextStyle(
+                        fontSize: 11,
+                        fontWeight: pw.FontWeight.bold,
+                        color: PdfColors.grey,
+                      ),
+                    ),
+                    pw.SizedBox(
+                      height: 10,
+                    ),
+                    pw.Text(
+                      ":     ₹ ${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.airportTaxAmount}",
+                      style: pw.TextStyle(
+                        fontSize: 11,
+                        fontWeight: pw.FontWeight.bold,
+                        color: PdfColors.grey,
+                      ),
+                    ),
+                    pw.SizedBox(
+                      height: 10,
+                    ),
+                    // pw.Text(
+                    //   ":     ₹ 30.00",
+                    //   style: pw.TextStyle(
+                    //     fontSize: 11,
+                    //     fontWeight: pw.FontWeight.bold,
+                    //     color: PdfColors.grey,
+                    //   ),
+                    // ),
+                    // pw.SizedBox(
+                    //   height: 10,
+                    // ),
+                    // pw.Text(
+                    //   ":     ₹ 5.00",
+                    //   style: pw.TextStyle(
+                    //     fontSize: 11,
+                    //     fontWeight: pw.FontWeight.bold,
+                    //     color: PdfColors.grey,
+                    //   ),
+                    // ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          pw.Padding(
+            padding: pw.EdgeInsets.only(left: 0, right: 50, top: 5, bottom: 10),
+            child: pw.Divider(
+              thickness: 1.2,
+            ),
+          ),
+          pw.Row(
+            children: [
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "Total Amount",
+                    style: pw.TextStyle(
+                        fontSize: 11, fontWeight: pw.FontWeight.bold),
+                  ),
+                ],
+              ),
+              pw.Padding(
+                padding: pw.EdgeInsets.only(left: 93),
+                child: pw.Column(
+                  children: [
+                    pw.Text(
+                      ":     ₹ ${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.totalAmount}",
+                      style: pw.TextStyle(
+                        fontSize: 11,
+                        fontWeight: pw.FontWeight.bold,
+                        color: PdfColors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          pw.Padding(
+            padding:
+                pw.EdgeInsets.only(left: 0, right: 50, top: 10, bottom: 10),
+            child: pw.Divider(
+              thickness: 1.2,
+            ),
+          ),
+          //last
+          pw.Text(
+            "Important Information",
+            style: pw.TextStyle(fontSize: 13, fontWeight: pw.FontWeight.bold),
+          ),
+          pw.SizedBox(
+            height: 10,
+          ),
+          pw.Text(
+            "The Indian rupee is the official currency in the Republic of India. The rupee is subdivided into 100 paise. The issuance of the currency is controlled by the Reserve Bank of India.",
+            style: pw.TextStyle(
+              fontSize: 11,
+              color: PdfColors.grey,
+            ),
+          ),
+        ]),
+      ),
+    ));
 
-      var bytes = await pdf.save();
+    var bytes = await pdf.save();
     downloadFile(bytes, "0111");
   }
 
@@ -638,21 +757,25 @@ class FlightsController extends GetxController {
     if (await Permission.storage.request().isGranted) {
       // Either the permission was already granted before or the user just granted it.
 
-      Directory generalDownloadDir = Directory(
-          '/storage/emulated/0/Download'); //! THIS WORKS for android only !!!!!!
+      // Directory generalDownloadDir = Directory(
+      //     '/storage/emulated/0/Download'); //! THIS WORKS for android only !!!!!!
 
-      //qr image file saved to general downloads folder
-      File file =
-          await File('${generalDownloadDir.path}/$txId-invoice.pdf').create();
+      try {
+        var path = "/storage/emulated/0/Download";
 
-      await file.writeAsBytes(bytes);
-      Get.closeAllSnackbars();
-      Get.snackbar("Invoice Downloaded to ", "${file.path}",
-          colorText: Colors.white,
-          backgroundColor: Colors.green,
-          snackPosition: SnackPosition.BOTTOM);
+        //qr image file saved to general downloads folder
+        File file = await File('$path/$txId-invoice.pdf').create();
+
+        await file.writeAsBytes(bytes);
+        Get.closeAllSnackbars();
+        Get.snackbar("Invoice Downloaded to ", "${file.path}",
+            colorText: Colors.white,
+            backgroundColor: Colors.green,
+            snackPosition: SnackPosition.BOTTOM);
+      } on Exception catch (e) {
+        // TODO
+        print(e);
+      }
     }
   }
-
 }
-

@@ -312,14 +312,20 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                                             padding:
                                                                 const EdgeInsets
                                                                         .only(
-                                                                    left: 12),
-                                                            child: Text(
-                                                                '${widget.flight.segments.length - 1} stop, via ${widget.flight.segments.first.destinationCity} ',
-                                                                style: const TextStyle(
-                                                                    fontSize:
-                                                                        11,
-                                                                    color: Color(
-                                                                        0xff8C8AAF))),
+                                                                    left: 20),
+                                                            child: Container(
+                                                              width: 200,
+                                                              child: FittedBox(
+                                                                fit: BoxFit.scaleDown,
+                                                                child: Text(
+                                                                    '${widget.flight.segments.length - 1} stop, via ${widget.flight.segments.first.destinationCity} ',
+                                                                    style: const TextStyle(
+                                                                        fontSize:
+                                                                            11,
+                                                                        color: Color(
+                                                                            0xff8C8AAF))),
+                                                              ),
+                                                            ),
                                                           ),
                                                   )
                                                 ],

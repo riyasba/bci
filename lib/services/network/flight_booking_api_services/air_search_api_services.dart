@@ -6,9 +6,9 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AirSearchApiServices extends BaseApiService {
-  Future airSearchApiServices({
-    required FlightSearchDataModel flightSearchModel,
-  }) async {
+  Future airSearchApiServices(
+      {required FlightSearchDataModel flightSearchModel,
+      required String airlineCode}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
@@ -38,7 +38,7 @@ class AirSearchApiServices extends BaseApiService {
             "infant_count": "0",
             "class_of_travel": "${flightSearchModel.cabinClass}",
             "inventory_type": 0,
-            "airline_code": ""
+            "airline_code": airlineCode
           });
       print("::::::::<--Air search-->::::::::status code::::::::::");
       print(response.statusCode);

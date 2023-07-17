@@ -836,7 +836,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                       PaxDetails paxDetails = PaxDetails(
                           firstName: profileController.profileData.first.name,
                           gender: 0,
-                          lastName: "",
+                          lastName: "t",
                           title: "Mr");
 
                       BookingModel bookingModel = BookingModel(

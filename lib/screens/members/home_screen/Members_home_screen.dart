@@ -208,7 +208,7 @@ class _Home_screen1State extends State<Home_screen1> {
                       kwidth10,
                       InkWell(
                         onTap: (){
-                          flightController.downloadFlightTicketInvoice();
+                          // flightController.downloadFlightTicketInvoice();
                         },
                         child: Text(
                           'Add Booking',

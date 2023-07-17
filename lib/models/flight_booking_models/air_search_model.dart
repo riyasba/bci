@@ -196,16 +196,16 @@ class Fare {
   factory Fare.fromJson(Map<String, dynamic> json) => Fare(
         fareDetails: List<FareDetail>.from(
             json["FareDetails"].map((x) => FareDetail.fromJson(x))),
-        fareType: json["FareType"],
-        fareId: json["Fare_Id"],
-        fareKey: json["Fare_Key"],
-        foodOnboard: json["Food_onboard"],
-        gstMandatory: json["GSTMandatory"],
+        fareType: json["FareType"] ?? 0,
+        fareId: json["Fare_Id"] ?? "",
+        fareKey: json["Fare_Key"] ?? "",
+        foodOnboard: json["Food_onboard"] ?? "",
+        gstMandatory: json["GSTMandatory"] ?? false,
         lastFewSeats: json["LastFewSeats"],
-        productClass: json["ProductClass"],
+        productClass: json["ProductClass"] ?? "",
         promptMessage: json["PromptMessage"],
-        refundable: json["Refundable"],
-        seatsAvailable: json["Seats_Available"],
+        refundable: json["Refundable"] ?? true,
+        seatsAvailable: json["Seats_Available"] ?? "",
         warning: json["Warning"],
       );
 

@@ -17,10 +17,10 @@ class AirAddPaymentApiServices extends BaseApiService {
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(airRepricingUrl,
+      var response = await dio.post(airAddPayment,
           options: Options(
               headers: {
-                'Accept': 'application/json',
+                'Content-Type': 'application/json',
                 'Authorization': 'Bearer $authtoken'
               },
               followRedirects: false,
@@ -34,7 +34,7 @@ class AirAddPaymentApiServices extends BaseApiService {
             "TransactionType": 0,
             "ProductId": "1",
           });
-      print("::::::::<--Air add payment-->::::::::status code::::::::::");
+      print("::::::::<--Air add payment-->::::::::status code::::::$refrenceNo::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;
