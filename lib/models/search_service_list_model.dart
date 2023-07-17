@@ -34,15 +34,23 @@ class SearchServiceListData {
     String vendorId;
     String title;
     String actualAmount;
-    String bvcAmount;
     String saleAmount;
+    String isOffer;
+    dynamic offerPercentage;
+    dynamic offerUptoAmount;
+    String isCoupon;
+    dynamic couponAmount;
     String description;
-    String isBooking;
+    String quantity;
+    String unit;
+    String isRecomended;
     String status;
     List<Amenty> amenties;
     String image;
     DateTime createdAt;
     DateTime updatedAt;
+    dynamic shareOption;
+    dynamic bvcAmount;
 
     SearchServiceListData({
         required this.id,
@@ -50,15 +58,23 @@ class SearchServiceListData {
         required this.vendorId,
         required this.title,
         required this.actualAmount,
-        required this.bvcAmount,
         required this.saleAmount,
+        required this.isOffer,
+        this.offerPercentage,
+        this.offerUptoAmount,
+        required this.isCoupon,
+        this.couponAmount,
         required this.description,
-        required this.isBooking,
+        required this.quantity,
+        required this.unit,
+        required this.isRecomended,
         required this.status,
         required this.amenties,
         required this.image,
         required this.createdAt,
         required this.updatedAt,
+        this.shareOption,
+        this.bvcAmount,
     });
 
     factory SearchServiceListData.fromJson(Map<String, dynamic> json) => SearchServiceListData(
@@ -67,18 +83,23 @@ class SearchServiceListData {
         vendorId: json["vendor_id"]?? "",
         title: json["title"]?? "",
         actualAmount: json["actual_amount"]?? "",
-        bvcAmount: json["bvc_amount"]?? "",
         saleAmount: json["sale_amount"]?? "",
+        isOffer: json["isOffer"]?? "",
+        offerPercentage: json["offerPercentage"]?? "",
+        offerUptoAmount: json["offerUpto_amount"]?? "",
+        isCoupon: json["isCoupon"]?? "",
+        couponAmount: json["coupon_amount"]?? "",
         description: json["description"]?? "",
-        isBooking: json["is_booking"]?? "",
+        quantity: json["quantity"]?? "",
+        unit: json["unit"]?? "",
+        isRecomended: json["is_recomended"]?? "",
         status: json["status"]?? "",
-        amenties: json["amenties"] == null
-            ? []
-            : List<Amenty>.from(
-                json["amenties"]!.map((x) => Amenty.fromJson(x))),
+        amenties:json["amenties"] == null ? [] : List<Amenty>.from(json["amenties"].map((x) => Amenty.fromJson(x))),
         image: json["image"]?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        shareOption: json["share_option"]?? "",
+        bvcAmount: json["bvc_amount"]?? "",
     );
 
     Map<String, dynamic> toJson() => {
@@ -87,31 +108,38 @@ class SearchServiceListData {
         "vendor_id": vendorId,
         "title": title,
         "actual_amount": actualAmount,
-        "bvc_amount": bvcAmount,
         "sale_amount": saleAmount,
+        "isOffer": isOffer,
+        "offerPercentage": offerPercentage,
+        "offerUpto_amount": offerUptoAmount,
+        "isCoupon": isCoupon,
+        "coupon_amount": couponAmount,
         "description": description,
-        "is_booking": isBooking,
+        "quantity": quantity,
+        "unit": unit,
+        "is_recomended": isRecomended,
         "status": status,
-        //"amenties": amenties == null ? [] : List<dynamic>.from(amenties!.map((x) => x)),
+        "amenties": List<dynamic>.from(amenties.map((x) => x.toJson())),
         "image": image,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
+        "share_option": shareOption,
+        "bvc_amount": bvcAmount,
     };
 }
 
-
 class Amenty {
-  String value;
+    String value;
 
-  Amenty({
-    required this.value,
-  });
+    Amenty({
+        required this.value,
+    });
 
-  factory Amenty.fromJson(Map<String, dynamic> json) => Amenty(
-        value: json["value"]?? "",
-      );
+    factory Amenty.fromJson(Map<String, dynamic> json) => Amenty(
+        value: json["value"],
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "value": value,
-      };
+    };
 }

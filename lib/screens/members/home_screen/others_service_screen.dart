@@ -112,8 +112,8 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                                 id: homeController.serviceListData[index].id,
                                 image:
                                     homeController.serviceListData[index].image,
-                                isBooking: homeController
-                                    .serviceListData[index].isBooking,
+                                // isBooking: homeController
+                                //     .serviceListData[index].isBooking,
                                 saleAmount: homeController
                                     .serviceListData[index].saleAmount,
                                 status: homeController
@@ -125,7 +125,17 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                                 amenties: homeController
                                     .serviceListData[index].amenties,
                                 vendorId: homeController
-                                    .serviceListData[index].vendorId);
+                                    .serviceListData[index].vendorId,
+                                    isCoupon: "",
+                                    isOffer: "",
+                                    isRecomended: "",
+                                    quantity: homeController.serviceListData[index].quantity,
+                                    unit: "",
+                                    couponAmount: "",
+                                    offerPercentage: "",
+                                    offerUptoAmount: "",
+                                    shareOption: ""
+                                    );
                         Get.to(ServiceDetailsScreen(
                           searchServicelist: searchServiceListData,
                         ));

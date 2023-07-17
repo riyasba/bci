@@ -32,44 +32,42 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
                 'assets/images/Clip.png',
                 fit: BoxFit.cover,
               )),
-          Positioned(
-              right: 10,
-              top: -100,
-              child: Image.network(
-                widget.searchServicelist.image,
-                //'assets/images/23456.png',
-                height: 400,
-                width: 100,
-                fit: BoxFit.fill,
-              )),
+          
           Padding(
             padding: const EdgeInsets.all(13.0),
             child: ListView(
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.searchServicelist.title,
-                  style:const TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
-                ),
-                ksizedbox10,
-                Text(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.searchServicelist.title,
+                          style:const TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
+                        ),
+                         ksizedbox10,
+                const Text(
                   'Barefoot Wine',
                   style: TextStyle(fontSize: 16),
                 ),
-                ksizedbox40,
-                Text('Tastes like...'),
                 ksizedbox20,
-                Text(
+                const Text('Tastes like...'),
+                ksizedbox20,
+                const Text(
                   'Apple, Rich, Vanilla',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                 ),
-                ksizedbox40,
-                Text(
+                ksizedbox20,
+                const Text(
                   'White Wine',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                 ),
-                ksizedbox40,
-                Text('Size'), ksizedbox30,
+                ksizedbox20,
+                const Text('Size'), 
+                ksizedbox10,
                 Row(
                   children: [
                     Container(
@@ -80,8 +78,8 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
                           borderRadius: BorderRadius.circular(4)),
                       child: Center(
                         child: Text(
-                          '2L',
-                          style: TextStyle(
+                            "${widget.searchServicelist.quantity} L",
+                          style:const TextStyle(
                             fontSize: 17,
                           ),
                         ),
@@ -89,11 +87,32 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    AddSubtractScreen(),
+                // Row(
+                //   children: [
+                //     AddSubtractScreen(),
+                //   ],
+                // ),
+                      ],
+                    ),
+             Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               children: [
+              Positioned(
+                right: 10,
+                top: -100,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: Image.network(widget.searchServicelist.image,
+                  height: 250,
+                  width: 150,
+                  fit: BoxFit.fill,
+                              ),
+                )),
+                      ],
+                    )
                   ],
-                ), // AddSubtractScreen(),
+                ),
+                // AddSubtractScreen(),
                 ksizedbox20,
                 // Container(
                 //   child: Center(
@@ -119,7 +138,7 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
                 //       borderRadius: BorderRadius.circular(7), color: kgrey),
                 // ),
                 // ksizedbox40,
-                Text(
+                const Text(
                   'About',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                 ),
@@ -129,7 +148,7 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
                   style: TextStyle(fontSize: 11, color: kgrey),
                 ),
                 ksizedbox20,
-                Text(
+                const Text(
                   'Delivery Information',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                 ),
@@ -204,10 +223,16 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                      onTap: Get.back,
-                      child: Image.asset('assets/images/chevron-left (2).png')),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
+                      onTap: (){
+                        Get.back();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Icon(Icons.arrow_back_ios,color: kwhite,),
+                      )
+                      ),
+                    const Padding(
+                    padding: EdgeInsets.only(right: 0),
                     child: Text(
                       'Wine',
                       style: TextStyle(

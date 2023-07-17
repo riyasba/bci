@@ -176,9 +176,9 @@ class _HolidayHomeState extends State<HolidayHome> {
                       width: 165.w,
                       decoration:
                       BoxDecoration(color: kwhite, borderRadius: BorderRadius.circular(19)),
-                                child: Column(
+                      child: Column(
                     children: [
-                     holidayPackageController.packageListData.isEmpty ? Container() : ClipRRect(
+                     holidayPackageController.packageListData[index].images.isEmpty ? Container(height: 150,) : ClipRRect(
                         borderRadius: BorderRadius.circular(19),
                         child: Image.network(holidayPackageController.packageListData[index].images.first,
                         height: 150,
@@ -249,6 +249,7 @@ class _HolidayHomeState extends State<HolidayHome> {
                           ),
                           child: Row(
                             children: [
+                              holidayPackageController.recomendedListData[index].images!.isEmpty ? Container(width: 75,) :
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(7),
                                 child: Image.network(holidayPackageController.recomendedListData[index].images!.first,
@@ -257,10 +258,10 @@ class _HolidayHomeState extends State<HolidayHome> {
                                         fit: BoxFit.cover,
                                 ),
                               ),
-                                             Padding(
-                                               padding: const EdgeInsets.all(5.0),
-                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                              Padding(
+                                 padding: const EdgeInsets.all(5.0),
+                                 child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                            children: [
                              Container(
                               width: 100,

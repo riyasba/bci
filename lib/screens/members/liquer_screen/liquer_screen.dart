@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
-import 'widget/liquers_containers.dart';
 
 class LiquorScreen extends StatefulWidget {
   const LiquorScreen({super.key});
@@ -31,7 +30,7 @@ class _LiquorScreenState extends State<LiquorScreen> {
     return Scaffold(
       backgroundColor:const Color(0xFFF9F8FD),
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(170),
+          preferredSize:const Size.fromHeight(110),
           child: Column(
             children: [
               ClipPath(
@@ -45,11 +44,16 @@ class _LiquorScreenState extends State<LiquorScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
-                            onTap: Get.back,
-                            child: Image.asset(
-                                'assets/images/chevron-left (2).png')),
+                            onTap: (){
+                        Get.back();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Icon(Icons.arrow_back_ios,color: kwhite,),
+                      )
+                                ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 20),
+                          padding: const EdgeInsets.only(right: 0),
                           child: Text(
                             'Liquors',
                             style: TextStyle(
@@ -71,26 +75,26 @@ class _LiquorScreenState extends State<LiquorScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: 44.h,
-                  child: TextFormField(
-                    // controller: _controller,
-                    decoration: InputDecoration(disabledBorder: OutlineInputBorder(),
-                        hintText: 'Search',
-                        fillColor: Colors.grey[200],
-                        focusColor: Colors.grey[200],
-                        isDense: true,
-                        filled: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(23.0),
-                        ),
-                        prefixIcon: Image.asset('assets/images/622669.png'),),
-                        //suffixIcon: Image.asset('assets/images/Icon material-location-on.png')),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: Container(
+              //     height: 44.h,
+              //     child: TextFormField(
+              //       // controller: _controller,
+              //       decoration: InputDecoration(disabledBorder: OutlineInputBorder(),
+              //           hintText: 'Search',
+              //           fillColor: Colors.grey[200],
+              //           focusColor: Colors.grey[200],
+              //           isDense: true,
+              //           filled: true,
+              //           border: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(23.0),
+              //           ),
+              //           prefixIcon: Image.asset('assets/images/622669.png'),),
+              //           //suffixIcon: Image.asset('assets/images/Icon material-location-on.png')),
+              //     ),
+              //   ),
+              // ),
             ],
           )),
       body: Padding(

@@ -37,6 +37,7 @@ class GetServiceListData {
   String categoryId;
   String vendorId;
   String title;
+  String quantity;
   String actualAmount;
   String bvcAmount;
   String saleAmount;
@@ -53,6 +54,7 @@ class GetServiceListData {
     required this.categoryId,
     required this.vendorId,
     required this.title,
+    required this.quantity,
     required this.actualAmount,
     required this.bvcAmount,
     required this.saleAmount,
@@ -71,6 +73,7 @@ class GetServiceListData {
         categoryId: json["category_id"] ?? 0,
         vendorId: json["vendor_id"] ?? "",
         title: json["title"] ?? "",
+        quantity: json["quantity"] ?? "",
         actualAmount: json["actual_amount"] ?? "",
         bvcAmount: json["bvc_amount"] ?? "",
         saleAmount: json["sale_amount"] ?? "",
@@ -91,6 +94,7 @@ class GetServiceListData {
         "category_id": categoryId,
         "vendor_id": vendorId,
         "title": title,
+        "quantity": quantity,
         "actual_amount": actualAmount,
         "bvc_amount": bvcAmount,
         "sale_amount": saleAmount,

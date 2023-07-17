@@ -1,6 +1,7 @@
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/screens/members/liquer_screen/add_cart_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constands/constands.dart';
@@ -18,11 +19,24 @@ class _LiquorListScreenState extends State<LiquorListScreen> {
 
   final homeController = Get.find<HomeController>();
 
+  final searchController = TextEditingController();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     homeController.liquorService(vendor: widget.vendor, categoryid: "6");
+    searchController.addListener(searchUsers);
+  }
+
+   searchUsers() {
+    if (searchController.text.trim().isNotEmpty) {
+      homeController.searchServiceList(searchKey: searchController.text,categoryid: "6");
+    } else {
+      homeController.liquorService(vendor: widget.vendor, categoryid: "6");
+      homeController.searchServiceListData.clear();
+      homeController.update();
+    }
   }
 
   @override
@@ -42,10 +56,16 @@ class _LiquorListScreenState extends State<LiquorListScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                        onTap: Get.back,
-                        child: Image.asset('assets/images/chevron-left (2).png')),
+                        onTap: (){
+                        Get.back();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Icon(Icons.arrow_back_ios,color: kwhite,),
+                      )
+                        ),
                     const Padding(
-                      padding: EdgeInsets.only(right: 20),
+                      padding: EdgeInsets.only(right: 0),
                       child: Text(
                         'Wine',
                         style: TextStyle(
@@ -67,8 +87,36 @@ class _LiquorListScreenState extends State<LiquorListScreen> {
               ),
             ),
           )),
-      body: Column(
+      body: ListView(
         children: [
+           Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 44,
+                  child: TextFormField(
+                     controller: searchController,
+                    decoration: InputDecoration(disabledBorder: OutlineInputBorder(),
+                        hintText: 'Search',
+                        fillColor: Colors.grey[200],
+                        focusColor: Colors.grey[200],
+                        isDense: true,
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(23.0),
+                        ),
+                        prefixIcon: Image.asset('assets/images/622669.png'),
+                        suffixIcon: searchController.text.length > 1 ? InkWell(
+                        onTap: (){
+                          searchController.clear();
+                        },
+                        child: const Icon(CupertinoIcons.clear,color: Colors.grey,),
+                        ) : Icon(CupertinoIcons.clear,color: Colors.grey[200],),
+                        ),
+                       // suffixIcon: Image.asset('assets/images/Icon material-location-on.png')
+                       // ),
+                  ),
+                ),
+              ),
          const Padding(
             padding: EdgeInsets.all(10.0),
             child: Row(
@@ -84,8 +132,33 @@ class _LiquorListScreenState extends State<LiquorListScreen> {
           GetBuilder<HomeController>(
             builder: (_) {
               return Container(
-                height: size.height * 0.70,
-                child: GridView.builder(
+                height: size.height * 0.66,
+                child:homeController.searchServiceListData.isEmpty &&
+                searchController.text.isNotEmpty
+               ? Center(
+                child: Column(
+                  children: [
+                    const Image(image: AssetImage("assets/icons/search.png")),
+                    Text(
+                      'No result found',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: kblue),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      '''we can't find any item matching\nyour search''',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 15, height: 1.5, color: kblue),
+                    ),
+                  ],
+                ),
+              )
+            : GridView.builder(
                       physics: const BouncingScrollPhysics(),
                       itemCount: homeController.searchServiceListData.length,
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
