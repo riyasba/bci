@@ -34,8 +34,8 @@ class GetServiceList {
 
 class GetServiceListData {
   int id;
-  String categoryId;
-  String vendorId;
+  dynamic categoryId;
+  dynamic vendorId;
   String title;
   String quantity;
   String actualAmount;
@@ -43,7 +43,7 @@ class GetServiceListData {
   String saleAmount;
   String description;
   String isBooking;
-  String status;
+  dynamic status;
   List<Amenty> amenties;
   String image;
   DateTime createdAt;
@@ -70,7 +70,7 @@ class GetServiceListData {
   factory GetServiceListData.fromJson(Map<String, dynamic> json) =>
       GetServiceListData(
         id: json["id"] ?? 0,
-        categoryId: json["category_id"] ?? 0,
+        categoryId: json["category_id"] ?? "",
         vendorId: json["vendor_id"] ?? "",
         title: json["title"] ?? "",
         quantity: json["quantity"] ?? "",

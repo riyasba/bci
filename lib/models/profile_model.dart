@@ -31,11 +31,11 @@ class ProfileModel {
 
 class User {
   int id;
-  String roleId;
+  dynamic roleId;
   String name;
   String email;
   String mobile;
-  String isVerrifiedMobile;
+  dynamic isVerrifiedMobile;
   String otp;
   dynamic category;
   dynamic subCategory;
@@ -47,7 +47,7 @@ class User {
   dynamic clientSecret;
   dynamic clientId;
   dynamic keyName;
-  String keyStatus;
+  dynamic keyStatus;
   dynamic emailVerifiedAt;
   dynamic address;
   dynamic dob;
@@ -63,7 +63,7 @@ class User {
   dynamic pincode;
   dynamic city;
   dynamic state;
-  String status;
+  dynamic status;
   DateTime createdAt;
   DateTime updatedAt;
 

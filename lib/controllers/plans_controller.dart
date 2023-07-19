@@ -46,7 +46,7 @@ class PlanController extends GetxController {
     update();
   }
 
-  getPlanDetails({required int id}) async {
+  getPlanDetails({required dynamic id}) async {
     subscribePlansData.clear();
     dio.Response<dynamic> response =
         await getPlansDetailsApiServices.getPlansDetails(planId: id);

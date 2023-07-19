@@ -31,7 +31,7 @@ class GetPackageCategoryList {
 class PackageCategoryData {
     int id;
     String name;
-    String status;
+    dynamic status;
     DateTime createdAt;
     DateTime updatedAt;
 
@@ -44,9 +44,9 @@ class PackageCategoryData {
     });
 
     factory PackageCategoryData.fromJson(Map<String, dynamic> json) => PackageCategoryData(
-        id: json["id"],
-        name: json["name"],
-        status: json["status"],
+        id: json["id"]?? 0,
+        name: json["name"]?? "",
+        status: json["status"]?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );

@@ -58,7 +58,7 @@ class _MyAccountState extends State<MyAccount> {
 
   plan(){
     if(profileController.planid != ""){
-      plansController.getPlanDetails(id: int.parse(profileController.planid.value));
+      plansController.getPlanDetails(id: profileController.planid.value);
     }else{
 
     }
@@ -114,8 +114,8 @@ class _MyAccountState extends State<MyAccount> {
       motherNameController.text =
           profileController.profileData.first.motherName;
 
-      oDoorNumberCN.text =
-          profileController.profileData.first.officialAddress.doorNo;
+      // oDoorNumberCN.text =
+      //     profileController.profileData.first.officialAddress.doorNo ?? "";
       oBuildingNumberCN.text =
           profileController.profileData.first.officialAddress.buildingName;
       oAddressCN.text =
@@ -276,8 +276,27 @@ class _MyAccountState extends State<MyAccount> {
                                           child: profileController.profileData.first
                                                       .profilePicture ==
                                                   null
-                                              ? Image.asset(
-                                                  'assets/icons/prfl.png')
+                                              ? Stack(
+                                                children: [
+                                                  Image.asset(
+                                                      'assets/icons/prfl.png',height: 80,),
+                                                       Positioned(
+                                                    left: 55,
+                                                    top: 55,
+                                                    child: Container(
+                                                      height: 25,
+                                                      width: 25,
+                                                      decoration: BoxDecoration(
+                                                        color: kblue,
+                                                        borderRadius: BorderRadius.circular(15)
+                                                      ),
+                                                      child:const Center(
+                                                        child: Icon(Icons.camera_alt,color: Colors.white,size: 17,),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
                                               : Stack(
                                                 children: [
                                                   Container(

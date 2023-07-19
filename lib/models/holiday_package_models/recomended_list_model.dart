@@ -30,8 +30,8 @@ class RecomendedList {
 
 class RecomendedListData {
     int id;
-    String categoryId;
-    String vendorId;
+    dynamic categoryId;
+    dynamic vendorId;
     String title;
     dynamic location;
     String actualAmount;
@@ -44,8 +44,8 @@ class RecomendedListData {
     String description;
     String? quantity;
     String? unit;
-    String isRecomended;
-    String status;
+    dynamic isRecomended;
+    dynamic status;
     List<Amenty> amenties;
     String image;
     DateTime createdAt;

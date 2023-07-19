@@ -34,7 +34,7 @@ class CategoryList {
   int id;
   String title;
   String description;
-  String status;
+  dynamic status;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -48,10 +48,10 @@ class CategoryList {
   });
 
   factory CategoryList.fromJson(Map<String, dynamic> json) => CategoryList(
-        id: json["id"],
-        title: json["title"],
-        description: json["description"],
-        status: json["status"],
+        id: json["id"]?? 0,
+        title: json["title"]?? "",
+        description: json["description"]?? "",
+        status: json["status"]?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );

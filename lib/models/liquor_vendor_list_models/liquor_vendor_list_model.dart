@@ -26,21 +26,21 @@ class LiquorVendorList {
 
 class VendorListData {
     int id;
-    String categoryId;
-    String vendorId;
+    int categoryId;
+    int vendorId;
     String title;
     String actualAmount;
     String saleAmount;
-    String isOffer;
+    int isOffer;
     dynamic offerPercentage;
     dynamic offerUptoAmount;
-    String isCoupon;
+    int isCoupon;
     dynamic couponAmount;
     String description;
     String quantity;
     String unit;
-    String? isRecomended;
-    String status;
+    int isRecomended;
+    int status;
     String amenties;
     String image;
     DateTime createdAt;
@@ -65,7 +65,7 @@ class VendorListData {
         required this.description,
         required this.quantity,
         required this.unit,
-        this.isRecomended,
+        required this.isRecomended,
         required this.status,
         required this.amenties,
         required this.image,
@@ -79,21 +79,21 @@ class VendorListData {
 
     factory VendorListData.fromJson(Map<String, dynamic> json) => VendorListData(
         id: json["id"]?? 0,
-        categoryId: json["category_id"]?? "",
-        vendorId: json["vendor_id"]?? "",
+        categoryId: json["category_id"]?? 0,
+        vendorId: json["vendor_id"]?? 0,
         title: json["title"]?? "",
         actualAmount: json["actual_amount"]?? "",
         saleAmount: json["sale_amount"]?? "",
-        isOffer: json["isOffer"]?? "",
+        isOffer: json["isOffer"]?? 0,
         offerPercentage: json["offerPercentage"]?? "",
         offerUptoAmount: json["offerUpto_amount"]?? "",
-        isCoupon: json["isCoupon"]?? "",
+        isCoupon: json["isCoupon"]?? 0,
         couponAmount: json["coupon_amount"]?? "",
         description: json["description"]?? "",
         quantity: json["quantity"]?? "",
         unit: json["unit"]?? "",
-        isRecomended: json["is_recomended"]?? "",
-        status: json["status"]?? "",
+        isRecomended: json["is_recomended"]?? 0,
+        status: json["status"]?? 0,
         amenties: json["amenties"]?? "",
         image: json["image"]?? "",
         createdAt: DateTime.parse(json["created_at"]),

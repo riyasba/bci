@@ -234,7 +234,7 @@ class HomeController extends GetxController {
 
     for (var i = 0; i < cartListData.length; i++) {
       double amount = double.parse(cartListData[i].amount);
-      int qty = int.parse(cartListData[i].quantity);
+      int qty = int.parse(cartListData[i].quantity.toString());
       double tempTotalAmount = amount * qty;
 
       grandTotal = grandTotal + tempTotalAmount;

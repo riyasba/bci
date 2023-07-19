@@ -3,7 +3,6 @@
 //     final getCouponsList = getCouponsListFromJson(jsonString);
 
 import 'dart:convert';
-import 'dart:math';
 
 GetCouponsList getCouponsListFromJson(String str) => GetCouponsList.fromJson(json.decode(str));
 
@@ -13,7 +12,7 @@ class GetCouponsList {
     String message;
     List<CouponsData> data;
 
-    GetCouponsList({ 
+    GetCouponsList({
         required this.message,
         required this.data,
     });
@@ -31,17 +30,16 @@ class GetCouponsList {
 
 class CouponsData {
     int id;
-    String userId;
-    String cId;
-    String planId;
+    int userId;
+    int cId;
+    int planId;
     String couponcode;
     String amount;
-    String isRedeemed;
+    int isRedeemed;
     DateTime expiryAt;
     DateTime createdAt;
     DateTime updatedAt;
-    String name;
-    int colorIndex;
+    Name name;
 
     CouponsData({
         required this.id,
@@ -55,22 +53,20 @@ class CouponsData {
         required this.createdAt,
         required this.updatedAt,
         required this.name,
-        required this.colorIndex,
     });
 
     factory CouponsData.fromJson(Map<String, dynamic> json) => CouponsData(
-        id: json["id"],
-        userId: json["user_id"] ?? "",
-        cId: json["c_id"] ?? "",
-        planId: json["plan_id"] ?? "",
-        couponcode: json["couponcode"] ?? "",
-        amount: json["amount"] ?? "",
-        isRedeemed: json["is_redeemed"] ?? "",
+        id: json["id"]?? 0,
+        userId: json["user_id"]?? 0,
+        cId: json["c_id"]?? 0,
+        planId: json["plan_id"]?? 0,
+        couponcode: json["couponcode"]?? "",
+        amount: json["amount"]?? "",
+        isRedeemed: json["is_redeemed"]?? 0,
         expiryAt: DateTime.parse(json["expiry_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        name: json["name"] ?? "",
-        colorIndex: Random().nextInt(4),
+        name: nameValues.map[json["name"]]!,
     );
 
     Map<String, dynamic> toJson() => {
@@ -84,8 +80,26 @@ class CouponsData {
         "expiry_at": expiryAt.toIso8601String(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "name": name,
+        "name": nameValues.reverse[name],
     };
 }
 
+enum Name { FLAT_10_OFFER_FOR_SPA_COMPLEMENTARY, THE_5_YEARS_COMPLEMENTARY, FLAT_10_OFFER_FOR_LIQUOR_COMPLEMENTARY }
 
+final nameValues = EnumValues({
+    "flat 10% offer for liquor complementary": Name.FLAT_10_OFFER_FOR_LIQUOR_COMPLEMENTARY,
+    "flat 10% offer for spa complementary": Name.FLAT_10_OFFER_FOR_SPA_COMPLEMENTARY,
+    "5 years complementary": Name.THE_5_YEARS_COMPLEMENTARY
+});
+
+class EnumValues<T> {
+    Map<String, T> map;
+    late Map<T, String> reverseMap;
+
+    EnumValues(this.map);
+
+    Map<T, String> get reverse {
+        reverseMap = map.map((k, v) => MapEntry(v, k));
+        return reverseMap;
+    }
+}

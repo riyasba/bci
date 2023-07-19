@@ -53,7 +53,7 @@ class ProfileController extends GetxController {
       MemberProfileModel profileModel =
           MemberProfileModel.fromJson(response.data);
       isSubscribed(profileModel.subscription);
-      planid(profileModel.planId);
+      planid(profileModel.planId.toString());
       profileData.add(profileModel.user);
       update();
     } else if (response.statusCode == 401) {

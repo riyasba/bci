@@ -4,161 +4,205 @@
 
 import 'dart:convert';
 
-MemberProfileModel memberProfileModelFromJson(String str) =>
-    MemberProfileModel.fromJson(json.decode(str));
+MemberProfileModel memberProfileModelFromJson(String str) => MemberProfileModel.fromJson(json.decode(str));
 
-String memberProfileModelToJson(MemberProfileModel data) =>
-    json.encode(data.toJson());
+String memberProfileModelToJson(MemberProfileModel data) => json.encode(data.toJson());
 
 class MemberProfileModel {
-  String message;
-  bool subscription;
-  int remainingDays;
-  dynamic percentage;
-  String planId;
-  MemberUser user;
+    String message;
+    bool subscription;
+    int remainingDays;
+    int percentage;
+    dynamic planId;
+    MemberUser user;
 
-  MemberProfileModel({
-    required this.message,
-    required this.subscription,
-    required this.remainingDays,
-    required this.percentage,
-    required this.planId,
-    required this.user,
-  });
+    MemberProfileModel({
+        required this.message,
+        required this.subscription,
+        required this.remainingDays,
+        required this.percentage,
+        this.planId,
+        required this.user,
+    });
 
-  factory MemberProfileModel.fromJson(Map<String, dynamic> json) =>
-      MemberProfileModel(
+    factory MemberProfileModel.fromJson(Map<String, dynamic> json) => MemberProfileModel(
         message: json["message"],
-        subscription: json["subscription"] ?? false,
-        remainingDays: json["remaining_days"] ?? 0,
-        percentage: json["percentage"] ?? 0,
-        planId: json["plan_id"] ?? "",
+        subscription: json["subscription"],
+        remainingDays: json["remaining_days"],
+        percentage: json["percentage"],
+        planId: json["plan_id"]?? "",
         user: MemberUser.fromJson(json["user"]),
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "message": message,
         "subscription": subscription,
         "remaining_days": remainingDays,
         "percentage": percentage,
+        "plan_id": planId,
         "user": user.toJson(),
-      };
+    };
 }
 
 class MemberUser {
-  int id;
-  String roleId;
-  String name;
-  String email;
-  String mobile;
-  String isVerrifiedMobile;
-  String otp;
-  String category;
-  String subCategory;
-  String alternateMobile;
-  String gstNo;
-  String adharProof;
-  String panProof;
-  dynamic profilePicture;
-  dynamic clientSecret;
-  dynamic clientId;
-  dynamic keyName;
-  String keyStatus;
-  dynamic emailVerifiedAt;
-  dynamic address;
-  dynamic dob;
-  dynamic occupation;
-  dynamic fatherName;
-  dynamic motherName;
-  dynamic isMarried;
- ResidentialAddress residentialAddress;
-  OfficialAddress officialAddress;
-  dynamic panNo;
-  dynamic aadharNo;
-  dynamic bio;
-  dynamic pincode;
-  dynamic city;
-  dynamic state;
-  String status;
- 
-  MemberUser({
-    required this.id,
-    required this.roleId,
-    required this.name,
-    required this.email,
-    required this.mobile,
-    required this.isVerrifiedMobile,
-    required this.otp,
-    required this.category,
-    required this.subCategory,
-    required this.alternateMobile,
-    required this.gstNo,
-    required this.adharProof,
-    required this.panProof,
-    this.profilePicture,
-    this.clientSecret,
-    this.clientId,
-    this.keyName,
-    required this.keyStatus,
-    this.emailVerifiedAt,
-    this.address,
-    this.dob,
-    this.occupation,
-    this.fatherName,
-    this.motherName,
-    this.isMarried,
-    required this.residentialAddress,
-    required this.officialAddress,
-    this.panNo,
-    this.aadharNo,
-    this.bio,
-    this.pincode,
-    this.city,
-    this.state,
-    required this.status,
-    
-  });
+    int id;
+    int roleId;
+    String name;
+    String email;
+    String mobile;
+    int isVerrifiedMobile;
+    String otp;
+    String referralCode;
+    dynamic referredBy;
+    dynamic walletAmount;
+    dynamic category;
+    dynamic subCategory;
+    dynamic alternateMobile;
+    dynamic gstNo;
+    dynamic adharProof;
+    dynamic panProof;
+    dynamic profilePicture;
+    dynamic clientSecret;
+    dynamic clientId;
+    dynamic keyName;
+    String keyStatus;
+    dynamic emailVerifiedAt;
+    dynamic address;
+    dynamic dob;
+    dynamic occupation;
+    dynamic fatherName;
+    dynamic motherName;
+    dynamic isMarried;
+    dynamic residentialAddress;
+    dynamic officialAddress;
+    dynamic panNo;
+    dynamic aadharNo;
+    dynamic bio;
+    dynamic pincode;
+    dynamic city;
+    dynamic state;
+    dynamic status;
+    dynamic gender;
+    dynamic spouse;
+    dynamic noOfChild;
+    dynamic childName;
+    dynamic weddingDate;
+    dynamic memberType;
+    dynamic branch;
+    dynamic qualification;
+    dynamic doorNo;
+    dynamic bciShareType;
+    dynamic bciShareAmount;
+    DateTime createdAt;
+    DateTime updatedAt;
 
-  factory MemberUser.fromJson(Map<String, dynamic> json) => MemberUser(
-        id: json["id"]?? 0,
-        roleId: json["role_id"]?? "",
-        name: json["name"]?? "",
-        email: json["email"]?? "",
-        mobile: json["mobile"]?? "",
-        isVerrifiedMobile: json["is_verrified_mobile"]?? "",
-        otp: json["otp"]?? "",
-        category: json["category"] ?? "",
-        subCategory: json["sub_category"] ?? "",
-        alternateMobile: json["alternate_mobile"] ?? "",
-        gstNo: json["gst_no"] ?? "",
-        adharProof: json["adhar_proof"] ?? '',
-        panProof: json["pan_proof"] ?? '',
-        profilePicture: json["profile_picture"] ?? "",
-        clientSecret: json["client_secret"]?? "",
-        clientId: json["client_id"]?? "",
-        keyName: json["Key_name"]?? "",
-        keyStatus: json["Key_status"]?? "",
-        emailVerifiedAt: json["email_verified_at"] ?? '',
-        address: json["address"] ?? "",
-        dob: json["dob"] ?? "",
-        occupation: json["occupation"]?? "",
-        fatherName: json["father_name"]?? "",
-        motherName: json["mother_name"]?? "",
-        isMarried: json["is_married"]?? "",
-        residentialAddress:json["residential_address"] == null ? ResidentialAddress(doorNo: "", address: "", buildingName: "", state: "", city: "", personalId: "", aadharId: "") : ResidentialAddress.fromJson(json["residential_address"]),
-        officialAddress:json["official_address"] == null ? OfficialAddress(doorNo: "", address: "", buildingName: "", state: "", city: "") : OfficialAddress.fromJson(json["official_address"]),
-        panNo: json["pan_no"]?? "",
-        aadharNo: json["aadhar_no"]?? "",
-        bio: json["bio"]?? "",
-        pincode: json["pincode"]?? "",
-        city: json["city"]?? "",
-        state: json["state"]?? "",
-        status: json["status"]?? "",
-     
-      );
+    MemberUser({
+        required this.id,
+        required this.roleId,
+        required this.name,
+        required this.email,
+        required this.mobile,
+        required this.isVerrifiedMobile,
+        required this.otp,
+        required this.referralCode,
+        this.referredBy,
+        this.walletAmount,
+        this.category,
+        this.subCategory,
+        this.alternateMobile,
+        this.gstNo,
+        this.adharProof,
+        this.panProof,
+        this.profilePicture,
+        this.clientSecret,
+        this.clientId,
+        this.keyName,
+        required this.keyStatus,
+        this.emailVerifiedAt,
+        this.address,
+        this.dob,
+        this.occupation,
+        this.fatherName,
+        this.motherName,
+        this.isMarried,
+        this.residentialAddress,
+        this.officialAddress,
+        this.panNo,
+        this.aadharNo,
+        this.bio,
+        this.pincode,
+        this.city,
+        this.state,
+        required this.status,
+        this.gender,
+        this.spouse,
+        this.noOfChild,
+        this.childName,
+        this.weddingDate,
+        this.memberType,
+        this.branch,
+        this.qualification,
+        this.doorNo,
+        this.bciShareType,
+        this.bciShareAmount,
+        required this.createdAt,
+        required this.updatedAt,
+    });
 
-  Map<String, dynamic> toJson() => {
+    factory MemberUser.fromJson(Map<String, dynamic> json) => MemberUser(
+        id: json["id"],
+        roleId: json["role_id"],
+        name: json["name"],
+        email: json["email"],
+        mobile: json["mobile"],
+        isVerrifiedMobile: json["is_verrified_mobile"],
+        otp: json["otp"],
+        referralCode: json["referral_code"],
+        referredBy: json["referred_by"],
+        walletAmount: json["wallet_amount"],
+        category: json["category"],
+        subCategory: json["sub_category"],
+        alternateMobile: json["alternate_mobile"],
+        gstNo: json["gst_no"],
+        adharProof: json["adhar_proof"],
+        panProof: json["pan_proof"],
+        profilePicture: json["profile_picture"],
+        clientSecret: json["client_secret"],
+        clientId: json["client_id"],
+        keyName: json["Key_name"],
+        keyStatus: json["Key_status"],
+        emailVerifiedAt: json["email_verified_at"],
+        address: json["address"],
+        dob: json["dob"],
+        occupation: json["occupation"],
+        fatherName: json["father_name"],
+        motherName: json["mother_name"],
+        isMarried: json["is_married"],
+        residentialAddress: json["residential_address"],
+        officialAddress: json["official_address"],
+        panNo: json["pan_no"],
+        aadharNo: json["aadhar_no"],
+        bio: json["bio"],
+        pincode: json["pincode"],
+        city: json["city"],
+        state: json["state"],
+        status: json["status"],
+        gender: json["gender"],
+        spouse: json["spouse"],
+        noOfChild: json["no_of_child"],
+        childName: json["child_name"],
+        weddingDate: json["wedding_date"],
+        memberType: json["member_type"],
+        branch: json["branch"],
+        qualification: json["qualification"],
+        doorNo: json["door_no"],
+        bciShareType: json["bci_share_type"],
+        bciShareAmount: json["bci_share_amount"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+    );
+
+    Map<String, dynamic> toJson() => {
         "id": id,
         "role_id": roleId,
         "name": name,
@@ -166,6 +210,9 @@ class MemberUser {
         "mobile": mobile,
         "is_verrified_mobile": isVerrifiedMobile,
         "otp": otp,
+        "referral_code": referralCode,
+        "referred_by": referredBy,
+        "wallet_amount": walletAmount,
         "category": category,
         "sub_category": subCategory,
         "alternate_mobile": alternateMobile,
@@ -193,82 +240,18 @@ class MemberUser {
         "city": city,
         "state": state,
         "status": status,
-      };
-}
-
-
-
-class OfficialAddress {
-  String doorNo;
-  String address;
-  String buildingName;
-  String state;
-  String city;
-
-  OfficialAddress({
-    required this.doorNo,
-    required this.address,
-    required this.buildingName,
-    required this.state,
-    required this.city,
-  });
-
-  factory OfficialAddress.fromJson(Map<String, dynamic> json) =>
-      OfficialAddress(
-        doorNo: json["door_no"]?? "",
-        address: json["address"]?? "",
-        buildingName: json["building_name"]?? "",
-        state: json["state"]?? "",
-        city: json["city"]?? "",
-      );
-
-  Map<String, dynamic> toJson() => {
+        "gender": gender,
+        "spouse": spouse,
+        "no_of_child": noOfChild,
+        "child_name": childName,
+        "wedding_date": weddingDate,
+        "member_type": memberType,
+        "branch": branch,
+        "qualification": qualification,
         "door_no": doorNo,
-        "address": address,
-        "building_name": buildingName,
-        "state": state,
-        "city": city,
-      };
+        "bci_share_type": bciShareType,
+        "bci_share_amount": bciShareAmount,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+    };
 }
-
-class ResidentialAddress {
-  String doorNo;
-  String address;
-  String buildingName;
-  String state;
-  String city;
-  String personalId;
-  String aadharId;
-
-  ResidentialAddress({
-    required this.doorNo,
-    required this.address,
-    required this.buildingName,
-    required this.state,
-    required this.city,
-    required this.personalId,
-    required this.aadharId,
-  });
-
-  factory ResidentialAddress.fromJson(Map<String, dynamic> json) =>
-      ResidentialAddress(
-        doorNo: json["door_no"]?? "",
-        address: json["address"]?? "",
-        buildingName: json["building_name"]?? "",
-        state: json["state"]?? "",
-        city: json["city"]?? "",
-        personalId: json["personal_id"]?? "",
-        aadharId: json["aadhar_id"]?? "",
-      );
-
-  Map<String, dynamic> toJson() => {
-        "door_no": doorNo,
-        "address": address,
-        "building_name": buildingName,
-        "state": state,
-        "city": city,
-        "personal_id": personalId,
-        "aadhar_id": aadharId,
-      };
-}
-

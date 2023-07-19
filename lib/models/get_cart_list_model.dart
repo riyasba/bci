@@ -32,9 +32,9 @@ class GetCartList {
 
 class CartListData {
   int id;
-  String userId;
-  String serviceId;
-  String quantity;
+  dynamic userId;
+  dynamic serviceId;
+  dynamic quantity;
   DateTime createdAt;
   DateTime updatedAt;
   String serviceName;

@@ -30,21 +30,21 @@ class SearchServiceList {
 
 class SearchServiceListData {
     int id;
-    String categoryId;
-    String vendorId;
+    dynamic categoryId;
+    dynamic vendorId;
     String title;
     String actualAmount;
     String saleAmount;
-    String isOffer;
+    dynamic isOffer;
     dynamic offerPercentage;
     dynamic offerUptoAmount;
-    String isCoupon;
+    dynamic isCoupon;
     dynamic couponAmount;
     String description;
     String quantity;
     String unit;
-    String isRecomended;
-    String status;
+    dynamic isRecomended;
+    dynamic status;
     List<Amenty> amenties;
     String image;
     DateTime createdAt;
@@ -79,21 +79,21 @@ class SearchServiceListData {
 
     factory SearchServiceListData.fromJson(Map<String, dynamic> json) => SearchServiceListData(
         id: json["id"]?? 0,
-        categoryId: json["category_id"]?? "",
-        vendorId: json["vendor_id"]?? "",
+        categoryId: json["category_id"]?? 0,
+        vendorId: json["vendor_id"]?? 0,
         title: json["title"]?? "",
         actualAmount: json["actual_amount"]?? "",
         saleAmount: json["sale_amount"]?? "",
-        isOffer: json["isOffer"]?? "",
+        isOffer: json["isOffer"]?? 0,
         offerPercentage: json["offerPercentage"]?? "",
         offerUptoAmount: json["offerUpto_amount"]?? "",
-        isCoupon: json["isCoupon"]?? "",
+        isCoupon: json["isCoupon"]?? 0,
         couponAmount: json["coupon_amount"]?? "",
         description: json["description"]?? "",
         quantity: json["quantity"]?? "",
         unit: json["unit"]?? "",
-        isRecomended: json["is_recomended"]?? "",
-        status: json["status"]?? "",
+        isRecomended: json["is_recomended"]?? 0,
+        status: json["status"]?? 0,
         amenties:json["amenties"] == null ? [] : List<Amenty>.from(json["amenties"].map((x) => Amenty.fromJson(x))),
         image: json["image"]?? "",
         createdAt: DateTime.parse(json["created_at"]),

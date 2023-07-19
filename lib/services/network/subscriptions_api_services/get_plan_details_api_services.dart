@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GetPlansDetailsApiServices extends BaseApiService {
-  Future getPlansDetails({required int planId}) async {
+  Future getPlansDetails({required dynamic planId}) async {
     dynamic responseJson;
     try {
       var dio = Dio();

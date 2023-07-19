@@ -109,7 +109,7 @@ class _LiquorScreenState extends State<LiquorScreen> {
                     padding:const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
                     child: InkWell(
                       onTap: (){
-                        Get.to( LiquorListScreen(vendor: homeController.vendorListData[index].vendorId,));
+                        Get.to( LiquorListScreen(vendor: homeController.vendorListData[index].vendorId.toString(),));
                       },
                       child: Container(
                               height: 150,

@@ -49,7 +49,7 @@ class SubscribePlansData {
     String amcImage;
     String cardImg;
     String amcDescription;
-    String status;
+    dynamic status;
     DateTime createdAt;
     DateTime updatedAt;
 
@@ -76,23 +76,23 @@ class SubscribePlansData {
     });
 
     factory SubscribePlansData.fromJson(Map<String, dynamic> json) => SubscribePlansData(
-        id: json["id"],
-        title: json["title"],
-        validityDays: json["validity_days"],
-        userType: json["user_type"],
-        actualAmount: json["actual_amount"],
-        saleAmount: json["sale_amount"],
-        dsaCommision: json["dsa_commision"],
-        referalCommision: json["referal_commision"],
-        amc: json["amc"],
-        amcCommision: json["amc_commision"],
-        cardNo: json["card_no"],
-        planImage: json["plan_image"],
-        planDescription: json["plan_description"],
-        amcImage: json["amc_image"],
-        cardImg: json["card_img"],
-        amcDescription: json["amc_description"],
-        status: json["status"],
+        id: json["id"]?? 0,
+        title: json["title"]?? "",
+        validityDays: json["validity_days"]?? "",
+        userType: json["user_type"]?? "",
+        actualAmount: json["actual_amount"]?? "",
+        saleAmount: json["sale_amount"]?? "",
+        dsaCommision: json["dsa_commision"]?? "",
+        referalCommision: json["referal_commision"]?? "",
+        amc: json["amc"]?? "",
+        amcCommision: json["amc_commision"]?? "",
+        cardNo: json["card_no"]?? "",
+        planImage: json["plan_image"]?? "",
+        planDescription: json["plan_description"]?? "",
+        amcImage: json["amc_image"]?? "",
+        cardImg: json["card_img"]?? "",
+        amcDescription: json["amc_description"]?? "",
+        status: json["status"]?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );

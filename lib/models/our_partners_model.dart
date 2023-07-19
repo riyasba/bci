@@ -28,7 +28,7 @@ class OurPartnersData {
     int id;
     String title;
     String image;
-    String status;
+    dynamic status;
     DateTime createdAt;
     DateTime updatedAt;
 

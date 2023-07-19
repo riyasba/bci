@@ -164,7 +164,7 @@ class AuthController extends GetxController {
     print("end testing...................>>>>>>>>>>>>>>");
 
     if (response.statusCode == 200) {
-      if (response.data["user"]["role_id"] == "3") {
+      if (response.data["user"]["role_id"].toString() == "3") {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString("auth_token", response.data["token"]);
         await prefs.setString("id", response.data["user"]["id"].toString());
