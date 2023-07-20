@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/instance_manager.dart';
 
-import '../generate_otp/generate_otp.dart';
+import '../generate_otp/member_login_screen.dart';
 import '../verified_screen/verified_screen.dart';
 
 class OtpVerificationView extends StatefulWidget {

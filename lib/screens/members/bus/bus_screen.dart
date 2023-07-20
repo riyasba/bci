@@ -17,7 +17,7 @@ class _BusScreenState extends State<BusScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
              appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(220),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(

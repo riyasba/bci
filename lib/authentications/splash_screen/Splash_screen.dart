@@ -1,4 +1,4 @@
-import 'package:bci/authentications/generate_otp/generate_otp.dart';
+import 'package:bci/authentications/generate_otp/member_login_screen.dart';
 import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:flutter/material.dart';

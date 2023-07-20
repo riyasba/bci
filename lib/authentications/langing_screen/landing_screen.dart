@@ -1,4 +1,4 @@
-import 'package:bci/authentications/generate_otp/generate_otp.dart';
+import 'package:bci/authentications/generate_otp/member_login_screen.dart';
 import 'package:bci/screens/bussiness/views/generations/generate_otp_screen.dart';
 
 import 'package:flutter/material.dart';

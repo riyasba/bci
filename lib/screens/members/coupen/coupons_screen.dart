@@ -49,7 +49,7 @@ class _Coupens_membersState extends State<Coupens_members> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(210),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -88,14 +88,6 @@ class _Coupens_membersState extends State<Coupens_members> {
         padding: const EdgeInsets.all(10.0),
         child: ListView(
           children: [
-            Row(
-              children: const [
-                Text(
-                  '',
-                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
-                ),
-              ],
-            ),
             ksizedbox10,
             GetBuilder<ProfileController>(builder: (_) {
               return Container(

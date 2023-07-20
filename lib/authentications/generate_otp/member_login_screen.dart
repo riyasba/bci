@@ -38,9 +38,6 @@ class _MemberLoginScreenState extends State<MemberLoginScreen> {
                   height: 250,
                 ),
               ),
-              const SizedBox(
-                height: 50,
-              ),
               Text(
                 'Enter Your Phone Number',
                 style: TextStyle(
