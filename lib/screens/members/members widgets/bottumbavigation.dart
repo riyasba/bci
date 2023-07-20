@@ -54,7 +54,7 @@ class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
     TabItem(Icons.home, "Home", korange,
         circleStrokeColor: Colors.white,
         labelStyle:
-            TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
     TabItem(Icons.search, "Search", korange,
         circleStrokeColor: Colors.white,
         labelStyle:
@@ -99,7 +99,7 @@ class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
           tabItems,
           controller: _navigationController,
           selectedPos: selectedpage,
-          animationDuration: Duration(milliseconds: 300),
+          animationDuration: const Duration(milliseconds: 300),
           selectedCallback: (int? selectedPos) {
             setState(() {
               selectedpage = selectedPos ?? 0;

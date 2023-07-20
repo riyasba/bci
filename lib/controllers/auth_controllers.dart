@@ -74,10 +74,10 @@ class AuthController extends GetxController {
     isLoading(true);
     dio.Response<dynamic> response =
         await memberRegisterApiServices.memberRegister(
-            memberRegisterModel: memberRegisterModel,
-            //officialAddress: officialAddress,
-            //residentialAddress: residentialAddress
-            );
+      memberRegisterModel: memberRegisterModel,
+      //officialAddress: officialAddress,
+      //residentialAddress: residentialAddress
+    );
     isLoading(false);
     if (response.statusCode == 201) {
       Get.to(OtpVerificationView(
@@ -161,6 +161,8 @@ class AuthController extends GetxController {
     print(response.data);
     print(response.statusCode);
     print(response.statusMessage);
+    print(response.data["user"]["role_id"]);
+    print(response.data["user"]["id"]);
     print("end testing...................>>>>>>>>>>>>>>");
 
     if (response.statusCode == 200) {

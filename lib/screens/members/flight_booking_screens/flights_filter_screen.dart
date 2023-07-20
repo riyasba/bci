@@ -16,11 +16,6 @@ class FlightFilterScreen extends StatefulWidget {
 class _FlightFilterScreenState extends State<FlightFilterScreen> {
   final flightController = Get.find<FlightsController>();
 
-  bool isAirIndia = false;
-  bool isAirAsia = false;
-  bool isGoFirst = false;
-  bool isSpiceJet = false;
-
   bool isNonStopFlight = false;
   bool isOneStopConnectingFlights = false;
   bool isAllFlight = false;
@@ -32,10 +27,10 @@ class _FlightFilterScreenState extends State<FlightFilterScreen> {
 
   resetFilters() async {
     setState(() {
-      isAirIndia = false;
-      isAirAsia = false;
-      isGoFirst = false;
-      isSpiceJet = false;
+      flightController.isAirIndia(false);
+      flightController.isAirAsia(false);
+      flightController.isGoFirst(false);
+      flightController.isSpiceJet(false);
 
       isNonStopFlight = false;
       isOneStopConnectingFlights = false;
@@ -55,212 +50,244 @@ class _FlightFilterScreenState extends State<FlightFilterScreen> {
         ),
         iconTheme: IconThemeData(color: kblue),
       ),
-      body: ListView(
-        children: [
-          const SizedBox(
-            height: 15,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Text(
-              "Airlines",
-              style: primaryFont.copyWith(
-                  color: kblue, fontSize: 16, fontWeight: FontWeight.w600),
+      body: Obx(
+        () => ListView(
+          children: [
+            const SizedBox(
+              height: 15,
             ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Row(
-            children: [
-              Checkbox(
-                checkColor: Colors.white,
-                fillColor: MaterialStateProperty.all(kblue),
-                value: isAirIndia,
-                onChanged: (bool? value) {
-                  setState(() {
-                    isAirIndia = value!;
-                    isAirAsia = !value;
-                    isGoFirst = !value;
-                    isSpiceJet = !value;
-                  });
-                },
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Text(
-                "Air india",
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: Text(
+                "Airlines",
                 style: primaryFont.copyWith(
-                    color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
-              )
-            ],
-          ),
-          Row(
-            children: [
-              Checkbox(
-                checkColor: Colors.white,
-                fillColor: MaterialStateProperty.all(kblue),
-                value: isAirAsia,
-                onChanged: (bool? value) {
-                  setState(() {
-                    isAirAsia = value!;
-                    isAirIndia = !value;
-                    isGoFirst = !value;
-                    isSpiceJet = !value;
-                  });
-                },
+                    color: kblue, fontSize: 16, fontWeight: FontWeight.w600),
               ),
-              const SizedBox(
-                width: 5,
-              ),
-              Text(
-                "Air Asia",
-                style: primaryFont.copyWith(
-                    color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
-              )
-            ],
-          ),
-          Row(
-            children: [
-              Checkbox(
-                checkColor: Colors.white,
-                fillColor: MaterialStateProperty.all(kblue),
-                value: isGoFirst,
-                onChanged: (bool? value) {
-                  setState(() {
-                    isGoFirst = value!;
-                    isAirIndia = !value;
-                    isAirAsia = !value;
-                    isSpiceJet = !value;
-                  });
-                },
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Text(
-                "Go First",
-                style: primaryFont.copyWith(
-                    color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
-              )
-            ],
-          ),
-          Row(
-            children: [
-              Checkbox(
-                checkColor: Colors.white,
-                fillColor: MaterialStateProperty.all(kblue),
-                value: isSpiceJet,
-                onChanged: (bool? value) {
-                  setState(() {
-                    isSpiceJet = value!;
-                    isAirIndia = !value;
-                    isAirAsia = !value;
-                    isGoFirst = !value;
-                  });
-                },
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Text(
-                "SpiceJet",
-                style: primaryFont.copyWith(
-                    color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
-              )
-            ],
-          ),
-          // const SizedBox(
-          //   height: 15,
-          // ),
-          // const Divider(
-          //   thickness: 1.5,
-          // ),
-          // const SizedBox(
-          //   height: 15,
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.only(left: 15),
-          //   child: Text(
-          //     "Flight Stops",
-          //     style: primaryFont.copyWith(
-          //         color: kblue, fontSize: 16, fontWeight: FontWeight.w600),
-          //   ),
-          // ),
-          // const SizedBox(
-          //   height: 15,
-          // ),
-          // Row(
-          //   children: [
-          //     Checkbox(
-          //       checkColor: Colors.white,
-          //       shape: CircleBorder(),
-          //       fillColor: MaterialStateProperty.all(kblue),
-          //       value: isNonStopFlight,
-          //       onChanged: (bool? value) {
-          //         setState(() {
-          //           isNonStopFlight = value!;
-          //         });
-          //       },
-          //     ),
-          //     const SizedBox(
-          //       width: 5,
-          //     ),
-          //     Text(
-          //       "Non Stop Flights",
-          //       style: primaryFont.copyWith(
-          //           color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
-          //     )
-          //   ],
-          // ),
-          // Row(
-          //   children: [
-          //     Checkbox(
-          //       checkColor: Colors.white,
-          //       shape: CircleBorder(),
-          //       fillColor: MaterialStateProperty.all(kblue),
-          //       value: isOneStopConnectingFlights,
-          //       onChanged: (bool? value) {
-          //         setState(() {
-          //           isOneStopConnectingFlights = value!;
-          //         });
-          //       },
-          //     ),
-          //     const SizedBox(
-          //       width: 5,
-          //     ),
-          //     Text(
-          //       "1 Stop Connecting flights",
-          //       style: primaryFont.copyWith(
-          //           color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
-          //     )
-          //   ],
-          // ),
-          // Row(
-          //   children: [
-          //     Checkbox(
-          //       checkColor: Colors.white,
-          //       shape: CircleBorder(),
-          //       fillColor: MaterialStateProperty.all(kblue),
-          //       value: isAllFlight,
-          //       onChanged: (bool? value) {
-          //         setState(() {
-          //           isAllFlight = value!;
-          //         });
-          //       },
-          //     ),
-          //     const SizedBox(
-          //       width: 5,
-          //     ),
-          //     Text(
-          //       "All flights",
-          //       style: primaryFont.copyWith(
-          //           color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
-          //     )
-          //   ],
-          // ),
-        ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              children: [
+                Checkbox(
+                  checkColor: Colors.white,
+                  fillColor: MaterialStateProperty.all(kblue),
+                  value: flightController.isAirIndia.value,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      flightController.isAirIndia(value!);
+                      flightController.indiGo(!value);
+                      flightController.isAirAsia(!value);
+                      flightController.isGoFirst(!value);
+                      flightController.isSpiceJet(!value);
+                    });
+                  },
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "Air india",
+                  style: primaryFont.copyWith(
+                      color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Checkbox(
+                  checkColor: Colors.white,
+                  fillColor: MaterialStateProperty.all(kblue),
+                  value: flightController.indiGo.value,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      flightController.isAirIndia(!value!);
+                      flightController.indiGo(value);
+                      flightController.isAirAsia(!value);
+                      flightController.isGoFirst(!value);
+                      flightController.isSpiceJet(!value);
+                    });
+                  },
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "IndiGo",
+                  style: primaryFont.copyWith(
+                      color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Checkbox(
+                  checkColor: Colors.white,
+                  fillColor: MaterialStateProperty.all(kblue),
+                  value: flightController.isAirAsia.value,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      flightController.isAirIndia(!value!);
+                      flightController.indiGo(!value);
+                      flightController.isAirAsia(value);
+                      flightController.isGoFirst(!value);
+                      flightController.isSpiceJet(!value);
+                    });
+                  },
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "Air Asia",
+                  style: primaryFont.copyWith(
+                      color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Checkbox(
+                  checkColor: Colors.white,
+                  fillColor: MaterialStateProperty.all(kblue),
+                  value: flightController.isGoFirst.value,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      flightController.isAirIndia(!value!);
+                      flightController.indiGo(!value);
+                      flightController.isAirAsia(!value);
+                      flightController.isGoFirst(value);
+                      flightController.isSpiceJet(!value);
+                    });
+                  },
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "Go First",
+                  style: primaryFont.copyWith(
+                      color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Checkbox(
+                  checkColor: Colors.white,
+                  fillColor: MaterialStateProperty.all(kblue),
+                  value: flightController.isSpiceJet.value,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      flightController.isAirIndia(!value!);
+                      flightController.indiGo(!value);
+                      flightController.isAirAsia(!value);
+                      flightController.isGoFirst(!value);
+                      flightController.isSpiceJet(value);
+                    });
+                  },
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "SpiceJet",
+                  style: primaryFont.copyWith(
+                      color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
+                )
+              ],
+            ),
+            // const SizedBox(
+            //   height: 15,
+            // ),
+            // const Divider(
+            //   thickness: 1.5,
+            // ),
+            // const SizedBox(
+            //   height: 15,
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 15),
+            //   child: Text(
+            //     "Flight Stops",
+            //     style: primaryFont.copyWith(
+            //         color: kblue, fontSize: 16, fontWeight: FontWeight.w600),
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 15,
+            // ),
+            // Row(
+            //   children: [
+            //     Checkbox(
+            //       checkColor: Colors.white,
+            //       shape: CircleBorder(),
+            //       fillColor: MaterialStateProperty.all(kblue),
+            //       value: isNonStopFlight,
+            //       onChanged: (bool? value) {
+            //         setState(() {
+            //           isNonStopFlight = value!;
+            //         });
+            //       },
+            //     ),
+            //     const SizedBox(
+            //       width: 5,
+            //     ),
+            //     Text(
+            //       "Non Stop Flights",
+            //       style: primaryFont.copyWith(
+            //           color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
+            //     )
+            //   ],
+            // ),
+            // Row(
+            //   children: [
+            //     Checkbox(
+            //       checkColor: Colors.white,
+            //       shape: CircleBorder(),
+            //       fillColor: MaterialStateProperty.all(kblue),
+            //       value: isOneStopConnectingFlights,
+            //       onChanged: (bool? value) {
+            //         setState(() {
+            //           isOneStopConnectingFlights = value!;
+            //         });
+            //       },
+            //     ),
+            //     const SizedBox(
+            //       width: 5,
+            //     ),
+            //     Text(
+            //       "1 Stop Connecting flights",
+            //       style: primaryFont.copyWith(
+            //           color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
+            //     )
+            //   ],
+            // ),
+            // Row(
+            //   children: [
+            //     Checkbox(
+            //       checkColor: Colors.white,
+            //       shape: CircleBorder(),
+            //       fillColor: MaterialStateProperty.all(kblue),
+            //       value: isAllFlight,
+            //       onChanged: (bool? value) {
+            //         setState(() {
+            //           isAllFlight = value!;
+            //         });
+            //       },
+            //     ),
+            //     const SizedBox(
+            //       width: 5,
+            //     ),
+            //     Text(
+            //       "All flights",
+            //       style: primaryFont.copyWith(
+            //           color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
+            //     )
+            //   ],
+            // ),
+          ],
+        ),
       ),
       bottomNavigationBar: Container(
         height: 60,
@@ -272,6 +299,13 @@ class _FlightFilterScreenState extends State<FlightFilterScreen> {
                 child: InkWell(
                   onTap: () {
                     resetFilters();
+                    String airlineCode = "";
+
+                    flightController.airSearch(
+                        flightSearchModel: widget.flightSearchModel,
+                        airlineCode: airlineCode);
+
+                    Get.back();
                   },
                   child: Container(
                     height: 55,
@@ -291,54 +325,55 @@ class _FlightFilterScreenState extends State<FlightFilterScreen> {
               ),
             ),
             Expanded(
-              child:  Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 15),
-                    child: InkWell(
-                      onTap: () async {
-                        String airlineCode = "";
-                        if (isAirAsia == true) {
-                          airlineCode = "I5";
-                        } else if (isAirIndia == true) {
-                          airlineCode = "AI";
-                        } else if (isSpiceJet == true) {
-                          airlineCode = "SG";
-                        } else if (isGoFirst == true) {
-                          airlineCode = "GOW";
-                        }
+              child: Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: InkWell(
+                    onTap: () async {
+                      String airlineCode = "";
+                      if (flightController.isAirAsia.isTrue) {
+                        airlineCode = "I5";
+                      } else if (flightController.isAirIndia.isTrue) {
+                        airlineCode = "AI";
+                      } else if (flightController.isSpiceJet.isTrue) {
+                        airlineCode = "SG";
+                      } else if (flightController.isGoFirst.isTrue) {
+                        airlineCode = "GOW";
+                      } else if (flightController.indiGo.isTrue) {
+                        airlineCode = "6E";
+                      }
 
-                        flightController.airSearch(
-                            flightSearchModel: widget.flightSearchModel,
-                            airlineCode: airlineCode);
+                      flightController.airSearch(
+                          flightSearchModel: widget.flightSearchModel,
+                          airlineCode: airlineCode);
 
-                        Get.back();
-                      },
-                      child: Container(
-                        height: 55,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: kblue),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Done",
-                          style: primaryFont.copyWith(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500),
-                        ),
+                      Get.back();
+                    },
+                    child: Container(
+                      height: 55,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: kblue),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Done",
+                        style: primaryFont.copyWith(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500),
                       ),
-                    )
-                    //  : Container(
-                    //         height: 55,
-                    //         decoration: BoxDecoration(
-                    //             borderRadius: BorderRadius.circular(10),
-                    //             color: kblue),
-                    //         alignment: Alignment.center,
-                    //         child: const CircularProgressIndicator(
-                    //           color: Colors.white,
-                    //         ),
-                    //       ),
                     ),
-             
+                  )
+                  //  : Container(
+                  //         height: 55,
+                  //         decoration: BoxDecoration(
+                  //             borderRadius: BorderRadius.circular(10),
+                  //             color: kblue),
+                  //         alignment: Alignment.center,
+                  //         child: const CircularProgressIndicator(
+                  //           color: Colors.white,
+                  //         ),
+                  //       ),
+                  ),
             )
           ],
         ),

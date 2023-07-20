@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -42,6 +43,12 @@ class FlightsController extends GetxController {
 
   RxBool isLoading = false.obs;
   RxBool isLoading2 = false.obs;
+
+  RxBool isAirIndia = false.obs;
+  RxBool isAirAsia = false.obs;
+  RxBool isGoFirst = false.obs;
+  RxBool isSpiceJet = false.obs;
+  RxBool indiGo = false.obs;
 
   AirSearchApiServices airSearchApiServices = AirSearchApiServices();
   AirportSearchApiServices airportSearchApiServices =
@@ -762,12 +769,14 @@ class FlightsController extends GetxController {
 
       try {
         var path = "/storage/emulated/0/Download";
+        var dir = await getExternalStorageDirectory();
 
         //qr image file saved to general downloads folder
-        File file = await File('$path/$txId-invoice.pdf').create();
+        File file = await File('${dir!.path}/$txId-invoice.pdf').create();
 
         await file.writeAsBytes(bytes);
         Get.closeAllSnackbars();
+        OpenFile.open(file.path);
         Get.snackbar("Invoice Downloaded to ", "${file.path}",
             colorText: Colors.white,
             backgroundColor: Colors.green,
