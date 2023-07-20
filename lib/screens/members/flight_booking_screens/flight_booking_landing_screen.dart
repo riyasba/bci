@@ -150,7 +150,7 @@ class _FlightBookingLandingScreenState
               ],
             ),
             ksizedbox20,
-            const Divider(
+            const Divider( 
               thickness: 1,
             ),
             ksizedbox10,

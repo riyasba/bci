@@ -14,6 +14,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
+import '../bus/bus_screen.dart';
 import '../coupen/coupons_screen.dart';
 import '../holiday/holiday_home.dart';
 import '../hottel/Hotel_members.dart';
@@ -82,7 +83,8 @@ class _Home_screen1State extends State<Home_screen1> {
                 ),
               ),
             ),
-          )),
+          )
+          ),
       body: Obx(
         () => profileController.isLoading.isTrue
             ? Center(
@@ -305,7 +307,9 @@ class _Home_screen1State extends State<Home_screen1> {
                           ),
                         ),
                         //
-                        InkWell(
+                        Row(
+                          children: [
+                                 InkWell(
                           onTap: () {
                             Get.to(const HolidayHome());
                           },
@@ -329,8 +333,8 @@ class _Home_screen1State extends State<Home_screen1> {
                               )
                             ],
                           ),
-                        ), //
-                        InkWell(
+                        ), 
+                          InkWell(
                           onTap: () {
                             Get.to(const OthersServiceScreen());
                           },
@@ -355,9 +359,38 @@ class _Home_screen1State extends State<Home_screen1> {
                             ],
                           ),
                         ),
+                          ],
+                        ),
+                       //
+                      InkWell(
+                          onTap: () {
+                            Get.to(const BusScreen());
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 58,
+                                width: 58,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: kblue),
+                                child:
+                                    Image.asset("assets/icons/buslogo.png"),
+                              ),
+                              const SizedBox(
+                                height: 7,
+                              ),
+                              const Text(
+                                'Bus',
+                                style: TextStyle(fontWeight: FontWeight.w700),
+                              )
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
+                  
                   // ksizedbox20,
                   // Row(
                   //   crossAxisAlignment: CrossAxisAlignment.start,
