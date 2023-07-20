@@ -59,7 +59,7 @@ class _OverviewWidgetState extends State<OverviewWidget> {
                 ],
               ),
               ksizedbox10,
-              if(holidayPackageController.getPackageDetailsData.isNotEmpty)
+              if(holidayPackageController.getPackageDetailsData.first.packageoverview.isNotEmpty)
               HtmlContentViewer(
                             htmlContent: holidayPackageController.getPackageDetailsData.first.packageoverview,
                             initialContentHeight:

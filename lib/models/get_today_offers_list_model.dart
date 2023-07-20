@@ -26,15 +26,15 @@ class GetTodayOffersList {
 
 class TodayOfferListData {
     int id;
-    String vendorId;
-    String categoryId;
+    dynamic vendorId;
+    dynamic categoryId;
     String title;
     DateTime startsAt;
     DateTime endsAt;
     String businessValue;
     String discountValue;
     String noOfClaimUser;
-    String status;
+    dynamic status;
     String image;
     String description;
     DateTime createdAt;
@@ -58,18 +58,18 @@ class TodayOfferListData {
     });
 
     factory TodayOfferListData.fromJson(Map<String, dynamic> json) => TodayOfferListData(
-        id: json["id"],
-        vendorId: json["vendor_id"],
-        categoryId: json["category_id"],
-        title: json["title"],
+        id: json["id"]?? 0,
+        vendorId: json["vendor_id"]?? "",
+        categoryId: json["category_id"]?? "",
+        title: json["title"]?? "",
         startsAt: DateTime.parse(json["starts_at"]),
         endsAt: DateTime.parse(json["ends_at"]),
-        businessValue: json["business_value"],
-        discountValue: json["discount_value"],
-        noOfClaimUser: json["no_of_claim_user"],
-        status: json["status"],
-        image: json["image"],
-        description: json["description"],
+        businessValue: json["business_value"]?? "",
+        discountValue: json["discount_value"]?? "",
+        noOfClaimUser: json["no_of_claim_user"]?? "",
+        status: json["status"]?? "",
+        image: json["image"]?? "",
+        description: json["description"]?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );

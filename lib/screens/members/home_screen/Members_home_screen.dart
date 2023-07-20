@@ -562,8 +562,11 @@ class _Home_screen1State extends State<Home_screen1> {
                                       onTap: () {
                                         Get.to(const TodayOfferScreen());
                                       },
-                                      child: Image.network(homeController
-                                          .todayOfferListData[index].image)),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.network(homeController
+                                            .todayOfferListData[index].image),
+                                      )),
                                 ),
                               );
                             });

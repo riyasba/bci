@@ -1,6 +1,7 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/holiday_package_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,6 +35,43 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
     holidayPackageController.adult(0);
     holidayPackageController.child(0);
     holidayPackageController.infant(0);
+  }
+
+  DateTime date = DateTime.now().subtract(const Duration(days: 6570));
+
+  _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: date,
+      initialDatePickerMode: DatePickerMode.day,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      firstDate: DateTime(1910),
+      locale: const Locale('en', 'IN'),
+      lastDate: DateTime.now().subtract(const Duration(days: 6570)),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: kblue, // <-- SEE HERE
+              onPrimary: Colors.white, // <-- SEE HERE
+              onSurface: Colors.blueAccent, // <-- SEE HERE
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: kblue, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+     if (picked != null)
+      setState(() {
+        date = picked;
+        dateOfDepController.text = formatDate(date, [dd, "/", mm, "/", yyyy]);
+      });
   }
 
   @override
@@ -157,30 +195,35 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                                     fontWeight: FontWeight.w500),
                                   ),
                                   ksizedbox10,
-                   Container(
-                  height: 40,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2),
-                      border: Border.all(),
-                      color:const Color.fromARGB(255, 254, 252, 252)),
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding:const EdgeInsets.only(left: 15, right: 10),
-                    child: TextField(
-                      controller: dateOfDepController,
-                      decoration:const InputDecoration(
-                          isCollapsed: true,
-                          isDense: true,
-                          border: InputBorder.none,
-                         // hintText: "Your Name",
-                          hintStyle: TextStyle(
-                            color: Color(0xff6E6D6E),
-                            fontWeight: FontWeight.w400,
-                          )),
-                    ),
-                  ),
-                ),
+                   InkWell(
+                    onTap: (){
+                      _selectDate(context);
+                    },
+                     child: Container(
+                                     height: 40,
+                                     width: size.width,
+                                     decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2),
+                        border: Border.all(),
+                        color:const Color.fromARGB(255, 254, 252, 252)),
+                                     alignment: Alignment.center,
+                                     child: Padding(
+                      padding:const EdgeInsets.only(left: 15, right: 10),
+                      child: TextField(
+                        controller: dateOfDepController,
+                        decoration:const InputDecoration(
+                            isCollapsed: true,
+                            isDense: true,
+                            border: InputBorder.none,
+                           // hintText: "Your Name",
+                            hintStyle: TextStyle(
+                              color: Color(0xff6E6D6E),
+                              fontWeight: FontWeight.w400,
+                            )),
+                      ),
+                                     ),
+                                   ),
+                   ),
                 ksizedbox20,
                 Obx( () =>
                    Row(

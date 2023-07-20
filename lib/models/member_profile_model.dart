@@ -12,7 +12,7 @@ class MemberProfileModel {
     String message;
     bool subscription;
     int remainingDays;
-    int percentage;
+    dynamic percentage;
     dynamic planId;
     MemberUser user;
 
@@ -29,7 +29,7 @@ class MemberProfileModel {
         message: json["message"],
         subscription: json["subscription"],
         remainingDays: json["remaining_days"],
-        percentage: json["percentage"],
+        percentage: json["percentage"]?? "",
         planId: json["plan_id"]?? "",
         user: MemberUser.fromJson(json["user"]),
     );

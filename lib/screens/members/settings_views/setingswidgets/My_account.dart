@@ -248,7 +248,7 @@ class _MyAccountState extends State<MyAccount> {
                     Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Container(
-                        height: 600,
+                        height: 530,
                         width: double.infinity,
                         decoration: BoxDecoration(
                             color: Colors.white,

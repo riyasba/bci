@@ -75,10 +75,15 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        InkWell(
-                            onTap: Get.back,
-                            child: Image.asset(
-                                'assets/images/chevron-left (2).png')),
+                        // InkWell(
+                        //   onTap: (){
+                        //     Get.back();
+                        //   },
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.only(left: 10),
+                        //     child: Icon(Icons.arrow_back_ios,color: kwhite,),
+                        //   ),
+                        //     ),
                         Text(
                           'Search',
                           style: TextStyle(
@@ -124,8 +129,8 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                         onTap: (){
                           searchController.clear();
                         },
-                        child: Icon(CupertinoIcons.clear,color: Colors.grey,),
-                        ) : Icon(CupertinoIcons.clear,color: Colors.white,),
+                        child:const Icon(CupertinoIcons.clear,color: Colors.grey,),
+                        ) : const Icon(CupertinoIcons.clear,color: Colors.white,),
                         ),
                 ),
               ),
@@ -142,11 +147,10 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                         height: 44,
                         width: 300,
                         decoration: BoxDecoration(
-                            color: kgrey,
+                            color: kwhite,
                             borderRadius: BorderRadius.circular(3),
                             border: Border.all(
-                                color: const Color.fromARGB(255, 5, 5, 5)
-                                    .withOpacity(0.8))),
+                                color: Colors.black54)),
                         child: Padding(
                           padding:
                               const EdgeInsets.only(left: 10, right: 10, top: 10),
@@ -161,7 +165,7 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                             style: const TextStyle(color: Colors.black54),
                             hint: const Text(
                               "Merchant Category Name",
-                              style: TextStyle(fontSize: 16, color: Colors.white),
+                              style: TextStyle(fontSize: 16, color: Colors.black54),
                             ),
                             onChanged: (CategoryList? value) {
                               setState(() {
@@ -190,7 +194,19 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                              homeController.searchServiceListData.clear();
                            });
                                     },
-                        child:const Icon(CupertinoIcons.clear,color: Colors.grey,)),
+                        child: Container(
+                               height: 42,
+                               width: 60,
+                               decoration: BoxDecoration(
+                                color: kwhite,
+                                borderRadius: BorderRadius.circular(3),
+                                border: Border.all(color: Colors.black54)
+                               ),
+                               child: Center(
+                                child: Text("Clear",style: TextStyle(color: Colors.black54),),
+                               ),
+                        )
+                        ),
                     ],
                   ),
                 );
