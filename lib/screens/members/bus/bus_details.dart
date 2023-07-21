@@ -1,3 +1,4 @@
+import 'package:bci/screens/members/bus/bus_seats_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -77,6 +78,12 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
                         Get.back();
                       },
                       child: Icon(Icons.arrow_back_ios,color: kwhite,)),
+                      title:  Text('Chennai - Bangalore',
+                         style: TextStyle(
+                          color: kwhite,
+                          fontSize: 20
+                         ),),
+                         centerTitle: true,
                   ),
                 ],
               )
@@ -107,73 +114,78 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
                     itemBuilder: (context,index){
                      return Padding(
                        padding: const EdgeInsets.only(left: 20,right: 20,top: 30),
-                       child: Container(
-                        height: 105,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: kwhite,
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              offset: Offset(0.0, 0.75),
-                              blurRadius: 2,
-                              color: kgrey
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(10)
-
-                        ),
-                         child: Column(
-                      
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20,left: 10,right: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-
-                                      Image.asset(image[index]),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 10),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(title[index],
+                       child: InkWell(
+                        onTap: (){
+                          Get.to(BusSeatsScreen());
+                        },
+                         child: Container(
+                          height: 105,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            color: kwhite,
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                offset: Offset(0.0, 0.75),
+                                blurRadius: 2,
+                                color: kgrey
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(10)
+                       
+                          ),
+                           child: Column(
+                                             
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 20,left: 10,right: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                       
+                                        Image.asset(image[index]),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 10),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(title[index],
+                                            ),
+                                              Text(discription[index],
+                                              style: TextStyle(
+                                                color: Color(0xffAEAEAE)
+                                              ),),
+                                              Text(distance[index],
+                                               style: TextStyle(
+                                                color: Color(0xffAEAEAE)
+                                              ),)
+                                            ],
                                           ),
-                                            Text(discription[index],
-                                            style: TextStyle(
-                                              color: Color(0xffAEAEAE)
-                                            ),),
-                                            Text(distance[index],
-                                             style: TextStyle(
-                                              color: Color(0xffAEAEAE)
-                                            ),)
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(amount[index],
-                                      style: TextStyle(
-                                        color: kOrange
-                                      ),),
-                                      Text(seats[index],
-                                       style: TextStyle(
-                                              color: Color(0xffAEAEAE)
-                                            ),)
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
+                                        )
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(amount[index],
+                                        style: TextStyle(
+                                          color: kOrange
+                                        ),),
+                                        Text(seats[index],
+                                         style: TextStyle(
+                                                color: Color(0xffAEAEAE)
+                                              ),)
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                           ),
                          ),
                        ),
                      );
