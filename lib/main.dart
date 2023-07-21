@@ -5,6 +5,7 @@ import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
+import 'package:bci/screens/members/bus/bus_contact_details.dart';
 import 'package:bci/screens/members/holiday/controllers/holidaycontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
           ),
           // home:  FlightBookingSuccessPage(
           // ),
-          home: const splash(),
+          home: const BusContactDetails(),
         );
       },
     );

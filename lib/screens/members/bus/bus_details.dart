@@ -1,6 +1,7 @@
 import 'package:bci/screens/members/bus/bus_seats_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../constands/constands.dart';
