@@ -9,6 +9,7 @@ import 'package:bci/models/flight_booking_models/booking_model.dart';
 import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
 import 'package:bci/models/flight_booking_models/passenger_model.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_booking_success_page.dart';
+import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
 import 'package:bci/screens/members/flight_booking_screens/par_nyc_screen.dart';
 import 'package:bci/services/network/flight_booking_api_services/air_add_payment_api_services.dart';
 import 'package:bci/services/network/flight_booking_api_services/air_printing_api_services.dart';
@@ -216,6 +217,7 @@ class FlightsController extends GetxController {
     isLoading(false);
     if (payment_response["result"] == "payment_successfull") {
       //need to give id
+      Get.to(() => FlightLoadingPage());
 
       bookAirTicket(bookingModel: bookingModel);
     } else {
@@ -238,7 +240,7 @@ class FlightsController extends GetxController {
         child: pw.Column(children: [
           pw.Center(
               child: pw.Text(
-            "Plane Ticket Purchase",
+            "Flight Ticket",
             style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold),
           )),
           pw.SizedBox(
@@ -288,16 +290,29 @@ class FlightsController extends GetxController {
             "Flight Details",
             style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold),
           ),
-          pw.SizedBox(
-            height: 5,
-          ),
-          pw.Text(
-            "Route",
-            style: pw.TextStyle(
-              fontSize: 12,
-              color: PdfColors.grey,
-            ),
-          ),
+          // pw.SizedBox(
+          //   height: 5,
+          // ),
+          // pw.Text(
+          //   "Route",
+          //   style: pw.TextStyle(
+          //     fontSize: 12,
+          //     color: PdfColors.grey,
+          //   ),
+          // ),
+          // pw.SizedBox(
+          //   height: 5,
+          // ),
+          // pw.Text(
+          //   "${airReprintModel.airPnrDetails.first.flights.first.origin} - ${airReprintModel.airPnrDetails.first.flights.first.destination}",
+          //   style: const pw.TextStyle(
+          //     fontSize: 12,
+          //     color: PdfColors.grey,
+          //   ),
+          // ),
+          // pw.SizedBox(
+          //   height: 5,
+          // ),
           pw.Divider(
             thickness: 1.2,
           ),
@@ -358,7 +373,8 @@ class FlightsController extends GetxController {
                     height: 4,
                   ),
                   pw.Text(
-                    "${airReprintModel.airPnrDetails.first.flights.first.travelDate}",
+                    airReprintModel
+                        .airPnrDetails.first.flights.first.travelDate,
                     style: pw.TextStyle(
                       fontSize: 10,
                       color: PdfColors.grey,
@@ -435,7 +451,7 @@ class FlightsController extends GetxController {
                   ),
                   pw.Text(
                     "${airReprintModel.airPnrDetails.first.flights.first.flightNumbers ?? ""}",
-                    style: pw.TextStyle(
+                    style: const pw.TextStyle(
                       fontSize: 10,
                       color: PdfColors.grey,
                     ),
@@ -454,8 +470,9 @@ class FlightsController extends GetxController {
                     height: 4,
                   ),
                   pw.Text(
-                    "Terminal 1",
-                    style: pw.TextStyle(
+                    airReprintModel.airPnrDetails.first.flights.first.segments
+                        .first.originTerminal,
+                    style: const pw.TextStyle(
                       fontSize: 10,
                       color: PdfColors.grey,
                     ),
@@ -474,8 +491,9 @@ class FlightsController extends GetxController {
                     height: 4,
                   ),
                   pw.Text(
-                    "",
-                    style: pw.TextStyle(
+                    airReprintModel.airPnrDetails.first.flights.first.segments
+                        .first.destinationTerminal,
+                    style: const pw.TextStyle(
                       fontSize: 10,
                       color: PdfColors.grey,
                     ),
@@ -485,7 +503,7 @@ class FlightsController extends GetxController {
             ],
           ),
           pw.Padding(
-            padding: pw.EdgeInsets.only(left: 30, right: 30, top: 10),
+            padding: const pw.EdgeInsets.only(left: 30, right: 30, top: 10),
             child: pw.Divider(
               thickness: 1.2,
             ),
@@ -518,8 +536,8 @@ class FlightsController extends GetxController {
                     ),
                     child: pw.Center(
                       child: pw.Text(
-                        "Business Class",
-                        style: pw.TextStyle(fontSize: 10),
+                        "",
+                        style: const pw.TextStyle(fontSize: 10),
                       ),
                     ),
                   ),
@@ -529,7 +547,7 @@ class FlightsController extends GetxController {
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: [
                   pw.Text(
-                    "Extra Baggage Allowance",
+                    "Checkin Baggage Allowance",
                     style: pw.TextStyle(
                         fontSize: 11, fontWeight: pw.FontWeight.bold),
                   ),
@@ -538,15 +556,44 @@ class FlightsController extends GetxController {
                   ),
                   pw.Container(
                     height: 20,
-                    width: 20,
+                    width: 70,
                     decoration: pw.BoxDecoration(
                       color: PdfColors.blueAccent100,
                       borderRadius: pw.BorderRadius.circular(3),
                     ),
                     child: pw.Center(
                       child: pw.Text(
-                        "${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.freeBaggage}",
-                        style: pw.TextStyle(fontSize: 10),
+                        airReprintModel.airPnrDetails.first.flights.first.fares
+                            .first.fareDetails.first.freeBaggage.checkInBaggage,
+                        style: const pw.TextStyle(fontSize: 10),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "Hand Baggage Allowance",
+                    style: pw.TextStyle(
+                        fontSize: 11, fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.SizedBox(
+                    height: 4,
+                  ),
+                  pw.Container(
+                    height: 20,
+                    width: 70,
+                    decoration: pw.BoxDecoration(
+                      color: PdfColors.blueAccent100,
+                      borderRadius: pw.BorderRadius.circular(3),
+                    ),
+                    child: pw.Center(
+                      child: pw.Text(
+                        airReprintModel.airPnrDetails.first.flights.first.fares
+                            .first.fareDetails.first.freeBaggage.handBaggage,
+                        style: const pw.TextStyle(fontSize: 10),
                       ),
                     ),
                   ),
@@ -565,7 +612,7 @@ class FlightsController extends GetxController {
                   ),
                   pw.Text(
                     "",
-                    style: pw.TextStyle(
+                    style: const pw.TextStyle(
                       fontSize: 10,
                       color: PdfColors.grey,
                     ),
@@ -575,7 +622,7 @@ class FlightsController extends GetxController {
             ],
           ),
           pw.Padding(
-            padding: pw.EdgeInsets.only(top: 10, bottom: 10),
+            padding: const pw.EdgeInsets.only(top: 10, bottom: 10),
             child: pw.Divider(
               thickness: 1.2,
             ),
@@ -586,7 +633,7 @@ class FlightsController extends GetxController {
             style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold),
           ),
           pw.Padding(
-            padding: pw.EdgeInsets.only(left: 0, top: 10),
+            padding: const pw.EdgeInsets.only(left: 0, top: 10),
             child: pw.Row(
               children: [
                 pw.Column(
@@ -639,7 +686,7 @@ class FlightsController extends GetxController {
                   crossAxisAlignment: pw.CrossAxisAlignment.start,
                   children: [
                     pw.Text(
-                      ":     ₹ ${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.basicAmount}",
+                      ":     Rs. ${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.basicAmount}",
                       style: pw.TextStyle(
                         fontSize: 11,
                         fontWeight: pw.FontWeight.bold,
@@ -650,7 +697,7 @@ class FlightsController extends GetxController {
                       height: 10,
                     ),
                     pw.Text(
-                      ":     ₹ ${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.serviceFeeAmount}",
+                      ":     Rs. ${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.serviceFeeAmount}",
                       style: pw.TextStyle(
                         fontSize: 11,
                         fontWeight: pw.FontWeight.bold,
@@ -661,7 +708,7 @@ class FlightsController extends GetxController {
                       height: 10,
                     ),
                     pw.Text(
-                      ":     ₹ ${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.airportTaxAmount}",
+                      ":     Rs. ${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.airportTaxAmount}",
                       style: pw.TextStyle(
                         fontSize: 11,
                         fontWeight: pw.FontWeight.bold,
@@ -696,7 +743,7 @@ class FlightsController extends GetxController {
             ),
           ),
           pw.Padding(
-            padding: pw.EdgeInsets.only(left: 0, right: 50, top: 5, bottom: 10),
+            padding: const pw.EdgeInsets.only(left: 0, right: 50, top: 5, bottom: 10),
             child: pw.Divider(
               thickness: 1.2,
             ),
@@ -714,11 +761,11 @@ class FlightsController extends GetxController {
                 ],
               ),
               pw.Padding(
-                padding: pw.EdgeInsets.only(left: 93),
+                padding: const pw.EdgeInsets.only(left: 93),
                 child: pw.Column(
                   children: [
                     pw.Text(
-                      ":     ₹ ${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.totalAmount}",
+                      ":     Rs. ${airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.totalAmount}",
                       style: pw.TextStyle(
                         fontSize: 11,
                         fontWeight: pw.FontWeight.bold,
@@ -757,10 +804,11 @@ class FlightsController extends GetxController {
     ));
 
     var bytes = await pdf.save();
-    downloadFile(bytes, "0111");
+    downloadFile(bytes, airReprintModel.airPnrDetails.first.airlinePnr);
   }
 
   downloadFile(var bytes, String txId) async {
+    await Permission.storage.request();
     if (await Permission.storage.request().isGranted) {
       // Either the permission was already granted before or the user just granted it.
 
@@ -768,11 +816,11 @@ class FlightsController extends GetxController {
       //     '/storage/emulated/0/Download'); //! THIS WORKS for android only !!!!!!
 
       try {
-        var path = "/storage/emulated/0/Download";
+        // var path = "/storage/emulated/0/Download";
         var dir = await getExternalStorageDirectory();
 
         //qr image file saved to general downloads folder
-        File file = await File('${dir!.path}/$txId-invoice.pdf').create();
+        File file = await File('${dir!.path}/$txId-air_ticket.pdf').create();
 
         await file.writeAsBytes(bytes);
         Get.closeAllSnackbars();
@@ -780,11 +828,24 @@ class FlightsController extends GetxController {
         Get.snackbar("Invoice Downloaded to ", "${file.path}",
             colorText: Colors.white,
             backgroundColor: Colors.green,
-            snackPosition: SnackPosition.BOTTOM);
+            snackPosition: SnackPosition.TOP);
       } on Exception catch (e) {
         // TODO
+        var dir = await getApplicationDocumentsDirectory();
+
+        File file = await File('${dir.path}/$txId-air_ticket.pdf').create();
+
+        await file.writeAsBytes(bytes);
+        OpenFile.open(file.path);
         print(e);
       }
+    } else {
+      var dir = await getApplicationDocumentsDirectory();
+
+      File file = await File('${dir.path}/$txId-air_ticket.pdf').create();
+
+      await file.writeAsBytes(bytes);
+      OpenFile.open(file.path);
     }
   }
 }

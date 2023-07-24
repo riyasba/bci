@@ -12,6 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'authentications/splash_screen/Splash_screen.dart';
 import 'screens/members/flight_booking_screens/flight_booking_success_page.dart';
+import 'screens/members/flight_booking_screens/flight_loading_page.dart';
 import 'screens/members/flight_booking_screens/flight_ticket_screen.dart';
 
 void main() {
@@ -41,9 +42,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          // home:  FlightBookingSuccessPage(
-          // ),
-          home: const BusContactDetails(),
+          // home: FlightLoadingPage(),
+          home: const splash(),
         );
       },
     );

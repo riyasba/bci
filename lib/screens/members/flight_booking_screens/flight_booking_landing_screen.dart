@@ -242,9 +242,9 @@ class _FlightBookingLandingScreenState
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
+                         const Row(
                             children: [
-                              const Text(
+                               Text(
                                 'Childrens',
                                 style: TextStyle(fontSize: 13),
                               ),
@@ -258,10 +258,10 @@ class _FlightBookingLandingScreenState
                                         .decreaseChildCount();
                                     flightBookingController.update();
                                   },
-                                  icon: Icon(Icons.do_not_disturb_on_outlined)),
+                                  icon: const Icon(Icons.do_not_disturb_on_outlined)),
                               Obx(() => Text(
                                     '${flightBookingController.childsCount.value}',
-                                    style: TextStyle(fontSize: 14),
+                                    style: const TextStyle(fontSize: 14),
                                   )),
                               IconButton(
                                   onPressed: () {

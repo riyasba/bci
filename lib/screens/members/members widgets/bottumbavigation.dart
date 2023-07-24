@@ -58,7 +58,7 @@ class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
     TabItem(Icons.search, "Search", korange,
         circleStrokeColor: Colors.white,
         labelStyle:
-            TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          const  TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
     TabItem(Icons.wallet, "Wallet", korange,
         circleStrokeColor: Colors.white,
         labelStyle:

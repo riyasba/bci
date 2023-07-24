@@ -34,7 +34,7 @@ class _HolidayHomeState extends State<HolidayHome> {
     getPackageList();
     searchController.addListener(searchUsers);
     holidayPackageController.recomended();
-    holidayPackageController.update();
+ 
   }
 
   getPackageList() async {
@@ -133,14 +133,20 @@ class _HolidayHomeState extends State<HolidayHome> {
                                 print("----------------->>>>--------------->>${holidayPackageController.getPackageDetailsData[index].id}");
                               },
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 2,right: 2),
+                                padding: const EdgeInsets.only(left: 4,right: 4,top: 2,bottom: 2),
                                 child: Container(
                                   height: 35,
                                   width: 100,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 2,
+                                        color: Colors.grey.withOpacity(0.6)
+                                      )
+                                    ],
                                     borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(color:holidayPackageController.catIndex.value == index ? Colors.grey : Colors.white),
+                                    border: Border.all(color:holidayPackageController.catIndex.value == index ? kblue : Colors.white),
                                   ),
                                   child: Center(
                                     child: Text(holidayPackageController.packageCategoryData[index].name,

@@ -146,6 +146,7 @@ class _FlightDeparetureSCreenState extends State<FlightDeparetureSCreen> {
                 child: Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: SfDateRangePicker(
+                      minDate: DateTime.now(),
                       initialSelectedDate: flightsController.depatureDate,
                       todayHighlightColor: kOrange,
                       selectionColor: kOrange,

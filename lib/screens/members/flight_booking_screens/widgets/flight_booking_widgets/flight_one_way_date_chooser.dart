@@ -39,7 +39,7 @@ class _FlightDestinationChooserState extends State<FlightOneWayDateRange> {
                 ksizedbox20,
                 InkWell(
                   onTap: () {
-                    Get.to(FlightDeparetureSCreen());
+                    Get.to(const FlightDeparetureSCreen());
                   },
                   child: flightsController.isDepatureDateSelected.isTrue
                       ? Container(

@@ -289,7 +289,7 @@ class _FlightFilterScreenState extends State<FlightFilterScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar:  Container(
         height: 60,
         child: Row(
           children: [
