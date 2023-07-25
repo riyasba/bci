@@ -1,4 +1,5 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/bus_controllers.dart';
 import 'package:bci/screens/members/bus/bus_payment_screen.dart';
 import 'package:bci/screens/members/bus/ticket_details_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
@@ -6,13 +7,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BusSeatsScreen extends StatefulWidget {
-  const BusSeatsScreen({super.key});
+  String boardingid;
+  String droppingid;
+  String buskey;
+  BusSeatsScreen({super.key,required this.boardingid, required this.droppingid, required this.buskey});
 
   @override
   State<BusSeatsScreen> createState() => _BusSeatsScreenState();
 }
 
 class _BusSeatsScreenState extends State<BusSeatsScreen> {
+
+  final busController = Get.find<BusController>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    busController.busSeat(boardingId: widget.boardingid, droppingId: widget.droppingid, busKey: widget.buskey);
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -87,55 +101,129 @@ class _BusSeatsScreenState extends State<BusSeatsScreen> {
             ],
           )
           ),
-          body:const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 50,right: 50),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
+          body: GetBuilder<BusController>(
+            builder: (_) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                    Padding(
+                      padding:const EdgeInsets.only(left: 50,right: 50),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Image(image: AssetImage("assets/icons/Group 13.png")),
-                          ksizedbox10,
-                          Image(image: AssetImage("assets/icons/Group 13.png"),color:Colors.amber,),
-                          ksizedbox10,
-                          Image(image: AssetImage("assets/icons/Group 13.png")),
-                          ksizedbox10,
-                          Image(image: AssetImage("assets/icons/Group 13.png")),
-                          ksizedbox10,
-                          Image(image: AssetImage("assets/icons/Group 13.png")),
-                          ksizedbox10,
-                          Image(image: AssetImage("assets/icons/Group 13.png")),
+                           
+                           Container(
+                            width: 200,
+                            height: 400,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                              border: Border.all(color: Colors.grey,width: 0.5)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width: 30,
+                                    child: ListView.builder(
+                                        itemCount: busController.seatMap.length,
+                                        itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.only(bottom: 5),
+                                          child: InkWell(
+                                            onTap: (){
+                                              if(busController.seatMap[index].isSelect == true){
+                                                  busController.seatMap[index].isSelect = false;
+                                                  busController.update();
+                                              } else {
+                                                busController.seatMap[index].isSelect = true;
+                                                  busController.update();
+                                              }
+                                              
+                                            },
+                                            child: Container(
+                                              height: 60,
+                                              width: 30,
+                                              decoration: BoxDecoration(
+                                                color:busController.seatMap[index].isSelect == true ? kOrange : Colors.grey[200],
+                                                borderRadius: BorderRadius.circular(5),
+                                                border: Border.all(color: Colors.grey)
+                                              ),
+                                              child: Center(
+                                                child: Text(busController.seatMap[index].seatNumber),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    ),
+                                  ),
+                                  ksizedbox10,
+                                  //
+                                   Container(
+                                    width: 70,
+                                    child: ListView.builder(
+                                      itemCount: busController.seatMap.length,
+                                      itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.only(bottom: 5,left: 5,),
+                                        child: Row(
+                                          children: [
+                                            InkWell(
+                                              onTap: (){
+
+                                              },
+                                              child: Container(
+                                                height: 60,
+                                                width: 30,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey[200],
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey)
+                                                ),
+                                                child: Center(
+                                                  child: Text(busController.seatMap[index].seatNumber),
+                                                ),
+                                              ),
+                                            ),
+                                            kwidth5,
+                                            InkWell(
+                                              onTap: (){
+
+                                              },
+                                              child: Container(
+                                                height: 60,
+                                                width: 30,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey[200],
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey)
+                                                ),
+                                                child: Center(
+                                                  child: Text(busController.seatMap[index].seatNumber),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                     },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                           ),
+                           
                         ],
                       ),
-                       Column(
-                         children: [
-                           Image(image: AssetImage("assets/icons/Group 20.png")),
-                           ksizedbox10,
-                           Image(image: AssetImage("assets/icons/Group 20.png")),
-                           ksizedbox10,
-                           Image(image: AssetImage("assets/icons/Group 20.png")),
-                           ksizedbox10,
-                           Image(image: AssetImage("assets/icons/Group 20.png")),
-                           ksizedbox10,
-                           Image(image: AssetImage("assets/icons/Group 20.png")),
-                           ksizedbox10,
-                           Image(image: AssetImage("assets/icons/Group 18.png")),
-                           ksizedbox10,
-                           Image(image: AssetImage("assets/icons/Group 20.png")),
-                           ksizedbox10,
-                           Image(image: AssetImage("assets/icons/Group 20.png")),
-                           ksizedbox10,
-                           Image(image: AssetImage("assets/icons/Group 20.png")),
-                         ],
-                       ),
-                    ],
-                  ),
-                ),
-                
-            ],
+                    ),
+                    
+                ],
+              );
+            }
           ),
           bottomNavigationBar: Container(
             height: 50,

@@ -26,10 +26,10 @@ class MemberRegisterApiServices extends BaseApiService {
             "name": memberRegisterModel.name,
             "mobile": memberRegisterModel.mobile,
             "email": memberRegisterModel.email,
-            //"occupation": memberRegisterModel.occupation,
-            //"father_name": memberRegisterModel.fatherName,
-            //"mother_name": memberRegisterModel.motherName,
-            //"is_married": "0",
+            // "occupation": memberRegisterModel.occupation,
+            // "father_name": memberRegisterModel.fatherName,
+            // "mother_name": memberRegisterModel.motherName,
+            // "is_married": "0",
             // "residential_address": jsonEncode({
             //   "door_no": residentialAddress.doorNo,
             //   "address": residentialAddress.address,
@@ -46,8 +46,8 @@ class MemberRegisterApiServices extends BaseApiService {
             //   "state": officialAddress.state,
             //   "city": officialAddress.city,
             // }),
-            //"pan_no": memberRegisterModel.panNo,
-            //"aadhar_no": residentialAddress.aadhrId,
+            // "pan_no": memberRegisterModel.panNo,
+            // "aadhar_no": residentialAddress.aadhrId,
             "role_id": "3",
           });
       print("::::::::<Register URL>::::::::status code::::::::::");

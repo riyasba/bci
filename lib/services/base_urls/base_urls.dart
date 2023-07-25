@@ -124,4 +124,12 @@ abstract class BaseApiService {
   //liquors api
   final getVendorByCategory = "https://bci.generation360tech.in/api/auth/getVendorsByCategory";
 
+  //bus booking api
+
+  final getCityListApiUrl = "https://bci.generation360tech.in/api/auth/Bus_CityList";
+
+  final searchBusApiUrl = "https://bci.generation360tech.in/api/auth/Bus_Search";
+
+  final busSeatMapApiUrl = "https://bci.generation360tech.in/api/auth/bus_seat_map";
+
 }

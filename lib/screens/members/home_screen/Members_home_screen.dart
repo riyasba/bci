@@ -229,30 +229,34 @@ class _Home_screen1State extends State<Home_screen1> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        InkWell(
-                          onTap: () {
-                            Get.to(() => const FlightBookingLandingScreen());
-                          },
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 58,
-                                width: 58,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: kblue),
-                                child:
-                                    Image.asset("assets/icons/icons (1).png"),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Get.to(() => const FlightBookingLandingScreen());
+                              },
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 58,
+                                    width: 58,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: kblue),
+                                    child:
+                                        Image.asset("assets/icons/icons (1).png"),
+                                  ),
+                                  const SizedBox(
+                                    height: 7,
+                                  ),
+                                  const Text(
+                                    'Flight',
+                                    style: TextStyle(fontWeight: FontWeight.w700),
+                                  )
+                                ],
                               ),
-                              const SizedBox(
-                                height: 7,
-                              ),
-                              const Text(
-                                'Flight',
-                                style: TextStyle(fontWeight: FontWeight.w700),
-                              )
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                         //
                         InkWell(

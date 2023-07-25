@@ -1,4 +1,8 @@
+import 'package:bci/controllers/bus_controllers.dart';
+import 'package:bci/screens/members/bus/bus_city_search_screen.dart';
+import 'package:bci/screens/members/bus/bus_to_city_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +17,50 @@ class BusScreen extends StatefulWidget {
 }
 
 class _BusScreenState extends State<BusScreen> {
+
+  final buscontroller = Get.find<BusController>();
+
+  DateTime date = DateTime.now();
+
+  _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: date,
+      initialDatePickerMode: DatePickerMode.day,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      firstDate: DateTime(1910),
+      locale: const Locale('en', 'IN'),
+      lastDate: DateTime.now().add(const Duration(days: 6570)),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: kblue, // <-- SEE HERE
+              onPrimary: Colors.white, // <-- SEE HERE
+              onSurface: Colors.blueAccent, // <-- SEE HERE
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: kblue, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    
+
+    if (picked != null)
+      setState(() {
+        date = picked;
+        buscontroller.date(formatDate(date, [dd, "/", mm, "/", yyyy]));
+        buscontroller.travelDatess = date;
+        //buscontroller.day(formatDate(date, []));
+      });
+  }
+   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,8 +99,8 @@ class _BusScreenState extends State<BusScreen> {
           ),
           body: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20,top: 30),
+              const Padding(
+                padding: EdgeInsets.only(left: 20,top: 30),
                 child: Row(
                   children: [
                     Text('Journey Details',
@@ -66,118 +114,126 @@ class _BusScreenState extends State<BusScreen> {
               ksizedbox10,
               Padding(
                 padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 108,
-                      decoration: BoxDecoration(
-                        color: kwhite,
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            offset: Offset(0.0, 0.75),
-                            color: kgrey,
-                            blurRadius: 1
-                          )
-                        ]
-                      ),
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10,top: 3),
-                            child: Row(
-                              children: [
-                                Text('From',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color(0xffBABABA)
-                                ),)
-                              ],
-                            ),
+                child: Obx( () =>
+                   Container(
+                    height: 108,
+                    decoration: BoxDecoration(
+                      color: kwhite,
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          offset:const Offset(0.0, 0.75),
+                          color: kgrey,
+                          blurRadius: 1
+                        )
+                      ]
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(left: 10,top: 3),
+                          child: Row(
+                            children: [
+                              Text('From',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Color(0xffBABABA)
+                              ),)
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10,top: 8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: 7,
-                                      width: 7,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: kOrange
-                                      ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10,top: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 7,
+                                    width: 7,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: kOrange
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text('Enter Boarding',
-                                      style: TextStyle(
+                                  ),
+                                  InkWell(
+                                    onTap: (){
+                                      Get.to(const BusCitySearchScreen());
+                                    },
+                                    child: Padding(
+                                      padding:const EdgeInsets.only(left: 10),
+                                      child: Text(buscontroller.fromCity.value,
+                                      style:const TextStyle(
                                         color: Color(0xff575757)
                                       ),
                                       ),
-                                    )
-                                  ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.only(right: 20),
+                              //   child: Row(
+                              //                             children:[
+                              //                              Image.asset('assets/icons/busarrow.png')
+                              //                         ]),
+                              // )
+                            ],
+                          ),
+                        ),
+                       
+                        const Padding(
+                          padding: EdgeInsets.only(top: 12,left: 10),
+                          child: Row(
+                            children: [
+                              Text('To',
+                              style: TextStyle(
+                                fontSize: 12
+                              ),)
+                            ],
+                          ),
+                        ),
+                           Padding(
+                          padding: const EdgeInsets.only(left: 10,top: 8),
+                          child: InkWell(
+                            onTap: (){
+                              Get.to(const ToBusCitySearchScreen());
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height: 7,
+                                  width: 7,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: kwhite,
+                                    border: Border.all(color: kgrey)
+                                  ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 20),
-                                  child: Row(
-                                                            children:[
-                                                             Image.asset('assets/icons/busarrow.png')
-                                                        ]),
-                                )
-                              ],
-                            ),
-                          ),
-       
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12,left: 10),
-                            child: Row(
-                              children: [
-                                Text('To',
-                                style: TextStyle(
-                                  fontSize: 12
-                                ),)
-                              ],
-                            ),
-                          ),
-                             Padding(
-                            padding: const EdgeInsets.only(left: 10,top: 8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: 7,
-                                      width: 7,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: kwhite,
-                                        border: Border.all(color: kgrey)
-                                      ),
+                                InkWell(
+                                  onTap: (){
+                                     Get.to(const ToBusCitySearchScreen());
+                                  },
+                                  child: Padding(
+                                    padding:const EdgeInsets.only(left: 10),
+                                    child: Text(buscontroller.toCity.value,
+                                    style:const TextStyle(
+                                      color: Color(0xff575757)
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text('Enter Destination',
-                                      style: TextStyle(
-                                        color: Color(0xff575757)
-                                      ),
-                                      ),
-                                    )
-                                  ],
+                                    ),
+                                  ),
                                 ),
                               
                               ],
                             ),
                           ),
-                          
-                        ],
-                      ),
+                        ),
+                        
+                      ],
                     ),
-                      
-                  ],
+                  ),
                 ),
               ),
               ksizedbox20,
@@ -190,7 +246,7 @@ class _BusScreenState extends State<BusScreen> {
                     color: kwhite,
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                        offset: Offset(0.0, 0.75),
+                        offset:const Offset(0.0, 0.75),
                         blurRadius: 1,
                         color: kgrey
                       )
@@ -198,8 +254,8 @@ class _BusScreenState extends State<BusScreen> {
                   ),
                   child: Column(
                     children: [
-                       Padding(
-                         padding: const EdgeInsets.only(left: 10,top: 5),
+                       const Padding(
+                         padding: EdgeInsets.only(left: 10,top: 5),
                          child: Row(
                           children: [
                             Text('Date',
@@ -215,25 +271,27 @@ class _BusScreenState extends State<BusScreen> {
                          child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            children: [
-                             Row(
-                              children: [
-                                Image.asset('assets/icons/busdate.png',
-                                height: 20,
-                                fit:BoxFit.fitHeight ,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 6),
-                                  child: Text('20'),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 6),
-                                  child: Text('September'),
-                                )
-                              ],
+                             InkWell(
+                              onTap: (){
+                                _selectDate(context);
+                              },
+                               child: Row(
+                                children: [
+                                  Image.asset('assets/icons/busdate.png',
+                                  height: 20,
+                                  fit:BoxFit.fitHeight ,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 6),
+                                    child: Text(buscontroller.date.value),
+                                  ),
+                                 
+                                ],
+                               ),
                              ),
-                             Row(
+                             const Row(
                               children: [
-                                Text('Monday')
+                                Text("")
                               ],
                              )
                            ],
@@ -247,7 +305,10 @@ class _BusScreenState extends State<BusScreen> {
               ksizedbox10,
               InkWell(
                 onTap: (){
-                  Get.to(BusDetailsScreen());
+                  Get.to(BusDetailsScreen(
+                    fromCityName: buscontroller.fromCity.value,
+                    toCityName: buscontroller.toCity.value,
+                    tdate: buscontroller.date.value,));
                 },
                 child: Container(
                   height: 44,
@@ -256,7 +317,7 @@ class _BusScreenState extends State<BusScreen> {
                    color: kOrange,
                    boxShadow: <BoxShadow>[
                     BoxShadow(
-                      offset: Offset(0.0, 0.75),
+                      offset:const Offset(0.0, 0.75),
                       blurRadius: 5,
                       color: kyellow
                     )
