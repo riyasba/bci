@@ -131,7 +131,6 @@ class _BusCitySearchScreenState extends State<BusCitySearchScreen> {
                                               padding: const EdgeInsets.only(left: 15, right: 15),
                                               child: InkWell(
                                                 onTap: () {
-
                                                   busController.fromCity(busController.getBusCityList[i].cityName);
                                                   busController.fromcityId(busController.getBusCityList[i].cityId);
                                                   
