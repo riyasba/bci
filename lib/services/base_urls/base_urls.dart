@@ -132,4 +132,7 @@ abstract class BaseApiService {
 
   final busSeatMapApiUrl = "https://bci.generation360tech.in/api/auth/bus_seat_map";
 
+  final busTempBooking = "https://bci.generation360tech.in/api/auth/bus_temp_booking";
+
+
 }

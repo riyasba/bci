@@ -15,7 +15,7 @@ class BusCitySearchScreen extends StatefulWidget {
 
 class _BusCitySearchScreenState extends State<BusCitySearchScreen> {
   final busController = Get.find<BusController>();
- 
+
   @override
   void initState() {
     super.initState();
@@ -60,44 +60,47 @@ class _BusCitySearchScreenState extends State<BusCitySearchScreen> {
                 ksizedbox10,
                 //search2(),
                 Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15),
-      child: Container(
-        height: 50,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color:const Color(0xFFEFEEEE),
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              BoxShadow(blurRadius: 5, color: Colors.grey.withOpacity(0.5)),
-            ]),
-       
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 10,
-            ),
-            const Icon(
-              Icons.search,
-              color: Colors.grey,
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              child: TextField(
-                  onChanged: (value) async {
-                    if (value.length > 1) {
-                      await Future.delayed(const Duration(milliseconds: 200));
-                      Get.find<BusController>().busCityList(searchCity: value);
-                    }
-                  },
-                  decoration: const InputDecoration.collapsed(
-                      hintText: "search city")),
-            ),
-          ],
-        ),
-      ),
-    ),
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: Container(
+                    height: 50,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: const Color(0xFFEFEEEE),
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 5,
+                              color: Colors.grey.withOpacity(0.5)),
+                        ]),
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const Icon(
+                          Icons.search,
+                          color: Colors.grey,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: TextField(
+                              onChanged: (value) async {
+                                if (value.length > 1) {
+                                  await Future.delayed(
+                                      const Duration(milliseconds: 200));
+                                  Get.find<BusController>()
+                                      .busCityList(searchCity: value);
+                                }
+                              },
+                              decoration: const InputDecoration.collapsed(
+                                  hintText: "search city")),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 ksizedbox10,
                 Padding(
                     padding: const EdgeInsets.only(left: 15, right: 15),
@@ -117,90 +120,99 @@ class _BusCitySearchScreenState extends State<BusCitySearchScreen> {
                                 ],
                                 borderRadius: BorderRadius.circular(5)),
                             child: GetBuilder<BusController>(builder: (_) {
-                              return busController.getBusCityList.isEmpty 
-                                     
+                              return busController.getBusCityList.isEmpty
                                   ? const Center(
                                       child: Text("No data found"),
                                     )
-                                  
-                                      : ListView(
-                                        children: [
-                                          ksizedbox10,
-                                          for (int i = 0; i < busController.getBusCityList.length; i++)
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 15, right: 15),
-                                              child: InkWell(
-                                                onTap: () {
-                                                  busController.fromCity(busController.getBusCityList[i].cityName);
-                                                  busController.fromcityId(busController.getBusCityList[i].cityId);
-                                                  
-                                                  Get.back();
-                                                },
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    // Container(
-                                                    //   width:
-                                                    //       MediaQuery.of(context)
-                                                    //               .size
-                                                    //               .width *
-                                                    //           0.2,
-                                                    //   child: Row(
-                                                    //     mainAxisAlignment:
-                                                    //         MainAxisAlignment
-                                                    //             .spaceBetween,
-                                                    //     children: [
-                                                    //       ElevatedButton(
-                                                    //         style: ElevatedButton
-                                                    //             .styleFrom(
-                                                    //                 minimumSize:
-                                                    //                     const Size(
-                                                    //                         30,
-                                                    //                         25),
-                                                    //                 backgroundColor:
-                                                    //                     kblue),
-                                                    //         onPressed: () {},
-                                                    //         child: Text(
-                                                    //           busController.getBusCityList[i].cityName,
-                                                    //         ),
-                                                    //       ),
-                                                    //     ],
-                                                    //   ),
-                                                    // ),
-                                                    Container(
-                                                      height: 30,
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.5,
-                                                      child: Text(busController.getBusCityList[i].cityName,
-                                                        // flightsController
-                                                        //     .airports[i].name,
-                                                        style: TextStyle(
-                                                            fontSize: 15.sp),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                        width: MediaQuery.of(
-                                                                    context)
+                                  : ListView(children: [
+                                      ksizedbox10,
+                                      for (int i = 0;
+                                          i <
+                                              busController
+                                                  .getBusCityList.length;
+                                          i++)
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 15, right: 15),
+                                          child: InkWell(
+                                            onTap: () {
+                                              busController.fromCity(
+                                                  busController
+                                                      .getBusCityList[i]
+                                                      .cityName);
+                                              busController.fromcityId(
+                                                  busController
+                                                      .getBusCityList[i]
+                                                      .cityId);
+
+                                              Get.back();
+                                            },
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                // Container(
+                                                //   width:
+                                                //       MediaQuery.of(context)
+                                                //               .size
+                                                //               .width *
+                                                //           0.2,
+                                                //   child: Row(
+                                                //     mainAxisAlignment:
+                                                //         MainAxisAlignment
+                                                //             .spaceBetween,
+                                                //     children: [
+                                                //       ElevatedButton(
+                                                //         style: ElevatedButton
+                                                //             .styleFrom(
+                                                //                 minimumSize:
+                                                //                     const Size(
+                                                //                         30,
+                                                //                         25),
+                                                //                 backgroundColor:
+                                                //                     kblue),
+                                                //         onPressed: () {},
+                                                //         child: Text(
+                                                //           busController.getBusCityList[i].cityName,
+                                                //         ),
+                                                //       ),
+                                                //     ],
+                                                //   ),
+                                                // ),
+                                                Container(
+                                                  height: 30,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.5,
+                                                  child: Text(
+                                                    busController
+                                                        .getBusCityList[i]
+                                                        .cityName,
+                                                    // flightsController
+                                                    //     .airports[i].name,
+                                                    style: TextStyle(
+                                                        fontSize: 15.sp),
+                                                  ),
+                                                ),
+                                                Container(
+                                                    width:
+                                                        MediaQuery.of(context)
                                                                 .size
                                                                 .width *
                                                             0.1,
-                                                        child: Text("",
-                                                            // flightsController
-                                                            //     .airports[i]
-                                                            //     .dst,
-                                                            style: TextStyle(
-                                                                fontSize:
-                                                                    15.sp)))
-                                                  ],
-                                                ),
-                                              ),
+                                                    child: Text("",
+                                                        // flightsController
+                                                        //     .airports[i]
+                                                        //     .dst,
+                                                        style: TextStyle(
+                                                            fontSize: 15.sp)))
+                                              ],
                                             ),
-                                        ]);
+                                          ),
+                                        ),
+                                    ]);
                             }),
                           ))
                     ]))

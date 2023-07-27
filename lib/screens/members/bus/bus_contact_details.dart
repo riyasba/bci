@@ -1,10 +1,24 @@
+import 'package:bci/models/bus_booking_models/search_bus_model.dart';
 import 'package:bci/screens/members/bus/buscommenappbar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../../constands/constands.dart';
 
 class BusContactDetails extends StatelessWidget {
-  const BusContactDetails({super.key});
+  Bus busData;
+  String boardingId;
+  String dropingId;
+  String searchkey;
+  List<String> seatIds;
+
+  BusContactDetails(
+      {super.key,
+      required this.boardingId,
+      required this.busData,
+      required this.dropingId,
+      required this.searchkey,
+      required this.seatIds});
 
   @override
   Widget build(BuildContext context) {
@@ -23,76 +37,63 @@ class BusContactDetails extends StatelessWidget {
               ksizedbox10,
               const Text('EMAIL ID').text.bold.gray500.make(),
               ksizedbox10,
-              const Text('Pravinraj902527@gmail.com').text.sm.gray500.make(),
+              const TextField(
+                decoration:
+                    InputDecoration.collapsed(hintText: "Enter your email"),
+              ),
               ksizedbox10,
               Divider(color: kgrey, height: 0.5),
               ksizedbox20,
               const Text('PHONE').text.bold.gray500.make(),
               ksizedbox10,
-              const Text('+91 - 9789390456').text.sm.gray500.make(),
-              ksizedbox10,
-              Divider(color: kgrey, height: 0.5),
-              ksizedbox20,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Passenger Details').text.xl.semiBold.make(),
-                  Text('Seat No : 07').text.semiBold.make(),
-                ],
+              const TextField(
+                decoration:
+                    InputDecoration.collapsed(hintText: "Enter your phone"),
               ),
               ksizedbox10,
-              const Text('NAME').text.bold.gray500.make(),
-              ksizedbox10,
-              const Text('Praveen').text.sm.gray500.make(),
-              ksizedbox10,
               Divider(color: kgrey, height: 0.5),
               ksizedbox20,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const Text('GENDER').text.gray500.semiBold.make(),
-                  Text('Male').text.semiBold.gray500.make(),
-                  Text('Female').text.semiBold.gray500.make(),
-                ],
-              ),
-              ksizedbox10,
-              const Text('AGE').text.bold.gray500.make(),
-              ksizedbox10,
-              const Text('21').text.sm.gray500.make(),
-              ksizedbox10,
-              Divider(color: kgrey, height: 0.5),
-              ksizedbox10,
-              ksizedbox20,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Passenger Details').text.xl.semiBold.make(),
-                  Text('Seat No : 07').text.semiBold.make(),
-                ],
-              ),
-              ksizedbox10,
-              const Text('NAME').text.bold.gray500.make(),
-              ksizedbox10,
-              const Text('Praveen').text.sm.gray500.make(),
-              ksizedbox10,
-              Divider(color: kgrey, height: 0.5),
-              ksizedbox20,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const Text('GENDER').text.gray500.semiBold.make(),
-                  Text('Male').text.semiBold.gray500.make(),
-                  Text('Female').text.semiBold.gray500.make(),
-                ],
-              ),
-              ksizedbox10,
-              const Text('AGE').text.bold.gray500.make(),
-              ksizedbox10,
-              const Text('21').text.sm.gray500.make(),
-              ksizedbox10,
-              Divider(color: kgrey, height: 0.5),
-              ksizedbox10,
-              ksizedbox20,
+              for (int i = 0; i < seatIds.length; i++)
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Passenger Details').text.xl.semiBold.make(),
+                        Text('Seat No : ${seatIds[i]}').text.semiBold.make(),
+                      ],
+                    ),
+                    ksizedbox10,
+                    const Text('NAME').text.bold.gray500.make(),
+                    ksizedbox10,
+                    const TextField(
+                      decoration: InputDecoration.collapsed(
+                          hintText: "Enter your name"),
+                    ),
+                    ksizedbox10,
+                    Divider(color: kgrey, height: 0.5),
+                    ksizedbox20,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Text('GENDER').text.gray500.semiBold.make(),
+                        Text('Male').text.semiBold.gray500.make(),
+                        Text('Female').text.semiBold.gray500.make(),
+                      ],
+                    ),
+                    ksizedbox10,
+                    const Text('AGE').text.bold.gray500.make(),
+                    ksizedbox10,
+                    const TextField(
+                      decoration:
+                          InputDecoration.collapsed(hintText: "Enter your age"),
+                    ),
+                    ksizedbox10,
+                    Divider(color: kgrey, height: 0.5),
+                    ksizedbox10,
+                    ksizedbox20,
+                  ],
+                ),
             ],
           ),
         ),
@@ -100,17 +101,26 @@ class BusContactDetails extends StatelessWidget {
       bottomNavigationBar: Row(
         children: [
           Expanded(
-            child: Container(child:Center(child: Text('Cancel')) ,
-                   //   width: double.infinity,
-              height: 75,
-              color: kgrey,
+            child: InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: Container(
+                child: const Center(child: Text('Cancel')),
+                //   width: double.infinity,
+                height: 55,
+                color: kgrey,
+              ),
             ),
           ),
           Expanded(
-            child: Container(child: Center(child: Text('Continue Booking')),
+            child: InkWell(
+              child: Container(
+                child: Center(child: Text('Continue Booking')),
                 //      width: double.infinity,
-              height: 75,
-              color: korange,
+                height: 55,
+                color: korange,
+              ),
             ),
           ),
         ],
