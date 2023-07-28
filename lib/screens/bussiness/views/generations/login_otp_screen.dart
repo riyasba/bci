@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
@@ -13,18 +12,18 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/instance_manager.dart';
 
-class BusinessOtpvarification extends StatefulWidget {
+class LoginBusinessOtpverification extends StatefulWidget {
   String phoneNumber;
   String otp;
-  BusinessOtpvarification(
+  LoginBusinessOtpverification(
       {super.key, required this.otp, required this.phoneNumber});
 
   @override
-  State<BusinessOtpvarification> createState() =>
-      _BusinessOtpvarificationState();
+  State<LoginBusinessOtpverification> createState() =>
+      _LoginBusinessOtpverificationState();
 }
 
-class _BusinessOtpvarificationState extends State<BusinessOtpvarification> {
+class _LoginBusinessOtpverificationState extends State<LoginBusinessOtpverification> {
   String otpString = "";
 
   int _start = 60; // Timer duration in seconds
@@ -214,9 +213,9 @@ class _BusinessOtpvarificationState extends State<BusinessOtpvarification> {
                   )
                 : InkWell(
                     onTap: () {
-                      authController.verifyOtp(mobile: widget.phoneNumber, otp: widget.otp);
-                      // authController.loginUsersbusiness(
-                      //     mobile: widget.phoneNumber, otp: otpString);
+                      //authController.verifyOtp(mobile: widget.phoneNumber, otp: widget.otp);
+                       authController.loginUsersbusiness(
+                           mobile: widget.phoneNumber, otp: otpString);
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20, right: 20),

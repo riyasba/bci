@@ -185,11 +185,11 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color: Color.fromARGB(255, 14, 13, 13))),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       isCollapsed: false,
                       isDense: true,
                       contentPadding:
@@ -197,7 +197,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       hintText: "Merchant Display Name",
                       hintStyle: TextStyle(
                         color: kblue,
@@ -223,11 +223,11 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       isCollapsed: false,
                       isDense: true,
                       contentPadding:
@@ -235,7 +235,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       hintText: "Email ID",
                       hintStyle: TextStyle(
                         color: kblue,
@@ -270,11 +270,11 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       isCollapsed: false,
                       isDense: true,
                       contentPadding:
@@ -282,7 +282,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       hintText: "Phone Number",
                       hintStyle: TextStyle(
                         color: kblue,
@@ -308,11 +308,11 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       isCollapsed: false,
                       isDense: true,
                       contentPadding:
@@ -346,11 +346,11 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       isCollapsed: false,
                       isDense: true,
                       contentPadding:
@@ -358,7 +358,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color: const Color(0xff707070))),
+                              const BorderSide(color:  Color(0xff707070))),
                       hintText: "Business Address",
                       hintStyle: TextStyle(
                         color: kblue,

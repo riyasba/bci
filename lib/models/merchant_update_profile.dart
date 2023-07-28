@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class MerchantUpdateModel {
   String categoryId;
   String name;
@@ -6,6 +8,13 @@ class MerchantUpdateModel {
   String alternateMobile;
   String gstNo;
   String address;
+  String bankName;
+  String bankAccountName;
+  String bankAccountNumber;
+  String accountType;
+  String ifscCode;
+  File shopImage;
+  
 
   MerchantUpdateModel({
     required this.categoryId,
@@ -15,5 +24,11 @@ class MerchantUpdateModel {
     required this.alternateMobile,
     required this.gstNo,
     required this.address,
+    required this.accountType,
+    required this.bankAccountName,
+    required this.bankAccountNumber,
+    required this.bankName,
+    required this.ifscCode,
+    required this.shopImage,
   });
 }

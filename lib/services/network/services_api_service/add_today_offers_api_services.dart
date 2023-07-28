@@ -1,49 +1,48 @@
 import 'dart:io';
-import 'package:bci/models/members_register_model.dart';
-import 'package:bci/models/merchant_update_profile.dart';
-import 'package:bci/models/merchants_register_model.dart';
 import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileUpdateApiServices extends BaseApiService {
-  Future profileUpdate({
-    required MerchantUpdateModel merchantUpdateModel,
+class AddTodayOffersApiServices extends BaseApiService {
+  Future addTodayOffersApiServices({
+    required String image,
+    required String title,
+    required String category,
+    required String startsat,
+    required String endsat,
+    required String discountValue,
+    required String claimUser,
+    required String bsValue,
   }) async {
     dynamic responseJson;
     try {
       var dio = Dio();
+
       FormData formData = FormData.fromMap({
-        "category_id": merchantUpdateModel.categoryId,
-        "name": merchantUpdateModel.name,
-        "mobile": merchantUpdateModel.mobile,
-        "alternate_mobile": merchantUpdateModel.alternateMobile,
-        "gst_no": merchantUpdateModel.gstNo,
-        "address": merchantUpdateModel.address,
-        "bank_name": merchantUpdateModel.bankName,
-        "bank_account_name": merchantUpdateModel.bankAccountName,
-        "account_type": merchantUpdateModel.accountType,
-        "bank_account_number": merchantUpdateModel.bankAccountNumber,
-        "ifsc_code": merchantUpdateModel.ifscCode,
-        "shop_image": await MultipartFile.fromFile(merchantUpdateModel.shopImage.path, filename: "shopImage"),
+        "image": await MultipartFile.fromFile(image, filename: image.split("/").last),
+        "title": title,
+        "category": category.toString(),
+        "starts_at": startsat,
+        "ends_at": endsat,
+        "discount_value": discountValue,
+        "claim_user": claimUser,
+        "bs_value": bsValue,
       });
+
+      print(formData.fields);
 
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-
-      var response = await dio.post(profileUpdateURL,
+      var response = await dio.post(addTodayOffersApiUrl,
           options: Options(
-              headers: {
-                'Accept': 'application/json',
-                'Authorization': 'Bearer $authtoken'
-              },
+              headers: {'Authorization': 'Bearer $authtoken'},
               followRedirects: false,
               validateStatus: (status) {
                 return status! <= 500;
               }),
           data: formData);
-      print("::::::::<profile update URL>::::::::status code::::::::::");
+      print("::::::::<Add today offers list>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

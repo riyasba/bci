@@ -1,38 +1,21 @@
 import 'dart:io';
-import 'package:bci/models/members_register_model.dart';
-import 'package:bci/models/merchant_update_profile.dart';
-import 'package:bci/models/merchants_register_model.dart';
 import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileUpdateApiServices extends BaseApiService {
-  Future profileUpdate({
-    required MerchantUpdateModel merchantUpdateModel,
+class CreateSupportApiServices extends BaseApiService {
+  Future createSupportApiServices({
+    required String title,
+    required String message
   }) async {
     dynamic responseJson;
     try {
       var dio = Dio();
-      FormData formData = FormData.fromMap({
-        "category_id": merchantUpdateModel.categoryId,
-        "name": merchantUpdateModel.name,
-        "mobile": merchantUpdateModel.mobile,
-        "alternate_mobile": merchantUpdateModel.alternateMobile,
-        "gst_no": merchantUpdateModel.gstNo,
-        "address": merchantUpdateModel.address,
-        "bank_name": merchantUpdateModel.bankName,
-        "bank_account_name": merchantUpdateModel.bankAccountName,
-        "account_type": merchantUpdateModel.accountType,
-        "bank_account_number": merchantUpdateModel.bankAccountNumber,
-        "ifsc_code": merchantUpdateModel.ifscCode,
-        "shop_image": await MultipartFile.fromFile(merchantUpdateModel.shopImage.path, filename: "shopImage"),
-      });
-
+      
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-
-      var response = await dio.post(profileUpdateURL,
+      var response = await dio.post(createSupportApiUrl,
           options: Options(
               headers: {
                 'Accept': 'application/json',
@@ -42,8 +25,12 @@ class ProfileUpdateApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: formData);
-      print("::::::::<profile update URL>::::::::status code::::::::::");
+          data: {
+            "title": title,
+            "message": message
+            }
+          );
+      print("::::::::<create support api>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

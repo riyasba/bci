@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/models/business_user_profile.dart';
@@ -43,7 +42,7 @@ class ProfileController extends GetxController {
   updateProfile({required MerchantUpdateModel merchantUpdateModel}) async {
     isLoading(true);
     dio.Response<dynamic> response = await profileUpdateApiServices
-        .profileUpdate(merchantUpdateModel: merchantUpdateModel);
+        .profileUpdate(merchantUpdateModel: merchantUpdateModel,);
     isLoading(false);
     if (response.statusCode == 200 || response.statusCode == 201) {
       Get.off(() => const MyAccountScreen());

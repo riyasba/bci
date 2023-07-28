@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/category_model.dart';
@@ -32,6 +31,13 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
   var weblinkController = TextEditingController();
   var digitController = TextEditingController();
   var categoryController = TextEditingController();
+  var bankNameController = TextEditingController();
+  var bankAccountNameController = TextEditingController();
+  var bankAccountNumberController = TextEditingController();
+  var accountTypeController = TextEditingController();
+  var ifscCodeController = TextEditingController();
+  
+
   File? image;
   File? image2;
   File? imageprofile;
@@ -70,9 +76,44 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
           profileController.profileData.first.alternateMobile ?? "";
       gstnoController.text = profileController.profileData.first.gstNo ?? "";
       categoryController.text = profileController.profileData.first.category;
+       bankAccountNameController.text = profileController.profileData.first.bankAccountName;
+      bankAccountNumberController.text = profileController.profileData.first.bankAccountNumber;
+      bankNameController.text = profileController.profileData.first.bankName;
+      accountTypeController.text = profileController.profileData.first.accountType;
+      ifscCodeController.text = profileController.profileData.first.ifscCode;
       getCategorybyID();
     }
   }
+  
+  //
+  File? simage;
+
+  Future spickerimage() async {
+    try {
+      final simage = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (simage == null) return;
+      final imagetemp = File(simage.path);
+      setState(() {
+        this.simage = imagetemp;
+      });
+    } catch (e) {
+      print('Failed to pick image:$e');
+    }
+  }
+
+  Future simagepic() async {
+    try {
+      final simage = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (simage == null) return;
+      final imagetemp = File(simage.path);
+      setState(() {
+        this.simage = imagetemp;
+      });
+    } catch (e) {
+      print('Failed to pick image:$e');
+    }
+  }
+  //
 
   Future pickerimage() async {
     try {
@@ -254,22 +295,28 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
           ksizedbox20,
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-            child: TextField(
-              controller: displayNameController,
-              decoration: InputDecoration(
-                  hintText: '  Merchant display name',
-                  hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: const OutlineInputBorder()),
+            child: Container(
+              height: 55,
+              child: TextField(
+                controller: displayNameController,
+                decoration: InputDecoration(
+                    hintText: '  Merchant display name',
+                    hintStyle: TextStyle(fontSize: 20, color: kblue),
+                    border: const OutlineInputBorder()),
+              ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-            child: TextField(
-              controller: addressController,
-              decoration: InputDecoration(
-                  hintText: '  Business Address',
-                  hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: const OutlineInputBorder()),
+            child: Container(
+              height: 55,
+              child: TextField(
+                controller: addressController,
+                decoration: InputDecoration(
+                    hintText: '  Business Address',
+                    hintStyle: TextStyle(fontSize: 20, color: kblue),
+                    border: const OutlineInputBorder()),
+              ),
             ),
           ),
           // Padding(
@@ -284,50 +331,124 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
           // ),
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-            child: TextField(
-              controller: numberController,
-              keyboardType: TextInputType.phone,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(10),
-                FilteringTextInputFormatter.digitsOnly,
-                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-              ],
-              decoration: InputDecoration(
-                  hintText: '  Mobile Number',
-                  hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: const OutlineInputBorder()),
+            child: Container(
+              height: 55,
+              child: TextField(
+                controller: numberController,
+                keyboardType: TextInputType.phone,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(10),
+                  FilteringTextInputFormatter.digitsOnly,
+                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                ],
+                decoration: InputDecoration(
+                    hintText: '  Mobile Number',
+                    hintStyle: TextStyle(fontSize: 20, color: kblue),
+                    border: const OutlineInputBorder()),
+              ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-            child: TextField(
-              controller: aleternativeController,
-              keyboardType: TextInputType.phone,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(10),
-                FilteringTextInputFormatter.digitsOnly,
-                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-              ],
-              decoration: InputDecoration(
-                  hintText: '  Alternate Phone Number',
-                  hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: const OutlineInputBorder()),
+            child: Container(
+              height: 55,
+              child: TextField(
+                controller: aleternativeController,
+                keyboardType: TextInputType.phone,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(10),
+                  FilteringTextInputFormatter.digitsOnly,
+                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                ],
+                decoration: InputDecoration(
+                    hintText: 'Alternate Phone Number',
+                    hintStyle: TextStyle(fontSize: 18, color: kblue),
+                    border: const OutlineInputBorder()),
+              ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-            child: TextField(
-              controller: gstnoController,
-              keyboardType: TextInputType.phone,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(15),
-              ],
-              decoration: InputDecoration(
-                  hintText: '  GST No.',
-                  hintStyle: TextStyle(fontSize: 20, color: kblue),
-                  border: const OutlineInputBorder()),
+            child: Container(
+              height: 55,
+              child: TextField(
+                controller: gstnoController,
+                keyboardType: TextInputType.phone,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(15),
+                ],
+                decoration: InputDecoration(
+                    hintText: 'GST No.',
+                    hintStyle: TextStyle(fontSize: 18, color: kblue),
+                    border: const OutlineInputBorder()),
+              ),
             ),
           ),
+          Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+              child: Container(
+                height: 55,
+                child: TextField(
+                  controller: bankNameController,
+                  decoration: InputDecoration(
+                      hintText: 'Bank Name',
+                      hintStyle: TextStyle(fontSize: 18, color: kblue),
+                      border: const OutlineInputBorder()),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+              child: Container(
+                height: 55,
+                child: TextField(
+                  controller: bankAccountNameController,
+                  decoration: InputDecoration(
+                      hintText: 'Bank Account Name',
+                      hintStyle: TextStyle(fontSize: 18, color: kblue),
+                      border: const OutlineInputBorder()),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+              child: Container(
+                height: 55,
+                child: TextField(
+                  controller: accountTypeController,
+                  decoration: InputDecoration(
+                      hintText: 'Account Type',
+                      hintStyle: TextStyle(fontSize: 18, color: kblue),
+                      border: const OutlineInputBorder()),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+              child: Container(
+                height: 55,
+                child: TextField(
+                  controller: bankAccountNumberController,
+                  decoration: InputDecoration(
+                      hintText: 'Bank Account Number',
+                      hintStyle: TextStyle(fontSize: 18, color: kblue),
+                      border: const OutlineInputBorder()),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+              child: Container(
+                height: 55,
+                child: TextField(
+                  controller: ifscCodeController,
+                  decoration: InputDecoration(
+                      hintText: 'IFSC Code',
+                      hintStyle: TextStyle(fontSize: 18, color: kblue),
+                      border: const OutlineInputBorder()),
+                ),
+              ),
+            ),
           // Padding(
           //   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
           //   child: TextField(
@@ -357,7 +478,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               children: [
                 image != null
                     ? Container(
-                        height: 130, width: 135, child: Image.file(image!))
+                        height: 100, width: 100, child: Image.file(image!))
                     : InkWell(
                         onTap: () {
                           showModalBottomSheet(
@@ -394,15 +515,15 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                               });
                         },
                         child: Container(
-                            height: 130,
-                            width: 135,
+                            height: 100,
+                            width: 100,
                             color: const Color(0xffE4E4E4),
                             child:
                                 Image.asset('assets/images/imageupload.png')),
                       ),
                 image2 != null
                     ? Container(
-                        height: 130, width: 135, child: Image.file(image2!))
+                        height: 100, width: 100, child: Image.file(image2!))
                     : InkWell(
                         onTap: () {
                           showModalBottomSheet(
@@ -439,12 +560,58 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                               });
                         },
                         child: Container(
-                            height: 130,
-                            width: 135,
+                            height: 100,
+                            width: 100,
                             color: const Color(0xffE4E4E4),
                             child:
                                 Image.asset('assets/images/imageupload.png')),
                       ),
+                      //
+                      simage != null
+                      ? Container(
+                          height: 100, width: 100, child: Image.file(simage!))
+                      : InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        TextButton(
+                                            onPressed: () {
+                                              spickerimage();
+                                            },
+                                            child: Text(
+                                              'Choose ur gallery',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16),
+                                            )),
+                                        TextButton(
+                                            onPressed: () {
+                                              simagepic();
+                                            },
+                                            child: Text(
+                                              'Choose ur Camera',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16),
+                                            ))
+                                      ],
+                                    ),
+                                  );
+                                });
+                          },
+                          child: Container(
+                              height: 100,
+                              width: 100,
+                              color: Color(0xffE4E4E4),
+                              child:
+                                  Image.asset('assets/images/imageupload.png')),
+                        ),
               ],
             ),
           ),
@@ -459,7 +626,11 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               Text(
                 'Pan Card',
                 style: TextStyle(fontSize: 16, color: kblue),
-              )
+              ),
+              Text(
+                'Shop Image',
+                style: TextStyle(fontSize: 16, color: kblue),
+              ),
             ],
           ),
           ksizedbox10,
@@ -535,7 +706,14 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                   categoryId: categoryController.text,
                                   gstNo: gstnoController.text,
                                   mobile: numberController.text,
-                                  name: displayNameController.text);
+                                  name: displayNameController.text,
+                                  accountType: accountTypeController.text,
+                                  bankAccountName: bankAccountNameController.text,
+                                  bankAccountNumber: bankAccountNumberController.text,
+                                  bankName: bankNameController.text,
+                                  ifscCode: ifscCodeController.text,
+                                  shopImage: simage!,
+                                  );
                           profileController.updateProfile(
                               merchantUpdateModel: merchantUpdateModel);
                         },

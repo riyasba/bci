@@ -1,3 +1,5 @@
+import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/controllers/settings_controllers.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,15 +15,40 @@ class ContactAdmin extends StatefulWidget {
 }
 
 class _ContactAdminState extends State<ContactAdmin> {
-  var nameController = TextEditingController();
-  var mobileController = TextEditingController();
-  var emailController = TextEditingController();
-  var descriptionController = TextEditingController();
+  
+  final profileController = Get.find<ProfileController>();
+  final settingsController = Get.find<SettingsController>();
+
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final emailController = TextEditingController();
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
+
+  
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setDefault();
+  }
+
+  setDefault() async {
+    await profileController.getProfile();
+    nameController.text = profileController.profileData.first.name;
+    phoneController.text = profileController.profileData.first.mobile;
+    emailController.text = profileController.profileData.first.email;
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize:const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -52,23 +79,161 @@ class _ContactAdminState extends State<ContactAdmin> {
             ),
           )),
       body: ListView(
-        children:[ Column(
+        children:[ 
+          Column(
           children: [
-            Column(children:[ 
-              textFiled('  Your Name', nameController),
-              ksizedbox10,
-              textFiled('  Mobile Number', mobileController),
-              ksizedbox10,
-              textFiled('  Email', emailController),
-             descriptiontextFiled('  Description', descriptionController),
-             ksizedbox20,
-             ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kblue,
-                minimumSize: Size(MediaQuery.of(context).size.width*0.9,44)
+            Column(
+              children:[ 
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: Container(
+                  height: 50,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color:const Color(0xffF2F1F1)),
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
+                    child: TextField(
+                      controller: nameController,
+                      decoration:const InputDecoration(
+                          isCollapsed: true,
+                          isDense: true,
+                          border: InputBorder.none,
+                          hintText:"Name",
+                          hintStyle: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ),
+                ),
               ),
-              onPressed: (){},
-              child: Text('Submit',style: TextStyle(fontSize: 20),)),
+               Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20,top: 20),
+                child: Container(
+                  height: 50,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color:const Color(0xffF2F1F1)),
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
+                    child: TextField(
+                      controller: phoneController,
+                      decoration:const InputDecoration(
+                          isCollapsed: true,
+                          isDense: true,
+                          border: InputBorder.none,
+                          hintText:"Mobile",
+                          hintStyle: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20,top: 20),
+                child: Container(
+                  height: 50,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color:const Color(0xffF2F1F1)),
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
+                    child: TextField(
+                      controller: emailController,
+                      decoration:const InputDecoration(
+                          isCollapsed: true,
+                          isDense: true,
+                          border: InputBorder.none,
+                          hintText:"Email",
+                          hintStyle: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20,top: 20),
+                child: Container(
+                  height: 50,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color:const Color(0xffF2F1F1)),
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
+                    child: TextField(
+                      controller: titleController,
+                      decoration:const InputDecoration(
+                          isCollapsed: true,
+                          isDense: true,
+                          border: InputBorder.none,
+                          hintText:"Title",
+                          hintStyle: TextStyle(
+                            color: Color(0xff6E6D6E),
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20,top: 20),
+                child: Container(
+                  height: 150,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color:const Color(0xffF2F1F1)),
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 15, right: 10),
+                    child: TextField(
+                      controller: descriptionController,
+                      maxLines: 100,
+                      decoration:const InputDecoration(
+                          isCollapsed: true,
+                          isDense: true,
+                          border: InputBorder.none,
+                          hintText: "Description",
+                          hintStyle: TextStyle(
+                            color: Color(0xff6E6D6E),
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
+                child: InkWell(
+                  onTap: (){
+                    settingsController.createSupport(title: titleController.text, message: descriptionController.text);
+                  },
+                  child: Container(
+                    height: 50,
+                    width: size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                          color:const Color(0xff003366)
+                    ),
+                    child:const Center(
+                      child: Text("Submit",style: TextStyle(fontSize: 25,color: Color(0xffF9F8FD)),),
+                    ),
+                  ),
+                ),
+              ),
               ksizedbox20,
               Padding(
                 padding: const EdgeInsets.only(left: 30,),
@@ -188,32 +353,34 @@ class _ContactAdminState extends State<ContactAdmin> {
     return Padding(
       padding: const EdgeInsets.only(right: 12,left: 12,top: 12),
       child: Container(
-        height: 56,
-        decoration: BoxDecoration(
-          
+        height: 50,
+        decoration:const BoxDecoration(
          color: Color(0xffF2F1F1),
          border: Border(
           bottom: BorderSide(
-            
-              color: Color(0xffF2F1F1)
+              color: Color(0xffF2F1F1),
           )
          )
         ),
-          child: TextField(
-            controller: controller,
-            decoration: InputDecoration(
-              enabledBorder: InputBorder.none,
-              hintText: hinttext,hintStyle: TextStyle(
-                fontSize: 16.5,
-                color: Color(0xff6E6D6E)
-              ),
-
-              border: OutlineInputBorder(
-                
-                borderSide: BorderSide(
-                  color: Color(0xffF2F1F1)
-                )
-              )),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: TextField(
+              controller: controller,
+              decoration: InputDecoration(
+                enabledBorder: InputBorder.none,
+                hintText: hinttext,
+                hintStyle: TextStyle(
+                  fontSize: 16.5,
+                  color: Color(0xff6E6D6E)
+                ),
+          
+                border: OutlineInputBorder(
+                  
+                  borderSide: BorderSide(
+                    color: Color(0xffF2F1F1)
+                  )
+                )),
+            ),
           ),
       
       ),

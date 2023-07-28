@@ -1,3 +1,4 @@
+import 'package:bci/controllers/services_controller.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,16 @@ class LastOffers extends StatefulWidget {
 }
 
 class _LastOffersState extends State<LastOffers> {
+
+  final serviceController = Get.find<ServicesController>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    serviceController.offerList();
+  }
+
   List lastimage = [
     'assets/images/lastoffers1.png',
     'assets/images/lastjewell.png',
@@ -36,7 +47,7 @@ class _LastOffersState extends State<LastOffers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize:const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -56,8 +67,8 @@ class _LastOffersState extends State<LastOffers> {
                           color: kwhite,
                         )),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 20),
                     child: Text(
                       'Last Offers',
                       style: TextStyle(fontSize: 23, color: Colors.white),
@@ -71,86 +82,77 @@ class _LastOffersState extends State<LastOffers> {
               ),
             ),
           )),
-      body: ListView(
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        children:[ Column(
-          children: [
-            Container(
-             child:   ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-                itemCount: lastimage.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Stack(children: [
-                      Column(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            color: Colors.white,
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 180,
-                                  width: 140,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10, left: 5, right: 10, bottom: 10),
-                                    child: Image.asset(
-                                      lastimage[index],
-                                      fit: BoxFit.contain,
-                                    ),
+      body: GetBuilder<ServicesController>(
+        builder: (_) {
+          return Container(
+           child:   ListView.builder(
+              itemCount: serviceController.offerListData.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.white,
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 180,
+                              width: 140,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 10, left: 5, right: 10, bottom: 10),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.network(
+                                    serviceController.offerListData[index].image,
+                                    fit: BoxFit.contain,
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 10,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        title[index].toString(),
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 5),
-                                        child: Text(
-                                          description[index].toString(),
-                                          style: TextStyle(
-                                              fontSize: 13, color: kgrey),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
+                              ),
                             ),
-                          ),
-                          Divider(
-                            thickness: 1.5,
-                          )
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 10,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    serviceController.offerListData[index].title,
+                                    style:const TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: Text(
+                                      serviceController.offerListData[index].discountValue,
+                                      style: TextStyle(
+                                          fontSize: 13, color: kgrey),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              IconButton(onPressed: (){},
-                                icon: Icon(Icons.more_vert)),
-                            ],
-                          ),
-                    ]),
-                  );
-                }),
-            ),
-          ],
-        ),
-        ]
+                      const Divider(
+                        thickness: 1.5,
+                      )
+                    ],
+                  ),
+                );
+              }),
+          );
+        }
       ),
     );
   }

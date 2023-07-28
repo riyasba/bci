@@ -3,10 +3,13 @@ import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/create_services_model.dart';
 import 'package:bci/models/get_booking_list_model.dart';
 import 'package:bci/models/service_list_model.dart';
+import 'package:bci/models/vendor_offer_list_model.dart';
 import 'package:bci/services/network/categorys_api_services/get_booking_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_booking_date_filter.dart';
+import 'package:bci/services/network/services_api_service/add_today_offers_api_services.dart';
 import 'package:bci/services/network/services_api_service/get_service_by_category.dart';
 import 'package:bci/services/network/services_api_service/get_services_api_services.dart';
+import 'package:bci/services/network/services_api_service/get_vendor_offer_list_api.services.dart';
 import 'package:bci/services/network/services_api_service/merchant_add_services.dart';
 import 'package:bci/services/network/services_api_service/merchants_update_service_api.dart';
 import 'package:flutter/material.dart';
@@ -159,6 +162,68 @@ class ServicesController extends GetxController {
 
       } else {
         Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+  }
+
+  //add today offers
+  AddTodayOffersApiServices addTodayOffersApiServices = AddTodayOffersApiServices();
+
+  addTodayOffers({
+    required String image,
+    required String title,
+    required String category,
+    required String startsat,
+    required String endsat,
+    required String discountValue,
+    required String claimUser,
+    required String bsValue,
+  }) async {
+
+    dio.Response<dynamic> response = await addTodayOffersApiServices.addTodayOffersApiServices(
+      image: image, 
+      title: title, 
+      category: category, 
+      startsat: startsat, 
+      endsat: endsat, 
+      discountValue: discountValue, 
+      claimUser: claimUser, 
+      bsValue: bsValue);
+      if(response.statusCode == 200){
+         Get.back();
+         Get.rawSnackbar(
+          backgroundColor: Colors.green,
+          messageText: Text(
+            "Offer created successfully",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+      } else {
+         Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+      }
+
+  }
+
+  //vendor offer list
+  GetVendorOfferListApiServices getVendorOfferListApiServices = GetVendorOfferListApiServices();
+  List<OfferListData> offerListData = [];
+
+  offerList() async {
+    dio.Response<dynamic> response = await getVendorOfferListApiServices.getVendorOfferListApiServices();
+    if(response.statusCode == 200){
+       VendorOfferList vendorOfferList = VendorOfferList.fromJson(response.data);
+       offerListData = vendorOfferList.message;
+    } else {
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             "Something went wrong",

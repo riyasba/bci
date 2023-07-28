@@ -74,17 +74,17 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox20,
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
               thickness: 1,
-              color: kblue,
+              color: kgrey,
             ),
           ),
           InkWell(
             onTap: () {
-              Get.to(BankDetailsScreen());
+              Get.to(const BankDetailsScreen());
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -108,17 +108,17 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox20,
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
               thickness: 1,
-              color: kblue,
+              color: kgrey,
             ),
           ),
           InkWell(
             onTap: () {
-              Get.to(DashBoardScreen());
+              Get.to(const DashBoardScreen());
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -142,17 +142,17 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox20,
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
               thickness: 1,
-              color: kblue,
+              color: kgrey,
             ),
           ),
           InkWell(
             onTap: () {
-              Get.to(YourReferalScreen());
+              Get.to(const YourReferalScreen());
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -176,17 +176,17 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox20,
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
               thickness: 1,
-              color: kblue,
+              color: kgrey,
             ),
           ),
           InkWell(
             onTap: () {
-              Get.to(SubscriptionScreen());
+              Get.to(const SubscriptionScreen());
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -210,17 +210,17 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox20,
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
               thickness: 1,
-              color: kblue,
+              color: kgrey,
             ),
           ),
           InkWell(
             onTap: () {
-              Get.to(ContactAdmin());
+              Get.to(const ContactAdmin());
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -244,12 +244,12 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox20,
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
               thickness: 1,
-              color: kblue,
+              color: kgrey,
             ),
           ),
           InkWell(

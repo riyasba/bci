@@ -6,7 +6,6 @@ import 'package:bci/controllers/settings_controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import 'authentications/splash_screen/Splash_screen.dart';
 
 void main() {
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           // home:  splash(),
-          home: splash(),
+          home:const splash(),
         );
       },
     );

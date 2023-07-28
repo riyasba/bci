@@ -163,7 +163,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 InkWell(
                   onTap: () {
                     Get.offAll(HomeBottomnavigationBar(
-                      index: 2,
+                      //index: 2,
                     ));
                   },
                   child: Container(
@@ -204,7 +204,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 InkWell(
                   onTap: () {
                     Get.offAll(HomeBottomnavigationBar(
-                      index: 3,
+                      //index: 3,
                     ));
                     //Get.to(const BusinessBookingScreen());
                   },
@@ -258,6 +258,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
               height: 15,
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 InkWell(
@@ -297,7 +298,10 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     child: Column(
                       children: [
                         Image.asset('assets/images/jhon.png'),
-                        const Text('Jhon\n')
+                         profileController.profileData.isEmpty
+                          ? Container()
+                          : Text(
+                              profileController.profileData.first.name)
                       ],
                     ),
                   ),
