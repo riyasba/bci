@@ -83,8 +83,7 @@ class _Home_screen1State extends State<Home_screen1> {
                 ),
               ),
             ),
-          )
-          ),
+          )),
       body: Obx(
         () => profileController.isLoading.isTrue
             ? Center(
@@ -209,7 +208,7 @@ class _Home_screen1State extends State<Home_screen1> {
                     children: [
                       kwidth10,
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           // flightController.downloadFlightTicketInvoice();
                         },
                         child: Text(
@@ -233,7 +232,8 @@ class _Home_screen1State extends State<Home_screen1> {
                           children: [
                             InkWell(
                               onTap: () {
-                                Get.to(() => const FlightBookingLandingScreen());
+                                Get.to(
+                                    () => const FlightBookingLandingScreen());
                               },
                               child: Column(
                                 children: [
@@ -243,15 +243,16 @@ class _Home_screen1State extends State<Home_screen1> {
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(5),
                                         color: kblue),
-                                    child:
-                                        Image.asset("assets/icons/icons (1).png"),
+                                    child: Image.asset(
+                                        "assets/icons/icons (1).png"),
                                   ),
                                   const SizedBox(
                                     height: 7,
                                   ),
                                   const Text(
                                     'Flight',
-                                    style: TextStyle(fontWeight: FontWeight.w700),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w700),
                                   )
                                 ],
                               ),
@@ -313,60 +314,77 @@ class _Home_screen1State extends State<Home_screen1> {
                         //
                         Row(
                           children: [
-                                 InkWell(
-                          onTap: () {
-                            Get.to(const HolidayHome());
-                          },
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 58,
-                                width: 58,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: kblue),
-                                child:
-                                    Image.asset("assets/icons/icons (5).png"),
+                            InkWell(
+                              onTap: () {
+                                Get.to(const HolidayHome());
+                              },
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 58,
+                                    width: 58,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: kblue),
+                                    child: Image.asset(
+                                        "assets/icons/icons (5).png"),
+                                  ),
+                                  const SizedBox(
+                                    height: 7,
+                                  ),
+                                  const Text(
+                                    'Holiday\nPackage',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w700),
+                                  )
+                                ],
                               ),
-                              const SizedBox(
-                                height: 7,
-                              ),
-                              const Text(
-                                'Holiday\nPackage',
-                                style: TextStyle(fontWeight: FontWeight.w700),
-                              )
-                            ],
-                          ),
-                        ), 
-                          InkWell(
-                          onTap: () {
-                            Get.to(const OthersServiceScreen());
-                          },
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 58,
-                                width: 58,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: kblue),
-                                child:
-                                    Image.asset("assets/icons/icons (2).png"),
-                              ),
-                              const SizedBox(
-                                height: 7,
-                              ),
-                              const Text(
-                                'BCI Direct\nPartners',
-                                style: TextStyle(fontWeight: FontWeight.w700),
-                              )
-                            ],
-                          ),
-                        ),
+                            ),
                           ],
                         ),
-                       //
-                      InkWell(
+                      ],
+                    ),
+                  ),
+                  ksizedbox20,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        //
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Get.to(const OthersServiceScreen());
+                              },
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 58,
+                                    width: 58,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: kblue),
+                                    child: Image.asset(
+                                        "assets/icons/icons (2).png"),
+                                  ),
+                                  const SizedBox(
+                                    height: 7,
+                                  ),
+                                  const Text(
+                                    'BCI Direct\nPartners',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w700),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        //
+                        InkWell(
                           onTap: () {
                             Get.to(const BusScreen());
                           },
@@ -378,8 +396,7 @@ class _Home_screen1State extends State<Home_screen1> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     color: kblue),
-                                child:
-                                    Image.asset("assets/icons/buslogo.png"),
+                                child: Image.asset("assets/icons/buslogo.png"),
                               ),
                               const SizedBox(
                                 height: 7,
@@ -391,10 +408,18 @@ class _Home_screen1State extends State<Home_screen1> {
                             ],
                           ),
                         ),
+                        Container(
+                          height: 58,
+                          width: 58,
+                        ),
+                        Container(
+                          height: 58,
+                          width: 58,
+                        ),
                       ],
                     ),
                   ),
-                  
+
                   // ksizedbox20,
                   // Row(
                   //   crossAxisAlignment: CrossAxisAlignment.start,

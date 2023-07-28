@@ -6,7 +6,10 @@ import 'package:bci/models/bus_booking_models/bus_seat_map_model.dart';
 import 'package:bci/models/bus_booking_models/pax_list_model.dart';
 import 'package:bci/models/bus_booking_models/search_bus_model.dart';
 import 'package:bci/screens/members/bus/bus_details.dart';
+import 'package:bci/screens/members/flight_booking_screens/flight_booking_success_page.dart';
+import 'package:bci/services/network/bus_api_services/bus_booking_add_payment_api_services.dart';
 import 'package:bci/services/network/bus_api_services/bus_cityList_api_service.dart';
+import 'package:bci/services/network/bus_api_services/bus_requiry_api_services.dart';
 import 'package:bci/services/network/bus_api_services/bus_seatMap_api_service.dart';
 import 'package:bci/services/network/bus_api_services/bus_temp_booking.dart';
 import 'package:bci/services/network/bus_api_services/search_bus_api_service.dart';
@@ -25,6 +28,11 @@ class BusController extends GetxController {
   var travelDatess = DateTime.now();
   BusTempTicketBookingApiService busTempTicketBookingApiService =
       BusTempTicketBookingApiService();
+
+  BusRequieyApiServices busRequieyApiServices = BusRequieyApiServices();
+
+  BusAddPaymentApiServices busAddPaymentApiServices =
+      BusAddPaymentApiServices();
 
   RxBool isLoading = false.obs;
 
@@ -138,8 +146,41 @@ class BusController extends GetxController {
             paxDetailslist: paxDetailslist);
 
     if (response.statusCode == 200) {
-      if (response.data["Response_Header"]["Error_Desc"] == "SUCCESS") {}
-      var bookingRefernceNo = response.data["Booking_RefNo"];
+      if (response.data["Response_Header"]["Error_Desc"] == "SUCCESS") {
+        var bookingRefernceNo = response.data["Booking_RefNo"];
+
+        //booking api
+      } else {
+        Get.rawSnackbar(
+            message: response.data["Booking_RefNo"],
+            backgroundColor: Colors.red);
+      }
     }
+  }
+
+  busAddPayment({required String refernceNo}) async {
+    dio.Response<dynamic> response =
+        await busAddPaymentApiServices.addPaymentForBusApiServices(
+            clientReferneNo: "Testing Team", refrenceNo: refernceNo);
+
+    if (response.statusCode == 200) {
+      // airReprint(refernceNo: refernceNo);
+      Get.rawSnackbar(
+          message: "Payment Added Success", backgroundColor: Colors.green);
+    } else {}
+  }
+
+  busTicketing({required String refernceNo}) async {
+
+    // dio.Response<dynamic> response = await   .airRePrintingApi(clientReferneNo: "", refrenceNo: refernceNo);
+
+    // if (response.statusCode == 200) { 
+    //   // AirReprintModel airReprintModel = AirReprintModel.fromJson(response.data);
+
+    //   // Get.off(() => FlightBookingSuccessPage(
+    //   //       airReprintModel: airReprintModel,
+    //   //       refNo: refernceNo,
+    //   //     ));
+    // } else {}
   }
 }
