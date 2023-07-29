@@ -865,6 +865,8 @@ class BusController extends GetxController {
     if (response.statusCode == 201) {}
   }
 
+  //bus booking list
+
   List<BookingHistoryData> bookingHistoryList = [];
 
   getBusBookingHistory() async {

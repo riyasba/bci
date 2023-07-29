@@ -3,28 +3,24 @@ import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class GetFlightBookingHistoryAPIServices extends BaseApiService {
-  Future getFlightBookingAPIServices() async {
+class GetWalletDetailsApiServices extends BaseApiService {
+  Future getWalletDetailsApiServices() async {
     dynamic responseJson;
     try {
       var dio = Dio();
+
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.get(
-        getFlightBookingHistoryURL,
-        options: Options(
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer $authtoken'
-            },
-            followRedirects: false,
-            validateStatus: (status) {
-              return status! <= 500;
-            }),
-      );
-      print(
-          "::::::::<-- GET flight History requiry-->::::::::status code:::::::::");
+      var response = await dio.post(getWalletDetailsApiUrl,
+          options: Options(
+              headers: {'Authorization': 'Bearer $authtoken'},
+              followRedirects: false,
+              validateStatus: (status) {
+                return status! <= 500;
+              }),
+          );
+      print("::::::::<get wallet details list URL>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

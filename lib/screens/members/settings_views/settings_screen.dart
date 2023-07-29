@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../coupen/coupons_screen.dart';
-import 'Dashbord.dart';
+import 'member_Dashbord.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});

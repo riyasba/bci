@@ -1,7 +1,9 @@
 import 'package:bci/constands/app_fonts.dart';
+import 'package:bci/models/get_wallet_details_model.dart';
 import 'package:bci/models/our_partners_model.dart';
 import 'package:bci/services/network/settings_api_services/create_support_api_service.dart';
 import 'package:bci/services/network/settings_api_services/generate_referralCode_api_service.dart';
+import 'package:bci/services/network/settings_api_services/get_wallet_details_api_service.dart';
 import 'package:bci/services/network/settings_api_services/our_partners_api_service.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
@@ -81,6 +83,27 @@ class SettingsController extends GetxController{
           ));
      }
      update();
+   }
+
+   //get wallet details
+   GetWalletDetailsApiServices getWalletDetailsApiServices = GetWalletDetailsApiServices();
+   List<GetWalletDetails> getWalletData = [];
+
+   getWalletList() async {
+      getWalletData.clear();
+      dio.Response<dynamic> response = await getWalletDetailsApiServices.getWalletDetailsApiServices();
+      if(response.statusCode == 200){
+        GetWalletDetails getWalletDetails = GetWalletDetails.fromJson(response.data);
+        getWalletData.add(getWalletDetails);
+      } else {
+        Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+      }
+      update();
    }
 
 }

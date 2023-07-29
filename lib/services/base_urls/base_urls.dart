@@ -165,4 +165,7 @@ abstract class BaseApiService {
 
   final String getFlightBookingHistoryURL =
       "https://bci.generation360tech.in/api/auth/get_flight_booking_history";
+
+  //get wallet details
+  final String getWalletDetailsApiUrl = "https://bci.generation360tech.in/api/auth/getUserwallet";
 }

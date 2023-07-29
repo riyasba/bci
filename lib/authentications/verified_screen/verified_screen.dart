@@ -22,8 +22,8 @@ class MemberVerifiedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ksizedbox30,
           Center(child: Image.asset('assets/images/Group 5817.png')),
           Text(
             "Welcome :)",

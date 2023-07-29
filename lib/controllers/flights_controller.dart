@@ -900,10 +900,12 @@ class FlightsController extends GetxController {
 
     if (response.statusCode == 201) {}
   }
+  
+  //flights booking list
 
   List<FlightBookedData> flightBookingHistoyrList = [];
 
-  getBusBookingHistory() async {
+  getFlightBookingHistory() async {
     dio.Response<dynamic> response =
         await getFlightBookingHistoryAPIServices.getFlightBookingAPIServices();
 

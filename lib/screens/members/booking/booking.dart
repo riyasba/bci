@@ -1,5 +1,6 @@
 import 'package:bci/screens/members/booking/widget/Flight_view.dart';
 import 'package:bci/screens/members/booking/widget/booking_hotels_containers.dart';
+import 'package:bci/screens/members/booking/widget/bus_booking.dart';
 import 'package:bci/screens/members/booking/widget/holiday_containers.dart';
 import 'package:bci/screens/members/booking/widget/others_bookings_view.dart';
 import 'package:custom_clippers/custom_clippers.dart';
@@ -25,7 +26,7 @@ class _MembersBookingState extends State<MembersBooking> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: Scaffold(
         backgroundColor: kwhite,
         appBar: PreferredSize(
@@ -83,6 +84,9 @@ class _MembersBookingState extends State<MembersBooking> {
                           text: "Flight",
                         ),
                         Tab(
+                          text: "Bus",
+                        ),
+                        Tab(
                           text: "Hotel",
                         ),
                         Tab(
@@ -97,7 +101,8 @@ class _MembersBookingState extends State<MembersBooking> {
             )),
         body:const TabBarView(
           children: [
-          Flight_widget (), 
+          FlightWidget (), 
+          BusContainers(),
           bookings_containers(),
           HoliaysContainors(),
           OthersBookingsView(),

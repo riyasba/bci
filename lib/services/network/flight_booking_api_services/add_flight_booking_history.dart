@@ -32,7 +32,7 @@ class AddFlightBookingHistoryAPIServices extends BaseApiService {
                 return status! <= 500;
               }),
           data: {
-            "Invoice_Number": invoiceNumber,
+            "Invoice_Number": "54545",
             "Remark": remark,
             "FromCityCode": fromCityCode,
             "ToCityCode": toCityCode,

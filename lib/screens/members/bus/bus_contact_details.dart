@@ -125,7 +125,7 @@ class _BusContactDetailsState extends State<BusContactDetails> {
                 Get.back();
               },
               child: Container(
-                child: Center(child: Text('Cancel')),
+                child: Center(child: Text('Cancel',style: TextStyle(color: Colors.white))),
                 //   width: double.infinity,
                 height: 55,
                 color: kgrey,
@@ -155,7 +155,7 @@ class _BusContactDetailsState extends State<BusContactDetails> {
                     seatMapKey: busController.seatMapKey.value);
               },
               child: Container(
-                child: Center(child: Text('Continue Booking')),
+                child: Center(child: Text('Continue Booking',style: TextStyle(color: Colors.white),)),
                 //      width: double.infinity,
                 height: 55,
                 color: korange,
