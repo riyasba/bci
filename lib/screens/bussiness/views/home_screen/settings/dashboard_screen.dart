@@ -81,7 +81,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 20),
-                        child: profileController.profileData.first.profilePicture == null
+                        child: profileController.profileData.isEmpty
                               ? Image.asset('assets/images/settingprofile.png')
                               : Container(
                                   height: 80,
