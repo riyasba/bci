@@ -1,14 +1,19 @@
 import 'dart:io';
-import 'package:bci/models/flight_booking_models/air_search_model.dart';
-import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
 import 'package:bci/services/base_urls/base_urls.dart';
-import 'package:date_format/date_format.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class BusRequieyApiServices extends BaseApiService {
-  Future busRequiryApi({
-    required String refrenceNo,
+class AddFlightBookingHistoryAPIServices extends BaseApiService {
+  Future addFlightBookingAPIServices({
+    required String invoiceNumber,
+    required String remark,
+    required String fromCityCode,
+    required String toCityCode,
+    required String fromCityName,
+    required String toCityName,
+    required String bookingRefNo,
+    required String airlineCode,
+    required String date,
   }) async {
     dynamic responseJson;
     try {
@@ -16,7 +21,7 @@ class BusRequieyApiServices extends BaseApiService {
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(busRequiryURL,
+      var response = await dio.post(addFlightBookingHistoryURL,
           options: Options(
               headers: {
                 'Content-Type': 'application/json',
@@ -26,9 +31,19 @@ class BusRequieyApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"booking_ref_no": refrenceNo, "imei_number": "5676757577567"});
+          data: {
+            "Invoice_Number": invoiceNumber,
+            "Remark": remark,
+            "FromCityCode": fromCityCode,
+            "ToCityCode": toCityCode,
+            "FromCityName": fromCityName,
+            "ToCityName": toCityName,
+            "Booking_RefNo": bookingRefNo,
+            "AirLineCode": airlineCode,
+            "Date": date
+          });
       print(
-          "::::::::<--Bus requiry-->::::::::status code::::::$refrenceNo::::");
+          "::::::::<--add flight History requiry-->::::::::status code:::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

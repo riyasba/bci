@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:bci/constands/app_fonts.dart';
+import 'package:bci/models/bus_booking_models/bus_booking_history_model.dart';
 import 'package:bci/models/bus_booking_models/bus_cityList_model.dart';
 import 'package:bci/models/bus_booking_models/bus_requery_model.dart';
 import 'package:bci/models/bus_booking_models/bus_seat_map_model.dart';
@@ -12,12 +13,14 @@ import 'package:bci/screens/members/bus/bus_booking_success.dart';
 import 'package:bci/screens/members/bus/bus_details.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_booking_success_page.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
+import 'package:bci/services/network/bus_api_services/add_bus_booking_history.dart';
 import 'package:bci/services/network/bus_api_services/bus_booking_add_payment_api_services.dart';
 import 'package:bci/services/network/bus_api_services/bus_cityList_api_service.dart';
 import 'package:bci/services/network/bus_api_services/bus_requiry_api_services.dart';
 import 'package:bci/services/network/bus_api_services/bus_seatMap_api_service.dart';
 import 'package:bci/services/network/bus_api_services/bus_temp_booking.dart';
 import 'package:bci/services/network/bus_api_services/bus_ticketing_api_services.dart';
+import 'package:bci/services/network/bus_api_services/get_bus_booking_history_api_services.dart';
 import 'package:bci/services/network/bus_api_services/search_bus_api_service.dart';
 import 'package:bci/services/network/subscriptions_api_services/ease_buzz_payment_api_services.dart';
 import 'package:date_format/date_format.dart';
@@ -48,6 +51,12 @@ class BusController extends GetxController {
       BusAddPaymentApiServices();
 
   BusTicketingApiServices busTicketingApiServices = BusTicketingApiServices();
+
+  AddBusBookingHistoryAPIServices addBusBookingHistoryAPIServices =
+      AddBusBookingHistoryAPIServices();
+
+  GetBusBookingHistoyApiServices getBusBookingHistoyApiServices =
+      GetBusBookingHistoyApiServices();
 
   RxBool isLoading = false.obs;
 
@@ -258,6 +267,15 @@ class BusController extends GetxController {
     if (response.statusCode == 200) {
       BusRequeryModel busRequeryModel = BusRequeryModel.fromJson(response.data);
 
+      addBusBookingHistoy(
+          bookingRefNo: refernceNo,
+          busName: busRequeryModel.busDetail.busType,
+          date: busRequeryModel.bookingDate,
+          fromCityCode: busRequeryModel.busDetail.fromCity,
+          fromCityName: busRequeryModel.busDetail.fromCity,
+          toCityCode: busRequeryModel.busDetail.toCity,
+          toCityName: busRequeryModel.busDetail.toCity);
+
       Get.off(() => BusBookingSuccessPage(
             busRequeryModel: busRequeryModel,
           ));
@@ -284,7 +302,7 @@ class BusController extends GetxController {
                   decoration: pw.BoxDecoration(
                       border: pw.Border.all(color: PdfColors.black)),
                   child: pw.Padding(
-                    padding: pw.EdgeInsets.only(
+                    padding: const pw.EdgeInsets.only(
                         left: 1, right: 1, top: 1, bottom: 1),
                     child: pw.Container(
                       height: 380,
@@ -294,7 +312,8 @@ class BusController extends GetxController {
                       child: pw.Column(
                         children: [
                           pw.Padding(
-                            padding: pw.EdgeInsets.only(top: 15, left: 20),
+                            padding:
+                                const pw.EdgeInsets.only(top: 15, left: 20),
                             child: pw.Row(
                               children: [
                                 pw.Text(
@@ -305,12 +324,12 @@ class BusController extends GetxController {
                             ),
                           ),
                           pw.Padding(
-                            padding: pw.EdgeInsets.only(
+                            padding: const pw.EdgeInsets.only(
                                 left: 20, top: 20, right: 20),
                             child: pw.Container(
                               height: 45,
                               width: 400,
-                              decoration: pw.BoxDecoration(
+                              decoration: const pw.BoxDecoration(
                                   color: PdfColors.yellow200,
                                   border: pw.Border(
                                       top: pw.BorderSide(
@@ -318,8 +337,8 @@ class BusController extends GetxController {
                                       bottom: pw.BorderSide(
                                           color: PdfColors.orange))),
                               child: pw.Padding(
-                                padding:
-                                    pw.EdgeInsets.only(left: 10, right: 10),
+                                padding: const pw.EdgeInsets.only(
+                                    left: 10, right: 10),
                                 child: pw.Row(
                                   mainAxisAlignment:
                                       pw.MainAxisAlignment.spaceBetween,
@@ -332,20 +351,28 @@ class BusController extends GetxController {
                                     ),
                                     pw.Text(
                                         busRequeryModel.busDetail.travelDate),
-                                    pw.Text(
-                                      busRequeryModel.busDetail.busType,
-                                      style: pw.TextStyle(
-                                          //fontWeight: pw.FontWeight.bold
-                                          ),
-                                    )
+                                    // pw.Text(
+                                    //   busRequeryModel.busDetail.busType,
+                                    //   style: pw.TextStyle(
+                                    //       //fontWeight: pw.FontWeight.bold
+                                    //       ),
+                                    // )
                                   ],
                                 ),
                               ),
                             ),
                           ),
                           pw.Padding(
-                            padding:
-                                pw.EdgeInsets.only(top: 20, left: 0, right: 0),
+                            padding: const pw.EdgeInsets.only(
+                                top: 20, left: 0, right: 0),
+                            child: pw.Container(
+                              height: 1,
+                              color: PdfColors.black,
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 2, left: 0, right: 0),
                             child: pw.Container(
                               height: 1,
                               color: PdfColors.black,
@@ -353,20 +380,13 @@ class BusController extends GetxController {
                           ),
                           pw.Padding(
                             padding:
-                                pw.EdgeInsets.only(top: 2, left: 0, right: 0),
-                            child: pw.Container(
-                              height: 1,
-                              color: PdfColors.black,
-                            ),
-                          ),
-                          pw.Padding(
-                            padding: pw.EdgeInsets.only(left: 20, right: 20),
+                                const pw.EdgeInsets.only(left: 20, right: 20),
                             child: pw.Container(
                               height: 100,
                               decoration:
                                   pw.BoxDecoration(color: PdfColors.grey100),
                               child: pw.Padding(
-                                padding: pw.EdgeInsets.only(
+                                padding: const pw.EdgeInsets.only(
                                     left: 12, right: 12, top: 5, bottom: 5),
                                 child: pw.Row(
                                   mainAxisAlignment:
@@ -389,7 +409,8 @@ class BusController extends GetxController {
                                           pw.Padding(
                                             padding: pw.EdgeInsets.only(top: 2),
                                             child: pw.Text(
-                                              '',
+                                              busRequeryModel
+                                                  .paxDetails.first.paxName,
                                               style: pw.TextStyle(
                                                 fontSize: 11,
                                                 //fontWeight: pw.FontWeight.bold
@@ -397,7 +418,7 @@ class BusController extends GetxController {
                                             ),
                                           ),
                                           pw.Text(
-                                            'redBus ticket #',
+                                            'ticket #',
                                             style: pw.TextStyle(
                                                 color: PdfColors.blueAccent,
                                                 fontWeight: pw.FontWeight.bold),
@@ -405,8 +426,8 @@ class BusController extends GetxController {
                                           pw.Padding(
                                             padding: pw.EdgeInsets.only(top: 2),
                                             child: pw.Text(
-                                              'TF6Z98757372',
-                                              style: pw.TextStyle(
+                                              busRequeryModel.bookingRefNo,
+                                              style: const pw.TextStyle(
                                                 fontSize: 11,
                                                 //fontWeight: pw.FontWeight.bold
                                               ),
@@ -428,7 +449,8 @@ class BusController extends GetxController {
                                         pw.Padding(
                                           padding: pw.EdgeInsets.only(top: 2),
                                           child: pw.Text(
-                                            'SU4',
+                                            busRequeryModel
+                                                .paxDetails.first.seatNumber,
                                             style: pw.TextStyle(
                                               fontSize: 11,
                                               //fontWeight: pw.FontWeight.bold
@@ -456,28 +478,6 @@ class BusController extends GetxController {
                                         ),
                                       ],
                                     ),
-                                    pw.Column(
-                                        crossAxisAlignment:
-                                            pw.CrossAxisAlignment.start,
-                                        children: [
-                                          pw.Text(
-                                            'Trip #',
-                                            style: pw.TextStyle(
-                                                color: PdfColors.blueAccent,
-                                                fontWeight: pw.FontWeight.bold),
-                                          ),
-                                          pw.Padding(
-                                            padding:
-                                                pw.EdgeInsets.only(top: 5.5),
-                                            child: pw.Text(
-                                              '24241791',
-                                              style: pw.TextStyle(
-                                                fontSize: 11,
-                                                //fontWeight: pw.FontWeight.bold
-                                              ),
-                                            ),
-                                          )
-                                        ])
                                   ],
                                 ),
                               ),
@@ -525,7 +525,7 @@ class BusController extends GetxController {
                                             padding:
                                                 pw.EdgeInsets.only(top: 5.5),
                                             child: pw.Text(
-                                              'A/C Sleeper (2+1)',
+                                              busRequeryModel.busDetail.busType,
                                               style: pw.TextStyle(
                                                 fontSize: 13,
                                                 //fontWeight: pw.FontWeight.bold
@@ -538,7 +538,7 @@ class BusController extends GetxController {
                                             pw.CrossAxisAlignment.start,
                                         children: [
                                           pw.Text(
-                                            'Reporting time',
+                                            'Departure Time',
                                             style: pw.TextStyle(
                                                 color: PdfColors.blueAccent,
                                                 fontWeight: pw.FontWeight.bold),
@@ -547,7 +547,8 @@ class BusController extends GetxController {
                                             padding:
                                                 pw.EdgeInsets.only(top: 5.5),
                                             child: pw.Text(
-                                              '08:15 PM',
+                                              busRequeryModel
+                                                  .busDetail.departureTime,
                                               style: pw.TextStyle(
                                                 fontSize: 13,
                                                 //fontWeight: pw.FontWeight.bold
@@ -590,7 +591,7 @@ class BusController extends GetxController {
                                                               .FontWeight.bold),
                                                     ),
                                                     pw.Text(
-                                                      '   Sholinganallur',
+                                                      '  ${busRequeryModel.busDetail.boardingDetails.boardingAddress}',
                                                       style: pw.TextStyle(
                                                         height: 2,
                                                         fontSize: 13,
@@ -600,38 +601,38 @@ class BusController extends GetxController {
                                                   ],
                                                 ),
                                               ),
-                                              pw.Padding(
-                                                padding: pw.EdgeInsets.only(
-                                                    top: 5.5),
-                                                child: pw.Row(
-                                                  children: [
-                                                    pw.Text(
-                                                      'Landmark:',
-                                                      style: pw.TextStyle(
-                                                          fontWeight: pw
-                                                              .FontWeight.bold),
-                                                    ),
-                                                    pw.Text(
-                                                      ' Sholinganallur',
-                                                      style: pw.TextStyle(
-                                                        height: 2,
-                                                        fontSize: 13,
-                                                        //fontWeight: pw.FontWeight.bold
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              pw.Padding(
-                                                padding: pw.EdgeInsets.only(
-                                                    top: 5.5),
-                                                child: pw.Text(
-                                                  'Address:',
-                                                  style: pw.TextStyle(
-                                                      fontWeight:
-                                                          pw.FontWeight.bold),
-                                                ),
-                                              ),
+                                              // pw.Padding(
+                                              //   padding: pw.EdgeInsets.only(
+                                              //       top: 5.5),
+                                              //   child: pw.Row(
+                                              //     children: [
+                                              //       pw.Text(
+                                              //         'Landmark:',
+                                              //         style: pw.TextStyle(
+                                              //             fontWeight: pw
+                                              //                 .FontWeight.bold),
+                                              //       ),
+                                              //       pw.Text(
+                                              //         ' Sholinganallur',
+                                              //         style: pw.TextStyle(
+                                              //           height: 2,
+                                              //           fontSize: 13,
+                                              //           //fontWeight: pw.FontWeight.bold
+                                              //         ),
+                                              //       ),
+                                              //     ],
+                                              //   ),
+                                              // ),
+                                              // pw.Padding(
+                                              //   padding: pw.EdgeInsets.only(
+                                              //       top: 5.5),
+                                              //   child: pw.Text(
+                                              //     'Address:',
+                                              //     style: pw.TextStyle(
+                                              //         fontWeight:
+                                              //             pw.FontWeight.bold),
+                                              //   ),
+                                              // ),
                                             ],
                                           ),
                                         ),
@@ -657,7 +658,7 @@ class BusController extends GetxController {
                                                     padding: pw.EdgeInsets.only(
                                                         top: 8),
                                                     child: pw.Text(
-                                                      'Rs. 600',
+                                                      'Rs. ${getTotalAmount(busRequeryModel.paxDetails)}',
                                                       style: pw.TextStyle(
                                                         fontSize: 13,
                                                         //fontWeight: pw.FontWeight.bold
@@ -830,5 +831,50 @@ class BusController extends GetxController {
     print(file.path);
 
     OpenFile.open(file.path);
+  }
+
+  getTotalAmount(List<PaxDetail> paxDetails) {
+    double totalAmount = 0;
+
+    for (var i = 0; i < paxDetails.length; i++) {
+      totalAmount = totalAmount + paxDetails[i].fare.totalAmount;
+    }
+
+    return totalAmount.toStringAsFixed(2);
+  }
+
+  addBusBookingHistoy({
+    required String fromCityCode,
+    required String toCityCode,
+    required String fromCityName,
+    required String toCityName,
+    required String bookingRefNo,
+    required String busName,
+    required String date,
+  }) async {
+    dio.Response<dynamic> response =
+        await addBusBookingHistoryAPIServices.addBusBookingAPIServices(
+            fromCityCode: fromCityCode,
+            toCityCode: toCityCode,
+            fromCityName: fromCityName,
+            toCityName: toCityName,
+            bookingRefNo: bookingRefNo,
+            busName: busName,
+            date: date);
+
+    if (response.statusCode == 201) {}
+  }
+
+  List<BookingHistoryData> bookingHistoryList = [];
+
+  getBusBookingHistory() async {
+    dio.Response<dynamic> response =
+        await getBusBookingHistoyApiServices.getBusBookingApiServices();
+
+    if (response.statusCode == 200) {
+      BusHistoryModel busHistoryModel = BusHistoryModel.fromJson(response.data);
+      bookingHistoryList = busHistoryModel.data;
+      update();
+    }
   }
 }

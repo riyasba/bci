@@ -97,10 +97,10 @@ class BusRequeryModel {
 
 class BookingPaymentDetail {
   String currencyCode;
-  int gatewayCharges;
+  dynamic gatewayCharges;
   String paymentConfirmationNumber;
-  int paymentAmount;
-  int paymentMode;
+  dynamic paymentAmount;
+  dynamic paymentMode;
 
   BookingPaymentDetail({
     required this.currencyCode,

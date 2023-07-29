@@ -26,9 +26,7 @@ class BusTicketingApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {
-            "Booking_RefNo": refrenceNo,
-          });
+          data: {"booking_ref_no": refrenceNo, "imei_number": "5676757577567"});
       print(
           "::::::::<--Bus ticketing-->::::::::status code::::::$refrenceNo::::");
       print(response.statusCode);

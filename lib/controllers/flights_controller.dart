@@ -2,20 +2,24 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/models/bus_booking_models/bus_booking_history_model.dart';
 import 'package:bci/models/flight_booking_models/air_port_search_model.dart';
 import 'package:bci/models/flight_booking_models/air_reprint_model.dart';
 import 'package:bci/models/flight_booking_models/air_search_model.dart';
 import 'package:bci/models/flight_booking_models/booking_model.dart';
 import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
+import 'package:bci/models/flight_booking_models/get_flight_booking_history.dart';
 import 'package:bci/models/flight_booking_models/passenger_model.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_booking_success_page.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
 import 'package:bci/screens/members/flight_booking_screens/par_nyc_screen.dart';
+import 'package:bci/services/network/flight_booking_api_services/add_flight_booking_history.dart';
 import 'package:bci/services/network/flight_booking_api_services/air_add_payment_api_services.dart';
 import 'package:bci/services/network/flight_booking_api_services/air_printing_api_services.dart';
 import 'package:bci/services/network/flight_booking_api_services/air_search_api_services.dart';
 import 'package:bci/services/network/flight_booking_api_services/air_ticket_booking_api_services.dart';
 import 'package:bci/services/network/flight_booking_api_services/airport_search_api_services.dart';
+import 'package:bci/services/network/flight_booking_api_services/get_flight_booking_list.dart';
 import 'package:bci/services/network/subscriptions_api_services/ease_buzz_payment_api_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -62,6 +66,12 @@ class FlightsController extends GetxController {
       AirAddPaymentApiServices();
 
   AirRePrintingServices airRePrintingServices = AirRePrintingServices();
+
+  GetFlightBookingHistoryAPIServices getFlightBookingHistoryAPIServices =
+      GetFlightBookingHistoryAPIServices();
+
+  AddFlightBookingHistoryAPIServices addFlightBookingHistoryAPIServices =
+      AddFlightBookingHistoryAPIServices();
 
   List<Airport> airports = [];
 
@@ -179,7 +189,22 @@ class FlightsController extends GetxController {
 
     if (response.statusCode == 200) {
       AirReprintModel airReprintModel = AirReprintModel.fromJson(response.data);
-
+      addFlightBookingHistoy(
+          invoiceNumber: airReprintModel.invoiceNumber,
+          remark: airReprintModel.remark,
+          fromCityCode:
+              airReprintModel.airPnrDetails.first.flights.first.origin,
+          toCityCode:
+              airReprintModel.airPnrDetails.first.flights.first.destination,
+          fromCityName:
+              airReprintModel.airPnrDetails.first.flights.first.origin,
+          toCityName:
+              airReprintModel.airPnrDetails.first.flights.first.destination,
+          bookingRefNo: airReprintModel.bookingRefNo,
+          airlineCode:
+              airReprintModel.airPnrDetails.first.flights.first.airlineCode,
+          date: airReprintModel.bookingDateTime
+          );
       Get.off(() => FlightBookingSuccessPage(
             airReprintModel: airReprintModel,
             refNo: refernceNo,
@@ -187,7 +212,7 @@ class FlightsController extends GetxController {
     } else {}
   }
 
-  static MethodChannel _channel = MethodChannel('easebuzz');
+  static MethodChannel _channel =  MethodChannel('easebuzz');
   EaseBuzzTokenApiService easeBuzzApi = EaseBuzzTokenApiService();
 
   payUseingEaseBuzzSubs(
@@ -743,7 +768,8 @@ class FlightsController extends GetxController {
             ),
           ),
           pw.Padding(
-            padding: const pw.EdgeInsets.only(left: 0, right: 50, top: 5, bottom: 10),
+            padding: const pw.EdgeInsets.only(
+                left: 0, right: 50, top: 5, bottom: 10),
             child: pw.Divider(
               thickness: 1.2,
             ),
@@ -846,6 +872,45 @@ class FlightsController extends GetxController {
 
       await file.writeAsBytes(bytes);
       OpenFile.open(file.path);
+    }
+  }
+
+  addFlightBookingHistoy({
+    required String invoiceNumber,
+    required String remark,
+    required String fromCityCode,
+    required String toCityCode,
+    required String fromCityName,
+    required String toCityName,
+    required String bookingRefNo,
+    required String airlineCode,
+    required String date,
+  }) async {
+    dio.Response<dynamic> response =
+        await addFlightBookingHistoryAPIServices.addFlightBookingAPIServices(
+            airlineCode: airlineCode,
+            bookingRefNo: bookingRefNo,
+            date: date,
+            fromCityCode: fromCityCode,
+            fromCityName: fromCityName,
+            invoiceNumber: invoiceNumber,
+            remark: remark,
+            toCityCode: toCityCode,
+            toCityName: toCityName);
+
+    if (response.statusCode == 201) {}
+  }
+
+  List<FlightBookedData> flightBookingHistoyrList = [];
+
+  getBusBookingHistory() async {
+    dio.Response<dynamic> response =
+        await getFlightBookingHistoryAPIServices.getFlightBookingAPIServices();
+
+    if (response.statusCode == 200) {
+      GetFlightsModel flightsModel = GetFlightsModel.fromJson(response.data);
+      flightBookingHistoyrList = flightsModel.data;
+      update();
     }
   }
 }

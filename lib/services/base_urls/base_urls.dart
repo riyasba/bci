@@ -153,4 +153,16 @@ abstract class BaseApiService {
       "https://bci.generation360tech.in/api/auth/bus_ticketing";
 
   final busRequiryURL = "https://bci.generation360tech.in/api/auth/bus_requery";
+
+  final String addBusBookingHistoryURL =
+      "https://bci.generation360tech.in/api/auth/add_bus_booking_history";
+
+  final String getBusBookingHistoryURL =
+      "https://bci.generation360tech.in/api/auth/get_bus_booking_history";
+
+  final String addFlightBookingHistoryURL =
+      "https://bci.generation360tech.in/api/auth/add_flight_booking_history";
+
+  final String getFlightBookingHistoryURL =
+      "https://bci.generation360tech.in/api/auth/get_flight_booking_history";
 }
