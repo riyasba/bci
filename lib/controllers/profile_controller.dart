@@ -193,11 +193,12 @@ class ProfileController extends GetxController {
     isLoading(false);
     if (payment_response["result"] == "payment_successfull") {
       final homeController = Get.find<HomeController>();
+      print("-------------->>---------->>");
       for (int i = 0; i < homeController.cartListData.length; i++) {
         homeController.addBooking(
-            serviceid: homeController.cartListData[i].serviceId,
+            serviceid: homeController.cartListData[i].serviceId.toString(),
             cartid: homeController.cartListData[i].id.toString(),
-            qty: homeController.cartListData[i].quantity,
+            qty: homeController.cartListData[i].quantity.toString(),
             offerOrCoupon: "",
             couponcode: "",
             amount: homeController.cartListData[i].price);

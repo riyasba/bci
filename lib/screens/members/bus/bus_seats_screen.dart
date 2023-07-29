@@ -309,6 +309,7 @@ class _BusSeatsScreenState extends State<BusSeatsScreen> {
                         dropingId: widget.dropingId,
                         searchkey: widget.searchkey,
                         seatIds: seatIds,
+                       amount: busController.totalAmount.value.toStringAsFixed(2),
                       ));
                     }
                   },

@@ -17,7 +17,7 @@ class BusAddPaymentApiServices extends BaseApiService {
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(bu,
+      var response = await dio.post(airAddPayment,
           options: Options(
               headers: {
                 'Content-Type': 'application/json',

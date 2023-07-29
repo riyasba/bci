@@ -157,13 +157,13 @@ class AuthController extends GetxController {
         await loginApiServices.loginApi(mobile: mobile, otp: otp);
     isLoading(false);
 
-    print("start testing...................>>>>>>>>>>>>>>");
-    print(response.data);
-    print(response.statusCode);
-    print(response.statusMessage);
-    print(response.data["user"]["role_id"]);
-    print(response.data["user"]["id"]);
-    print("end testing...................>>>>>>>>>>>>>>");
+    // print("start testing...................>>>>>>>>>>>>>>");
+    // print(response.data);
+    // print(response.statusCode);
+    // print(response.statusMessage);
+    // print(response.data["user"]["role_id"]);
+    // print(response.data["user"]["id"]);
+    // print("end testing...................>>>>>>>>>>>>>>");
 
     if (response.statusCode == 200) {
       if (response.data["user"]["role_id"].toString() == "3") {
@@ -190,7 +190,7 @@ class AuthController extends GetxController {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "Invalid OTP",
+            response.data["message"],
             style: primaryFont.copyWith(color: Colors.white),
           ));
     } else {
