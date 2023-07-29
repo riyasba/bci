@@ -182,7 +182,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          profileController.profileData.first.profilePicture == null
+                          profileController.profileData.isEmpty
                               ? Image.asset('assets/images/settingprofile.png')
                               : Container(
                                   height: 80,

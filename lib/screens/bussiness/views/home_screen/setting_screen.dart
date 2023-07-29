@@ -152,7 +152,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
           ),
           InkWell(
             onTap: () {
-              Get.to(const YourReferalScreen());
+              Get.to(const BusinessYourReferralScreen());
             },
             child: Container(
               width: MediaQuery.of(context).size.width,

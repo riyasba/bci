@@ -1,6 +1,7 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/models/get_wallet_details.model.dart';
 import 'package:bci/services/network/settings_api_services/create_support_api_service.dart';
+import 'package:bci/services/network/settings_api_services/generate_referralCode_api_services.dart';
 import 'package:bci/services/network/settings_api_services/get_wallet_api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,8 @@ class SettingsController extends GetxController{
    RxInt index = 0.obs;
 
    RxInt actIndex = 10.obs;
+
+   RxString referralCode = "".obs;
 
    //create support
    CreateSupportApiServices createSupportApiService = CreateSupportApiServices();
@@ -58,6 +61,26 @@ class SettingsController extends GetxController{
           ));
       }
       update();
+   }
+
+   
+//generate referral code api
+   GenerateReferralCodeApiService generateReferralCodeApiService = GenerateReferralCodeApiService();
+
+   generateRefCode() async {
+
+      dio.Response<dynamic> response = await generateReferralCodeApiService.generateReferralCodeApiService();
+      if(response.statusCode == 200){
+         referralCode(response.data["code"]);
+      } else {
+        Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+      }
+     update();
    }
 
 }

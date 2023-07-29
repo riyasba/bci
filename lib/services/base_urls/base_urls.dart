@@ -46,7 +46,10 @@ abstract class BaseApiService {
 
   //get wallet details
   final String getWalletDetailsApiUrl = "https://bci.generation360tech.in/api/auth/getUserwallet"; 
-
+  
+  //generate referral code
+  final String generateReferralCodeApiUrl =
+      "https://bci.generation360tech.in/api/auth/generateReferralCode";
 
 }
  
