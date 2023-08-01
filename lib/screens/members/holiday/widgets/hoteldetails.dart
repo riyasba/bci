@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_super_html_viewer/flutter_super_html_viewer.dart';
 import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
-
-import '../../../../constands/app_fonts.dart';
 import '../../../../constands/constands.dart';
 
 class HotelDetails extends StatefulWidget {

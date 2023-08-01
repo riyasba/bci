@@ -319,7 +319,7 @@ class _BusBoardingDetailsScreenState extends State<BusBoardingDetailsScreen> {
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
         child: InkWell(
           onTap: () {
             if (boardingId == null) {
@@ -359,6 +359,7 @@ class _BusBoardingDetailsScreenState extends State<BusBoardingDetailsScreen> {
           ),
         ),
       ),
+      
     );
   }
 }

@@ -44,29 +44,23 @@ class _MemberLoginScreenState extends State<MemberLoginScreen> {
                     fontSize: 22, color: kblue, fontWeight: FontWeight.w700),
               ),
               ksizedbox20,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'We will send you an ',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18, color: kblue),
-                  ),
-                  Text(
-                    'One Time Password',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                text: 'We will send you an ',
+                style: TextStyle(fontSize: 17, color: kblue),
+                 children:  <TextSpan>[
+                   TextSpan(text: 'One Time Password', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: kblue)),
+                   TextSpan(text: '\non this mobile number',
+                   style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                         color: kblue),
-                  ),
-                ],
+                   ),
+                 ],
+               ),
               ),
-              Text(
-                'on this mobile number',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, color: kblue),
-              ),
+             
               ksizedbox40,
               Padding(
                 padding: const EdgeInsets.all(8.0),

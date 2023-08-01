@@ -4,6 +4,7 @@ import 'package:bci/models/bus_booking_models/search_bus_model.dart';
 import 'package:bci/screens/members/bus/buscommenappbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../../constands/constands.dart';
 
@@ -29,10 +30,15 @@ class BusContactDetails extends StatefulWidget {
 }
 
 class _BusContactDetailsState extends State<BusContactDetails> {
+
   final busController = Get.find<BusController>();
 
   var phoneNumberController = TextEditingController();
   var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var ageController = TextEditingController();
+
+  String selectedGender = '';
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +58,7 @@ class _BusContactDetailsState extends State<BusContactDetails> {
               const Text('EMAIL ID').text.bold.gray500.make(),
               ksizedbox10,
                TextField(
-                controller: nameController,
+                controller: emailController,
                 decoration:
                     InputDecoration.collapsed(hintText: "Enter your email"),
               ),
@@ -63,14 +69,14 @@ class _BusContactDetailsState extends State<BusContactDetails> {
               ksizedbox10,
                TextField(
                 controller: phoneNumberController,
-                decoration:
-                    InputDecoration.collapsed(hintText: "Enter your phone"),
+                decoration: const InputDecoration.collapsed(hintText: "Enter your phone"),
               ),
               ksizedbox10,
               Divider(color: kgrey, height: 0.5),
               ksizedbox20,
               for (int i = 0; i < widget.seatIds.length; i++)
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,8 +91,9 @@ class _BusContactDetailsState extends State<BusContactDetails> {
                     ksizedbox10,
                     const Text('NAME').text.bold.gray500.make(),
                     ksizedbox10,
-                    const TextField(
-                      decoration: InputDecoration.collapsed(
+                    TextField(
+                      controller: nameController,
+                      decoration: const InputDecoration.collapsed(
                           hintText: "Enter your name"),
                     ),
                     ksizedbox10,
@@ -96,16 +103,44 @@ class _BusContactDetailsState extends State<BusContactDetails> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         const Text('GENDER').text.gray500.semiBold.make(),
-                        Text('Male').text.semiBold.gray500.make(),
-                        Text('Female').text.semiBold.gray500.make(),
                       ],
                     ),
+                    RadioListTile(
+            title:const Text('Male'),
+            value: 'Male',
+            groupValue: selectedGender,
+            onChanged: (value) {
+              setState(() {
+                selectedGender = value!;
+              });
+            },
+          ),
+          RadioListTile(
+            title:const Text('Female'),
+            value: 'Female',
+            groupValue: selectedGender,
+            onChanged: (value) {
+              setState(() {
+                selectedGender = value!;
+              });
+            },
+          ),
+          RadioListTile(
+            title:const Text('Other'),
+            value: 'Other',
+            groupValue: selectedGender,
+            onChanged: (value) {
+              setState(() {
+                selectedGender = value!;
+              });
+            },
+          ),
                     ksizedbox10,
                     const Text('AGE').text.bold.gray500.make(),
                     ksizedbox10,
-                    const TextField(
-                      decoration:
-                          InputDecoration.collapsed(hintText: "Enter your age"),
+                    TextField(
+                      controller: ageController,
+                      decoration: const InputDecoration.collapsed(hintText: "Enter your age"),
                     ),
                     ksizedbox10,
                     Divider(color: kgrey, height: 0.5),
@@ -141,11 +176,11 @@ class _BusContactDetailsState extends State<BusContactDetails> {
                     busData: widget.busData,
                     searcKey: widget.searchkey,
                     mobileNumber: phoneNumberController.text,
-                    customerEmail: "test@email.com",
+                    customerEmail: emailController.text,
                     paxDetailslist: [
                       PaxDetailslist(
-                          age: 20,
-                          gender: 0,
+                          age: ageController.text.toInt(),
+                          gender: selectedGender == "Male" ? 0 : 1,
                           isLadies: false,
                           paxName: nameController.text,
                           seatNumber: widget.seatIds.first),
