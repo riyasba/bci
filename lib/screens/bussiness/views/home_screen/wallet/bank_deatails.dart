@@ -224,21 +224,25 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
             ksizedbox20,
             Padding(
               padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                children: [
-                  profileController.profileData.first.shopImage == null
-                              ? Image.asset('assets/images/settingprofile.png')
-                              : Container(
-                                  height: 130,
-                                  width: 130,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: NetworkImage(profileController
-                                              .profileData.first.shopImage)),
-                                      borderRadius: BorderRadius.circular(5)),
-                                ),
-                        
-                ],
+              child: GetBuilder<ProfileController>(
+                builder: (_) {
+                  return Row(
+                    children: [
+                      profileController.profileData.isEmpty
+                                  ? Image.asset('assets/images/settingprofile.png')
+                                  : Container(
+                                      height: 130,
+                                      width: 130,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(profileController
+                                                  .profileData.first.shopImage)),
+                                          borderRadius: BorderRadius.circular(5)),
+                                    ),
+                            
+                    ],
+                  );
+                }
               ),
             ),
             ksizedbox10,
