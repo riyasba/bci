@@ -491,16 +491,16 @@ class PaxDetail {
 }
 
 class Fare {
-  int basicAmount;
-  int cancellationCharges;
+  dynamic basicAmount;
+  dynamic cancellationCharges;
   List<dynamic> fareDetails;
-  int gst;
-  int grossCommission;
-  int netCommission;
-  int otherAmount;
-  int serviceFeeAmount;
-  int totalAmount;
-  int tradeMarkupAmount;
+  dynamic gst;
+  dynamic grossCommission;
+  dynamic netCommission;
+  dynamic otherAmount;
+  dynamic serviceFeeAmount;
+  dynamic totalAmount;
+  dynamic tradeMarkupAmount;
 
   Fare({
     required this.basicAmount,

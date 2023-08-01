@@ -1,5 +1,7 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/bus_controllers.dart';
+import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/models/bus_booking_models/bus_contact_details_model.dart';
 import 'package:bci/models/bus_booking_models/search_bus_model.dart';
 import 'package:bci/screens/members/bus/bus_contact_details.dart';
 import 'package:bci/screens/members/bus/bus_payment_screen.dart';
@@ -28,11 +30,13 @@ class BusSeatsScreen extends StatefulWidget {
 
 class _BusSeatsScreenState extends State<BusSeatsScreen> {
   final busController = Get.find<BusController>();
+  final profileController = Get.find<ProfileController>();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    profileController.getProfile();
     busController.busSeat(
         boardingId: widget.boardingId,
         droppingId: widget.dropingId,
@@ -41,6 +45,7 @@ class _BusSeatsScreenState extends State<BusSeatsScreen> {
   }
 
   List<String> seatIds = [];
+  List<BusContactDetailsModel> busContactDetailsModel = [];
 
   @override
   Widget build(BuildContext context) {
@@ -145,6 +150,15 @@ class _BusSeatsScreenState extends State<BusSeatsScreen> {
                                           setState(() {
                                             seatIds.remove(busController
                                                 .seatMap[index].seatNumber);
+
+                                           BusContactDetailsModel busContactDetailsModeldata = BusContactDetailsModel(
+                                                  ageController: TextEditingController(),
+                                                  gender: "",
+                                                  nameController: TextEditingController(),
+                                                  seats: busController.seatMap[index].seatNumber
+                                                ); 
+
+                                                busContactDetailsModel.removeWhere((element) => element.seats == busController.seatMap[index].seatNumber);    
                                           });
 
                                           double tempAmount =
@@ -161,6 +175,15 @@ class _BusSeatsScreenState extends State<BusSeatsScreen> {
                                           setState(() {
                                             seatIds.add(busController
                                                 .seatMap[index].seatNumber);
+
+                                           BusContactDetailsModel busContactDetailsModeldata = BusContactDetailsModel(
+                                                  ageController: TextEditingController(),
+                                                  gender: "",
+                                                  nameController: TextEditingController(),
+                                                  seats: busController.seatMap[index].seatNumber
+                                                );
+
+                                                busContactDetailsModel.add(busContactDetailsModeldata);
                                           });
 
                                           double tempAmount =
@@ -309,7 +332,9 @@ class _BusSeatsScreenState extends State<BusSeatsScreen> {
                         dropingId: widget.dropingId,
                         searchkey: widget.searchkey,
                         seatIds: seatIds,
-                       amount: busController.totalAmount.value.toStringAsFixed(2),
+                        cusName:profileController.profileData.isEmpty ? "test" : profileController.profileData.first.name,
+                        busContactmodel: busContactDetailsModel,
+                        amount: busController.totalAmount.value.toStringAsFixed(2),
                       ));
                     }
                   },

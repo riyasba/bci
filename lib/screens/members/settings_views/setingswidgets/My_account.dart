@@ -1302,7 +1302,7 @@ class _MyAccountState extends State<MyAccount> {
                                                     top: 130,
                                                     child:profileController.profileData.first
                                                       .profilePicture == null
-                                              ? Image.asset('assets/icons/prfl.png')
+                                              ? Image.asset('assets/icons/prfl.png',height: 50,width: 50,)
                                               : Container(
                                                       height: 55,
                                                       width: 55,

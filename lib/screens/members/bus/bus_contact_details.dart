@@ -1,8 +1,10 @@
 import 'package:bci/controllers/bus_controllers.dart';
+import 'package:bci/models/bus_booking_models/bus_contact_details_model.dart';
 import 'package:bci/models/bus_booking_models/pax_list_model.dart';
 import 'package:bci/models/bus_booking_models/search_bus_model.dart';
 import 'package:bci/screens/members/bus/buscommenappbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -14,7 +16,9 @@ class BusContactDetails extends StatefulWidget {
   String dropingId;
   String searchkey;
   List<String> seatIds;
+  List<BusContactDetailsModel> busContactmodel;
   String amount;
+  String cusName;
 
   BusContactDetails(
       {super.key,
@@ -23,7 +27,10 @@ class BusContactDetails extends StatefulWidget {
       required this.dropingId,
       required this.searchkey,
       required this.amount,
-      required this.seatIds});
+      required this.seatIds,
+      required this.busContactmodel,
+      required this.cusName
+      });
 
   @override
   State<BusContactDetails> createState() => _BusContactDetailsState();
@@ -31,14 +38,38 @@ class BusContactDetails extends StatefulWidget {
 
 class _BusContactDetailsState extends State<BusContactDetails> {
 
-  final busController = Get.find<BusController>();
+ final busController = Get.find<BusController>();
 
   var phoneNumberController = TextEditingController();
   var nameController = TextEditingController();
   var emailController = TextEditingController();
   var ageController = TextEditingController();
-
   String selectedGender = '';
+  //2
+  var phoneNumberController2 = TextEditingController();
+  var nameController2 = TextEditingController();
+  var emailController2 = TextEditingController();
+  var ageController2 = TextEditingController();
+  String selectedGender2 = '';
+  //3
+  var phoneNumberController3 = TextEditingController();
+  var nameController3 = TextEditingController();
+  var emailController3 = TextEditingController();
+  var ageController3 = TextEditingController();
+  String selectedGender3 = '';
+  //4
+  var phoneNumberController4 = TextEditingController();
+  var nameController4 = TextEditingController();
+  var emailController4 = TextEditingController();
+  var ageController4 = TextEditingController();
+  String selectedGender4 = '';
+  //5
+  var phoneNumberController5 = TextEditingController();
+  var nameController5 = TextEditingController();
+  var emailController5 = TextEditingController();
+  var ageController5 = TextEditingController();
+  String selectedGender5 = '';
+  
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +89,10 @@ class _BusContactDetailsState extends State<BusContactDetails> {
               const Text('EMAIL ID').text.bold.gray500.make(),
               ksizedbox10,
                TextField(
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.emailAddress,
                 controller: emailController,
-                decoration:
-                    InputDecoration.collapsed(hintText: "Enter your email"),
+                decoration: const InputDecoration.collapsed(hintText: "Enter your email"),
               ),
               ksizedbox10,
               Divider(color: kgrey, height: 0.5),
@@ -68,13 +100,20 @@ class _BusContactDetailsState extends State<BusContactDetails> {
               const Text('PHONE').text.bold.gray500.make(),
               ksizedbox10,
                TextField(
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.phone,
+                inputFormatters: [
+                       LengthLimitingTextInputFormatter(10),
+                       FilteringTextInputFormatter.digitsOnly,
+                    FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                  ],
                 controller: phoneNumberController,
                 decoration: const InputDecoration.collapsed(hintText: "Enter your phone"),
               ),
               ksizedbox10,
               Divider(color: kgrey, height: 0.5),
               ksizedbox20,
-              for (int i = 0; i < widget.seatIds.length; i++)
+              for (int i = 0; i < widget.busContactmodel.length; i++)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -82,7 +121,7 @@ class _BusContactDetailsState extends State<BusContactDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text('Passenger Details').text.xl.semiBold.make(),
-                        Text('Seat No : ${widget.seatIds[i]}')
+                        Text('Seat No : ${widget.busContactmodel[i].seats}')
                             .text
                             .semiBold
                             .make(),
@@ -92,7 +131,9 @@ class _BusContactDetailsState extends State<BusContactDetails> {
                     const Text('NAME').text.bold.gray500.make(),
                     ksizedbox10,
                     TextField(
-                      controller: nameController,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      controller: widget.busContactmodel[i].nameController,
                       decoration: const InputDecoration.collapsed(
                           hintText: "Enter your name"),
                     ),
@@ -108,30 +149,20 @@ class _BusContactDetailsState extends State<BusContactDetails> {
                     RadioListTile(
             title:const Text('Male'),
             value: 'Male',
-            groupValue: selectedGender,
+            groupValue: widget.busContactmodel[i].gender,
             onChanged: (value) {
               setState(() {
-                selectedGender = value!;
+                widget.busContactmodel[i].gender = value!;
               });
             },
           ),
           RadioListTile(
             title:const Text('Female'),
             value: 'Female',
-            groupValue: selectedGender,
+            groupValue: widget.busContactmodel[i].gender,
             onChanged: (value) {
               setState(() {
-                selectedGender = value!;
-              });
-            },
-          ),
-          RadioListTile(
-            title:const Text('Other'),
-            value: 'Other',
-            groupValue: selectedGender,
-            onChanged: (value) {
-              setState(() {
-                selectedGender = value!;
+                widget.busContactmodel[i].gender = value!;
               });
             },
           ),
@@ -139,7 +170,9 @@ class _BusContactDetailsState extends State<BusContactDetails> {
                     const Text('AGE').text.bold.gray500.make(),
                     ksizedbox10,
                     TextField(
-                      controller: ageController,
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.number,
+                      controller: widget.busContactmodel[i].ageController,
                       decoration: const InputDecoration.collapsed(hintText: "Enter your age"),
                     ),
                     ksizedbox10,
@@ -170,6 +203,24 @@ class _BusContactDetailsState extends State<BusContactDetails> {
           Expanded(
             child: InkWell(
               onTap: () {
+
+                List<PaxDetailslist> paxDetailslists = [];
+
+                for(int a = 0; a < widget.busContactmodel.length; a++){
+                 
+                 PaxDetailslist paxDetailslistdata = PaxDetailslist(
+                  age: widget.busContactmodel[a].ageController.text,
+                  gender:widget.busContactmodel[a].gender == "Male" ? 0 : 1, 
+                  isLadies: false, 
+                  paxName: widget.busContactmodel[a].nameController.text, 
+                  seatNumber: widget.busContactmodel[a].seats
+                  ); 
+
+                  paxDetailslists.add(paxDetailslistdata);
+
+                }
+
+
                 busController.tempBookBusTicket(
                     boardingId: widget.boardingId,
                     droppingId: widget.dropingId,
@@ -177,16 +228,9 @@ class _BusContactDetailsState extends State<BusContactDetails> {
                     searcKey: widget.searchkey,
                     mobileNumber: phoneNumberController.text,
                     customerEmail: emailController.text,
-                    paxDetailslist: [
-                      PaxDetailslist(
-                          age: ageController.text.toInt(),
-                          gender: selectedGender == "Male" ? 0 : 1,
-                          isLadies: false,
-                          paxName: nameController.text,
-                          seatNumber: widget.seatIds.first),
-                    ],
+                    paxDetailslist: paxDetailslists,
                     amount: widget.amount,
-                    customerName: nameController.text,
+                    customerName: widget.cusName,
                     seatMapKey: busController.seatMapKey.value);
               },
               child: Container(

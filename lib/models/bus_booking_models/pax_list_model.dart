@@ -1,5 +1,5 @@
 class PaxDetailslist {
-  int age;
+  String age;
   bool isLadies;
   String paxName;
   String seatNumber;
