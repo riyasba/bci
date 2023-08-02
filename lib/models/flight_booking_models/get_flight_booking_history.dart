@@ -38,7 +38,7 @@ class GetFlightsModel {
 
 class FlightBookedData {
   int id;
-  int userId;
+  dynamic userId;
   String invoiceNumber;
   String remark;
   String fromCitycode;
@@ -48,7 +48,7 @@ class FlightBookedData {
   String bookingRefNo;
   String airlineCode;
   String bookingDate;
-  int createdBy;
+  dynamic createdBy;
   DateTime createdAt;
   DateTime updatedAt;
 

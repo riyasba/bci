@@ -30,26 +30,26 @@ class GetPackageList {
 
 class PackageListData {
     int id;
-    int vendorId;
-    String? location;
-    int categoryId;
-    String title;
+    dynamic vendorId;
+    dynamic location;
+    dynamic categoryId;
+    dynamic title;
     dynamic description;
-    String image;
-    int isRecomended;
-    String inclusion;
-    String? exclusion;
-    String amount;
-    String packageoverview;
-    String duration;
-    String placeToVisit;
-    String packageInclude;
+    dynamic image;
+    dynamic isRecomended;
+    dynamic inclusion;
+    dynamic exclusion;
+    dynamic amount;
+    dynamic packageoverview;
+    dynamic duration;
+    dynamic placeToVisit;
+    dynamic packageInclude;
     dynamic dayWiseItinerary;
     dynamic status;
     DateTime createdAt;
     DateTime updatedAt;
     List<String> images;
-    String categoryName;
+    dynamic categoryName;
 
     PackageListData({
         required this.id,

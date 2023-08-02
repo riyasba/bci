@@ -84,6 +84,13 @@ class HolidayPackageController extends GetxController{
     if(response.statusCode == 200){
       GetPackageDetails getPackageDetails = GetPackageDetails.fromJson(response.data);
       getPackageDetailsData.add(getPackageDetails.data);
+    }else if(response.statusCode == 404){
+      Get.rawSnackbar(
+          backgroundColor: Colors.black,
+          messageText: Text(
+            "Package not found",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
     }else{
       Get.rawSnackbar(
           backgroundColor: Colors.red,

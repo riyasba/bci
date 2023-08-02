@@ -11,7 +11,7 @@ class GetPackageDetailsApiServices extends BaseApiService {
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.get(
+      var response = await dio.post(
         getPackageDetailsApiUrl,
         options: Options(
             headers: {

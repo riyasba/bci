@@ -26,29 +26,29 @@ class LiquorVendorList {
 
 class VendorListData {
     int id;
-    int categoryId;
-    int vendorId;
-    String title;
-    String actualAmount;
-    String saleAmount;
-    int isOffer;
+    dynamic categoryId;
+    dynamic vendorId;
+    dynamic title;
+    dynamic actualAmount;
+    dynamic saleAmount;
+    dynamic isOffer;
     dynamic offerPercentage;
     dynamic offerUptoAmount;
-    int isCoupon;
+    dynamic isCoupon;
     dynamic couponAmount;
-    String description;
-    String quantity;
-    String unit;
-    int isRecomended;
-    int status;
-    String amenties;
-    String image;
+    dynamic description;
+    dynamic quantity;
+    dynamic unit;
+    dynamic isRecomended;
+    dynamic status;
+    dynamic amenties;
+    dynamic image;
     DateTime createdAt;
     DateTime updatedAt;
     dynamic shareOption;
     dynamic bvcAmount;
-    String name;
-    String email;
+    dynamic name;
+    dynamic email;
 
     VendorListData({
         required this.id,
@@ -79,21 +79,21 @@ class VendorListData {
 
     factory VendorListData.fromJson(Map<String, dynamic> json) => VendorListData(
         id: json["id"]?? 0,
-        categoryId: json["category_id"]?? 0,
-        vendorId: json["vendor_id"]?? 0,
+        categoryId: json["category_id"]?? "",
+        vendorId: json["vendor_id"]?? "",
         title: json["title"]?? "",
         actualAmount: json["actual_amount"]?? "",
         saleAmount: json["sale_amount"]?? "",
-        isOffer: json["isOffer"]?? 0,
+        isOffer: json["isOffer"]?? "",
         offerPercentage: json["offerPercentage"]?? "",
         offerUptoAmount: json["offerUpto_amount"]?? "",
-        isCoupon: json["isCoupon"]?? 0,
+        isCoupon: json["isCoupon"]?? "",
         couponAmount: json["coupon_amount"]?? "",
         description: json["description"]?? "",
         quantity: json["quantity"]?? "",
         unit: json["unit"]?? "",
-        isRecomended: json["is_recomended"]?? 0,
-        status: json["status"]?? 0,
+        isRecomended: json["is_recomended"]?? "",
+        status: json["status"]?? "",
         amenties: json["amenties"]?? "",
         image: json["image"]?? "",
         createdAt: DateTime.parse(json["created_at"]),

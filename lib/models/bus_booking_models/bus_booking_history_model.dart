@@ -38,7 +38,7 @@ class BusHistoryModel {
 
 class BookingHistoryData {
   int id;
-  int userId;
+  dynamic userId;
   String remarks;
   String fromCitycode;
   String toCitycode;
@@ -47,7 +47,7 @@ class BookingHistoryData {
   String bookingRefno;
   String busName;
   String bookingDate;
-  int createdBy;
+  dynamic createdBy;
   DateTime createdAt;
   DateTime updatedAt;
 

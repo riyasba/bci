@@ -79,10 +79,14 @@ class _BusContainersState extends State<BusContainers> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ksizedbox10,
-                                  Text(
-                                    busController.bookingHistoryList[index].busName
-                                        .toString(),
-                                    style: const TextStyle(fontSize: 21),
+                                  Container(
+                                    width: 200,
+                                    child: Text(
+                                      busController.bookingHistoryList[index].busName
+                                          .toString(),
+                                          maxLines: 2,
+                                      style: const TextStyle(fontSize: 21),
+                                    ),
                                   ),
                                   Container(
                                     width: 200,

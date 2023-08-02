@@ -30,8 +30,8 @@ class GetEnquiryList {
 
 class EnquiryData {
     int id;
-    int packageId;
-    int vendorId;
+    dynamic packageId;
+    dynamic vendorId;
     String cityOfDeparture;
     String dateOfDeparture;
     String adultCount;
@@ -40,7 +40,7 @@ class EnquiryData {
     String name;
     String email;
     String mobile;
-    int status;
+    dynamic status;
     DateTime createdAt;
     DateTime updatedAt;
     PackageDetails packageDetails;
@@ -78,7 +78,7 @@ class EnquiryData {
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        packageDetails: PackageDetails.fromJson(json["package_details"]),
+        packageDetails:json["package_details"] == 'null' ? PackageDetails(id: 0 , vendorId: "", location: "", categoryId: "", title: "", image: [], isRecomended: "", amount: "", packageoverview: "", duration: "", placeToVisit: "", packageInclude: "", status: "", createdAt: DateTime.now(), updatedAt: DateTime.now()) : PackageDetails.fromJson(json["package_details"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -102,13 +102,13 @@ class EnquiryData {
 
 class PackageDetails {
     int id;
-    int vendorId;
+    dynamic vendorId;
     String location;
-    int categoryId;
+    dynamic categoryId;
     String title;
     dynamic description;
     List<String> image;
-    int isRecomended;
+    dynamic isRecomended;
     dynamic inclusion;
     dynamic exclusion;
     String amount;
@@ -117,7 +117,7 @@ class PackageDetails {
     String placeToVisit;
     String packageInclude;
     dynamic dayWiseItinerary;
-    int status;
+    dynamic status;
     DateTime createdAt;
     DateTime updatedAt;
 

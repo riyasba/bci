@@ -878,5 +878,6 @@ class BusController extends GetxController {
       bookingHistoryList = busHistoryModel.data;
       update();
     }
+    update();
   }
 }

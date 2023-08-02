@@ -29,6 +29,7 @@ class _OverviewWidgetState extends State<OverviewWidget> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return
+     holidayPackageController.getPackageDetailsData.isEmpty ? const Center(child: Text("No Data Found"),) :
       ListView(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
@@ -59,7 +60,8 @@ class _OverviewWidgetState extends State<OverviewWidget> {
                 ],
               ),
               ksizedbox10,
-              if(holidayPackageController.getPackageDetailsData.first.packageoverview.isNotEmpty)
+              //if(holidayPackageController.getPackageDetailsData.first.packageoverview.isNotEmpty)
+              holidayPackageController.getPackageDetailsData.isEmpty ? const Center(child: Text("No Data Found"),) :
               HtmlContentViewer(
                             htmlContent: holidayPackageController.getPackageDetailsData.first.packageoverview,
                             initialContentHeight:
@@ -242,6 +244,7 @@ class _OverviewWidgetState extends State<OverviewWidget> {
                 ],
               ),
               ksizedbox10,
+              holidayPackageController.getPackageDetailsData.isEmpty ? const Center(child: Text("No Data Found"),) :
                HtmlContentViewer(
                             htmlContent: holidayPackageController.getPackageDetailsData.first.inclusion,
                             initialContentHeight:
