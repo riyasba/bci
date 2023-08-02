@@ -46,13 +46,13 @@ class MemberProfileModel {
 
 class MemberUser {
     int id;
-    int roleId;
-    String name;
-    String email;
-    String mobile;
-    int isVerrifiedMobile;
-    String otp;
-    String referralCode;
+    dynamic roleId;
+    dynamic name;
+    dynamic email;
+    dynamic mobile;
+    dynamic isVerrifiedMobile;
+    dynamic otp;
+    dynamic referralCode;
     dynamic referredBy;
     dynamic walletAmount;
     dynamic category;
@@ -65,7 +65,7 @@ class MemberUser {
     dynamic clientSecret;
     dynamic clientId;
     dynamic keyName;
-    String keyStatus;
+    dynamic keyStatus;
     dynamic emailVerifiedAt;
     dynamic address;
     dynamic dob;
