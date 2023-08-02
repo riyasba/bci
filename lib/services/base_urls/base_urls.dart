@@ -1,39 +1,44 @@
 abstract class BaseApiService {
-  final String baseUrl = "https://bci.generation360tech.in";
+  final String baseUrl = "https://bci.batechnology.in";
+
+  // old url - https://bci.generation360tech.in/
+  // new url - https://bci.batechnology.in/
+
 
   //register url
   final String registerURl =
-      "https://bci.generation360tech.in/api/register_user";
+    "https://bci.batechnology.in/api/register_user";
 
   //login url
   final String getOtpUrl = "https://bci.generation360tech.in/api/get_otp";
 
-  //otp verify
-  final String otpVerifyApiUrl = "https://bci.generation360tech.in/api/otp_verrify";
-
   //login url
-  final String loginURL = "https://bci.generation360tech.in/api/login";
+  final String loginURL = "https://bci.batechnology.in/api/login";
 
   //category url
-  final String categoryURL = "https://bci.generation360tech.in/api/category";
+  final String categoryURL = "https://bci.batechnology.in/api/category";
 
   //sub category URL
-  final String subCategoryURL = "https://bci.generation360tech.in/api/sub_category";
+  final String subCategoryURL =
+      "https://bci.generation360tech.in/api/sub_category";
 
   //get profile api
-  final String getProfileURL = "https://bci.generation360tech.in/api/auth/profile";
+  final String getProfileURL =
+      "https://bci.generation360tech.in/api/auth/profile";
 
 //profile update API URL
-  final String profileUpdateURL = "https://bci.generation360tech.in/api/auth/profile_update";
+  final String profileUpdateURL =
+      "https://bci.generation360tech.in/api/auth/profile_update";
 
   //Add services
-  final String addServicesURL = "https://bci.generation360tech.in/api/auth/merchant_create_service";
+  final String addServicesURL =
+      "https://bci.generation360tech.in/api/auth/merchant_create_service";
 
   //get Services
-  final String getServicesURL = "https://bci.generation360tech.in/api/auth/service_list";
+  final String getServicesURL = "https://bci.batechnology.in/api/auth/service_list";
 
   //get booking list
-  final String bookingListApiUrl = "https://bci.generation360tech.in/api/auth/vendor_booking_list";
+  final String bookingListApiUrl = "https://bci.batechnology.in/api/auth/vendor_booking_list";
 
   // add today offers 
   final String addTodayOffersApiUrl = "https://bci.generation360tech.in/api/auth/merchant_offers";
