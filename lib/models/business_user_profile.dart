@@ -45,12 +45,12 @@ class BusinessProfileModel {
 }
 
 class BusinessUser {
-    int id;
-    int roleId;
+    dynamic id;
+    dynamic roleId;
     String name;
     String email;
     String mobile;
-    int isVerrifiedMobile;
+    dynamic isVerrifiedMobile;
     String otp;
     String referralCode;
     dynamic referredBy;
@@ -81,7 +81,7 @@ class BusinessUser {
     dynamic pincode;
     dynamic city;
     dynamic state;
-    String status;
+    dynamic status;
     dynamic gender;
     dynamic spouse;
     dynamic noOfChild;

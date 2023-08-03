@@ -29,10 +29,10 @@ class CategoryModel {
 }
 
 class CategoryList {
-    int id;
+    dynamic id;
     String title;
     String description;
-    int status;
+    dynamic status;
     DateTime createdAt;
     DateTime updatedAt;
 
