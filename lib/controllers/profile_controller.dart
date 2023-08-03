@@ -1,15 +1,11 @@
 import 'dart:io';
-
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/home_page_controller.dart';
-import 'package:bci/models/get_cart_list_model.dart';
 import 'package:bci/models/get_coupons_model.dart';
 import 'package:bci/models/member_profile_model.dart';
 import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
-import 'package:bci/models/profile_model.dart';
-import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:bci/services/network/profile_api_services/our_coupons_api_service.dart';
 import 'package:bci/services/network/profile_api_services/profile_api_services.dart';
 import 'package:bci/services/network/profile_api_services/profile_pic_update_api_services.dart';
@@ -22,7 +18,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
-
 import '../services/network/profile_api_services/update_residencial_address_api_services.dart';
 
 class ProfileController extends GetxController {

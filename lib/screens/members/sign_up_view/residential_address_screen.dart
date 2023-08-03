@@ -387,6 +387,7 @@ class _ResidentialAddressScreenState extends State<ResidentialAddressScreen> {
                                 city: cityController.text,
                                 state: stateController.text,
                                 personalId: personalIDController.text,
+                                pincode: "",
                                 aadhrId: aadharController.text);
 
                             // MemberRegisterModel tempMemberRegisterModel =

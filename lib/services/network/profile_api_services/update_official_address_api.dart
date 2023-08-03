@@ -21,6 +21,8 @@ class UpdateOfficialApiServices extends BaseApiService {
           "building_name": officialAddress.buildingName,
           "state": officialAddress.state,
           "city": officialAddress.city,
+          "proof_id_no": officialAddress.personalId,
+          "pincode": officialAddress.pincode,
         }),
       });
 

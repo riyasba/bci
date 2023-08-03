@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:velocity_x/velocity_x.dart';
 import '../../../../constands/constands.dart';
 
 class MyAccount extends StatefulWidget {
@@ -28,13 +29,26 @@ class _MyAccountState extends State<MyAccount> {
   var fatherNameController = TextEditingController();
   var motherNameController = TextEditingController();
   var dateOfBirthController = TextEditingController();
+  var weddingDateController = TextEditingController();
+  var gstNoController = TextEditingController();
+  var panNoController = TextEditingController();
+  var adharNoController = TextEditingController();
+  var branchController = TextEditingController();
+  var spouseController = TextEditingController();
+  var genderController = TextEditingController();
+  var qualificationController = TextEditingController();
+  var alternateMobController = TextEditingController();
+  var childController = TextEditingController();
   bool isMarried = false;
+  String selectedGender = '';
 
   var oDoorNumberCN = TextEditingController();
   var oBuildingNumberCN = TextEditingController();
   var oAddressCN = TextEditingController();
   var oCityCN = TextEditingController();
   var oStateCN = TextEditingController();
+  var proofidController = TextEditingController();
+  var pincodeController = TextEditingController();
 
   var rDoorNumberCN = TextEditingController();
   var rBuildingNumberCN = TextEditingController();
@@ -43,6 +57,8 @@ class _MyAccountState extends State<MyAccount> {
   var rStateCN = TextEditingController();
   var rpersonalIdCN = TextEditingController();
   var rAadhrCN = TextEditingController();
+  var rproofidController = TextEditingController();
+  var rpincodeController = TextEditingController();
 
   final settingsController = Get.find<SettingsController>();
   final plansController = Get.find<PlanController>();
@@ -101,44 +117,88 @@ class _MyAccountState extends State<MyAccount> {
       });
   }
 
+  //
+  DateTime wdate = DateTime.now().subtract(const Duration(days: 6570));
+
+  _wselectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: wdate,
+      initialDatePickerMode: DatePickerMode.day,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      firstDate: DateTime(1910),
+      locale: const Locale('en', 'IN'),
+      lastDate: DateTime.now().subtract(const Duration(days: 6570)),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: kblue, // <-- SEE HERE
+              onPrimary: Colors.white, // <-- SEE HERE
+              onSurface: Colors.blueAccent, // <-- SEE HERE
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: kblue, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null)
+      setState(() {
+        wdate = picked;
+        weddingDateController.text = formatDate(wdate, [dd, "/", mm, "/", yyyy]);
+      });
+  }
+
   setDefault() async {
     await profileController.getProfile();
     if (profileController.profileData.isNotEmpty) {
       nameController.text = profileController.profileData.first.name;
       phoneController.text = profileController.profileData.first.mobile;
       emailController.text = profileController.profileData.first.email;
-      occupationController.text =
-          profileController.profileData.first.occupation;
-      fatherNameController.text =
-          profileController.profileData.first.fatherName;
-      motherNameController.text =
-          profileController.profileData.first.motherName;
+      occupationController.text = profileController.profileData.first.occupation;
+      fatherNameController.text = profileController.profileData.first.fatherName;
+      motherNameController.text = profileController.profileData.first.motherName;
+      qualificationController.text = profileController.profileData.first.qualification;
+      gstNoController.text = profileController.profileData.first.gstNo;
+      panNoController.text = profileController.profileData.first.panNo;
+      adharNoController.text = profileController.profileData.first.aadharNo;
+      selectedGender = profileController.profileData.first.gender;
+      alternateMobController.text = profileController.profileData.first.alternateMobile;
+
 
       // oDoorNumberCN.text =
       //     profileController.profileData.first.officialAddress.doorNo ?? "";
       oBuildingNumberCN.text =
-          profileController.profileData.first.officialAddress.buildingName;
+          profileController.profileData.first.officialAddress.buildingName ?? "";
       oAddressCN.text =
-          profileController.profileData.first.officialAddress.address;
+          profileController.profileData.first.officialAddress.address ?? "";
 
-      oCityCN.text = profileController.profileData.first.officialAddress.city;
-      oStateCN.text = profileController.profileData.first.officialAddress.state;
+      oCityCN.text = profileController.profileData.first.officialAddress.city ?? "";
+      oStateCN.text = profileController.profileData.first.officialAddress.state ?? "";
+      proofidController.text = profileController.profileData.first.officialAddress.proofid ?? "";
+      pincodeController.text = profileController.profileData.first.officialAddress.state ?? "";
 
       rDoorNumberCN.text =
-          profileController.profileData.first.residentialAddress.doorNo;
+          profileController.profileData.first.residentialAddress.doorNo ?? "";
       rBuildingNumberCN.text =
-          profileController.profileData.first.residentialAddress.buildingName;
+          profileController.profileData.first.residentialAddress.buildingName ?? "";
       rAddressCN.text =
-          profileController.profileData.first.residentialAddress.address;
+          profileController.profileData.first.residentialAddress.address ?? "";
 
       rCityCN.text =
-          profileController.profileData.first.residentialAddress.city;
+          profileController.profileData.first.residentialAddress.city ?? "";
       rStateCN.text =
-          profileController.profileData.first.residentialAddress.state;
+          profileController.profileData.first.residentialAddress.state ?? "";
       rpersonalIdCN.text =
-          profileController.profileData.first.residentialAddress.personalId;
+          profileController.profileData.first.residentialAddress.personalId ?? "";
       rAadhrCN.text =
-          profileController.profileData.first.residentialAddress.aadharId;
+          profileController.profileData.first.residentialAddress.aadharId ?? "";
 
       setState(() {
         isMarried =
@@ -147,6 +207,9 @@ class _MyAccountState extends State<MyAccount> {
       dateOfBirthController.text = profileController.profileData.first.dob;
     }
   }
+
+  File? image;
+  File? image2;
 
   File? imageprofile;
 
@@ -164,6 +227,59 @@ class _MyAccountState extends State<MyAccount> {
       print('Failed to pick image:$e');
     }
   }
+
+  Future pickerimage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      final imagetemp = File(image.path);
+      setState(() {
+        this.image = imagetemp;
+      });
+    } catch (e) {
+      print('Failed to pick image:$e');
+    }
+  }
+
+  Future imagepic() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (image == null) return;
+      final imagetemp = File(image.path);
+      setState(() {
+        this.image = imagetemp;
+      });
+    } catch (e) {
+      print('Failed to pick image:$e');
+    }
+  }
+
+  Future pickerimage2() async {
+    try {
+      final image2 = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image2 == null) return;
+      final imagetemp2 = File(image2.path);
+      setState(() {
+        this.image2 = imagetemp2;
+      });
+    } catch (e) {
+      print('Failed to pick image:$e');
+    }
+  }
+
+  Future imagepic2() async {
+    try {
+      final image2 = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (image2 == null) return;
+      final imagetemp2 = File(image2.path);
+      setState(() {
+        this.image2 = imagetemp2;
+      });
+    } catch (e) {
+      print('Failed to pick image:$e');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -248,7 +364,6 @@ class _MyAccountState extends State<MyAccount> {
                     Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Container(
-                        height: 530,
                         width: double.infinity,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -341,34 +456,38 @@ class _MyAccountState extends State<MyAccount> {
                                   ],
                                 );
                               }),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Container(
-                                  height: 37,
-                                  width: size.width,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(2),
-                                      border: Border.all(
-                                          color: const Color(0xff707070)),
-                                      color: const Color(0xffF9F8FD)),
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 15, right: 10),
-                                    child: TextField(
-                                      controller: nameController,
-                                      decoration: InputDecoration(
-                                          isCollapsed: true,
-                                          isDense: true,
-                                          border: InputBorder.none,
-                                          hintText: "User Name",
-                                          hintStyle: TextStyle(
-                                            color: kblue,
-                                            fontWeight: FontWeight.w400,
-                                          )),
+                              GetBuilder<ProfileController>(
+                                builder: (_) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Container(
+                                      height: 37,
+                                      width: size.width,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(2),
+                                          border: Border.all(
+                                              color: const Color(0xff707070)),
+                                          color: const Color(0xffF9F8FD)),
+                                      alignment: Alignment.center,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 15, right: 10),
+                                        child: TextField(
+                                          controller: nameController,
+                                          decoration: InputDecoration(
+                                              isCollapsed: true,
+                                              isDense: true,
+                                              border: InputBorder.none,
+                                              hintText: "User Name",
+                                              hintStyle: TextStyle(
+                                                color: kblue,
+                                                fontWeight: FontWeight.w400,
+                                              )),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
+                                  );
+                                }
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
@@ -450,12 +569,77 @@ class _MyAccountState extends State<MyAccount> {
                                     padding:
                                         const EdgeInsets.only(left: 15, right: 10),
                                     child: TextField(
+                                      controller: alternateMobController,
+                                      keyboardType: TextInputType.phone,
+                                      inputFormatters: [
+                                        LengthLimitingTextInputFormatter(10),
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        FilteringTextInputFormatter.deny(
+                                            RegExp(r'\s')),
+                                      ],
+                                      decoration: InputDecoration(
+                                          isCollapsed: true,
+                                          isDense: true,
+                                          border: InputBorder.none,
+                                          hintText: "Alternate Mobile Number",
+                                          hintStyle: TextStyle(
+                                            color: kblue,
+                                            fontWeight: FontWeight.w400,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  height: 37,
+                                  width: size.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      border: Border.all(
+                                          color: const Color(0xff707070)),
+                                      color: const Color(0xffF9F8FD)),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 15, right: 10),
+                                    child: TextField(
                                       controller: occupationController,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
                                           isDense: true,
                                           border: InputBorder.none,
                                           hintText: "Occupation",
+                                          hintStyle: TextStyle(
+                                            color: kblue,
+                                            fontWeight: FontWeight.w400,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  height: 37,
+                                  width: size.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      border: Border.all(
+                                          color: const Color(0xff707070)),
+                                      color: const Color(0xffF9F8FD)),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 15, right: 10),
+                                    child: TextField(
+                                      controller: qualificationController,
+                                      decoration: InputDecoration(
+                                          isCollapsed: true,
+                                          isDense: true,
+                                          border: InputBorder.none,
+                                          hintText: "Qualification",
                                           hintStyle: TextStyle(
                                             color: kblue,
                                             fontWeight: FontWeight.w400,
@@ -522,45 +706,137 @@ class _MyAccountState extends State<MyAccount> {
                                   ),
                                 ),
                               ),
-                              // Padding(
-                              //   padding: const EdgeInsets.only(top: 10),
-                              //   child: Container(
-                              //     height: 37,
-                              //     width: size.width,
-                              //     decoration: BoxDecoration(
-                              //         borderRadius: BorderRadius.circular(2),
-                              //         border: Border.all(
-                              //             color: const Color(0xff707070)),
-                              //         color: const Color(0xffF9F8FD)),
-                              //     alignment: Alignment.center,
-                              //     child: Padding(
-                              //       padding:
-                              //           const EdgeInsets.only(left: 15, right: 10),
-                              //       child: Row(
-                              //         children: [
-                              //           Text(
-                              //             "Married :",
-                              //             style: TextStyle(
-                              //               color: kblue,
-                              //               fontWeight: FontWeight.w400,
-                              //             ),
-                              //           ),
-                              //           Checkbox(
-                              //             checkColor: Colors.white,
-                              //             fillColor:
-                              //                 MaterialStateProperty.all(kblue),
-                              //             value: isMarried,
-                              //             onChanged: (bool? value) {
-                              //               setState(() {
-                              //                 isMarried = value!;
-                              //               });
-                              //             },
-                              //           )
-                              //         ],
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  height: 37,
+                                  width: size.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      border: Border.all(
+                                          color: const Color(0xff707070)),
+                                      color: const Color(0xffF9F8FD)),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 15, right: 10),
+                                    child: TextField(
+                                      controller: childController,
+                                      decoration: InputDecoration(
+                                          isCollapsed: true,
+                                          isDense: true,
+                                          border: InputBorder.none,
+                                          hintText: "Children",
+                                          hintStyle: TextStyle(
+                                            color: kblue,
+                                            fontWeight: FontWeight.w400,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              ksizedbox10,
+                                  Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Text('GENDER').text.gray500.semiBold.make(),
+                      ],
+                    ),
+                    RadioListTile(
+            title:const Text('Male'),
+            value: 'Male',
+            groupValue: selectedGender,
+            onChanged: (value) {
+              setState(() {
+                selectedGender = value!;
+              });
+            },
+          ),
+          RadioListTile(
+            title:const Text('Female'),
+            value: 'Female',
+            groupValue: selectedGender,
+            onChanged: (value) {
+              setState(() {
+                selectedGender = value!;
+              });
+            },
+          ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  height: 37,
+                                  width: size.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      border: Border.all(
+                                          color: const Color(0xff707070)),
+                                      color: const Color(0xffF9F8FD)),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 15, right: 10),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Married :",
+                                          style: TextStyle(
+                                            color: kblue,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        Checkbox(
+                                          checkColor: Colors.white,
+                                          fillColor:
+                                              MaterialStateProperty.all(kblue),
+                                          value: isMarried,
+                                          onChanged: (bool? value) {
+                                            setState(() {
+                                              isMarried = value!;
+                                            });
+                                          },
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                               
+                               
+
+                               Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  height: 37,
+                                  width: size.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      border: Border.all(
+                                          color: const Color(0xff707070)),
+                                      color: const Color(0xffF9F8FD)),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 15, right: 10),
+                                    child: TextField(
+                                      controller: weddingDateController,
+                                      readOnly: true,
+                                      onTap: () {
+                                        _wselectDate(context);
+                                      },
+                                      decoration: InputDecoration(
+                                          isCollapsed: true,
+                                          isDense: true,
+                                          border: InputBorder.none,
+                                          hintText: "Wedding Date",
+                                          hintStyle: TextStyle(
+                                            color: kblue,
+                                            fontWeight: FontWeight.w400,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: Container(
@@ -585,7 +861,265 @@ class _MyAccountState extends State<MyAccount> {
                                           isCollapsed: true,
                                           isDense: true,
                                           border: InputBorder.none,
-                                          hintText: "Date of Birth",
+                                          hintText: "Date Of Birth",
+                                          hintStyle: TextStyle(
+                                            color: kblue,
+                                            fontWeight: FontWeight.w400,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  height: 37,
+                                  width: size.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      border: Border.all(
+                                          color: const Color(0xff707070)),
+                                      color: const Color(0xffF9F8FD)),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 15, right: 10),
+                                    child: TextField(
+                                      controller: gstNoController,
+                                      decoration: InputDecoration(
+                                          isCollapsed: true,
+                                          isDense: true,
+                                          border: InputBorder.none,
+                                          hintText: "GST No",
+                                          hintStyle: TextStyle(
+                                            color: kblue,
+                                            fontWeight: FontWeight.w400,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  height: 37,
+                                  width: size.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      border: Border.all(
+                                          color: const Color(0xff707070)),
+                                      color: const Color(0xffF9F8FD)),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 15, right: 10),
+                                    child: TextField(
+                                      controller: panNoController,
+                                      decoration: InputDecoration(
+                                          isCollapsed: true,
+                                          isDense: true,
+                                          border: InputBorder.none,
+                                          hintText: "PAN No",
+                                          hintStyle: TextStyle(
+                                            color: kblue,
+                                            fontWeight: FontWeight.w400,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  height: 37,
+                                  width: size.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      border: Border.all(
+                                          color: const Color(0xff707070)),
+                                      color: const Color(0xffF9F8FD)),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 15, right: 10),
+                                    child: TextField(
+                                      controller: adharNoController,
+                                      decoration: InputDecoration(
+                                          isCollapsed: true,
+                                          isDense: true,
+                                          border: InputBorder.none,
+                                          hintText: "Aadhar No",
+                                          hintStyle: TextStyle(
+                                            color: kblue,
+                                            fontWeight: FontWeight.w400,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              //
+                              ksizedbox10,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                 image != null
+                    ? Container(
+                        height: 100, 
+                        width: 100, 
+                        child:profileController.profileData.isEmpty ? Image.file(image!) : Image.network(profileController.profileData.first.adharProof))
+                    : InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return Container(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            pickerimage();
+                                          },
+                                          child: const Text(
+                                            'Choose ur gallery',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16),
+                                          )),
+                                      TextButton(
+                                          onPressed: () {
+                                            imagepic();
+                                          },
+                                          child: const Text(
+                                            'Choose ur Camera',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16),
+                                          ))
+                                    ],
+                                  ),
+                                );
+                              });
+                        },
+                        child: Container(
+                            height: 100,
+                            width: 100,
+                            color: const Color(0xffE4E4E4),
+                            child:
+                                Image.asset('assets/images/imageupload.png')),
+                      ),
+                image2 != null
+                    ? Container(
+                        height: 100, width: 100, child: Image.file(image2!))
+                    : InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return Container(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            pickerimage2();
+                                          },
+                                          child: const Text(
+                                            'Choose ur gallery',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16),
+                                          )),
+                                      TextButton(
+                                          onPressed: () {
+                                            imagepic2();
+                                          },
+                                          child: const Text(
+                                            'Choose ur Camera',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16),
+                                          ))
+                                    ],
+                                  ),
+                                );
+                              });
+                        },
+                        child: Container(
+                            height: 100,
+                            width: 100,
+                            color: const Color(0xffE4E4E4),
+                            child:
+                                Image.asset('assets/images/imageupload.png')),
+                      ),
+                              ],),
+                              ksizedbox10,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                'Aadhar Card',
+                style: TextStyle(fontSize: 16, color: kblue),
+              ),
+              Text(
+                'Pan Card',
+                style: TextStyle(fontSize: 16, color: kblue),
+              ),
+             
+            ],
+          ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  height: 37,
+                                  width: size.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      border: Border.all(
+                                          color: const Color(0xff707070)),
+                                      color: const Color(0xffF9F8FD)),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 15, right: 10),
+                                    child: TextField(
+                                      controller: branchController,
+                                      decoration: InputDecoration(
+                                          isCollapsed: true,
+                                          isDense: true,
+                                          border: InputBorder.none,
+                                          hintText: "Branch",
+                                          hintStyle: TextStyle(
+                                            color: kblue,
+                                            fontWeight: FontWeight.w400,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  height: 37,
+                                  width: size.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      border: Border.all(
+                                          color: const Color(0xff707070)),
+                                      color: const Color(0xffF9F8FD)),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 15, right: 10),
+                                    child: TextField(
+                                      controller: spouseController,
+                                      decoration: InputDecoration(
+                                          isCollapsed: true,
+                                          isDense: true,
+                                          border: InputBorder.none,
+                                          hintText: "Spouse",
                                           hintStyle: TextStyle(
                                             color: kblue,
                                             fontWeight: FontWeight.w400,
@@ -625,14 +1159,25 @@ class _MyAccountState extends State<MyAccount> {
                                                 MemberProfileUpdateModel(
                                               name: nameController.text,
                                               email: emailController.text,
-                                              dateOfBirth:
-                                                  dateOfBirthController.text,
+                                              dateOfBirth: dateOfBirthController.text,
                                               fatherName: fatherNameController.text,
                                               isMarried:
                                                   isMarried == true ? "1" : "0",
                                               mobile: phoneController.text,
                                               motherName: motherNameController.text,
                                               occupation: occupationController.text,
+                                              adharNo: adharNoController.text,
+                                              panNo: panNoController.text,
+                                              gstNo: gstNoController.text,
+                                              gender: selectedGender == "Male" ? "Male" : "Female",
+                                              qualification: qualificationController.text,
+                                              weddingDate: weddingDateController.text,
+                                              branch: branchController.text,
+                                              spouse: spouseController.text,
+                                              alternateMob: alternateMobController.text,
+                                              adharproofimg: image!.path,
+                                              panproofimg: image2!.path,
+                                              children: childController.text,
                                             );
 
                                             profileController.updateProfile(
@@ -702,7 +1247,6 @@ class _MyAccountState extends State<MyAccount> {
                     Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Container(
-                        height: 350,
                         width: double.infinity,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -874,6 +1418,64 @@ class _MyAccountState extends State<MyAccount> {
                                   ),
                                 ),
                               ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  height: 37,
+                                  width: size.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      border: Border.all(
+                                          color: const Color(0xff707070)),
+                                      color: const Color(0xffF9F8FD)),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 15, right: 10),
+                                    child: TextField(
+                                      controller: proofidController,
+                                      decoration: InputDecoration(
+                                          isCollapsed: true,
+                                          isDense: true,
+                                          border: InputBorder.none,
+                                          hintText: "Proof Id No",
+                                          hintStyle: TextStyle(
+                                            color: kblue,
+                                            fontWeight: FontWeight.w400,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  height: 37,
+                                  width: size.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      border: Border.all(
+                                          color: const Color(0xff707070)),
+                                      color: const Color(0xffF9F8FD)),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 15, right: 10),
+                                    child: TextField(
+                                      controller: pincodeController,
+                                      decoration: InputDecoration(
+                                          isCollapsed: true,
+                                          isDense: true,
+                                          border: InputBorder.none,
+                                          hintText: "Pincode",
+                                          hintStyle: TextStyle(
+                                            color: kblue,
+                                            fontWeight: FontWeight.w400,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                              ),
                               Obx(
                                 () => profileController.isLoading.isTrue
                                     ? Container(
@@ -906,8 +1508,9 @@ class _MyAccountState extends State<MyAccount> {
                                               buildingName: oBuildingNumberCN.text,
                                               city: oCityCN.text,
                                               doorNo: oDoorNumberCN.text,
-                                              personalId: "",
+                                              personalId: proofidController.text,
                                               state: oStateCN.text,
+                                              pincode: pincodeController.text
                                             );
 
                                             profileController.updateOfficalAddress(
@@ -976,7 +1579,6 @@ class _MyAccountState extends State<MyAccount> {
                     Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Container(
-                        height: 445,
                         width: double.infinity,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -1168,7 +1770,7 @@ class _MyAccountState extends State<MyAccount> {
                                           isCollapsed: true,
                                           isDense: true,
                                           border: InputBorder.none,
-                                          hintText: "Personal ID",
+                                          hintText: "Proof Id No",
                                           hintStyle: TextStyle(
                                             color: kblue,
                                             fontWeight: FontWeight.w400,
@@ -1204,7 +1806,7 @@ class _MyAccountState extends State<MyAccount> {
                                           isCollapsed: true,
                                           isDense: true,
                                           border: InputBorder.none,
-                                          hintText: "Adhaar ID",
+                                          hintText: "Pincode",
                                           //suffixIcon:const Icon(Icons.upload),
                                           hintStyle: TextStyle(
                                             color: kblue,
@@ -1249,6 +1851,7 @@ class _MyAccountState extends State<MyAccount> {
                                                     city: rCityCN.text,
                                                     doorNo: rDoorNumberCN.text,
                                                     personalId: rpersonalIdCN.text,
+                                                    pincode: "",
                                                     state: rStateCN.text);
                                             profileController
                                                 .updateRecidencyAddress(
