@@ -214,7 +214,7 @@ class _BusinessOtpvarificationState extends State<BusinessOtpvarification> {
                   )
                 : InkWell(
                     onTap: () {
-                      authController.verifyOtp(mobile: widget.phoneNumber, otp: widget.otp);
+                      authController.verifyOtp(mobile: widget.phoneNumber, otp: otpString);
                       // authController.loginUsersbusiness(
                       //     mobile: widget.phoneNumber, otp: otpString);
                     },
