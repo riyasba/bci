@@ -97,15 +97,26 @@ class BusController extends GetxController {
             fromCityId: fromCityId, toCityId: toCityId, travelDate: travelDate);
     isLoading(false);
     if (response.statusCode == 200) {
-      SearchBusList searchBusList = SearchBusList.fromJson(response.data);
-      busData = searchBusList.buses;
-      busSearchKey(searchBusList.searchKey);
-      Get.to(BusDetailsScreen(
-        fromCityName: fromCity.value,
-        toCityName: toCity.value,
-        tdate: date.value,
-        searchKey: searchBusList.searchKey,
-      ));
+      if (response.data["Error_Code"] == "0001") {
+          Get.rawSnackbar(
+            backgroundColor: Colors.red,
+            messageText: Text(
+              "No bus availbale for the given city Names.",
+              style: primaryFont.copyWith(color: Colors.white),
+            ));
+       
+      } else {
+         SearchBusList searchBusList = SearchBusList.fromJson(response.data);
+        busData = searchBusList.buses;
+        busSearchKey(searchBusList.searchKey);
+        Get.to(BusDetailsScreen(
+          fromCityName: fromCity.value,
+          toCityName: toCity.value,
+          tdate: date.value,
+          searchKey: searchBusList.searchKey,
+        ));
+      
+      }
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,

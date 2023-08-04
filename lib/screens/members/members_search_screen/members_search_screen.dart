@@ -145,7 +145,7 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                     children: [
                       Container(
                         height: 44,
-                        width: 300,
+                        width: size.width * 0.7,
                         decoration: BoxDecoration(
                             color: kwhite,
                             borderRadius: BorderRadius.circular(3),

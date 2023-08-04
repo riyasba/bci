@@ -77,6 +77,33 @@ class _FlightBookingSuccessPageState extends State<BusBookingSuccessPage> {
                     ),
                   ),
                 ],
+              ),
+               const SizedBox(
+                height: 50,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      getback();
+                    },
+                    child: Container(
+                      height: 55,
+                      decoration: BoxDecoration(
+                          color: kblue,
+                          borderRadius: BorderRadius.circular(20)),
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: Text(
+                          "Back to Home",
+                          style: primaryFont.copyWith(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               )
             ],
           ),

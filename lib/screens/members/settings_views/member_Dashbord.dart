@@ -78,15 +78,16 @@ class _DashBoardScreenMenbersState extends State<DashBoardScreenMenbers> {
                         child:profileController.profileData.isEmpty
                           ? Container()
                           : Text(
-                          'Hello, ${profileController.profileData.first.name}',
+                          'Hello, ${profileController.profileData.first.name ?? ""}',
                           style: TextStyle(fontSize: 20, color: kblue),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 20),
-                        child:profileController.profileData.isEmpty ?
+                        child: profileController.profileData.isEmpty ?
                          Image.asset('assets/images/settingprofile.png') : 
-                         ClipRRect(
+                         profileController.profileData.first.profilePicture == null ? Image.asset(
+                                      'assets/images/settingprofile.png') : ClipRRect(
                           borderRadius: BorderRadius.circular(35),
                            child: Image.network(
                             profileController.profileData.first.profilePicture,

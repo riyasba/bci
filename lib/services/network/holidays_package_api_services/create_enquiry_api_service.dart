@@ -22,7 +22,7 @@ class CreateEnquiryApiService extends BaseApiService {
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
       String? vendorid = prefs.getString("id");
-      var response = await dio.get(
+      var response = await dio.post(
         createEnquiryApiUrl,
         options: Options(
             headers: {

@@ -50,24 +50,24 @@ class _FlightBookingSuccessPageState extends State<FlightBookingSuccessPage> {
                 style: primaryFont.copyWith(
                     color: kblue, fontWeight: FontWeight.bold, fontSize: 22),
               ),
-              Text(
-                  "Flight Pnr ${widget.airReprintModel.airPnrDetails.first.airlinePnr}"),
-              Text(
-                  "Flight ticket status: ${widget.airReprintModel.airPnrDetails.first.ticketStatusDesc}"),
-              Text(
-                  "Flight ticket status Id: ${widget.airReprintModel.airPnrDetails.first.ticketStatusId}"),
-              Text(
-                  "Flight ticket date: ${widget.airReprintModel.airPnrDetails.first.ticketingDate}"),
-              Text(
-                  "Flight ticket airline last pnr: ${widget.airReprintModel.airPnrDetails.last.airlinePnr}"),
-              Text(
-                  "Flight ticket status id (last): ${widget.airReprintModel.airPnrDetails.last.ticketStatusId}"),
-              Text(
-                  "Flight ticket status(last): ${widget.airReprintModel.airPnrDetails.last.ticketStatusDesc}"),
-              Text(widget.airReprintModel.airPnrDetails.first.airlineName ??
-                  "-N/A"),
-              Text(widget.airReprintModel.airPnrDetails.first.failureRemark ??
-                  "-N/A"),
+              // Text(
+              //     "Flight Pnr ${widget.airReprintModel.airPnrDetails.first.airlinePnr}"),
+              // Text(
+              //     "Flight ticket status: ${widget.airReprintModel.airPnrDetails.first.ticketStatusDesc}"),
+              // Text(
+              //     "Flight ticket status Id: ${widget.airReprintModel.airPnrDetails.first.ticketStatusId}"),
+              // Text(
+              //     "Flight ticket date: ${widget.airReprintModel.airPnrDetails.first.ticketingDate}"),
+              // Text(
+              //     "Flight ticket airline last pnr: ${widget.airReprintModel.airPnrDetails.last.airlinePnr}"),
+              // Text(
+              //     "Flight ticket status id (last): ${widget.airReprintModel.airPnrDetails.last.ticketStatusId}"),
+              // Text(
+              //     "Flight ticket status(last): ${widget.airReprintModel.airPnrDetails.last.ticketStatusDesc}"),
+              // Text(widget.airReprintModel.airPnrDetails.first.airlineName ??
+              //     "-N/A"),
+              // Text(widget.airReprintModel.airPnrDetails.first.failureRemark ??
+              //     "-N/A"),
               const SizedBox(
                 height: 50,
               ),
@@ -95,7 +95,34 @@ class _FlightBookingSuccessPageState extends State<FlightBookingSuccessPage> {
                     ),
                   ),
                 ],
-              )
+              ),
+                const SizedBox(
+                height: 50,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      getback();
+                    },
+                    child: Container(
+                      height: 55,
+                      decoration: BoxDecoration(
+                          color: kblue,
+                          borderRadius: BorderRadius.circular(20)),
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: Text(
+                          "Back to home",
+                          style: primaryFont.copyWith(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
