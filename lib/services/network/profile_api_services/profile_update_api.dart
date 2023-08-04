@@ -25,7 +25,7 @@ class ProfileUpdateApiServices extends BaseApiService {
         "account_type": merchantUpdateModel.accountType,
         "bank_account_number": merchantUpdateModel.bankAccountNumber,
         "ifsc_code": merchantUpdateModel.ifscCode,
-        "shop_image": await MultipartFile.fromFile(merchantUpdateModel.shopImage.path, filename: "shopImage"),
+        if(merchantUpdateModel.shopImage != "null" ) "shop_image": await MultipartFile.fromFile(merchantUpdateModel.shopImage, filename: "shopImage"),
       });
 
       final prefs = await SharedPreferences.getInstance();
@@ -56,7 +56,7 @@ class ProfileUpdateApiServices extends BaseApiService {
   dynamic returnResponse(Response<dynamic> response) {
     switch (response.statusCode) {
       case 200:
-        dynamic responseJson = response.data;
+        dynamic responseJson = response.data; 
         print("here.>>>>>>>>>>>>");
         return responseJson;
       case 400:

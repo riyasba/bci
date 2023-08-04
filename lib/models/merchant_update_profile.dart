@@ -13,7 +13,7 @@ class MerchantUpdateModel {
   String bankAccountNumber;
   String accountType;
   String ifscCode;
-  File shopImage;
+  String shopImage;
   
 
   MerchantUpdateModel({

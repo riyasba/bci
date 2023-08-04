@@ -48,6 +48,8 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
 
   var merchantCategory;
 
+  bool isGSTNum = true;
+
   @override
   void initState() {
     super.initState();
@@ -261,8 +263,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                     decoration: const BoxDecoration(
                                         shape: BoxShape.circle),
                                     child: profileController.profileData.first
-                                                .profilePicture ==
-                                            null
+                                                .profilePicture.isEmpty
                                         ? Image.asset(
                                             'assets/images/settingprofile.png',
                                             fit: BoxFit.fitWidth,
@@ -372,18 +373,27 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
             child: Container(
               height: 55,
               child: TextField(
+                onChanged: (value) {
+                                      setState(() {
+                                         isGSTNum = gstvalidate(value);
+                                      });
+                                    },
                 controller: gstnoController,
-                keyboardType: TextInputType.phone,
+                textCapitalization: TextCapitalization.characters,
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(15),
                 ],
                 decoration: InputDecoration(
-                    hintText: 'GST No.',
+                    hintText: 'GST No',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
                     border: const OutlineInputBorder()),
               ),
             ),
           ),
+          if(isGSTNum == false && gstnoController.text.isNotEmpty) const Padding(
+                            padding: EdgeInsets.only(top: 10,left: 15),
+                            child: Text("GST number is not valid",style: TextStyle(color: Colors.red),),
+                          ),
           Padding(
               padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
               child: Container(
@@ -428,7 +438,13 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               child: Container(
                 height: 55,
                 child: TextField(
+                  keyboardType: TextInputType.number,
                   controller: bankAccountNumberController,
+                  inputFormatters: [
+                  LengthLimitingTextInputFormatter(16),
+                  FilteringTextInputFormatter.digitsOnly,
+                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                ],
                   decoration: InputDecoration(
                       hintText: 'Bank Account Number',
                       hintStyle: TextStyle(fontSize: 18, color: kblue),
@@ -442,6 +458,10 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                 height: 55,
                 child: TextField(
                   controller: ifscCodeController,
+                  inputFormatters: [
+                  LengthLimitingTextInputFormatter(11),
+                ],
+                  textCapitalization: TextCapitalization.characters,
                   decoration: InputDecoration(
                       hintText: 'IFSC Code',
                       hintStyle: TextStyle(fontSize: 18, color: kblue),
@@ -470,9 +490,9 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
           //         border: OutlineInputBorder()),
           //   ),
           // ),
-          ksizedbox40,
+          ksizedbox20,
           Padding(
-            padding: const EdgeInsets.only(left: 20),
+            padding: const EdgeInsets.only(left: 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -633,7 +653,6 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               ),
             ],
           ),
-          ksizedbox10,
           GetBuilder<AuthController>(builder: (_) {
             return Padding(
               padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -712,7 +731,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                   bankAccountNumber: bankAccountNumberController.text,
                                   bankName: bankNameController.text,
                                   ifscCode: ifscCodeController.text,
-                                  shopImage: simage!,
+                                  shopImage:simage == null ? "null" : simage!.path,
                                   );
                           profileController.updateProfile(
                               merchantUpdateModel: merchantUpdateModel);
@@ -730,4 +749,76 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
       ),
     );
   }
+
+
+var mult = [
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 0, 6, 7, 8, 9, 5],
+  [2, 3, 4, 0, 1, 7, 8, 9, 5, 6],
+  [3, 4, 0, 1, 2, 8, 9, 5, 6, 7],
+  [4, 0, 1, 2, 3, 9, 5, 6, 7, 8],
+  [5, 9, 8, 7, 6, 0, 4, 3, 2, 1],
+  [6, 5, 9, 8, 7, 1, 0, 4, 3, 2],
+  [7, 6, 5, 9, 8, 2, 1, 0, 4, 3],
+  [8, 7, 6, 5, 9, 3, 2, 1, 0, 4],
+  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+];
+var perm = [
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 5, 7, 6, 2, 8, 3, 0, 9, 4],
+  [5, 8, 0, 3, 7, 9, 6, 1, 4, 2],
+  [8, 9, 1, 6, 0, 4, 3, 5, 2, 7],
+  [9, 4, 5, 3, 1, 2, 6, 8, 7, 0],
+  [4, 2, 8, 6, 5, 7, 3, 9, 0, 1],
+  [2, 7, 9, 3, 8, 0, 6, 4, 1, 5],
+  [7, 0, 4, 6, 9, 1, 3, 2, 5, 8]
+];
+var i, j, x;
+
+String reverseString(String gstNum) {
+  var chars = gstNum.split('');
+  return chars.reversed.join();
 }
+
+int listElementsSum(List a) {
+  int sum = 0;
+  if (a.length <= 1) {
+    return a[0];
+  } else {
+    for (int e in a) {
+      sum += e;
+    }
+  }
+  return sum;
+}
+
+
+
+   bool gstvalidate(String gstNum) {
+    var check, lmo, gst, csum;
+    check = reverseString(gstNum)[0];
+    lmo = gstNum.substring(0, 14);
+    List l = [], m = [], n = [];
+    gst = lmo.split('');
+    for (var i = 0; i < gst.length; ++i) {
+      if (RegExp(r'^[0-9]+$').hasMatch(gst[i])) {
+        l.add(int.parse(gst[i]));
+      } else {
+        l.add(lmo.codeUnitAt(i) - 55);
+      }
+    }
+    for (var i = 0; i < l.length; ++i) {
+      m.add(l[i] * (i % 2 + 1));
+    }
+    for (var i = 0; i < m.length; ++i) {
+      n.add(((m[i] / 36) + (m[i] % 36)).truncate());
+    }
+    var sum = listElementsSum(n);
+
+    csum = 36 - sum % 36;
+    csum = csum < 10 ? csum.toString() : String.fromCharCode(csum + 55);
+    bool val = csum == check ? true : false;
+    return val;
+  }
+}
+

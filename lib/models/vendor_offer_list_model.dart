@@ -26,15 +26,15 @@ class VendorOfferList {
 
 class OfferListData {
     int id;
-    int vendorId;
-    int categoryId;
+    dynamic vendorId;
+    dynamic categoryId;
     String title;
     DateTime startsAt;
     DateTime endsAt;
     String businessValue;
     String discountValue;
     String noOfClaimUser;
-    int status;
+    dynamic status;
     String image;
     dynamic description;
     DateTime createdAt;

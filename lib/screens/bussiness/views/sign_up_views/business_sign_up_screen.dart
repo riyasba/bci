@@ -209,6 +209,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                 padding: const EdgeInsets.only(top: 15),
                 child: TextFormField(
                   textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.emailAddress,
                   controller: emailIdController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {

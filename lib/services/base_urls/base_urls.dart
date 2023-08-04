@@ -23,7 +23,7 @@ abstract class BaseApiService {
       "https://bci.batechnology.in/api/sub_category";
 
    //api URL
-  final String otpVerifyApiUrl = "https://bci.generation360tech.in/api/otp_verrify";
+  final String otpVerifyApiUrl = "https://bci.batechnology.in/api/otp_verrify";
 
   //get profile api
   final String getProfileURL =

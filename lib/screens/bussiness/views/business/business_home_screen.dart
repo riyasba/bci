@@ -163,7 +163,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 InkWell(
                   onTap: () {
                     Get.offAll(HomeBottomnavigationBar(
-                      //index: 2,
+                      index: 2,
                     ));
                   },
                   child: Container(
@@ -204,7 +204,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 InkWell(
                   onTap: () {
                     Get.offAll(HomeBottomnavigationBar(
-                      //index: 3,
+                      index: 3,
                     ));
                     //Get.to(const BusinessBookingScreen());
                   },

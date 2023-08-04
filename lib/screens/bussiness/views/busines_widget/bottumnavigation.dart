@@ -13,6 +13,10 @@ import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 
 class HomeBottomnavigationBar extends StatefulWidget {
+  int index;
+
+  HomeBottomnavigationBar({super.key,this.index = 0});
+
   @override
   State<HomeBottomnavigationBar> createState() => _HomeBottomnavigationBarState();
 }
@@ -23,7 +27,12 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
   @override
   void initState() {
     super.initState();
-    _navigationController = CircularBottomNavigationController(selectedpage);
+    _navigationController = CircularBottomNavigationController(widget.index);
+    setindex();
+  }
+
+  setindex(){
+      selectedpage = widget.index;
   }
 
   @override
