@@ -22,7 +22,7 @@ class UpdateResidencialAddressApiServices extends BaseApiService {
           "state": residentialAddress.state,
           "city": residentialAddress.city,
           "personal_id": residentialAddress.personalId,
-          "aadhar_id": residentialAddress.aadhrId
+          "pincode": residentialAddress.pincode
         }),
       });
 

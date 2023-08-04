@@ -30,16 +30,16 @@ class GetCouponsList {
 
 class CouponsData {
     int id;
-    int userId;
-    int cId;
-    int planId;
-    String couponcode;
-    String amount;
-    int isRedeemed;
+    dynamic userId;
+    dynamic cId;
+    dynamic planId;
+    dynamic couponcode;
+    dynamic amount;
+    dynamic isRedeemed;
     DateTime expiryAt;
     DateTime createdAt;
     DateTime updatedAt;
-    Name name;
+    dynamic name;
 
     CouponsData({
         required this.id,
@@ -57,16 +57,16 @@ class CouponsData {
 
     factory CouponsData.fromJson(Map<String, dynamic> json) => CouponsData(
         id: json["id"]?? 0,
-        userId: json["user_id"]?? 0,
-        cId: json["c_id"]?? 0,
-        planId: json["plan_id"]?? 0,
+        userId: json["user_id"]?? "",
+        cId: json["c_id"]?? "",
+        planId: json["plan_id"]?? "",
         couponcode: json["couponcode"]?? "",
         amount: json["amount"]?? "",
-        isRedeemed: json["is_redeemed"]?? 0,
+        isRedeemed: json["is_redeemed"]?? "",
         expiryAt: DateTime.parse(json["expiry_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        name: nameValues.map[json["name"]]!,
+        name:json["name"] == null ? "" :  nameValues.map[json["name"]],
     );
 
     Map<String, dynamic> toJson() => {

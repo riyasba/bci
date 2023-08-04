@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:textfield_tags/textfield_tags.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../../../constands/constands.dart';
 
@@ -41,6 +42,7 @@ class _MyAccountState extends State<MyAccount> {
   var childController = TextEditingController();
   bool isMarried = false;
   String selectedGender = '';
+  bool isGSTNum = true;
 
   var oDoorNumberCN = TextEditingController();
   var oBuildingNumberCN = TextEditingController();
@@ -70,6 +72,22 @@ class _MyAccountState extends State<MyAccount> {
     setDefault();
     profileController.getProfile();
     plan();
+    _controller = TextfieldTagsController();
+  }
+
+  double? _distanceToField;
+  TextfieldTagsController? _controller;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _distanceToField = MediaQuery.of(context).size.width;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller!.dispose();
   }
 
   plan(){
@@ -80,7 +98,7 @@ class _MyAccountState extends State<MyAccount> {
     }
   }
 
-  DateTime date = DateTime.now().subtract(const Duration(days: 6570));
+  DateTime date = DateTime.now();
 
   _selectDate(BuildContext context) async {
     DateTime? picked = await showDatePicker(
@@ -90,7 +108,7 @@ class _MyAccountState extends State<MyAccount> {
       initialEntryMode: DatePickerEntryMode.calendarOnly,
       firstDate: DateTime(1910),
       locale: const Locale('en', 'IN'),
-      lastDate: DateTime.now().subtract(const Duration(days: 6570)),
+      lastDate: DateTime.now(),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -118,7 +136,7 @@ class _MyAccountState extends State<MyAccount> {
   }
 
   //
-  DateTime wdate = DateTime.now().subtract(const Duration(days: 6570));
+  DateTime wdate = DateTime.now();
 
   _wselectDate(BuildContext context) async {
     DateTime? picked = await showDatePicker(
@@ -128,7 +146,7 @@ class _MyAccountState extends State<MyAccount> {
       initialEntryMode: DatePickerEntryMode.calendarOnly,
       firstDate: DateTime(1910),
       locale: const Locale('en', 'IN'),
-      lastDate: DateTime.now().subtract(const Duration(days: 6570)),
+      lastDate: DateTime.now(),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -170,41 +188,49 @@ class _MyAccountState extends State<MyAccount> {
       adharNoController.text = profileController.profileData.first.aadharNo;
       selectedGender = profileController.profileData.first.gender;
       alternateMobController.text = profileController.profileData.first.alternateMobile;
+      weddingDateController.text = profileController.profileData.first.weddingDate;
+     
+      selectedGender = profileController.profileData.first.gender;
+      branchController.text = profileController.profileData.first.branch;
+      spouseController.text = profileController.profileData.first.spouse;
+      dateOfBirthController.text = profileController.profileData.first.dob;
 
 
-      // oDoorNumberCN.text =
-      //     profileController.profileData.first.officialAddress.doorNo ?? "";
+      oDoorNumberCN.text =
+          profileController.profileData.first.officialAddress.doorNo;
       oBuildingNumberCN.text =
-          profileController.profileData.first.officialAddress.buildingName ?? "";
+          profileController.profileData.first.officialAddress.buildingName;
       oAddressCN.text =
-          profileController.profileData.first.officialAddress.address ?? "";
+          profileController.profileData.first.officialAddress.address;
 
-      oCityCN.text = profileController.profileData.first.officialAddress.city ?? "";
-      oStateCN.text = profileController.profileData.first.officialAddress.state ?? "";
-      proofidController.text = profileController.profileData.first.officialAddress.proofid ?? "";
-      pincodeController.text = profileController.profileData.first.officialAddress.state ?? "";
+      oCityCN.text = profileController.profileData.first.officialAddress.city;
+      oStateCN.text = profileController.profileData.first.officialAddress.state;
+      proofidController.text = profileController.profileData.first.officialAddress.proofIdNo;
+      pincodeController.text = profileController.profileData.first.officialAddress.pincode;
 
       rDoorNumberCN.text =
-          profileController.profileData.first.residentialAddress.doorNo ?? "";
+          profileController.profileData.first.residentialAddress.doorNo;
       rBuildingNumberCN.text =
-          profileController.profileData.first.residentialAddress.buildingName ?? "";
+          profileController.profileData.first.residentialAddress.buildingName;
       rAddressCN.text =
-          profileController.profileData.first.residentialAddress.address ?? "";
+          profileController.profileData.first.residentialAddress.address;
 
       rCityCN.text =
-          profileController.profileData.first.residentialAddress.city ?? "";
+          profileController.profileData.first.residentialAddress.city;
       rStateCN.text =
-          profileController.profileData.first.residentialAddress.state ?? "";
+          profileController.profileData.first.residentialAddress.state;
       rpersonalIdCN.text =
-          profileController.profileData.first.residentialAddress.personalId ?? "";
-      rAadhrCN.text =
-          profileController.profileData.first.residentialAddress.aadharId ?? "";
+          profileController.profileData.first.residentialAddress.personalId;
+      // rAadhrCN.text =
+      //     profileController.profileData.first.residentialAddress.aadharId;
+          rproofidController.text = profileController.profileData.first.residentialAddress.personalId;
+          rpincodeController.text = profileController.profileData.first.residentialAddress.pincode;
 
       setState(() {
         isMarried =
             profileController.profileData.first.isMarried == "0" ? false : true;
       });
-      dateOfBirthController.text = profileController.profileData.first.dob;
+       _controller?.addTag = profileController.profileData.first.childName;
     }
   }
 
@@ -389,8 +415,7 @@ class _MyAccountState extends State<MyAccount> {
                                             profileimage();
                                           },
                                           child: profileController.profileData.first
-                                                      .profilePicture ==
-                                                  null
+                                                      .profilePicture.isEmpty
                                               ? Stack(
                                                 children: [
                                                   Image.asset(
@@ -706,35 +731,137 @@ class _MyAccountState extends State<MyAccount> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Container(
-                                  height: 37,
-                                  width: size.width,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(2),
-                                      border: Border.all(
-                                          color: const Color(0xff707070)),
-                                      color: const Color(0xffF9F8FD)),
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 15, right: 10),
-                                    child: TextField(
-                                      controller: childController,
-                                      decoration: InputDecoration(
-                                          isCollapsed: true,
-                                          isDense: true,
-                                          border: InputBorder.none,
-                                          hintText: "Children",
-                                          hintStyle: TextStyle(
-                                            color: kblue,
-                                            fontWeight: FontWeight.w400,
-                                          )),
+                              // Padding(
+                              //   padding: const EdgeInsets.only(top: 10),
+                              //   child: Container(
+                              //     height: 37,
+                              //     width: size.width,
+                              //     decoration: BoxDecoration(
+                              //         borderRadius: BorderRadius.circular(2),
+                              //         border: Border.all(
+                              //             color: const Color(0xff707070)),
+                              //         color: const Color(0xffF9F8FD)),
+                              //     alignment: Alignment.center,
+                              //     child: Padding(
+                              //       padding:
+                              //           const EdgeInsets.only(left: 15, right: 10),
+                              //       child: TextField(
+                              //         controller: childController,
+                              //         decoration: InputDecoration(
+                              //             isCollapsed: true,
+                              //             isDense: true,
+                              //             border: InputBorder.none,
+                              //             hintText: "Children",
+                              //             hintStyle: TextStyle(
+                              //               color: kblue,
+                              //               fontWeight: FontWeight.w400,
+                              //             )),
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
+                              
+                              TextFieldTags(
+            textfieldTagsController: _controller,
+            initialTags: const [],
+            textSeparators: const [','],
+            letterCase: LetterCase.normal,
+            validator: (String tag) {
+              if (tag == 'php') {
+                return 'No, please just no';
+              } else if (_controller!.getTags!.contains(tag)) {
+                return 'you already entered that';
+              }
+              return null;
+            },
+            inputfieldBuilder:
+                (context, tec, fn, error, onChanged, onSubmitted) {
+              return ((context, sc, tags, onTagDelete) {
+                return Padding(
+                  padding: const EdgeInsets.only(top:10.0),
+                  child: TextField(
+                    controller: tec,
+                    focusNode: fn,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(255, 74, 137, 92),
+                          width: 3.0,
+                        ),
+                      ),
+                      // focusedBorder: const OutlineInputBorder(
+                      //   borderSide: BorderSide(
+                      //     color: Color.fromARGB(255, 74, 137, 92),
+                      //     width: 3.0,
+                      //   ),
+                      // ),
+                      helperText: 'No Of Children',
+                      helperStyle: TextStyle(
+                        color: kblue,
+                      ),
+                      hintText: _controller!.hasTags ? '' : "No Of Children...",
+                      errorText: error,
+                      prefixIconConstraints:
+                          BoxConstraints(maxWidth: _distanceToField! * 0.74),
+                      prefixIcon: tags.isNotEmpty
+                          ? SingleChildScrollView(
+                              controller: sc,
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                  children: tags.map((String tag) {
+                                return Container(
+                                  decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20.0),
                                     ),
+                                    color: Color.fromARGB(255, 74, 80, 137),
                                   ),
-                                ),
-                              ),
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 5.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      InkWell(
+                                        child: Text(
+                                          '$tag',
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                        onTap: () {
+                                          print("$tag selected");
+                                        },
+                                      ),
+                                      const SizedBox(width: 4.0),
+                                      InkWell(
+                                        child: const Icon(
+                                          Icons.cancel,
+                                          size: 14.0,
+                                          color: Color.fromARGB(
+                                              255, 233, 233, 233),
+                                        ),
+                                        onTap: () {
+                                          onTagDelete(tag);
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }).toList()),
+                            )
+                          : null,
+                    ),
+                    onChanged: onChanged,
+                    onSubmitted: onSubmitted,
+                  ),
+                );
+              });
+            },
+          ),
+
                               ksizedbox10,
                                   Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -885,7 +1012,16 @@ class _MyAccountState extends State<MyAccount> {
                                     padding:
                                         const EdgeInsets.only(left: 15, right: 10),
                                     child: TextField(
+                                      onChanged: (value) {
+                                      setState(() {
+                                         isGSTNum = gstvalidate(value);
+                                      });
+                                    },
                                       controller: gstNoController,
+                                      textCapitalization: TextCapitalization.characters,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(15),
+                                     ],
                                       decoration: InputDecoration(
                                           isCollapsed: true,
                                           isDense: true,
@@ -899,6 +1035,15 @@ class _MyAccountState extends State<MyAccount> {
                                   ),
                                 ),
                               ),
+                               if(isGSTNum == false && gstNoController.text.isNotEmpty) const Padding(
+                            padding:  EdgeInsets.only(top: 5),
+                            child: Row(
+                              children: [
+                                Text("GST number is not valid",
+                                style: TextStyle(color: Colors.red),),
+                              ],
+                            ),
+                          ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: Container(
@@ -915,6 +1060,10 @@ class _MyAccountState extends State<MyAccount> {
                                         const EdgeInsets.only(left: 15, right: 10),
                                     child: TextField(
                                       controller: panNoController,
+                                       textCapitalization: TextCapitalization.characters,
+                                      inputFormatters: [
+                                      LengthLimitingTextInputFormatter(10),
+                                     ],
                                       decoration: InputDecoration(
                                           isCollapsed: true,
                                           isDense: true,
@@ -944,6 +1093,13 @@ class _MyAccountState extends State<MyAccount> {
                                         const EdgeInsets.only(left: 15, right: 10),
                                     child: TextField(
                                       controller: adharNoController,
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: [
+                                        LengthLimitingTextInputFormatter(12),
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        FilteringTextInputFormatter.deny(
+                                            RegExp(r'\s')),
+                                      ],
                                       decoration: InputDecoration(
                                           isCollapsed: true,
                                           isDense: true,
@@ -966,7 +1122,7 @@ class _MyAccountState extends State<MyAccount> {
                     ? Container(
                         height: 100, 
                         width: 100, 
-                        child:profileController.profileData.isEmpty ? Image.file(image!) : Image.network(profileController.profileData.first.adharProof))
+                        child: profileController.profileData.first.adharProof.isEmpty ? Image.file(image!) : Image.network(profileController.profileData.first.adharProof))
                     : InkWell(
                         onTap: () {
                           showModalBottomSheet(
@@ -1006,12 +1162,12 @@ class _MyAccountState extends State<MyAccount> {
                             height: 100,
                             width: 100,
                             color: const Color(0xffE4E4E4),
-                            child:
-                                Image.asset('assets/images/imageupload.png')),
+                            child:profileController.profileData.first.adharProof.isEmpty ? Image.asset('assets/images/imageupload.png') : Image.network(profileController.profileData.first.adharProof)
+                                ),
                       ),
                 image2 != null
                     ? Container(
-                        height: 100, width: 100, child: Image.file(image2!))
+                        height: 100, width: 100, child: profileController.profileData.first.panProof.isEmpty ? Image.file(image2!) : Image.network(profileController.profileData.first.panProof))
                     : InkWell(
                         onTap: () {
                           showModalBottomSheet(
@@ -1051,8 +1207,8 @@ class _MyAccountState extends State<MyAccount> {
                             height: 100,
                             width: 100,
                             color: const Color(0xffE4E4E4),
-                            child:
-                                Image.asset('assets/images/imageupload.png')),
+                            child: profileController.profileData.first.panProof.isEmpty ? Image.asset('assets/images/imageupload.png') : Image.network(profileController.profileData.first.panProof)
+                            ),
                       ),
                               ],),
                               ksizedbox10,
@@ -1161,8 +1317,7 @@ class _MyAccountState extends State<MyAccount> {
                                               email: emailController.text,
                                               dateOfBirth: dateOfBirthController.text,
                                               fatherName: fatherNameController.text,
-                                              isMarried:
-                                                  isMarried == true ? "1" : "0",
+                                              isMarried: isMarried,
                                               mobile: phoneController.text,
                                               motherName: motherNameController.text,
                                               occupation: occupationController.text,
@@ -1175,14 +1330,15 @@ class _MyAccountState extends State<MyAccount> {
                                               branch: branchController.text,
                                               spouse: spouseController.text,
                                               alternateMob: alternateMobController.text,
-                                              adharproofimg: image!.path,
-                                              panproofimg: image2!.path,
-                                              children: childController.text,
+                                              adharproofimg: image == null ? "null": image!.path,
+                                              panproofimg: image2 == null ? "null": image2!.path,
+                                              children: _controller!.getTags,
                                             );
 
                                             profileController.updateProfile(
                                                 memberProfileUpdateModel:
                                                     memberProfileUpdateModel);
+                                                    print(_controller!.getTags);
                                           },
                                           child: Container(
                                             height: 50,
@@ -1463,6 +1619,13 @@ class _MyAccountState extends State<MyAccount> {
                                         const EdgeInsets.only(left: 15, right: 10),
                                     child: TextField(
                                       controller: pincodeController,
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: [
+                                        LengthLimitingTextInputFormatter(6),
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        FilteringTextInputFormatter.deny(
+                                            RegExp(r'\s')),
+                                      ],
                                       decoration: InputDecoration(
                                           isCollapsed: true,
                                           isDense: true,
@@ -1765,7 +1928,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding:
                                         const EdgeInsets.only(left: 15, right: 10),
                                     child: TextField(
-                                      controller: rpersonalIdCN,
+                                      controller: rproofidController,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
                                           isDense: true,
@@ -1794,10 +1957,10 @@ class _MyAccountState extends State<MyAccount> {
                                     padding:
                                         const EdgeInsets.only(left: 15, right: 10),
                                     child: TextField(
-                                      controller: rAadhrCN,
-                                      keyboardType: TextInputType.phone,
+                                      controller: rpincodeController,
+                                      keyboardType: TextInputType.number,
                                       inputFormatters: [
-                                        LengthLimitingTextInputFormatter(15),
+                                        LengthLimitingTextInputFormatter(6),
                                         FilteringTextInputFormatter.digitsOnly,
                                         FilteringTextInputFormatter.deny(
                                             RegExp(r'\s')),
@@ -1850,8 +2013,8 @@ class _MyAccountState extends State<MyAccount> {
                                                         rBuildingNumberCN.text,
                                                     city: rCityCN.text,
                                                     doorNo: rDoorNumberCN.text,
-                                                    personalId: rpersonalIdCN.text,
-                                                    pincode: "",
+                                                    personalId:rproofidController.text,
+                                                    pincode: rpincodeController.text,
                                                     state: rStateCN.text);
                                             profileController
                                                 .updateRecidencyAddress(
@@ -1904,7 +2067,7 @@ class _MyAccountState extends State<MyAccount> {
                                                     left: 15,
                                                     top: 130,
                                                     child:profileController.profileData.first
-                                                      .profilePicture == null
+                                                      .profilePicture.isEmpty
                                               ? Image.asset('assets/icons/prfl.png',height: 50,width: 50,)
                                               : Container(
                                                       height: 55,
@@ -1941,4 +2104,78 @@ class _MyAccountState extends State<MyAccount> {
       ),
     );
   }
+
+
+
+var mult = [
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 0, 6, 7, 8, 9, 5],
+  [2, 3, 4, 0, 1, 7, 8, 9, 5, 6],
+  [3, 4, 0, 1, 2, 8, 9, 5, 6, 7],
+  [4, 0, 1, 2, 3, 9, 5, 6, 7, 8],
+  [5, 9, 8, 7, 6, 0, 4, 3, 2, 1],
+  [6, 5, 9, 8, 7, 1, 0, 4, 3, 2],
+  [7, 6, 5, 9, 8, 2, 1, 0, 4, 3],
+  [8, 7, 6, 5, 9, 3, 2, 1, 0, 4],
+  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+];
+var perm = [
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 5, 7, 6, 2, 8, 3, 0, 9, 4],
+  [5, 8, 0, 3, 7, 9, 6, 1, 4, 2],
+  [8, 9, 1, 6, 0, 4, 3, 5, 2, 7],
+  [9, 4, 5, 3, 1, 2, 6, 8, 7, 0],
+  [4, 2, 8, 6, 5, 7, 3, 9, 0, 1],
+  [2, 7, 9, 3, 8, 0, 6, 4, 1, 5],
+  [7, 0, 4, 6, 9, 1, 3, 2, 5, 8]
+];
+var i, j, x;
+
+String reverseString(String gstNum) {
+  var chars = gstNum.split('');
+  return chars.reversed.join();
 }
+
+int listElementsSum(List a) {
+  int sum = 0;
+  if (a.length <= 1) {
+    return a[0];
+  } else {
+    for (int e in a) {
+      sum += e;
+    }
+  }
+  return sum;
+}
+
+
+
+   bool gstvalidate(String gstNum) {
+    var check, lmo, gst, csum;
+    check = reverseString(gstNum)[0];
+    lmo = gstNum.substring(0, 14);
+    List l = [], m = [], n = [];
+    gst = lmo.split('');
+    for (var i = 0; i < gst.length; ++i) {
+      if (RegExp(r'^[0-9]+$').hasMatch(gst[i])) {
+        l.add(int.parse(gst[i]));
+      } else {
+        l.add(lmo.codeUnitAt(i) - 55);
+      }
+    }
+    for (var i = 0; i < l.length; ++i) {
+      m.add(l[i] * (i % 2 + 1));
+    }
+    for (var i = 0; i < m.length; ++i) {
+      n.add(((m[i] / 36) + (m[i] % 36)).truncate());
+    }
+    var sum = listElementsSum(n);
+
+    csum = 36 - sum % 36;
+    csum = csum < 10 ? csum.toString() : String.fromCharCode(csum + 55);
+    bool val = csum == check ? true : false;
+    return val;
+  }
+}
+
+

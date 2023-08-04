@@ -6,7 +6,7 @@ class MemberProfileUpdateModel {
   String fatherName;
   String motherName;
   String dateOfBirth;
-  String isMarried;
+  dynamic isMarried;
   String qualification;
   String gender;
   String weddingDate;
@@ -18,7 +18,7 @@ class MemberProfileUpdateModel {
   String alternateMob;
   String adharproofimg;
   String panproofimg;
-  String children;
+  List<String>? children;
 
 
   MemberProfileUpdateModel(

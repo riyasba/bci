@@ -71,6 +71,7 @@ dependencies:
   path_provider: ^2.0.11
   permission_handler: ^10.2.0
   open_file: ^3.3.2
+  textfield_tags: ^2.0.2
 
 dev_dependencies:
   flutter_test:

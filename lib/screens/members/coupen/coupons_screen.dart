@@ -120,8 +120,7 @@ class _Coupens_membersState extends State<Coupens_members> {
                                                 width: size.width * 0.52,
                                                 child: Text(
                                                   profileController
-                                                      .couponsData[index].name
-                                                      .toString(),
+                                                      .couponsData[index].name.toString(),
                                                   maxLines: 2,
                                                   style: primaryFont.copyWith(
                                                       fontSize: 15,

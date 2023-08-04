@@ -31,8 +31,9 @@ class ProfileUpdateApiServices extends BaseApiService {
         "branch": memberProfileUpdateModel.branch,
         "spouse": memberProfileUpdateModel.spouse,
         "child_name": memberProfileUpdateModel.children,
-        "adhar_proof": await MultipartFile.fromFile(memberProfileUpdateModel.adharproofimg, filename: "adhar_proof"),
-        "pan_proof": await MultipartFile.fromFile(memberProfileUpdateModel.panproofimg, filename: "pan_proof"),
+        "wedding_date": memberProfileUpdateModel.weddingDate,
+       if(memberProfileUpdateModel.adharproofimg != "null") "adhar_proof": await MultipartFile.fromFile(memberProfileUpdateModel.adharproofimg, filename: "adhar_proof"),
+       if(memberProfileUpdateModel.panproofimg != "null") "pan_proof": await MultipartFile.fromFile(memberProfileUpdateModel.panproofimg, filename: "pan_proof"),
       });
 
       final prefs = await SharedPreferences.getInstance();

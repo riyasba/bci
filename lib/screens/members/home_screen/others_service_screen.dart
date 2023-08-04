@@ -154,7 +154,7 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                               borderRadius: BorderRadius.circular(15),
                               child: Image.network(
                                 homeController.serviceListData[index].image,
-                                height: 130,
+                                height: 125,
                                 width: size.width,
                                 fit: BoxFit.cover,
                               ),
