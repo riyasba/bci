@@ -1,8 +1,11 @@
+import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/screens/members/settings_views/setingswidgets/My_account.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -28,11 +31,14 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
   //   super.initState();
   // }
 
+  final profileController = Get.find<ProfileController>();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _pageController = PageController(initialPage: 0);
+    profileController.getProfile();
   }
 
   @override
@@ -62,9 +68,10 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
               Column(
                 children: [
                   Expanded(
-                      child: PageView(controller: _pageController, children: [
-                    riyasandi(),
-                    riyasnadi2(),
+                      child: PageView(controller: _pageController, 
+                      children:const [
+                    Onbording(),
+                    Onbording2(),
                     Onbording3(),
                     Onbording4(),
                     Onbording5()
@@ -124,7 +131,11 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
                                 isPageViewEnabled = true;
                               });
                               if (_pageController.page!.toInt() == 4) {
-                                Get.offAll(HelloConvexAppBar());
+                                if(profileController.profileData.first.occupation.isEmpty){
+                                  Get.to(const MyAccount());
+                                }else{
+                                  Get.offAll(HelloConvexAppBar());
+                                }
                               } else {
                                 _pageController.nextPage(
                                   duration: const Duration(milliseconds: 300),
@@ -142,8 +153,13 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
                   right: 7,
                   top: 7,
                   child: GestureDetector(
-                      onTap: () {
-                        Get.offAll(HelloConvexAppBar());
+                      onTap: () async {
+                        await profileController.getProfile();
+                        if(profileController.profileData.first.occupation.isEmpty){
+                                  Get.to(const MyAccount());
+                                }else{
+                                  Get.offAll(HelloConvexAppBar());
+                                }
                       },
                       child: const Text(
                         "Skip",
@@ -157,16 +173,16 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
   }
 }
 
-class riyasandi extends StatefulWidget {
-  const riyasandi({
+class Onbording extends StatefulWidget {
+  const Onbording({
     super.key,
   });
 
   @override
-  State<riyasandi> createState() => _riyasandiState();
+  State<Onbording> createState() => _OnbordingState();
 }
 
-class _riyasandiState extends State<riyasandi> {
+class _OnbordingState extends State<Onbording> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -193,16 +209,16 @@ class _riyasandiState extends State<riyasandi> {
   }
 }
 
-class riyasnadi2 extends StatefulWidget {
-  const riyasnadi2({
+class Onbording2 extends StatefulWidget {
+  const Onbording2({
     super.key,
   });
 
   @override
-  State<riyasnadi2> createState() => _riyasnadi2State();
+  State<Onbording2> createState() => _Onbording2State();
 }
 
-class _riyasnadi2State extends State<riyasnadi2> {
+class _Onbording2State extends State<Onbording2> {
   @override
   Widget build(BuildContext context) {
     return Column(

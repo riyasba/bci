@@ -183,7 +183,7 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             InkWell(
               onTap: () {
-                Get.to(Coupens_members());
+                Get.to(CoupensMembers());
               },
               child:const Row(
                 children: [

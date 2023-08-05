@@ -11,8 +11,8 @@ String memberProfileModelToJson(MemberProfileModel data) => json.encode(data.toJ
 class MemberProfileModel {
     String message;
     bool subscription;
-    int remainingDays;
-    int percentage;
+    dynamic remainingDays;
+    dynamic percentage;
     String planId;
     MemberUser user;
 
@@ -30,7 +30,7 @@ class MemberProfileModel {
         subscription: json["subscription"],
         remainingDays: json["remaining_days"],
         percentage: json["percentage"],
-        planId: json["plan_id"],
+        planId: json["plan_id"]?? "",
         user: MemberUser.fromJson(json["user"]),
     );
 

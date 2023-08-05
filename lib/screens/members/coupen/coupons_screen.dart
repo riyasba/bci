@@ -14,14 +14,14 @@ import 'package:get/get.dart';
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
 
-class Coupens_members extends StatefulWidget {
-  const Coupens_members({super.key});
+class CoupensMembers extends StatefulWidget {
+  const CoupensMembers({super.key});
 
   @override
-  State<Coupens_members> createState() => _Coupens_membersState();
+  State<CoupensMembers> createState() => _CoupensMembersState();
 }
 
-class _Coupens_membersState extends State<Coupens_members> {
+class _CoupensMembersState extends State<CoupensMembers> {
   final profileController = Get.find<ProfileController>();
 
   @override

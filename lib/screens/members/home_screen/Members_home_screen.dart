@@ -200,7 +200,7 @@ class _Home_screen1State extends State<Home_screen1> {
                   ksizedbox20,
                   InkWell(
                       onTap: () {
-                        Get.to(const Coupens_members());
+                        Get.to(const CoupensMembers());
                       },
                       child: Image.asset('assets/images/Group 5755.png')),
                   ksizedbox20,
