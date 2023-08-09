@@ -29,8 +29,11 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
   var occupationController = TextEditingController();
   var fatherNameController = TextEditingController();
   var motherNameController = TextEditingController();
+  var referralController = TextEditingController();
 
   final authController = Get.find<AuthController>();
+
+  bool isReferral = false;
 
   DateTime date = DateTime.now().subtract(const Duration(days: 6570));
 
@@ -268,6 +271,61 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                         )),
                   ),
                 ),
+                if(isReferral == true)
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: TextFormField(
+                    textInputAction: TextInputAction.next,
+                    controller: referralController,
+                    //autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide:
+                                const BorderSide(color:  Color(0xff707070))),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide:
+                                const BorderSide(color:  Color(0xff707070))),
+                        isCollapsed: false,
+                        isDense: true,
+                        contentPadding:
+                            const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide:
+                                const BorderSide(color:  Color(0xff707070))),
+                        hintText: "Referral Code",
+                        hintStyle: TextStyle(
+                          color: kblue,
+                          fontWeight: FontWeight.w400,
+                        )),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Checkbox(
+                          checkColor: Colors.white,
+                           fillColor:
+                           MaterialStateProperty.all(kblue),
+                            value: isReferral,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                isReferral = value!;
+                              });
+                             },
+                     ),
+                     Text(
+                  "Referral Code",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.w400, color: kblue),
+                ),
+                  ],
+                ),
+
                 // Padding(
                 //   padding: const EdgeInsets.only(top: 15),
                 //   child: TextFormField(
@@ -498,6 +556,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                                 roleId: "3"
                                 );
                               authController.registerMember(
+                                  referralCode: referralController.text,
                                   memberRegisterModel: memberRegisterModel,
                                   //officialAddress: oficeaddressModel,
                                   //residentialAddress: widget.addressModel

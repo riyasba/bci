@@ -9,9 +9,10 @@ import 'package:bci/models/get_today_offers_list_model.dart';
 import 'package:bci/models/liquor_vendor_list_models/liquor_vendor_list_model.dart';
 import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/models/slider_model.dart';
+import 'package:bci/models/slider_product_model.dart';
 import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
 import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
-import 'package:bci/screens/members/otcpayment/successful.dart';
+import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
 import 'package:bci/services/network/categorys_api_services/add_booking_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/add_to_cart_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/delete_cart_api_services.dart';
@@ -23,6 +24,7 @@ import 'package:bci/services/network/categorys_api_services/get_today_offers_lis
 import 'package:bci/services/network/categorys_api_services/search_service_list_api_services.dart';
 import 'package:bci/services/network/liquors_api_services/liquor_service_list.dart';
 import 'package:bci/services/network/liquors_api_services/liquor_vendor_list_api_service.dart';
+import 'package:bci/services/network/slider_api_services/slider_product_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/add_subscription_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plan_details_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plans_list_api_services.dart';
@@ -202,7 +204,7 @@ class HomeController extends GetxController {
   GetCartListApiServices getCartListApiServices = GetCartListApiServices();
   List<CartListData> cartListData = [];
 
-  getCartdetails() async {
+   getCartdetails() async {
     dio.Response<dynamic> response =
         await getCartListApiServices.getCartListApiServices();
 
@@ -391,6 +393,30 @@ class HomeController extends GetxController {
       SearchServiceList searchServiceList =
           SearchServiceList.fromJson(response.data);
       searchServiceListData = searchServiceList.data;
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+
+  }
+
+  //get slider product
+  GetSliderProductApiServices getSliderProductApiServices = GetSliderProductApiServices();
+  List<SliderData> sliderData = [];
+
+  sliderProduct() async {
+
+    dio.Response<dynamic> response = await getSliderProductApiServices.getSliderproduct();
+    if(response.statusCode == 200){
+
+      SliderProductModel sliderProductModel = SliderProductModel.fromJson(response.data);
+      sliderData = sliderProductModel.posts;
+
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,

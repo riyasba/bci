@@ -378,6 +378,7 @@ class _OfficeAddressScreenState extends State<OfficeAddressScreen> {
                                   //     personalId: "",
                                   //     aadhrId: "");
                                   authController.registerMember(
+                                    referralCode: " ",
                                       memberRegisterModel:
                                           widget.memberRegisterModel,
                                       //officialAddress: oficeaddressModel,
@@ -388,7 +389,7 @@ class _OfficeAddressScreenState extends State<OfficeAddressScreen> {
                               child: Container(
                                 height: 50,
                                 width: size.width,
-                                decoration: BoxDecoration(
+                                decoration: BoxDecoration( 
                                   borderRadius: BorderRadius.circular(6),
                                   border: Border.all(
                                       color: const Color(0xffFFBF7E)),

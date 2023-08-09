@@ -12,6 +12,7 @@ import 'package:bci/screens/bussiness/views/generations/verified_screen.dart';
 import 'package:bci/services/network/auth_api_services/get_otp_api_services.dart';
 import 'package:bci/services/network/auth_api_services/login_api_services.dart';
 import 'package:bci/services/network/auth_api_services/merchant_api_services.dart';
+import 'package:bci/services/network/auth_api_services/referral_register_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_category_services.dart';
 import 'package:bci/services/network/categorys_api_services/sub_category_api_services.dart';
 import 'package:flutter/material.dart';
@@ -68,8 +69,7 @@ class AuthController extends GetxController {
 
   registerMember({
     required MemberRegisterModel memberRegisterModel,
-    //required AddressModel residentialAddress,
-    //required AddressModel officialAddress,
+    required String referralCode
   }) async {
     isLoading(true);
     dio.Response<dynamic> response =
@@ -80,6 +80,7 @@ class AuthController extends GetxController {
     );
     isLoading(false);
     if (response.statusCode == 201) {
+      memReferralRegister(referralCode: referralCode);
       Get.to(OtpVerificationView(
         phoneNumber: memberRegisterModel.mobile,
         otp: response.data["user"]["otp"].toString(),
@@ -92,6 +93,25 @@ class AuthController extends GetxController {
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }
+  }
+
+  //referral register
+  ReferralRegisterApiServices referralRegisterApiServices = ReferralRegisterApiServices();
+
+  memReferralRegister({required String referralCode}) async {
+      
+      dio.Response<dynamic> response = await referralRegisterApiServices.
+      referralRegister(referralCode: referralCode);
+      if(response.data["success"] == true){
+
+      }else{
+        Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            response.data["message"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+      }
   }
 
   getOtpFunction({required String mobileNumber}) async {

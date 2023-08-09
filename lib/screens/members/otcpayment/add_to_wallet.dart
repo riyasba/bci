@@ -1,5 +1,5 @@
 import 'package:bci/screens/bussiness/views/home_screen/contact_admin.dart';
-import 'package:bci/screens/members/otcpayment/successful.dart';
+import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
 import 'package:bci/screens/members/settings_views/upgrade_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';

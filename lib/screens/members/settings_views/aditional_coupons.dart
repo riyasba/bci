@@ -84,7 +84,7 @@ class _AdditionalCouponsState extends State<AdditionalCoupons> {
                         ]),
                   ),
               const Divider(thickness: 3,) ],
-              )),body: const TabBarView(children: [Others_continers(),Others_continers()]) , ),
+              )),body: const TabBarView(children: [OthersContiners(),OthersContiners()]) , ),
     );
   }
 }

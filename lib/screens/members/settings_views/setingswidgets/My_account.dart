@@ -6,6 +6,7 @@ import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/screens/bussiness/views/home_screen/contact_admin.dart';
 import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
+import 'package:bci/screens/members/settings_views/upgrade_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
@@ -2067,7 +2068,12 @@ class _MyAccountState extends State<MyAccount> {
                       //
                       ksizedbox30,
                       plansController.subscribePlansData.isEmpty ? 
-                      const Image(image: AssetImage("assets/images/Group 5128.png"),height: 200,) :
+                                 InkWell(
+                                      onTap: () {
+                                        Get.to(const UpgradeScreen());
+                                      },
+                                      child: Image.asset(
+                                          'assets/images/Group 5826.png')) :
                             Stack(
                               children: [
                                 Image.network(plansController.subscribePlansData.first.cardImg,

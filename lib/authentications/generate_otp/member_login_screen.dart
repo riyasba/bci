@@ -1,7 +1,7 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
-import 'package:bci/screens/members/sign_up_view/sign_up_screen.dart';
+import 'package:bci/screens/members/sign_up_view/member_sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';

@@ -1,15 +1,10 @@
-import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
-import 'package:bci/screens/members/home_screen/home_screen.dart';
-import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
+import 'package:bci/screens/members/settings_views/setingswidgets/My_account.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
 import '../../../constands/constands.dart';
-import '../settings_views/upgrade_screen.dart';
 //import 'holiday_home.dart';
 
 class SucessfulScreenOtc extends StatelessWidget {
@@ -53,7 +48,7 @@ class SucessfulScreenOtc extends StatelessWidget {
             InkWell(
               onTap: () {
                 Get.offAll(
-                  () => HelloConvexAppBar(),
+                  () => const MyAccount(),
                 );
               },
               child: Container(

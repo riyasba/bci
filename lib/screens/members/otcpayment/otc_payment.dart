@@ -2,7 +2,7 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_plans_model.dart';
-import 'package:bci/screens/members/otcpayment/successful.dart';
+import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -42,6 +42,7 @@ class _Home_screen1State extends State<Home_screen1> {
     profileController.getProfile();
     homeController.getSlider();
     homeController.todayOffers();
+    homeController.sliderProduct();
   }
 
   @override
@@ -103,24 +104,8 @@ class _Home_screen1State extends State<Home_screen1> {
                                   CarouselSlider(
                                       carouselController: sliderController,
                                       items: [
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/images/Scroll Group 11.png'))),
-                                        ),
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/images/Group 5767.png'))),
-                                        ),
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/images/Group 5807.png'))),
-                                        ),
+                                             for (int i = 0; i < homeController.sliderData.length;  i++)
+                                             Image.network(homeController.sliderData[i].image)
                                       ],
                                       options: CarouselOptions(
                                         height: 170,
@@ -149,7 +134,7 @@ class _Home_screen1State extends State<Home_screen1> {
                                     children: [
                                       AnimatedSmoothIndicator(
                                         activeIndex: activeIndex,
-                                        count: 3,
+                                        count: homeController.sliderData.length,
                                         effect: ScaleEffect(
                                             dotHeight: 9.0,
                                             dotWidth: 9.0,
@@ -512,7 +497,7 @@ class _Home_screen1State extends State<Home_screen1> {
                   //   ],
                   // ),
                   ksizedbox30,
-                  if (homeController.sliderList.isNotEmpty)
+                 // if (homeController.sliderList.isNotEmpty)
                     CarouselSlider(
                         carouselController: sliderController,
                         items: [

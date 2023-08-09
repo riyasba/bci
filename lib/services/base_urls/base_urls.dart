@@ -128,47 +128,41 @@ abstract class BaseApiService {
   final String generateReferralCodeApiUrl =
       "https://bci.batechnology.in/api/auth/generateReferralCode";
 
-  final String recomendedListApiUrl =
-      "https://bci.batechnology.in/api/auth/recomended_list";
+  final String recomendedListApiUrl = "https://bci.batechnology.in/api/auth/recomended_list";
 
-  final String ourPartnersApiUrl =
-      "https://bci.batechnology.in/api/getpartners";
+  final String ourPartnersApiUrl = "https://bci.batechnology.in/api/getpartners";
 
   //liquors api
-  final getVendorByCategory =
-      "https://bci.batechnology.in/api/auth/getVendorsByCategory";
+  final getVendorByCategory = "https://bci.batechnology.in/api/auth/getVendorsByCategory";
 
   //bus booking api
 
-  final getCityListApiUrl =
-      "https://bci.batechnology.in/api/auth/Bus_CityList";
+  final getCityListApiUrl = "https://bci.batechnology.in/api/auth/Bus_CityList";
 
-  final searchBusApiUrl =
-      "https://bci.batechnology.in/api/auth/Bus_Search";
+  final searchBusApiUrl = "https://bci.batechnology.in/api/auth/Bus_Search";
 
-  final busSeatMapApiUrl =
-      "https://bci.batechnology.in/api/auth/bus_seat_map";
+  final busSeatMapApiUrl = "https://bci.batechnology.in/api/auth/bus_seat_map";
 
-  final busTempBooking =
-      "https://bci.batechnology.in/api/auth/bus_temp_booking";
+  final busTempBooking = "https://bci.batechnology.in/api/auth/bus_temp_booking";
 
-  final busTicketing =
-      "https://bci.batechnology.in/api/auth/bus_ticketing";
+  final busTicketing = "https://bci.batechnology.in/api/auth/bus_ticketing";
 
   final busRequiryURL = "https://bci.batechnology.in/api/auth/bus_requery";
 
-  final String addBusBookingHistoryURL =
-      "https://bci.batechnology.in/api/auth/add_bus_booking_history";
+  final String addBusBookingHistoryURL = "https://bci.batechnology.in/api/auth/add_bus_booking_history";
 
-  final String getBusBookingHistoryURL =
-      "https://bci.batechnology.in/api/auth/get_bus_booking_history";
+  final String getBusBookingHistoryURL = "https://bci.batechnology.in/api/auth/get_bus_booking_history";
 
-  final String addFlightBookingHistoryURL =
-      "https://bci.batechnology.in/api/auth/add_flight_booking_history";
+  final String addFlightBookingHistoryURL = "https://bci.batechnology.in/api/auth/add_flight_booking_history";
 
-  final String getFlightBookingHistoryURL =
-      "https://bci.batechnology.in/api/auth/get_flight_booking_history";
+  final String getFlightBookingHistoryURL = "https://bci.batechnology.in/api/auth/get_flight_booking_history";
 
   //get wallet details
   final String getWalletDetailsApiUrl = "https://bci.batechnology.in/api/auth/getUserwallet";
+
+  //home screen banner api
+  final String getSliderProductApiUrl = "https://bci.batechnology.in/api/auth/get_slider_product";
+
+  //generate referral code
+  final String generateReferralApiUrl = "https://bci.batechnology.in/api/generateReferralregister";
 }
