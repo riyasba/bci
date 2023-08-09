@@ -29,7 +29,7 @@ class _BusContainersState extends State<BusContainers> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return GetBuilder<HolidayPackageController>(builder: (_) {
+    return GetBuilder<BusController>(builder: (_) {
       return Padding(
         padding: const EdgeInsets.only(top: 20),
         child: busController.bookingHistoryList.isEmpty

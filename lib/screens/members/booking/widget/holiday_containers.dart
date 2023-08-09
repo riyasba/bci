@@ -78,10 +78,14 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ksizedbox10,
-                                  Text(
-                                    holidayPackageController.enquiryData[index].packageDetails.title
-                                        .toString(),
-                                    style: const TextStyle(fontSize: 21),
+                                  Container(
+                                    width: 200,
+                                    child: Text(
+                                      holidayPackageController.enquiryData[index].packageDetails.title
+                                          .toString(),
+                                          maxLines: 2,
+                                      style: const TextStyle(fontSize: 21),
+                                    ),
                                   ),
                                   Container(
                                     width: 200,
