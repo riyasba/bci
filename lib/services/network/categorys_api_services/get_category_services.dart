@@ -15,6 +15,7 @@ class GetCategoryApiServices extends BaseApiService {
         options: Options(
             headers: {
               'Accept': 'application/json',
+              'Access-Control-Allow-Origin': '*'
             },
             followRedirects: false,
             validateStatus: (status) {
@@ -50,5 +51,5 @@ class GetCategoryApiServices extends BaseApiService {
       //     'Error occured while communication with server' +
       //         ' with status code : ${response.statusCode}');
     }
-  }
+  }  
 }

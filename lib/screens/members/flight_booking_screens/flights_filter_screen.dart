@@ -1,12 +1,14 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/flights_controller.dart';
+import 'package:bci/models/flight_booking_models/air_search_model.dart';
 import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FlightFilterScreen extends StatefulWidget {
   FlightSearchDataModel flightSearchModel;
+  
   FlightFilterScreen({super.key, required this.flightSearchModel});
 
   @override
@@ -20,10 +22,20 @@ class _FlightFilterScreenState extends State<FlightFilterScreen> {
   bool isOneStopConnectingFlights = false;
   bool isAllFlight = false;
 
+  final flightsController = Get.find<FlightsController>();
+
+ 
+
   @override
   void initState() {
     super.initState();
   }
+
+
+  
+
+
+ String airlineCode = "";
 
   resetFilters() async {
     setState(() {
@@ -50,8 +62,7 @@ class _FlightFilterScreenState extends State<FlightFilterScreen> {
         ),
         iconTheme: IconThemeData(color: kblue),
       ),
-      body: Obx(
-        () => ListView(
+      body:  ListView(
           children: [
             const SizedBox(
               height: 15,
@@ -67,19 +78,17 @@ class _FlightFilterScreenState extends State<FlightFilterScreen> {
             const SizedBox(
               height: 15,
             ),
+            for(int i = 0; i < flightsController.flightCodelist.length ;i++)
             Row(
               children: [
                 Checkbox(
                   checkColor: Colors.white,
                   fillColor: MaterialStateProperty.all(kblue),
-                  value: flightController.isAirIndia.value,
+                  value: flightController.flightFilterIndex.value == i,
                   onChanged: (bool? value) {
                     setState(() {
-                      flightController.isAirIndia(value!);
-                      flightController.indiGo(!value);
-                      flightController.isAirAsia(!value);
-                      flightController.isGoFirst(!value);
-                      flightController.isSpiceJet(!value);
+                     flightController.flightFilterIndex(i);
+                     airlineCode = flightsController.flightCodelist[i].airlineCode;
                     });
                   },
                 ),
@@ -87,116 +96,116 @@ class _FlightFilterScreenState extends State<FlightFilterScreen> {
                   width: 5,
                 ),
                 Text(
-                  "Air india",
+                  flightsController.flightCodelist[i].segments.first.airlineName,
                   style: primaryFont.copyWith(
                       color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
                 )
               ],
             ),
-            Row(
-              children: [
-                Checkbox(
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.all(kblue),
-                  value: flightController.indiGo.value,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      flightController.isAirIndia(!value!);
-                      flightController.indiGo(value);
-                      flightController.isAirAsia(!value);
-                      flightController.isGoFirst(!value);
-                      flightController.isSpiceJet(!value);
-                    });
-                  },
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  "IndiGo",
-                  style: primaryFont.copyWith(
-                      color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.all(kblue),
-                  value: flightController.isAirAsia.value,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      flightController.isAirIndia(!value!);
-                      flightController.indiGo(!value);
-                      flightController.isAirAsia(value);
-                      flightController.isGoFirst(!value);
-                      flightController.isSpiceJet(!value);
-                    });
-                  },
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  "Air Asia",
-                  style: primaryFont.copyWith(
-                      color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.all(kblue),
-                  value: flightController.isGoFirst.value,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      flightController.isAirIndia(!value!);
-                      flightController.indiGo(!value);
-                      flightController.isAirAsia(!value);
-                      flightController.isGoFirst(value);
-                      flightController.isSpiceJet(!value);
-                    });
-                  },
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  "Go First",
-                  style: primaryFont.copyWith(
-                      color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.all(kblue),
-                  value: flightController.isSpiceJet.value,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      flightController.isAirIndia(!value!);
-                      flightController.indiGo(!value);
-                      flightController.isAirAsia(!value);
-                      flightController.isGoFirst(!value);
-                      flightController.isSpiceJet(value);
-                    });
-                  },
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  "SpiceJet",
-                  style: primaryFont.copyWith(
-                      color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
-                )
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     Checkbox(
+            //       checkColor: Colors.white,
+            //       fillColor: MaterialStateProperty.all(kblue),
+            //       value: flightController.indiGo.value,
+            //       onChanged: (bool? value) {
+            //         setState(() {
+            //           flightController.isAirIndia(!value!);
+            //           flightController.indiGo(value);
+            //           flightController.isAirAsia(!value);
+            //           flightController.isGoFirst(!value);
+            //           flightController.isSpiceJet(!value);
+            //         });
+            //       },
+            //     ),
+            //     const SizedBox(
+            //       width: 5,
+            //     ),
+            //     Text(
+            //       "IndiGo",
+            //       style: primaryFont.copyWith(
+            //           color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
+            //     )
+            //   ],
+            // ),
+            // Row(
+            //   children: [
+            //     Checkbox(
+            //       checkColor: Colors.white,
+            //       fillColor: MaterialStateProperty.all(kblue),
+            //       value: flightController.isAirAsia.value,
+            //       onChanged: (bool? value) {
+            //         setState(() {
+            //           flightController.isAirIndia(!value!);
+            //           flightController.indiGo(!value);
+            //           flightController.isAirAsia(value);
+            //           flightController.isGoFirst(!value);
+            //           flightController.isSpiceJet(!value);
+            //         });
+            //       },
+            //     ),
+            //     const SizedBox(
+            //       width: 5,
+            //     ),
+            //     Text(
+            //       "Air Asia",
+            //       style: primaryFont.copyWith(
+            //           color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
+            //     )
+            //   ],
+            // ),
+            // Row(
+            //   children: [
+            //     Checkbox(
+            //       checkColor: Colors.white,
+            //       fillColor: MaterialStateProperty.all(kblue),
+            //       value: flightController.isGoFirst.value,
+            //       onChanged: (bool? value) {
+            //         setState(() {
+            //           flightController.isAirIndia(!value!);
+            //           flightController.indiGo(!value);
+            //           flightController.isAirAsia(!value);
+            //           flightController.isGoFirst(value);
+            //           flightController.isSpiceJet(!value);
+            //         });
+            //       },
+            //     ),
+            //     const SizedBox(
+            //       width: 5,
+            //     ),
+            //     Text(
+            //       "Go First",
+            //       style: primaryFont.copyWith(
+            //           color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
+            //     )
+            //   ],
+            // ),
+            // Row(
+            //   children: [
+            //     Checkbox(
+            //       checkColor: Colors.white,
+            //       fillColor: MaterialStateProperty.all(kblue),
+            //       value: flightController.isSpiceJet.value,
+            //       onChanged: (bool? value) {
+            //         setState(() {
+            //           flightController.isAirIndia(!value!);
+            //           flightController.indiGo(!value);
+            //           flightController.isAirAsia(!value);
+            //           flightController.isGoFirst(!value);
+            //           flightController.isSpiceJet(value);
+            //         });
+            //       },
+            //     ),
+            //     const SizedBox(
+            //       width: 5,
+            //     ),
+            //     Text(
+            //       "SpiceJet",
+            //       style: primaryFont.copyWith(
+            //           color: kblue, fontWeight: FontWeight.w400, fontSize: 16),
+            //     )
+            //   ],
+            // ),
             // const SizedBox(
             //   height: 15,
             // ),
@@ -288,7 +297,6 @@ class _FlightFilterScreenState extends State<FlightFilterScreen> {
             // ),
           ],
         ),
-      ),
       bottomNavigationBar:  Container(
         height: 60,
         child: Row(
@@ -298,14 +306,15 @@ class _FlightFilterScreenState extends State<FlightFilterScreen> {
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: InkWell(
                   onTap: () {
-                    resetFilters();
-                    String airlineCode = "";
+                    // getFunctionsApi();
+                    // resetFilters();
+                    // String airlineCode = "";
 
-                    flightController.airSearch(
-                        flightSearchModel: widget.flightSearchModel,
-                        airlineCode: airlineCode);
+                    // flightController.airSearch(
+                    //     flightSearchModel: widget.flightSearchModel,
+                    //     airlineCode: airlineCode);
 
-                    Get.back();
+                    // Get.back();
                   },
                   child: Container(
                     height: 55,
@@ -329,18 +338,18 @@ class _FlightFilterScreenState extends State<FlightFilterScreen> {
                   padding: const EdgeInsets.only(left: 15, right: 15),
                   child: InkWell(
                     onTap: () async {
-                      String airlineCode = "";
-                      if (flightController.isAirAsia.isTrue) {
-                        airlineCode = "I5";
-                      } else if (flightController.isAirIndia.isTrue) {
-                        airlineCode = "AI";
-                      } else if (flightController.isSpiceJet.isTrue) {
-                        airlineCode = "SG";
-                      } else if (flightController.isGoFirst.isTrue) {
-                        airlineCode = "GOW";
-                      } else if (flightController.indiGo.isTrue) {
-                        airlineCode = "6E";
-                      }
+                      // String airlineCode = "";
+                      // if (flightController.isAirAsia.isTrue) {
+                      //   airlineCode = "I5";
+                      // } else if (flightController.isAirIndia.isTrue) {
+                      //   airlineCode = "AI";
+                      // } else if (flightController.isSpiceJet.isTrue) {
+                      //   airlineCode = "SG";
+                      // } else if (flightController.isGoFirst.isTrue) {
+                      //   airlineCode = "GOW";
+                      // } else if (flightController.indiGo.isTrue) {
+                      //   airlineCode = "6E";
+                      // }
 
                       flightController.airSearch(
                           flightSearchModel: widget.flightSearchModel,

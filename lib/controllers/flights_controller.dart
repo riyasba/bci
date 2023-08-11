@@ -40,6 +40,8 @@ class FlightsController extends GetxController {
 
   RxInt domesticORInternational = 0.obs;
 
+  RxInt flightFilterIndex = 0.obs;
+
   DateTime depatureDate = DateTime.now();
   RxBool isDepatureDateSelected = false.obs;
 
@@ -54,6 +56,8 @@ class FlightsController extends GetxController {
   RxBool isGoFirst = false.obs;
   RxBool isSpiceJet = false.obs;
   RxBool indiGo = false.obs;
+
+  List<Flight> flightCodelist = [];
 
   AirSearchApiServices airSearchApiServices = AirSearchApiServices();
   AirportSearchApiServices airportSearchApiServices =
@@ -203,8 +207,7 @@ class FlightsController extends GetxController {
           bookingRefNo: airReprintModel.bookingRefNo,
           airlineCode:
               airReprintModel.airPnrDetails.first.flights.first.airlineCode,
-          date: airReprintModel.bookingDateTime
-          );
+          date: airReprintModel.bookingDateTime);
       Get.off(() => FlightBookingSuccessPage(
             airReprintModel: airReprintModel,
             refNo: refernceNo,
@@ -212,7 +215,7 @@ class FlightsController extends GetxController {
     } else {}
   }
 
-  static MethodChannel _channel =  MethodChannel('easebuzz');
+  static MethodChannel _channel = MethodChannel('easebuzz');
   EaseBuzzTokenApiService easeBuzzApi = EaseBuzzTokenApiService();
 
   payUseingEaseBuzzSubs(
@@ -259,6 +262,12 @@ class FlightsController extends GetxController {
   Future<void> downloadFlightTicketInvoice(
       AirReprintModel airReprintModel) async {
     final pdf = pw.Document();
+
+    print("------------------------------>>starting to generate PDF");
+    print(
+        "------------------------------>>${airReprintModel.airPnrDetails.first.flights.first.origin}");
+    print(
+        "------------------------------>>${airReprintModel.airPnrDetails.first.flights.first.destination}");
 
     pdf.addPage(pw.Page(
       build: (pw.Context context) => pw.Center(
@@ -455,8 +464,9 @@ class FlightsController extends GetxController {
                     height: 4,
                   ),
                   pw.Text(
-                    "${airReprintModel.airPnrDetails.first.flights.first.destination}",
-                    style: pw.TextStyle(
+                    airReprintModel
+                        .airPnrDetails.first.flights.first.destination,
+                    style: const pw.TextStyle(
                       fontSize: 10,
                       color: PdfColors.grey,
                     ),
@@ -900,7 +910,7 @@ class FlightsController extends GetxController {
 
     if (response.statusCode == 201) {}
   }
-  
+
   //flights booking list
 
   List<FlightBookedData> flightBookingHistoyrList = [];

@@ -162,6 +162,16 @@ class Flight {
         "Segments": List<dynamic>.from(segments.map((x) => x.toJson())),
         "TravelDate": travelDate,
       };
+
+  @override
+  int get hashCode => airlineCode.hashCode ^ travelDate.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Flight &&
+          runtimeType == other.runtimeType &&
+          airlineCode == other.airlineCode;
 }
 
 class Fare {

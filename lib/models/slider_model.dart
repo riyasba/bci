@@ -32,14 +32,14 @@ class SliderModel {
 
 class SliderPost {
   int id;
-  String merchant;
-  String actionUrl;
-  String orderNo;
+  dynamic merchant;
+  dynamic actionUrl;
+  dynamic orderNo;
   String image;
-  String status;
+  dynamic status;
   DateTime createdAt;
   DateTime updatedAt;
-  String vendorName;
+  dynamic vendorName;
   String mobile;
 
   SliderPost({

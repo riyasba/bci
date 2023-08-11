@@ -39,10 +39,16 @@ class _Home_screen1State extends State<Home_screen1> {
   @override
   void initState() {
     super.initState();
-    profileController.getProfile();
-    homeController.getSlider();
-    homeController.todayOffers();
-    homeController.sliderProduct();
+    getDatas();
+  }
+
+  getDatas() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      profileController.getProfile();
+      homeController.getSlider();
+      homeController.todayOffers();
+      homeController.sliderProduct();
+    });
   }
 
   @override
@@ -104,8 +110,13 @@ class _Home_screen1State extends State<Home_screen1> {
                                   CarouselSlider(
                                       carouselController: sliderController,
                                       items: [
-                                             for (int i = 0; i < homeController.sliderData.length;  i++)
-                                             Image.network(homeController.sliderData[i].image)
+                                        for (int i = 0;
+                                            i <
+                                                homeController
+                                                    .sliderData.length;
+                                            i++)
+                                          Image.network(homeController
+                                              .sliderData[i].image)
                                       ],
                                       options: CarouselOptions(
                                         height: 170,
@@ -497,54 +508,54 @@ class _Home_screen1State extends State<Home_screen1> {
                   //   ],
                   // ),
                   ksizedbox30,
-                 // if (homeController.sliderList.isNotEmpty)
-                    CarouselSlider(
-                        carouselController: sliderController,
-                        items: [
-                          for (int i = 0;
-                              i < homeController.sliderList.length;
-                              i++)
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              // child: Container(
-                              //   decoration: BoxDecoration(
-                              //     borderRadius: BorderRadius.circular(10),
-                              //     color: Colors.red,
-                              //       image: DecorationImage(
-                              //     image: NetworkImage(
-                              //         homeController.sliderList[i].image),
-                              //   )),
-                              // ),
-                              child: Image.network(
-                                  homeController.sliderList[i].image),
-                            ),
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //       image: DecorationImage(
-                          //           image: AssetImage('assets/images/Group 5781.png'))),
-                          // ),
-                        ],
-                        options: CarouselOptions(
-                          height: 170,
-                          onPageChanged: (index, reason) {
-                            setState(() {
-                              activeIndex = index;
-                            });
-                          },
-                          aspectRatio: 16 / 9,
-                          viewportFraction: 1,
-                          initialPage: 0,
-                          enableInfiniteScroll: true,
-                          reverse: false,
-                          autoPlay: true,
-                          autoPlayInterval: const Duration(seconds: 4),
-                          autoPlayAnimationDuration:
-                              const Duration(milliseconds: 1800),
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          enlargeCenterPage: true,
-                          enlargeFactor: 0.3,
-                          scrollDirection: Axis.horizontal,
-                        )),
+                  // if (homeController.sliderList.isNotEmpty)
+                  CarouselSlider(
+                      carouselController: sliderController,
+                      items: [
+                        for (int i = 0;
+                            i < homeController.sliderList.length;
+                            i++)
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            // child: Container(
+                            //   decoration: BoxDecoration(
+                            //     borderRadius: BorderRadius.circular(10),
+                            //     color: Colors.red,
+                            //       image: DecorationImage(
+                            //     image: NetworkImage(
+                            //         homeController.sliderList[i].image),
+                            //   )),
+                            // ),
+                            child: Image.network(
+                                homeController.sliderList[i].image),
+                          ),
+                        // Container(
+                        //   decoration: BoxDecoration(
+                        //       image: DecorationImage(
+                        //           image: AssetImage('assets/images/Group 5781.png'))),
+                        // ),
+                      ],
+                      options: CarouselOptions(
+                        height: 170,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            activeIndex = index;
+                          });
+                        },
+                        aspectRatio: 16 / 9,
+                        viewportFraction: 1,
+                        initialPage: 0,
+                        enableInfiniteScroll: true,
+                        reverse: false,
+                        autoPlay: true,
+                        autoPlayInterval: const Duration(seconds: 4),
+                        autoPlayAnimationDuration:
+                            const Duration(milliseconds: 1800),
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enlargeCenterPage: true,
+                        enlargeFactor: 0.3,
+                        scrollDirection: Axis.horizontal,
+                      )),
                   if (homeController.sliderList.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(top: 15),

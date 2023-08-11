@@ -1,5 +1,6 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/flights_controller.dart';
+import 'package:bci/models/flight_booking_models/air_search_model.dart';
 import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_details_screen.dart';
 import 'package:bci/screens/members/flight_booking_screens/flights_filter_screen.dart';
@@ -24,6 +25,20 @@ class ParNycSCreen extends StatefulWidget {
 
 class _ParNycSCreenState extends State<ParNycSCreen> {
   final flightsController = Get.find<FlightsController>();
+
+
+  @override
+  void initState() {
+    super.initState();
+    getFunctionsApi();
+  }
+
+  getFunctionsApi() {
+    Set<Flight> uniqueFlights = Set<Flight>.from(flightsController.flightList);
+    List<Flight> uniqueFlightList = uniqueFlights.toList();
+
+    flightsController.flightCodelist = uniqueFlightList;
+  }
 
   @override
   Widget build(BuildContext context) {

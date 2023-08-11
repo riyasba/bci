@@ -198,10 +198,10 @@ class _FlightBookingLandingScreenState
                                         .decreaseAdultCount();
                                     flightBookingController.update();
                                   },
-                                  icon: Icon(Icons.do_not_disturb_on_outlined)),
+                                  icon: const Icon(Icons.do_not_disturb_on_outlined)),
                               Obx(() => Text(
                                     '${flightBookingController.adultsCount.value}',
-                                    style: TextStyle(fontSize: 14),
+                                    style: const TextStyle(fontSize: 14),
                                   )),
                               IconButton(
                                   onPressed: () {
