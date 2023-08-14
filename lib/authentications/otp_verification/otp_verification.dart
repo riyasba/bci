@@ -174,8 +174,7 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                               borderRadius: BorderRadius.circular(
                                 4,
                               ),
-                              border:
-                                  Border.all(color: const Color(0xffFFBF7E)),
+                              border: Border.all(color: const Color(0xffFFBF7E)),
                               boxShadow: const [
                                 BoxShadow(
                                   color: Color(0xFFFF5C29),

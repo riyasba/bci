@@ -282,6 +282,6 @@ class AuthController extends GetxController {
   logout() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString("auth_token", "null");
-    Get.to(const MemberLoginScreen());
+    Get.offAll(const MemberLoginScreen());
   }
 }

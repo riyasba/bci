@@ -60,11 +60,11 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
             style: TabStyle.reactCircle,
       
             items: [
-              TabItem(
+             const TabItem(
                 icon: Icons.home, title: 'Home'),
               TabItem(
                 icon: ImageIcon(
-                  AssetImage(
+                 const AssetImage(
                     'assets/images/notificationimage.png',
                   ),
                   color: selectedpage == 1 ?kblue : kwhite,
@@ -73,7 +73,7 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
               ),
               TabItem(
                   icon: ImageIcon(
-                    AssetImage(
+                   const AssetImage(
                       'assets/images/bottomwallet.png',
                     ),
                     color: selectedpage == 2 ? kblue : kwhite,
@@ -81,7 +81,7 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
                   title: 'Wallet'),
               TabItem(
                   icon: ImageIcon(
-                    AssetImage(
+                 const   AssetImage(
                       'assets/images/bottombooking.png',
                     ),
                     color: selectedpage == 3 ? kblue : kwhite,
@@ -91,7 +91,7 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
                 
                   icon: ImageIcon(
                     
-                    AssetImage(
+                  const  AssetImage(
                       'assets/images/bottomsetting.png',
                       
                     ),
