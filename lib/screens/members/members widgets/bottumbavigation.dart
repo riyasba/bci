@@ -43,7 +43,7 @@ class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
       title: 'Search Result',
       items: const ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
     ),
-    const WalletScreen_members(),
+    const WalletScreenMembers(),
     const MembersBooking(),
     const SettingScreen(),
   ];

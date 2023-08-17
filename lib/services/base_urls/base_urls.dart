@@ -165,4 +165,11 @@ abstract class BaseApiService {
 
   //generate referral code
   final String generateReferralApiUrl = "https://bci.batechnology.in/api/generateReferralregister";
+
+  //add transaction
+  final String addTransactionApiUrl = "https://bci.batechnology.in/api/auth/add_transaction";
+
+  //get transaction history
+  final String transactionHistoryApiUrl = "https://bci.batechnology.in/api/auth/transaction_history";
+  
 }
