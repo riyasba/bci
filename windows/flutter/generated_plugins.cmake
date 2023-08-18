@@ -3,8 +3,10 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  awesome_notifications
   connectivity_plus
   file_selector_windows
+  firebase_core
   nb_utils
   permission_handler_windows
   share_plus
