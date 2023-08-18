@@ -19,8 +19,11 @@ import 'package:bci/services/network/categorys_api_services/sub_category_api_ser
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import '../models/transaction_history_model.dart';
 import '../services/network/auth_api_services/customer_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../services/network/auth_api_services/transaction_history_api_service.dart';
 
 class AuthController extends GetxController {
 //apis method call
@@ -284,5 +287,28 @@ class AuthController extends GetxController {
       otpCode = response.data["otp"].toString();
     }
     return otpCode;
+  }
+
+
+
+    //transaction history
+  TransactionHistoryApiServices transactionHistoryApiServices = TransactionHistoryApiServices();
+  List<TransactionHistory> transactionHistorydata = [];
+
+  transactionHistoryDetails() async {
+
+    dio.Response<dynamic> response = await transactionHistoryApiServices.transactionHistoryApi();
+    if(response.statusCode == 200){
+      TransactionHistoryModel transactionHistoryModel = TransactionHistoryModel.fromJson(response.data);
+      transactionHistorydata = transactionHistoryModel.transactionHistory;
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
   }
 }

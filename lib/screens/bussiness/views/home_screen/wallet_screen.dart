@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../constands/constands.dart';
+import '../../../../controllers/auth_controllers.dart';
+import '../../../../controllers/profile_controller.dart';
 
 class WalletScreen extends StatefulWidget {
   const WalletScreen({super.key});
@@ -34,11 +36,24 @@ class _WalletScreenState extends State<WalletScreen> {
     'assets/images/amounticon.png',
     'assets/images/amounticon.png',
   ];
-  List yesterdayamounttitle = [
+  List yesterdayamounttitle = [ 
+
     'Money Send to Ankit',
     'Money Received From Tom'
+     
   ];
   List yesterdaydate = ['20/03/2023', '20/03/2023'];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    profileController.getProfile();
+    authController.transactionHistoryDetails();
+  }
+
+  final profileController = Get.find<ProfileController>();
+  final authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     var _mediaQuery = MediaQuery.of(context).size;
@@ -91,7 +106,6 @@ class _WalletScreenState extends State<WalletScreen> {
               ],
             ),
             Row(
-              
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 15, top: 10),
@@ -211,7 +225,8 @@ class _WalletScreenState extends State<WalletScreen> {
                               Text(
                                 'Withdraw \nCash',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 16.sp, color: kwhite),
+                                style:
+                                    TextStyle(fontSize: 16.sp, color: kwhite),
                               )
                             ],
                           ),
@@ -238,149 +253,72 @@ class _WalletScreenState extends State<WalletScreen> {
                 Image.asset('assets/images/transactionicon.png')
               ],
             ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    'Today Transaction',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: 250,
-              child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: amountimage.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Stack(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: kwhite,
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                      offset: Offset(0.0, 0.75),
-                                      blurRadius: 1.0,
-                                      color: kgrey)
-                                ]),
-                            height: 100,
-                            width: MediaQuery.of(context).size.width,
-                            child: Row(
-                              children: [
-                                Image.asset(amountimage[index]),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      bottom: 35, left: 10),
-                                  child: Text(
-                                    amounttitle[index].toString(),
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
+            GetBuilder<AuthController>(builder: (_) {
+              return Container(
+                height: _mediaQuery.height * 0.4,
+                child: ListView.builder(
+                    itemCount: authController.transactionHistorydata.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Stack(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: kwhite,
+                                  boxShadow: <BoxShadow>[
+                                    BoxShadow(
+                                        offset: Offset(0.0, 0.75),
+                                        blurRadius: 1.0,
+                                        color: kgrey)
+                                  ]),
+                              height: 100,
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                children: [
+                                  //Image.asset(amountimage[index]),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 35, left: 10),
+                                    child: Text(
+                                      authController
+                                          .transactionHistorydata[index].type,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                          Positioned(
-                              right: 15,
-                              top: 50,
-                              child: Text(
-                                amountcash[index].toString(),
-                                style: TextStyle(
-                                    color: index == 0 ? kOrange : kblue,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
-                              )),
-                          Positioned(
-                            left: 50,
-                            top: 70,
-                            child: Text(amountdate[index].toString()),
-                          ),
-                          Positioned(
-                              left: 170,
+                            Positioned(
+                                right: 15,
+                                top: 50,
+                                child: Text(
+                                  authController
+                                      .transactionHistorydata[index].amount,
+                                  style: TextStyle(
+                                      color: index == 0 ? kOrange : kblue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                )),
+                            Positioned(
+                              left: 50,
                               top: 70,
-                              child: Text(refno[index].toString()))
-                        ],
-                      ),
-                    );
-                  }),
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    'yesterday Transaction',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              height: 250,
-              child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: amountimage.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Stack(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: kwhite,
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                      offset: Offset(0.0, 0.75),
-                                      blurRadius: 1.0,
-                                      color: kgrey)
-                                ]),
-                            height: 100,
-                            width: MediaQuery.of(context).size.width,
-                            child: Row(
-                              children: [
-                                Image.asset(yesterdayamountimage[index]),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      bottom: 35, left: 10),
-                                  child: Text(
-                                    yesterdayamounttitle[index].toString(),
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
+                              child: Text(authController
+                                  .transactionHistorydata[index].updatedAt
+                                  .toString()),
                             ),
-                          ),
-                          Positioned(
-                              right: 15,
-                              top: 50,
-                              child: Text(
-                                amountcash[index].toString(),
-                                style: TextStyle(
-                                    color: index == 0 ? kOrange : kblue,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
-                              )),
-                          Positioned(
-                            left: 50,
-                            top: 70,
-                            child: Text(yesterdaydate[index].toString()),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-            ),
+                            // Positioned(
+                            //     left: 170,
+                            //     top: 70,
+                            //     child: Text(refno[index].toString()))
+                          ],
+                        ),
+                      );
+                    }),
+              );
+            }),
           ],
         ),
       ]),

@@ -4,10 +4,8 @@ abstract class BaseApiService {
   // old url - https://bci.generation360tech.in/
   // new url - https://bci.batechnology.in/
 
-
   //register url
-  final String registerURl =
-    "https://bci.batechnology.in/api/register_user";
+  final String registerURl = "https://bci.batechnology.in/api/register_user";
 
   //login url
   final String getOtpUrl = "https://bci.batechnology.in/api/get_otp";
@@ -19,15 +17,13 @@ abstract class BaseApiService {
   final String categoryURL = "https://bci.batechnology.in/api/category";
 
   //sub category URL
-  final String subCategoryURL =
-      "https://bci.batechnology.in/api/sub_category";
+  final String subCategoryURL = "https://bci.batechnology.in/api/sub_category";
 
-   //api URL
+  //api URL
   final String otpVerifyApiUrl = "https://bci.batechnology.in/api/otp_verrify";
 
   //get profile api
-  final String getProfileURL =
-      "https://bci.batechnology.in/api/auth/profile";
+  final String getProfileURL = "https://bci.batechnology.in/api/auth/profile";
 
 //profile update API URL
   final String profileUpdateURL =
@@ -38,26 +34,34 @@ abstract class BaseApiService {
       "https://bci.batechnology.in/api/auth/merchant_create_service";
 
   //get Services
-  final String getServicesURL = "https://bci.batechnology.in/api/auth/service_list";
+  final String getServicesURL =
+      "https://bci.batechnology.in/api/auth/service_list";
 
   //get booking list
-  final String bookingListApiUrl = "https://bci.batechnology.in/api/auth/vendor_booking_list";
+  final String bookingListApiUrl =
+      "https://bci.batechnology.in/api/auth/vendor_booking_list";
 
-  // add today offers 
-  final String addTodayOffersApiUrl = "https://bci.batechnology.in/api/auth/merchant_offers";
+  // add today offers
+  final String addTodayOffersApiUrl =
+      "https://bci.batechnology.in/api/auth/merchant_offers";
 
   //vendor offer list
-  final String vendorOfferListApiUrl = "https://bci.batechnology.in/api/auth/vendor_offers_list";
+  final String vendorOfferListApiUrl =
+      "https://bci.batechnology.in/api/auth/vendor_offers_list";
 
   //create support
-  final String createSupportApiUrl = "https://bci.batechnology.in/api/auth/create_ticket";
+  final String createSupportApiUrl =
+      "https://bci.batechnology.in/api/auth/create_ticket";
 
   //get wallet details
-  final String getWalletDetailsApiUrl = "https://bci.batechnology.in/api/auth/getUserwallet"; 
-  
+  final String getWalletDetailsApiUrl =
+      "https://bci.batechnology.in/api/auth/getUserwallet";
+
   //generate referral code
   final String generateReferralCodeApiUrl =
       "https://bci.batechnology.in/api/auth/generateReferralCode";
 
+//Get Transactionhistory
+  final String transactionHistoryApiUrl =
+      "https://bci.batechnology.in/api/auth/transaction_history";
 }
- 
