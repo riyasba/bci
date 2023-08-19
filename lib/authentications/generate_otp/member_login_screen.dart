@@ -5,10 +5,8 @@ import 'package:bci/screens/members/sign_up_view/member_sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../otp_verification/otp_verification.dart';
+
 
 class MemberLoginScreen extends StatefulWidget {
   const MemberLoginScreen({super.key});

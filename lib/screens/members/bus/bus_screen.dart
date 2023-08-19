@@ -8,21 +8,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constands/constands.dart';
-import 'bus_details.dart';
+
 
 class BusScreen extends StatefulWidget {
   const BusScreen({super.key});
 
   @override
   State<BusScreen> createState() => _BusScreenState();
+
 }
 
 class _BusScreenState extends State<BusScreen> {
+
   final buscontroller = Get.find<BusController>();
 
   DateTime date = DateTime.now();
 
   _selectDate(BuildContext context) async {
+    
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: date,

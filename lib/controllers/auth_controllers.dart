@@ -1,5 +1,4 @@
 import 'package:bci/authentications/generate_otp/member_login_screen.dart';
-import 'package:bci/authentications/langing_screen/landing_screen.dart';
 import 'package:bci/authentications/otp_verification/otp_verification.dart';
 import 'package:bci/authentications/verified_screen/verified_screen.dart';
 import 'package:bci/constands/app_fonts.dart';

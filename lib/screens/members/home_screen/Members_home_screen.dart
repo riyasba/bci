@@ -18,6 +18,7 @@ import '../bus/bus_screen.dart';
 import '../coupen/coupons_screen.dart';
 import '../holiday/holiday_home.dart';
 import '../hottel/Hotel_members.dart';
+import '../hottel/datepicking_screen.dart';
 import '../liquer_screen/liquer_screen.dart';
 import '../offer screen/offer_screen_grid.dart';
 import '../settings_views/upgrade_screen.dart';
@@ -108,38 +109,37 @@ class _Home_screen1State extends State<Home_screen1> {
                             ? Column(
                                 children: [
                                   CarouselSlider(
-                                      carouselController: sliderController,
-                                      items: [
-                                        for (int i = 0;
-                                            i <
-                                                homeController
-                                                    .sliderData.length;
-                                            i++)
-                                          Image.network(homeController
-                                              .sliderData[i].image)
-                                      ],
-                                      options: CarouselOptions(
-                                        height: 170,
-                                        onPageChanged: (index, reason) {
-                                          setState(() {
-                                            activeIndex = index;
-                                          });
-                                        },
-                                        aspectRatio: 16 / 9,
-                                        viewportFraction: 1,
-                                        initialPage: 0,
-                                        enableInfiniteScroll: true,
-                                        reverse: false,
-                                        autoPlay: true,
-                                        autoPlayInterval:
-                                            const Duration(seconds: 3),
-                                        autoPlayAnimationDuration:
-                                            const Duration(milliseconds: 800),
-                                        autoPlayCurve: Curves.fastOutSlowIn,
-                                        enlargeCenterPage: true,
-                                        enlargeFactor: 0.3,
-                                        scrollDirection: Axis.horizontal,
-                                      )),
+                                    carouselController: sliderController,
+                                    items: [
+                                      for (int i = 0;
+                                          i < homeController.sliderData.length;
+                                          i++)
+                                        Image.network(
+                                            homeController.sliderData[i].image)
+                                    ],
+                                    options: CarouselOptions(
+                                      height: 170,
+                                      onPageChanged: (index, reason) {
+                                        setState(() {
+                                          activeIndex = index;
+                                        });
+                                      },
+                                      aspectRatio: 16 / 9,
+                                      viewportFraction: 1,
+                                      initialPage: 0,
+                                      enableInfiniteScroll: true,
+                                      reverse: false,
+                                      autoPlay: true,
+                                      autoPlayInterval:
+                                          const Duration(seconds: 3),
+                                      autoPlayAnimationDuration:
+                                          const Duration(milliseconds: 800),
+                                      autoPlayCurve: Curves.fastOutSlowIn,
+                                      enlargeCenterPage: true,
+                                      enlargeFactor: 0.3,
+                                      scrollDirection: Axis.horizontal,
+                                    ),
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -258,7 +258,7 @@ class _Home_screen1State extends State<Home_screen1> {
                         //
                         InkWell(
                           onTap: () {
-                            Get.to(Hotel());
+                            Get.to(Datepicker_screen_hotel());
                           },
                           child: Column(
                             children: [

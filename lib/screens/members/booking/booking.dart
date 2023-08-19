@@ -6,12 +6,12 @@ import 'package:bci/screens/members/booking/widget/others_bookings_view.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
 import '../../../constands/constands.dart';
-import '../../bussiness/views/business/notification_screen.dart';
+
 import '../../bussiness/views/home_screen/contact_admin.dart';
 
 class MembersBooking extends StatefulWidget {

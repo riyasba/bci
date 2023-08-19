@@ -172,4 +172,14 @@ abstract class BaseApiService {
   //get transaction history
   final String transactionHistoryApiUrl = "https://bci.batechnology.in/api/auth/transaction_history";
   
+
+
+
+   //hotel search
+  final String searchHotelApiUrl = "https://bci.batechnology.in/api/auth/search_hotels";
+
+
+
+  //hotel search city
+  final String searchHotelcityApiUrl = "https://bci.batechnology.in/api/auth/destination_list";
 }

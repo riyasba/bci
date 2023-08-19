@@ -15,7 +15,7 @@ class Dropdown_Small extends StatefulWidget {
 
 class _Dropdown_SmallState extends State<Dropdown_Small> {
   var _selectedOption ;
- final List<String> options = ['1','2','3'];
+ final List<String> options = ['A/C','Non A/C',];
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
