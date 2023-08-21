@@ -87,12 +87,11 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
                 print("destination selected");
                 Destinationcontrolr.text = citymodel.destination;
                 //    hotelController.toCity(citymodel.cityName);
-                hotelController.hotelSearchKey('110755');
+                hotelController.hotelSearchKey(citymodel.cityid);
                 print(citymodel.cityid);
                 print(citymodel.country);
                 print(citymodel.countrycode);
                 print(citymodel.destination);
-              
               },
             ),
           ),
@@ -211,13 +210,14 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             InkWell(
-                                onTap: () {
-                                  hotelController.child--;
-                                },
-                                child: const Icon(
-                                  Icons.remove,
-                                  size: 20,
-                                )),
+                              onTap: () {
+                                hotelController.child--;
+                              },
+                              child: const Icon(
+                                Icons.remove,
+                                size: 20,
+                              ),
+                            ),
                             Container(
                               height: 25,
                               width: 25,
@@ -264,7 +264,7 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
                           children: [
                             InkWell(
                                 onTap: () {
-                                  hotelController.infant--;
+                                  hotelController.roomno--;
                                 },
                                 child: const Icon(
                                   Icons.remove,
@@ -276,14 +276,14 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
                               color: Colors.orange,
                               child: Center(
                                 child: Text(
-                                  hotelController.infant.value.toString(),
+                                  hotelController.roomno.value.toString(),
                                   style: const TextStyle(color: Colors.white),
                                 ),
                               ),
                             ),
                             InkWell(
                                 onTap: () {
-                                  hotelController.infant++;
+                                  hotelController.roomno++;
                                 },
                                 child: const Icon(
                                   Icons.add,
@@ -320,42 +320,67 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
           ),
           ksizedbox40,
           ksizedbox20,
-          InkWell(
-            onTap: () {
-              hotelController.searchHotel(
-                child: hotelController.child.value,
-                adult: hotelController.adult.value,
-                checkindate: DateFormat('dd/MM/yyyy').format(start),
-                checkoutdate: DateFormat('dd/MM/yyyy').format(end),
-                destination: hotelController.hotelSearchKey.value,
-              );
-              //Get.to(Sucessful_screen_hotel());
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Container(
-                width: double.infinity,
-                height: 45,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    24,
+          Obx(
+            ()=> InkWell(
+              onTap: () {
+                hotelController.searchHotel(
+                  child: hotelController.child.value,
+                  adult: hotelController.adult.value,
+                  checkindate: DateFormat('dd/MM/yyyy').format(start),
+                  checkoutdate: DateFormat('dd/MM/yyyy').format(end),
+                  destination: hotelController.hotelSearchKey.value,
+                //  childage: hotelController.roomno.value,
+                  roomsno:  hotelController.roomno.string,
+                );
+                //Get.to(Sucessful_screen_hotel());
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: hotelController.isLoading.isTrue?     Container(
+                  width: double.infinity,
+                  height: 45,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      24,
+                    ),
+                    gradient: const LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                        Color(0xFFFF5C29),
+                        Color(0xFFFFCD38),
+                      ],
+                    ),
                   ),
-                  gradient: const LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    colors: [
-                      Color(0xFFFF5C29),
-                      Color(0xFFFFCD38),
-                    ],
+                child: const CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                ):
+                Container(
+                  width: double.infinity,
+                  height: 45,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      24,
+                    ),
+                    gradient: const LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                        Color(0xFFFF5C29),
+                        Color(0xFFFFCD38),
+                      ],
+                    ),
                   ),
-                ),
-                child: Text(
-                  'Search',
-                  style: TextStyle(
-                      fontSize: 17,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600),
+                  child: Text(
+                    'Search',
+                    style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
               ),
             ),

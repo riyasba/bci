@@ -10,28 +10,53 @@ class SearchHotelListApiService extends BaseApiService {
     required String checkoutdate,
     required int adult,
     required int child,
-    }) async {
+  //  required int childage,
+    required String roomsno,
+  }) async {
     dynamic responseJson;
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var data = {
+      // var data = {
+      //   "BookingMode": "5",
+      //   "CheckInDate": checkindate,
+      //   "CheckOutDate": checkoutdate,
+      //   "NoOfNights": "1",
+      //   "CountryCode": "IN",
+      //   "DestinationCityId": destination,
+      //   "ResultCount": Null,
+      //   "Currency": "INR",
+      //   "GuestNationality": "IN",
+      //   "NoOfRooms": roomsno,
+      //   "RoomGuests": [
+      //     {
+      //       "Adult": adult,
+      //       "Child": child,
+      //       "ChildAge": Null,
+      //     }
+      //   ],
+      //   "MaxRating": "5",
+      //   "MinRating": "0",
+      //   "UserIp": "122.160.83.78"
+      // };
+
+      var data2={
     "BookingMode": "5",
     "CheckInDate": checkindate,
     "CheckOutDate": checkoutdate,
     "NoOfNights": "1",
     "CountryCode": "IN",
-    "DestinationCityId": "127343",
+    "DestinationCityId": destination,
     "ResultCount": null,
     "Currency": "INR",
     "GuestNationality": "IN",
-    "NoOfRooms": "1",
+    "NoOfRooms": roomsno,
     "RoomGuests": [
         {
-            "Adult":adult,
-            "Child": child,
+            "Adult": adult.toString(),
+            "Child": child.toString(),
             "ChildAge": null
         }
     ],
@@ -40,22 +65,20 @@ class SearchHotelListApiService extends BaseApiService {
     "UserIp": "122.160.83.78"
 };
 
-print(data);
+      print(data2);
 
-      var response = await dio.post(
-        searchHotelApiUrl,
-        options: Options(
+      var response = await dio.post(searchHotelApiUrl,
+          options: Options(
             headers: {
-              'Content-Type' : 'application/json',
+              'Content-Type': 'application/json',
               'Authorization': 'Bearer $authtoken'
             },
             followRedirects: false,
             validateStatus: (status) {
               return status! <= 500;
-            }),
-            data: data
-                 
-      );
+            },
+          ),
+          data: data2);
       print("::::::::<search HOTEL-list Api>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
