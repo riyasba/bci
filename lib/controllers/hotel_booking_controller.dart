@@ -19,12 +19,11 @@ class HotelBookingController extends GetxController {
   //search bus
   SearchHotelListApiService searchBusListApiService =
       SearchHotelListApiService();
-  List<Bus> busData = [];
+ // List<Bus> busData = [];
   RxString hotelSearchKey = "".obs;
 
   searchHotel(
       {required String destination,
-       
         required int child,
         required int adult,
       required String checkindate,

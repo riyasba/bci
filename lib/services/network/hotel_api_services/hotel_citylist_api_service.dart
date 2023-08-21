@@ -20,7 +20,7 @@ class GetHotelCityListApiService extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"country": "india", "destination": "Chennai"});
+          data: {"country": "india", "destination": searchCity});
 
       print("::::::::<get HOTEL city-list Api>::::::::status code::::::::::");
       print(response.statusCode);

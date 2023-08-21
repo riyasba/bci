@@ -21,8 +21,17 @@ class Datepicker_screen_hotel extends StatefulWidget {
 }
 
 class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
-  DateTimeRange daterange =
-      DateTimeRange(start: DateTime(2023,8, 18,), end: DateTime(2023, 9, 18,));
+  DateTimeRange daterange = DateTimeRange(
+      start: DateTime(
+        2023,
+        8,
+        18,
+      ),
+      end: DateTime(
+        2023,
+        9,
+        18,
+      ));
 
   final hotelController = Get.find<HotelBookingController>();
   final Destinationcontrolr = TextEditingController();
@@ -32,7 +41,7 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
     var size = MediaQuery.of(context).size;
     final start = daterange.start;
     final end = daterange.end;
-  //  final diffrence = daterange.duration;
+    //  final diffrence = daterange.duration;
     return Scaffold(
       backgroundColor: Color(0xFFF9F8FD),
       body: ListView(
@@ -51,7 +60,7 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
                   if (value.length > 1) {
                     await Future.delayed(const Duration(milliseconds: 200));
                     Get.find<HotelBookingController>()
-                       . hotelCityList(searchCity: value);
+                        .hotelCityList(searchCity: value);
                   }
                 },
                 controller: Destinationcontrolr,
@@ -78,7 +87,12 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
                 print("destination selected");
                 Destinationcontrolr.text = citymodel.destination;
                 //    hotelController.toCity(citymodel.cityName);
-                hotelController.hotelSearchKey(citymodel.cityid);
+                hotelController.hotelSearchKey('110755');
+                print(citymodel.cityid);
+                print(citymodel.country);
+                print(citymodel.countrycode);
+                print(citymodel.destination);
+              
               },
             ),
           ),
@@ -311,8 +325,9 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
               hotelController.searchHotel(
                 child: hotelController.child.value,
                 adult: hotelController.adult.value,
-                checkindate: DateFormat('dd/mm/yyyy').format(start),
-                checkoutdate: DateFormat('dd/mm/yyyy').format(end),    destination: hotelController.hotelSearchKey.value,
+                checkindate: DateFormat('dd/MM/yyyy').format(start),
+                checkoutdate: DateFormat('dd/MM/yyyy').format(end),
+                destination: hotelController.hotelSearchKey.value,
               );
               //Get.to(Sucessful_screen_hotel());
             },

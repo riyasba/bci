@@ -17,25 +17,13 @@ class SearchHotelListApiService extends BaseApiService {
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(
-        searchHotelApiUrl,
-        options: Options(
-            headers: {
-              'Content-Type' : 'application/json',
-              'Authorization': 'Bearer $authtoken'
-            },
-            followRedirects: false,
-            validateStatus: (status) {
-              return status! <= 500;
-            }),
-            data: 
-                   {
+      var data = {
     "BookingMode": "5",
     "CheckInDate": checkindate,
     "CheckOutDate": checkoutdate,
     "NoOfNights": "1",
     "CountryCode": "IN",
-    "DestinationCityId":destination ,
+    "DestinationCityId": "127343",
     "ResultCount": null,
     "Currency": "INR",
     "GuestNationality": "IN",
@@ -50,7 +38,22 @@ class SearchHotelListApiService extends BaseApiService {
     "MaxRating": "5",
     "MinRating": "0",
     "UserIp": "122.160.83.78"
-}
+};
+
+print(data);
+
+      var response = await dio.post(
+        searchHotelApiUrl,
+        options: Options(
+            headers: {
+              'Content-Type' : 'application/json',
+              'Authorization': 'Bearer $authtoken'
+            },
+            followRedirects: false,
+            validateStatus: (status) {
+              return status! <= 500;
+            }),
+            data: data
                  
       );
       print("::::::::<search HOTEL-list Api>::::::::status code::::::::::");
