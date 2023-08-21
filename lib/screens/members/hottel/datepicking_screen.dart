@@ -1,20 +1,14 @@
 import 'package:bci/screens/members/hottel/wigets/dropdown.dart';
-import 'package:bci/screens/members/hottel/wigets/sucsessful.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import '../../../constands/constands.dart';
 import '../../../controllers/hotel_booking_controller.dart';
-import '../../../models/bus_booking_models/bus_cityList_model.dart';
 import '../../../models/hotel_booking_models/search_city_list_model.dart';
-import '../../../models/hotel_booking_models/search_city_list_model.dart';
-
-
 
 class Datepicker_screen_hotel extends StatefulWidget {
   const Datepicker_screen_hotel({
@@ -27,74 +21,68 @@ class Datepicker_screen_hotel extends StatefulWidget {
 }
 
 class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
-
   DateTimeRange daterange =
-      DateTimeRange(start: DateTime(2023, 8, 18), end: DateTime(2023, 9, 18));
-
+      DateTimeRange(start: DateTime(2023,8, 18,), end: DateTime(2023, 9, 18,));
 
   final hotelController = Get.find<HotelBookingController>();
   final Destinationcontrolr = TextEditingController();
 
-  
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     final start = daterange.start;
     final end = daterange.end;
-    final diffrence = daterange.duration;
+  //  final diffrence = daterange.duration;
     return Scaffold(
       backgroundColor: Color(0xFFF9F8FD),
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
-          // Container(
-          //   decoration: BoxDecoration(
-          //       //  color: Colors.grey[200],
-          //       borderRadius: BorderRadius.circular(15)),
-          //   height: size.height * 0.06,
-          //   width: size.width * 0.2,
-          //   child: TypeAheadField<SearchCityListModel>(
-          //     getImmediateSuggestions: true,
-          //     textFieldConfiguration: TextFieldConfiguration(
-          //       onChanged: (value) async {
-          //         if (value.length > 1) {
-          //           await Future.delayed(const Duration(milliseconds: 200));
-          //           Get.find<HotelBookingController>().SearchCityListModel(searchCity: value);
-          //         }
-          //       },
-          //       controller: Destinationcontrolr,
-          //       decoration: const InputDecoration(
-          //           border: OutlineInputBorder(),
-          //           hintText: 'Enter Destination'),
-          //     ),
-          //     suggestionsCallback: (String pattern) async {
-          //       return hotelController.getBusCityList
-          //           .where((item) => item.cityName
-          //               .toLowerCase()
-          //               .startsWith(pattern.toLowerCase()))
-          //           .toList();
-          //     },
-          //     itemBuilder: (context, GetBusCityList citymodel) {
-          //       return ListTile(
-          //         title: Text(citymodel.cityName),
-          //       );
-          //     },
-          //     itemSeparatorBuilder: (context, index) {
-          //       return Divider();
-          //     },
-          //     onSuggestionSelected: (GetBusCityList citymodel) {
-          //       print("destination selected");
-          //       Destinationcontrolr.text = citymodel.cityName;
-          //       busController.toCity(citymodel.cityName);
-          //       busController.tocityId(citymodel.cityId);
-          //     },
-          //   ),
-          // ),
-          // TableCalendar(
-          //   firstDay: DateTime.utc(2010, 10, 16),
-          //   lastDay: DateTime.utc(2030, 3, 14),
-          //   focusedDay: DateTime.now(),
-          // ),
+          Container(
+            decoration: BoxDecoration(
+                //  color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(15)),
+            height: size.height * 0.06,
+            width: size.width * 0.2,
+            child: TypeAheadField<SearchCityListModel>(
+              getImmediateSuggestions: true,
+              textFieldConfiguration: TextFieldConfiguration(
+                onChanged: (value) async {
+                  if (value.length > 1) {
+                    await Future.delayed(const Duration(milliseconds: 200));
+                    Get.find<HotelBookingController>()
+                       . hotelCityList(searchCity: value);
+                  }
+                },
+                controller: Destinationcontrolr,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter Destination'),
+              ),
+              suggestionsCallback: (String pattern) async {
+                return hotelController.getHotelCityList
+                    .where((item) => item.destination
+                        .toLowerCase()
+                        .startsWith(pattern.toLowerCase()))
+                    .toList();
+              },
+              itemBuilder: (context, SearchCityListModel citymodel) {
+                return ListTile(
+                  title: Text(citymodel.destination),
+                );
+              },
+              itemSeparatorBuilder: (context, index) {
+                return Divider();
+              },
+              onSuggestionSelected: (SearchCityListModel citymodel) {
+                print("destination selected");
+                Destinationcontrolr.text = citymodel.destination;
+                //    hotelController.toCity(citymodel.cityName);
+                hotelController.hotelSearchKey(citymodel.cityid);
+              },
+            ),
+          ),
+
           ksizedbox30, //  Image.asset('assets/images/Group 5823(1).png',
           //     height: 500, fit: BoxFit.cover),
           InkWell(
@@ -103,17 +91,17 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  DateFormat('yyyy/MM/dd').format(start),
+                  DateFormat('dd/MM/yyyy').format(start),
                   style: TextStyle(color: kblue, fontSize: 16),
                 ),
 
-                Text(
-                  'Days ${diffrence.inDays}',
-                  style: TextStyle(color: kblue, fontSize: 16),
-                ),
+                // Text(
+                //   'Days ${diffrence.inDays}',
+                //   style: TextStyle(color: kblue, fontSize: 16),
+                // ),
                 //Image.asset('assets/images/Repeat Grid 3.png'),
                 Text(
-                  DateFormat('yyyy/MM/dd').format(end),
+                  DateFormat('dd/MM/yyyy').format(end),
                   style: TextStyle(color: kblue, fontSize: 16),
                 ),
               ],
@@ -323,8 +311,8 @@ class _Datepicker_screen_hotelState extends State<Datepicker_screen_hotel> {
               hotelController.searchHotel(
                 child: hotelController.child.value,
                 adult: hotelController.adult.value,
-                checkindate: DateFormat('yyyy/MM/dd').format(start),
-                checkoutdate: DateFormat('yyyy/MM/dd').format(end),
+                checkindate: DateFormat('dd/mm/yyyy').format(start),
+                checkoutdate: DateFormat('dd/mm/yyyy').format(end),    destination: hotelController.hotelSearchKey.value,
               );
               //Get.to(Sucessful_screen_hotel());
             },

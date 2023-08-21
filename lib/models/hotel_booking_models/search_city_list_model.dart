@@ -9,6 +9,8 @@ List<SearchCityListModel> searchCityListModelFromJson(String str) => List<Search
 String searchCityListModelToJson(List<SearchCityListModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class SearchCityListModel {
+
+
     String cityid;
     String destination;
     String stateprovince;
@@ -16,22 +18,25 @@ class SearchCityListModel {
     String country;
     String countrycode;
 
+
     SearchCityListModel({
+
         required this.cityid,
         required this.destination,
         required this.stateprovince,
         required this.stateProvinceCode,
         required this.country,
         required this.countrycode,
+
     });
 
     factory SearchCityListModel.fromJson(Map<String, dynamic> json) => SearchCityListModel(
-        cityid: json["cityid"],
-        destination: json["Destination"],
-        stateprovince: json["stateprovince"],
-        stateProvinceCode: json["StateProvinceCode"],
-        country: json["country"],
-        countrycode: json["countrycode"],
+        cityid: json["cityid"]?? "",
+        destination: json["Destination"]?? "",
+        stateprovince: json["stateprovince"]?? "",
+        stateProvinceCode: json["StateProvinceCode"]?? "",
+        country: json["country"]?? "",
+        countrycode: json["countrycode"]?? "",
     );
 
     Map<String, dynamic> toJson() => {

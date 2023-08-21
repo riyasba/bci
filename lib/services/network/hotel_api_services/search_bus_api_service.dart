@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SearchHotelListApiService extends BaseApiService {
   Future searchhotelListApiService({
     required String checkindate,
+    required String destination,
     required String checkoutdate,
     required int adult,
     required int child,
@@ -34,7 +35,7 @@ class SearchHotelListApiService extends BaseApiService {
     "CheckOutDate": checkoutdate,
     "NoOfNights": "1",
     "CountryCode": "IN",
-    "DestinationCityId":'110755' ,
+    "DestinationCityId":destination ,
     "ResultCount": null,
     "Currency": "INR",
     "GuestNationality": "IN",
@@ -52,7 +53,7 @@ class SearchHotelListApiService extends BaseApiService {
 }
                  
       );
-      print("::::::::<search bus-list Api>::::::::status code::::::::::");
+      print("::::::::<search HOTEL-list Api>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

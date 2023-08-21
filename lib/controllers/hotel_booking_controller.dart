@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import '../constands/app_fonts.dart';
 import '../models/bus_booking_models/search_bus_model.dart';
+import '../models/hotel_booking_models/search_city_list_model.dart';
+import '../services/network/hotel_api_services/hotel_citylist_api_service.dart';
 import '../services/network/hotel_api_services/search_bus_api_service.dart';
 
 class HotelBookingController extends GetxController {
@@ -12,22 +14,25 @@ class HotelBookingController extends GetxController {
   RxInt adult = 0.obs;
   RxInt infant = 0.obs;
   RxBool isLoading = false.obs;
+  List<SearchCityListModel> getHotelCityList = [];
 
   //search bus
   SearchHotelListApiService searchBusListApiService =
       SearchHotelListApiService();
   List<Bus> busData = [];
-  RxString busSearchKey = "".obs;
+  RxString hotelSearchKey = "".obs;
 
   searchHotel(
-      {required int child,
+      {required String destination,
+       
+        required int child,
         required int adult,
       required String checkindate,
       required String checkoutdate,}) async {
     isLoading(true);
     dio.Response<dynamic> response =
         await searchBusListApiService.searchhotelListApiService(
-            adult: adult, checkindate: checkindate, checkoutdate: checkoutdate, child: child);
+            adult: adult, checkindate: checkindate, checkoutdate: checkoutdate, child: child, destination: destination);
     isLoading(false);
     if (response.statusCode == 200) {
       if (response.data["Error_Code"] == "0001") {
@@ -38,9 +43,10 @@ class HotelBookingController extends GetxController {
               style: primaryFont.copyWith(color: Colors.white),
             ));
       } else {
-        SearchBusList searchBusList = SearchBusList.fromJson(response.data);
-        busData = searchBusList.buses;
-        busSearchKey(searchBusList.searchKey);
+        SearchCityListModel searchBusList = SearchCityListModel.fromJson(response.data);
+           
+       // busData = searchBusList.buses;
+    //    busSearchKey(searchBusList.searchKey);
         // Get.to(BusDetailsScreen(
         //   fromCityName: fromCity.value,
         //   toCityName: toCity.value,
@@ -88,5 +94,28 @@ class HotelBookingController extends GetxController {
   }
 
   //get hotel room
+  //hotel city list
+  GetHotelCityListApiService getBusCityListApiService =
+      GetHotelCityListApiService();
+
+  hotelCityList({required String searchCity}) async {
+    dio.Response<dynamic> response = await getBusCityListApiService
+        .getHotelCityListApiService(searchCity: searchCity);
+
+    if (response.statusCode == 200) {
+      getHotelCityList = List<SearchCityListModel>.from(
+          response.data.map((x) =>SearchCityListModel.fromJson(x)));
+    } else {
+      Get.rawSnackbar(
+        backgroundColor: Colors.red,
+        messageText: Text(
+          "something went wrong ${response.statusCode}",
+          style: primaryFont.copyWith(color: Colors.white),
+        ),
+      );
+    }
+    update();
+  }
+
 
 }

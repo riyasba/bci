@@ -1,5 +1,4 @@
 import 'package:bci/constands/app_fonts.dart';
-import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_booking_list_model.dart';
 import 'package:bci/models/get_cart_list_model.dart';
 import 'package:bci/models/get_plan_details_model.dart';
@@ -11,7 +10,6 @@ import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/models/slider_model.dart';
 import 'package:bci/models/slider_product_model.dart';
 import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
-import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
 import 'package:bci/services/network/categorys_api_services/add_booking_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/add_to_cart_api_services.dart';
