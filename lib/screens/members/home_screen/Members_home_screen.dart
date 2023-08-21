@@ -18,7 +18,7 @@ import '../bus/bus_screen.dart';
 import '../coupen/coupons_screen.dart';
 import '../holiday/holiday_home.dart';
 import '../hottel/Hotel_members.dart';
-import '../hottel/datepicking_screen.dart';
+import '../hottel/search_hotel_screen.dart';
 import '../liquer_screen/liquer_screen.dart';
 import '../offer screen/offer_screen_grid.dart';
 import '../settings_views/upgrade_screen.dart';
@@ -258,7 +258,7 @@ class _Home_screen1State extends State<Home_screen1> {
                         //
                         InkWell(
                           onTap: () {
-                            Get.to(Datepicker_screen_hotel());
+                            Get.to(SerchHotelScreen());
                           },
                           child: Column(
                             children: [

@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import 'datepicking_screen.dart';
+import 'search_hotel_screen.dart';
 
 class Final_booking extends StatelessWidget {
   const Final_booking({super.key});
@@ -158,7 +158,7 @@ class Final_booking extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        Get.to(Datepicker_screen_hotel());
+                        Get.to(SerchHotelScreen());
                         // Get.to(BusinessGenerate_otp
                         // ());
                       },
