@@ -1,3 +1,5 @@
+import 'package:bci/models/hotel_booking_models/hotel_info_model.dart';
+import 'package:bci/services/network/hotel_api_services/hotel_info_api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
@@ -51,10 +53,40 @@ class HotelBookingController extends GetxController {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "something went wrong ${response.statusCode}",
+            "something went wrong",
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }
     update();
   }
+
+  //hotel info
+  HotelInfoApiServices hotelInfoApiServices = HotelInfoApiServices();
+  List<HotelInfoData> hotelInfoData = [];
+
+  hotelInfo({
+    required String userIp,
+    required String resultIndex,
+    required String hotelCode,
+    required String searchToken,
+   }) async { 
+     
+     dio.Response<dynamic> response = await hotelInfoApiServices.hotelInfoApiServices(
+      userIp: userIp, resultIndex: resultIndex, hotelCode: hotelCode, searchToken: searchToken);
+      if(response.statusCode == 200){
+        HotelInfoModel hotelInfoModel = HotelInfoModel.fromJson(response.data);
+        hotelInfoData.add(hotelInfoModel.result);
+      } else {
+        Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+      }
+      update();
+  }
+
+  //get hotel room
+
 }

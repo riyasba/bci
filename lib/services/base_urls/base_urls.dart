@@ -171,14 +171,19 @@ abstract class BaseApiService {
 
   //get transaction history
   final String transactionHistoryApiUrl = "https://bci.batechnology.in/api/auth/transaction_history";
-  
 
+  //fcm token 
+  final String fcmTokenStoreApiUrl = "https://bci.batechnology.in/api/auth/fcm-token";
+
+  //hotel info
+  final String hotelInfoApiUrl = "https://bci.batechnology.in/api/auth/hotelinfo";
+
+  //hotel get hotel room
+  final String getHotelRoomApiUrl = "https://bci.batechnology.in/api/auth/get_hotel_room";
 
 
    //hotel search
   final String searchHotelApiUrl = "https://bci.batechnology.in/api/auth/search_hotels";
-
-
 
   //hotel search city
   final String searchHotelcityApiUrl = "https://bci.batechnology.in/api/auth/destination_list";

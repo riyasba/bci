@@ -10,6 +10,7 @@ import 'package:bci/models/transaction_history_model.dart';
 import 'package:bci/screens/bussiness/views/generations/otp_verification_screen.dart';
 import 'package:bci/screens/bussiness/views/generations/verified_screen.dart';
 import 'package:bci/services/network/auth_api_services/add_transaction_api_service.dart';
+import 'package:bci/services/network/auth_api_services/fcm_token_store_api_service.dart';
 import 'package:bci/services/network/auth_api_services/get_otp_api_services.dart';
 import 'package:bci/services/network/auth_api_services/login_api_services.dart';
 import 'package:bci/services/network/auth_api_services/merchant_api_services.dart';
@@ -285,6 +286,21 @@ class AuthController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString("auth_token", "null");
     Get.offAll(const MemberLoginScreen());
+  }
+
+  //fcm token store api
+  FcmTokenStoreApiService fcmTokenStoreApiService = FcmTokenStoreApiService();
+
+  fcmtoken({required String token}) async {
+    dio.Response<dynamic> response = await fcmTokenStoreApiService
+        .fcmTokenStoreApiService(token: token,);
+    if (response.statusCode == 200) {
+    } else {
+      Get.snackbar("Something went wrong", response.statusCode.toString(),
+          colorText: Colors.white,
+          backgroundColor: Colors.red,
+          snackPosition: SnackPosition.BOTTOM);
+    }
   }
 
   //add transaction

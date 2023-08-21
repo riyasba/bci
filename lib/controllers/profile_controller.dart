@@ -14,6 +14,7 @@ import 'package:bci/services/network/profile_api_services/redeem_coupons_api_ser
 import 'package:bci/services/network/profile_api_services/update_official_address_api.dart';
 import 'package:bci/services/network/subscriptions_api_services/ease_buzz_payment_api_services.dart';
 import 'package:bci/widgets/home_widgets/loading_widgets.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -45,15 +46,20 @@ class ProfileController extends GetxController {
     dio.Response<dynamic> response = await getProfileApiServices.getProfile();
     isLoading(false);
     if (response.statusCode == 200) {
-      MemberProfileModel profileModel =
-          MemberProfileModel.fromJson(response.data);
+      MemberProfileModel profileModel = MemberProfileModel.fromJson(response.data);
       isSubscribed(profileModel.subscription);
       planid(profileModel.planId.toString());
       profileData.add(profileModel.user);
       update();
+      var token = await FirebaseMessaging.instance.getToken();
+      Get.find<AuthController>().fcmtoken(
+          token: token.toString(),);
+      print("............firebase token.......=====================>>>");
+      print(token);
     } else if (response.statusCode == 401) {
       Get.find<AuthController>().logout();
     }
+    update();
   }
 
   updateProfile(
