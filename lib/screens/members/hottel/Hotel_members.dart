@@ -52,7 +52,7 @@ class _HotelListScreenState extends State<HotelListScreen> {
                     style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
                   ),
                 ],
-              ),
+               ),
               Padding(padding: const EdgeInsets.all(8.0), child: search()),
             ],
           ),
