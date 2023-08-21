@@ -1,8 +1,10 @@
 import 'package:bci/models/hotel_booking_models/hotel_info_model.dart';
+import 'package:bci/models/hotel_booking_models/search_hotel_list_model.dart';
 import 'package:bci/services/network/hotel_api_services/hotel_info_api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constands/app_fonts.dart';
 import '../models/bus_booking_models/search_bus_model.dart';
 import '../models/hotel_booking_models/search_city_list_model.dart';
@@ -22,6 +24,7 @@ class HotelBookingController extends GetxController {
       SearchHotelListApiService();
   // List<Bus> busData = [];
   RxString hotelSearchKey = "".obs;
+  List<SearchHotelData> searchHotelData = [];
 
   searchHotel({
     required String destination,
@@ -43,38 +46,29 @@ class HotelBookingController extends GetxController {
          //   childage: childage,
             roomsno: roomsno);
     isLoading(false);
-    if (response.statusCode == 200) {
-      if (response.data["Error_Code"] == "0001") {
+    if (response.data["Error"]["ErrorCode"] == 0) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("search_token", response.data["token"]);
+      SearchHotelModel searchHotelModel = SearchHotelModel.fromJson(response.data);
+      searchHotelData = searchHotelModel.result;
+      Get.to( HotelListScreen());
+      
+      // if (response.data["Error_Code"] == "0001") {
+      //   Get.rawSnackbar(
+      //     backgroundColor: Colors.red,
+      //     messageText: Text(
+      //       "No hotel availbale for the given city Names.",
+      //       style: primaryFont.copyWith(color: Colors.white),
+      //     ),
+      //   );
+      } else {
         Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "No hotel availbale for the given city Names.",
+            "something went wrong",
             style: primaryFont.copyWith(color: Colors.white),
-          ),
-        );
-      } else {
-        SearchCityListModel searchBusList =
-            SearchCityListModel.fromJson(response.data);
-Get.to(Hotel());
-        // busData = searchBusList.buses;
-        //    busSearchKey(searchBusList.searchKey);
-        // Get.to(BusDetailsScreen(
-        //   fromCityName: fromCity.value,
-        //   toCityName: toCity.value,
-        //   tdate: date.value,
-        //   searchKey: searchBusList.searchKey,
-        // )
-        // );
+          ));
       }
-    } else {
-      Get.rawSnackbar(
-        backgroundColor: Colors.red,
-        messageText: Text(
-          "something went wrong",
-          style: primaryFont.copyWith(color: Colors.white),
-        ),
-      );
-    }
     update();
   }
 
