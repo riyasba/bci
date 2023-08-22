@@ -68,25 +68,30 @@ class _Home_screen1State extends State<Home_screen1> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.asset('assets/images/projectlogo.png'),
-                    GetBuilder<ProfileController>(builder: (_) {
-                      return profileController.profileData.isEmpty
-                          ? Container()
-                          : Text(
-                              'Hello, ${profileController.profileData.first.name}',
-                              style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            );
-                    }),
+                    GetBuilder<ProfileController>(
+                      builder: (_) {
+                        return profileController.profileData.isEmpty
+                            ? Container()
+                            : Text(
+                                'Hello, ${profileController.profileData.first.name}',
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              );
+                      },
+                    ),
                     IconButton(
-                        onPressed: () {
-                          Get.to(const NotificationScreen());
-                        },
-                        icon: Icon(
-                          Icons.notifications,
-                          color: kwhite,
-                        ))
+                      onPressed: () {
+                        Get.to(
+                          const NotificationScreen(),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.notifications,
+                        color: kwhite,
+                      ),
+                    )
                   ],
                 ),
               ),

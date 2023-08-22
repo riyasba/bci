@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math' as math;
 import '../../../constands/constands.dart';
 import 'final_booking.dart';
@@ -130,7 +131,7 @@ class _HotelListScreenState extends State<HotelListScreen> {
                           boxShadow: [
                             BoxShadow(
                                 blurRadius: 5, color: Colors.grey.withOpacity(0.5)),
-                          ]),
+                          ],),
                     ),
                       
                     Positioned(
@@ -139,7 +140,18 @@ class _HotelListScreenState extends State<HotelListScreen> {
                       bottom: 0,
                       child: Padding(
                           padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: InkWell(onTap: (){Get.to( Final_booking());},
+                          child: InkWell(onTap: ()async{
+                            
+                            
+                            final prefs = await SharedPreferences.getInstance();
+                            var searchtocken=prefs.getString("searchtoken");
+                            Get.to( 
+                            Final_booking(hotelCode:hotelBookingController.searchHotelData[index].hotelCode ,
+                             resultIndex: hotelBookingController.searchHotelData[index].resultIndex.toString(),
+                              searchToken: searchtocken ?? "" ,
+                               userIp: '122.160.83.78',
+                               )
+                            );},
                             child: Container(
                                 height: 100,
                                 width: 51,

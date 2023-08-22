@@ -28,11 +28,11 @@ class GetHotelRoomApiServices extends BaseApiService {
               return status! <= 500;
             }),
             data: {
-              "UserIp":"122.160.83.78",
-              "ResultIndex":"56",
-              "HotelCode":"21080231",
-              "Search_Token":"5d1f34c8a24b8c3eaf805530084b1eb5b73464b8"
-            }
+              "UserIp":userIp,
+              "ResultIndex":resultIndex,
+              "HotelCode":hotelCode,
+              "Search_Token":searchToken,    
+                    }
       );
       print("::::::::<get hotel room Api>::::::::status code::::::::::");
       print(response.statusCode);

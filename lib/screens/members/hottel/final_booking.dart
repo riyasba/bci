@@ -8,7 +8,10 @@ import 'package:get/get_core/src/get_main.dart';
 import 'search_hotel_screen.dart';
 
 class Final_booking extends StatelessWidget {
-  const Final_booking({super.key});
+  const Final_booking({super.key, required String userIp,
+    required String resultIndex,
+    required String hotelCode,
+    required String searchToken,});
 
   @override
   Widget build(BuildContext context) {
