@@ -187,4 +187,11 @@ abstract class BaseApiService {
 
   //hotel search city
   final String searchHotelcityApiUrl = "https://bci.batechnology.in/api/auth/destination_list";
+
+  //hotel booking api
+  final String hotelBookingApiUrl = "https://bci.batechnology.in/api/auth/hotel_booking";
+
+  //notification list
+  final String notificationListApiUrl = "https://bci.batechnology.in/api/auth/notification_list";
+
 }

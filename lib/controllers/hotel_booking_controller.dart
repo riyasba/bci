@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constands/app_fonts.dart';
-import '../models/bus_booking_models/search_bus_model.dart';
 import '../models/hotel_booking_models/search_city_list_model.dart';
 import '../screens/members/hottel/Hotel_members.dart';
 import '../services/network/hotel_api_services/hotel_citylist_api_service.dart';

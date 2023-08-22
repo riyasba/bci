@@ -1,8 +1,8 @@
+import 'package:bci/controllers/auth_controllers.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
 import '../../../../constands/constands.dart';
 import '../home_screen/contact_admin.dart';
 
@@ -46,6 +46,16 @@ class _NotificationScreenState extends State<NotificationScreen> {
     'Your amount transaction for your \noficial account and More check \namount your wallet'
   ];
   List yesterdaysubtitle = ['2 days ago', '2 days ago', '2 days ago'];
+
+  final authController = Get.find<AuthController>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    authController.notification();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,8 +80,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           color: kwhite,
                         )),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 22),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 22),
                     child: Text(
                       'Notification',
                       style: TextStyle(
@@ -92,176 +102,66 @@ class _NotificationScreenState extends State<NotificationScreen> {
               ),
             ),
           )),
-      body: ListView(children: [
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      'Today',
-                      style:
-                          TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListView.builder(
-                itemCount: todayimages.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 140,
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.white,
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 180,
-                                width: 150,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10, left: 5, right: 10, bottom: 10),
-                                  child: Image.asset(
-                                    todayimages[index],
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
+      body: GetBuilder<AuthController>(
+        builder: (_) {
+          return ListView.builder(
+              itemCount: authController.notificationData.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 90,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.white,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 20,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 20,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      todaytitle[index].toString(),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    authController.notificationData[index].title,
+                                    style:const TextStyle(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 6),
+                                    child: Text(
+                                      authController.notificationData[index].message,
                                       style: TextStyle(
-                                          fontSize: 19,
+                                          fontSize: 14, color: kgrey),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Text(
+                                      authController.notificationData[index].createdAt.toString(),
+                                      style:const TextStyle(
+                                          fontSize: 13.5,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 6),
-                                      child: Text(
-                                        todaydiscription[index].toString(),
-                                        style: TextStyle(
-                                            fontSize: 12, color: kgrey),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: Text(
-                                        todaysubtitle[index].toString(),
-                                        style: TextStyle(
-                                            fontSize: 13.5,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          thickness: 1.5,
-                        )
-                      ],
-                    ),
-                  );
-                }),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 11),
-                  child: Text(
-                    'Yesterday',
-                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
-            ),
-            ListView.builder(
-                itemCount: yesterdayimage.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 140,
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.white,
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 180,
-                                width: 150,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10, left: 5, right: 10, bottom: 10),
-                                  child: Image.asset(
-                                    yesterdayimage[index],
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
+                                  )
+                                ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 20,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      yesterdaytitle[index].toString(),
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 6),
-                                      child: Text(
-                                        yesterdaydiscriptions[index].toString(),
-                                        style: TextStyle(
-                                            fontSize: 13, color: kgrey),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 25),
-                                      child: Text(
-                                        yesterdaysubtitle[index].toString(),
-                                        style: TextStyle(
-                                            fontSize: 13.5,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                            )
+                          ],
                         ),
-                        Divider(
-                          thickness: 1.5,
-                        )
-                      ],
-                    ),
-                  );
-                }),
-          ],
-        ),
-      ]),
+                      ),
+                      const Divider(
+                        thickness: 1.5,
+                      )
+                    ],
+                  ),
+                );
+              });
+        }
+      ),
     );
   }
 }

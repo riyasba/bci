@@ -5,6 +5,7 @@ import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/models/category_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/merchants_register_model.dart';
+import 'package:bci/models/notification_list_model.dart';
 import 'package:bci/models/sub_category_model.dart';
 import 'package:bci/models/transaction_history_model.dart';
 import 'package:bci/screens/bussiness/views/generations/otp_verification_screen.dart';
@@ -14,6 +15,7 @@ import 'package:bci/services/network/auth_api_services/fcm_token_store_api_servi
 import 'package:bci/services/network/auth_api_services/get_otp_api_services.dart';
 import 'package:bci/services/network/auth_api_services/login_api_services.dart';
 import 'package:bci/services/network/auth_api_services/merchant_api_services.dart';
+import 'package:bci/services/network/auth_api_services/notification_list_api_service.dart';
 import 'package:bci/services/network/auth_api_services/referral_register_api_services.dart';
 import 'package:bci/services/network/auth_api_services/transaction_history_api_service.dart';
 import 'package:bci/services/network/categorys_api_services/get_category_services.dart';
@@ -342,4 +344,26 @@ class AuthController extends GetxController {
     }
     update();
   }
+
+  //notification list
+  NotificationListApiService notificationListApiService = NotificationListApiService();
+  List<NotificationData> notificationData = [];
+
+  notification() async {
+
+    dio.Response<dynamic> response = await notificationListApiService.notificationListApiService();
+    if(response.statusCode == 200){
+      NotificationListModel notificationListModel = NotificationListModel.fromJson(response.data);
+      notificationData = notificationListModel.data;
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+   update();
+  }
+
 }
