@@ -98,15 +98,14 @@ class BusController extends GetxController {
     isLoading(false);
     if (response.statusCode == 200) {
       if (response.data["Error_Code"] == "0001") {
-          Get.rawSnackbar(
+        Get.rawSnackbar(
             backgroundColor: Colors.red,
             messageText: Text(
               "No bus availbale for the given city Names.",
               style: primaryFont.copyWith(color: Colors.white),
             ));
-       
       } else {
-         SearchBusList searchBusList = SearchBusList.fromJson(response.data);
+        SearchBusList searchBusList = SearchBusList.fromJson(response.data);
         busData = searchBusList.buses;
         busSearchKey(searchBusList.searchKey);
         Get.to(BusDetailsScreen(
@@ -115,7 +114,6 @@ class BusController extends GetxController {
           tdate: date.value,
           searchKey: searchBusList.searchKey,
         ));
-      
       }
     } else {
       Get.rawSnackbar(
@@ -131,6 +129,7 @@ class BusController extends GetxController {
   //bus seat map
   BusSeatMapApiService busSeatMapApiService = BusSeatMapApiService();
   List<SeatMap> seatMap = [];
+  List<List<SeatMap>> seatMapList = [];
 
   RxDouble totalAmount = 0.0.obs;
 
@@ -141,6 +140,7 @@ class BusController extends GetxController {
       required String droppingId,
       required String searchKey,
       required Bus busData}) async {
+        seatMapList.clear();
     dio.Response<dynamic> response =
         await busSeatMapApiService.busSeatMapApiService(
             boardingId: boardingId,
@@ -150,6 +150,7 @@ class BusController extends GetxController {
     if (response.statusCode == 200) {
       BusSeatMapList busSeatMapList = BusSeatMapList.fromJson(response.data);
       seatMap = busSeatMapList.seatMap;
+      generateBusSeats(seatMap);
       seatMapKey(busSeatMapList.seatMapKey);
     } else {
       Get.rawSnackbar(
@@ -158,6 +159,38 @@ class BusController extends GetxController {
             "something went wrong ${response.statusCode}",
             style: primaryFont.copyWith(color: Colors.white),
           ));
+    }
+    update();
+  }
+
+  generateBusSeats(List<SeatMap> seatMap) {
+    List<int> rowList = [];
+
+    for (int k = 0; k < seatMap.length; k++) {
+      rowList.add(int.parse(seatMap[k].row));
+    }
+
+    List<int> uniqueList = rowList.toSet().toList();
+
+    // Sort the unique list
+    uniqueList.sort();
+
+    for (int i = 0; i < uniqueList.length; i++) {
+      int rowNumber = uniqueList[i];
+
+      List<SeatMap> tempList = [];
+
+      for (int j = 0; j < seatMap.length; j++) {
+        int tempRowNum = int.parse(seatMap[j].row.toString());
+
+        print(rowNumber == tempRowNum);
+
+        if (rowNumber == tempRowNum) {
+          tempList.add(seatMap[j]);
+        }
+      }
+      print(tempList.length);
+      seatMapList.add(tempList);
     }
     update();
   }
