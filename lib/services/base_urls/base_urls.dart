@@ -98,6 +98,8 @@ abstract class BaseApiService {
   final String airAddPayment =
       "https://bci.batechnology.in/api/auth/add_payment";
 
+  final String airGetSeatMap = "https://bci.batechnology.in/api/auth/air_get_seat_map";
+
   final String airportSearch = "https://openflights.org/php/apsearch.php";
 
   //----------- holidays bookings ---------------//

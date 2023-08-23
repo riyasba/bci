@@ -8,6 +8,8 @@ import 'package:bci/controllers/hotel_booking_controller.dart';
 import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
+import 'package:bci/screens/members/bus/bus_contact_details.dart';
+import 'package:bci/screens/members/flight_booking_screens/air_seat_map_screen_view.dart';
 import 'package:bci/screens/members/holiday/controllers/holidaycontroller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -117,7 +119,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          // home: BusBoardingDetailsScreen(),
+    
           home: const splash(),
         );
       },

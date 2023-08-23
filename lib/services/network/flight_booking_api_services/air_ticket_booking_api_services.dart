@@ -189,7 +189,7 @@ class AirTicketBookingApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: data3);
+          data: data);
       print("::::::::<--Air Ticket booking-->::::::::status code::::::::::");
       print("---------->>Search key");
       print(bookingModel.searchKey);
