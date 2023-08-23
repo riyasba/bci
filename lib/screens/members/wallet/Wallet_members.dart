@@ -89,191 +89,196 @@ class _WalletScreenMembersState extends State<WalletScreenMembers> {
               ),
             ),
           )),
-      body: ListView(
-        physics:const BouncingScrollPhysics(), 
-        children: [
-        Column(
-          children: [
-            Row(
+      body: GetBuilder<ProfileController>(
+        builder: (_) {
+          return ListView(
+            physics:const BouncingScrollPhysics(), 
+            children: [
+            Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 5),
-                  child: Text(
-                    'Total Wallet',
-                    style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
-                  ),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, top: 10),
-                  child: Container(
-                    height: 110.h,
-                    width: 245.w,
-                    child: Padding(
-                      padding:  EdgeInsets.only(top: 20, right: 40),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Total Wallet Amount',
-                            style: TextStyle(color: kwhite, fontSize: 17.sp),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, right: 70),
-                            child: Text(
-                              '₹1990.0',
-                              style: TextStyle(fontSize: 21.sp, color: kwhite),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      boxShadow: <BoxShadow>[
-                        BoxShadow(
-                            offset:const Offset(0.0, 0.75),
-                            blurRadius: 7.0,
-                            color: kyellow)
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                      color: kOrange,
-                    ),
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20, top: 10),
-                      child: InkWell(onTap: (){
-                        Get.to(const AddWaletScreen());
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: kyellow,
-                              border: Border.all(color: kOrange, width: 1)),
-                          height: _mediaQuery.height>700?108:110.h,
-                          width: _mediaQuery.width>700?90:95.w,
+                      padding: const EdgeInsets.only(left: 10, top: 5),
+                      child: Text(
+                        'Total Wallet',
+                        style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15, top: 10),
+                      child: Container(
+                        height: 110.h,
+                        width: 245.w,
+                        child: Padding(
+                          padding:  EdgeInsets.only(top: 20, right: 40,left: 20),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 11),
-                                child: CircleAvatar(
-                                  backgroundColor: kwhite,
-                                  radius: 22.r,
-                                  child: Image.asset(
-                                    'assets/images/cirlewallet.png',
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                              ),
-                             const SizedBox(
-                                height: 5,
-                              ),
                               Text(
-                                'Deposit \nCash',
-                                style: TextStyle(fontSize: 15.sp, color: kwhite),
+                                'Total Wallet Amount',
+                                style: TextStyle(color: kwhite, fontSize: 17.sp),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10, right: 70),
+                                child:profileController.profileData.isEmpty ? Text("") : Text(
+                                  '₹${profileController.profileData.first.walletAmount}',
+                                  style: TextStyle(fontSize: 21.sp, color: kwhite),
+                                ),
                               )
                             ],
                           ),
                         ),
+                        decoration: BoxDecoration(
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                                offset:const Offset(0.0, 0.75),
+                                blurRadius: 7.0,
+                                color: kyellow)
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                          color: kOrange,
+                        ),
                       ),
                     ),
-                  ],
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 40),
-                  child: Text(
-                    'Transaction History',
-                    style: TextStyle(fontSize: 25.sp, color: kblue),
-                  ),
-                ),
-                Image.asset('assets/images/transactionicon.png')
-              ],
-            ),
-           
-            SizedBox(
-              height: 10.h,
-            ),
-            GetBuilder<AuthController>(
-              builder: (_) {
-                return Container(
-                  height: _mediaQuery.height * 0.4,
-                  child: ListView.builder(
-                      itemCount: authController.transactionHistorydata.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Stack(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: kwhite,
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                          offset: Offset(0.0, 0.75),
-                                          blurRadius: 1.0,
-                                          color: kgrey)
-                                    ]),
-                                height: 100,
-                                width: MediaQuery.of(context).size.width,
-                                child: Row(
-                                  children: [
-                                    //Image.asset(amountimage[index]),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: 35, left: 10),
-                                      child: Text(
-                                        authController.transactionHistorydata[index].type,
-                                        style:const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, top: 10),
+                          child: InkWell(onTap: (){
+                            Get.to(const AddWaletScreen());
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: kyellow,
+                                  border: Border.all(color: kOrange, width: 1)),
+                              height: _mediaQuery.height>700?108:110.h,
+                              width: _mediaQuery.width>700?90:95.w,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 11),
+                                    child: CircleAvatar(
+                                      backgroundColor: kwhite,
+                                      radius: 22.r,
+                                      child: Image.asset(
+                                        'assets/images/cirlewallet.png',
+                                        fit: BoxFit.contain,
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                 const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    'Deposit \nCash',
+                                    style: TextStyle(fontSize: 15.sp, color: kwhite),
+                                  )
+                                ],
                               ),
-                              Positioned(
-                                  right: 15,
-                                  top: 50,
-                                  child: Text(
-                                    authController.transactionHistorydata[index].amount,
-                                    style: TextStyle(
-                                        color: index == 0 ? kOrange : kblue,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                  )),
-                              Positioned(
-                                left: 50,
-                                top: 70,
-                                child: Text(authController.transactionHistorydata[index].updatedAt.toString()),
-                              ),
-                              // Positioned(
-                              //     left: 170,
-                              //     top: 70,
-                              //     child: Text(refno[index].toString()))
-                            ],
+                            ),
                           ),
-                        );
-                      }),
-                );
-              }
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 40),
+                      child: Text(
+                        'Transaction History',
+                        style: TextStyle(fontSize: 25.sp, color: kblue),
+                      ),
+                    ),
+                    Image.asset('assets/images/transactionicon.png')
+                  ],
+                ),
+               
+                SizedBox(
+                  height: 10.h,
+                ),
+                GetBuilder<AuthController>(
+                  builder: (_) {
+                    return Container(
+                      height: _mediaQuery.height * 0.4,
+                      child: ListView.builder(
+                          itemCount: authController.transactionHistorydata.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: kwhite,
+                                        boxShadow: <BoxShadow>[
+                                          BoxShadow(
+                                              offset: Offset(0.0, 0.75),
+                                              blurRadius: 1.0,
+                                              color: kgrey)
+                                        ]),
+                                    height: 100,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Row(
+                                      children: [
+                                        //Image.asset(amountimage[index]),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 35, left: 10),
+                                          child: Text(
+                                            authController.transactionHistorydata[index].type,
+                                            style:const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Positioned(
+                                      right: 15,
+                                      top: 50,
+                                      child: Text(
+                                        authController.transactionHistorydata[index].amount,
+                                        style: TextStyle(
+                                            color: index == 0 ? kOrange : kblue,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      )),
+                                  Positioned(
+                                    left: 50,
+                                    top: 70,
+                                    child: Text(authController.transactionHistorydata[index].updatedAt.toString()),
+                                  ),
+                                  // Positioned(
+                                  //     left: 170,
+                                  //     top: 70,
+                                  //     child: Text(refno[index].toString()))
+                                ],
+                              ),
+                            );
+                          }),
+                    );
+                  }
+                ),
+               
+              ],
             ),
-           
-          ],
-        ),
-      ]),
+          ]);
+        }
+      ),
     );
   }
 }

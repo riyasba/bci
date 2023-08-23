@@ -134,7 +134,7 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
                                 if(profileController.profileData.first.occupation.isEmpty){
                                   Get.to(const MyAccount());
                                 }else{
-                                  Get.offAll(HelloConvexAppBar());
+                                  Get.offAll(MemberBottomNavBar());
                                 }
                               } else {
                                 _pageController.nextPage(
@@ -158,7 +158,7 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
                         if(profileController.profileData.first.occupation.isEmpty){
                                   Get.to(const MyAccount());
                                 }else{
-                                  Get.offAll(HelloConvexAppBar());
+                                  Get.offAll(MemberBottomNavBar());
                                 }
                       },
                       child: const Text(

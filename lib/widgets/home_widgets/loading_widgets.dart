@@ -20,7 +20,7 @@ class _LoadingWidgetsState extends State<LoadingWidgets> {
   redirectToNext() async {
     await Future.delayed(const Duration(seconds: 3));
 
-    Get.offAll(() => HelloConvexAppBar());
+    Get.offAll(() => MemberBottomNavBar());
   }
 
   @override

@@ -1,4 +1,6 @@
+import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/My_account.dart';
+import 'package:bci/screens/members/wallet/Wallet_members.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,7 +50,7 @@ class SucessfulScreenOtc extends StatelessWidget {
             InkWell(
               onTap: () {
                 Get.offAll(
-                  () => const MyAccount(),
+                  () => MemberBottomNavBar(),
                 );
               },
               child: Container(

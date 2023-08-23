@@ -1,18 +1,25 @@
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/bussiness/views/home_screen/contact_admin.dart';
-import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
-import 'package:bci/screens/members/settings_views/upgrade_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
-
 import '../../../constands/constands.dart';
 
-class AddWaletScreen extends StatelessWidget {
+class AddWaletScreen extends StatefulWidget {
   const AddWaletScreen({super.key});
+
+  @override
+  State<AddWaletScreen> createState() => _AddWaletScreenState();
+}
+
+class _AddWaletScreenState extends State<AddWaletScreen> {
+
+  final profileController = Get.find<ProfileController>();
+
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +38,10 @@ class AddWaletScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                        onTap: Get.back,
-                        child:
-                            Image.asset('assets/images/chevron-left (2).png')),
+                      onTap: (){
+                        Get.back();
+                      },
+                      child:const Icon(Icons.arrow_back_ios,color: Colors.white,)),
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: Text(
@@ -68,114 +76,140 @@ class AddWaletScreen extends StatelessWidget {
             ],
           ),
           ksizedbox30,
-          Text(
-            'Add To Wallet Amounts or Default Amount Choose Payment Methods...',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: kblue, fontSize: 22.sp),
+          Padding(
+            padding: const EdgeInsets.only(left: 10,right: 10),
+            child: Text(
+              'Add To Wallet Amounts or Default Amount Choose Payment Methods...',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: kblue, fontSize: 22.sp),
+            ),
           ),
           ksizedbox30,
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(left: 15,right: 15),
             child: Container(
-              child: Center(
-                child: Text(
-                  '₹1990.00',
-                  style: TextStyle(
-                      fontSize: 30.sp,
-                      fontWeight: FontWeight.w800,
-                      color: kwhite),
-                ),
-              ),
-              height: 50.h,
-              width: 220.w,
-              decoration: BoxDecoration(
-                  color: kblue, borderRadius: BorderRadius.circular(4)),
-            ),
+                   height: 40,
+                              width: _mediaQuery.width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(2),
+                                  border: Border.all(color: kblue),
+                                  color:
+                                      const Color.fromARGB(255, 254, 252, 252)),
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding:const EdgeInsets.only(left: 15, right: 10),
+                                child: TextField(
+                                  controller: amountController,
+                                  keyboardType: TextInputType.number,
+                                  decoration:const InputDecoration(
+                                      isCollapsed: true,
+                                      isDense: true,
+                                      border: InputBorder.none,
+                                      hintText: "Add amount to wallet",
+                                      hintStyle: TextStyle(
+                                        color: Color(0xff6E6D6E),
+                                        fontWeight: FontWeight.w400,
+                                      )),
+                                ),
+                              ),
+                            ),
           ),
+          // ksizedbox40,
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 15),
+          //   child: Row(
+          //     children: [
+          //       Text(
+          //         'Others Amounts',
+          //         style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w700),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // ksizedbox30,
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: [
+          //     Container(
+          //       decoration: BoxDecoration(border: Border.all(color: kblue)),
+          //       child:Center(
+          //         child: Text(
+          //           '+2000',
+          //           style: TextStyle(
+          //               fontSize: 19.sp,
+          //               fontWeight: FontWeight.w500,
+          //               color: kblue),
+          //         ),
+          //       ),
+          //       height: 50.h,
+          //       width: 120.w,
+          //     ),
+          //     Container(
+          //       decoration: BoxDecoration(border: Border.all(color: kblue)),
+          //       child: Center(
+          //         child: Text(
+          //           '+2000',
+          //           style: TextStyle(
+          //               fontSize: 19.sp,
+          //               fontWeight: FontWeight.w500,
+          //               color: kblue),
+          //         ),
+          //       ),
+          //       height: 50.h,
+          //       width: 120.w,
+          //     ),
+          //   ],
+          // ),
+          // ksizedbox30,
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: [
+          //     Container(
+          //       decoration: BoxDecoration(border: Border.all(color: kblue)),
+          //       child: Center(
+          //         child: Text(
+          //           '+2000',
+          //           style: TextStyle(
+          //               fontSize: 19.sp,
+          //               fontWeight: FontWeight.w500,
+          //               color: kblue),
+          //         ),
+          //       ),
+          //       height: 50.h,
+          //       width: 120.w,
+          //     ),
+          //     Container(
+          //       decoration: BoxDecoration(border: Border.all(color: kblue)),
+          //       child: Center(
+          //         child: Text(
+          //           '+2000',
+          //           style: TextStyle(
+          //               fontSize: 19.sp,
+          //               fontWeight: FontWeight.w500,
+          //               color: kblue),
+          //         ),
+          //       ),
+          //       height: 50.h,
+          //       width: 120.w,
+          //     ),
+          //   ],
+          // ),
           ksizedbox40,
-          Row(
-            children: [
-              Text(
-                'Others Amounts',
-                style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w700),
-              ),
-            ],
-          ),
-          ksizedbox30,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                decoration: BoxDecoration(border: Border.all(color: kblue)),
-                child:Center(
-                  child: Text(
-                    '+2000',
-                    style: TextStyle(
-                        fontSize: 19.sp,
-                        fontWeight: FontWeight.w500,
-                        color: kblue),
-                  ),
-                ),
-                height: 50.h,
-                width: 120.w,
-              ),
-              Container(
-                decoration: BoxDecoration(border: Border.all(color: kblue)),
-                child: Center(
-                  child: Text(
-                    '+2000',
-                    style: TextStyle(
-                        fontSize: 19.sp,
-                        fontWeight: FontWeight.w500,
-                        color: kblue),
-                  ),
-                ),
-                height: 50.h,
-                width: 120.w,
-              ),
-            ],
-          ),
-          ksizedbox30,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                decoration: BoxDecoration(border: Border.all(color: kblue)),
-                child: Center(
-                  child: Text(
-                    '+2000',
-                    style: TextStyle(
-                        fontSize: 19.sp,
-                        fontWeight: FontWeight.w500,
-                        color: kblue),
-                  ),
-                ),
-                height: 50.h,
-                width: 120.w,
-              ),
-              Container(
-                decoration: BoxDecoration(border: Border.all(color: kblue)),
-                child: Center(
-                  child: Text(
-                    '+2000',
-                    style: TextStyle(
-                        fontSize: 19.sp,
-                        fontWeight: FontWeight.w500,
-                        color: kblue),
-                  ),
-                ),
-                height: 50.h,
-                width: 120.w,
-              ),
-            ],
-          ),
           ksizedbox40,
           InkWell(
             onTap: () {
-              Get.to(const SucessfulScreenOtc());
+              
+              profileController.payUseingEaseBuzzWallet(
+                id: 0, 
+                amount: amountController.text, 
+                customerName: profileController.profileData.first.name,
+                email: "${profileController.profileData.first.name}@gmail.com",
+                phone:profileController.profileData.first.mobile,
+                status: "");
+              //Get.to(const SucessfulScreenOtc());
             },
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 15,right: 15),
               child: Container(
                 width: double.infinity,
                 height: 50.h,
@@ -194,7 +228,7 @@ class AddWaletScreen extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Next',
+                  'Pay',
                   style: TextStyle(
                       fontSize: 28.sp,
                       color: Colors.white,
@@ -220,13 +254,13 @@ class AddWaletScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                               const Text(
                                   'Cancel Transaction',
                                   style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Text(
@@ -355,7 +389,7 @@ class AddWaletScreen extends StatelessWidget {
               }
             },
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 15,right: 15,top: 10),
               child: Container(
                 width: double.infinity,
                 height: 50.h,

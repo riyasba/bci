@@ -309,7 +309,7 @@ class _MyAccountState extends State<MyAccount> {
   }
 
   getback(){
-    Get.offAll(HelloConvexAppBar());
+    Get.offAll(MemberBottomNavBar());
   }
 
 

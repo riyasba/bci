@@ -23,7 +23,7 @@ class _FlightBookingSuccessPageState extends State<BusBookingSuccessPage> {
 
   getback() {
     Get.offAll(
-      () => HelloConvexAppBar(),
+      () => MemberBottomNavBar(),
     );
   }
 

@@ -17,12 +17,12 @@ import '../wallet/Wallet_members.dart';
 import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 
-class HelloConvexAppBar extends StatefulWidget {
+class MemberBottomNavBar extends StatefulWidget {
   @override
-  State<HelloConvexAppBar> createState() => _HelloConvexAppBarState();
+  State<MemberBottomNavBar> createState() => _MemberBottomNavBarState();
 }
 
-class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
+class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
   late CircularBottomNavigationController _navigationController;
 
   @override
