@@ -207,7 +207,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                             },
                             child: Text(
                               'Edit',
-                              style: TextStyle(fontSize: 22, color: kOrange),
+                              style: TextStyle(fontSize: 20, color: kOrange),
                             )),
                       ),
                     ],
@@ -223,7 +223,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       readOnly: true,
                       decoration: InputDecoration(
                           hintText: '  Merchant display name',
-                          hintStyle: TextStyle(fontSize: 20, color: kblue),
+                          hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: OutlineInputBorder()),
                     ),
                   ),
@@ -237,7 +237,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       readOnly: true,
                       decoration: InputDecoration(
                           hintText: '  Business Address',
-                          hintStyle: TextStyle(fontSize: 20, color: kblue),
+                          hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
                   ),
@@ -271,7 +271,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       readOnly: true,
                       decoration: InputDecoration(
                           hintText: '  Mobile Number',
-                          hintStyle: TextStyle(fontSize: 20, color: kblue),
+                          hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border:const OutlineInputBorder()),
                     ),
                   ),
@@ -285,7 +285,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       readOnly: true,
                       decoration: InputDecoration(
                           hintText: 'Alternate Phone Number',
-                          hintStyle: TextStyle(fontSize: 18, color: kblue),
+                          hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
                   ),
@@ -299,7 +299,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       readOnly: true,
                       decoration: InputDecoration(
                           hintText: 'GST No.',
-                          hintStyle: TextStyle(fontSize: 18, color: kblue),
+                          hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
                   ),
@@ -361,7 +361,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       readOnly: true,
                       decoration: InputDecoration(
                           hintText: 'Bank Name',
-                          hintStyle: TextStyle(fontSize: 18, color: kblue),
+                          hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
                   ),
@@ -375,7 +375,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       readOnly: true,
                       decoration: InputDecoration(
                           hintText: 'Bank Account Name',
-                          hintStyle: TextStyle(fontSize: 18, color: kblue),
+                          hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
                   ),
@@ -389,7 +389,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       readOnly: true,
                       decoration: InputDecoration(
                           hintText: 'Account Type',
-                          hintStyle: TextStyle(fontSize: 18, color: kblue),
+                          hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
                   ),
@@ -403,7 +403,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       readOnly: true,
                       decoration: InputDecoration(
                           hintText: 'Bank Account Number',
-                          hintStyle: TextStyle(fontSize: 18, color: kblue),
+                          hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
                   ),
@@ -417,7 +417,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       readOnly: true,
                       decoration: InputDecoration(
                           hintText: 'IFSC Code',
-                          hintStyle: TextStyle(fontSize: 18, color: kblue),
+                          hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
                   ),

@@ -7,7 +7,6 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/models/category_model.dart';
 import 'package:bci/models/merchants_register_model.dart';
-import 'package:bci/models/sub_category_model.dart';
 import 'package:bci/screens/bussiness/views/generations/generate_otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,6 +34,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
   var alternativeMobileController = TextEditingController();
   var businessAddressController = TextEditingController();
   var gstNoController = TextEditingController();
+  var referalcodeController = TextEditingController();
 
   File? aadharCardImage;
   File? panCardImage;
@@ -45,7 +45,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
     authController.getCategoryList();
     authController.getSubCategoryList();
   }
-
+  bool checkvalue = false;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -481,12 +481,58 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       hintStyle: TextStyle(
                         color: kblue,
                         fontWeight: FontWeight.w400,
-                      )),
+                      )
+                      ),
                 ),
               ),
               const SizedBox(
                 height: 15,
               ),
+                 checkvalue==true? TextField(
+                  controller: referalcodeController,
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide:
+                              const BorderSide(color: Color(0xff707070))),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide:
+                              const BorderSide(color: Color(0xff707070))),
+                      isCollapsed: false,
+                      isDense: true,
+                      contentPadding:
+                          const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide:
+                              const BorderSide(color: Color(0xff707070))),
+                                hintText: 'Referal Code',
+                                  hintStyle: TextStyle(
+                        color: kblue,
+                        fontWeight: FontWeight.w400,
+                      )
+                          
+                  ),
+                                 
+                                ):Text(''),
+                                ksizedbox20,
+                                Row(
+                                  children: [
+                                    Checkbox(value: checkvalue, 
+                                    onChanged: (value){
+                                      setState(() {
+                                        checkvalue = value!;
+                                      });
+                                    }),
+                                    Text('Referal Code')
+                                  ],
+                                ),
+                              SizedBox(
+                                height: 15,
+                              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -4,16 +4,18 @@ import 'package:bci/controllers/flights_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/services_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
+import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'authentications/splash_screen/Splash_screen.dart';
+import 'controllers/notification_controller.dart';
+import 'controllers/vendorbanner_controller.dart';
 
 Future main()async {
-
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized(); 
   await Firebase.initializeApp();
 
     AwesomeNotifications().initialize(
@@ -38,7 +40,34 @@ Future main()async {
   ],
   debug: true
 );
+ 
 
+ @pragma('vm:entry-point')
+   Future<void> onActionReceivedMethod(
+      ReceivedAction receivedAction) async {
+
+    if(
+      receivedAction.actionType == ActionType.SilentAction ||
+      receivedAction.actionType == ActionType.SilentBackgroundAction
+    ){
+      // For background actions, you must hold the execution until the end
+      print('Message sent via notification input: "${receivedAction.buttonKeyInput}"');
+      
+    }
+    else {
+      Get.offAll(NotificationScreen());
+      // MyApp.navigatorKey.currentState?.pushNamedAndRemoveUntil(
+      //     '/notification-page',
+      //         (route) =>
+      //     (route.settings.name != '/notification-page') || route.isFirst,
+      //     arguments: receivedAction);
+    }
+  }
+
+ Future<void> startListeningNotificationEvents() async {
+    AwesomeNotifications()
+        .setListeners(onActionReceivedMethod: onActionReceivedMethod);
+  }
 AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
   if (!isAllowed) {
     // This is just a basic example. For real apps, you must show some
@@ -74,8 +103,13 @@ AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
   Get.put(AuthController());
   Get.put(ProfileController());
   Get.put(ServicesController());
-  runApp(const MyApp());
+  Get.put(VendorBannerController());
+  Get.put(NotificationController());
+  runApp( MyApp());
 }
+
+
+//
 
 
 firebaseNotification()async{
@@ -92,10 +126,18 @@ NotificationSettings settings = await messaging.requestPermission(
 );
 
 print('User granted permission: ${settings.authorizationStatus}');
+print(settings);
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +147,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
         return GetMaterialApp(
+          navigatorKey: MyApp.navigatorKey,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,

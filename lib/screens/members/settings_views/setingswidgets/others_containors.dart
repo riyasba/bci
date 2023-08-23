@@ -1,7 +1,6 @@
 import 'package:bci/constands/constands.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class Others_continers extends StatelessWidget {
   const Others_continers({super.key});
@@ -24,7 +23,7 @@ class Others_continers extends StatelessWidget {
             children: [
               containor_coupons(), containor_coupons(),
             ],
-          ),  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          ),  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
             children: [
               containor_coupons(), containor_coupons(),
             ],

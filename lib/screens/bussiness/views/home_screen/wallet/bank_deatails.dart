@@ -102,7 +102,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                     child: Text(
                       'Bank Details',
                       style: TextStyle(
-                          fontSize: 23,
+                          fontSize: 21,
                           color: Colors.white),
                     ),
                   ),
@@ -137,7 +137,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                 readOnly: true,
                 decoration: InputDecoration(
                     hintText: 'Bank Name',
-                    hintStyle: TextStyle(fontSize: 18, color: kblue),
+                    hintStyle: TextStyle(fontSize: 16, color: kblue),
                     border: OutlineInputBorder()),
               ),
             ),
@@ -148,7 +148,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                 readOnly: true,
                 decoration: InputDecoration(
                     hintText: 'Bank Account Name',
-                    hintStyle: TextStyle(fontSize: 18, color: kblue),
+                    hintStyle: TextStyle(fontSize: 16, color: kblue),
                     border: OutlineInputBorder()),
               ),
             ),
@@ -159,7 +159,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                 readOnly: true,
                 decoration: InputDecoration(
                     hintText: ' Account Type',
-                    hintStyle: TextStyle(fontSize: 18, color: kblue),
+                    hintStyle: TextStyle(fontSize: 16, color: kblue),
                     border: OutlineInputBorder()),
               ),
             ),
@@ -170,7 +170,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                 readOnly: true,
                 decoration: InputDecoration(
                     hintText: 'Bank Account Number',
-                    hintStyle: TextStyle(fontSize: 18, color: kblue),
+                    hintStyle: TextStyle(fontSize: 16, color: kblue),
                     border: OutlineInputBorder()),
               ),
             ),
@@ -181,7 +181,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                 readOnly: true,
                 decoration: InputDecoration(
                     hintText: 'IFSC code',
-                    hintStyle: TextStyle(fontSize: 18, color: kblue),
+                    hintStyle: TextStyle(fontSize: 16, color: kblue),
                     border: OutlineInputBorder()),
               ),
             ),

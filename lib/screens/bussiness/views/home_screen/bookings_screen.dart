@@ -4,6 +4,7 @@ import 'package:calender_picker/calender_picker.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../constands/constands.dart';
 
@@ -320,14 +321,14 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                               );
                         },
                         child: Container(
-                          height: 140,
+                          height: 140.h,
                           width: MediaQuery.of(context).size.width,
                           color: Colors.white,
                           child: Row(
                             children: [
                               Container(
-                                height: 180,
-                                width: 150,
+                                height: 180.h,
+                                width: 150.w,
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       top: 10, left: 5, right: 10, bottom: 10),
@@ -354,7 +355,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                                     Padding(
                                       padding: const EdgeInsets.only(top: 6),
                                       child: Container(
-                                        width: 210,
+                                        width: 210.w,
                                         child: Text(
                                           serviceController.bookingListData[index].description,
                                           maxLines: 5,
@@ -384,51 +385,49 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
       context: context,
       builder: (BuildContext context, ) {
         return AlertDialog(
-          title: Container(
-            height: 400,
-            width: 300,
-            color: Colors.white,
+         content: SizedBox(
+          height: 500,
+    width: 1000,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                        Row(
                          children: [
-                          Icon(Icons.arrow_back_ios,color: kblue,size: 15,),
+                          GestureDetector(
+                            onTap: (){
+                              Get.back();
+                            },
+                            child: Icon(Icons.arrow_back_ios,color: kblue,size: 15,)),
                           const SizedBox(width: 10,),
                            Text(
-                            'Tourist Details',
-                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                            'Booking Details',
+                            style: TextStyle(fontSize: 18, color: kblue,fontWeight: FontWeight.bold),
                       ),
                          ],
                        ),
-                       Row(
+                        ksizedbox10,                      
+                        Row(
                          children: [
-                          Image.network(img,height: 50,width: 60, fit: BoxFit.cover,),
+                          Image.network(img,height: 100,width: 100, fit: BoxFit.cover,),
                           const SizedBox(width: 10,),
-                           Column(
-                             children: [
-                               Text(
-                                tit,
-                                style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
-                      ),
-                      Text( 'Date : 17/30/34',
-                                style: TextStyle(fontSize: 12, color: kblue,fontWeight: FontWeight.w500),
-                      ),
-                             ],
-                           ),
+                          
                          ],
                        ),
+                       ksizedbox10,
                        Row(
                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                          children: [
                          Text(
-                            'Place',
+                            'Product Name',
                             style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
                       ),
-                           Text(
-                            tit,
-                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
-                      ),
+                           Container(
+                               width: 90,
+                             child: Text(
+                              tit,
+                              style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                                                 ),
+                           ),
                          ],
                        ),
                        Divider(thickness: 1,),
@@ -439,53 +438,49 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                             'Date',
                             style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
                       ),
-                           Text(
-                            '19/06/23',
-                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
-                      ),
+                           Container(
+                               width: 90,
+                             child: Text(
+                              '19/06/23',
+                              style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                                                 ),
+                           ),
                          ],
                        ),
+                      
                        Divider(thickness: 1,),
                        Row(
                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                          children: [
                          Text(
-                            'Trip',
+                            'Customer Name',
                             style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
                       ),
-                           Text(
-                            '03.54 PM',
-                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
-                      ),
+                           Container(
+                               width: 90,
+                             child: Text(
+                              'Riyas',
+                              style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                                                 ),
+                           ),
                          ],
                        ),
                        Divider(thickness: 1,),
                        Row(
-                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                         children: [
-                         Text(
-                            'Country',
-                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
-                      ),
-                           Text(
-                            'India',
-                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
-                      ),
-                         ],
-                       ),
-                       Divider(thickness: 1,),
-                       Row(
-                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                         children: [
-                         Text(
-                            'Adult',
-                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
-                      ),
-                           Text(
-                            '10',
-                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
-                      ),
-                         ],
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 150,
+                            child: Text('Customer Details',
+                              style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Container(
+                            width: 90,
+                            child: Text('20,balaji nagar,\nanna nagar, \nchennai',
+                              style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),),
+                          )
+                        ],
                        ),
                        Divider(thickness: 1,),
                        Row(
@@ -495,10 +490,13 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                             'Quantity',
                             style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
                       ),
-                           Text(
-                            qty,
-                            style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
-                      ),
+                           Container(
+                               width: 90,
+                             child: Text(
+                              qty,
+                              style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                                                 ),
+                           ),
                          ],
                        ),
                        Divider(thickness: 1,),
@@ -509,15 +507,20 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                             'Price',
                             style: TextStyle(fontSize: 16, color: Colors.green,fontWeight: FontWeight.bold),
                       ),
-                           Text(
-                            amt,
-                            style: TextStyle(fontSize: 15, color: Colors.green,fontWeight: FontWeight.w500),
-                      ),
+                           Container(
+                               width: 90,
+                             child: Text(
+                              amt,
+                              style: TextStyle(fontSize: 15, color: Colors.green,fontWeight: FontWeight.w500),
+                                                 ),
+                           ),
                          ],
                        ),
               ],
             ),
+           
           ),
+            insetPadding: const EdgeInsets.all(10),
         );
       },
     );

@@ -97,7 +97,7 @@ class _WalletScreenState extends State<WalletScreen> {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 5),
+                  padding: const EdgeInsets.only(left: 10, top: 10),
                   child: Text(
                     'Total Wallet',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -108,7 +108,7 @@ class _WalletScreenState extends State<WalletScreen> {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 15, top: 10),
+                  padding: const EdgeInsets.only(left: 15, top: 20),
                   child: Container(
                     height: 110.h,
                     width: 235.w,
@@ -121,10 +121,14 @@ class _WalletScreenState extends State<WalletScreen> {
                             style: TextStyle(color: kwhite, fontSize: 17.sp),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 10, right: 70),
-                            child: Text(
-                              '₹1990.0',
+                            padding: const EdgeInsets.only(top: 10, right: 30),
+                            child:profileController.profileData.isNotEmpty? Text('₹${profileController.profileData.first.walletAmount}'
+                              ,
                               style: TextStyle(fontSize: 21.sp, color: kwhite),
+                            ):Padding(
+                              padding: const EdgeInsets.only(top: 10,right: 30),
+                              child: Text('₹ 0.0',
+                              style: TextStyle(fontSize: 21.sp, color: kwhite), ),
                             ),
                           )
                         ],
@@ -164,7 +168,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                         child: Text(
                                           'Add Bank Account to Withdraw',
                                           style: TextStyle(
-                                              fontSize: 19.5, color: kblue),
+                                              fontSize: 17, color: kblue),
                                         ),
                                       ),
                                     ],
@@ -185,7 +189,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                       child: Text(
                                         'Add',
                                         style: TextStyle(
-                                          fontSize: 23,
+                                          fontSize: 18,
                                         ),
                                       ))
                                 ],
@@ -256,7 +260,8 @@ class _WalletScreenState extends State<WalletScreen> {
             GetBuilder<AuthController>(builder: (_) {
               return Container(
                 height: _mediaQuery.height * 0.4,
-                child: ListView.builder(
+                child:authController.transactionHistorydata.isNotEmpty? ListView.builder(
+                  shrinkWrap: true,
                     itemCount: authController.transactionHistorydata.length,
                     itemBuilder: (context, index) {
                       return Padding(
@@ -280,13 +285,13 @@ class _WalletScreenState extends State<WalletScreen> {
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         bottom: 35, left: 10),
-                                    child: Text(
+                                    child: authController.transactionHistorydata.isNotEmpty? Text(
                                       authController
                                           .transactionHistorydata[index].type,
                                       style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),
-                                    ),
+                                    ):Text('No Found Data'),
                                   ),
                                 ],
                               ),
@@ -294,20 +299,20 @@ class _WalletScreenState extends State<WalletScreen> {
                             Positioned(
                                 right: 15,
                                 top: 50,
-                                child: Text(
+                                child:authController.transactionHistorydata.isNotEmpty? Text(
                                   authController
                                       .transactionHistorydata[index].amount,
                                   style: TextStyle(
                                       color: index == 0 ? kOrange : kblue,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18),
-                                )),
+                                ):Text('No Found Data')),
                             Positioned(
                               left: 50,
                               top: 70,
-                              child: Text(authController
+                              child:authController.transactionHistorydata.isNotEmpty? Text(authController
                                   .transactionHistorydata[index].updatedAt
-                                  .toString()),
+                                  .toString()):Text('No Found Data'),
                             ),
                             // Positioned(
                             //     left: 170,
@@ -316,7 +321,7 @@ class _WalletScreenState extends State<WalletScreen> {
                           ],
                         ),
                       );
-                    }),
+                    }):Center(child: Text('No Found Data')),
               );
             }),
           ],

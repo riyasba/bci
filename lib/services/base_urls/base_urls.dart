@@ -64,4 +64,13 @@ abstract class BaseApiService {
 //Get Transactionhistory
   final String transactionHistoryApiUrl =
       "https://bci.batechnology.in/api/auth/transaction_history";
+
+   //Get notification_list
+   final String notificationlistURL = "https://bci.batechnology.in/api/auth/notification_list"; 
+    
+    //fcmtoken
+   final String fcmTokenStoreApiUrl = "https://bci.batechnology.in/api/auth/fcm-token";
+
+   //vendorbanner 
+   final String vendorbannerURL = 'https://bci.batechnology.in/api/auth/get_vendor_slider';
 }

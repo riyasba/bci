@@ -1,9 +1,11 @@
 import 'package:custom_clippers/custom_clippers.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../constands/constands.dart';
+import '../../../../controllers/notification_controller.dart';
 import '../home_screen/contact_admin.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -46,6 +48,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
     'Your amount transaction for your \noficial account and More check \namount your wallet'
   ];
   List yesterdaysubtitle = ['2 days ago', '2 days ago', '2 days ago'];
+
+  @override
+  void initState() {
+    super.initState();
+    notificationController.notification();
+  }
+final notificationController = Get.find<NotificationController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,161 +113,146 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: Text(
                       'Today',
                       style:
-                          TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 21, fontWeight: FontWeight.bold,
+                          color: kgrey),
                     ),
                   ),
                 ],
               ),
             ),
-            ListView.builder(
-                itemCount: todayimages.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 140,
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.white,
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 180,
-                                width: 150,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10, left: 5, right: 10, bottom: 10),
-                                  child: Image.asset(
-                                    todayimages[index],
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
+            GetBuilder<NotificationController>(
+              builder: (context) {
+                return ListView.builder(
+                    itemCount: notificationController.notificationlist.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 110,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                            
+                                  //  boxShadow: <BoxShadow>[
+                                  //   BoxShadow(
+                                  //     offset: Offset(0.0, 0.75),
+                                  //     blurRadius: 5,
+                                  //     color: kgrey
+                                  //   )
+                                  //  ]
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 20,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      todaytitle[index].toString(),
-                                      style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 6),
-                                      child: Text(
-                                        todaydiscription[index].toString(),
-                                        style: TextStyle(
-                                            fontSize: 12, color: kgrey),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: Text(
-                                        todaysubtitle[index].toString(),
-                                        style: TextStyle(
-                                            fontSize: 13.5,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    notificationController.notificationlist[index].title,
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    notificationController.notificationlist[index].message,
+                                    style: TextStyle(
+                                        fontSize: 12, color: kgrey),
+                                  ),
+                                  Text(
+                                    formatDate(notificationController.notificationlist[index].createdAt,
+                                     [dd ,'-',mm,'-',yyyy])
+                                    ,
+                                    style: TextStyle(
+                                        fontSize: 13.5,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Divider(
+                              thickness: 1.5,
+                            )
+                          ],
                         ),
-                        Divider(
-                          thickness: 1.5,
-                        )
-                      ],
-                    ),
-                  );
-                }),
+                      );
+                    });
+              }
+            ),
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 11),
+                  padding: const EdgeInsets.only(left: 18,top: 10),
                   child: Text(
                     'Yesterday',
-                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold,
+                    color: kgrey),
                   ),
                 ),
               ],
-            ),
-            ListView.builder(
-                itemCount: yesterdayimage.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 140,
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.white,
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 180,
-                                width: 150,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10, left: 5, right: 10, bottom: 10),
-                                  child: Image.asset(
-                                    yesterdayimage[index],
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
+            ),ksizedbox10,
+            GetBuilder<NotificationController>(
+              builder: (context) {
+                return ListView.builder(
+                    itemCount: notificationController
+                    .notificationlist.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 110,
+                              width: MediaQuery.of(context).size.width,
+                             
+                              decoration: BoxDecoration(
+                                  
+                                  //  boxShadow: <BoxShadow>[
+                                  //   BoxShadow(
+                                  //     offset: Offset(0.0, 0.75),
+                                  //     blurRadius: 5,
+                                  //     color: kgrey
+                                  //   )
+                                  //  ]
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 20,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      yesterdaytitle[index].toString(),
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 6),
-                                      child: Text(
-                                        yesterdaydiscriptions[index].toString(),
-                                        style: TextStyle(
-                                            fontSize: 13, color: kgrey),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 25),
-                                      child: Text(
-                                        yesterdaysubtitle[index].toString(),
-                                        style: TextStyle(
-                                            fontSize: 13.5,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    notificationController.notificationlist[index].title,
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    notificationController.notificationlist[index].message,
+                                    style: TextStyle(
+                                        fontSize: 13, color: kgrey),
+                                  ),
+                                  Text(
+                                    formatDate( notificationController.notificationlist[index].createdAt, [
+                                      dd,"-",mm,"-",yyyy
+                                    ])
+                                   
+                                  ,
+                                    style: TextStyle(
+                                        fontSize: 13.5,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Divider(
+                              thickness: 1.5,
+                            )
+                          ],
                         ),
-                        Divider(
-                          thickness: 1.5,
-                        )
-                      ],
-                    ),
-                  );
-                }),
+                      );
+                    });
+              }
+            ),
+            ksizedbox20,
           ],
         ),
       ]),

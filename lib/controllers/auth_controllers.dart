@@ -24,6 +24,7 @@ import '../services/network/auth_api_services/customer_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/network/auth_api_services/transaction_history_api_service.dart';
+import '../services/network/fcmtoken_apiservice.dart';
 
 class AuthController extends GetxController {
 //apis method call
@@ -206,6 +207,7 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       if (response.data["user"]["role_id"].toString() == "5") {
         final prefs = await SharedPreferences.getInstance();
+        await prefs.setString("id", response.data["user"]["id"].toString());
         await prefs.setString("auth_token", response.data["token"]);
         Get.offAll(const BusinessverifiedScreen());
       } else {
@@ -301,6 +303,7 @@ class AuthController extends GetxController {
     if(response.statusCode == 200){
       TransactionHistoryModel transactionHistoryModel = TransactionHistoryModel.fromJson(response.data);
       transactionHistorydata = transactionHistoryModel.transactionHistory;
+      print('transaction data');
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -310,5 +313,20 @@ class AuthController extends GetxController {
           ));
     }
     update();
+  }
+
+  //fcm token store api
+  FcmTokenStoreApiService fcmTokenStoreApiService = FcmTokenStoreApiService();
+
+  fcmtoken({required String token}) async {
+    dio.Response<dynamic> response = await fcmTokenStoreApiService
+        .fcmTokenStoreApiService(token: token,);
+    if (response.statusCode == 200) {
+    } else {
+      Get.snackbar("Something went wrong", response.statusCode.toString(),
+          colorText: Colors.white,
+          backgroundColor: Colors.red,
+          snackPosition: SnackPosition.BOTTOM);
+    }
   }
 }

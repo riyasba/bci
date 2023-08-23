@@ -60,11 +60,11 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
                   children: [
                     Image.asset('assets/images/settingperson.png'),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 10),
+                      padding: const EdgeInsets.only(left: 17, top: 10),
                       child: Text(
                         'My Account',
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 20,
                             color: kblue,
                             fontWeight: FontWeight.w500),
                       ),
@@ -74,7 +74,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox10,
+          ksizedbox20,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
@@ -94,11 +94,11 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
                   children: [
                     Image.asset('assets/images/settingbank.png'),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 6),
+                      padding: const EdgeInsets.only(left: 17, top: 6),
                       child: Text(
                         'Bank Details',
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 20,
                             color: kblue,
                             fontWeight: FontWeight.w500),
                       ),
@@ -108,7 +108,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox10,
+          ksizedbox20,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
@@ -128,11 +128,11 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
                   children: [
                     Image.asset('assets/images/settingdasbord.png'),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 6),
+                      padding: const EdgeInsets.only(left: 17, top: 6),
                       child: Text(
                         'Dashboard',
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 20,
                             color: kblue,
                             fontWeight: FontWeight.w500),
                       ),
@@ -142,7 +142,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox10,
+          ksizedbox20,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
@@ -162,11 +162,11 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
                   children: [
                     Image.asset('assets/images/settingreferal.png'),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 6),
+                      padding: const EdgeInsets.only(left: 17, top: 6),
                       child: Text(
                         'Your Referral',
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 20,
                             color: kblue,
                             fontWeight: FontWeight.w500),
                       ),
@@ -176,48 +176,49 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox10,
+          ksizedbox20,
           Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
+            padding: const EdgeInsets.only(left: 15, right: 10),
             child: Divider(
               thickness: 1,
               color: kgrey,
             ),
           ),
-          InkWell(
-            onTap: () {
-              Get.to(const SubscriptionScreen());
-            },
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Row(
-                  children: [
-                    Image.asset('assets/images/settingpackage.png'),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 6),
-                      child: Text(
-                        'Package Subscription',
-                        style: TextStyle(
-                            fontSize: 22,
-                            color: kblue,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          ksizedbox10,
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Divider(
-              thickness: 1,
-              color: kgrey,
-            ),
-          ),
+          // InkWell(
+          //   onTap: () {
+          //     Get.to(const SubscriptionScreen());
+          //   },
+          //   child: Container(
+          //     width: MediaQuery.of(context).size.width,
+          //     child: Padding(
+          //       padding: const EdgeInsets.only(left: 20),
+          //       child: Row(
+          //         children: [
+          //           Image.asset('assets/images/settingpackage.png'),
+          //           Padding(
+          //             padding: const EdgeInsets.only(left: 10, top: 6),
+          //             child: Text(
+          //               'Package Subscription',
+          //               style: TextStyle(
+          //                   fontSize: 22,
+          //                   color: kblue,
+          //                   fontWeight: FontWeight.w500),
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // ksizedbox10,
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 10, right: 10),
+          //   child: Divider(
+          //     thickness: 1,
+          //     color: kgrey,
+          //   ),
+          // ),
+          
           InkWell(
             onTap: () {
               Get.to(const ContactAdmin());
@@ -230,11 +231,11 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
                   children: [
                     Image.asset('assets/images/settinghelps.png'),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 6),
+                      padding: const EdgeInsets.only(left: 17, top: 6),
                       child: Text(
                         'Support',
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 20,
                             color: kblue,
                             fontWeight: FontWeight.w500),
                       ),
@@ -244,7 +245,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox10,
+          ksizedbox20,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
@@ -269,11 +270,11 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
                   children: [
                     Image.asset('assets/images/settinglogout.png'),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 6),
+                      padding: const EdgeInsets.only(left: 17, top: 6),
                       child: Text(
                         'LogOut',
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 20,
                             color: kblue,
                             fontWeight: FontWeight.w500),
                       ),

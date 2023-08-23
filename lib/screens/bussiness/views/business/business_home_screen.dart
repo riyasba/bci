@@ -15,6 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../../../controllers/vendorbanner_controller.dart';
 import '../home_screen/contact_admin.dart';
 import '../home_screen/coupon_screen.dart';
 import 'notification_screen.dart';
@@ -32,12 +33,14 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
 
   final profileController = Get.find<ProfileController>();
 
+
   @override
   void initState() {
     super.initState();
     profileController.getProfile();
+    vendorController.getvendorbanner();
   }
-
+   final vendorController = Get.find<VendorBannerController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,48 +84,42 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
       body: ListView(physics: BouncingScrollPhysics(), children: [
         Column(
           children: [
-            CarouselSlider(
-                carouselController: sliderController,
-                items: [
-                  Container(
-                    decoration:const BoxDecoration(
-                        image: DecorationImage(
-                            image:
-                                AssetImage('assets/images/sliderimage1.png'))),
-                  ),
-                  Container(
-                    decoration:const BoxDecoration(
-                        image: DecorationImage(
-                            image:
-                                AssetImage('assets/images/sliderimage2.png'))),
-                  ),
-                  Container(
-                    decoration:const BoxDecoration(
-                        image: DecorationImage(
-                            image:
-                                AssetImage('assets/images/sliderimage3.png'))),
-                  )
-                ],
-                options: CarouselOptions(
-                  height: 180,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      activeIndex = index;
-                    });
-                  },
-                  aspectRatio: 16 / 9,
-                  viewportFraction: 0.8,
-                  initialPage: 0,
-                  enableInfiniteScroll: true,
-                  reverse: false,
-                  autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 3),
-                  autoPlayAnimationDuration: Duration(milliseconds: 800),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  enlargeCenterPage: true,
-                  enlargeFactor: 0.3,
-                  scrollDirection: Axis.horizontal,
-                )),
+             GetBuilder<VendorBannerController>(
+              builder: (context) {
+                return CarouselSlider(
+                    carouselController: sliderController,
+                    items: [
+                     for(var i=0; i<vendorController.postlist.length;i++)
+                  
+                                          Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image:
+                                  NetworkImage(vendorController.postlist.first.image))),
+                      ),
+                    ],
+                    options: CarouselOptions(
+                      height: 180,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          activeIndex = index;
+                        });
+                      },
+                      aspectRatio: 16 / 9,
+                      viewportFraction: 0.8,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 3),
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      enlargeFactor: 0.3,
+                      scrollDirection: Axis.horizontal,
+                    ));
+              }
+            ),
             AnimatedSmoothIndicator(
               activeIndex: activeIndex,
               count: 3,
@@ -133,7 +130,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                   activeDotColor: kOrange),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 158, top: 25),
+              padding: const EdgeInsets.only(right: 158, top: 30),
               child: Text(
                 'Available Service',
                 style: TextStyle(
@@ -152,6 +149,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     Get.to(const AvailabilityScreen());
                   },
                   child: Container(
+                    height: 140,
                     child: Column(
                       children: [
                         Image.asset('assets/images/availability.png'),
@@ -167,6 +165,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     ));
                   },
                   child: Container(
+                    height: 140,
                     child: Column(
                       children: [
                         Image.asset('assets/images/wallet.png'),
@@ -180,35 +179,13 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(const ContactAdmin());
-                  },
-                  child: Container(
-                      child: Column(
-                    children: [
-                      Image.asset('assets/images/contactadmin.png'),
-                      const Text(
-                        'Contact\n Admin',
-                        textAlign: TextAlign.center,
-                      )
-                    ],
-                  )),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                InkWell(
-                  onTap: () {
                     Get.offAll(HomeBottomnavigationBar(
                       index: 3,
                     ));
                     //Get.to(const BusinessBookingScreen());
                   },
                   child: Container(
+                    height: 140,
                     child: Column(
                       children: [
                         Image.asset('assets/images/booking.png'),
@@ -220,11 +197,22 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     ),
                   ),
                 ),
+
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                
                 InkWell(
                   onTap: () {
                     Get.to(const OffersScreen());
                   },
                   child: Container(
+                    height: 140,
                     child: Column(
                       children: [
                         Image.asset('assets/images/offers.png'),
@@ -236,11 +224,29 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     ),
                   ),
                 ),
-                InkWell(
+                  InkWell(
+                  onTap: () {
+                    Get.to(const CouponScreen());
+                  },
+                  child: Container(
+                    height: 140,
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/cupenimage.png'),
+                        const Text(
+                          'Coupon\nRedemention',
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                  InkWell(
                   onTap: () {
                     Get.to(const ServiceBookingScreen());
                   },
                   child: Container(
+                    height: 140,
                     child: Column(
                       children: [
                         Image.asset('assets/images/servicebooking.png'),
@@ -252,30 +258,48 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     ),
                   ),
                 )
+                 
+              
               ],
             ),
-             const SizedBox(
-              height: 15,
-            ),
+          
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                InkWell(
+                
+                 InkWell(
                   onTap: () {
-                    Get.to(const CouponScreen());
+                    Get.to(const MyAccountScreen());
                   },
                   child: Container(
+                    height: 140,
                     child: Column(
                       children: [
-                        Image.asset('assets/images/cupenimage.png'),
-                        const Text(
-                          'Coupon\nRedemention',
-                          textAlign: TextAlign.center,
-                        ),
+                        Image.asset('assets/images/jhon.png'),
+                         profileController.profileData.isEmpty
+                          ? Container()
+                          : Text(
+                              profileController.profileData.first.name)
                       ],
                     ),
                   ),
+                ),
+                      InkWell(
+                  onTap: () {
+                    Get.to(const ContactAdmin());
+                  },
+                  child: Container(
+                    height: 140,
+                      child: Column(
+                    children: [
+                      Image.asset('assets/images/contactadmin.png'),
+                      const Text(
+                        'Contact\n Admin',
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                  )),
                 ),
                 // InkWell(
                 //   onTap: () {
@@ -290,22 +314,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 //     ),
                 //   ),
                 // ),
-                InkWell(
-                  onTap: () {
-                    Get.to(const MyAccountScreen());
-                  },
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Image.asset('assets/images/jhon.png'),
-                         profileController.profileData.isEmpty
-                          ? Container()
-                          : Text(
-                              profileController.profileData.first.name)
-                      ],
-                    ),
-                  ),
-                ),
+              
                 Container(width: 90,),
                 // InkWell(
                 //   onTap: () {},

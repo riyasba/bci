@@ -8,6 +8,7 @@ import 'package:bci/screens/bussiness/views/home_screen/settings/my_account_scre
 import 'package:bci/services/network/profile_api_services/profile_api_services.dart';
 import 'package:bci/services/network/profile_api_services/profile_pic_update_api.dart';
 import 'package:bci/services/network/profile_api_services/profile_update_api.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
@@ -29,6 +30,12 @@ class ProfileController extends GetxController {
       BusinessProfileModel profileModel =
           BusinessProfileModel.fromJson(response.data);
       profileData.add(profileModel.user);
+      //fcmtoken
+      var token = await FirebaseMessaging.instance.getToken();
+      Get.find<AuthController>().fcmtoken(
+          token: token.toString(),);
+      print("............firebase token.......=====================>>>");
+      print(token);
       update();
     } else if (response.statusCode == 401) {
       Get.snackbar("Session has expired", "",

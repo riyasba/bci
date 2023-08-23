@@ -55,7 +55,7 @@ class _BusinessYourReferralScreenState extends State<BusinessYourReferralScreen>
                       child: Text(
                         'Invite',
                         style: TextStyle(
-                            fontSize: 20.sp,
+                            fontSize: 22.sp,
                             fontWeight: FontWeight.w600,
                             color:const Color(0xffF9F8FD)),
                       ),
@@ -83,10 +83,10 @@ class _BusinessYourReferralScreenState extends State<BusinessYourReferralScreen>
                 child: Text(
                   'Referral Code',
                   style: TextStyle(
-                      fontSize: 28, fontWeight: FontWeight.w600, color: kblue),
+                      fontSize: 22, fontWeight: FontWeight.w600, color: kblue),
                 ),
               ),
-            ),
+            ),ksizedbox10,
             Obx( () =>
                Container(
                 height: 50,
@@ -103,7 +103,7 @@ class _BusinessYourReferralScreenState extends State<BusinessYourReferralScreen>
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(settingsController.referralCode.value,style: TextStyle(
-                           fontSize: 20, color: kblue, fontWeight: FontWeight.w500),),
+                           fontSize: 16, color: kblue, fontWeight: FontWeight.w500),),
                         InkWell(
                           onTap: (){
                             FlutterClipboard.copy(settingsController.referralCode.value).then(
@@ -142,14 +142,15 @@ class _BusinessYourReferralScreenState extends State<BusinessYourReferralScreen>
                 Text(
                   'Referral Count :  ',
                   style: TextStyle(
-                      fontSize: 26.sp,
+                      fontSize: 20.sp,
                       color: kblue,
                       fontWeight: FontWeight.w600),
                 ),
                 Referal_containors(),kwidth10,  Referal_containors() ,kwidth10, Referal_containors()
               ],
             ),
-            ksizedbox30,
+            ksizedbox40,
+            ksizedbox20,
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: InkWell(
