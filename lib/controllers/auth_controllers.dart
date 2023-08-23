@@ -110,12 +110,12 @@ class AuthController extends GetxController {
       if(response.data["success"] == true){
 
       }else{
-        Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            response.data["message"],
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
+        // Get.rawSnackbar(
+        //   backgroundColor: Colors.red,
+        //   messageText: Text(
+        //     response.data["message"],
+        //     style: primaryFont.copyWith(color: Colors.white),
+        //   ));
       }
   }
 

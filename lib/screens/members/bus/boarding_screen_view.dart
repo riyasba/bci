@@ -2,7 +2,6 @@ import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/models/bus_booking_models/search_bus_model.dart';
 import 'package:bci/screens/members/bus/bus_dynamic_seats_screen.dart';
-import 'package:bci/screens/members/bus/bus_seats_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

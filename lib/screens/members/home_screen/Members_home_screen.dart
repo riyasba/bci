@@ -31,6 +31,7 @@ class Home_screen1 extends StatefulWidget {
 }
 
 class _Home_screen1State extends State<Home_screen1> {
+
   CarouselController sliderController = CarouselController();
   final profileController = Get.find<ProfileController>();
   final homeController = Get.find<HomeController>();
@@ -54,8 +55,11 @@ class _Home_screen1State extends State<Home_screen1> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+
       appBar: PreferredSize(
+        
           preferredSize: const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),

@@ -4,8 +4,7 @@ import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/bus_booking_models/bus_contact_details_model.dart';
 import 'package:bci/models/bus_booking_models/search_bus_model.dart';
 import 'package:bci/screens/members/bus/bus_contact_details.dart';
-import 'package:bci/screens/members/bus/bus_payment_screen.dart';
-import 'package:bci/screens/members/bus/ticket_details_screen.dart';
+
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,12 +35,25 @@ class _BusSeatsScreenState extends State<BusSeatsScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    print("----------------------------------->>on init");
+    print("----------------------------------->>on init");
+    print(
+        "----${busController.totalAmount}------------------------------->>on init");
+    busController.totalAmount(0);
     profileController.getProfile();
     busController.busSeat(
         boardingId: widget.boardingId,
         droppingId: widget.dropingId,
         busData: widget.busData,
         searchKey: widget.searchkey);
+  }
+
+  setDefault() async {
+    print("-------------------->.setting default");
+    await Future.delayed(Duration(seconds: 2));
+    busController.totalAmount(0);
+    busController.update();
   }
 
   List<String> seatIds = [];
@@ -52,66 +64,69 @@ class _BusSeatsScreenState extends State<BusSeatsScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(220),
-          child: Stack(
-            children: [
-              Container(
-                child: ClipPath(
-                  clipper: SinCosineWaveClipper(),
-                  child: Container(
-                      height: 200,
-                      color: kblue,
-                      child: Column(
-                        children: [
-                          AppBar(
-                            backgroundColor: kblue,
-                            elevation: 0,
-                            leading: InkWell(
-                                onTap: () {
-                                  Get.back();
-                                },
-                                child: Icon(
-                                  Icons.arrow_back_ios,
-                                  color: kwhite,
-                                )),
-                            title: Text(
-                              '${widget.busData.fromCity} - ${widget.busData.toCity}',
-                              style: TextStyle(color: kwhite, fontSize: 20),
-                            ),
-                            centerTitle: true,
+        preferredSize: const Size.fromHeight(220),
+        child: Stack(
+          children: [
+            Container(
+              child: ClipPath(
+                clipper: SinCosineWaveClipper(),
+                child: Container(
+                  height: 200,
+                  color: kblue,
+                  child: Column(
+                    children: [
+                      AppBar(
+                        backgroundColor: kblue,
+                        elevation: 0,
+                        leading: InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: kwhite,
                           ),
-                          Text(
-                            widget.busData.busType,
-                            style: TextStyle(color: kwhite, fontSize: 15),
-                          ),
-                        ],
-                      )),
+                        ),
+                        title: Text(
+                          '${widget.busData.fromCity} - ${widget.busData.toCity}',
+                          style: TextStyle(color: kwhite, fontSize: 20),
+                        ),
+                        centerTitle: true,
+                      ),
+                      Text(
+                        widget.busData.busType,
+                        style: TextStyle(color: kwhite, fontSize: 15),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Positioned(
-                top: 139,
-                left: 0,
-                right: 0,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 50, right: 50),
-                  child: Container(
-                    height: 50,
-                    width: size.width,
-                    decoration: BoxDecoration(
-                        color: kwhite,
-                        boxShadow: [BoxShadow(color: kgrey, blurRadius: 2)],
-                        borderRadius: BorderRadius.circular(3)),
-                    child: Center(
-                      child: Text(
-                        'Bus Seats',
-                        style: TextStyle(color: kOrange, fontSize: 20),
-                      ),
+            ),
+            Positioned(
+              top: 139,
+              left: 0,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 50, right: 50),
+                child: Container(
+                  height: 50,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      color: kwhite,
+                      boxShadow: [BoxShadow(color: kgrey, blurRadius: 2)],
+                      borderRadius: BorderRadius.circular(3)),
+                  child: Center(
+                    child: Text(
+                      'Bus Seats',
+                      style: TextStyle(color: kOrange, fontSize: 20),
                     ),
                   ),
                 ),
               ),
-            ],
-          )),
+            ),
+          ],
+        ),
+      ),
       body: GetBuilder<BusController>(builder: (_) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -151,14 +166,23 @@ class _BusSeatsScreenState extends State<BusSeatsScreen> {
                                             seatIds.remove(busController
                                                 .seatMap[index].seatNumber);
 
-                                           BusContactDetailsModel busContactDetailsModeldata = BusContactDetailsModel(
-                                                  ageController: TextEditingController(),
-                                                  gender: "",
-                                                  nameController: TextEditingController(),
-                                                  seats: busController.seatMap[index].seatNumber
-                                                ); 
+                                            BusContactDetailsModel
+                                                busContactDetailsModeldata =
+                                                BusContactDetailsModel(
+                                                    ageController:
+                                                        TextEditingController(),
+                                                    gender: "",
+                                                    nameController:
+                                                        TextEditingController(),
+                                                    seats: busController
+                                                        .seatMap[index]
+                                                        .seatNumber);
 
-                                                busContactDetailsModel.removeWhere((element) => element.seats == busController.seatMap[index].seatNumber);    
+                                            busContactDetailsModel.removeWhere(
+                                                (element) =>
+                                                    element.seats ==
+                                                    busController.seatMap[index]
+                                                        .seatNumber);
                                           });
 
                                           double tempAmount =
@@ -176,14 +200,20 @@ class _BusSeatsScreenState extends State<BusSeatsScreen> {
                                             seatIds.add(busController
                                                 .seatMap[index].seatNumber);
 
-                                           BusContactDetailsModel busContactDetailsModeldata = BusContactDetailsModel(
-                                                  ageController: TextEditingController(),
-                                                  gender: "",
-                                                  nameController: TextEditingController(),
-                                                  seats: busController.seatMap[index].seatNumber
-                                                );
+                                            BusContactDetailsModel
+                                                busContactDetailsModeldata =
+                                                BusContactDetailsModel(
+                                                    ageController:
+                                                        TextEditingController(),
+                                                    gender: "",
+                                                    nameController:
+                                                        TextEditingController(),
+                                                    seats: busController
+                                                        .seatMap[index]
+                                                        .seatNumber);
 
-                                                busContactDetailsModel.add(busContactDetailsModeldata);
+                                            busContactDetailsModel.add(
+                                                busContactDetailsModeldata);
                                           });
 
                                           double tempAmount =
@@ -326,16 +356,21 @@ class _BusSeatsScreenState extends State<BusSeatsScreen> {
                           message: "Please select any seats to continue",
                           backgroundColor: Colors.red);
                     } else {
-                      Get.to(BusContactDetails(
-                        boardingId: widget.boardingId,
-                        busData: widget.busData,
-                        dropingId: widget.dropingId,
-                        searchkey: widget.searchkey,
-                        seatIds: seatIds,
-                        cusName:profileController.profileData.isEmpty ? "test" : profileController.profileData.first.name,
-                        busContactmodel: busContactDetailsModel,
-                        amount: busController.totalAmount.value.toStringAsFixed(2),
-                      ));
+                      Get.to(
+                        BusContactDetails(
+                          boardingId: widget.boardingId,
+                          busData: widget.busData,
+                          dropingId: widget.dropingId,
+                          searchkey: widget.searchkey,
+                          seatIds: seatIds,
+                          cusName: profileController.profileData.isEmpty
+                              ? "test"
+                              : profileController.profileData.first.name,
+                          busContactmodel: busContactDetailsModel,
+                          amount: busController.totalAmount.value
+                              .toStringAsFixed(2),
+                        ),
+                      );
                     }
                   },
                   child: Container(

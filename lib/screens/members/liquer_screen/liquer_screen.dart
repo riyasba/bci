@@ -20,7 +20,7 @@ class _LiquorScreenState extends State<LiquorScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     homeController.liquorVendors(categoryid: "6");
   }
@@ -131,7 +131,7 @@ class _LiquorScreenState extends State<LiquorScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
-                        child: Image.network(homeController.vendorListData[index].image)),
+                        child: Image.network(homeController.vendorListData[index].image,fit: BoxFit.cover,width: 100,height: 130,)),
                                   ),kwidth10,
                                   Padding(
                       padding: const EdgeInsets.all(8.0),

@@ -5,19 +5,20 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/instance_manager.dart';
 
-import '../generate_otp/member_login_screen.dart';
-import '../verified_screen/verified_screen.dart';
+
+
 
 class OtpVerificationView extends StatefulWidget {
+
   String phoneNumber;
   String otp;
+
+  
   OtpVerificationView({super.key, this.phoneNumber = "", this.otp = ""});
 
   @override

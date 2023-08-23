@@ -2,14 +2,11 @@ import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/My_account.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../constands/constands.dart';
 import '../../screens/members/members widgets/bottumbavigation.dart';
 

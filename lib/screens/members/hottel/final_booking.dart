@@ -2,14 +2,11 @@ import 'package:bci/constands/constands.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:readmore/readmore.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:velocity_x/velocity_x.dart';
-
 import '../../../controllers/hotel_booking_controller.dart';
-
 import 'search_hotel_screen.dart';
 
 class Final_booking extends StatefulWidget {
@@ -17,7 +14,7 @@ class Final_booking extends StatefulWidget {
   final String resultIndex;
   final String hotelCode;
   final String searchToken;
-   Final_booking({
+  Final_booking({
     super.key,
     required this.userIp,
     required this.resultIndex,
@@ -185,9 +182,17 @@ class _Final_bookingState extends State<Final_booking> {
                           ? Text('')
                           : Container(
                               width: size.width * 0.9,
-                              child: Text(
+                              child: ReadMoreText(
                                 hotelController.hotelInfoData.first.description,
-                                style: TextStyle(color: Colors.grey),
+                                trimLines: 2,
+                                colorClickableText: Colors.orange,
+                                trimMode: TrimMode.Line,
+                                trimCollapsedText: 'show more',
+                                trimExpandedText: ' show less',
+                                lessStyle: const TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.bold),
+                                moreStyle: const TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.bold),
                               ),
                             ),
                       ksizedbox30,
@@ -205,7 +210,8 @@ class _Final_bookingState extends State<Final_booking> {
                     children: [
                       Text(
                         'Price',
-                        style: TextStyle(color:kblue,fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                            color: kblue, fontWeight: FontWeight.w700),
                       ),
                       ksizedbox10,
                       hotelController.hotelRoomsData.isEmpty
@@ -214,7 +220,8 @@ class _Final_bookingState extends State<Final_booking> {
                               hotelController.hotelRoomsData.first
                                   .hotelRoomsDetails.first.price.roomPrice
                                   .toString(),
-                              style: TextStyle(fontWeight: FontWeight.w700,color: kgrey),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, color: kgrey),
                             ),
                     ],
                   ),
@@ -222,7 +229,8 @@ class _Final_bookingState extends State<Final_booking> {
                     children: [
                       Text(
                         'Reviews',
-                      style: TextStyle(color:kblue,fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                            color: kblue, fontWeight: FontWeight.w700),
                       ),
                       ksizedbox10,
                       hotelController.hotelInfoData.isEmpty
@@ -230,7 +238,8 @@ class _Final_bookingState extends State<Final_booking> {
                           : Text(
                               hotelController.hotelInfoData.first.starRating
                                   .toString(),
-                            style: TextStyle(fontWeight: FontWeight.w700,color: kgrey),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, color: kgrey),
                             ),
                     ],
                   ),
@@ -238,7 +247,8 @@ class _Final_bookingState extends State<Final_booking> {
                     children: [
                       Text(
                         'Availability',
-                       style: TextStyle(color:kblue,fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                            color: kblue, fontWeight: FontWeight.w700),
                       ),
                       ksizedbox10,
                       hotelController.hotelRoomsData.isEmpty
@@ -246,7 +256,8 @@ class _Final_bookingState extends State<Final_booking> {
                           : Text(
                               hotelController.hotelRoomsData.first
                                   .hotelRoomsDetails.first.availabilityType,
-                            style: TextStyle(fontWeight: FontWeight.w700,color: kgrey),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, color: kgrey),
                             ),
                     ],
                   )
@@ -258,7 +269,8 @@ class _Final_bookingState extends State<Final_booking> {
               children: [
                 Text(
                   '     Amenities',
-                  style: TextStyle(fontSize: 21, fontWeight: FontWeight.w700,color: kblue),
+                  style: TextStyle(
+                      fontSize: 21, fontWeight: FontWeight.w700, color: kblue),
                 ),
               ],
             ),
@@ -269,16 +281,14 @@ class _Final_bookingState extends State<Final_booking> {
                   ? Text('')
                   : Container(
                       height: 50,
-                      child: ListView.builder(physics: NeverScrollableScrollPhysics(),
+                      child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
                         itemCount: hotelController.hotelRoomsData.length,
                         itemBuilder: (BuildContext context, int index) {
                           return ListTile(
-                            title: Text(
-                              hotelController.hotelRoomsData.first
+                            title: Text(hotelController.hotelRoomsData.first
                                 .hotelRoomsDetails[index].amenity.first
-                                .toString()
-                                ),
-                            
+                                .toString()),
                           );
                         },
                       ),
