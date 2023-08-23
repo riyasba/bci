@@ -57,7 +57,8 @@ class SearchHotelListApiService extends BaseApiService {
         {
             "Adult": adult.toString(),
             "Child": child.toString(),
-            "ChildAge": null
+            "ChildAge":null,
+            // child < 0 ? 2 : null,
         }
     ],
     "MaxRating": "5",

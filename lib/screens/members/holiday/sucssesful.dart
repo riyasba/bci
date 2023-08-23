@@ -18,10 +18,13 @@ class Sucessful_screen extends StatelessWidget {
         backgroundColor: Color(0xFFF9F8FD),
         elevation: 0,
         leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Image.asset('assets/images/Icon awesome-arrow-right.png',)),
+          onTap: () {
+            Get.back();
+          },
+          child: Image.asset(
+            'assets/images/Icon awesome-arrow-right.png',
+          ),
+        ),
         title: Text(
           'Payment Completed',
           style: TextStyle(
@@ -43,35 +46,40 @@ class Sucessful_screen extends StatelessWidget {
               'Thank you! Your payment is complete',
               style: TextStyle(
                   fontSize: 22.sp, fontWeight: FontWeight.w600, color: kblue),
-            ),ksizedbox40,ksizedbox40,
-            
-        InkWell(onTap: (){Get.to(HolidayHome());},
-                child: Container(
-                  width: 150.w,
-                  height: 45.h,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      4,
-                    ),
-                    gradient: const LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        Color(0xFFFF5C29),
-                        Color(0xFFFFCD38),
-                      ],
-                    ),
+            ),
+            ksizedbox40,
+            ksizedbox40,
+            InkWell(
+              onTap: () {
+                Get.to(HolidayHome());
+              },
+              child: Container(
+                width: 150.w,
+                height: 45.h,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    4,
                   ),
-                  child: Text(
-                    'Done',
-                    style: TextStyle(
-                        fontSize: 17.sp,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600),
+                  gradient: const LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color(0xFFFF5C29),
+                      Color(0xFFFFCD38),
+                    ],
                   ),
                 ),
-              ),  ],
+                child: Text(
+                  'Done',
+                  style: TextStyle(
+                      fontSize: 17.sp,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constands/app_fonts.dart';
+import '../models/hotel_booking_models/get_hotel_room_model.dart';
 import '../models/hotel_booking_models/search_city_list_model.dart';
 import '../screens/members/hottel/Hotel_members.dart';
+import '../services/network/hotel_api_services/get_hotel_room_api_service.dart';
 import '../services/network/hotel_api_services/hotel_citylist_api_service.dart';
 import '../services/network/hotel_api_services/search_hotel_api_service.dart';
 
@@ -81,6 +83,7 @@ class HotelBookingController extends GetxController {
     required String hotelCode,
     required String searchToken,
   }) async {
+    hotelInfoData.clear();
     dio.Response<dynamic> response =
         await hotelInfoApiServices.hotelInfoApiServices(
             userIp: userIp,
@@ -102,6 +105,43 @@ class HotelBookingController extends GetxController {
   }
 
   //get hotel room
+
+ GetHotelRoomApiServices hotelroomsApiServices = GetHotelRoomApiServices();
+  List<HotelRoomData > hotelRoomsData = [];
+
+ getHotelRoomApiServices({
+    required String userIp,
+    required String resultIndex,
+    required String hotelCode,
+    required String searchToken,
+  }) async {
+    hotelRoomsData.clear();
+    dio.Response<dynamic> response =
+        await hotelroomsApiServices.getHotelRoomApiServices(
+            userIp: userIp,
+            resultIndex: resultIndex,
+            hotelCode: hotelCode,
+            searchToken: searchToken);
+    if (response.statusCode == 200) {
+      GetHotelRoomModel hotelRoomsModel = GetHotelRoomModel.fromJson(response.data);
+      hotelRoomsData.add(hotelRoomsModel.result);
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+  }
+
+
+
+
+
+
+
   //hotel city list
   GetHotelCityListApiService getBusCityListApiService =
       GetHotelCityListApiService();

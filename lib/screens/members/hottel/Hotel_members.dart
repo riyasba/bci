@@ -11,17 +11,16 @@ import '../../../constands/constands.dart';
 import 'final_booking.dart';
 
 class HotelListScreen extends StatefulWidget {
-  
-  HotelListScreen({super.key,});
+  HotelListScreen({
+    super.key,
+  });
 
   @override
   State<HotelListScreen> createState() => _HotelListScreenState();
 }
 
 class _HotelListScreenState extends State<HotelListScreen> {
-
   final hotelBookingController = Get.find<HotelBookingController>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -53,17 +52,17 @@ class _HotelListScreenState extends State<HotelListScreen> {
                     style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
                   ),
                 ],
-               ),
+              ),
               Padding(padding: const EdgeInsets.all(8.0), child: search()),
             ],
           ),
         ),
       ),
       backgroundColor: kwhite,
-       body: ListView(
+      body: ListView(
         children: [
-           const Padding(
-            padding:  EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Text(
@@ -81,108 +80,133 @@ class _HotelListScreenState extends State<HotelListScreen> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Stack(
-                  children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomLeft: Radius.circular(15)),
-                            child: Image.network(
-                              hotelBookingController.searchHotelData[index].hotelPicture,
-                              width: 100,height:130,fit: BoxFit.cover,),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                 Container(
-                                  width: 200,
-                                   child: Text(
-                                    hotelBookingController.searchHotelData[index].hotelName,
-                                    style: TextStyle(
-                                        fontSize: 17, fontWeight: FontWeight.w700),
-                                                                 ),
-                                 ),
-                                Container(
-                                  width: 200,
-                                  child: Text(
-                                    hotelBookingController.searchHotelData[index].hotelAddress,
-                                    style: TextStyle(color: Colors.grey,),
-                                  ),
-                                ),
-                                Text(
-                                  '₹ ${hotelBookingController.searchHotelData[index].price.publishedPrice}',
-                                  style: TextStyle(color: kblue),
-                                ),
-                                ksizedbox10,
-                               
-                              ],
+                    children: [
+                      Container(
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  bottomLeft: Radius.circular(15)),
+                              child: Image.network(
+                                hotelBookingController
+                                    .searchHotelData[index].hotelPicture,
+                                width: 100,
+                                height: 130,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      height: 135,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 200,
+                                    child: Text(
+                                      hotelBookingController
+                                          .searchHotelData[index].hotelName,
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 200,
+                                    child: Text(
+                                      hotelBookingController
+                                          .searchHotelData[index].hotelAddress,
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    '₹ ${hotelBookingController.searchHotelData[index].price.publishedPrice}',
+                                    style: TextStyle(color: kblue),
+                                  ),
+                                  ksizedbox10,
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        height: 135,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
                           boxShadow: [
                             BoxShadow(
-                                blurRadius: 5, color: Colors.grey.withOpacity(0.5)),
-                          ],),
-                    ),
-                      
-                    Positioned(
-                      right: 5,
-                      top: 0,
-                      bottom: 0,
-                      child: Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: InkWell(onTap: ()async{
-                            
-                            
-                            final prefs = await SharedPreferences.getInstance();
-                            var searchtocken=prefs.getString("searchtoken");
-                            Get.to( 
-                            Final_booking(hotelCode:hotelBookingController.searchHotelData[index].hotelCode ,
-                             resultIndex: hotelBookingController.searchHotelData[index].resultIndex.toString(),
-                              searchToken: searchtocken ?? "" ,
-                               userIp: '122.160.83.78',
-                               )
-                            );},
-                            child: Container(
-                                height: 100,
-                                width: 51,
-                                decoration: BoxDecoration(
-                                    color: kblue,
-                                    borderRadius: BorderRadius.circular(16)),
-                                alignment: Alignment.center,
-                                child: Transform.rotate(
-                                  angle: -math.pi / 2.0,
-                                  child:const Text(
-                                    "Booking",
-                                    style: TextStyle(
-                                        color: Color(0xFFD1D1D1),
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13),
-                                  ),
-                                )),
-                          )),
-                    ),
-                    //
-                  ],
-                                ),
+                                blurRadius: 5,
+                                color: Colors.grey.withOpacity(0.5)),
+                          ],
+                        ),
+                      ),
+
+                      Positioned(
+                        right: 5,
+                        top: 0,
+                        bottom: 0,
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 10, bottom: 10),
+                            child: InkWell(
+                              onTap: () async {
+                                print(hotelBookingController
+                                    .searchHotelData[index].hotelName);
+                                final prefs =
+                                    await SharedPreferences.getInstance();
+                                var searchtocken =
+                                    prefs.getString("searchtoken");
+                                Get.to(Final_booking(
+                                  hotelCode: hotelBookingController
+                                      .searchHotelData[index].hotelCode,
+                                  resultIndex: hotelBookingController
+                                      .searchHotelData[index].resultIndex
+                                      .toString(),
+                                  searchToken: searchtocken ?? "",
+                                  userIp: '122.160.83.78',
+                                ));
+                                hotelBookingController.update();
+                                // print(
+                                //     'hotel code${hotelBookingController.searchHotelData[index].hotelCode}');
+                                // print(
+                                //     'result index${hotelBookingController.searchHotelData[index].resultIndex}');
+                                // print(
+                                //     'search tocken${searchtocken}');
+                                // print(
+                                //     'hotel code${hotelBookingController.searchHotelData[index].hotelCode}');
+                              },
+                              child: Container(
+                                  height: 100,
+                                  width: 51,
+                                  decoration: BoxDecoration(
+                                      color: kblue,
+                                      borderRadius: BorderRadius.circular(16)),
+                                  alignment: Alignment.center,
+                                  child: Transform.rotate(
+                                    angle: -math.pi / 2.0,
+                                    child: const Text(
+                                      "Booking",
+                                      style: TextStyle(
+                                          color: Color(0xFFD1D1D1),
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 13),
+                                    ),
+                                  )),
+                            )),
+                      ),
+                      //
+                    ],
+                  ),
                 );
               },
-              ),
+            ),
           ),
         ],
-       ),
-      
-        
-         
-          );
+      ),
+    );
   }
 }

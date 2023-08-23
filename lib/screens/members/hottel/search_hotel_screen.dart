@@ -1,4 +1,3 @@
-import 'package:bci/screens/members/hottel/wigets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +5,6 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
-import 'package:velocity_x/velocity_x.dart';
 import '../../../constands/constands.dart';
 import '../../../controllers/hotel_booking_controller.dart';
 import '../../../models/hotel_booking_models/search_city_list_model.dart';
@@ -255,58 +253,58 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                     ],
                   ),
                   kwidth10,
-                  Column(
-                    children: [
-                      Text(
-                        'Child',
-                        style: TextStyle(
-                            fontSize: 20.sp,
-                            color: kblue,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      ksizedbox10,
-                      Container(
-                        height: 25,
-                        width: 75,
-                        decoration: BoxDecoration(
-                          border: Border.all(),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                hotelController.child--;
-                              },
-                              child: const Icon(
-                                Icons.remove,
-                                size: 20,
-                              ),
-                            ),
-                            Container(
-                              height: 25,
-                              width: 25,
-                              color: Colors.orange,
-                              child: Center(
-                                child: Text(
-                                  hotelController.child.value.toString(),
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                                onTap: () {
-                                  hotelController.child++;
-                                },
-                                child: const Icon(
-                                  Icons.add,
-                                  size: 20,
-                                )),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Column(
+                  //   children: [
+                  //     Text(
+                  //       'Child',
+                  //       style: TextStyle(
+                  //           fontSize: 20.sp,
+                  //           color: kblue,
+                  //           fontWeight: FontWeight.w500),
+                  //     ),
+                  //     ksizedbox10,
+                  //     Container(
+                  //       height: 25,
+                  //       width: 75,
+                  //       decoration: BoxDecoration(
+                  //         border: Border.all(),
+                  //       ),
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //         children: [
+                  //           InkWell(
+                  //             onTap: () {
+                  //               hotelController.child--;
+                  //             },
+                  //             child: const Icon(
+                  //               Icons.remove,
+                  //               size: 20,
+                  //             ),
+                  //           ),
+                  //           Container(
+                  //             height: 25,
+                  //             width: 25,
+                  //             color: Colors.orange,
+                  //             child: Center(
+                  //               child: Text(
+                  //                 hotelController.child.value.toString(),
+                  //                 style: const TextStyle(color: Colors.white),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           InkWell(
+                  //               onTap: () {
+                  //                 hotelController.child++;
+                  //               },
+                  //               child: const Icon(
+                  //                 Icons.add,
+                  //                 size: 20,
+                  //               )),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   kwidth10,
                   Column(
                     children: [
