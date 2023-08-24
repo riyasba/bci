@@ -1,4 +1,4 @@
-import 'dart:convert';
+
 import 'dart:io';
 
 import 'package:bci/constands/app_fonts.dart';
@@ -8,10 +8,10 @@ import 'package:bci/models/bus_booking_models/bus_requery_model.dart';
 import 'package:bci/models/bus_booking_models/bus_seat_map_model.dart';
 import 'package:bci/models/bus_booking_models/pax_list_model.dart';
 import 'package:bci/models/bus_booking_models/search_bus_model.dart';
-import 'package:bci/models/flight_booking_models/booking_model.dart';
+
 import 'package:bci/screens/members/bus/bus_booking_success.dart';
 import 'package:bci/screens/members/bus/bus_details.dart';
-import 'package:bci/screens/members/flight_booking_screens/flight_booking_success_page.dart';
+
 import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
 import 'package:bci/services/network/bus_api_services/add_bus_booking_history.dart';
 import 'package:bci/services/network/bus_api_services/bus_booking_add_payment_api_services.dart';
@@ -23,7 +23,7 @@ import 'package:bci/services/network/bus_api_services/bus_ticketing_api_services
 import 'package:bci/services/network/bus_api_services/get_bus_booking_history_api_services.dart';
 import 'package:bci/services/network/bus_api_services/search_bus_api_service.dart';
 import 'package:bci/services/network/subscriptions_api_services/ease_buzz_payment_api_services.dart';
-import 'package:date_format/date_format.dart';
+
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -98,15 +98,14 @@ class BusController extends GetxController {
     isLoading(false);
     if (response.statusCode == 200) {
       if (response.data["Error_Code"] == "0001") {
-          Get.rawSnackbar(
+        Get.rawSnackbar(
             backgroundColor: Colors.red,
             messageText: Text(
               "No bus availbale for the given city Names.",
               style: primaryFont.copyWith(color: Colors.white),
             ));
-       
       } else {
-         SearchBusList searchBusList = SearchBusList.fromJson(response.data);
+        SearchBusList searchBusList = SearchBusList.fromJson(response.data);
         busData = searchBusList.buses;
         busSearchKey(searchBusList.searchKey);
         Get.to(BusDetailsScreen(
@@ -115,7 +114,6 @@ class BusController extends GetxController {
           tdate: date.value,
           searchKey: searchBusList.searchKey,
         ));
-      
       }
     } else {
       Get.rawSnackbar(
@@ -131,6 +129,7 @@ class BusController extends GetxController {
   //bus seat map
   BusSeatMapApiService busSeatMapApiService = BusSeatMapApiService();
   List<SeatMap> seatMap = [];
+  List<List<SeatMap>> seatMapList = [];
 
   RxDouble totalAmount = 0.0.obs;
 
@@ -141,6 +140,7 @@ class BusController extends GetxController {
       required String droppingId,
       required String searchKey,
       required Bus busData}) async {
+        seatMapList.clear();
     dio.Response<dynamic> response =
         await busSeatMapApiService.busSeatMapApiService(
             boardingId: boardingId,
@@ -150,6 +150,7 @@ class BusController extends GetxController {
     if (response.statusCode == 200) {
       BusSeatMapList busSeatMapList = BusSeatMapList.fromJson(response.data);
       seatMap = busSeatMapList.seatMap;
+      generateBusSeats(seatMap);
       seatMapKey(busSeatMapList.seatMapKey);
     } else {
       Get.rawSnackbar(
@@ -158,6 +159,38 @@ class BusController extends GetxController {
             "something went wrong ${response.statusCode}",
             style: primaryFont.copyWith(color: Colors.white),
           ));
+    }
+    update();
+  }
+
+  generateBusSeats(List<SeatMap> seatMap) {
+    List<int> rowList = [];
+
+    for (int k = 0; k < seatMap.length; k++) {
+      rowList.add(int.parse(seatMap[k].row));
+    }
+
+    List<int> uniqueList = rowList.toSet().toList();
+
+    // Sort the unique list
+    uniqueList.sort();
+
+    for (int i = 0; i < uniqueList.length; i++) {
+      int rowNumber = uniqueList[i];
+
+      List<SeatMap> tempList = [];
+
+      for (int j = 0; j < seatMap.length; j++) {
+        int tempRowNum = int.parse(seatMap[j].row.toString());
+
+        print(rowNumber == tempRowNum);
+
+        if (rowNumber == tempRowNum) {
+          tempList.add(seatMap[j]);
+        }
+      }
+      print(tempList.length);
+      seatMapList.add(tempList);
     }
     update();
   }

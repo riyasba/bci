@@ -9,7 +9,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constands/image_string.dart';
-import '../langing_screen/landing_screen.dart';
+
 
 class splash extends StatefulWidget {
   const splash({super.key});
@@ -36,7 +36,7 @@ class _splashState extends State<splash> {
   toHomePageMember() async {
     await Future.delayed(const Duration(seconds: 2));
     Get.offAll(
-      () => HelloConvexAppBar(),
+      () => MemberBottomNavBar(),
     );
   }
 

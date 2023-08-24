@@ -185,8 +185,8 @@ class _LiquorListScreenState extends State<LiquorListScreen> {
                                   borderRadius: BorderRadius.circular(15)),
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   
                                   children: [
                                     ClipRRect(
@@ -196,23 +196,17 @@ class _LiquorListScreenState extends State<LiquorListScreen> {
                                             .searchServiceListData[index].image,
                                         height: 100,
                                         width:150,
-                                        fit: BoxFit.fill,
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: Container(
-                                        width: double.infinity,
-                                        child: Text(
-                                          homeController
-                                              .searchServiceListData[index].title,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                              color: kblue),
-                                        ),
-                                      ),
+                                    Text(
+                                      homeController
+                                          .searchServiceListData[index].title,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: kblue),
                                     ),
                                     Text(homeController.searchServiceListData[index].actualAmount,)
                                   ],

@@ -6,6 +6,7 @@ import 'package:bci/models/get_coupons_model.dart';
 import 'package:bci/models/member_profile_model.dart';
 import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
+import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
 import 'package:bci/services/network/profile_api_services/our_coupons_api_service.dart';
 import 'package:bci/services/network/profile_api_services/profile_api_services.dart';
 import 'package:bci/services/network/profile_api_services/profile_pic_update_api_services.dart';
@@ -14,6 +15,7 @@ import 'package:bci/services/network/profile_api_services/redeem_coupons_api_ser
 import 'package:bci/services/network/profile_api_services/update_official_address_api.dart';
 import 'package:bci/services/network/subscriptions_api_services/ease_buzz_payment_api_services.dart';
 import 'package:bci/widgets/home_widgets/loading_widgets.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -45,15 +47,20 @@ class ProfileController extends GetxController {
     dio.Response<dynamic> response = await getProfileApiServices.getProfile();
     isLoading(false);
     if (response.statusCode == 200) {
-      MemberProfileModel profileModel =
-          MemberProfileModel.fromJson(response.data);
+      MemberProfileModel profileModel = MemberProfileModel.fromJson(response.data);
       isSubscribed(profileModel.subscription);
       planid(profileModel.planId.toString());
       profileData.add(profileModel.user);
       update();
+      var token = await FirebaseMessaging.instance.getToken();
+      Get.find<AuthController>().fcmtoken(
+          token: token.toString(),);
+      print("............firebase token.......=====================>>>");
+      print(token);
     } else if (response.statusCode == 401) {
       Get.find<AuthController>().logout();
     }
+    update();
   }
 
   updateProfile(
@@ -133,10 +140,10 @@ class ProfileController extends GetxController {
   //redeem coupon
   RedeemCouponApiServices redeemCouponApiServices = RedeemCouponApiServices();
 
-  redeemCoupon({required String couponcode, required String serviceId}) async {
+  redeemCoupon({required String couponcode, required String serviceId,required String  vendorId}) async {
     String tempAmount = "0";
     dio.Response<dynamic> response = await redeemCouponApiServices
-        .redeemCouponApiServices(couponcode: couponcode, serviceId: serviceId);
+        .redeemCouponApiServices(couponcode: couponcode, serviceId: serviceId, vendorId: vendorId);
     if (response.statusCode == 200) {
       tempAmount = response.data["amount"].toString();
       Get.rawSnackbar(
@@ -235,6 +242,7 @@ class ProfileController extends GetxController {
     }
   }
 
+//add subcription
   payUseingEaseBuzzSubs({
     required int id,
     required String amount,
@@ -296,4 +304,67 @@ class ProfileController extends GetxController {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
+
+  //add wallet amount
+  payUseingEaseBuzzWallet({
+    required int id,
+    required String amount,
+    required String customerName,
+    required String email,
+    required String phone,
+    required dynamic status,
+  }) async {
+    Get.find<ProfileController>().getProfile();
+    var response = await easeBuzzApi.getPaymentToken(
+        amount: amount,
+        customerName: customerName,
+        email: email,
+        id: "07889${DateTime.now().microsecond}${DateTime.now().second}",
+        phone: phone);
+
+    String access_key = response["data"];
+    String pay_mode = "test";
+
+    print("access_key >>$access_key");
+    Object parameters = {"access_key": access_key, "pay_mode": pay_mode};
+    // isPayLoading(false);
+    isLoading(false);
+    final payment_response =
+        await _channel.invokeMethod("payWithEasebuzz", parameters);
+    print(payment_response);
+    isLoading(false);
+    if (payment_response["result"] == "payment_successfull") {
+
+      Get.find<AuthController>().addTransaction(amount: amount);
+
+      Get.to(const SucessfulScreenOtc());
+
+      //need to give id
+      Get.snackbar(
+        "Payment Successfully Paid",
+        "",
+        icon: const Icon(Icons.check_circle_outline_outlined,
+            color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+
+      print(response);
+    } else {
+      Get.closeAllSnackbars();
+      Get.snackbar(
+          "The last transaction has been cancelled!", "Please try again!",
+          colorText: Colors.white,
+          backgroundColor: Colors.red,
+          snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+
 }

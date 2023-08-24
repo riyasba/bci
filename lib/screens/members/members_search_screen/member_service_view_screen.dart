@@ -145,7 +145,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
-                                    children:  [
+                                    children: [
                                       Text(
                                         "View Cart",
                                         style: TextStyle(
@@ -315,7 +315,9 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                         if (redeemCouponcontroller.text.isNotEmpty) {
                           print(">>>>>>>>>>>11111111111111111111");
                           profileController.redeemCoupon(
-                              couponcode: redeemCouponcontroller.text,serviceId: widget.searchServicelist.id.toString());
+                              couponcode: redeemCouponcontroller.text,
+                              serviceId: widget.searchServicelist.id.toString(),
+                              vendorId: widget.searchServicelist.vendorId);
                           homeController.addBooking(
                               cartid: widget.searchServicelist.id.toString(),
                               serviceid: widget.searchServicelist.id.toString(),

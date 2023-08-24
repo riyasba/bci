@@ -1,6 +1,9 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/flights_controller.dart';
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/flight_booking_models/air_search_model.dart';
 import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
+import 'package:bci/screens/members/flight_booking_screens/air_seat_map_screen_view.dart';
 import 'package:bci/screens/members/flight_booking_screens/plane_details_scree.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +28,10 @@ class FlightDetailsScreen extends StatefulWidget {
 
 class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
   var numberController = TextEditingController();
+  final flightController = Get.find<FlightsController>();
+  final profileController = Get.find<ProfileController>();
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -316,7 +323,8 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                                             child: Container(
                                                               width: 200,
                                                               child: FittedBox(
-                                                                fit: BoxFit.scaleDown,
+                                                                fit: BoxFit
+                                                                    .scaleDown,
                                                                 child: Text(
                                                                     '${widget.flight.segments.length - 1} stop, via ${widget.flight.segments.first.destinationCity} ',
                                                                     style: const TextStyle(
@@ -406,102 +414,116 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                   ),
                 ),
                 ksizedbox10,
-                InkWell(
-                  onTap: () {
-                    Get.to(PlaneDetailsScreen(
-                      flight: widget.flight,
-                      flightSearchDataModel: widget.flightSearchDataModel,
-                      seachKey: widget.searchKey,
-                    ));
-                    // showModalBottomSheet(
-                    //     shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.vertical(
-                    //       top: Radius.circular(26.0),
-                    //     )),
-                    //     context: context,
-                    //     builder: (context) {
-                    //       return Padding(
-                    //         padding: const EdgeInsets.only(left: 10, right: 10),
-                    //         child: Container(
-                    //           height: 340.h,
-                    //           width: MediaQuery.of(context).size.width,
-                    //           child: Column(
-                    //             children: [
-                    //               ksizedbox40,
-                    //               Text(
-                    //                 'Flights Details',
-                    //                 style: TextStyle(
-                    //                     fontSize: 21,
-                    //                     fontWeight: FontWeight.bold),
-                    //               ),
-                    //               ksizedbox20,
-                    //               Text(
-                    //                 'Enter your mobile phone number',
-                    //                 style: TextStyle(fontSize: 17),
-                    //               ),
-                    //               ksizedbox40,
-                    //               Padding(
-                    //                 padding: const EdgeInsets.only(
-                    //                     left: 40, right: 25),
-                    //                 child: TextField(
-                    //                   controller: numberController,
-                    //                   decoration: InputDecoration(
-                    //                       prefixIcon: Image.asset(
-                    //                           'assets/images/flaightindiaimage.png'),
-                    //                       suffixIcon: Image.asset(
-                    //                           'assets/images/flaightcorrectimage.png'),
-                    //                       hintText: '(+91) 9876543210',
-                    //                       helperStyle:
-                    //                           TextStyle(color: Colors.black)),
-                    //                 ),
-                    //               ),
-                    //               ksizedbox40,
-                    //               InkWell(
-                    //                 onTap: () {
+                Obx(
+                  () => flightController.isLoading.isTrue
+                      ? Container(
+                          height: 45,
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                                kyellow,
+                                kOrange,
+                              ]),
+                              borderRadius: BorderRadius.circular(15)),
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      : InkWell(
+                          onTap: () async {
+                             try {
+  String flightKey =
+     await flightController.getFlightRepricing(
+         flightSearchModel:
+             widget.flightSearchDataModel,
+         flight: widget.flight,
+         searchKey: widget.searchKey,
+         mobileNumber: profileController
+             .profileData.first.mobile);
+              bool isSeatMapvailable = await flightController
+                                  .getSeatMapApiServises(
+                                      searchKey: widget.searchKey,
+                                      flightKey: flightKey,
+                                      paxDetails: [
+                                    {
+                                      "Pax_Id": 1,
+                                      "Pax_type": 0,
+                                      "Title": "Mr",
+                                      "First_Name": "Testing",
+                                      "Last_Name": "Sample",
+                                      "Gender": 0,
+                                      "Age": null,
+                                      "DOB": null,
+                                      "Passport_Number": null,
+                                      "Passport_Issuing_Country": null,
+                                      "Passport_Expiry": null,
+                                      "Nationality": null,
+                                      "FrequentFlyerDetails": null
+                                    }
+                                  ]);
 
-                    //                 },
-                    //                 child: Container(
-                    //                   height: 45,
-                    //                   width: MediaQuery.of(context).size.width *
-                    //                       0.7,
-                    //                   decoration: BoxDecoration(
-                    //                       gradient: LinearGradient(colors: [
-                    //                         kyellow,
-                    //                         kOrange,
-                    //                       ]),
-                    //                       borderRadius:
-                    //                           BorderRadius.circular(15)),
-                    //                   child: Center(
-                    //                     child: Text(
-                    //                       'Send ',
-                    //                       style: TextStyle(
-                    //                           color: kwhite, fontSize: 18),
-                    //                     ),
-                    //                   ),
-                    //                 ),
-                    //               ),
-                    //             ],
-                    //           ),
-                    //         ),
-                    //       );
-                    //     });
-                  },
-                  child: Container(
-                    height: 45,
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: [
-                          kyellow,
-                          kOrange,
-                        ]),
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Center(
-                      child: Text(
-                        'Next',
-                        style: TextStyle(color: kwhite, fontSize: 18),
-                      ),
-                    ),
-                  ),
+                              if (isSeatMapvailable) {
+                                Get.to(() => AirSeatMapScreenView(
+                                  flight: widget.flight,
+                                  flightSearchDataModel: widget.flightSearchDataModel,
+                                      flightKey: widget.flight.flightKey,
+                                      paxDetails: const [
+                                        {
+                                          "Pax_Id": 1,
+                                          "Pax_type": 0,
+                                          "Title": "Mr",
+                                          "First_Name": "Testing",
+                                          "Last_Name": "Sample",
+                                          "Gender": 0,
+                                          "Age": null,
+                                          "DOB": null,
+                                          "Passport_Number": null,
+                                          "Passport_Issuing_Country": null,
+                                          "Passport_Expiry": null,
+                                          "Nationality": null,
+                                          "FrequentFlyerDetails": null
+                                        }
+                                      ],
+                                      searchKey: widget.searchKey,
+                                    ));
+                              } else {
+                                Get.to(PlaneDetailsScreen(
+                                  flight: widget.flight,
+                                  flightSearchDataModel:
+                                      widget.flightSearchDataModel,
+                                  seachKey: widget.searchKey,
+                                ));
+                              }
+} on Exception catch (e) {
+  // TODO
+  Get.to(PlaneDetailsScreen(
+                                flight: widget.flight,
+                                flightSearchDataModel:
+                                    widget.flightSearchDataModel,
+                                seachKey: widget.searchKey,
+                              ));
+}
+                           
+                          },
+                          child: Container(
+                            height: 45,
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(colors: [
+                                  kyellow,
+                                  kOrange,
+                                ]),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Center(
+                              child: Text(
+                                'Next',
+                                style: TextStyle(color: kwhite, fontSize: 18),
+                              ),
+                            ),
+                          ),
+                        ),
                 ),
                 ksizedbox10,
               ],

@@ -10,31 +10,32 @@ class Home_screen1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
-          child: ClipPath(
-            clipper: SinCosineWaveClipper(),
-            child: Container(
-              height: 180,
-              color: kblue,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Image.asset('assets/images/projectlogo.png'),
-                 const Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Text(
-                      'Hello,Jhon',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
+        preferredSize: const Size.fromHeight(250),
+        child: ClipPath(
+          clipper: SinCosineWaveClipper(),
+          child: Container(
+            height: 180,
+            color: kblue,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Image.asset('assets/images/projectlogo.png'),
+                const Padding(
+                  padding: EdgeInsets.only(right: 20),
+                  child: Text(
+                    'Hello,Jhon',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
-                  Image.asset('assets/images/helps.png')
-                ],
-              ),
+                ),
+                Image.asset('assets/images/helps.png')
+              ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

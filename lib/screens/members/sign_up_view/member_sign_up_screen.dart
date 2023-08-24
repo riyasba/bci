@@ -1,15 +1,13 @@
 import 'package:bci/authentications/generate_otp/member_login_screen.dart';
-import 'package:bci/authentications/otp_verification/otp_verification.dart';
-import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/models/members_register_model.dart';
-import 'package:bci/screens/members/sign_up_view/residential_address_screen.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+
 
 class MemberSignUpScreen extends StatefulWidget {
   
@@ -105,7 +103,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                 ksizedbox30,
                 const Image(
                     height: 200,
-                    image: AssetImage("assets/images/Group 6011.png")),
+                    image: AssetImage("assets/images/Group 6011.png"),),
                 ksizedbox30,
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
@@ -557,10 +555,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                                 );
                               authController.registerMember(
                                   referralCode: referralController.text,
-                                  memberRegisterModel: memberRegisterModel,
-                                  //officialAddress: oficeaddressModel,
-                                  //residentialAddress: widget.addressModel
-                                  );
+                                  memberRegisterModel: memberRegisterModel,);
                             }
                           },
                           child: Container(

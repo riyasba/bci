@@ -5,7 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class RedeemCouponApiServices extends BaseApiService {
   Future redeemCouponApiServices(
-      {required String couponcode, required String serviceId}) async {
+      {required String couponcode,
+      required String serviceId,
+      required String vendorId}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
@@ -22,9 +24,17 @@ class RedeemCouponApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"coupon_code": couponcode, "service_id": serviceId});
+          data: {
+            "coupon_code": couponcode,
+            "service_id": serviceId,
+           "vendor_id": vendorId,
+          });
       print(
           "::::::::<redeem coupon Api Services Api>::::::::status code::::::::::");
+      print(vendorId);
+      print(serviceId);
+      print(couponcode);
+      print(".........>>>>>>>>>>>>><<<<<<<<<<>>>>>>>>>>>>>...");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

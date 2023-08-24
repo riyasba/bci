@@ -18,6 +18,7 @@ import '../bus/bus_screen.dart';
 import '../coupen/coupons_screen.dart';
 import '../holiday/holiday_home.dart';
 import '../hottel/Hotel_members.dart';
+import '../hottel/search_hotel_screen.dart';
 import '../liquer_screen/liquer_screen.dart';
 import '../offer screen/offer_screen_grid.dart';
 import '../settings_views/upgrade_screen.dart';
@@ -30,10 +31,16 @@ class Home_screen1 extends StatefulWidget {
 }
 
 class _Home_screen1State extends State<Home_screen1> {
+
+
   CarouselController sliderController = CarouselController();
+
   final profileController = Get.find<ProfileController>();
+
   final homeController = Get.find<HomeController>();
+
   final flightController = Get.find<FlightsController>();
+
   int activeIndex = 0;
 
   @override
@@ -53,39 +60,62 @@ class _Home_screen1State extends State<Home_screen1> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+
       appBar: PreferredSize(
+        
           preferredSize: const Size.fromHeight(250),
+
           child: ClipPath(
+
             clipper: SinCosineWaveClipper(),
+
             child: Container(
+
               height: 140,
+
               color: kblue,
+
+
               child: Padding(
+
                 padding: const EdgeInsets.only(bottom: 22, left: 15, right: 10),
+
                 child: Row(
+
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                   children: [
+
                     Image.asset('assets/images/projectlogo.png'),
-                    GetBuilder<ProfileController>(builder: (_) {
-                      return profileController.profileData.isEmpty
-                          ? Container()
-                          : Text(
-                              'Hello, ${profileController.profileData.first.name}',
-                              style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            );
-                    }),
+
+                    GetBuilder<ProfileController>(
+                      
+                      builder: (_) {
+
+                        return profileController.profileData.isEmpty
+                            ? Container()
+                            : Text(
+                                'Hello, ${profileController.profileData.first.name}',
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              );
+                      },
+                    ),
                     IconButton(
-                        onPressed: () {
-                          Get.to(const NotificationScreen());
-                        },
-                        icon: Icon(
-                          Icons.notifications,
-                          color: kwhite,
-                        ))
+                      onPressed: () {
+                        Get.to(
+                          const NotificationScreen(),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.notifications,
+                        color: kwhite,
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -108,38 +138,37 @@ class _Home_screen1State extends State<Home_screen1> {
                             ? Column(
                                 children: [
                                   CarouselSlider(
-                                      carouselController: sliderController,
-                                      items: [
-                                        for (int i = 0;
-                                            i <
-                                                homeController
-                                                    .sliderData.length;
-                                            i++)
-                                          Image.network(homeController
-                                              .sliderData[i].image)
-                                      ],
-                                      options: CarouselOptions(
-                                        height: 170,
-                                        onPageChanged: (index, reason) {
-                                          setState(() {
-                                            activeIndex = index;
-                                          });
-                                        },
-                                        aspectRatio: 16 / 9,
-                                        viewportFraction: 1,
-                                        initialPage: 0,
-                                        enableInfiniteScroll: true,
-                                        reverse: false,
-                                        autoPlay: true,
-                                        autoPlayInterval:
-                                            const Duration(seconds: 3),
-                                        autoPlayAnimationDuration:
-                                            const Duration(milliseconds: 800),
-                                        autoPlayCurve: Curves.fastOutSlowIn,
-                                        enlargeCenterPage: true,
-                                        enlargeFactor: 0.3,
-                                        scrollDirection: Axis.horizontal,
-                                      )),
+                                    carouselController: sliderController,
+                                    items: [
+                                      for (int i = 0;
+                                          i < homeController.sliderData.length;
+                                          i++)
+                                        Image.network(
+                                            homeController.sliderData[i].image)
+                                    ],
+                                    options: CarouselOptions(
+                                      height: 170,
+                                      onPageChanged: (index, reason) {
+                                        setState(() {
+                                          activeIndex = index;
+                                        });
+                                      },
+                                      aspectRatio: 16 / 9,
+                                      viewportFraction: 1,
+                                      initialPage: 0,
+                                      enableInfiniteScroll: true,
+                                      reverse: false,
+                                      autoPlay: true,
+                                      autoPlayInterval:
+                                          const Duration(seconds: 3),
+                                      autoPlayAnimationDuration:
+                                          const Duration(milliseconds: 800),
+                                      autoPlayCurve: Curves.fastOutSlowIn,
+                                      enlargeCenterPage: true,
+                                      enlargeFactor: 0.3,
+                                      scrollDirection: Axis.horizontal,
+                                    ),
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -258,7 +287,7 @@ class _Home_screen1State extends State<Home_screen1> {
                         //
                         InkWell(
                           onTap: () {
-                            Get.to(Hotel());
+                            Get.to(SerchHotelScreen());
                           },
                           child: Column(
                             children: [

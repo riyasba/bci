@@ -1,18 +1,23 @@
 import 'package:bci/authentications/generate_otp/member_login_screen.dart';
-import 'package:bci/authentications/langing_screen/landing_screen.dart';
 import 'package:bci/authentications/otp_verification/otp_verification.dart';
 import 'package:bci/authentications/verified_screen/verified_screen.dart';
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/models/category_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/merchants_register_model.dart';
+import 'package:bci/models/notification_list_model.dart';
 import 'package:bci/models/sub_category_model.dart';
+import 'package:bci/models/transaction_history_model.dart';
 import 'package:bci/screens/bussiness/views/generations/otp_verification_screen.dart';
 import 'package:bci/screens/bussiness/views/generations/verified_screen.dart';
+import 'package:bci/services/network/auth_api_services/add_transaction_api_service.dart';
+import 'package:bci/services/network/auth_api_services/fcm_token_store_api_service.dart';
 import 'package:bci/services/network/auth_api_services/get_otp_api_services.dart';
 import 'package:bci/services/network/auth_api_services/login_api_services.dart';
 import 'package:bci/services/network/auth_api_services/merchant_api_services.dart';
+import 'package:bci/services/network/auth_api_services/notification_list_api_service.dart';
 import 'package:bci/services/network/auth_api_services/referral_register_api_services.dart';
+import 'package:bci/services/network/auth_api_services/transaction_history_api_service.dart';
 import 'package:bci/services/network/categorys_api_services/get_category_services.dart';
 import 'package:bci/services/network/categorys_api_services/sub_category_api_services.dart';
 import 'package:flutter/material.dart';
@@ -109,12 +114,12 @@ RxInt filterindex = 0.obs;
       if(response.data["success"] == true){
 
       }else{
-        Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            response.data["message"],
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
+        // Get.rawSnackbar(
+        //   backgroundColor: Colors.red,
+        //   messageText: Text(
+        //     response.data["message"],
+        //     style: primaryFont.copyWith(color: Colors.white),
+        //   ));
       }
   }
 
@@ -309,4 +314,81 @@ RxInt filterindex = 0.obs;
     prefs.setString("auth_token", "null");
     Get.offAll(const MemberLoginScreen());
   }
+
+  //fcm token store api
+  FcmTokenStoreApiService fcmTokenStoreApiService = FcmTokenStoreApiService();
+
+  fcmtoken({required String token}) async {
+    dio.Response<dynamic> response = await fcmTokenStoreApiService
+        .fcmTokenStoreApiService(token: token,);
+    if (response.statusCode == 200) {
+    } else {
+      Get.snackbar("Something went wrong", response.statusCode.toString(),
+          colorText: Colors.white,
+          backgroundColor: Colors.red,
+          snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+
+  //add transaction
+  AddTransactionApiServices addTransactionApiServices = AddTransactionApiServices();
+
+  addTransaction({required String amount}) async {
+      
+      dio.Response<dynamic> response = await addTransactionApiServices.
+       addTransactionApi(amount: amount);
+       if(response.statusCode == 200){
+
+       } else {
+          Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+       }
+  }
+
+  //transaction history
+  TransactionHistoryApiServices transactionHistoryApiServices = TransactionHistoryApiServices();
+  List<TransactionHistory> transactionHistorydata = [];
+
+  transactionHistoryDetails() async {
+
+    dio.Response<dynamic> response = await transactionHistoryApiServices.transactionHistoryApi();
+    if(response.statusCode == 200){
+      TransactionHistoryModel transactionHistoryModel = TransactionHistoryModel.fromJson(response.data);
+      transactionHistorydata = transactionHistoryModel.transactionHistory;
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+  }
+
+  //notification list
+  NotificationListApiService notificationListApiService = NotificationListApiService();
+  List<NotificationData> notificationData = [];
+
+  notification() async {
+
+    dio.Response<dynamic> response = await notificationListApiService.notificationListApiService();
+    if(response.statusCode == 200){
+      NotificationListModel notificationListModel = NotificationListModel.fromJson(response.data);
+      notificationData = notificationListModel.data;
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+   update();
+  }
+
 }

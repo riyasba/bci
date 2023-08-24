@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:clipboard/clipboard.dart';
+import 'package:coupon_uikit/coupon_uikit.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -10,7 +11,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-
+import 'dart:math' as math;
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
 
@@ -100,142 +101,275 @@ class _CoupensMembersState extends State<CoupensMembers> {
                         itemCount: profileController.couponsData.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: const EdgeInsets.only(top: 5, bottom: 5),
-                            child: ClipPath(
-                              clipper: TicketPassClipper(),
-                              child: Container(
-                                  height: 90,
-                                  decoration: BoxDecoration(
-                                      color: colors[Random().nextInt(9)],
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 10,top: 10,right: 10,bottom: 5),
+                            padding: const EdgeInsets.all(15),
+                            child: CouponCard(
+                              shadow: Shadow(),
+                              height: 150,
+                              backgroundColor: Colors.white,
+                              curveAxis: Axis.vertical,
+                              firstChild: Container(
+                                decoration: BoxDecoration(
+                                    color: Color((math.Random().nextDouble() *
+                                                0xFFFFFF)
+                                            .toInt())
+                                        .withOpacity(1.0)),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Center(
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                                width: size.width * 0.52,
-                                                child: Text(
-                                                  profileController
-                                                      .couponsData[index].name.toString(),
-                                                  maxLines: 2,
-                                                  style: primaryFont.copyWith(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                       if(profileController
-                                                      .couponsData[index].isRedeemed == "1")     Container(
-                                              height: 30,
-                                              width: 85,
-                                              decoration: BoxDecoration(
-                                                  color: const Color.fromARGB(255, 75, 133, 76),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5)),
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                "Redeemed",
-                                                style: primaryFont.copyWith(
-                                                    color: Colors.white),
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: const [
+                                            Text(
+                                              '23%',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold,
                                               ),
-                                            )
+                                            ),
+                                            Text(
+                                              'OFF',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      CustomPaint(
-                                          size: const Size(1, double.infinity),
-                                          painter: DashedLineVerticalPainter()),
-                                      Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Text(
-                                              "Coupon Code :",
-                                              style: primaryFont.copyWith(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            Text(
-                                               profileController
-                                                  .couponsData[index]
-                                                  .couponcode,
-                                              style: primaryFont.copyWith(
-                                                  fontSize: 14,
-                                                  color: Color.fromARGB(255, 235, 145, 10),
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                            InkWell(
-                                              onTap: (){
-                                                FlutterClipboard.copy(
-                                                        profileController
-                                                            .couponsData[index]
-                                                            .couponcode)
-                                                    .then(
-                                                  (value) =>
-                                                      Fluttertoast.showToast(
-                                                          msg:
-                                                              "Copy to clipboard",
-                                                          toastLength: Toast
-                                                              .LENGTH_SHORT,
-                                                          gravity: ToastGravity
-                                                              .CENTER,
-                                                          timeInSecForIosWeb: 1,
-                                                          backgroundColor:
-                                                              Colors.white,
-                                                          textColor:
-                                                              Colors.black,
-                                                          fontSize: 16.0),
-                                                  //print("code copied")
-                                                );
-                                              },
-                                              child: Container(
-                                                height: 25,
-                                                width: 90,
-                                                decoration: BoxDecoration(
-                                                    color: kblue,
-                                                    borderRadius:
-                                                        BorderRadius.circular(4)),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      "Copy",
-                                                      style: primaryFont.copyWith(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    const Icon(
-                                                      Icons.copy,
-                                                      color: Colors.white,
-                                                      size: 15,
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            )
-                                          ],
+                                    ),
+                                    const Divider(
+                                        color: Colors.white54, height: 0),
+                                     Expanded(
+                                      child: Center(
+                                        child: Text(
+                                         profileController
+                                        .couponsData[index].name.toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      )
-                                    ],
-                                  )),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              secondChild: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    "Coupon Code :",
+                                       textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,),
+                                  ),
+                                  Text(
+                                    profileController
+                                        .couponsData[index].couponcode,
+                                    style: primaryFont.copyWith(
+                                        fontSize: 14,
+                                        color: Color(
+                                                (math.Random().nextDouble() *
+                                                        0xFFFFFF)
+                                                    .toInt())
+                                            .withOpacity(1.0),
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      FlutterClipboard.copy(profileController
+                                              .couponsData[index].couponcode)
+                                          .then(
+                                        (value) => Fluttertoast.showToast(
+                                            msg: "Copy to clipboard",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            gravity: ToastGravity.CENTER,
+                                            timeInSecForIosWeb: 1,
+                                            backgroundColor: Colors.white,
+                                            textColor: Colors.black,
+                                            fontSize: 16.0),
+                                        //print("code copied")
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 25,
+                                      width: 90,
+                                      decoration: BoxDecoration(
+                                          color: kblue,
+                                          borderRadius:
+                                              BorderRadius.circular(4)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Copy",
+                                            style: primaryFont.copyWith(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          const Icon(
+                                            Icons.copy,
+                                            color: Colors.white,
+                                            size: 15,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
+                          // return Padding(
+                          //   padding: const EdgeInsets.only(top: 5, bottom: 5),
+                          //   child: ClipPath(
+                          //     clipper: CouponCard(),
+                          //     child: Container(
+                          //         height: 90,
+                          //         decoration: BoxDecoration(
+                          //             color: colors[Random().nextInt(9)],
+                          //             borderRadius: BorderRadius.circular(5)),
+                          //         child: Row(
+                          //           children: [
+                          //             Padding(
+                          //               padding: const EdgeInsets.only(left: 10,top: 10,right: 10,bottom: 5),
+                          //               child: Column(
+                          //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //                 crossAxisAlignment: CrossAxisAlignment.start,
+                          //                 children: [
+                          //                   Container(
+                          //                       width: size.width * 0.52,
+                          //                       child: Text(
+                          //                         profileController
+                          //                             .couponsData[index].name.toString(),
+                          //                         maxLines: 2,
+                          //                         style: primaryFont.copyWith(
+                          //                             fontSize: 15,
+                          //                             fontWeight:
+                          //                                 FontWeight.bold),
+                          //                       )),
+                          //              if(profileController
+                          //                             .couponsData[index].isRedeemed == "1")     Container(
+                          //                     height: 30,
+                          //                     width: 85,
+                          //                     decoration: BoxDecoration(
+                          //                         color: const Color.fromARGB(255, 75, 133, 76),
+                          //                         borderRadius:
+                          //                             BorderRadius.circular(
+                          //                                 5)),
+                          //                     alignment: Alignment.center,
+                          //                     child: Text(
+                          //                       "Redeemed",
+                          //                       style: primaryFont.copyWith(
+                          //                           color: Colors.white),
+                          //                     ),
+                          //                   )
+                          //                 ],
+                          //               ),
+                          //             ),
+                          //             const SizedBox(
+                          //               width: 10,
+                          //             ),
+                          //             CustomPaint(
+                          //                 size: const Size(1, double.infinity),
+                          //                 painter: DashedLineVerticalPainter()),
+                          //             Padding(
+                          //               padding: const EdgeInsets.all(10.0),
+                          //               child: Column(
+                          //                 crossAxisAlignment:
+                          //                     CrossAxisAlignment.start,
+                          //                 mainAxisAlignment:
+                          //                     MainAxisAlignment.spaceAround,
+                          //                 children: [
+                          //                   Text(
+                          //                     "Coupon Code :",
+                          //                     style: primaryFont.copyWith(
+                          //                         fontSize: 15,
+                          //                         fontWeight: FontWeight.w400),
+                          //                   ),
+                          //                   Text(
+                          //                      profileController
+                          //                         .couponsData[index]
+                          //                         .couponcode,
+                          //                     style: primaryFont.copyWith(
+                          //                         fontSize: 14,
+                          //                         color: Color.fromARGB(255, 235, 145, 10),
+                          //                         fontWeight: FontWeight.w500),
+                          //                   ),
+                          //                   InkWell(
+                          //                     onTap: (){
+                          //                       FlutterClipboard.copy(
+                          //                               profileController
+                          //                                   .couponsData[index]
+                          //                                   .couponcode)
+                          //                           .then(
+                          //                         (value) =>
+                          //                             Fluttertoast.showToast(
+                          //                                 msg:
+                          //                                     "Copy to clipboard",
+                          //                                 toastLength: Toast
+                          //                                     .LENGTH_SHORT,
+                          //                                 gravity: ToastGravity
+                          //                                     .CENTER,
+                          //                                 timeInSecForIosWeb: 1,
+                          //                                 backgroundColor:
+                          //                                     Colors.white,
+                          //                                 textColor:
+                          //                                     Colors.black,
+                          //                                 fontSize: 16.0),
+                          //                         //print("code copied")
+                          //                       );
+                          //                     },
+                          //                     child: Container(
+                          //                       height: 25,
+                          //                       width: 90,
+                          //                       decoration: BoxDecoration(
+                          //                           color: kblue,
+                          //                           borderRadius:
+                          //                               BorderRadius.circular(4)),
+                          //                       child: Row(
+                          //                         mainAxisAlignment:
+                          //                             MainAxisAlignment.center,
+                          //                         children: [
+                          //                           Text(
+                          //                             "Copy",
+                          //                             style: primaryFont.copyWith(
+                          //                                 color: Colors.white,
+                          //                                 fontWeight:
+                          //                                     FontWeight.w500),
+                          //                           ),
+                          //                           const SizedBox(
+                          //                             width: 5,
+                          //                           ),
+                          //                           const Icon(
+                          //                             Icons.copy,
+                          //                             color: Colors.white,
+                          //                             size: 15,
+                          //                           )
+                          //                         ],
+                          //                       ),
+                          //                      ),
+                          //                   )
+                          //                 ],
+                          //               ),
+                          //             )
+                          //           ],
+                          //         )),
+                          //   ),
+                          // );
                         },
                       ),
               );

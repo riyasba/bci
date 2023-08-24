@@ -47,7 +47,8 @@ class Sucessful_screen_hotel extends StatelessWidget {
                   fontSize: 22.sp, fontWeight: FontWeight.w600, color: kblue),
             ),ksizedbox40,ksizedbox40,
             
-        InkWell(onTap: (){Get.to( Hotel());},
+        InkWell(onTap: (){
+          Get.to( HotelListScreen());},
                 child: Container(
                   width: 150,
                   height: 45,

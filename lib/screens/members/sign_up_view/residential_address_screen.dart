@@ -1,8 +1,5 @@
-import 'package:bci/authentications/generate_otp/member_login_screen.dart';
-import 'package:bci/authentications/otp_verification/otp_verification.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/models/members_register_model.dart';
-import 'package:bci/screens/members/sign_up_view/office_address_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

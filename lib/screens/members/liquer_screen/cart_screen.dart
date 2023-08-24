@@ -1,17 +1,14 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
-import 'package:bci/screens/members/liquer_screen/widget/order_widget.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
 
@@ -208,13 +205,14 @@ class _CartScreenState extends State<CartScreen> {
                                                                   color: Colors
                                                                       .grey)),
                                                           onPressed: () {
+                                                            Get.back();
                                                             homeController.deleteToCart(
                                                                 serviceid: homeController
                                                                     .cartListData[
                                                                         index]
                                                                     .serviceId
                                                                     .toString());
-                                                            Get.back();
+                                                            
                                                           },
                                                         ),
                                                       ],
@@ -226,7 +224,7 @@ class _CartScreenState extends State<CartScreen> {
                                               //         .serviceId
                                               //         .toString());
                                             },
-                                            child: Row(
+                                            child:const Row(
                                               children: [
                                                 Icon(
                                                   CupertinoIcons.delete,

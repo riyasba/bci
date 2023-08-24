@@ -1,10 +1,10 @@
 import 'package:bci/controllers/bus_controllers.dart';
 import 'package:bci/screens/members/bus/boarding_screen_view.dart';
-import 'package:bci/screens/members/bus/bus_seats_screen.dart';
+
 import 'package:custom_clippers/custom_clippers.dart';
-import 'package:date_format/date_format.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 
 import '../../../constands/constands.dart';

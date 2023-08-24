@@ -831,7 +831,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                   ),
                   ksizedbox20,
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       // Get.to(()=> const FlightBookingSuccessPage());
                       PaxDetails paxDetails = PaxDetails(
                           firstName: profileController.profileData.first.name,
@@ -839,12 +839,22 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                           lastName: "t",
                           title: "Mr");
 
+                      String flightKey =
+                          await flightsController.getFlightRepricing(
+                              flightSearchModel: widget.flightSearchDataModel,
+                              flight: widget.flight,
+                              searchKey: widget.searchKey,
+                              mobileNumber:
+                                  profileController.profileData.first.mobile);
+                        print("<--> <-----------> Flight key <-----------> <-->");
+                        print(flightKey);
+
                       BookingModel bookingModel = BookingModel(
                           bookingRemark:
                               "${widget.flightSearchDataModel.fromIata} - ${widget.flightSearchDataModel.toIata}",
                           customerMobile:
                               profileController.profileData.first.mobile,
-                          flightKey: widget.flight.flightKey,
+                          flightKey: flightKey,
                           passengerEmail:
                               profileController.profileData.first.email,
                           passengerMobile:

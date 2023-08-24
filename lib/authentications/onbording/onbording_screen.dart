@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../constands/constands.dart';
-import '../../screens/members/members widgets/bottumbavigation.dart';
 import '../../screens/bussiness/views/busines_widget/bottumnavigation.dart';
 
 class Onbording extends StatefulWidget {

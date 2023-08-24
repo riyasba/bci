@@ -1,10 +1,10 @@
-import 'package:bci/screens/members/liquer_screen/widget/like.dart';
+
 import 'package:bci/screens/members/liquer_screen/widget/popular_Wine.dart';
-import 'package:bci/screens/members/liquer_screen/wine_screen.dart';
+
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';

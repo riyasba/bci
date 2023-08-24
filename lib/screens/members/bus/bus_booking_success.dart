@@ -3,7 +3,6 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/bus_controllers.dart';
 import 'package:bci/controllers/flights_controller.dart';
 import 'package:bci/models/bus_booking_models/bus_requery_model.dart';
-import 'package:bci/models/flight_booking_models/air_reprint_model.dart';
 import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,7 +22,7 @@ class _FlightBookingSuccessPageState extends State<BusBookingSuccessPage> {
 
   getback() {
     Get.offAll(
-      () => HelloConvexAppBar(),
+      () => MemberBottomNavBar(),
     );
   }
 

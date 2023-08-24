@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
-import 'package:bci/models/merchants_register_model.dart';
 import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';

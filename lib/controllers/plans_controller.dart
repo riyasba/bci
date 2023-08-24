@@ -1,7 +1,6 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_plan_details_model.dart';
-import 'package:bci/models/get_plan_details_model.dart';
 import 'package:bci/models/get_plans_model.dart';
 import 'package:bci/models/slider_model.dart';
 import 'package:bci/services/network/subscriptions_api_services/add_subscription_api_services.dart';
