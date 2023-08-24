@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/offerslist_model.dart';
+import '../services/network/settings_api_services/offerslist_api_service.dart';
+
 class SettingsController extends GetxController{
 
    RxInt index = 0.obs;
@@ -104,6 +107,28 @@ class SettingsController extends GetxController{
           ));
       }
       update();
+   }
+   
+   //offerslist
+   OffersListApiService offerslistapiservice = OffersListApiService();
+   List<Offersdata> offerslistdata = [];
+
+   offersList()async{
+      offerslistdata.clear();
+      dio.Response<dynamic> response = await offerslistapiservice.offerslist();
+      if(response.statusCode==200){
+        OffersListModel offerslistModel = OffersListModel.fromJson(response.data);
+        offerslistdata = offerslistModel.message;
+      }
+      else {
+       Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+     }
+     update();
    }
 
 }

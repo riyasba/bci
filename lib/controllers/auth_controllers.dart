@@ -18,11 +18,15 @@ import 'package:bci/services/network/categorys_api_services/sub_category_api_ser
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import '../models/offerslist_model.dart';
 import '../services/network/auth_api_services/member_register_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../services/network/categorys_api_services/filter_category_api_service.dart';
+
 class AuthController extends GetxController {
 //apis method call
+RxInt filterindex = 0.obs;
   MerchantRegisterApiServices merchantRegisterApiServices =
       MerchantRegisterApiServices();
 
@@ -265,6 +269,27 @@ class AuthController extends GetxController {
       categoryList = categoryModel.data;
     }
     update();
+  }
+
+  //offers filter 
+    FilterCategoryApiService filtercategoryapiservice = FilterCategoryApiService();
+
+     List<Offersdata> offerslistdata = [];
+
+  getoffersfilterCategory({required String categoryid})async{
+    dio.Response<dynamic> response = await filtercategoryapiservice.filtercategory(categoryId: categoryid);
+    if(response.statusCode == 200){
+       OffersListModel offerslistModel = OffersListModel.fromJson(response.data);
+        offerslistdata = offerslistModel.message;
+         update();
+        } else {
+          Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+        }
   }
 
   getSubCategoryList() async {
