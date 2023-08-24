@@ -18,18 +18,15 @@ class OthersServiceScreen extends StatefulWidget {
 }
 
 class _OthersServiceScreenState extends State<OthersServiceScreen> {
-
   final homeController = Get.find<HomeController>();
 
   @override
   void initState() {
-
     // TODO: implement initState
 
     super.initState();
 
     homeController.serviceList();
-   
   }
 
   @override
@@ -46,18 +43,20 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                   height: 150.h,
                   color: kblue,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 5,right: 5,bottom: 20),
+                    padding:
+                        const EdgeInsets.only(left: 5, right: 5, bottom: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
-                            onTap: Get.back,
-                            child: Container(
-                              height: 30,
-                              width: 30,
-                              child: Image.asset(
-                                  'assets/images/chevron-left (2).png'),
-                            )),
+                          onTap: Get.back,
+                          child: Container(
+                            height: 30,
+                            width: 30,
+                            child: Image.asset(
+                                'assets/images/chevron-left (2).png'),
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(right: 0),
                           child: Text(
@@ -70,9 +69,7 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                         ),
                         IconButton(
                             onPressed: () {
-
                               Get.to(NotificationScreen());
-                              
                             },
                             icon: Icon(
                               Icons.notifications,
@@ -132,16 +129,16 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                                     .serviceListData[index].amenties,
                                 vendorId: homeController
                                     .serviceListData[index].vendorId,
-                                    isCoupon: "",
-                                    isOffer: "",
-                                    isRecomended: "",
-                                    quantity: homeController.serviceListData[index].quantity,
-                                    unit: "",
-                                    couponAmount: "",
-                                    offerPercentage: "",
-                                    offerUptoAmount: "",
-                                    shareOption: ""
-                                    );
+                                isCoupon: "",
+                                isOffer: "",
+                                isRecomended: "",
+                                quantity: homeController
+                                    .serviceListData[index].quantity,
+                                unit: "",
+                                couponAmount: "",
+                                offerPercentage: "",
+                                offerUptoAmount: "",
+                                shareOption: "");
                         Get.to(ServiceDetailsScreen(
                           searchServicelist: searchServiceListData,
                         ));

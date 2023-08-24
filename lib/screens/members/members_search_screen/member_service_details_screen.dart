@@ -75,7 +75,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                 ),
                 ksizedbox10,
                 Text(
-                  'Services${widget.searchServicelist.id}',
+                  'Services',
                   style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
