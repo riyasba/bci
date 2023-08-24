@@ -140,10 +140,10 @@ class ProfileController extends GetxController {
   //redeem coupon
   RedeemCouponApiServices redeemCouponApiServices = RedeemCouponApiServices();
 
-  redeemCoupon({required String couponcode, required String serviceId}) async {
+  redeemCoupon({required String couponcode, required String serviceId,required String  vendorId}) async {
     String tempAmount = "0";
     dio.Response<dynamic> response = await redeemCouponApiServices
-        .redeemCouponApiServices(couponcode: couponcode, serviceId: serviceId);
+        .redeemCouponApiServices(couponcode: couponcode, serviceId: serviceId, vendorId: vendorId);
     if (response.statusCode == 200) {
       tempAmount = response.data["amount"].toString();
       Get.rawSnackbar(

@@ -32,10 +32,15 @@ class Home_screen1 extends StatefulWidget {
 
 class _Home_screen1State extends State<Home_screen1> {
 
+
   CarouselController sliderController = CarouselController();
+
   final profileController = Get.find<ProfileController>();
+
   final homeController = Get.find<HomeController>();
+
   final flightController = Get.find<FlightsController>();
+
   int activeIndex = 0;
 
   @override
@@ -61,19 +66,34 @@ class _Home_screen1State extends State<Home_screen1> {
       appBar: PreferredSize(
         
           preferredSize: const Size.fromHeight(250),
+
           child: ClipPath(
+
             clipper: SinCosineWaveClipper(),
+
             child: Container(
+
               height: 140,
+
               color: kblue,
+
+
               child: Padding(
+
                 padding: const EdgeInsets.only(bottom: 22, left: 15, right: 10),
+
                 child: Row(
+
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                   children: [
+
                     Image.asset('assets/images/projectlogo.png'),
+
                     GetBuilder<ProfileController>(
+                      
                       builder: (_) {
+
                         return profileController.profileData.isEmpty
                             ? Container()
                             : Text(

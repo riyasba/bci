@@ -53,30 +53,25 @@ Future main() async {
 
   firebaseNotification();
 
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print('Got a message whilst in the foreground!');
-    print('Message data: ${message.data}');
+  FirebaseMessaging.onMessage.listen(
+    (RemoteMessage message) {
+      print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}');
 
-    if (message.notification != null) {
-      print('Message also contained a notification: ${message.notification}');
+      if (message.notification != null) {
+        print('Message also contained a notification: ${message.notification}');
 
-      AwesomeNotifications().createNotification(
-
-        content: NotificationContent(
-
-            id: 10,
-
-            channelKey: 'basic_channel',
-
-            title: message.notification!.title,
-
-            body: message.notification!.body,
-            
-            actionType: ActionType.Default),
-            
-      );
-    }
-  });
+        AwesomeNotifications().createNotification(
+          content: NotificationContent(
+              id: 10,
+              channelKey: 'basic_channel',
+              title: message.notification!.title,
+              body: message.notification!.body,
+              actionType: ActionType.Default),
+        );
+      }
+    },
+  );
 
   Get.put(FlightsController());
   Get.put(SettingsController());

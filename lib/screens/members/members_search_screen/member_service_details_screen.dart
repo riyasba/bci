@@ -29,7 +29,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: InkWell(
-          onTap: (){
+          onTap: () {
             Get.back();
           },
           child: Icon(
@@ -75,7 +75,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                 ),
                 ksizedbox10,
                 Text(
-                  'Services',
+                  'Services${widget.searchServicelist.id}',
                   style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
@@ -134,7 +134,9 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                 await profileController.redeemCoupon(
                                     couponcode: redeemCouponcontroller.text,
                                     serviceId:
-                                        widget.searchServicelist.id.toString());
+                                        widget.searchServicelist.id.toString(),
+                                    vendorId:
+                                        widget.searchServicelist.vendorId);
 
                             double tAmount = double.parse(amount);
                             double tempSaleAmounz =

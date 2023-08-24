@@ -18,12 +18,16 @@ class OthersServiceScreen extends StatefulWidget {
 }
 
 class _OthersServiceScreenState extends State<OthersServiceScreen> {
+
   final homeController = Get.find<HomeController>();
 
   @override
   void initState() {
+
     // TODO: implement initState
+
     super.initState();
+
     homeController.serviceList();
    
   }
@@ -66,7 +70,9 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                         ),
                         IconButton(
                             onPressed: () {
+
                               Get.to(NotificationScreen());
+                              
                             },
                             icon: Icon(
                               Icons.notifications,

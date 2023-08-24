@@ -1,5 +1,4 @@
-import 'package:bci/authentications/generate_otp/member_login_screen.dart';
-import 'package:bci/authentications/otp_verification/otp_verification.dart';
+
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/models/members_register_model.dart';
