@@ -16,38 +16,6 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-  List todayimages = [
-    'assets/images/listnotiimage.png',
-    'assets/images/listnotiimage2.png',
-    'assets/images/listnotiimage3.png'
-  ];
-  List todaytitle = ['New Offers', 'Liquor Wine', 'Room Booking'];
-  List todaydiscription = [
-    'Hello Everyone new casual dress\noffer today launch this time just \ncheck the offers list and enjoy and\nhappiness user for offers',
-    'New Order Complete In pay and \njust wine taste for enjoy more\nthen orders get in offers',
-    'New Taji Hotels room booking \nconfirm enjoy your rooms and\nsleep check for full details\nbooking process',
-  ];
-  List todaysubtitle = [
-    'Few minutes ago',
-    '30 minutes ago',
-    '1 Hour ago',
-  ];
-  List yesterdayimage = [
-    'assets/images/listnotiimage4.png',
-    'assets/images/listnotiimage5.png',
-    'assets/images/listnotiimage6.png',
-  ];
-  List yesterdaytitle = [
-    'flight Offers in Tourism',
-    'New Subscriptions',
-    'Transaction completes'
-  ];
-  List yesterdaydiscriptions = [
-    'Just clik and booking this tourism \nand travel offers only for 2days',
-    'Get in new subscription options\nenjoys and Welcome to BCI process\nused for offers',
-    'Your amount transaction for your \noficial account and More check \namount your wallet'
-  ];
-  List yesterdaysubtitle = ['2 days ago', '2 days ago', '2 days ago'];
 
   @override
   void initState() {
@@ -104,9 +72,9 @@ final notificationController = Get.find<NotificationController>();
           )),
       body: GetBuilder<NotificationController>(
           builder: (_) {
-            return Container(
+            return  Container(
               height: size.height,
-              child: ListView.builder(
+              child:notificationController.notificationlist.isNotEmpty? ListView.builder(
                   itemCount: notificationController.notificationlist.length,
                   itemBuilder: (context, index) {
                     return Padding(
@@ -158,7 +126,7 @@ final notificationController = Get.find<NotificationController>();
                         ],
                       ),
                     );
-                  }),
+                  }):Center(child: Text('No Notification')),
             );
           }
         ),

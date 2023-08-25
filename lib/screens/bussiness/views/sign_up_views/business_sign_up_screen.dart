@@ -61,7 +61,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                 "Sign Up Now",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 32, fontWeight: FontWeight.w600, color: kblue),
+                    fontSize: 20, fontWeight: FontWeight.w600, color: kblue),
               ),
               ksizedbox10,
               Text(
@@ -291,341 +291,341 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       )),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: TextFormField(
-                  textInputAction: TextInputAction.next,
-                  controller: alternativeMobileController,
-                  keyboardType: TextInputType.phone,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(10),
-                    FilteringTextInputFormatter.digitsOnly,
-                    FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                  ],
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
-                      isCollapsed: false,
-                      isDense: true,
-                      contentPadding:
-                          const EdgeInsets.only(top: 12, bottom: 12, left: 15),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
-                      hintText: "Alternate Phone Number",
-                      hintStyle: TextStyle(
-                        color: kblue,
-                        fontWeight: FontWeight.w400,
-                      )),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: TextFormField(
-                  textInputAction: TextInputAction.next,
-                  controller: businessAddressController,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Business Address can't be empty";
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
-                      isCollapsed: false,
-                      isDense: true,
-                      contentPadding:
-                          const EdgeInsets.only(top: 12, bottom: 12, left: 15),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
-                      hintText: "Business Address",
-                      hintStyle: TextStyle(
-                        color: kblue,
-                        fontWeight: FontWeight.w400,
-                      )),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Obx(
-                () => Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        authController.isGstAvailable(true);
-                      },
-                      child: Container(
-                        height: 17,
-                        width: 17,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: kblue),
-                            color: authController.isGstAvailable.isTrue
-                                ? kblue
-                                : Colors.white,
-                            borderRadius: BorderRadius.circular(10)),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 7,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        authController.isGstAvailable(true);
-                      },
-                      child: Text(
-                        "Yes",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w400,
-                            color: kblue),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        authController.isGstAvailable(false);
-                      },
-                      child: Container(
-                        height: 17,
-                        width: 17,
-                        decoration: BoxDecoration(
-                            color: authController.isGstAvailable.isFalse
-                                ? kblue
-                                : Colors.white,
-                            border: Border.all(color: kblue),
-                            borderRadius: BorderRadius.circular(10)),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 7,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        authController.isGstAvailable(false);
-                      },
-                      child: Text(
-                        "No",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w400,
-                            color: kblue),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: TextFormField(
-                  textInputAction: TextInputAction.none,
-                  //controller: usernamecontroller,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) {
-                    if (authController.isGstAvailable.isTrue &&
-                        value!.isEmpty) {
-                      return "Gst Number can't be empty";
-                    }
-                    return null;
-                  },
-                  textCapitalization: TextCapitalization.characters,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(15),
-                  ],
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              const BorderSide(color: Color(0xff707070))),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              const BorderSide(color: Color(0xff707070))),
-                      isCollapsed: false,
-                      isDense: true,
-                      contentPadding:
-                          const EdgeInsets.only(top: 12, bottom: 12, left: 15),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              const BorderSide(color: Color(0xff707070))),
-                      hintText: "Gst No",
-                      hintStyle: TextStyle(
-                        color: kblue,
-                        fontWeight: FontWeight.w400,
-                      )
-                      ),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-                 checkvalue==true? TextField(
-                  controller: referalcodeController,
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              const BorderSide(color: Color(0xff707070))),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              const BorderSide(color: Color(0xff707070))),
-                      isCollapsed: false,
-                      isDense: true,
-                      contentPadding:
-                          const EdgeInsets.only(top: 12, bottom: 12, left: 15),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              const BorderSide(color: Color(0xff707070))),
-                                hintText: 'Referal Code',
-                                  hintStyle: TextStyle(
-                        color: kblue,
-                        fontWeight: FontWeight.w400,
-                      )
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 15),
+              //   child: TextFormField(
+              //     textInputAction: TextInputAction.next,
+              //     controller: alternativeMobileController,
+              //     keyboardType: TextInputType.phone,
+              //     inputFormatters: [
+              //       LengthLimitingTextInputFormatter(10),
+              //       FilteringTextInputFormatter.digitsOnly,
+              //       FilteringTextInputFormatter.deny(RegExp(r'\s')),
+              //     ],
+              //     autovalidateMode: AutovalidateMode.onUserInteraction,
+              //     decoration: InputDecoration(
+              //         fillColor: Colors.white,
+              //         filled: true,
+              //         enabledBorder: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(5),
+              //             borderSide:
+              //                 const BorderSide(color:  Color(0xff707070))),
+              //         focusedBorder: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(5),
+              //             borderSide:
+              //                 const BorderSide(color:  Color(0xff707070))),
+              //         isCollapsed: false,
+              //         isDense: true,
+              //         contentPadding:
+              //             const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+              //         border: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(5),
+              //             borderSide:
+              //                 const BorderSide(color:  Color(0xff707070))),
+              //         hintText: "Alternate Phone Number",
+              //         hintStyle: TextStyle(
+              //           color: kblue,
+              //           fontWeight: FontWeight.w400,
+              //         )),
+              //   ),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 15),
+              //   child: TextFormField(
+              //     textInputAction: TextInputAction.next,
+              //     controller: businessAddressController,
+              //     autovalidateMode: AutovalidateMode.onUserInteraction,
+              //     validator: (value) {
+              //       if (value!.isEmpty) {
+              //         return "Business Address can't be empty";
+              //       }
+              //       return null;
+              //     },
+              //     decoration: InputDecoration(
+              //         fillColor: Colors.white,
+              //         filled: true,
+              //         enabledBorder: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(5),
+              //             borderSide:
+              //                 const BorderSide(color:  Color(0xff707070))),
+              //         focusedBorder: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(5),
+              //             borderSide:
+              //                 const BorderSide(color:  Color(0xff707070))),
+              //         isCollapsed: false,
+              //         isDense: true,
+              //         contentPadding:
+              //             const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+              //         border: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(5),
+              //             borderSide:
+              //                 const BorderSide(color:  Color(0xff707070))),
+              //         hintText: "Business Address",
+              //         hintStyle: TextStyle(
+              //           color: kblue,
+              //           fontWeight: FontWeight.w400,
+              //         )),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 15,
+              // ),
+              // Obx(
+              //   () => Row(
+              //     children: [
+              //       InkWell(
+              //         onTap: () {
+              //           authController.isGstAvailable(true);
+              //         },
+              //         child: Container(
+              //           height: 17,
+              //           width: 17,
+              //           decoration: BoxDecoration(
+              //               border: Border.all(color: kblue),
+              //               color: authController.isGstAvailable.isTrue
+              //                   ? kblue
+              //                   : Colors.white,
+              //               borderRadius: BorderRadius.circular(10)),
+              //         ),
+              //       ),
+              //       const SizedBox(
+              //         width: 7,
+              //       ),
+              //       InkWell(
+              //         onTap: () {
+              //           authController.isGstAvailable(true);
+              //         },
+              //         child: Text(
+              //           "Yes",
+              //           textAlign: TextAlign.center,
+              //           style: TextStyle(
+              //               fontSize: 17,
+              //               fontWeight: FontWeight.w400,
+              //               color: kblue),
+              //         ),
+              //       ),
+              //       const SizedBox(
+              //         width: 15,
+              //       ),
+              //       InkWell(
+              //         onTap: () {
+              //           authController.isGstAvailable(false);
+              //         },
+              //         child: Container(
+              //           height: 17,
+              //           width: 17,
+              //           decoration: BoxDecoration(
+              //               color: authController.isGstAvailable.isFalse
+              //                   ? kblue
+              //                   : Colors.white,
+              //               border: Border.all(color: kblue),
+              //               borderRadius: BorderRadius.circular(10)),
+              //         ),
+              //       ),
+              //       const SizedBox(
+              //         width: 7,
+              //       ),
+              //       InkWell(
+              //         onTap: () {
+              //           authController.isGstAvailable(false);
+              //         },
+              //         child: Text(
+              //           "No",
+              //           textAlign: TextAlign.center,
+              //           style: TextStyle(
+              //               fontSize: 17,
+              //               fontWeight: FontWeight.w400,
+              //               color: kblue),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 15),
+              //   child: TextFormField(
+              //     textInputAction: TextInputAction.none,
+              //     //controller: usernamecontroller,
+              //     autovalidateMode: AutovalidateMode.onUserInteraction,
+              //     validator: (value) {
+              //       if (authController.isGstAvailable.isTrue &&
+              //           value!.isEmpty) {
+              //         return "Gst Number can't be empty";
+              //       }
+              //       return null;
+              //     },
+              //     textCapitalization: TextCapitalization.characters,
+              //     inputFormatters: [
+              //       LengthLimitingTextInputFormatter(15),
+              //     ],
+              //     decoration: InputDecoration(
+              //         fillColor: Colors.white,
+              //         filled: true,
+              //         enabledBorder: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(5),
+              //             borderSide:
+              //                 const BorderSide(color: Color(0xff707070))),
+              //         focusedBorder: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(5),
+              //             borderSide:
+              //                 const BorderSide(color: Color(0xff707070))),
+              //         isCollapsed: false,
+              //         isDense: true,
+              //         contentPadding:
+              //             const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+              //         border: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(5),
+              //             borderSide:
+              //                 const BorderSide(color: Color(0xff707070))),
+              //         hintText: "Gst No",
+              //         hintStyle: TextStyle(
+              //           color: kblue,
+              //           fontWeight: FontWeight.w400,
+              //         )
+              //         ),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 15,
+              // ),
+              //    checkvalue==true? TextField(
+              //     controller: referalcodeController,
+              //       decoration: InputDecoration(
+              //         fillColor: Colors.white,
+              //         filled: true,
+              //         enabledBorder: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(5),
+              //             borderSide:
+              //                 const BorderSide(color: Color(0xff707070))),
+              //         focusedBorder: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(5),
+              //             borderSide:
+              //                 const BorderSide(color: Color(0xff707070))),
+              //         isCollapsed: false,
+              //         isDense: true,
+              //         contentPadding:
+              //             const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+              //         border: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(5),
+              //             borderSide:
+              //                 const BorderSide(color: Color(0xff707070))),
+              //                   hintText: 'Referal Code',
+              //                     hintStyle: TextStyle(
+              //           color: kblue,
+              //           fontWeight: FontWeight.w400,
+              //         )
                           
-                  ),
+              //     ),
                                  
-                                ):Text(''),
-                                ksizedbox20,
-                                Row(
-                                  children: [
-                                    Checkbox(value: checkvalue, 
-                                    onChanged: (value){
-                                      setState(() {
-                                        checkvalue = value!;
-                                      });
-                                    }),
-                                    Text('Referal Code')
-                                  ],
-                                ),
-                              SizedBox(
-                                height: 15,
-                              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        onTap: () async {
-                          final ImagePicker _picker = ImagePicker();
-                          // Pick an image
-                          final XFile? tempimage = await _picker.pickImage(
-                              source: ImageSource.gallery);
+              //                   ):Text(''),
+              //                   ksizedbox20,
+                              //   Row(
+                              //     children: [
+                              //       Checkbox(value: checkvalue, 
+                              //       onChanged: (value){
+                              //         setState(() {
+                              //           checkvalue = value!;
+                              //         });
+                              //       }),
+                              //       Text('Referal Code')
+                              //     ],
+                              //   ),
+                              // SizedBox(
+                              //   height: 15,
+                              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         InkWell(
+              //           onTap: () async {
+              //             final ImagePicker _picker = ImagePicker();
+              //             // Pick an image
+              //             final XFile? tempimage = await _picker.pickImage(
+              //                 source: ImageSource.gallery);
 
-                          setState(() {
-                            aadharCardImage = File(tempimage!.path);
-                          });
-                        },
-                        child: Container(
-                          height: 130,
-                          width: 150,
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 215, 215, 213),
-                              borderRadius: BorderRadius.circular(3)),
-                          child: aadharCardImage != null
-                              ? Image.file(aadharCardImage!)
-                              : const Center(
-                                  child: Icon(
-                                    Icons.cloud_upload,
-                                    color: Colors.grey,
-                                    size: 45,
-                                  ),
-                                ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Aadhaar Card",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w400,
-                            color: kblue),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        onTap: () async {
-                          final ImagePicker _picker = ImagePicker();
-                          // Pick an image
-                          final XFile? tempimage = await _picker.pickImage(
-                              source: ImageSource.gallery);
+              //             setState(() {
+              //               aadharCardImage = File(tempimage!.path);
+              //             });
+              //           },
+              //           child: Container(
+              //             height: 130,
+              //             width: 150,
+              //             decoration: BoxDecoration(
+              //                 color: const Color.fromARGB(255, 215, 215, 213),
+              //                 borderRadius: BorderRadius.circular(3)),
+              //             child: aadharCardImage != null
+              //                 ? Image.file(aadharCardImage!)
+              //                 : const Center(
+              //                     child: Icon(
+              //                       Icons.cloud_upload,
+              //                       color: Colors.grey,
+              //                       size: 45,
+              //                     ),
+              //                   ),
+              //           ),
+              //         ),
+              //         const SizedBox(
+              //           height: 5,
+              //         ),
+              //         Text(
+              //           "Aadhaar Card",
+              //           textAlign: TextAlign.center,
+              //           style: TextStyle(
+              //               fontSize: 17,
+              //               fontWeight: FontWeight.w400,
+              //               color: kblue),
+              //         ),
+              //       ],
+              //     ),
+              //     Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         InkWell(
+              //           onTap: () async {
+              //             final ImagePicker _picker = ImagePicker();
+              //             // Pick an image
+              //             final XFile? tempimage = await _picker.pickImage(
+              //                 source: ImageSource.gallery);
 
-                          setState(() {
-                            panCardImage = File(tempimage!.path);
-                          });
-                        },
-                        child: Container(
-                          height: 130,
-                          width: 150,
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 215, 215, 213),
-                              borderRadius: BorderRadius.circular(3)),
-                          child: panCardImage != null
-                              ? Image.file(panCardImage!)
-                              : const Center(
-                                  child: Icon(
-                                    Icons.cloud_upload,
-                                    color: Colors.grey,
-                                    size: 45,
-                                  ),
-                                ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Pan Card",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w400,
-                            color: kblue),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              //             setState(() {
+              //               panCardImage = File(tempimage!.path);
+              //             });
+              //           },
+              //           child: Container(
+              //             height: 130,
+              //             width: 150,
+              //             decoration: BoxDecoration(
+              //                 color: const Color.fromARGB(255, 215, 215, 213),
+              //                 borderRadius: BorderRadius.circular(3)),
+              //             child: panCardImage != null
+              //                 ? Image.file(panCardImage!)
+              //                 : const Center(
+              //                     child: Icon(
+              //                       Icons.cloud_upload,
+              //                       color: Colors.grey,
+              //                       size: 45,
+              //                     ),
+              //                   ),
+              //           ),
+              //         ),
+              //         const SizedBox(
+              //           height: 5,
+              //         ),
+              //         Text(
+              //           "Pan Card",
+              //           textAlign: TextAlign.center,
+              //           style: TextStyle(
+              //               fontSize: 17,
+              //               fontWeight: FontWeight.w400,
+              //               color: kblue),
+              //         ),
+              //       ],
+              //     ),
+              //   ],
+              // ),
               ksizedbox40,
               Obx(
                 () => authController.isLoading.isTrue
@@ -660,39 +660,17 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
                             if (merchantCategory != null) {
-                              if (aadharCardImage == null) {
-                                Get.rawSnackbar(
-                                    backgroundColor: Colors.red,
-                                    messageText: Text(
-                                      "Select Aadhar card Image",
-                                      style: primaryFont.copyWith(
-                                          color: Colors.white),
-                                    ));
-                              } else if (panCardImage == null) {
-                                Get.rawSnackbar(
-                                    backgroundColor: Colors.red,
-                                    messageText: Text(
-                                      "Select Pan card Image",
-                                      style: primaryFont.copyWith(
-                                          color: Colors.white),
-                                    ));
-                              } else {
+                            
                                 MerchantRegisterModel merchantRegisterModel =
                                     MerchantRegisterModel(
-                                        aadharProof: aadharCardImage!.path,
-                                        address: businessAddressController.text,
-                                        alternateMobile:
-                                            alternativeMobileController.text,
-                                        categoryId:
-                                            merchantCategory.id.toString(),
+                      
+        
                                        
                                         email: emailIdController.text,
-                                        gstNo: gstNoController.text,
+            
                                         mobile: phoneNumberController.text,
                                         name: merchantDistplaynameController.text,
-                                        panProof: panCardImage!.path,
-                                        password: "12345678",
-                                        passwordConfirmation: "12345678",
+                              
                                         roleId: "5");
 
                                 authController.registerMerchants(
@@ -708,7 +686,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                                         color: Colors.white),
                                   ));
                             }
-                          }
+                      
                         },
                         child: Container(
                           height: 50,

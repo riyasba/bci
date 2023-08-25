@@ -12,23 +12,11 @@ class MerchantRegisterApiServices extends BaseApiService {
     try {
       var dio = Dio();
       FormData formData = FormData.fromMap({
-        "category_id": merchantRegisterModel.categoryId,
         //"subcategory_id": merchantRegisterModel.subcategoryId,
         "name": merchantRegisterModel.name,
         "email": merchantRegisterModel.email,
         "mobile": merchantRegisterModel.mobile,
-        "alternate_mobile": merchantRegisterModel.alternateMobile,
-        "gst_no": merchantRegisterModel.gstNo,
-        "address": merchantRegisterModel.address,
-        "aadhar_proof": await MultipartFile.fromFile(
-            merchantRegisterModel.aadharProof,
-            filename: merchantRegisterModel.gstNo),
-        "pan_proof": await MultipartFile.fromFile(
-            merchantRegisterModel.panProof,
-            filename: merchantRegisterModel.name),
         "role_id": "5",
-        "password": "1234567",
-        "password_confirmation": "1234567"
       });
 
       var response = await dio.post(registerURl,
