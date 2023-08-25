@@ -99,7 +99,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     padding: const EdgeInsets.only(top: 56, left: 20),
                     child: InkWell(
                       onTap: () {
-                        Get.to(MyAccountScreen());
+                        Get.to(const MyAccountScreen());
                       },
                       child: Row(
                         children: [
@@ -126,8 +126,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 0),
+                        const Padding(
+                          padding: EdgeInsets.only(right: 0),
                           child: Image(
                             image: AssetImage(
                               'assets/images/cirlewallet.png',
@@ -143,8 +143,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             style: TextStyle(fontSize: 18, color: kblue),
                           ),
                         ),
-                        Text(
-                          '₹ 1.00',
+                        profileController.profileData.isEmpty ? const Text("0.0") : Text(
+                          '₹ ${profileController.profileData.first.walletAmount}',
                           style: TextStyle(
                               fontSize: 18,
                               color: kblue,
@@ -165,7 +165,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(color: kwhite, boxShadow: <BoxShadow>[
                           BoxShadow(
-                              offset: Offset(0.0, 0.75), blurRadius: 5, color: kgrey)
+                              offset:const Offset(0.0, 0.75), blurRadius: 5, color: kgrey)
                         ]),
                         child: Column(
                           children: [
@@ -199,7 +199,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         color: kOrange,
                                         borderRadius: BorderRadius.circular(4)),
                                     child: Center(
-                                        child: settingsController.getWalletData.isEmpty ? Text("") : Text(
+                                        child: settingsController.getWalletData.isEmpty ? const Text("") : Text(
                                                settingsController.getWalletData.first.earnings.todayEarnings.toString(),
                                       style: TextStyle(color: kwhite),
                                     )),
@@ -211,7 +211,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         color: kOrange,
                                         borderRadius: BorderRadius.circular(4)),
                                     child: Center(
-                                        child: settingsController.getWalletData.isEmpty ? Text("") : Text(
+                                        child: settingsController.getWalletData.isEmpty ? const Text("") : Text(
                                                settingsController.getWalletData.first.earnings.thisMonthEarnings.toString(),
                                       style: TextStyle(color: kwhite),
                                     )),
@@ -223,7 +223,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         color: kOrange,
                                         borderRadius: BorderRadius.circular(4)),
                                     child: Center(
-                                        child: settingsController.getWalletData.isEmpty ? Text("") : Text(
+                                        child: settingsController.getWalletData.isEmpty ? const Text("") : Text(
                                                settingsController.getWalletData.first.earnings.totalEarnings.toString(),
                                       style: TextStyle(color: kwhite),
                                     )),
@@ -267,7 +267,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(color: kwhite, boxShadow: <BoxShadow>[
                           BoxShadow(
-                              offset: Offset(0.0, 0.75), blurRadius: 5, color: kgrey)
+                              offset:const  Offset(0.0, 0.75), blurRadius: 5, color: kgrey)
                         ]),
                         child: Column(
                           children: [
@@ -302,7 +302,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         color: kOrange,
                                         borderRadius: BorderRadius.circular(4)),
                                     child: Center(
-                                        child: settingsController.getWalletData.isEmpty ? Text("") : Text(
+                                        child: settingsController.getWalletData.isEmpty ? const Text("") : Text(
                                                settingsController.getWalletData.first.bookings.todayBooking.toString(),
                                       style: TextStyle(color: kwhite),
                                     )),
@@ -314,7 +314,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         color: kOrange,
                                         borderRadius: BorderRadius.circular(4)),
                                     child: Center(
-                                        child: settingsController.getWalletData.isEmpty ? Text("") : Text(
+                                        child: settingsController.getWalletData.isEmpty ? const Text("") : Text(
                                                settingsController.getWalletData.first.bookings.thisMonthBooking.toString(),
                                       style: TextStyle(color: kwhite),
                                     )),
@@ -326,7 +326,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         color: kOrange,
                                         borderRadius: BorderRadius.circular(4)),
                                     child: Center(
-                                        child: settingsController.getWalletData.isEmpty ? Text("") : Text(
+                                        child: settingsController.getWalletData.isEmpty ? const Text("") : Text(
                                                settingsController.getWalletData.first.bookings.totalBooking.toString(),
                                       style: TextStyle(color: kwhite),
                                     )),
@@ -370,7 +370,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(color: kwhite, boxShadow: <BoxShadow>[
                           BoxShadow(
-                              offset: Offset(0.0, 0.75), color: kgrey, blurRadius: 5)
+                              offset:const Offset(0.0, 0.75), color: kgrey, blurRadius: 5)
                         ]),
                         child: Column(
                           children: [
@@ -405,7 +405,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         color: kOrange,
                                         borderRadius: BorderRadius.circular(4)),
                                     child: Center(
-                                        child: settingsController.getWalletData.isEmpty ? Text("") : Text(
+                                        child: settingsController.getWalletData.isEmpty ? const Text("") : Text(
                                                settingsController.getWalletData.first.referrals.todayReferrals.toString(),
                                       style: TextStyle(color: kwhite),
                                     )),
@@ -417,7 +417,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         color: kOrange,
                                         borderRadius: BorderRadius.circular(4)),
                                     child: Center(
-                                        child: settingsController.getWalletData.isEmpty ? Text("") : Text(
+                                        child: settingsController.getWalletData.isEmpty ? const Text("") : Text(
                                                settingsController.getWalletData.first.referrals.thisMonthReferrals.toString(),
                                       style: TextStyle(color: kwhite),
                                     )),
@@ -429,7 +429,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         color: kOrange,
                                         borderRadius: BorderRadius.circular(4)),
                                     child: Center(
-                                        child: settingsController.getWalletData.isEmpty ? Text("") : Text(
+                                        child: settingsController.getWalletData.isEmpty ? const Text("") : Text(
                                                settingsController.getWalletData.first.referrals.totalReferrals.toString(),
                                       style: TextStyle(color: kwhite),
                                     )),

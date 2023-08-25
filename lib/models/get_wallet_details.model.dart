@@ -120,7 +120,7 @@ class Referrals {
     });
 
     factory Referrals.fromJson(Map<String, dynamic> json) => Referrals(
-        totalReferrals: json["total_referrals"],
+        totalReferrals: json["total_referrals"]?? 0,
         todayReferrals: json["today_referrals"],
         thisMonthReferrals: json["this_month_referrals"],
     );

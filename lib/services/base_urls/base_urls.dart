@@ -73,4 +73,7 @@ abstract class BaseApiService {
 
    //vendorbanner 
    final String vendorbannerURL = 'https://bci.batechnology.in/api/auth/get_vendor_slider';
+
+   //vendor redeemption coupons
+   final String redeemprtionCouponsApiUrl = "https://bci.batechnology.in/api/auth/vedorRedeemCoupons";
 }

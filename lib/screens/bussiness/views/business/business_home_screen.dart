@@ -81,7 +81,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
               ),
             ),
           )),
-      body: ListView(physics: BouncingScrollPhysics(), children: [
+      body: ListView(physics:const BouncingScrollPhysics(), children: [
         Column(
           children: [
              GetBuilder<VendorBannerController>(
@@ -95,7 +95,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image:
-                                  NetworkImage(vendorController.postlist.first.image))),
+                                  NetworkImage(vendorController.postlist[i].image))),
                       ),
                     ],
                     options: CarouselOptions(
@@ -241,34 +241,25 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     ),
                   ),
                 ),
-                  InkWell(
-                  onTap: () {
-                    Get.to(const ServiceBookingScreen());
-                  },
-                  child: Container(
-                    height: 140,
-                    child: Column(
-                      children: [
-                        Image.asset('assets/images/servicebooking.png'),
-                        const Text(
-                          'Service\nBookings\nRequest',
-                          textAlign: TextAlign.center,
-                        )
-                      ],
-                    ),
-                  ),
-                )
-                 
-              
-              ],
-            ),
-          
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                
-                 InkWell(
+                //   InkWell(
+                //   onTap: () {
+                //     Get.to(const ServiceBookingScreen());
+                //   },
+                //   child: Container(
+                //     height: 140,
+                //     child: Column(
+                //       children: [
+                //         Image.asset('assets/images/servicebooking.png'),
+                //         const Text(
+                //           'Service\nBookings\nRequest',
+                //           textAlign: TextAlign.center,
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                // )
+
+                InkWell(
                   onTap: () {
                     Get.to(const MyAccountScreen());
                   },
@@ -284,7 +275,17 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                       ],
                     ),
                   ),
-                ),
+                ),   
+              
+              ],
+            ),
+          
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                
+                 
                       InkWell(
                   onTap: () {
                     Get.to(const ContactAdmin());
@@ -314,7 +315,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 //     ),
                 //   ),
                 // ),
-              
+                Container(width: 90,),
                 Container(width: 90,),
                 // InkWell(
                 //   onTap: () {},

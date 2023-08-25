@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/category_model.dart';
+import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:bci/screens/bussiness/views/home_screen/settings/edit_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
@@ -153,7 +154,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                     padding: const EdgeInsets.only(right: 20),
                     child: IconButton(
                         onPressed: () {
-                          Get.back();
+                          Get.offAll(HomeBottomnavigationBar(index: 4,));
                         },
                         icon: Icon(
                           Icons.arrow_back_ios,

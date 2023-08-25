@@ -5,6 +5,7 @@ import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/models/category_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/merchants_register_model.dart';
+import 'package:bci/models/redeemption_Coupons_model.dart';
 import 'package:bci/models/sub_category_model.dart';
 import 'package:bci/screens/bussiness/views/generations/generate_otp_screen.dart';
 import 'package:bci/screens/bussiness/views/generations/login_otp_screen.dart';
@@ -16,6 +17,7 @@ import 'package:bci/services/network/auth_api_services/merchant_api_services.dar
 import 'package:bci/services/network/auth_api_services/verify_otp_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_category_services.dart';
 import 'package:bci/services/network/categorys_api_services/sub_category_api_services.dart';
+import 'package:bci/services/network/coupons_redeemption_api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
@@ -329,4 +331,25 @@ class AuthController extends GetxController {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
+
+  //coupon redeemption api
+  CouponsRedeemptionApiService couponsRedeemptionApiService = CouponsRedeemptionApiService();
+  List<CouponRedeemptionData> couponRedeemptionData = [];
+
+  redeemptionCoupon() async {
+     
+     dio.Response<dynamic> response = await couponsRedeemptionApiService.couponsRedeemptionApiService();
+     if(response.statusCode == 200){
+       RedeemtioncouponsListModel redeemtioncouponsListModel = RedeemtioncouponsListModel.fromJson(response.data);
+       couponRedeemptionData = redeemtioncouponsListModel.data;
+     } else {
+       Get.snackbar("Something went wrong", "",
+          colorText: Colors.white,
+          backgroundColor: Colors.red,
+          snackPosition: SnackPosition.BOTTOM);
+     }
+     update();
+  }
+
+
 }

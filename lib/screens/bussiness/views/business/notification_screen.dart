@@ -57,9 +57,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
 final notificationController = Get.find<NotificationController>();
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize:const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -79,8 +80,8 @@ final notificationController = Get.find<NotificationController>();
                           color: kwhite,
                         )),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 22),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 22),
                     child: Text(
                       'Notification',
                       style: TextStyle(
@@ -90,7 +91,7 @@ final notificationController = Get.find<NotificationController>();
                     ),
                   ),Padding(
                     padding: const EdgeInsets.only(right: 20),
-                    child: InkWell(onTap: (){Get.to(ContactAdmin());},
+                    child: InkWell(onTap: (){Get.to(const ContactAdmin());},
                       child: Image.asset('assets/images/3669173_help_ic_icon.png')),
                   )
                   // Padding(
@@ -101,161 +102,66 @@ final notificationController = Get.find<NotificationController>();
               ),
             ),
           )),
-      body: ListView(children: [
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      'Today',
-                      style:
-                          TextStyle(fontSize: 21, fontWeight: FontWeight.bold,
-                          color: kgrey),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            GetBuilder<NotificationController>(
-              builder: (context) {
-                return ListView.builder(
-                    itemCount: notificationController.notificationlist.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 110,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                            
-                                  //  boxShadow: <BoxShadow>[
-                                  //   BoxShadow(
-                                  //     offset: Offset(0.0, 0.75),
-                                  //     blurRadius: 5,
-                                  //     color: kgrey
-                                  //   )
-                                  //  ]
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    notificationController.notificationlist[index].title,
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    notificationController.notificationlist[index].message,
-                                    style: TextStyle(
-                                        fontSize: 12, color: kgrey),
-                                  ),
-                                  Text(
-                                    formatDate(notificationController.notificationlist[index].createdAt,
-                                     [dd ,'-',mm,'-',yyyy])
-                                    ,
-                                    style: TextStyle(
-                                        fontSize: 13.5,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
+      body: GetBuilder<NotificationController>(
+          builder: (_) {
+            return Container(
+              height: size.height,
+              child: ListView.builder(
+                  itemCount: notificationController.notificationlist.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 110,
+                            width: MediaQuery.of(context).size.width,
+                            decoration:const BoxDecoration(
+                          
+                                //  boxShadow: <BoxShadow>[
+                                //   BoxShadow(
+                                //     offset: Offset(0.0, 0.75),
+                                //     blurRadius: 5,
+                                //     color: kgrey
+                                //   )
+                                //  ]
                             ),
-                            Divider(
-                              thickness: 1.5,
-                            )
-                          ],
-                        ),
-                      );
-                    });
-              }
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 18,top: 10),
-                  child: Text(
-                    'Yesterday',
-                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold,
-                    color: kgrey),
-                  ),
-                ),
-              ],
-            ),ksizedbox10,
-            GetBuilder<NotificationController>(
-              builder: (context) {
-                return ListView.builder(
-                    itemCount: notificationController
-                    .notificationlist.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 110,
-                              width: MediaQuery.of(context).size.width,
-                             
-                              decoration: BoxDecoration(
-                                  
-                                  //  boxShadow: <BoxShadow>[
-                                  //   BoxShadow(
-                                  //     offset: Offset(0.0, 0.75),
-                                  //     blurRadius: 5,
-                                  //     color: kgrey
-                                  //   )
-                                  //  ]
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    notificationController.notificationlist[index].title,
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    notificationController.notificationlist[index].message,
-                                    style: TextStyle(
-                                        fontSize: 13, color: kgrey),
-                                  ),
-                                  Text(
-                                    formatDate( notificationController.notificationlist[index].createdAt, [
-                                      dd,"-",mm,"-",yyyy
-                                    ])
-                                   
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  notificationController.notificationlist[index].title,
+                                  style:const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  notificationController.notificationlist[index].message,
+                                  style: TextStyle(
+                                      fontSize: 12, color: kgrey),
+                                ),
+                                Text(
+                                  formatDate(notificationController.notificationlist[index].createdAt,
+                                   [dd ,'-',mm,'-',yyyy])
                                   ,
-                                    style: TextStyle(
-                                        fontSize: 13.5,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
+                                  style:const TextStyle(
+                                      fontSize: 13.5,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
                             ),
-                            Divider(
-                              thickness: 1.5,
-                            )
-                          ],
-                        ),
-                      );
-                    });
-              }
-            ),
-            ksizedbox20,
-          ],
+                          ),
+                          const Divider(
+                            thickness: 1.5,
+                          )
+                        ],
+                      ),
+                    );
+                  }),
+            );
+          }
         ),
-      ]),
     );
   }
 }

@@ -317,7 +317,8 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                               serviceController.bookingListData[index].service, 
                               serviceController.bookingListData[index].description, 
                               serviceController.bookingListData[index].purchasePrice,
-                              serviceController.bookingListData[index].quantity
+                              serviceController.bookingListData[index].quantity,
+                              serviceController.bookingListData[index].user.name,
                               );
                         },
                         child: Container(
@@ -332,7 +333,9 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       top: 10, left: 5, right: 10, bottom: 10),
-                                      child: Image.network(serviceController.bookingListData[index].image,fit: BoxFit.contain,),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(5),
+                                        child: Image.network(serviceController.bookingListData[index].image,fit: BoxFit.cover,)),
                                   // child: Image.asset(
                                   //   bookingimage[index],
                                   //   fit: BoxFit.contain,
@@ -360,7 +363,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                                           serviceController.bookingListData[index].description,
                                           maxLines: 5,
                                           style:
-                                              TextStyle(fontSize: 12, color: kblue),
+                                              TextStyle(fontSize: 12, color: kgrey),
                                         ),
                                       ),
                                     ),
@@ -380,7 +383,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
     );
   }
 
-  Future<void> dialogBuilder(BuildContext context,String img, String tit, String date, String amt, String qty) {
+  Future<void> dialogBuilder(BuildContext context,String img, String tit, String des, String amt, String qty, String cusName,) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context, ) {
@@ -425,30 +428,30 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                                width: 90,
                              child: Text(
                               tit,
-                              style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                              style: TextStyle(fontSize: 15, color: kgrey,fontWeight: FontWeight.w500),
                                                  ),
                            ),
                          ],
                        ),
                        Divider(thickness: 1,),
-                       Row(
-                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                         children: [
-                         Text(
-                            'Date',
-                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
-                      ),
-                           Container(
-                               width: 90,
-                             child: Text(
-                              '19/06/23',
-                              style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
-                                                 ),
-                           ),
-                         ],
-                       ),
+                      //  Row(
+                      //    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //    children: [
+                      //    Text(
+                      //       'Date',
+                      //       style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      // ),
+                      //      Container(
+                      //          width: 90,
+                      //        child: Text(
+                      //         date,
+                      //         style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                      //                            ),
+                      //      ),
+                      //    ],
+                      //  ),
                       
-                       Divider(thickness: 1,),
+                      //  Divider(thickness: 1,),
                        Row(
                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                          children: [
@@ -459,30 +462,30 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                            Container(
                                width: 90,
                              child: Text(
-                              'Riyas',
-                              style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                              cusName,
+                              style: TextStyle(fontSize: 15, color: kgrey,fontWeight: FontWeight.w500),
                                                  ),
                            ),
                          ],
                        ),
-                       Divider(thickness: 1,),
-                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 150,
-                            child: Text('Customer Details',
-                              style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Container(
-                            width: 90,
-                            child: Text('20,balaji nagar,\nanna nagar, \nchennai',
-                              style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),),
-                          )
-                        ],
-                       ),
-                       Divider(thickness: 1,),
+                       const Divider(thickness: 1,),
+                      //  Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Container(
+                      //       width: 150,
+                      //       child: Text('Status',
+                      //         style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      //       ),
+                      //     ),
+                      //     Container(
+                      //       width: 90,
+                      //       child: Text(sts,
+                      //         style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),),
+                      //     )
+                      //   ],
+                      //  ),
+                      //  Divider(thickness: 1,),
                        Row(
                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                          children: [
@@ -494,24 +497,24 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                                width: 90,
                              child: Text(
                               qty,
-                              style: TextStyle(fontSize: 15, color: kblue,fontWeight: FontWeight.w500),
+                              style: TextStyle(fontSize: 15, color: kgrey,fontWeight: FontWeight.w500),
                                                  ),
                            ),
                          ],
                        ),
-                       Divider(thickness: 1,),
+                       const Divider(thickness: 1,),
                        Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                          children: [
-                         Text(
+                         const Text(
                             'Price',
                             style: TextStyle(fontSize: 16, color: Colors.green,fontWeight: FontWeight.bold),
                       ),
                            Container(
                                width: 90,
                              child: Text(
-                              amt,
-                              style: TextStyle(fontSize: 15, color: Colors.green,fontWeight: FontWeight.w500),
+                              "₹ ${amt}",
+                              style:const TextStyle(fontSize: 15, color: Colors.green,fontWeight: FontWeight.w500),
                                                  ),
                            ),
                          ],

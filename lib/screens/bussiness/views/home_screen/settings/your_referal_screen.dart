@@ -23,6 +23,7 @@ class _BusinessYourReferralScreenState extends State<BusinessYourReferralScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
+    settingsController.getWalletList();
     settingsController.generateRefCode();
   }
 
@@ -146,7 +147,21 @@ class _BusinessYourReferralScreenState extends State<BusinessYourReferralScreen>
                       color: kblue,
                       fontWeight: FontWeight.w600),
                 ),
-                Referal_containors(),kwidth10,  Referal_containors() ,kwidth10, Referal_containors()
+                Container(
+                  height: 30,
+      width: 30,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(7), color: korange),
+      child: Center(
+          child:settingsController.getWalletData.isEmpty ? const Text("") : 
+          Text(settingsController.getWalletData.first.referrals.totalReferrals.toString(),
+        style: TextStyle(
+            color: kwhite,
+            fontSize: 18,
+            fontWeight: FontWeight.w600),
+      )),
+      
+    ),
               ],
             ),
             ksizedbox40,
@@ -199,8 +214,8 @@ class _BusinessYourReferralScreenState extends State<BusinessYourReferralScreen>
   }
 }
 
-class Referal_containors extends StatelessWidget {
-  const Referal_containors({
+class  ReferalContainors extends StatelessWidget {
+  const ReferalContainors({
     super.key,
   });
 
@@ -208,8 +223,7 @@ class Referal_containors extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-          child: Text(
-        '0',
+          child: Text("",
         style: TextStyle(
             color: kwhite,
             fontSize: 18,

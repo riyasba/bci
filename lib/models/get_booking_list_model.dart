@@ -33,10 +33,11 @@ class BookingListData {
     String paymentId;
     String quantity;
     String purchasePrice;
-    String status;
-    String service;
-    String image;
-    String description;
+    Status status;
+    dynamic service;
+    dynamic image;
+    dynamic description;
+    User user;
 
     BookingListData({
         required this.id,
@@ -47,17 +48,19 @@ class BookingListData {
         required this.service,
         required this.image,
         required this.description,
+        required this.user,
     });
 
     factory BookingListData.fromJson(Map<String, dynamic> json) => BookingListData(
-        id: json["id"],
-        paymentId: json["payment_id"],
-        quantity: json["quantity"],
-        purchasePrice: json["purchase_price"],
-        status: json["status"],
-        service: json["service"],
-        image: json["image"],
-        description: json["description"],
+        id: json["id"]?? 0,
+        paymentId: json["payment_id"]?? "",
+        quantity: json["quantity"]?? "",
+        purchasePrice: json["purchase_price"]?? "",
+        status: statusValues.map[json["status"]]!,
+        service: json["service"]?? "",
+        image: json["image"]?? "",
+        description: json["description"]?? "",
+        user:User.fromJson(json["user"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -65,9 +68,62 @@ class BookingListData {
         "payment_id": paymentId,
         "quantity": quantity,
         "purchase_price": purchasePrice,
-        "status": status,
+        "status": statusValues.reverse[status],
         "service": service,
         "image": image,
         "description": description,
+        "user": user.toJson(),
     };
+}
+
+enum Status {
+    COMPLETED
+}
+
+final statusValues = EnumValues({
+    "completed": Status.COMPLETED
+});
+
+class User {
+    int id;
+    String name;
+    String email;
+    dynamic profile;
+    dynamic mobile;
+
+    User({
+        required this.id,
+        required this.name,
+        required this.email,
+        required this.profile,
+        required this.mobile,
+    });
+
+    factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"]?? 0,
+        name: json["name"]?? "",
+        email: json["email"]?? "",
+        profile: json["profile"]?? "",
+        mobile: json["mobile"]?? "",
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "email": email,
+        "profile": profile,
+        "mobile": mobile,
+    };
+}
+
+class EnumValues<T> {
+    Map<String, T> map;
+    late Map<T, String> reverseMap;
+
+    EnumValues(this.map);
+
+    Map<T, String> get reverse {
+        reverseMap = map.map((k, v) => MapEntry(v, k));
+        return reverseMap;
+    }
 }
