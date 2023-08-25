@@ -8,7 +8,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -17,7 +17,7 @@ import '../../bussiness/views/business/notification_screen.dart';
 import '../bus/bus_screen.dart';
 import '../coupen/coupons_screen.dart';
 import '../holiday/holiday_home.dart';
-import '../hottel/Hotel_members.dart';
+
 import '../hottel/search_hotel_screen.dart';
 import '../liquer_screen/liquer_screen.dart';
 import '../offer screen/offer_screen_grid.dart';
@@ -31,16 +31,10 @@ class Home_screen1 extends StatefulWidget {
 }
 
 class _Home_screen1State extends State<Home_screen1> {
-
-
   CarouselController sliderController = CarouselController();
-
   final profileController = Get.find<ProfileController>();
-
   final homeController = Get.find<HomeController>();
-
   final flightController = Get.find<FlightsController>();
-
   int activeIndex = 0;
 
   @override
@@ -60,40 +54,22 @@ class _Home_screen1State extends State<Home_screen1> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       appBar: PreferredSize(
-        
           preferredSize: const Size.fromHeight(250),
-
           child: ClipPath(
-
             clipper: SinCosineWaveClipper(),
-
             child: Container(
-
               height: 140,
-
               color: kblue,
-
-
               child: Padding(
-
                 padding: const EdgeInsets.only(bottom: 22, left: 15, right: 10),
-
                 child: Row(
-
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                   children: [
-
                     Image.asset('assets/images/projectlogo.png'),
-
                     GetBuilder<ProfileController>(
-                      
                       builder: (_) {
-
                         return profileController.profileData.isEmpty
                             ? Container()
                             : Text(

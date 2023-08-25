@@ -29,44 +29,62 @@ class GetCouponsList {
 }
 
 class CouponsData {
+
+
+
     int id;
-    dynamic userId;
-    dynamic cId;
-    dynamic planId;
-    dynamic couponcode;
-    dynamic amount;
-    dynamic isRedeemed;
+    String userId;
+    String cId;
+    String planId;
+    String? serviceId;
+    String? vendorId;
+    String couponcode;
+    dynamic image;
+    String amount;
+    String isRedeemed;
     DateTime expiryAt;
     DateTime createdAt;
     DateTime updatedAt;
     dynamic name;
 
+
+
     CouponsData({
+
         required this.id,
         required this.userId,
         required this.cId,
         required this.planId,
+        required this.serviceId,
+        required this.vendorId,
         required this.couponcode,
+        required this.image,
         required this.amount,
         required this.isRedeemed,
         required this.expiryAt,
         required this.createdAt,
         required this.updatedAt,
         required this.name,
+
     });
 
     factory CouponsData.fromJson(Map<String, dynamic> json) => CouponsData(
-        id: json["id"]?? 0,
-        userId: json["user_id"]?? "",
-        cId: json["c_id"]?? "",
-        planId: json["plan_id"]?? "",
-        couponcode: json["couponcode"]?? "",
-        amount: json["amount"]?? "",
-        isRedeemed: json["is_redeemed"]?? "",
+
+        id: json["id"],
+        userId: json["user_id"],
+        cId: json["c_id"],
+        planId: json["plan_id"],
+        serviceId: json["service_id"],
+        vendorId: json["vendor_id"],
+        couponcode: json["couponcode"],
+        image: json["image"]??"",
+        amount: json["amount"],
+        isRedeemed: json["is_redeemed"],
         expiryAt: DateTime.parse(json["expiry_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        name:json["name"] == null ? "" :  nameValues.map[json["name"]],
+        name: json["name"],
+        
     );
 
     Map<String, dynamic> toJson() => {
@@ -74,32 +92,16 @@ class CouponsData {
         "user_id": userId,
         "c_id": cId,
         "plan_id": planId,
+        "service_id": serviceId,
+        "vendor_id": vendorId,
         "couponcode": couponcode,
+        "image": image,
         "amount": amount,
         "is_redeemed": isRedeemed,
         "expiry_at": expiryAt.toIso8601String(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "name": nameValues.reverse[name],
+        "name": name,
     };
 }
 
-enum Name { FLAT_10_OFFER_FOR_SPA_COMPLEMENTARY, THE_5_YEARS_COMPLEMENTARY, FLAT_10_OFFER_FOR_LIQUOR_COMPLEMENTARY }
-
-final nameValues = EnumValues({
-    "flat 10% offer for liquor complementary": Name.FLAT_10_OFFER_FOR_LIQUOR_COMPLEMENTARY,
-    "flat 10% offer for spa complementary": Name.FLAT_10_OFFER_FOR_SPA_COMPLEMENTARY,
-    "5 years complementary": Name.THE_5_YEARS_COMPLEMENTARY
-});
-
-class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-        reverseMap = map.map((k, v) => MapEntry(v, k));
-        return reverseMap;
-    }
-}

@@ -45,7 +45,6 @@ class _MyAccountState extends State<MyAccount> {
   bool isMarried = false;
   String selectedGender = '';
   bool isGSTNum = true;
-
   var oDoorNumberCN = TextEditingController();
   var oBuildingNumberCN = TextEditingController();
   var oAddressCN = TextEditingController();
@@ -53,7 +52,6 @@ class _MyAccountState extends State<MyAccount> {
   var oStateCN = TextEditingController();
   var proofidController = TextEditingController();
   var pincodeController = TextEditingController();
-
   var rDoorNumberCN = TextEditingController();
   var rBuildingNumberCN = TextEditingController();
   var rAddressCN = TextEditingController();
@@ -63,18 +61,24 @@ class _MyAccountState extends State<MyAccount> {
   var rAadhrCN = TextEditingController();
   var rproofidController = TextEditingController();
   var rpincodeController = TextEditingController();
-
   final settingsController = Get.find<SettingsController>();
   final plansController = Get.find<PlanController>();
   final profileController = Get.find<ProfileController>();
-
+  
   @override
+  
   void initState() {
+
     super.initState();
+
     setDefault();
+
     profileController.getProfile();
+
     plan();
+
     _controller = TextfieldTagsController();
+
   }
 
   double? _distanceToField;

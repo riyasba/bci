@@ -6,8 +6,6 @@ import 'package:clipboard/clipboard.dart';
 
 import 'package:coupon_uikit/coupon_uikit.dart';
 
-import 'package:custom_clippers/custom_clippers.dart';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter/src/widgets/framework.dart';
@@ -17,82 +15,28 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import 'dart:math' as math;
+import '../../../../constands/constands.dart';
 
-import '../../../constands/constands.dart';
-
-import '../../bussiness/views/business/notification_screen.dart';
-
-class CoupensMembers extends StatefulWidget {
-  const CoupensMembers({super.key});
+class Coupons extends StatefulWidget {
+  const Coupons({super.key});
 
   @override
-  State<CoupensMembers> createState() => _CoupensMembersState();
+  State<Coupons> createState() => _CouponsState();
 }
 
-class _CoupensMembersState extends State<CoupensMembers> {
-
+class _CouponsState extends State<Coupons> {
   final profileController = Get.find<ProfileController>();
 
   @override
   void initState() {
-    
     super.initState();
     profileController.getCoupons();
   }
-
-  List colors = [
-    Color.fromARGB(255, 176, 75, 201),
-    Color.fromARGB(255, 172, 218, 65),
-    const Color(0xffF8AC61),
-    const Color(0xff8DC6FF),
-    const Color(0xffEDD076),
-    const Color(0xff90E79C),
-    const Color(0xff00D8E0),
-    Color.fromARGB(255, 143, 48, 206),
-    Color.fromARGB(255, 0, 224, 149),
-    const Color(0xffD9908A),
-  ];
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(150),
-          child: ClipPath(
-            clipper: SinCosineWaveClipper(),
-            child: Container(
-              height: 150,
-              color: kblue,
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                        onTap: Get.back,
-                        child:
-                            Image.asset('assets/images/chevron-left (2).png')),
-                    const Text(
-                      'All Coupons',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          Get.to(const NotificationScreen());
-                        },
-                        icon: Icon(
-                          Icons.notifications,
-                          color: kwhite,
-                        ))
-                  ],
-                ),
-              ),
-            ),
-          )),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListView(
@@ -122,8 +66,8 @@ class _CoupensMembersState extends State<CoupensMembers> {
                                             .toInt())
                                         .withOpacity(1.0)),
                                 child: Image.network(
-                                  profileController
-                                      .couponsData[index].image,fit: BoxFit.cover,
+                                  profileController.couponsData[index].image,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                               secondChild: Column(
@@ -200,15 +144,10 @@ class _CoupensMembersState extends State<CoupensMembers> {
                               ),
                             ),
                           );
-                          
                         },
                       ),
               );
             }),
-            //Image.asset('assets/images/Group 5789.png'),ksizedbox30,
-            //Image.asset('assets/images/Group 5790.png'),ksizedbox30,
-            //Image.asset('assets/images/Group 5791.png'),ksizedbox30,
-            //Image.asset('assets/images/Group 5792.png')
           ],
         ),
       ),

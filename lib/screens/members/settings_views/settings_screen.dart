@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../coupen/coupons_screen.dart';
+import 'aditional_coupons.dart';
 import 'member_Dashbord.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -183,7 +184,7 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             InkWell(
               onTap: () {
-                Get.to(CoupensMembers());
+                Get.to(AdditionalCoupons());
               },
               child:const Row(
                 children: [

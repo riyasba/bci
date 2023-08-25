@@ -11,19 +11,24 @@ class AddSubscriptionApiServices extends BaseApiService {
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(addPlanUrl,
-          options: Options(
-              headers: {
-                'Accept': 'application/json',
-                'Authorization': 'Bearer $authtoken'
-              },
-              followRedirects: false,
-              validateStatus: (status) {
-                return status! <= 500;
-              }),
-          data: {"plan_id": planId, "user_id": customerId});
-      print(
-          "::::::::<Get plan details Api>::::::::status code::::::$planId::::");
+      var response = await dio.post(
+        addPlanUrl,
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer $authtoken'
+          },
+          followRedirects: false,
+          validateStatus: (status) {
+            return status! <= 500;
+          },
+        ),
+        data: {
+          "plan_id": planId,
+           "user_id": customerId
+           },
+      );
+      print("::::::::< Get plan details Api >:::$customerId:::: : status code ::::::$planId::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

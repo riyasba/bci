@@ -3,7 +3,6 @@ import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
 import 'package:bci/screens/members/members_search_screen/member_service_details_screen.dart';
-import 'package:bci/screens/members/members_search_screen/member_service_view_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -139,9 +138,11 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                                 offerPercentage: "",
                                 offerUptoAmount: "",
                                 shareOption: "");
-                        Get.to(ServiceDetailsScreen(
-                          searchServicelist: searchServiceListData,
-                        ));
+                        Get.to(
+                          ServiceDetailsScreen(
+                            searchServicelist: searchServiceListData,
+                          ),
+                        );
                       },
                       child: Container(
                         decoration: BoxDecoration(

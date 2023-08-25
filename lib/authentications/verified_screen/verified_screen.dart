@@ -1,19 +1,10 @@
-//import 'package:bci/authentications/onbording/introduction_screen.dart';
-//import 'package:bci/authentications/onbording/onbording1.dart';
 import 'package:bci/constands/constands.dart';
-import 'package:bci/screens/members/home_screen/Members_home_screen.dart';
-import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
-import '../../screens/members/members widgets/bottumbavigation.dart';
 import '../onbording/Member_onbording_screen.dart';
-//import '../onbording/onbording_screen.dart';
-//import '../../widgets/bottumbavigation.dart';
 
 class MemberVerifiedScreen extends StatelessWidget {
   const MemberVerifiedScreen({super.key});
@@ -24,7 +15,8 @@ class MemberVerifiedScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(child: Image.asset('assets/images/Group 5817.png')),
+          Center(
+            child: Image.asset('assets/images/Group 5817.png')),
           Text(
             "Welcome :)",
             style: TextStyle(

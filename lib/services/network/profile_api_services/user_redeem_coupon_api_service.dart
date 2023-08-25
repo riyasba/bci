@@ -3,28 +3,31 @@ import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class GetPlansApiServices extends BaseApiService {
-  Future getPlans() async {
+class RedeemedCouponsCouponApiServices extends BaseApiService {
+  Future redeemedCouponApiServices(
+      ) async {
     dynamic responseJson;
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.get(
-        getPlanList,
-        options: Options(
-          headers: {
-            'Accept': 'application/json',
-            'Authorization': 'Bearer $authtoken'
-          },
-          followRedirects: false,
-          validateStatus: (status) {
-            return status! <= 500;
-          },
-        ),
-      );
-      print("::::::::<Plans Api>::::::::status code::::::::::");
+      var response = await dio.get(userRedeemCoupons,
+          options: Options(
+              headers: {
+                'Accept': 'application/json',
+                'Authorization': 'Bearer $authtoken'
+              },
+              followRedirects: false,
+              validateStatus: (status) {
+                return status! <= 500;
+              }),
+        );
+      print("::::::::<redeem coupon Api Services Api>::::::::status code::::::::::");
+       // print(vendorId);
+      // print(serviceId);
+      // print(couponcode);
+      print(".........>>>>>>>>>>>>><<<<<<<<<<>>>>>>>>>>>>>...");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

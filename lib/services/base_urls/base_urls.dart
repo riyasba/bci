@@ -5,8 +5,7 @@ abstract class BaseApiService {
   //new url - https://bci.batechnology.in
 
   //register url
-  final String registerURl =
-      "https://bci.batechnology.in/api/register_user";
+  final String registerURl = "https://bci.batechnology.in/api/register_user";
 
   //login url
   final String getOtpUrl = "https://bci.batechnology.in/api/get_otp";
@@ -18,20 +17,17 @@ abstract class BaseApiService {
   final String categoryURL = "https://bci.batechnology.in/api/category";
 
   //sub category URL
-  final String subCategoryURL =
-      "https://bci.batechnology.in/api/sub_category";
+  final String subCategoryURL = "https://bci.batechnology.in/api/sub_category";
 
   //get profile api
-  final String getProfileURL =
-      "https://bci.batechnology.in/api/auth/profile";
+  final String getProfileURL = "https://bci.batechnology.in/api/auth/profile";
 
 //profile update API URL
   final String profileUpdateURL =
       "https://bci.batechnology.in/api/auth/profile_update";
 
   //sliders Api
-  final String getSliderURL =
-      "https://bci.batechnology.in/api/auth/get_slider";
+  final String getSliderURL = "https://bci.batechnology.in/api/auth/get_slider";
 
   //Get plan list
   final String getPlanList =
@@ -69,11 +65,11 @@ abstract class BaseApiService {
   final String couponsApiUrl =
       "https://bci.batechnology.in/api/auth/getUserCoupons";
 
-  //coupons redeem api
+  //coupons redeem api --//
   final String redeemCouponsApiUrl =
       "https://bci.batechnology.in/api/auth/redeemCoupon";
 
-  //get booking list
+  //get booking list --//
   final String bookingListApiUrl =
       "https://bci.batechnology.in/api/auth/booking_list";
 
@@ -98,7 +94,8 @@ abstract class BaseApiService {
   final String airAddPayment =
       "https://bci.batechnology.in/api/auth/add_payment";
 
-  final String airGetSeatMap = "https://bci.batechnology.in/api/auth/air_get_seat_map";
+  final String airGetSeatMap =
+      "https://bci.batechnology.in/api/auth/air_get_seat_map";
 
   final String airportSearch = "https://openflights.org/php/apsearch.php";
 
@@ -130,12 +127,15 @@ abstract class BaseApiService {
   final String generateReferralCodeApiUrl =
       "https://bci.batechnology.in/api/auth/generateReferralCode";
 
-  final String recomendedListApiUrl = "https://bci.batechnology.in/api/auth/recomended_list";
+  final String recomendedListApiUrl =
+      "https://bci.batechnology.in/api/auth/recomended_list";
 
-  final String ourPartnersApiUrl = "https://bci.batechnology.in/api/getpartners";
+  final String ourPartnersApiUrl =
+      "https://bci.batechnology.in/api/getpartners";
 
   //liquors api
-  final getVendorByCategory = "https://bci.batechnology.in/api/auth/getVendorsByCategory";
+  final getVendorByCategory =
+      "https://bci.batechnology.in/api/auth/getVendorsByCategory";
 
   //bus booking api
 
@@ -145,59 +145,73 @@ abstract class BaseApiService {
 
   final busSeatMapApiUrl = "https://bci.batechnology.in/api/auth/bus_seat_map";
 
-  final busTempBooking = "https://bci.batechnology.in/api/auth/bus_temp_booking";
+  final busTempBooking =
+      "https://bci.batechnology.in/api/auth/bus_temp_booking";
 
   final busTicketing = "https://bci.batechnology.in/api/auth/bus_ticketing";
 
   final busRequiryURL = "https://bci.batechnology.in/api/auth/bus_requery";
 
-  final String addBusBookingHistoryURL = "https://bci.batechnology.in/api/auth/add_bus_booking_history";
+  final String addBusBookingHistoryURL =
+      "https://bci.batechnology.in/api/auth/add_bus_booking_history";
 
-  final String getBusBookingHistoryURL = "https://bci.batechnology.in/api/auth/get_bus_booking_history";
+  final String getBusBookingHistoryURL =
+      "https://bci.batechnology.in/api/auth/get_bus_booking_history";
 
-  final String addFlightBookingHistoryURL = "https://bci.batechnology.in/api/auth/add_flight_booking_history";
+  final String addFlightBookingHistoryURL =
+      "https://bci.batechnology.in/api/auth/add_flight_booking_history";
 
-  final String getFlightBookingHistoryURL = "https://bci.batechnology.in/api/auth/get_flight_booking_history";
+  final String getFlightBookingHistoryURL =
+      "https://bci.batechnology.in/api/auth/get_flight_booking_history";
 
   //get wallet details
-  final String getWalletDetailsApiUrl = "https://bci.batechnology.in/api/auth/getUserwallet";
+  final String getWalletDetailsApiUrl =
+      "https://bci.batechnology.in/api/auth/getUserwallet";
 
   //home screen banner api
-  final String getSliderProductApiUrl = "https://bci.batechnology.in/api/auth/get_slider_product";
+  final String getSliderProductApiUrl =
+      "https://bci.batechnology.in/api/auth/get_slider_product";
 
   //generate referral code
-  final String generateReferralApiUrl = "https://bci.batechnology.in/api/generateReferralregister";
+  final String generateReferralApiUrl =
+      "https://bci.batechnology.in/api/generateReferralregister";
 
   //add transaction
-  final String addTransactionApiUrl = "https://bci.batechnology.in/api/auth/add_transaction";
+  final String addTransactionApiUrl =
+      "https://bci.batechnology.in/api/auth/add_transaction";
 
   //get transaction history
-  final String transactionHistoryApiUrl = "https://bci.batechnology.in/api/auth/transaction_history";
+  final String transactionHistoryApiUrl =
+      "https://bci.batechnology.in/api/auth/transaction_history";
 
-  //fcm token 
-  final String fcmTokenStoreApiUrl = "https://bci.batechnology.in/api/auth/fcm-token";
+  //fcm token
+  final String fcmTokenStoreApiUrl =
+      "https://bci.batechnology.in/api/auth/fcm-token";
 
   //hotel info
-  final String hotelInfoApiUrl = "https://bci.batechnology.in/api/auth/hotelinfo";
+  final String hotelInfoApiUrl =
+      "https://bci.batechnology.in/api/auth/hotelinfo";
 
   //hotel get hotel room
-  final String getHotelRoomApiUrl = "https://bci.batechnology.in/api/auth/get_hotel_room";
+  final String getHotelRoomApiUrl =
+      "https://bci.batechnology.in/api/auth/get_hotel_room";
 
-
-   //hotel search
-  final String searchHotelApiUrl = "https://bci.batechnology.in/api/auth/search_hotels";
+  //hotel search
+  final String searchHotelApiUrl =
+      "https://bci.batechnology.in/api/auth/search_hotels";
 
   //hotel search city
-  final String searchHotelcityApiUrl = "https://bci.batechnology.in/api/auth/destination_list";
+  final String searchHotelcityApiUrl =
+      "https://bci.batechnology.in/api/auth/destination_list";
 
   //hotel booking api
-  final String hotelBookingApiUrl = "https://bci.batechnology.in/api/auth/hotel_booking";
+  final String hotelBookingApiUrl =
+      "https://bci.batechnology.in/api/auth/hotel_booking";
 
   //block room api
   final blockRoomApiUrl = "https://bci.batechnology.in/api/auth/block_room";
 
   //notification list
-  final String notificationListApiUrl = "https://bci.batechnology.in/api/auth/notification_list";
-
-
+  final String notificationListApiUrl =
+      "https://bci.batechnology.in/api/auth/notification_list";
 }

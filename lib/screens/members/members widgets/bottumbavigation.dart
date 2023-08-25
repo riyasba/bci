@@ -1,14 +1,11 @@
 import 'dart:io';
-
 import 'package:bci/constands/constands.dart';
 import 'package:bci/screens/members/booking/booking.dart';
 import 'package:bci/screens/members/settings_views/settings_screen.dart';
-// import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-// import '../../../views/home_screen/wallet_screen.dart';
 import '../home_screen/Members_home_screen.dart';
 import '../members_search_screen/members_search_screen.dart';
 import '../wallet/Wallet_members.dart';
@@ -28,6 +25,7 @@ class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
 
   @override
   void initState() {
+
     super.initState();
     _navigationController = CircularBottomNavigationController(selectedpage);
     setDefaultPage();
@@ -35,8 +33,10 @@ class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
 
   @override
   void dispose() {
+
     super.dispose();
     _navigationController.dispose();
+
   }
 
   setDefaultPage() async{

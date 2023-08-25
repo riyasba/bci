@@ -13,6 +13,7 @@ import 'package:bci/services/network/profile_api_services/profile_pic_update_api
 import 'package:bci/services/network/profile_api_services/profile_update_api_services.dart';
 import 'package:bci/services/network/profile_api_services/redeem_coupons_api_services.dart';
 import 'package:bci/services/network/profile_api_services/update_official_address_api.dart';
+import 'package:bci/services/network/profile_api_services/user_redeem_coupon_api_service.dart';
 import 'package:bci/services/network/subscriptions_api_services/ease_buzz_payment_api_services.dart';
 import 'package:bci/widgets/home_widgets/loading_widgets.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -47,14 +48,16 @@ class ProfileController extends GetxController {
     dio.Response<dynamic> response = await getProfileApiServices.getProfile();
     isLoading(false);
     if (response.statusCode == 200) {
-      MemberProfileModel profileModel = MemberProfileModel.fromJson(response.data);
+      MemberProfileModel profileModel =
+          MemberProfileModel.fromJson(response.data);
       isSubscribed(profileModel.subscription);
       planid(profileModel.planId.toString());
       profileData.add(profileModel.user);
       update();
       var token = await FirebaseMessaging.instance.getToken();
       Get.find<AuthController>().fcmtoken(
-          token: token.toString(),);
+        token: token.toString(),
+      );
       print("............firebase token.......=====================>>>");
       print(token);
     } else if (response.statusCode == 401) {
@@ -86,11 +89,12 @@ class ProfileController extends GetxController {
     isLoading(false);
     if (response.statusCode == 200 || response.statusCode == 201) {
       Get.rawSnackbar(
-          backgroundColor: Colors.green,
-          messageText: Text(
-            "Address updated",
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
+        backgroundColor: Colors.green,
+        messageText: Text(
+          "Address updated",
+          style: primaryFont.copyWith(color: Colors.white),
+        ),
+      );
     }
   }
 
@@ -116,9 +120,38 @@ class ProfileController extends GetxController {
     getProfile();
   }
 
+  // service coupons list
+  RedeemCouponApiServices userredeemCouponApiServices =
+      RedeemCouponApiServices();
+  List<CouponsData> servicecouponsData = [];
+
+  getuserCoupones(
+      {required String couponcode,
+      required String serviceId,
+      required String vendorId}) async {
+    dio.Response<dynamic> response =
+        await redeemCouponApiServices.redeemCouponApiServices(
+            couponcode: couponcode, serviceId: serviceId, vendorId: vendorId);
+    if (response.statusCode == 200) {
+      GetCouponsList getCouponsList = GetCouponsList.fromJson(response.data);
+      couponsData = getCouponsList.data;
+    } else {
+      Get.rawSnackbar(
+        backgroundColor: Colors.red,
+        messageText: Text(
+          response.data["message"],
+          style: primaryFont.copyWith(color: Colors.white),
+        ),
+      );
+    }
+    update();
+  }
+
   //coupons list
   OurCouponsApiServices ourCouponsApiServices = OurCouponsApiServices();
+  // RedeemCouponApiServices redeemCouponApiServices = RedeemCouponApiServices();
   List<CouponsData> couponsData = [];
+  List<CouponsData> redeemcouponsData = [];
 
   getCoupons() async {
     dio.Response<dynamic> response =
@@ -137,13 +170,36 @@ class ProfileController extends GetxController {
     update();
   }
 
+  RedeemedCouponsCouponApiServices redeemedCouponsCouponApiServices = RedeemedCouponsCouponApiServices();
+
+    redeemgetCoupons() async {
+    dio.Response<dynamic> response =
+        await redeemedCouponsCouponApiServices.redeemedCouponApiServices();
+    if (response.statusCode == 200) {
+      GetCouponsList getCouponsList = GetCouponsList.fromJson(response.data);
+      redeemcouponsData = getCouponsList.data;
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            response.data["message"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+  }
+
   //redeem coupon
   RedeemCouponApiServices redeemCouponApiServices = RedeemCouponApiServices();
 
-  redeemCoupon({required String couponcode, required String serviceId,required String  vendorId}) async {
+  redeemCoupon(
+      {required String couponcode,
+      required String serviceId,
+      required String vendorId}) async {
     String tempAmount = "0";
-    dio.Response<dynamic> response = await redeemCouponApiServices
-        .redeemCouponApiServices(couponcode: couponcode, serviceId: serviceId, vendorId: vendorId);
+    dio.Response<dynamic> response =
+        await redeemCouponApiServices.redeemCouponApiServices(
+            couponcode: couponcode, serviceId: serviceId, vendorId: vendorId);
     if (response.statusCode == 200) {
       tempAmount = response.data["amount"].toString();
       Get.rawSnackbar(
@@ -334,7 +390,6 @@ class ProfileController extends GetxController {
     print(payment_response);
     isLoading(false);
     if (payment_response["result"] == "payment_successfull") {
-
       Get.find<AuthController>().addTransaction(amount: amount);
 
       Get.to(const SucessfulScreenOtc());
@@ -366,5 +421,4 @@ class ProfileController extends GetxController {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
-
 }

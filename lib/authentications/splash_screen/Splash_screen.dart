@@ -1,22 +1,25 @@
 import 'package:bci/authentications/generate_otp/member_login_screen.dart';
-import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../constands/image_string.dart';
+
+
 
 
 class splash extends StatefulWidget {
   const splash({super.key});
 
+
+
   @override
   State<splash> createState() => _splashState();
 }
+
+
 
 class _splashState extends State<splash> {
   @override
