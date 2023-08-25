@@ -1,5 +1,6 @@
 import 'package:bci/controllers/bus_controllers.dart';
 import 'package:bci/controllers/holiday_package_controller.dart';
+import 'package:bci/models/bus_booking_models/bus_booking_history_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -16,7 +17,6 @@ class BusContainers extends StatefulWidget {
 }
 
 class _BusContainersState extends State<BusContainers> {
-
   final busController = Get.find<BusController>();
 
   @override
@@ -31,7 +31,7 @@ class _BusContainersState extends State<BusContainers> {
     var size = MediaQuery.of(context).size;
     return GetBuilder<BusController>(builder: (_) {
       return Padding(
-        padding: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.only(top: 10),
         child: busController.bookingHistoryList.isEmpty
             ? const Center(
                 child: Text("No bookings found"),
@@ -42,19 +42,14 @@ class _BusContainersState extends State<BusContainers> {
                 itemBuilder: (context, index) {
                   return Card(
                     child: InkWell(
-                      onTap: (){
-                        // dialogBuilder(context, 
-                        // homeController.bookingListData[index].image, 
-                        // homeController.bookingListData[index].service, 
-                        // homeController.bookingListData[index].description, 
-                        // homeController.bookingListData[index].purchasePrice, 
-                        // homeController.bookingListData[index].quantity
-                        // );
+                      onTap: () {
+                        dialogBuilder(context,
+                            busBookingData:
+                                busController.bookingHistoryList[index]);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Container(
-                          height: 125,
                           width: size.width,
                           decoration: BoxDecoration(
                             color: kwhite,
@@ -75,31 +70,34 @@ class _BusContainersState extends State<BusContainers> {
                               // ),
                               kwidth10,
                               Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ksizedbox10,
                                   Container(
                                     width: 200,
                                     child: Text(
-                                      busController.bookingHistoryList[index].busName
+                                      busController
+                                          .bookingHistoryList[index].busName
                                           .toString(),
-                                          maxLines: 2,
+                                      maxLines: 2,
                                       style: const TextStyle(fontSize: 21),
                                     ),
                                   ),
                                   Container(
                                     width: 200,
                                     child: Text(
-                                      '${busController.bookingHistoryList[index].fromCityname}',
+                                      '${busController.bookingHistoryList[index].fromCityname} to ${busController.bookingHistoryList[index].toCityname}',
                                       maxLines: 4,
                                       style: TextStyle(color: kblue),
                                     ),
                                   ),
-                                  // Text(
-                                  //   'Check in : 03:44PM Check Out 03:43 PM',
-                                  //   style: TextStyle(color: kblue),
-                                  // ),
+
+                                  Text(
+                                    'Booking Date :${busController.bookingHistoryList[index].bookingDate.split(" ").first}',
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
                                   // Text(
                                   //   'Total Person : 5 Members',
                                   //   style: TextStyle(color: kblue),
@@ -120,5 +118,233 @@ class _BusContainersState extends State<BusContainers> {
                 }),
       );
     });
+  }
+
+  Future<void> dialogBuilder(
+    BuildContext context, {
+    required BookingHistoryData busBookingData,
+  }) {
+    return showDialog<void>(
+      context: context,
+      builder: (
+        BuildContext context,
+      ) {
+        return AlertDialog(
+          title: Container(
+            height: 400,
+            width: 300,
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.arrow_back_ios,
+                      color: kblue,
+                      size: 15,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Details',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    const Icon(Icons.bus_alert),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 150,
+                          child: Text(
+                            busBookingData.remarks == ""
+                                ? "Bus Booking"
+                                : busBookingData.remarks,
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: kblue,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          'Date : ${busBookingData.bookingDate.split(" ").first}',
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: kblue,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'From city',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      busBookingData.fromCityname,
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: kblue,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'To City',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      busBookingData.toCityname,
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: kblue,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Booking Ref.no',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      busBookingData.bookingRefno,
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: kblue,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Bus Name',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      width: 120,
+                      child: Text(
+                        busBookingData.busName,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: kblue,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ],
+                ),
+
+                // const Divider(
+                //   thickness: 1,
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text(
+                //       'Quantity',
+                //       style: TextStyle(
+                //           fontSize: 16,
+                //           color: kblue,
+                //           fontWeight: FontWeight.bold),
+                //     ),
+                //     Text(
+                //       qty,
+                //       style: TextStyle(
+                //           fontSize: 15,
+                //           color: kblue,
+                //           fontWeight: FontWeight.w500),
+                //     ),
+                //   ],
+                // ),
+                const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Download',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.find<BusController>().busTicketDownload(
+                            refernceNo: busBookingData.bookingRefno);
+                      },
+                      child: Container(
+                        height: 45,
+                        width: 120,
+                        decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: const Icon(
+                          Icons.download,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

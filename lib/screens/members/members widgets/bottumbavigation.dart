@@ -16,6 +16,9 @@ import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 
 class MemberBottomNavBar extends StatefulWidget {
+  int index;
+  MemberBottomNavBar({this.index = 0});
+  
   @override
   State<MemberBottomNavBar> createState() => _MemberBottomNavBarState();
 }
@@ -27,12 +30,18 @@ class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
   void initState() {
     super.initState();
     _navigationController = CircularBottomNavigationController(selectedpage);
+    setDefaultPage();
   }
 
   @override
   void dispose() {
     super.dispose();
     _navigationController.dispose();
+  }
+
+  setDefaultPage() async{
+    selectedpage = widget.index;
+
   }
 
   final List1 = [
@@ -68,7 +77,7 @@ class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
     TabItem(Icons.settings, "Settings", korange,
         circleStrokeColor: Colors.white,
         labelStyle:
-            TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          const  TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
   ]);
 
   back(){

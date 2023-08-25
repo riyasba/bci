@@ -9,6 +9,7 @@ import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/screens/members/holiday/controllers/holidaycontroller.dart';
+import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,8 @@ Future main() async {
       null,
       [
         NotificationChannel(
-            channelGroupKey: 'basic_channel_group',
-            channelKey: 'basic_channel',
+            channelGroupKey: 'basic_noti_channel_group',
+            channelKey: 'basic_noti_channel',
             channelName: 'Basic notifications',
             channelDescription: 'Notification channel for basic tests',
             defaultColor: const Color(0xFF9D50DD),
@@ -37,8 +38,7 @@ Future main() async {
       // Channel groups are only visual and are not required
       channelGroups: [
         NotificationChannelGroup(
-            channelGroupKey: 'basic_channel_group',
-            channelGroupName: 'Basic group')
+            channelGroupName: 'Basic group', channelGroupkey: '')
       ],
       debug: true);
 
@@ -53,25 +53,45 @@ Future main() async {
 
   firebaseNotification();
 
-  FirebaseMessaging.onMessage.listen(
-    (RemoteMessage message) {
-      print('Got a message whilst in the foreground!');
-      print('Message data: ${message.data}');
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${message.data}');
 
-      if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification}');
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
 
-        AwesomeNotifications().createNotification(
-          content: NotificationContent(
-              id: 10,
-              channelKey: 'basic_channel',
-              title: message.notification!.title,
-              body: message.notification!.body,
-              actionType: ActionType.Default),
-        );
-      }
-    },
-  );
+      AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: 15,
+          channelKey: 'basic_noti_channel',
+          title: message.notification!.title,
+          body: message.notification!.body,
+        ),
+      );
+    }
+  });
+
+  AwesomeNotifications()
+      .actionStream
+      .listen((ReceivedNotification receivedNotification) {
+    print(
+        ":::--------:::::::notification datas:>>>>>>>>>>>>>>>:::-------------------::::::");
+    Get.offAll(() => MemberBottomNavBar(
+          index: 3,
+        ));
+  });
+
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    print(message.data);
+    print(message.notification);
+    if (message.data.isNotEmpty) {
+      Map<String, String>? data = Map.from(message.data);
+
+      Get.offAll(() => MemberBottomNavBar(
+            index: 3,
+          ));
+    }
+  });
 
   Get.put(FlightsController());
   Get.put(SettingsController());

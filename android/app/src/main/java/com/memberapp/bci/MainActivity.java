@@ -1,4 +1,4 @@
-package com.member.bci;
+package com.memberapp.bci;
 
 import io.flutter.embedding.android.FlutterActivity;
 import android.os.Build;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import android.content.Intent;
 import com.google.gson.Gson;
 import com.easebuzz.payment.kit.PWECouponsActivity;
-import com.member.bci.JsonConverter;
+import com.memberapp.bci.JsonConverter;
 import datamodels.PWEStaticDataModel;
 import java.io.*;
 

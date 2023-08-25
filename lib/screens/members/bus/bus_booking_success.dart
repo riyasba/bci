@@ -58,7 +58,7 @@ class _FlightBookingSuccessPageState extends State<BusBookingSuccessPage> {
                   InkWell(
                     onTap: () {
                       Get.find<BusController>()
-                          .createPDF(context, widget.busRequeryModel);
+                          .createPDF( widget.busRequeryModel);
                     },
                     child: Container(
                       height: 55,

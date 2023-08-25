@@ -76,7 +76,7 @@ dependencies:
   firebase_messaging: ^14.6.6
   cloud_firestore: ^4.8.5
   firebase_core: ^2.15.1
-  awesome_notifications: ^0.7.4+1
+  awesome_notifications: ^0.6.19
   intl: ^0.17.0
   flutter_typeahead: ^4.6.2
   readmore: ^2.1.0

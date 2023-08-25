@@ -1,4 +1,4 @@
-package com.member.bci;
+package com.memberapp.bci;
 
 import org.json.JSONArray;
 import org.json.JSONException;

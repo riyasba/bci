@@ -33,7 +33,7 @@ class BookingListData {
     String paymentId;
     String quantity;
     String purchasePrice;
-    Status status;
+    String status;
     String service;
     String image;
     String description;
@@ -54,7 +54,7 @@ class BookingListData {
         paymentId: json["payment_id"]?? "",
         quantity: json["quantity"]?? "",
         purchasePrice: json["purchase_price"]?? "",
-        status: statusValues.map[json["status"]]!,
+        status: json["status"],
         service: json["service"]?? "",
         image: json["image"]?? "",
         description: json["description"]?? "",
@@ -65,35 +65,13 @@ class BookingListData {
         "payment_id": paymentId,
         "quantity": quantity,
         "purchase_price": purchasePrice,
-        "status": statusValues.reverse[status],
-        "service": serviceValues.reverse[service],
+        "status": status,
+        "service": service,
         "image": image,
         "description": description,
     };
 }
 
-enum Service { CHANGES, PRIYADHARSHINI, CTZ }
 
-final serviceValues = EnumValues({
-    "changes": Service.CHANGES,
-    "Ctz": Service.CTZ,
-    "Priyadharshini": Service.PRIYADHARSHINI
-});
 
-enum Status { COMPLETED }
 
-final statusValues = EnumValues({
-    "completed": Status.COMPLETED
-});
-
-class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-        reverseMap = map.map((k, v) => MapEntry(v, k));
-        return reverseMap;
-    }
-}

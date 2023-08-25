@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:bci/constands/app_fonts.dart';
@@ -140,7 +139,7 @@ class BusController extends GetxController {
       required String droppingId,
       required String searchKey,
       required Bus busData}) async {
-        seatMapList.clear();
+    seatMapList.clear();
     dio.Response<dynamic> response =
         await busSeatMapApiService.busSeatMapApiService(
             boardingId: boardingId,
@@ -326,11 +325,21 @@ class BusController extends GetxController {
     } else {}
   }
 
+  busTicketDownload({required String refernceNo}) async {
+    dio.Response<dynamic> response =
+        await busRequieyApiServices.busRequiryApi(refrenceNo: refernceNo);
+
+    if (response.statusCode == 200) {
+      BusRequeryModel busRequeryModel = BusRequeryModel.fromJson(response.data);
+
+      createPDF(busRequeryModel);
+    }
+  }
+
   ///bus ticketing
   ///
   ///
-  Future<void> createPDF(
-      BuildContext bcontext, BusRequeryModel busRequeryModel) async {
+  Future<void> createPDF(BusRequeryModel busRequeryModel) async {
     final pdf = pw.Document();
     print("------------------------>>>1");
     pdf.addPage(pw.Page(
@@ -924,4 +933,5 @@ class BusController extends GetxController {
     }
     update();
   }
+  
 }
