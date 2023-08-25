@@ -333,23 +333,23 @@ class HomeController extends GetxController {
 
   //get today offers list
   GetTodayOffersListApiServices getTodayOffersListApiServices = GetTodayOffersListApiServices();
-  List<TodayOfferListData> todayOfferListData = [];
+  List<OffersListModel> todayOfferListData = [];
 
   todayOffers() async {
 
     dio.Response<dynamic> response = await getTodayOffersListApiServices.getTodayOffersListApiServices();
     if(response.statusCode == 200){
       
-      GetTodayOffersList getTodayOffersList = GetTodayOffersList.fromJson(response.data);
-      todayOfferListData = getTodayOffersList.message;
+      List<OffersListModel> getTodayOffersList = List<OffersListModel>.from(response.data.map((x) => OffersListModel.fromJson(x)));;
+      todayOfferListData = getTodayOffersList;
 
     } else {
-      // Get.rawSnackbar(
-      //     backgroundColor: Colors.red,
-      //     messageText: Text(
-      //       "Something went wrong",
-      //       style: primaryFont.copyWith(color: Colors.white),
-      //     ));
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
     }
     update();
 

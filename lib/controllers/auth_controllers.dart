@@ -279,19 +279,19 @@ RxInt filterindex = 0.obs;
   //offers filter 
     FilterCategoryApiService filtercategoryapiservice = FilterCategoryApiService();
 
-     List<Offersdata> offerslistdata = [];
+     List<OffersListModel> offerslistdata = [];
 
   getoffersfilterCategory({required String categoryid})async{
     dio.Response<dynamic> response = await filtercategoryapiservice.filtercategory(categoryId: categoryid);
     if(response.statusCode == 200){
-       OffersListModel offerslistModel = OffersListModel.fromJson(response.data);
-        offerslistdata = offerslistModel.message;
+       List<OffersListModel> offerslistModel = offersListModelFromJson(response.data);
+        offerslistdata = offerslistModel;
          update();
         } else {
           Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "Something went wrong",
+            " Offers not available today",
             style: primaryFont.copyWith(color: Colors.white),
           ));
         }

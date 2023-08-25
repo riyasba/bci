@@ -8,7 +8,6 @@ import 'package:bci/services/network/settings_api_services/our_partners_api_serv
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/offerslist_model.dart';
 import '../services/network/settings_api_services/offerslist_api_service.dart';
@@ -111,14 +110,15 @@ class SettingsController extends GetxController{
    
    //offerslist
    OffersListApiService offerslistapiservice = OffersListApiService();
-   List<Offersdata> offerslistdata = [];
+   
+   List<OffersListModel> offerslistdata = [];
 
    offersList()async{
       offerslistdata.clear();
       dio.Response<dynamic> response = await offerslistapiservice.offerslist();
       if(response.statusCode==200){
-        OffersListModel offerslistModel = OffersListModel.fromJson(response.data);
-        offerslistdata = offerslistModel.message;
+    List<OffersListModel> offerslistModel = List<OffersListModel>.from(response.data.map((x) => OffersListModel.fromJson(x)));;
+        offerslistdata = offerslistModel;
       }
       else {
        Get.rawSnackbar(

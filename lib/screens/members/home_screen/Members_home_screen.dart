@@ -143,8 +143,27 @@ class _Home_screen1State extends State<Home_screen1> {
                                       for (int i = 0;
                                           i < homeController.sliderData.length;
                                           i++)
-                                        Image.network(
-                                            homeController.sliderData[i].image)
+                                        InkWell(
+                                          onTap: (){
+                                            if( homeController.sliderData[i].product=="Hotel"){
+                                            Get.to(HotelListScreen());
+                                            }
+                                            else if(homeController.sliderData[i].product=="Liquors"){
+                                             Get.to( LiquorScreen());
+                                            }
+                                            else if(homeController.sliderData[i].product== "Bus"){
+                                             Get.to( BusScreen());
+                                            }
+                                            else if(homeController.sliderData[i].product=="Flight"){
+                                            Get.to( FlightBookingLandingScreen());
+
+                                            }
+                                          
+                                         
+                                          },                                       
+                                            child: Image.network(
+                                              homeController.sliderData[i].image),
+                                        )
                                     ],
                                     options: CarouselOptions(
                                       height: 170,

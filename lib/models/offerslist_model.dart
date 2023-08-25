@@ -4,27 +4,11 @@
 
 import 'dart:convert';
 
-OffersListModel offersListModelFromJson(String str) => OffersListModel.fromJson(json.decode(str));
+List<OffersListModel> offersListModelFromJson(String str) => List<OffersListModel>.from(json.decode(str).map((x) => OffersListModel.fromJson(x)));
 
-String offersListModelToJson(OffersListModel data) => json.encode(data.toJson());
+String offersListModelToJson(List<OffersListModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class OffersListModel {
-    List<Offersdata> message;
-
-    OffersListModel({
-        required this.message,
-    });
-
-    factory OffersListModel.fromJson(Map<String, dynamic> json) => OffersListModel(
-        message: List<Offersdata>.from(json["message"].map((x) => Offersdata.fromJson(x))),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "message": List<dynamic>.from(message.map((x) => x.toJson())),
-    };
-}
-
-class Offersdata {
     int id;
     String vendorId;
     String categoryId;
@@ -40,7 +24,7 @@ class Offersdata {
     DateTime createdAt;
     DateTime updatedAt;
 
-    Offersdata({
+    OffersListModel({
         required this.id,
         required this.vendorId,
         required this.categoryId,
@@ -57,19 +41,19 @@ class Offersdata {
         required this.updatedAt,
     });
 
-    factory Offersdata.fromJson(Map<String, dynamic> json) => Offersdata(
-        id: json["id"],
-        vendorId: json["vendor_id"],
-        categoryId: json["category_id"],
-        title: json["title"],
+    factory OffersListModel.fromJson(Map<String, dynamic> json) => OffersListModel(
+        id: json["id"]??0,
+        vendorId: json["vendor_id"]??0,
+        categoryId: json["category_id"]??0,
+        title: json["title"]??"",
         startsAt: DateTime.parse(json["starts_at"]),
         endsAt: DateTime.parse(json["ends_at"]),
-        businessValue: json["business_value"],
-        discountValue: json["discount_value"],
-        noOfClaimUser: json["no_of_claim_user"],
-        status: json["status"],
-        image: json["image"],
-        description: json["description"],
+        businessValue: json["business_value"]??"",
+        discountValue: json["discount_value"]??"",
+        noOfClaimUser: json["no_of_claim_user"]??"",
+        status: json["status"]??"",
+        image: json["image"]??"",
+        description: json["description"]??"",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );

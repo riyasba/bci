@@ -12,7 +12,7 @@ import '../../bussiness/views/business/notification_screen.dart';
 import '../../bussiness/views/home_screen/contact_admin.dart';
 
 class OffersDetail extends StatelessWidget {
-   TodayOfferListData todayOfferListData;
+   OffersListModel todayOfferListData;
    OffersDetail({super.key,required this.todayOfferListData});
 
   @override
