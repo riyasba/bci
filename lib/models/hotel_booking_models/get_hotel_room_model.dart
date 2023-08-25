@@ -98,6 +98,7 @@ class HotelRoomsDetail {
   int roomIndex;
   String roomTypeCode;
   String roomDescription;
+  String ratePlanName;
   String roomTypeName;
   String ratePlanCode;
   int ratePlan;
@@ -136,6 +137,7 @@ class HotelRoomsDetail {
     required this.infoSource,
     required this.sequenceNo,
     required this.dayRates,
+    required this.ratePlanName,
     required this.isPerStay,
     required this.supplierPrice,
     required this.price,
@@ -167,6 +169,7 @@ class HotelRoomsDetail {
         roomTypeName: json["RoomTypeName"],
         ratePlanCode: json["RatePlanCode"],
         ratePlan: json["RatePlan"],
+        ratePlanName: json["RatePlanName"],
         infoSource: json["InfoSource"],
         sequenceNo: json["SequenceNo"],
         dayRates: List<DayRate>.from(
@@ -204,6 +207,7 @@ class HotelRoomsDetail {
         "RoomTypeName": roomTypeName,
         "RatePlanCode": ratePlanCode,
         "RatePlan": ratePlan,
+        "RatePlanName": ratePlanName,
         "InfoSource": infoSource,
         "SequenceNo": sequenceNo,
         "DayRates": List<dynamic>.from(dayRates.map((x) => x.toJson())),

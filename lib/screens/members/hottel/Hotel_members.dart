@@ -143,7 +143,7 @@ class _HotelListScreenState extends State<HotelListScreen> {
                               .searchHotelData[index].hotelName);
                           final prefs = await SharedPreferences.getInstance();
                           var searchtocken = prefs.getString("searchtoken");
-                          Get.to(Final_booking(
+                          Get.to(HotelInfobooking(
                             hotelCode: hotelBookingController
                                 .searchHotelData[index].hotelCode,
                             resultIndex: hotelBookingController

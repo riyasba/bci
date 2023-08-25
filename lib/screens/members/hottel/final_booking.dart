@@ -9,12 +9,12 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../controllers/hotel_booking_controller.dart';
 import 'search_hotel_screen.dart';
 
-class Final_booking extends StatefulWidget {
+class HotelInfobooking extends StatefulWidget {
   final String userIp;
   final String resultIndex;
   final String hotelCode;
   final String searchToken;
-  Final_booking({
+  HotelInfobooking({
     super.key,
     required this.userIp,
     required this.resultIndex,
@@ -23,10 +23,10 @@ class Final_booking extends StatefulWidget {
   });
 
   @override
-  State<Final_booking> createState() => _Final_bookingState();
+  State<HotelInfobooking> createState() => _HotelInfobookingState();
 }
 
-class _Final_bookingState extends State<Final_booking> {
+class _HotelInfobookingState extends State<HotelInfobooking> {
   CarouselController sliderController = CarouselController();
   final hotelController = Get.find<HotelBookingController>();
   int activeIndex = 0;
@@ -153,10 +153,10 @@ class _Final_bookingState extends State<Final_booking> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       hotelController.hotelInfoData.isEmpty
-                          ? Text('')
+                          ? const Text('')
                           : Text(
                               hotelController.hotelInfoData.first.hotelName,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 21, fontWeight: FontWeight.w700),
                             ),
                       Row(
@@ -167,19 +167,19 @@ class _Final_bookingState extends State<Final_booking> {
                           //         .hotelInfoData.first.countryName),
                           // kwidth5,
                           hotelController.hotelInfoData.isEmpty
-                              ? Text('')
-                              : Container(
+                              ? const Text('')
+                              :  Container(
                                   width: size.width * 0.8,
                                   child: Text(
                                     hotelController.hotelInfoData.first.address,
-                                    style: TextStyle(color: Colors.grey),
+                                    style: const TextStyle(color: Colors.grey),
                                   ),
                                 )
                         ],
                       ),
                       ksizedbox30,
                       hotelController.hotelInfoData.isEmpty
-                          ? Text('')
+                          ? const Text('')
                           : Container(
                               width: size.width * 0.9,
                               child: ReadMoreText(
@@ -189,10 +189,10 @@ class _Final_bookingState extends State<Final_booking> {
                                 trimMode: TrimMode.Line,
                                 trimCollapsedText: 'show more',
                                 trimExpandedText: ' show less',
-                                lessStyle: const TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                                moreStyle: const TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
+                                lessStyle: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.bold,color: korange),
+                                moreStyle: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.bold,color: korange),
                               ),
                             ),
                       ksizedbox30,
@@ -215,7 +215,7 @@ class _Final_bookingState extends State<Final_booking> {
                       ),
                       ksizedbox10,
                       hotelController.hotelRoomsData.isEmpty
-                          ? Text('')
+                          ? const Text('')
                           : Text(
                               hotelController.hotelRoomsData.first
                                   .hotelRoomsDetails.first.price.roomPrice
@@ -265,24 +265,23 @@ class _Final_bookingState extends State<Final_booking> {
               ),
             ),
             ksizedbox30,
-            Row(
-              children: [
-                Text(
-                  '     Amenities',
-                  style: TextStyle(
-                      fontSize: 21, fontWeight: FontWeight.w700, color: kblue),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                'Amenities',
+                style: TextStyle(
+                    fontSize: 21, fontWeight: FontWeight.w700, color: kblue),
+              ),
             ),
             ksizedbox10,
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: hotelController.hotelRoomsData.isEmpty
-                  ? Text('')
+                  ? const Text('')
                   : Container(
                       height: 50,
                       child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics:const NeverScrollableScrollPhysics(),
                         itemCount: hotelController.hotelRoomsData.length,
                         itemBuilder: (BuildContext context, int index) {
                           return ListTile(
@@ -294,32 +293,24 @@ class _Final_bookingState extends State<Final_booking> {
                       ),
                     ),
             ),
-            //   child: ListView(
-            //     physics: BouncingScrollPhysics(),
-            //     shrinkWrap: true, scrollDirection: Axis.horizontal,
-            //     //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //     children: [
-            //       Image.asset(
-            //         'assets/images/Group 5816(1).png',
-            //       ),
-            //       Image.asset(
-            //         'assets/images/aa.png',
-            //       ),
-            //       Image.asset(
-            //         'assets/images/Group 5817(1).png',
-            //       ),
-            //       Image.asset(
-            //         'assets/images/Group 5819(1).png',
-            //       ),
-            //       Image.asset('assets/images/Group 5820.png'),
-            //       Image.asset('assets/images/Group 5821.png')
-            //     ],
-            //   ),
-            // ),
-
-            ksizedbox30,
             Padding(
-              padding: const EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                'Room Description :',
+                style: TextStyle(
+                    fontSize: 17, fontWeight: FontWeight.w700, color: kblue),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20,top: 5),
+              child:hotelController.hotelRoomsData.isEmpty ? const Text("") : Text(
+                hotelController.hotelRoomsData.first.hotelRoomsDetails.first.roomDescription,
+                style: TextStyle(
+                    fontSize: 15, fontWeight: FontWeight.w400, color: kgrey),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 10,top: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
