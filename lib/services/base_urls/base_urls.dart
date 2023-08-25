@@ -193,7 +193,11 @@ abstract class BaseApiService {
   //hotel booking api
   final String hotelBookingApiUrl = "https://bci.batechnology.in/api/auth/hotel_booking";
 
+  //block room api
+  final blockRoomApiUrl = "https://bci.batechnology.in/api/auth/block_room";
+
   //notification list
   final String notificationListApiUrl = "https://bci.batechnology.in/api/auth/notification_list";
+
 
 }

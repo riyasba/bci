@@ -69,16 +69,19 @@ class _HotelListScreenState extends State<HotelListScreen> {
                 Container(
                   child: Row(
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            bottomLeft: Radius.circular(15)),
-                        child: Image.network(
-                          hotelBookingController
-                              .searchHotelData[index].hotelPicture,
-                          width: 100,
-                          height: 130,
-                          fit: BoxFit.cover,
+                      Container(
+                         width: 100,
+                            height: 130,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              bottomLeft: Radius.circular(15)),
+                          child: Image.network(
+                            hotelBookingController.searchHotelData[index].hotelPicture,
+                            width: 100,
+                            height: 130,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       Padding(
