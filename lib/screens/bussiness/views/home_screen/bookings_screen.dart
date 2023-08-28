@@ -132,23 +132,9 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
       );
   }
 
-  DateTime _dateTime = DateTime.now();
+
   DateTime dateTime1 = DateTime(2100);
-  List bookingimage = [
-    'assets/images/bookingcar.png',
-    'assets/images/bookingflight.png',
-    'assets/images/bookingroom.png'
-  ];
-  List bookingtitle = [
-    'Car Service Book',
-    'Flight Booki Services',
-    'Hotel Room Book Service',
-  ];
-  List bookingdescription = [
-    'Want to get your Car Serviced \nOr Repaired? Book Now. \nPitstop offers Car Care Services at \nyour doorstep in Bangalore through \nour network of branded and multi \nbrand car service garages.',
-    'A new pricing model would charge \npassengers according to the travel \nhabits revealed in their online search \nhistory.',
-    'Discover luxury hotel \naccommodation at Aman \nTokyo, situated near the Imperial \nPalace Gardens in Tokyo, Japan. \nChoose from rooms and suites \nwith a view.'
-  ];
+ 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -319,6 +305,8 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                               serviceController.bookingListData[index].purchasePrice,
                               serviceController.bookingListData[index].quantity,
                               serviceController.bookingListData[index].user.name,
+                              serviceController.bookingListData[index].user.mobile.toString(),
+                              serviceController.bookingListData[index].user.email
                               );
                         },
                         child: Container(
@@ -383,7 +371,8 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
     );
   }
 
-  Future<void> dialogBuilder(BuildContext context,String img, String tit, String des, String amt, String qty, String cusName,) {
+  Future<void> dialogBuilder(BuildContext context,String img, String tit, String des, String amt, String qty, String cusName,
+  String mobileno, String  email) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context, ) {
@@ -506,9 +495,9 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                        Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                          children: [
-                         const Text(
+                          Text(
                             'Price',
-                            style: TextStyle(fontSize: 16, color: Colors.green,fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
                       ),
                            Container(
                                width: 90,
@@ -516,6 +505,40 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                               "₹ ${amt}",
                               style:const TextStyle(fontSize: 15, color: Colors.green,fontWeight: FontWeight.w500),
                                                  ),
+                           ),
+                         ],
+                       ),
+                           const Divider(thickness: 1,),
+                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                          Text(
+                            'Mobile Number',
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Container(
+                               width: 90,
+                             child: Text(
+                              mobileno,
+                              style: TextStyle(fontSize: 15, color: kgrey,fontWeight: FontWeight.w500),
+                                                 ),
+                           ),
+                         ],
+                       ),
+                           const Divider(thickness: 1,),
+                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children: [
+                          Text(
+                        "Email Addres",
+                            style: TextStyle(fontSize: 16, color: kblue,fontWeight: FontWeight.bold),
+                      ),
+                           Container(
+                               width: 96,
+                             child: Text(
+                              email,
+                              style: TextStyle(fontSize: 15, color:kgrey,fontWeight: FontWeight.w500),
+                             ),
                            ),
                          ],
                        ),

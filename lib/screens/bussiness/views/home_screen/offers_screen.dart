@@ -394,6 +394,7 @@ class _OffersScreenState extends State<OffersScreen> {
                       fontSize: 18,
                       fontWeight: FontWeight.w400),),
                        const SizedBox(height: 5,),
+                       ksizedbox10,
                         InkWell(
                           onTap: (){
                            _showDatePicker(context);
@@ -426,6 +427,7 @@ class _OffersScreenState extends State<OffersScreen> {
                       fontSize: 18,
                       fontWeight: FontWeight.w400),),
                       const SizedBox(height: 5,),
+                      ksizedbox10,
                       InkWell(
                           onTap: (){
                             _showDatePicker1(context);
