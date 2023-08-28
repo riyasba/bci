@@ -85,7 +85,7 @@ class _CouponsState extends State<VendorCoupons> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Text(
+                                 const Text(
                                     "Coupon Code :",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -108,25 +108,25 @@ class _CouponsState extends State<VendorCoupons> {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      FlutterClipboard.copy(profileController
-                                              .redeemcouponsData[index].couponcode)
-                                          .then(
-                                        (value) => Fluttertoast.showToast(
-                                            msg: "Copy to clipboard",
-                                            toastLength: Toast.LENGTH_SHORT,
-                                            gravity: ToastGravity.CENTER,
-                                            timeInSecForIosWeb: 1,
-                                            backgroundColor: Colors.white,
-                                            textColor: Colors.black,
-                                            fontSize: 16.0),
-                                        //print("code copied")
-                                      );
+                                      // FlutterClipboard.copy(profileController
+                                      //         .redeemcouponsData[index].couponcode)
+                                      //     .then(
+                                      //   (value) => Fluttertoast.showToast(
+                                      //       msg: "Copy to clipboard",
+                                      //       toastLength: Toast.LENGTH_SHORT,
+                                      //       gravity: ToastGravity.CENTER,
+                                      //       timeInSecForIosWeb: 1,
+                                      //       backgroundColor: Colors.white,
+                                      //       textColor: Colors.black,
+                                      //       fontSize: 16.0),
+                                      //   //print("code copied")
+                                      // );
                                     },
                                     child: Container(
                                       height: 25,
-                                      width: 90,
+                                      width: 120,
                                       decoration: BoxDecoration(
-                                          color: kblue,
+                                          color: Colors.green,
                                           borderRadius:
                                               BorderRadius.circular(4)),
                                       child: Row(
@@ -134,19 +134,12 @@ class _CouponsState extends State<VendorCoupons> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            "Copy",
+                                            "Redeemed",
                                             style: primaryFont.copyWith(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w500),
                                           ),
-                                          const SizedBox(
-                                            width: 5,
-                                          ),
-                                          const Icon(
-                                            Icons.copy,
-                                            color: Colors.white,
-                                            size: 15,
-                                          ),
+                                          
                                         ],
                                       ),
                                     ),

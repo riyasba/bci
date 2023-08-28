@@ -52,15 +52,15 @@ class NotificationData {
     });
 
     factory NotificationData.fromJson(Map<String, dynamic> json) => NotificationData(
-        id: json["id"],
-        title: json["title"],
-        message: json["message"],
-        recipientId: json["recipient_id"],
-        vendorId: json["vendor_id"],
-        notifiableType: json["notifiable_type"],
-        notifyId: json["notify_id"],
-        data: json["data"],
-        readAt: json["read_at"],
+        id: json["id"]?? 0,
+        title: json["title"]?? "",
+        message: json["message"]?? "",
+        recipientId: json["recipient_id"]?? "",
+        vendorId: json["vendor_id"]?? "",
+        notifiableType: json["notifiable_type"]?? "",
+        notifyId: json["notify_id"]?? "",
+        data: json["data"]?? "",
+        readAt: json["read_at"]?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );

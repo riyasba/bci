@@ -86,18 +86,6 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                                       style: TextStyle(color: kblue),
                                     ),
                                   ),
-                                  // Text(
-                                  //   'Check in : 03:44PM Check Out 03:43 PM',
-                                  //   style: TextStyle(color: kblue),
-                                  // ),
-                                  // Text(
-                                  //   'Total Person : 5 Members',
-                                  //   style: TextStyle(color: kblue),
-                                  // ),
-                                  // Text(
-                                  //   'Ac Rooms',
-                                  //   style: TextStyle(color: kblue),
-                                  // ),
                                   ksizedbox10
                                 ],
                               )
@@ -173,19 +161,19 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          'Date : ${formatDate(DateTime.now(), [
-                                dd,
-                                "/",
-                                mm,
-                                "/",
-                                yyyy
-                              ])}',
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: kblue,
-                              fontWeight: FontWeight.w500),
-                        ),
+                        // Text(
+                        //   'Date : ${formatDate(DateTime.now(), [
+                        //         dd,
+                        //         "/",
+                        //         mm,
+                        //         "/",
+                        //         yyyy
+                        //       ])}',
+                        //   style: TextStyle(
+                        //       fontSize: 12,
+                        //       color: kblue,
+                        //       fontWeight: FontWeight.w500),
+                        // ),
                       ],
                     ),
                   ],
@@ -196,21 +184,44 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                 const Divider(
                   thickness: 1,
                 ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text(
+                //       'Date',
+                //       style: TextStyle(
+                //           fontSize: 16,
+                //           color: kblue,
+                //           fontWeight: FontWeight.bold),
+                //     ),
+                //     Text(
+                //       formatDate(bookingData.,
+                //                    [dd ,'-',mm,'-',yyyy]),
+                //       style: TextStyle(
+                //           fontSize: 15,
+                //           color: kblue,
+                //           fontWeight: FontWeight.w500),
+                //     ),
+                //   ],
+                // ),
+                // const Divider(
+                //   thickness: 1,
+                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Date',
+                      'Description',
                       style: TextStyle(
                           fontSize: 16,
                           color: kblue,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      '19/06/23',
+                      bookingData.description,
                       style: TextStyle(
                           fontSize: 15,
-                          color: kblue,
+                          color: kgrey,
                           fontWeight: FontWeight.w500),
                     ),
                   ],
@@ -222,73 +233,7 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Trip',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: kblue,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      '03.54 PM',
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: kblue,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                ),
-                const Divider(
-                  thickness: 1,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Country',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: kblue,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      'India',
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: kblue,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                ),
-                const Divider(
-                  thickness: 1,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Adult',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: kblue,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      '10',
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: kblue,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                ),
-                const Divider(
-                  thickness: 1,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Quantity',
+                      'quantity',
                       style: TextStyle(
                           fontSize: 16,
                           color: kblue,
@@ -298,7 +243,51 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                       bookingData.quantity,
                       style: TextStyle(
                           fontSize: 15,
+                          color: kgrey,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text(
+                //       'Adult',
+                //       style: TextStyle(
+                //           fontSize: 16,
+                //           color: kblue,
+                //           fontWeight: FontWeight.bold),
+                //     ),
+                //     Text(
+                //       '10',
+                //       style: TextStyle(
+                //           fontSize: 15,
+                //           color: kgrey,
+                //           fontWeight: FontWeight.w500),
+                //     ),
+                //   ],
+                // ),
+                // const Divider(
+                //   thickness: 1,
+                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Status',
+                      style: TextStyle(
+                          fontSize: 16,
                           color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      bookingData.status,
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: kgrey,
                           fontWeight: FontWeight.w500),
                     ),
                   ],
@@ -317,7 +306,7 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      bookingData.purchasePrice,
+                      "₹ ${bookingData.purchasePrice}",
                       style: const TextStyle(
                           fontSize: 15,
                           color: Colors.green,

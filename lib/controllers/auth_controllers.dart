@@ -287,6 +287,7 @@ RxInt filterindex = 0.obs;
        List<OffersListModel> offerslistModel = offersListModelFromJson(response.data);
         offerslistdata = offerslistModel;
          update();
+         Get.back();
         } else {
           Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -295,6 +296,7 @@ RxInt filterindex = 0.obs;
             style: primaryFont.copyWith(color: Colors.white),
           ));
         }
+        update();
   }
 
   getSubCategoryList() async {

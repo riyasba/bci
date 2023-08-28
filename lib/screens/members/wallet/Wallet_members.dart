@@ -2,6 +2,7 @@ import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -156,6 +157,7 @@ class _WalletScreenMembersState extends State<WalletScreenMembers> {
                             child: Container(
                               decoration: BoxDecoration(
                                   color: kyellow,
+                                  borderRadius: BorderRadius.circular(10),
                                   border: Border.all(color: kOrange, width: 1)),
                               height: _mediaQuery.height>700?108:110.h,
                               width: _mediaQuery.width>700?90:95.w,
@@ -193,16 +195,16 @@ class _WalletScreenMembersState extends State<WalletScreenMembers> {
                   height: 20,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 40),
+                      padding: const EdgeInsets.only(left: 10),
                       child: Text(
                         'Transaction History',
                         style: TextStyle(fontSize: 25.sp, color: kblue),
                       ),
                     ),
-                    Image.asset('assets/images/transactionicon.png')
+                   // Image.asset('assets/images/transactionicon.png')
                   ],
                 ),
                
@@ -225,7 +227,7 @@ class _WalletScreenMembersState extends State<WalletScreenMembers> {
                                         color: kwhite,
                                         boxShadow: <BoxShadow>[
                                           BoxShadow(
-                                              offset: Offset(0.0, 0.75),
+                                              offset:const Offset(0.0, 0.75),
                                               blurRadius: 1.0,
                                               color: kgrey)
                                         ]),
@@ -251,16 +253,17 @@ class _WalletScreenMembersState extends State<WalletScreenMembers> {
                                       right: 15,
                                       top: 50,
                                       child: Text(
-                                        authController.transactionHistorydata[index].amount,
+                                        "₹ ${authController.transactionHistorydata[index].amount}",
                                         style: TextStyle(
                                             color: index == 0 ? kOrange : kblue,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18),
                                       )),
                                   Positioned(
-                                    left: 50,
+                                    left: 10,
                                     top: 70,
-                                    child: Text(authController.transactionHistorydata[index].updatedAt.toString()),
+                                    child: Text(formatDate(authController.transactionHistorydata[index].createdAt,
+                                   [dd ,'-',mm,'-',yyyy]),),
                                   ),
                                   // Positioned(
                                   //     left: 170,

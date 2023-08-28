@@ -11,7 +11,6 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
 import '../bus/bus_screen.dart';

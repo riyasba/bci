@@ -69,11 +69,11 @@ var selectItem = '';
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
              Padding(
-              padding: EdgeInsets.only(top: 20,left: 20),
+              padding:const EdgeInsets.only(top: 20,left: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Member Offer",
+                  const Text("Member Offer",
                   style: TextStyle(fontSize: 20,
                   fontWeight: FontWeight.w500,
                   color: Color(0xff003366)),),
@@ -81,7 +81,7 @@ var selectItem = '';
                   IconButton(onPressed: (){
                   showModalBottomSheet(
 
-                    shape: RoundedRectangleBorder(
+                    shape:const RoundedRectangleBorder(
                      borderRadius: BorderRadiusDirectional.only(
                       topEnd: Radius.circular(15),
                       topStart: Radius.circular(15)
@@ -109,11 +109,12 @@ var selectItem = '';
                                               authcontroller.filterindex(index);
                                               authcontroller.getoffersfilterCategory(categoryid: authcontroller.categoryList[index].id.toString());
                                               authcontroller.update();
+                                              Get.back();
                                             },
                                             child: Container(
-                                            width: 100,
+                                            width: 200,
                                               child: Text(authcontroller.categoryList[index].title,
-                                              style: TextStyle(
+                                              style:const TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500
                                               ),)),
@@ -157,7 +158,7 @@ var selectItem = '';
 
                   }, 
                  
-                  icon: Icon(Icons.filter_alt))
+                  icon:const Icon(Icons.filter_alt))
                 //     GetBuilder<AuthController>(
                 //       builder: (_) {
                 //         return PopupMenuButton(
@@ -184,60 +185,59 @@ var selectItem = '';
                 ],
               ),
             ),
-           Padding(
-             padding: const EdgeInsets.only(top: 40,left: 20,right: 20),
-             child: GetBuilder<SettingsController>(
-                builder: (_) {
-                  return Container(
+           GetBuilder<SettingsController>(
+              builder: (_) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
                     height: 500,
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount:settingcontroller.offerslistdata.length ,
                       itemBuilder: (context, index) {
-                        return settingcontroller.offerslistdata.isNotEmpty?  Container(
-                          height: 140,
-                          width: size.width,
-                          decoration: BoxDecoration(
-                            color:const Color(0xff594A99),
-                            borderRadius: BorderRadius.circular(15),
+                        return settingcontroller.offerslistdata.isNotEmpty?  Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 140,
+                            width: size.width,
+                            decoration: BoxDecoration(
+                              color:const Color(0xff594A99),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 15,),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(settingcontroller.offerslistdata[index].title,
+                                         style:const TextStyle(fontSize: 20,
+                                         fontWeight: FontWeight.w500,
+                                         height: 1.4,
+                                         color: Color(0xffFAE7E3)),),
+                                         Padding(
+                                           padding: const EdgeInsets.only(top: 10,right: 10,bottom: 10),
+                                           child: Container(
+                                            height: 150,
+                                            width: 200,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10)
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(10),
+                                              child: Image(
+                                                image: NetworkImage(settingcontroller.offerslistdata[index].image),fit: BoxFit.fill))),
+                                         )
+                                       ],
+                                    ),
+                            ),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 15,),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(settingcontroller.offerslistdata[index].title,
-                                       style: TextStyle(fontSize: 20,
-                                       fontWeight: FontWeight.w500,
-                                       height: 1.4,
-                                       color: Color(0xffFAE7E3)),),
-                                       Padding(
-                                         padding: const EdgeInsets.only(top: 10,right: 10,bottom: 10),
-                                         child: Container(
-                                          height: 150,
-                                          width: 200,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10)
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(10),
-                                            child: Image(
-                                              image: NetworkImage(settingcontroller.offerslistdata[index].image),fit: BoxFit.fill))),
-                                       )
-                                     ],
-                                  ),
-                          ),
-                        ):Text('No data');
-                  
+                        ) : const Text('No data');
                       },
-                     
-                     
-                      
                     ),
-                  );
-                }
-              ),
-           ),
+                  ),
+                );
+              }
+            ),
         ],
       ),
     );

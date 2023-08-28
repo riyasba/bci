@@ -1,4 +1,6 @@
 import 'package:bci/controllers/holiday_package_controller.dart';
+import 'package:bci/models/holiday_package_models/get_enquiry_list_model.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -42,13 +44,8 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
                   return Card(
                     child: InkWell(
                       onTap: (){
-                        // dialogBuilder(context, 
-                        // homeController.bookingListData[index].image, 
-                        // homeController.bookingListData[index].service, 
-                        // homeController.bookingListData[index].description, 
-                        // homeController.bookingListData[index].purchasePrice, 
-                        // homeController.bookingListData[index].quantity
-                        // );
+                         dialogBuilder(
+                            context, holidayPackageController.enquiryData[index]);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -119,5 +116,218 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
                 }),
       );
     });
+  }
+
+  Future<void> dialogBuilder(
+      BuildContext context, EnquiryData enquiryDatas) {
+    return showDialog<void>(
+      context: context,
+      builder: (
+        BuildContext context,
+      ) {
+        return AlertDialog(
+          title: Container(
+            height: 400,
+            width: 300,
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.arrow_back_ios,
+                      color: kblue,
+                      size: 15,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Details',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    Image.network(enquiryDatas.packageDetails.image.first,
+                      height: 50,
+                      width: 60,
+                      fit: BoxFit.cover,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(enquiryDatas.packageDetails.title,
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: kblue,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        // Text(
+                        //    'Date : ${formatDate(enquiryDatas.packageDetails.createdAt,
+                        //            [dd ,'-',mm,'-',yyyy])}',
+                        //   style: TextStyle(
+                        //       fontSize: 12,
+                        //       color: kblue,
+                        //       fontWeight: FontWeight.w500),
+                        // ),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Date',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      formatDate(enquiryDatas.packageDetails.createdAt,
+                                   [dd ,'-',mm,'-',yyyy]),
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: kgrey,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Trip',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      enquiryDatas.packageDetails.duration,
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: kgrey,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Country',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      enquiryDatas.packageDetails.location,
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: kgrey,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Adult',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      enquiryDatas.adultCount,
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: kgrey,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Child',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(enquiryDatas.childCount,
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: kgrey,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                     const Text(
+                      'Price',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  Text("₹ ${enquiryDatas.packageDetails.amount.toString()}",
+                      style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.green,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

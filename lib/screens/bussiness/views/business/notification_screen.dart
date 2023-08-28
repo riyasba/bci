@@ -1,5 +1,6 @@
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:custom_clippers/custom_clippers.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -141,7 +142,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
                                     child: Text(
-                                      authController.notificationData[index].createdAt.toString(),
+                                      formatDate(authController.notificationData[index].createdAt,
+                                   [dd ,'-',mm,'-',yyyy]),
                                       style:const TextStyle(
                                           fontSize: 13.5,
                                           fontWeight: FontWeight.bold),

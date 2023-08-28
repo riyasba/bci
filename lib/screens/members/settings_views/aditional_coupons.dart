@@ -83,10 +83,10 @@ class _AdditionalCouponsState extends State<AdditionalCoupons> {
                       },
                       tabs: const [
                         Tab(
-                          text: "Other Coupons",
+                          text: "Your Coupons",
                         ),
                         Tab(
-                          text: "Vendor Coupons",
+                          text: "Redeemed Coupons",
                         ),
                       ]),
                 ),

@@ -575,97 +575,97 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                             ],
                           ),
                           ksizedbox10,
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.location_city,
-                                color: kOrange,
-                              ),
-                              Text(
-                                'Places to Visit :06N Mauritius',
-                                style: TextStyle(
-                                    fontSize: 18.sp,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                          ksizedbox30,
-                          Text(
-                            'Packages Include',
-                            style: TextStyle(
-                                fontSize: 20.sp,
-                                color: kblue,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          ksizedbox10,
-                          Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Icon(
-                                    Icons.flight_outlined,
-                                    color: kgrey,
-                                  ),
-                                  Text(
-                                    'Flights',
-                                    style: TextStyle(
-                                        fontSize: 10.sp,
-                                        color: kgrey,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
-                              ),
-                              kwidth5,
-                              Column(
-                                children: [
-                                  Icon(
-                                    Icons.hotel,
-                                    color: kgrey,
-                                  ),
-                                  Text(
-                                    'Hotels',
-                                    style: TextStyle(
-                                        fontSize: 10.sp,
-                                        color: kgrey,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
-                              ),
-                              kwidth5,
-                              Column(
-                                children: [
-                                  Icon(
-                                    Icons.car_rental,
-                                    color: kgrey,
-                                  ),
-                                  Text(
-                                    'Travel',
-                                    style: TextStyle(
-                                        fontSize: 10.sp,
-                                        color: kgrey,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
-                              ),
-                              kwidth5,
-                              Column(
-                                children: [
-                                  Icon(
-                                    Icons.food_bank,
-                                    color: kgrey,
-                                  ),
-                                  Text(
-                                    'Meals',
-                                    style: TextStyle(
-                                        fontSize: 10.sp,
-                                        color: kgrey,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   children: [
+                          //     Icon(
+                          //       Icons.location_city,
+                          //       color: kOrange,
+                          //     ),
+                          //     Text(
+                          //       'Places to Visit :06N Mauritius',
+                          //       style: TextStyle(
+                          //           fontSize: 18.sp,
+                          //           color: Colors.black,
+                          //           fontWeight: FontWeight.w500),
+                          //     ),
+                          //   ],
+                          // ),
+                          // ksizedbox30,
+                          // Text(
+                          //   'Packages Include',
+                          //   style: TextStyle(
+                          //       fontSize: 20.sp,
+                          //       color: kblue,
+                          //       fontWeight: FontWeight.w500),
+                          // ),
+                          // ksizedbox10,
+                          // Row(
+                          //   children: [
+                          //     Column(
+                          //       children: [
+                          //         Icon(
+                          //           Icons.flight_outlined,
+                          //           color: kgrey,
+                          //         ),
+                          //         Text(
+                          //           'Flights',
+                          //           style: TextStyle(
+                          //               fontSize: 10.sp,
+                          //               color: kgrey,
+                          //               fontWeight: FontWeight.w500),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //     kwidth5,
+                          //     Column(
+                          //       children: [
+                          //         Icon(
+                          //           Icons.hotel,
+                          //           color: kgrey,
+                          //         ),
+                          //         Text(
+                          //           'Hotels',
+                          //           style: TextStyle(
+                          //               fontSize: 10.sp,
+                          //               color: kgrey,
+                          //               fontWeight: FontWeight.w500),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //     kwidth5,
+                          //     Column(
+                          //       children: [
+                          //         Icon(
+                          //           Icons.car_rental,
+                          //           color: kgrey,
+                          //         ),
+                          //         Text(
+                          //           'Travel',
+                          //           style: TextStyle(
+                          //               fontSize: 10.sp,
+                          //               color: kgrey,
+                          //               fontWeight: FontWeight.w500),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //     kwidth5,
+                          //     Column(
+                          //       children: [
+                          //         Icon(
+                          //           Icons.food_bank,
+                          //           color: kgrey,
+                          //         ),
+                          //         Text(
+                          //           'Meals',
+                          //           style: TextStyle(
+                          //               fontSize: 10.sp,
+                          //               color: kgrey,
+                          //               fontWeight: FontWeight.w500),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ],
+                          // ),
                         ],
                       ),
                     ),
