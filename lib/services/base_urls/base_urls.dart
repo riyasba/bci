@@ -214,4 +214,8 @@ abstract class BaseApiService {
   //notification list
   final String notificationListApiUrl =
       "https://bci.batechnology.in/api/auth/notification_list";
+
+
+
+    final String userRedeemCoupons ="https://bci.batechnology.in/api/auth/getUserCoupons";
 }

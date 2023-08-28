@@ -18,6 +18,7 @@ import '../bus/bus_screen.dart';
 import '../coupen/coupons_screen.dart';
 import '../holiday/holiday_home.dart';
 
+import '../hottel/Hotel_members.dart';
 import '../hottel/search_hotel_screen.dart';
 import '../liquer_screen/liquer_screen.dart';
 import '../offer screen/offer_screen_grid.dart';

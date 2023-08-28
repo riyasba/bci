@@ -20,6 +20,7 @@ class HotelListScreen extends StatefulWidget {
 }
 
 class _HotelListScreenState extends State<HotelListScreen> {
+
   final hotelBookingController = Get.find<HotelBookingController>();
 
   @override
@@ -70,14 +71,15 @@ class _HotelListScreenState extends State<HotelListScreen> {
                   child: Row(
                     children: [
                       Container(
-                         width: 100,
-                            height: 130,
+                        width: 100,
+                        height: 130,
                         child: ClipRRect(
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(15),
                               bottomLeft: Radius.circular(15)),
                           child: Image.network(
-                            hotelBookingController.searchHotelData[index].hotelPicture,
+                            hotelBookingController
+                                .searchHotelData[index].hotelPicture,
                             width: 100,
                             height: 130,
                             fit: BoxFit.cover,
@@ -139,8 +141,7 @@ class _HotelListScreenState extends State<HotelListScreen> {
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: InkWell(
                         onTap: () async {
-                          print(hotelBookingController
-                              .searchHotelData[index].hotelName);
+                        
                           final prefs = await SharedPreferences.getInstance();
                           var searchtocken = prefs.getString("searchtoken");
                           Get.to(HotelInfobooking(
@@ -151,6 +152,8 @@ class _HotelListScreenState extends State<HotelListScreen> {
                                 .toString(),
                             searchToken: searchtocken ?? "",
                             userIp: '122.160.83.78',
+                           
+                               // hotelBookingController.blockroomdata[index].hotelRoomsDetails.toString(),
                           ));
                           hotelBookingController.update();
                           // print(

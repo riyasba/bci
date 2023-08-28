@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # isgpayui_plugin:  
+  #   path: plugin/Flutter_Plugin/ISGPay_PG_Plugin
+  
 
 
   # The following adds the Cupertino Icons font to your application.

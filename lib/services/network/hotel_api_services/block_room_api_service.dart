@@ -15,6 +15,7 @@ class BlockRoomApiService extends BaseApiService {
     }) async {
     dynamic responseJson;
     try {
+      print('api call');
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
@@ -55,13 +56,13 @@ class BlockRoomApiService extends BaseApiService {
             "DayRates": [
                     {
                         "Amount": hotelRoomsDetail.dayRates.first.amount,
-                        "Date": hotelRoomsDetail.dayRates.first.date
+                        "Date": hotelRoomsDetail.dayRates.first.date.toIso8601String()
                     }
                 ],
                 "IsPerStay": hotelRoomsDetail.isPerStay,
                 "SupplierPrice": hotelRoomsDetail.supplierPrice,
             "Price": {
-                    "CurrencyCode": hotelRoomsDetail.price.currencyCode,
+                    "CurrencyCode": hotelRoomsDetail.price.currencyCode.index,
                     "RoomPrice": hotelRoomsDetail.price.roomPrice,
                     "Tax": hotelRoomsDetail.price.tax,
                     "ExtraGuestCharge": hotelRoomsDetail.price.extraGuestCharge,
@@ -97,19 +98,19 @@ class BlockRoomApiService extends BaseApiService {
                 "SmokingPreference": hotelRoomsDetail.smokingPreference,
             "BedTypes": hotelRoomsDetail.bedTypes,
             "HotelSupplements": hotelRoomsDetail.hotelSupplements,
-             "LastCancellationDate": hotelRoomsDetail.lastCancellationDate,
+             "LastCancellationDate": hotelRoomsDetail.lastCancellationDate.toIso8601String(),
                 "CancellationPolicies": [
                   for(int i = 0; i < hotelRoomsDetail.cancellationPolicies.length; i++ )
                     {
                         "Charge": hotelRoomsDetail.cancellationPolicies[i].charge,
                         "ChargeType": hotelRoomsDetail.cancellationPolicies[i].chargeType,
-                        "Currency": hotelRoomsDetail.cancellationPolicies[i].currency,
-                        "FromDate": hotelRoomsDetail.cancellationPolicies[i].fromDate,
-                        "ToDate": hotelRoomsDetail.cancellationPolicies[i].toDate
+                        "Currency": hotelRoomsDetail.cancellationPolicies[i].currency.name,
+                        "FromDate": hotelRoomsDetail.cancellationPolicies[i].fromDate.toIso8601String(),
+                        "ToDate": hotelRoomsDetail.cancellationPolicies[i].toDate.toIso8601String()
                     },
                    
                 ],
-                "LastVoucherDate": hotelRoomsDetail.lastVoucherDate,
+                "LastVoucherDate": hotelRoomsDetail.lastVoucherDate.toIso8601String(),
                 "CancellationPolicy": hotelRoomsDetail.cancellationPolicy,
                 "Inclusion": hotelRoomsDetail.inclusion,
             "IsPassportMandatory": hotelRoomsDetail.isPassportMandatory,
@@ -122,7 +123,7 @@ class BlockRoomApiService extends BaseApiService {
     "Search_Token": searchToken
 }
       );
-      print("::::::::<block room api service>::::::::status code::::::::::");
+      print("::::::::<block room api service>:hotelroomdatails${hotelRoomsDetail}:::hotel name${hotelName}::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

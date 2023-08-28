@@ -80,7 +80,7 @@ class SearchHotelListApiService extends BaseApiService {
             },
           ),
           data: data2);
-      print("::::::::<search HOTEL-list Api>::::::::status code::::::::::");
+      print("::::::::<search HOTEL - list Api>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

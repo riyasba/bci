@@ -7,13 +7,13 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:readmore/readmore.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../controllers/hotel_booking_controller.dart';
-import 'search_hotel_screen.dart';
 
 class HotelInfobooking extends StatefulWidget {
   final String userIp;
   final String resultIndex;
   final String hotelCode;
   final String searchToken;
+
   HotelInfobooking({
     super.key,
     required this.userIp,
@@ -168,7 +168,7 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
                           // kwidth5,
                           hotelController.hotelInfoData.isEmpty
                               ? const Text('')
-                              :  Container(
+                              : Container(
                                   width: size.width * 0.8,
                                   child: Text(
                                     hotelController.hotelInfoData.first.address,
@@ -190,9 +190,13 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
                                 trimCollapsedText: 'show more',
                                 trimExpandedText: ' show less',
                                 lessStyle: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold,color: korange),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: korange),
                                 moreStyle: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold,color: korange),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: korange),
                               ),
                             ),
                       ksizedbox30,
@@ -281,7 +285,7 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
                   : Container(
                       height: 50,
                       child: ListView.builder(
-                        physics:const NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: hotelController.hotelRoomsData.length,
                         itemBuilder: (BuildContext context, int index) {
                           return ListTile(
@@ -302,15 +306,20 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20,top: 5),
-              child:hotelController.hotelRoomsData.isEmpty ? const Text("") : Text(
-                hotelController.hotelRoomsData.first.hotelRoomsDetails.first.roomDescription,
-                style: TextStyle(
-                    fontSize: 15, fontWeight: FontWeight.w400, color: kgrey),
-              ),
+              padding: const EdgeInsets.only(left: 20, top: 5),
+              child: hotelController.hotelRoomsData.isEmpty
+                  ? const Text("")
+                  : Text(
+                      hotelController.hotelRoomsData.first.hotelRoomsDetails
+                          .first.roomDescription,
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                          color: kgrey),
+                    ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 10,top: 20),
+              padding: const EdgeInsets.only(right: 10, top: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -326,7 +335,17 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
                         ),
                       ),
                       onPressed: () {
-                        Get.to(SerchHotelScreen());
+                        
+                        hotelController.blockroomapi(
+                            userIp: widget.userIp,
+                            resultIndex: widget.resultIndex,
+                            hotelCode: widget.hotelCode,
+                            hotelName:
+                                hotelController.hotelInfoData.first.hotelName,
+                            searchToken: widget.searchToken,
+                            hotelRoomsDetail: hotelController
+                                .hotelRoomsData.first.hotelRoomsDetails.first);
+                        // Get.to(Sucssesspage());
                         // Get.to(BusinessGenerate_otp
                         // ());
                       },

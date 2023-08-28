@@ -6,12 +6,17 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constands/app_fonts.dart';
+import '../models/hotel_booking_models/block_room_api_model.dart';
 import '../models/hotel_booking_models/get_hotel_room_model.dart';
 import '../models/hotel_booking_models/search_city_list_model.dart';
 import '../screens/members/hottel/Hotel_members.dart';
+import '../services/network/hotel_api_services/block_room_api_service.dart';
 import '../services/network/hotel_api_services/get_hotel_room_api_service.dart';
+import '../services/network/hotel_api_services/hotel_booking_api_service.dart';
 import '../services/network/hotel_api_services/hotel_citylist_api_service.dart';
 import '../services/network/hotel_api_services/search_hotel_api_service.dart';
+import 'package:bci/models/hotel_booking_models/get_hotel_room_model.dart'
+    as ht;
 
 class HotelBookingController extends GetxController {
   RxInt child = 0.obs;
@@ -20,19 +25,12 @@ class HotelBookingController extends GetxController {
   RxBool isLoading = false.obs;
   List<SearchCityListModel> getHotelCityList = [];
 
-
-
-  //search bus
+  //search hotel
   SearchHotelListApiService searchBusListApiService =
       SearchHotelListApiService();
 
-
-  // List<Bus> busData = [];
-
-
   RxString hotelSearchKey = "".obs;
   List<SearchHotelData> searchHotelData = [];
-  
 
   searchHotel({
     required String destination,
@@ -40,7 +38,7 @@ class HotelBookingController extends GetxController {
     required int adult,
     required String checkindate,
     required String checkoutdate,
-   // required int childage,
+    // required int childage,
     required String roomsno,
   }) async {
     isLoading(true);
@@ -51,16 +49,17 @@ class HotelBookingController extends GetxController {
             checkoutdate: checkoutdate,
             child: child,
             destination: destination,
-         //   childage: childage,
+            //   childage: childage,
             roomsno: roomsno);
     isLoading(false);
     if (response.data["Error"]["ErrorCode"] == 0) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("searchtoken", response.data["Search_Token"]);
-      SearchHotelModel searchHotelModel = SearchHotelModel.fromJson(response.data);
+      SearchHotelModel searchHotelModel =
+          SearchHotelModel.fromJson(response.data);
       searchHotelData = searchHotelModel.result;
-      Get.to( HotelListScreen());
-      
+      Get.to(HotelListScreen());
+
       // if (response.data["Error_Code"] == "0001") {
       //   Get.rawSnackbar(
       //     backgroundColor: Colors.red,
@@ -69,14 +68,14 @@ class HotelBookingController extends GetxController {
       //       style: primaryFont.copyWith(color: Colors.white),
       //     ),
       //   );
-      } else {
-        Get.rawSnackbar(
+    } else {
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             "something went wrong",
             style: primaryFont.copyWith(color: Colors.white),
           ));
-      }
+    }
     update();
   }
 
@@ -113,10 +112,10 @@ class HotelBookingController extends GetxController {
 
   //get hotel room
 
- GetHotelRoomApiServices hotelroomsApiServices = GetHotelRoomApiServices();
-  List<HotelRoomData > hotelRoomsData = [];
+  GetHotelRoomApiServices hotelroomsApiServices = GetHotelRoomApiServices();
+  List<HotelRoomData> hotelRoomsData = [];
 
- getHotelRoomApiServices({
+  getHotelRoomApiServices({
     required String userIp,
     required String resultIndex,
     required String hotelCode,
@@ -130,7 +129,8 @@ class HotelBookingController extends GetxController {
             hotelCode: hotelCode,
             searchToken: searchToken);
     if (response.statusCode == 200) {
-      GetHotelRoomModel hotelRoomsModel = GetHotelRoomModel.fromJson(response.data);
+      GetHotelRoomModel hotelRoomsModel =
+          GetHotelRoomModel.fromJson(response.data);
       hotelRoomsData.add(hotelRoomsModel.result);
     } else {
       Get.rawSnackbar(
@@ -142,12 +142,6 @@ class HotelBookingController extends GetxController {
     }
     update();
   }
-
-
-
-
-
-
 
   //hotel city list
   GetHotelCityListApiService getBusCityListApiService =
@@ -168,6 +162,83 @@ class HotelBookingController extends GetxController {
           style: primaryFont.copyWith(color: Colors.white),
         ),
       );
+    }
+    update();
+  }
+
+  //block room
+
+  BlockRoomApiService blockroomapiservice = BlockRoomApiService();
+  List<Result> blockroomdata = [];
+
+  blockroomapi(
+      {required String userIp,
+      required String resultIndex,
+      required String hotelCode,
+      required String hotelName,
+      required String searchToken,
+      required ht.HotelRoomsDetail hotelRoomsDetail}) async {
+    hotelRoomsData.clear();
+    dio.Response<dynamic> response =
+        await blockroomapiservice.blockRoomApiService(
+            hotelCode: hotelCode,
+            hotelName: hotelName,
+            hotelRoomsDetail: hotelRoomsDetail,
+            resultIndex: resultIndex,
+            searchToken: searchToken,
+            userIp: userIp);
+    if (response.statusCode == 200) {
+      // BlockRoomApiModel blockroommodel =
+      //     BlockRoomApiModel.fromJson(response.data);
+      // blockroomdata.add(blockroommodel.result);
+      hotelbookingapi(
+        hotelCode: hotelCode,
+        hotelName: hotelName,
+        hotelRoomsDetail: hotelRoomsDetail,
+        resultIndex: resultIndex,
+        searchToken: searchToken,
+        userIp: userIp,
+      );
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+  }
+
+  //hotel booking
+
+  HotelBookingApiServices hotelbookingapiservice = HotelBookingApiServices();
+
+  hotelbookingapi(
+      {required String userIp,
+      required String resultIndex,
+      required String hotelCode,
+      required String hotelName,
+      required String searchToken,
+      required ht.HotelRoomsDetail hotelRoomsDetail}) async {
+    hotelRoomsData.clear();
+    dio.Response<dynamic> response =
+        await hotelbookingapiservice.hotelBookingApiServices(
+            hotelCode: hotelCode,
+            hotelName: hotelName,
+            hotelRoomsDetail: hotelRoomsDetail,
+            resultIndex: resultIndex,
+            searchToken: searchToken,
+            userIp: userIp);
+    if (response.statusCode == 200) {
+      print('hotel book sucessfully');
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
     }
     update();
   }
