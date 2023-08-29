@@ -7,9 +7,11 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:get/get.dart';
+import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
@@ -50,6 +52,49 @@ class _Home_screen1State extends State<Home_screen1> {
       homeController.todayOffers();
       homeController.sliderProduct();
     });
+  }
+
+  String responseData = "Nothing";
+  final _isgpayuiPlugin = IsgpayuiPlugin();
+
+  void startPlugin() async {
+    String? result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _isgpayuiPlugin.initiateISGPayUI(getArguments(100)) ??
+          'Unknown platform version';
+    } on PlatformException catch (e) {
+      result = e.message;
+    }
+    debugPrint('Result ::: $result');
+    setState(() {
+      responseData = result!;
+    });
+  }
+
+  Map getArguments(var amount) {
+    var randomStr = DateTime.now().microsecondsSinceEpoch.toString();
+    Map map = {
+      'version': "1",
+      'txnRefNo': "TX$randomStr", // Should change on every request
+      'amount': '$amount',
+      'passCode': 'SVPL4257',
+      'bankId': '000004',
+      'terminalId': '10100781',
+      'merchantId': '101000000000781',
+      'mcc': '4112',
+      'paymentType': 'Pay',
+      'currency': "INR",
+      'email': 'manu@gmail.com',
+      'phone': '+917907886767',
+      'hashKey': '5EC4A697141C8CE45509EF485EE7D4B1',
+      'aesKey': 'E59CD2BF6F4D86B5FB3897A680E0DD3E',
+      'payOut': '',
+      'orderInfo': '089978',
+      'env': 'PROD', //UAT PROD
+      'url': 'https://sandbox.isgpay.com/ISGPay-Genius/request.action',
+    };
+    return map;
   }
 
   @override
@@ -120,25 +165,29 @@ class _Home_screen1State extends State<Home_screen1> {
                                           i < homeController.sliderData.length;
                                           i++)
                                         InkWell(
-                                          onTap: (){
-                                            if( homeController.sliderData[i].product=="Hotel"){
-                                            Get.to(HotelListScreen());
+                                          onTap: () {
+                                            if (homeController
+                                                    .sliderData[i].product ==
+                                                "Hotel") {
+                                              // Get.to(HotelListScreen());
+                                              startPlugin();
+                                            } else if (homeController
+                                                    .sliderData[i].product ==
+                                                "Liquors") {
+                                              Get.to(LiquorScreen());
+                                            } else if (homeController
+                                                    .sliderData[i].product ==
+                                                "Bus") {
+                                              Get.to(BusScreen());
+                                            } else if (homeController
+                                                    .sliderData[i].product ==
+                                                "Flight") {
+                                              Get.to(
+                                                  FlightBookingLandingScreen());
                                             }
-                                            else if(homeController.sliderData[i].product=="Liquors"){
-                                             Get.to( LiquorScreen());
-                                            }
-                                            else if(homeController.sliderData[i].product== "Bus"){
-                                             Get.to( BusScreen());
-                                            }
-                                            else if(homeController.sliderData[i].product=="Flight"){
-                                            Get.to( FlightBookingLandingScreen());
-
-                                            }
-                                          
-                                         
-                                          },                                       
-                                            child: Image.network(
-                                              homeController.sliderData[i].image),
+                                          },
+                                          child: Image.network(homeController
+                                              .sliderData[i].image),
                                         )
                                     ],
                                     options: CarouselOptions(

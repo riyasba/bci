@@ -90,37 +90,37 @@ class HotelRoomData {
 }
 
 class HotelRoomsDetail {
-  String availabilityType;
+  dynamic availabilityType;
   dynamic childCount;
-  bool requireAllPaxDetails;
-  int roomId;
-  int roomStatus;
-  int roomIndex;
-  String roomTypeCode;
-  String roomDescription;
-  String ratePlanName;
-  String roomTypeName;
-  String ratePlanCode;
-  int ratePlan;
-  String infoSource;
-  String sequenceNo;
+  dynamic requireAllPaxDetails;
+  dynamic roomId;
+  dynamic roomStatus;
+  dynamic roomIndex;
+  dynamic roomTypeCode;
+  dynamic roomDescription;
+  dynamic ratePlanName;
+  dynamic roomTypeName;
+  dynamic ratePlanCode;
+  dynamic ratePlan;
+  dynamic infoSource;
+  dynamic sequenceNo;
   List<DayRate> dayRates;
-  bool isPerStay;
+  dynamic isPerStay;
   dynamic supplierPrice;
   Price price;
-  String roomPromotion;
+  dynamic roomPromotion;
   List<String> amenities;
   List<String> amenity;
-  String smokingPreference;
+  dynamic smokingPreference;
   List<dynamic> bedTypes;
   List<dynamic> hotelSupplements;
   DateTime lastCancellationDate;
   List<CancellationPolicy> cancellationPolicies;
   DateTime lastVoucherDate;
-  String cancellationPolicy;
+  dynamic cancellationPolicy;
   List<String> inclusion;
-  bool isPassportMandatory;
-  bool isPanMandatory;
+  dynamic isPassportMandatory;
+  dynamic isPanMandatory;
 
   HotelRoomsDetail({
     required this.availabilityType,
@@ -234,7 +234,7 @@ class HotelRoomsDetail {
 class CancellationPolicy {
   int charge;
   int chargeType;
-  Currency currency;
+  dynamic currency;
   DateTime fromDate;
   DateTime toDate;
 
@@ -250,7 +250,7 @@ class CancellationPolicy {
       CancellationPolicy(
         charge: json["Charge"],
         chargeType: json["ChargeType"],
-        currency: currencyValues.map[json["Currency"]]!,
+        currency: json["Currency"],
         fromDate: DateTime.parse(json["FromDate"]),
         toDate: DateTime.parse(json["ToDate"]),
       );
@@ -258,18 +258,16 @@ class CancellationPolicy {
   Map<String, dynamic> toJson() => {
         "Charge": charge,
         "ChargeType": chargeType,
-        "Currency": currencyValues.reverse[currency],
+        "Currency": currency,
         "FromDate": fromDate.toIso8601String(),
         "ToDate": toDate.toIso8601String(),
       };
 }
 
-enum Currency { INR }
 
-final currencyValues = EnumValues({"INR": Currency.INR});
 
 class DayRate {
-  double amount;
+  dynamic amount;
   DateTime date;
 
   DayRate({
@@ -289,7 +287,7 @@ class DayRate {
 }
 
 class Price {
-  Currency currencyCode;
+  String currencyCode;
   dynamic roomPrice;
   dynamic tax;
   dynamic extraGuestCharge;
@@ -332,7 +330,7 @@ class Price {
   });
 
   factory Price.fromJson(Map<String, dynamic> json) => Price(
-        currencyCode: currencyValues.map[json["CurrencyCode"]]!,
+        currencyCode: json["CurrencyCode"],
         roomPrice: json["RoomPrice"],
         tax: json["Tax"],
         extraGuestCharge: json["ExtraGuestCharge"],
@@ -354,7 +352,7 @@ class Price {
       );
 
   Map<String, dynamic> toJson() => {
-        "CurrencyCode": currencyValues.reverse[currencyCode],
+        "CurrencyCode": currencyCode,
         "RoomPrice": roomPrice,
         "Tax": tax,
         "ExtraGuestCharge": extraGuestCharge,

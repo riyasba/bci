@@ -20,16 +20,8 @@ class SerchHotelScreen extends StatefulWidget {
 
 class _SerchHotelScreenState extends State<SerchHotelScreen> {
   DateTimeRange daterange = DateTimeRange(
-      start: DateTime(
-        2023,
-        8,
-        18,
-      ),
-      end: DateTime(
-        2023,
-        9,
-        18,
-      ));
+      start: DateTime.now(),
+      end: DateTime.now().add(Duration(days: 1)));
 
   final hotelController = Get.find<HotelBookingController>();
   final Destinationcontrolr = TextEditingController();
@@ -69,7 +61,7 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                     if (value.length > 1) {
                       await Future.delayed(const Duration(milliseconds: 200));
                       Get.find<HotelBookingController>()
-                          .hotelCityList(searchCity: value);
+                          .hotelCityList(searchCity: value.trim());
                     }
                   },
                   controller: Destinationcontrolr,
@@ -476,8 +468,8 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
   Future pickDateRange() async {
     DateTimeRange? newDateRange = await showDateRangePicker(
       context: context,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2030),
       initialDateRange: daterange,
     );
 

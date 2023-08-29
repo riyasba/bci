@@ -25,7 +25,7 @@ class Sucessful_screen_hotel extends StatelessWidget {
             },
             child: Image.asset('assets/images/Icon awesome-arrow-right.png')),
         title: Text(
-          'Payment Completed',
+          'Booking Completed',
           style: TextStyle(
               fontSize: 27.sp, fontWeight: FontWeight.w800, color: kblue),
         ),

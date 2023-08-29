@@ -2,6 +2,7 @@ import 'package:bci/constands/constands.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_super_html_viewer/flutter_super_html_viewer.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:readmore/readmore.dart';
@@ -178,28 +179,6 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
                         ],
                       ),
                       ksizedbox30,
-                      hotelController.hotelInfoData.isEmpty
-                          ? const Text('')
-                          : Container(
-                              width: size.width * 0.9,
-                              child: ReadMoreText(
-                                hotelController.hotelInfoData.first.description,
-                                trimLines: 2,
-                                colorClickableText: Colors.orange,
-                                trimMode: TrimMode.Line,
-                                trimCollapsedText: 'show more',
-                                trimExpandedText: ' show less',
-                                lessStyle: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: korange),
-                                moreStyle: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: korange),
-                              ),
-                            ),
-                      ksizedbox30,
                     ],
                   ),
                 ],
@@ -269,6 +248,15 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
               ),
             ),
             ksizedbox30,
+            
+               hotelController.hotelInfoData.isEmpty
+                ? const Text('')
+                :    Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: HtmlContentViewer(
+                              htmlContent: hotelController.hotelInfoData.first.description,),
+                ),
+            ksizedbox30,
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Text(
@@ -324,38 +312,71 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   // Image.asset('assets/images/Group 5822(1).png'),
-                  SizedBox(
-                    height: 58,
-                    width: 200,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: kblue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      onPressed: () {
-                        
-                        hotelController.blockroomapi(
-                            userIp: widget.userIp,
-                            resultIndex: widget.resultIndex,
-                            hotelCode: widget.hotelCode,
-                            hotelName:
-                                hotelController.hotelInfoData.first.hotelName,
-                            searchToken: widget.searchToken,
-                            hotelRoomsDetail: hotelController
-                                .hotelRoomsData.first.hotelRoomsDetails.first);
-                        // Get.to(Sucssesspage());
-                        // Get.to(BusinessGenerate_otp
-                        // ());
-                      },
-                      child: Text(
-                        'Book Now',
-                        style: TextStyle(
-                            fontSize: 22,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
+                  Obx(
+                    () => SizedBox(
+                      height: 58,
+                      width: 200,
+                      child: hotelController.isLoading.isTrue
+                          ? ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: kblue,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                              onPressed: () {
+                                // hotelController.blockroomapi(
+                                //     userIp: widget.userIp,
+                                //     resultIndex: widget.resultIndex,
+                                //     hotelCode: widget.hotelCode,
+                                //     hotelName: hotelController
+                                //         .hotelInfoData.first.hotelName,
+                                //     searchToken: widget.searchToken,
+                                //     hotelRoomsDetail: hotelController
+                                //         .hotelRoomsData
+                                //         .first
+                                //         .hotelRoomsDetails
+                                //         .first);
+                                // Get.to(Sucssesspage());
+                                // Get.to(BusinessGenerate_otp
+                                // ());
+                              },
+                              child: const CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            )
+                          : ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: kblue,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                              onPressed: () {
+                                hotelController.blockroomapi(
+                                    userIp: widget.userIp,
+                                    resultIndex: widget.resultIndex,
+                                    hotelCode: widget.hotelCode,
+                                    hotelName: hotelController
+                                        .hotelInfoData.first.hotelName,
+                                    searchToken: widget.searchToken,
+                                    hotelRoomsDetail: hotelController
+                                        .hotelRoomsData
+                                        .first
+                                        .hotelRoomsDetails
+                                        .first);
+                                // Get.to(Sucssesspage());
+                                // Get.to(BusinessGenerate_otp
+                                // ());
+                              },
+                              child: const Text(
+                                'Book Now',
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
                     ),
                   ),
                 ],

@@ -21,6 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import '../services/network/profile_api_services/update_residencial_address_api_services.dart';
 
 class ProfileController extends GetxController {
@@ -41,6 +42,14 @@ class ProfileController extends GetxController {
   RxBool isLoading = false.obs;
 
   RxString planid = "".obs;
+
+
+
+
+
+
+
+
 
   getProfile() async {
     profileData.clear();

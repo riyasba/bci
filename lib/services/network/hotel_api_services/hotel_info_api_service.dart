@@ -20,7 +20,7 @@ class HotelInfoApiServices extends BaseApiService {
         hotelInfoApiUrl,
         options: Options(
             headers: {
-              'Accept': 'application/json',
+              'Content-Type': 'application/json',
               'Authorization': 'Bearer $authtoken'
             },
             followRedirects: false,

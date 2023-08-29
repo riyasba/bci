@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
    <application
         tools:replace="android:label"
+        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
         android:label="BCI Member"
         android:requestLegacyExternalStorage="true"
         android:name="${applicationName}"

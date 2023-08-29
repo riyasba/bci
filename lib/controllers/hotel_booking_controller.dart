@@ -1,5 +1,6 @@
 import 'package:bci/models/hotel_booking_models/hotel_info_model.dart';
 import 'package:bci/models/hotel_booking_models/search_hotel_list_model.dart';
+import 'package:bci/screens/members/hottel/wigets/sucsessful.dart';
 import 'package:bci/services/network/hotel_api_services/hotel_info_api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,8 +21,8 @@ import 'package:bci/models/hotel_booking_models/get_hotel_room_model.dart'
 
 class HotelBookingController extends GetxController {
   RxInt child = 0.obs;
-  RxInt adult = 0.obs;
-  RxInt roomno = 0.obs;
+  RxInt adult = 1.obs;
+  RxInt roomno = 1.obs;
   RxBool isLoading = false.obs;
   List<SearchCityListModel> getHotelCityList = [];
 
@@ -178,6 +179,7 @@ class HotelBookingController extends GetxController {
       required String hotelName,
       required String searchToken,
       required ht.HotelRoomsDetail hotelRoomsDetail}) async {
+    isLoading(true);
     hotelRoomsData.clear();
     dio.Response<dynamic> response =
         await blockroomapiservice.blockRoomApiService(
@@ -200,6 +202,7 @@ class HotelBookingController extends GetxController {
         userIp: userIp,
       );
     } else {
+      isLoading(false);
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
@@ -221,7 +224,7 @@ class HotelBookingController extends GetxController {
       required String hotelName,
       required String searchToken,
       required ht.HotelRoomsDetail hotelRoomsDetail}) async {
-    hotelRoomsData.clear();
+ 
     dio.Response<dynamic> response =
         await hotelbookingapiservice.hotelBookingApiServices(
             hotelCode: hotelCode,
@@ -230,8 +233,19 @@ class HotelBookingController extends GetxController {
             resultIndex: resultIndex,
             searchToken: searchToken,
             userIp: userIp);
+    isLoading(false);
     if (response.statusCode == 200) {
-      print('hotel book sucessfully');
+      if (response.data["Error"]["ErrorCode"] == 0) {
+        // success page
+        Get.to(() => Sucessful_screen_hotel());
+      } else {
+        Get.rawSnackbar(
+            backgroundColor: Colors.red,
+            messageText: Text(
+              response.data["Error"]["ErrorMessage"],
+              style: primaryFont.copyWith(color: Colors.white),
+            ));
+      }
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
