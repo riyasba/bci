@@ -36,6 +36,8 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
   var gstNoController = TextEditingController();
   var referalcodeController = TextEditingController();
 
+  bool isReferral = false;
+
   File? aadharCardImage;
   File? panCardImage;
 
@@ -291,6 +293,63 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       )),
                 ),
               ),
+
+                    if(isReferral == true)
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: TextFormField(
+                    textInputAction: TextInputAction.next,
+                    controller: referalcodeController,
+                    //autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide:
+                                const BorderSide(color:  Color(0xff707070))),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide:
+                                const BorderSide(color:  Color(0xff707070))),
+                        isCollapsed: false,
+                        isDense: true,
+                        contentPadding:
+                            const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide:
+                                const BorderSide(color:  Color(0xff707070))),
+                        hintText: "Referral Code",
+                        hintStyle: TextStyle(
+                          color: kblue,
+                          fontWeight: FontWeight.w400,
+                        )),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Checkbox(
+                          checkColor: Colors.white,
+                           fillColor:
+                           MaterialStateProperty.all(kblue),
+                            value: isReferral,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                isReferral = value!;
+                              });
+                             },
+                     ),
+                     Text(
+                  "Referral Code",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.w400, color: kblue),
+                ),
+                  ],
+                ),
+
+
               // Padding(
               //   padding: const EdgeInsets.only(top: 15),
               //   child: TextFormField(
@@ -674,6 +733,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                                         roleId: "5");
 
                                 authController.registerMerchants(
+                                  referralCode: referalcodeController.text,
                                     merchantRegisterModel:
                                         merchantRegisterModel);
                               }

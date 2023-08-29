@@ -76,4 +76,8 @@ abstract class BaseApiService {
 
    //vendor redeemption coupons
    final String redeemprtionCouponsApiUrl = "https://bci.batechnology.in/api/auth/vedorRedeemCoupons";
+
+    //generate referral code
+  final String generateReferralApiUrl =
+      "https://bci.batechnology.in/api/generateReferralregister";
 }
