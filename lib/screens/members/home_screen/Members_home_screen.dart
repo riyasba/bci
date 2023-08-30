@@ -3,6 +3,7 @@ import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_booking_landing_screen.dart';
 import 'package:bci/screens/members/home_screen/others_service_screen.dart';
+import 'package:bci/screens/members/settings_views/aditional_coupons.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_clippers/custom_clippers.dart';
@@ -269,9 +270,9 @@ class _Home_screen1State extends State<Home_screen1> {
                   ksizedbox20,
                   InkWell(
                       onTap: () {
-                        Get.to(const CoupensMembers());
+                        Get.to(const MemberCouponScreen());
                       },
-                      child: Image.asset('assets/images/Group 5755.png')),
+                      child: Image.asset('assets/icons/homecoupon.jpg')),
                   ksizedbox20,
                   Row(
                     children: [

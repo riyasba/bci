@@ -171,7 +171,7 @@ class MemberUser {
         otp: json["otp"]?? "",
         referralCode: json["referral_code"]?? "",
         referredBy: json["referred_by"]?? "",
-        walletAmount: json["wallet_amount"]?? "",
+        walletAmount: json["wallet_amount"]?? "0.0",
         category: json["category"]?? "",
         subCategory: json["sub_category"]?? "",
         alternateMobile: json["alternate_mobile"]?? "",

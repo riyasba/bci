@@ -103,7 +103,7 @@ class _MembersBookingState extends State<MembersBooking> {
           children: [
           FlightWidget (), 
           BusContainers(), 
-          bookings_containers(),
+          HotelBookingScreen(),
           HoliaysContainors(),
           OthersBookingsView(),
         ]),

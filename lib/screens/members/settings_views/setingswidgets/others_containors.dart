@@ -1,24 +1,10 @@
 import 'package:bci/constands/app_fonts.dart';
-
 import 'package:bci/controllers/profile_controller.dart';
-
-import 'package:clipboard/clipboard.dart';
-
 import 'package:coupon_uikit/coupon_uikit.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:flutter/src/widgets/framework.dart';
-
-import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:get/get.dart';
-
 import 'dart:math' as math;
-
-import '../../../../constands/constands.dart';
-
-
 
 
 class VendorCoupons extends StatefulWidget {
@@ -50,12 +36,13 @@ class _CouponsState extends State<VendorCoupons> {
     return Scaffold(
       body: GetBuilder<ProfileController>(builder: (_) {
         return Container(
-          height: size.height * 0.55,
+          //height: size.height * 0.55,
           child: profileController.redeemcouponsData.isEmpty
               ? const Center(
                   child: Text("No Coupons Available"),
                 )
               : ListView.builder(
+                  shrinkWrap: true,
                   itemCount: profileController.redeemcouponsData.length,
                   itemBuilder: (context, index) {
                     return Padding(
@@ -71,9 +58,10 @@ class _CouponsState extends State<VendorCoupons> {
                                           0xFFFFFF)
                                       .toInt())
                                   .withOpacity(1.0)),
-                          child: Image.network(
-                            profileController
-                                .redeemcouponsData[index].image,fit: BoxFit.cover,
+                          child: profileController.redeemcouponsData[index].image == "null" ? 
+                          Image.asset("assets/icons/coupon.jpg",fit: BoxFit.cover,) :
+                           Image.network(profileController.redeemcouponsData[index].image,
+                           fit: BoxFit.cover,
                           ),
                         ),
                         secondChild: Column(

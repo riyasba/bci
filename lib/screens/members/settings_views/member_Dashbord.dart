@@ -150,14 +150,14 @@ class _DashBoardScreenMenbersState extends State<DashBoardScreenMenbers> {
                             style: TextStyle(fontSize: 18, color: kblue),
                           ),
                         ),
-                        Text(
-                          '₹ 1.00',
+                        profileController.profileData.isEmpty ? const Text("") : Text(
+                        '₹ ${profileController.profileData.first.walletAmount}',
                           style: TextStyle(
                               fontSize: 18,
                               color: kblue,
                               fontWeight: FontWeight.bold),
                         ),
-                        Image.asset('assets/images/dashboardforward.png')
+                        Image.asset('assets/images/dashboardforward.png'),
                       ],
                     ),
                   ),

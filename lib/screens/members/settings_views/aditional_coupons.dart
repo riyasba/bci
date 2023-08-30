@@ -8,14 +8,14 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../constands/constands.dart';
 import '../../bussiness/views/home_screen/contact_admin.dart';
 
-class AdditionalCoupons extends StatefulWidget {
-  const AdditionalCoupons({super.key});
+class MemberCouponScreen extends StatefulWidget {
+  const MemberCouponScreen({super.key});
 
   @override
-  State<AdditionalCoupons> createState() => _AdditionalCouponsState();
+  State<MemberCouponScreen> createState() => _MemberCouponScreenState();
 }
 
-class _AdditionalCouponsState extends State<AdditionalCoupons> {
+class _MemberCouponScreenState extends State<MemberCouponScreen> {
   int index = 0;
 
   @override
@@ -24,13 +24,13 @@ class _AdditionalCouponsState extends State<AdditionalCoupons> {
       length: 2,
       child: Scaffold(
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(250),
+            preferredSize: const Size.fromHeight(200),
             child: Column(
               children: [
                 ClipPath(
                   clipper: SinCosineWaveClipper(),
                   child: Container(
-                    height: 157,
+                    height: 137,
                     color: kblue,
                     child: Padding(
                       padding: const EdgeInsets.all(15),
@@ -90,9 +90,9 @@ class _AdditionalCouponsState extends State<AdditionalCoupons> {
                         ),
                       ]),
                 ),
-                const Divider(
-                  thickness: 3,
-                )
+                // const Divider(
+                //   thickness: 3,
+                // )
               ],
             )),
         body: const TabBarView(children: [Coupons(), VendorCoupons()]),

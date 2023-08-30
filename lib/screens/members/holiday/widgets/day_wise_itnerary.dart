@@ -53,7 +53,7 @@ class _DayWiseItineraryState extends State<DayWiseItinerary> {
            ksizedbox20,
            holidayPackageController.getPackageDetailsData.isEmpty ? const Center(child: Text("No Data Found"),) :
         HtmlContentViewer(
-                        htmlContent: holidayPackageController.getPackageDetailsData.first.description,
+                        htmlContent: holidayPackageController.getPackageDetailsData.first.dayWiseItinerary,
                         initialContentHeight:
                             MediaQuery.of(context).size.height,
                         initialContentWidth: MediaQuery.of(context).size.width,

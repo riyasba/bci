@@ -1,6 +1,8 @@
+import 'package:bci/models/hotel_booking_models/hotel_booking_list_model.dart';
 import 'package:bci/models/hotel_booking_models/hotel_info_model.dart';
 import 'package:bci/models/hotel_booking_models/search_hotel_list_model.dart';
 import 'package:bci/screens/members/hottel/wigets/sucsessful.dart';
+import 'package:bci/services/network/hotel_api_services/hotel_booking_list_api_service.dart';
 import 'package:bci/services/network/hotel_api_services/hotel_info_api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -259,4 +261,26 @@ class HotelBookingController extends GetxController {
     }
     update();
   }
+
+  //get hotel booking list
+  HotelBookingListApiServices hotelBookingListApiServices = HotelBookingListApiServices();
+  List<BookingList> bookingList = [];
+
+  hotelBookingList() async {
+
+    dio.Response<dynamic> response = await hotelBookingListApiServices.hotelBookingListApiServices();
+    if(response.statusCode == 200){
+       HotelBookingListModel hotelBookingListModel = HotelBookingListModel.fromJson(response.data);
+       bookingList = hotelBookingListModel.bookingList;
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+  }
+
 }

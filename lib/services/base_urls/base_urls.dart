@@ -216,6 +216,9 @@ abstract class BaseApiService {
       "https://bci.batechnology.in/api/auth/notification_list";
 
 
+  //user redeemded coupon
+  final String userRedeemCoupons ="https://bci.batechnology.in/api/auth/userRedeemCoupons";
 
-    final String userRedeemCoupons ="https://bci.batechnology.in/api/auth/userRedeemCoupons";
+  //hotel booking list 
+  final String hotelBookinglistApiUrl = "https://bci.batechnology.in/api/auth/list_hotel_booking";
 }

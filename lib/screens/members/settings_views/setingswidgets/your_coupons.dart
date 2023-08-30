@@ -39,18 +39,19 @@ class _CouponsState extends State<Coupons> {
     return Scaffold(
       body: GetBuilder<ProfileController>(builder: (_) {
         return Container(
-          height: size.height * 0.55,
+         // height: size.height * 0.55,
           child: profileController.couponsData.isEmpty
               ? const Center(
                   child: Text("No Coupons Available"),
                 )
               : ListView.builder(
+                shrinkWrap: true,
                   itemCount: profileController.couponsData.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(15),
                       child: CouponCard(
-                        shadow: Shadow(),
+                        shadow:const Shadow(),
                         height: 150,
                         backgroundColor: Colors.white,
                         curveAxis: Axis.vertical,
@@ -60,7 +61,9 @@ class _CouponsState extends State<Coupons> {
                                           0xFFFFFF)
                                       .toInt())
                                   .withOpacity(1.0)),
-                          child: Image.network(
+                          child:profileController.couponsData[index].image == "null" ? 
+                          Image.asset("assets/icons/coupon.jpg",fit: BoxFit.cover,) :
+                           Image.network(
                             profileController.couponsData[index].image,
                             fit: BoxFit.cover,
                           ),
@@ -69,7 +72,7 @@ class _CouponsState extends State<Coupons> {
                           mainAxisAlignment:
                               MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(
+                            const Text(
                               "Coupon Code :",
                               textAlign: TextAlign.center,
                               style: TextStyle(

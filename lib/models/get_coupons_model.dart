@@ -77,7 +77,7 @@ class CouponsData {
         serviceId: json["service_id"],
         vendorId: json["vendor_id"],
         couponcode: json["couponcode"],
-        image: json["image"]??"",
+        image: json["image"]?? "null",
         amount: json["amount"],
         isRedeemed: json["is_redeemed"],
         expiryAt: DateTime.parse(json["expiry_at"]),

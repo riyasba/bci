@@ -52,7 +52,7 @@ class _AdditionalInfoWidgetState extends State<AdditionalInfoWidget> {
                 ),
                 if(holidayPackageController.getPackageDetailsData.first.packageoverview.isNotEmpty)
                 HtmlContentViewer(
-                            htmlContent: holidayPackageController.getPackageDetailsData.first.packageoverview,
+                            htmlContent: holidayPackageController.getPackageDetailsData.first.packageInclude,
                             initialContentHeight:
                                 MediaQuery.of(context).size.height,
                             initialContentWidth: MediaQuery.of(context).size.width,

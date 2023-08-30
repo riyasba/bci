@@ -18,7 +18,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize:const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -38,8 +38,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           color: kwhite,
                         )),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 120),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 120),
                     child: Text(
                       'Dashboard',
                       style: TextStyle(fontSize: 23, color: Colors.white),
