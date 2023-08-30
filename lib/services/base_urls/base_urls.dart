@@ -221,4 +221,7 @@ abstract class BaseApiService {
 
   //hotel booking list 
   final String hotelBookinglistApiUrl = "https://bci.batechnology.in/api/auth/list_hotel_booking";
+
+    final String storeHotelBookingURL ="https://bci.batechnology.in/api/auth/store_hotel_booking";
+
 }

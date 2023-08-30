@@ -59,8 +59,12 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
         ),
       ),
       body: GetBuilder<HotelBookingController>(builder: (_) {
-        return ListView(
-          physics: BouncingScrollPhysics(),
+        return  hotelController.isPageLoading.isTrue?  Center(
+          child: CircularProgressIndicator(
+            color: korange,
+          ),
+        ): ListView(
+          physics:const BouncingScrollPhysics(),
           children: [
             Container(
               width: size.width * 0.9,
@@ -355,6 +359,8 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
                               onPressed: () {
                                 hotelController.blockroomapi(
                                     userIp: widget.userIp,
+                                    hotelInfoData: hotelController
+                                            .hotelInfoData.first,
                                     resultIndex: widget.resultIndex,
                                     hotelCode: widget.hotelCode,
                                     hotelName: hotelController

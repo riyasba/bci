@@ -1,3 +1,4 @@
+import 'package:bci/models/hotel_booking_models/store_temp_search_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -380,6 +381,12 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
           Obx(
             () => InkWell(
               onTap: () {
+                hotelController.tempBookingModel = TempBookingModel(
+                  bookingDate: DateFormat('dd/MM/yyyy').format(start),
+                  noOfDays: diffrence.inDays.toString(),
+                  noOfPeople: hotelController.adult.value.toString(),
+                  place: Destinationcontrolr.text
+                );
                 hotelController.searchHotel(
                   child: hotelController.child.value,
                   adult: hotelController.adult.value,

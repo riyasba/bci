@@ -217,12 +217,17 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                           color: kblue,
                           fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      bookingData.description,
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: kgrey,
-                          fontWeight: FontWeight.w500),
+                    Container(
+                      width: 100,
+                      child: Text(
+                        bookingData.description,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: kgrey,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ),
                   ],
                 ),

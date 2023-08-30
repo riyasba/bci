@@ -1,9 +1,14 @@
 import 'package:bci/models/hotel_booking_models/hotel_booking_list_model.dart';
+import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/models/hotel_booking_models/hotel_booking_store_data_model.dart';
 import 'package:bci/models/hotel_booking_models/hotel_info_model.dart';
 import 'package:bci/models/hotel_booking_models/search_hotel_list_model.dart';
+import 'package:bci/models/hotel_booking_models/store_temp_search_data.dart';
 import 'package:bci/screens/members/hottel/wigets/sucsessful.dart';
 import 'package:bci/services/network/hotel_api_services/hotel_booking_list_api_service.dart';
 import 'package:bci/services/network/hotel_api_services/hotel_info_api_service.dart';
+import 'package:bci/services/network/hotel_api_services/store_hotel_booking_data_api.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
@@ -28,9 +33,13 @@ class HotelBookingController extends GetxController {
   RxBool isLoading = false.obs;
   List<SearchCityListModel> getHotelCityList = [];
 
+  TempBookingModel? tempBookingModel;
+
   //search hotel
   SearchHotelListApiService searchBusListApiService =
       SearchHotelListApiService();
+
+    StoreHotelBookingApiServices storeHotelBookingApiServices = StoreHotelBookingApiServices();
 
   RxString hotelSearchKey = "".obs;
   RxString hotelSearchKeyCode = "".obs;
@@ -89,12 +98,15 @@ class HotelBookingController extends GetxController {
   HotelInfoApiServices hotelInfoApiServices = HotelInfoApiServices();
   List<HotelInfoData> hotelInfoData = [];
 
+  RxBool isPageLoading = false.obs;
+
   hotelInfo({
     required String userIp,
     required String resultIndex,
     required String hotelCode,
     required String searchToken,
   }) async {
+    isPageLoading(true);
     hotelInfoData.clear();
     dio.Response<dynamic> response =
         await hotelInfoApiServices.hotelInfoApiServices(
@@ -134,6 +146,7 @@ class HotelBookingController extends GetxController {
             resultIndex: resultIndex,
             hotelCode: hotelCode,
             searchToken: searchToken);
+            isPageLoading(false);
     if (response.statusCode == 200) {
       GetHotelRoomModel hotelRoomsModel =
           GetHotelRoomModel.fromJson(response.data);
@@ -183,6 +196,7 @@ class HotelBookingController extends GetxController {
       required String hotelCode,
       required String hotelName,
       required String searchToken,
+      required HotelInfoData hotelInfoData,
       required ht.HotelRoomsDetail hotelRoomsDetail}) async {
     isLoading(true);
     hotelRoomsData.clear();
@@ -202,6 +216,7 @@ class HotelBookingController extends GetxController {
         hotelCode: hotelCode,
         hotelName: hotelName,
         hotelRoomsDetail: hotelRoomsDetail,
+        hotelInfoData: hotelInfoData,
         resultIndex: resultIndex,
         searchToken: searchToken,
         userIp: userIp,
@@ -228,6 +243,7 @@ class HotelBookingController extends GetxController {
       required String hotelCode,
       required String hotelName,
       required String searchToken,
+      required HotelInfoData hotelInfoData,
       required ht.HotelRoomsDetail hotelRoomsDetail}) async {
  
     dio.Response<dynamic> response =
@@ -242,7 +258,27 @@ class HotelBookingController extends GetxController {
     if (response.statusCode == 200) {
       if (response.data["Error"]["ErrorCode"] == 0) {
         // success page
-        Get.to(() => Sucessful_screen_hotel());
+        final profileController = Get.find<ProfileController>();
+        HotelBookingStroreData hotelBookingStroreData = HotelBookingStroreData(
+        bookingDate: tempBookingModel!.bookingDate,
+        bookingId: response.data["Result"]["BookingId"].toString(),
+        bookingRefNo: response.data["Result"]["BookingRefNo"].toString(),
+        confirmationNo: response.data["Result"]["BookingRefNo"].toString(),
+        hotelBookingStatus: response.data["Result"]["HotelBookingStatus"].toString(),
+        isCancelPolicyChanged:  response.data["Result"]["IsCancellationPolicyChanged"].toString(),
+        isPriceChanged:  response.data["Result"]["IsPriceChanged"].toString(),
+        noOfDays: tempBookingModel!.noOfDays,
+        noOfPeople: tempBookingModel!.noOfPeople,
+        place: tempBookingModel!.place,
+        userId: profileController.profileData.first.id.toString(),
+        hotelContact: hotelInfoData.hotelContactNo.toString(),
+        hotelImage: hotelInfoData.images.first,
+        hotelName: hotelInfoData.hotelName,
+        price: hotelRoomsDetail.dayRates.first.amount.toString(),
+        userName: profileController.profileData.first.name.toString() 
+        );
+       storeHotlBookingData(hotelBookingStoreData: hotelBookingStroreData);
+        Get.to(() => const Sucessful_screen_hotel());
       } else {
         Get.rawSnackbar(
             backgroundColor: Colors.red,
@@ -283,4 +319,13 @@ class HotelBookingController extends GetxController {
     update();
   }
 
+
+  storeHotlBookingData({required HotelBookingStroreData hotelBookingStoreData}) async{
+    dio.Response<dynamic> response = await storeHotelBookingApiServices.storeHotelBooking(hotelBookingStoreData: hotelBookingStoreData);
+
+    if(response.statusCode == 200){
+
+    }
+
+  }
 }

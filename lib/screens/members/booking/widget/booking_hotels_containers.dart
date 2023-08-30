@@ -95,13 +95,12 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                   Row(
                                     children: [
                                       Text(
-                                     "Date :",
+                                     "Booking Date :",
                                       maxLines: 4,
                                       style: TextStyle(color: kblue),
                                     ),
                                       Text(
-                                          " ${formatDate(hotelBookingController.bookingList[index].createdAt,
-                                       [dd ,'-',mm,'-',yyyy])}",
+                                          hotelBookingController.bookingList[index].bookingDate,
                                           maxLines: 4,
                                           style: TextStyle(color: kgrey),
                                         ),
@@ -204,15 +203,14 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Date',
+                      'Booking Date',
                       style: TextStyle(
                           fontSize: 16,
                           color: kblue,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      formatDate(bookingData.createdAt,
-                                   [dd ,'-',mm,'-',yyyy]),
+                      bookingData.bookingDate,
                       style: TextStyle(
                           fontSize: 15,
                           color: kgrey,
@@ -257,6 +255,28 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                     ),
                     Text(
                       bookingData.place,
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: kgrey,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Booking Status',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      bookingData.hotelBookingStatus,
                       style: TextStyle(
                           fontSize: 15,
                           color: kgrey,

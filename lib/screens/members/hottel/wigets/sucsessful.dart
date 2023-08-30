@@ -22,7 +22,7 @@ class Sucessful_screen_hotel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFF9F8FD),
+        backgroundColor: const Color(0xFFF9F8FD),
         elevation: 0,
         leading: InkWell(
             onTap: () {
