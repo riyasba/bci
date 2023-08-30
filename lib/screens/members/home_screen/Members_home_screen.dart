@@ -76,22 +76,22 @@ class _Home_screen1State extends State<Home_screen1> {
     var randomStr = DateTime.now().microsecondsSinceEpoch.toString();
     Map map = {
       'version': "1",
-      'txnRefNo': "TX$randomStr", // Should change on every request
-      'amount': '$amount',
+      'txnRefNo': "ORD00001", // Should change on every request
+      'amount': 100,
       'passCode': 'SVPL4257',
       'bankId': '000004',
       'terminalId': '10100781',
       'merchantId': '101000000000781',
-      'mcc': '4112',
+      'mcc': 4112,
       'paymentType': 'Pay',
-      'currency': "INR",
+      'currency': 356,
       'email': 'manu@gmail.com',
       'phone': '+917907886767',
-      'hashKey': '5EC4A697141C8CE45509EF485EE7D4B1',
-      'aesKey': 'E59CD2BF6F4D86B5FB3897A680E0DD3E',
-      'payOut': '',
-      'orderInfo': '089978',
-      'env': 'PROD', //UAT PROD
+      'hashKey': 'E59CD2BF6F4D86B5FB3897A680E0DD3E',
+      'aesKey': '5EC4A697141C8CE45509EF485EE7D4B1',
+      'payOpt': 'cc',
+      'orderInfo': 'NARUTO00001',
+      'env': 'UAT', //UAT PROD
       'url': 'https://sandbox.isgpay.com/ISGPay-Genius/request.action',
     };
     return map;

@@ -89,6 +89,7 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                   Destinationcontrolr.text = citymodel.destination;
                   //    hotelController.toCity(citymodel.cityName);
                   hotelController.hotelSearchKey(citymodel.cityid);
+                  hotelController.hotelSearchKeyCode(citymodel.countrycode);
                   print(citymodel.cityid);
                   print(citymodel.country);
                   print(citymodel.countrycode);
@@ -387,6 +388,7 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                   destination: hotelController.hotelSearchKey.value,
                   //  childage: hotelController.roomno.value,
                   roomsno: hotelController.roomno.string,
+                  countryCode: hotelController.hotelSearchKeyCode.value
                 );
                 //Get.to(Sucessful_screen_hotel());
               },

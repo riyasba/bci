@@ -123,7 +123,7 @@ class BlockRoomApiService extends BaseApiService {
     "GuestNationality": "IN",
     "NoOfRooms": "1",
     "HotelRoomsDetails": [hotelRoomsDetail.toJson()],
-     "UserIp": userIp,
+     "UserIp": "122.160.83.78",
      "Search_Token": searchToken
 };
       print("//--//--/--/body of the blocl api/--//--/--/--//");
@@ -133,6 +133,7 @@ class BlockRoomApiService extends BaseApiService {
       var response = await dio.post(blockRoomApiUrl,
           options: Options(
               headers: {
+                'Content-Type': 'application/json',
                 'Authorization': 'Bearer $authtoken'
               },
               followRedirects: false,

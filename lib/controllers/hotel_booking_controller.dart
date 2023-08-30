@@ -31,10 +31,12 @@ class HotelBookingController extends GetxController {
       SearchHotelListApiService();
 
   RxString hotelSearchKey = "".obs;
+  RxString hotelSearchKeyCode = "".obs;
   List<SearchHotelData> searchHotelData = [];
 
   searchHotel({
     required String destination,
+    required String countryCode,
     required int child,
     required int adult,
     required String checkindate,
@@ -47,6 +49,7 @@ class HotelBookingController extends GetxController {
         await searchBusListApiService.searchhotelListApiService(
             adult: adult,
             checkindate: checkindate,
+            countryCode: countryCode,
             checkoutdate: checkoutdate,
             child: child,
             destination: destination,
@@ -150,7 +153,7 @@ class HotelBookingController extends GetxController {
 
   hotelCityList({required String searchCity}) async {
     dio.Response<dynamic> response = await getBusCityListApiService
-        .getHotelCityListApiService(searchCity: searchCity);
+        .getHotelCityListApiService(searchCity: searchCity.trim());
 
     if (response.statusCode == 200) {
       getHotelCityList = List<SearchCityListModel>.from(

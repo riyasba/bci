@@ -1,3 +1,4 @@
+import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -12,6 +13,10 @@ import '../Hotel_members.dart';
 
 class Sucessful_screen_hotel extends StatelessWidget {
   const Sucessful_screen_hotel({super.key});
+
+  getBack() {
+    Get.offAll(()=> MemberBottomNavBar());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,45 +41,49 @@ class Sucessful_screen_hotel extends StatelessWidget {
           children: [
             Image.asset('assets/images/accept-icon.png'),
             Text(
-              'Payment Successful',
+              'Booking Successful',
               style: TextStyle(
                   color: kblue, fontSize: 28.sp, fontWeight: FontWeight.w700),
             ),
             ksizedbox10,
             Text(
-              'Thank you! Your payment is complete',
+              'Thank you! Your booking is complete',
               style: TextStyle(
                   fontSize: 22.sp, fontWeight: FontWeight.w600, color: kblue),
-            ),ksizedbox40,ksizedbox40,
-            
-        InkWell(onTap: (){
-          Get.to( HotelListScreen());},
-                child: Container(
-                  width: 150,
-                  height: 45,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      4,
-                    ),
-                    gradient: const LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        Color(0xFFFF5C29),
-                        Color(0xFFFFCD38),
-                      ],
-                    ),
+            ),
+            ksizedbox40,
+            ksizedbox40,
+            InkWell(
+              onTap: () {
+                Get.offAll(MemberBottomNavBar());
+              },
+              child: Container(
+                width: 150,
+                height: 45,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    4,
                   ),
-                  child: Text(
-                    'Done',
-                    style: TextStyle(
-                        fontSize: 17,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600),
+                  gradient: const LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color(0xFFFF5C29),
+                      Color(0xFFFFCD38),
+                    ],
                   ),
                 ),
-              ),  ],
+                child: const Text(
+                  'Done',
+                  style: TextStyle(
+                      fontSize: 17,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

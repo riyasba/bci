@@ -7,6 +7,7 @@ class SearchHotelListApiService extends BaseApiService {
   Future searchhotelListApiService({
     required String checkindate,
     required String destination,
+    required String countryCode,
     required String checkoutdate,
     required int adult,
     required int child,

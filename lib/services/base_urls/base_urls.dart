@@ -217,5 +217,5 @@ abstract class BaseApiService {
 
 
 
-    final String userRedeemCoupons ="https://bci.batechnology.in/api/auth/getUserCoupons";
+    final String userRedeemCoupons ="https://bci.batechnology.in/api/auth/userRedeemCoupons";
 }

@@ -278,7 +278,7 @@ class FareDetail {
 
   factory FareDetail.fromJson(Map<String, dynamic> json) => FareDetail(
         airportTaxAmount: json["AirportTax_Amount"]?.toDouble(),
-        airportTaxes: List<AirportTax>.from(
+        airportTaxes: json["AirportTaxes"] == null ? []: List<AirportTax>.from(
             json["AirportTaxes"].map((x) => AirportTax.fromJson(x))),
         basicAmount: json["Basic_Amount"],
         cancellationCharges: json["CancellationCharges"] == null
@@ -286,7 +286,7 @@ class FareDetail {
             : List<Charge>.from(
                 json["CancellationCharges"]!.map((x) => Charge.fromJson(x))),
         currencyCode: json["Currency_Code"],
-        fareClasses: List<FareClass>.from(
+        fareClasses: json["FareClasses"] == null ? [] : List<FareClass>.from(
             json["FareClasses"].map((x) => FareClass.fromJson(x))),
         freeBaggage: FreeBaggage.fromJson(json["Free_Baggage"]),
         gst: json["GST"],

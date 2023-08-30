@@ -102,7 +102,7 @@ class HotelBookingApiServices extends BaseApiService {
             ]
         }
     ],
-    "UserIp": userIp,
+    "UserIp": "122.160.83.78",
     "Search_Token": searchToken
 };
 
@@ -224,6 +224,7 @@ developer.log(data2.toString(),name: "hotel booking");
         hotelBookingApiUrl,
         options: Options(
             headers: {
+              'Content-Type': 'application/json',
               'Authorization': 'Bearer $authtoken'
             },
             followRedirects: false,

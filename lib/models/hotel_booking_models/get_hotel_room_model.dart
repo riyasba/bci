@@ -217,7 +217,7 @@ class HotelRoomsDetail {
         "RoomPromotion": roomPromotion,
         "Amenities": List<dynamic>.from(amenities.map((x) => x)),
         "Amenity": List<dynamic>.from(amenity.map((x) => x)),
-        "SmokingPreference": smokingPreference,
+        "SmokingPreference": 0,
         "BedTypes": List<dynamic>.from(bedTypes.map((x) => x)),
         "HotelSupplements": List<dynamic>.from(hotelSupplements.map((x) => x)),
         "LastCancellationDate": lastCancellationDate.toIso8601String(),

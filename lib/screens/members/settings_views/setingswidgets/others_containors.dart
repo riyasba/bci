@@ -38,7 +38,7 @@ class _CouponsState extends State<VendorCoupons> {
     
 
     super.initState();
-    profileController.  redeemgetCoupons();
+    profileController.redeemgetCoupons();
 
   }
 
