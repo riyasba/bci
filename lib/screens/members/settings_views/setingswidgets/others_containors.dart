@@ -48,118 +48,106 @@ class _CouponsState extends State<VendorCoupons> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: ListView(
-          children: [
-            ksizedbox10,
-            GetBuilder<ProfileController>(builder: (_) {
-              return Container(
-                height: size.height * 0.75,
-                child: profileController.redeemcouponsData.isEmpty
-                    ? const Center(
-                        child: Text("No Coupons Available"),
-                      )
-                    : ListView.builder(
-                        itemCount: profileController.redeemcouponsData.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: CouponCard(
-                              shadow: Shadow(),
-                              height: 150,
-                              backgroundColor: Colors.white,
-                              curveAxis: Axis.vertical,
-                              firstChild: Container(
-                                decoration: BoxDecoration(
-                                    color: Color((math.Random().nextDouble() *
-                                                0xFFFFFF)
-                                            .toInt())
-                                        .withOpacity(1.0)),
-                                child: Image.network(
-                                  profileController
-                                      .redeemcouponsData[index].image,fit: BoxFit.cover,
-                                ),
-                              ),
-                              secondChild: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                 const Text(
-                                    "Coupon Code :",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    profileController
-                                        .redeemcouponsData[index].couponcode,
-                                    style: primaryFont.copyWith(
-                                        fontSize: 14,
-                                        color: Color(
-                                                (math.Random().nextDouble() *
-                                                        0xFFFFFF)
-                                                    .toInt())
-                                            .withOpacity(1.0),
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      // FlutterClipboard.copy(profileController
-                                      //         .redeemcouponsData[index].couponcode)
-                                      //     .then(
-                                      //   (value) => Fluttertoast.showToast(
-                                      //       msg: "Copy to clipboard",
-                                      //       toastLength: Toast.LENGTH_SHORT,
-                                      //       gravity: ToastGravity.CENTER,
-                                      //       timeInSecForIosWeb: 1,
-                                      //       backgroundColor: Colors.white,
-                                      //       textColor: Colors.black,
-                                      //       fontSize: 16.0),
-                                      //   //print("code copied")
-                                      // );
-                                    },
-                                    child: Container(
-                                      height: 25,
-                                      width: 120,
-                                      decoration: BoxDecoration(
-                                          color: Colors.green,
-                                          borderRadius:
-                                              BorderRadius.circular(4)),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Redeemed",
-                                            style: primaryFont.copyWith(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
+      body: GetBuilder<ProfileController>(builder: (_) {
+        return Container(
+          height: size.height * 0.55,
+          child: profileController.redeemcouponsData.isEmpty
+              ? const Center(
+                  child: Text("No Coupons Available"),
+                )
+              : ListView.builder(
+                  itemCount: profileController.redeemcouponsData.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: CouponCard(
+                        shadow: Shadow(),
+                        height: 150,
+                        backgroundColor: Colors.white,
+                        curveAxis: Axis.vertical,
+                        firstChild: Container(
+                          decoration: BoxDecoration(
+                              color: Color((math.Random().nextDouble() *
+                                          0xFFFFFF)
+                                      .toInt())
+                                  .withOpacity(1.0)),
+                          child: Image.network(
+                            profileController
+                                .redeemcouponsData[index].image,fit: BoxFit.cover,
+                          ),
+                        ),
+                        secondChild: Column(
+                          mainAxisAlignment:
+                              MainAxisAlignment.spaceEvenly,
+                          children: [
+                           const Text(
+                              "Coupon Code :",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          );
-                          
-                        },
+                            Text(
+                              profileController
+                                  .redeemcouponsData[index].couponcode,
+                              style: primaryFont.copyWith(
+                                  fontSize: 14,
+                                  color: Color(
+                                          (math.Random().nextDouble() *
+                                                  0xFFFFFF)
+                                              .toInt())
+                                      .withOpacity(1.0),
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                // FlutterClipboard.copy(profileController
+                                //         .redeemcouponsData[index].couponcode)
+                                //     .then(
+                                //   (value) => Fluttertoast.showToast(
+                                //       msg: "Copy to clipboard",
+                                //       toastLength: Toast.LENGTH_SHORT,
+                                //       gravity: ToastGravity.CENTER,
+                                //       timeInSecForIosWeb: 1,
+                                //       backgroundColor: Colors.white,
+                                //       textColor: Colors.black,
+                                //       fontSize: 16.0),
+                                //   //print("code copied")
+                                // );
+                              },
+                              child: Container(
+                                height: 25,
+                                width: 120,
+                                decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius:
+                                        BorderRadius.circular(4)),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Redeemed",
+                                      style: primaryFont.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-              );
-            }),
-            //Image.asset('assets/images/Group 5789.png'),ksizedbox30,
-            //Image.asset('assets/images/Group 5790.png'),ksizedbox30,
-            //Image.asset('assets/images/Group 5791.png'),ksizedbox30,
-            //Image.asset('assets/images/Group 5792.png')
-          ],
-        ),
-      ),
+                    );
+                    
+                  },
+                ),
+        );
+      }),
     );
   }
 }
