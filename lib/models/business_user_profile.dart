@@ -11,8 +11,8 @@ String businessProfileModelToJson(BusinessProfileModel data) => json.encode(data
 class BusinessProfileModel {
     String message;
     bool subscription;
-    int remainingDays;
-    int percentage;
+    dynamic remainingDays;
+    dynamic percentage;
     dynamic planId;
     BusinessUser user;
 

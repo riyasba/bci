@@ -462,7 +462,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                 // Pick an image
                 final XFile? tempimage =
                     await _picker.pickImage(source: ImageSource.gallery);
-
+      
                 setState(() {
                   serviceImage = File(tempimage!.path);
                 });
@@ -787,7 +787,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                 ),
               ],
             ),
-
+      
           if (isCouponEligible)
             Padding(
               padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -848,18 +848,18 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                   : InkWell(
                       onTap: () {
                         List<Amenty> listTags = [];
-
+      
                         var tagsList = _controller!.getTags;
-
+      
                         for (var i = 0; i < tagsList!.length; i++) {
                           listTags.add(Amenty(value: tagsList[i]));
                         }
-
+      
                         CategoryList? categoryModel;
                         if (merchantCategory != null) {
                           categoryModel = merchantCategory as CategoryList;
                         }
-
+      
                         CreateServiceModel createServiceModel =
                             CreateServiceModel(
                                 offerPercentage:
@@ -892,7 +892,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                                 offerAmount: offerAmountController.text.isEmpty
                                     ? null
                                     : offerAmountController.text);
-
+      
                         serviceController.updateServices(
                             createServiceModel: createServiceModel,
                             id: widget.serviceData.id);

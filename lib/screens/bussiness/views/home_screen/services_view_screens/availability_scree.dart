@@ -122,7 +122,7 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                 ksizedbox10,
                 InkWell(
                   onTap: () {
-                    Get.to(() => AddServicesView());
+                    Get.to(() => const AddServicesView());
                     // showDialog(
                     //     context: context,
                     //     builder: (context) {
@@ -397,11 +397,14 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                                                   left: 5,
                                                   right: 10,
                                                   bottom: 10),
-                                              child: Image.network(
-                                                servicesController
-                                                    .serviceDataList[index]
-                                                    .image,
-                                                fit: BoxFit.contain,
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.circular(4),
+                                                child: Image.network(
+                                                  servicesController
+                                                      .serviceDataList[index]
+                                                      .image,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                           ),
