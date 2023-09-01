@@ -18,6 +18,7 @@ import 'package:bci/services/network/categorys_api_services/get_booking_list_api
 import 'package:bci/services/network/categorys_api_services/get_cart_list_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_filter_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_service_list_api_service.dart';
+import 'package:bci/services/network/categorys_api_services/get_services_by_vendor_id.dart';
 import 'package:bci/services/network/categorys_api_services/get_today_offers_list_api_service.dart';
 import 'package:bci/services/network/categorys_api_services/search_service_list_api_services.dart';
 import 'package:bci/services/network/liquors_api_services/liquor_service_list.dart';
@@ -112,6 +113,29 @@ class HomeController extends GetxController {
     if (response.statusCode == 200) {
       GetServiceList getServiceList = GetServiceList.fromJson(response.data);
       serviceListData = getServiceList.data;
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            response.data["message"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+  }
+
+  VendorServiceListApiServices vendorServiceListApiServices = VendorServiceListApiServices();
+  List<GetServiceListData> vendorServiceListData = [];
+
+    vendorServiceList(String vendorId) async {
+    dio.Response<dynamic> response =
+        await vendorServiceListApiServices.vendorServiceListApiServices(
+          vendorId: vendorId
+        );
+
+    if (response.statusCode == 200) {
+      GetServiceList getServiceList = GetServiceList.fromJson(response.data);
+      vendorServiceListData = getServiceList.data;
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,

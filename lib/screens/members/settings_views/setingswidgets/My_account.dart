@@ -1132,7 +1132,10 @@ class _MyAccountState extends State<MyAccount> {
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
                                    image != null
-                      ? Container(
+                      ?  profileController.profileData.isEmpty ? Container(
+                        height: 6,
+                        width: 5,
+                      ) : Container(
                           height: 100, 
                           width: 100, 
                           child: profileController.profileData.first.adharProof.isEmpty ? Image.file(image!) : Image.network(profileController.profileData.first.adharProof))
@@ -1171,7 +1174,10 @@ class _MyAccountState extends State<MyAccount> {
                                   );
                                 });
                           },
-                          child: Container(
+                          child:profileController.profileData.isEmpty ? Container(
+                            height: 5,
+                            width: 5,
+                          ) : Container(
                               height: 100,
                               width: 100,
                               color: const Color(0xffE4E4E4),
@@ -1179,7 +1185,10 @@ class _MyAccountState extends State<MyAccount> {
                                   ),
                         ),
                   image2 != null
-                      ? Container(
+                      ? profileController.profileData.isEmpty ? Container(
+                        height: 5,
+                        width: 5,
+                      ): Container(
                           height: 100, width: 100, child: profileController.profileData.first.panProof.isEmpty ? Image.file(image2!) : Image.network(profileController.profileData.first.panProof))
                       : InkWell(
                           onTap: () {
@@ -1216,7 +1225,11 @@ class _MyAccountState extends State<MyAccount> {
                                   );
                                 });
                           },
-                          child: Container(
+                          child: profileController
+                                              .profileData.isEmpty ? Container(
+                                                height: 5,
+                                                width: 5,
+                                              ): Container(
                               height: 100,
                               width: 100,
                               color: const Color(0xffE4E4E4),

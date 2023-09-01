@@ -868,7 +868,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                               .flight.fares.first.fareDetails.first.totalAmount
                               .toString(),
                           customerName:
-                              profileController.profileData.first.name,
+                              profileController.profileData.first.name.trim().split(" ").first,
                           email: profileController.profileData.first.email,
                           phone: profileController.profileData.first.mobile,
                           bookingModel: bookingModel);

@@ -39,7 +39,8 @@ class HotelBookingController extends GetxController {
   SearchHotelListApiService searchBusListApiService =
       SearchHotelListApiService();
 
-    StoreHotelBookingApiServices storeHotelBookingApiServices = StoreHotelBookingApiServices();
+  StoreHotelBookingApiServices storeHotelBookingApiServices =
+      StoreHotelBookingApiServices();
 
   RxString hotelSearchKey = "".obs;
   RxString hotelSearchKeyCode = "".obs;
@@ -146,7 +147,7 @@ class HotelBookingController extends GetxController {
             resultIndex: resultIndex,
             hotelCode: hotelCode,
             searchToken: searchToken);
-            isPageLoading(false);
+    isPageLoading(false);
     if (response.statusCode == 200) {
       GetHotelRoomModel hotelRoomsModel =
           GetHotelRoomModel.fromJson(response.data);
@@ -245,7 +246,8 @@ class HotelBookingController extends GetxController {
       required String searchToken,
       required HotelInfoData hotelInfoData,
       required ht.HotelRoomsDetail hotelRoomsDetail}) async {
- 
+    final profileController = Get.find<ProfileController>();
+
     dio.Response<dynamic> response =
         await hotelbookingapiservice.hotelBookingApiServices(
             hotelCode: hotelCode,
@@ -253,6 +255,10 @@ class HotelBookingController extends GetxController {
             hotelRoomsDetail: hotelRoomsDetail,
             resultIndex: resultIndex,
             searchToken: searchToken,
+            emailId: profileController.profileData.first.email,
+            userName: profileController.profileData.first.name,
+            mobileNumber: profileController.profileData.first.mobile,
+            pancard: profileController.profileData.first.panNo,
             userIp: userIp);
     isLoading(false);
     if (response.statusCode == 200) {
@@ -260,24 +266,27 @@ class HotelBookingController extends GetxController {
         // success page
         final profileController = Get.find<ProfileController>();
         HotelBookingStroreData hotelBookingStroreData = HotelBookingStroreData(
-        bookingDate: tempBookingModel!.bookingDate,
-        bookingId: response.data["Result"]["BookingId"].toString(),
-        bookingRefNo: response.data["Result"]["BookingRefNo"].toString(),
-        confirmationNo: response.data["Result"]["BookingRefNo"].toString(),
-        hotelBookingStatus: response.data["Result"]["HotelBookingStatus"].toString(),
-        isCancelPolicyChanged:  response.data["Result"]["IsCancellationPolicyChanged"].toString(),
-        isPriceChanged:  response.data["Result"]["IsPriceChanged"].toString(),
-        noOfDays: tempBookingModel!.noOfDays,
-        noOfPeople: tempBookingModel!.noOfPeople,
-        place: tempBookingModel!.place,
-        userId: profileController.profileData.first.id.toString(),
-        hotelContact: hotelInfoData.hotelContactNo.toString(),
-        hotelImage: hotelInfoData.images.first,
-        hotelName: hotelInfoData.hotelName,
-        price: hotelRoomsDetail.dayRates.first.amount.toString(),
-        userName: profileController.profileData.first.name.toString() 
-        );
-       storeHotlBookingData(hotelBookingStoreData: hotelBookingStroreData);
+            bookingDate: tempBookingModel!.bookingDate,
+            bookingId: response.data["Result"]["BookingId"].toString(),
+            bookingRefNo: response.data["Result"]["BookingRefNo"].toString(),
+            confirmationNo: response.data["Result"]["BookingRefNo"].toString(),
+            hotelBookingStatus:
+                response.data["Result"]["HotelBookingStatus"].toString(),
+            isCancelPolicyChanged: response.data["Result"]
+                    ["IsCancellationPolicyChanged"]
+                .toString(),
+            isPriceChanged:
+                response.data["Result"]["IsPriceChanged"].toString(),
+            noOfDays: tempBookingModel!.noOfDays,
+            noOfPeople: tempBookingModel!.noOfPeople,
+            place: tempBookingModel!.place,
+            userId: profileController.profileData.first.id.toString(),
+            hotelContact: hotelInfoData.hotelContactNo.toString(),
+            hotelImage: hotelInfoData.images.first,
+            hotelName: hotelInfoData.hotelName,
+            price: hotelRoomsDetail.dayRates.first.amount.toString(),
+            userName: profileController.profileData.first.name.toString());
+        storeHotlBookingData(hotelBookingStoreData: hotelBookingStroreData);
         Get.to(() => const Sucessful_screen_hotel());
       } else {
         Get.rawSnackbar(
@@ -299,15 +308,17 @@ class HotelBookingController extends GetxController {
   }
 
   //get hotel booking list
-  HotelBookingListApiServices hotelBookingListApiServices = HotelBookingListApiServices();
+  HotelBookingListApiServices hotelBookingListApiServices =
+      HotelBookingListApiServices();
   List<BookingList> bookingList = [];
 
   hotelBookingList() async {
-
-    dio.Response<dynamic> response = await hotelBookingListApiServices.hotelBookingListApiServices();
-    if(response.statusCode == 200){
-       HotelBookingListModel hotelBookingListModel = HotelBookingListModel.fromJson(response.data);
-       bookingList = hotelBookingListModel.bookingList;
+    dio.Response<dynamic> response =
+        await hotelBookingListApiServices.hotelBookingListApiServices();
+    if (response.statusCode == 200) {
+      HotelBookingListModel hotelBookingListModel =
+          HotelBookingListModel.fromJson(response.data);
+      bookingList = hotelBookingListModel.bookingList;
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -319,13 +330,11 @@ class HotelBookingController extends GetxController {
     update();
   }
 
+  storeHotlBookingData(
+      {required HotelBookingStroreData hotelBookingStoreData}) async {
+    dio.Response<dynamic> response = await storeHotelBookingApiServices
+        .storeHotelBooking(hotelBookingStoreData: hotelBookingStoreData);
 
-  storeHotlBookingData({required HotelBookingStroreData hotelBookingStoreData}) async{
-    dio.Response<dynamic> response = await storeHotelBookingApiServices.storeHotelBooking(hotelBookingStoreData: hotelBookingStoreData);
-
-    if(response.statusCode == 200){
-
-    }
-
+    if (response.statusCode == 200) {}
   }
 }

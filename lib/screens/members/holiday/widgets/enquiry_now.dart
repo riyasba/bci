@@ -1,6 +1,7 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/holiday_package_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/models/holiday_package_models/get_package_details_model.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +10,11 @@ import 'package:get/get.dart';
 
 class EnquiryNowWidget extends StatefulWidget {
   String packageId;
-  EnquiryNowWidget({super.key, required this.packageId});
+  GetPackageDetailsData getPackageDetailsData;
+  EnquiryNowWidget(
+      {super.key,
+      required this.packageId,
+      required this.getPackageDetailsData});
 
   @override
   State<EnquiryNowWidget> createState() => _EnquiryNowWidgetState();
@@ -19,6 +24,7 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
   final holidayPackageController = Get.find<HolidayPackageController>();
   final profileController = Get.find<ProfileController>();
 
+  final packageNameController = TextEditingController();
   final cityOfDepController = TextEditingController();
   final dateOfDepController = TextEditingController();
   final nameController = TextEditingController();
@@ -71,6 +77,13 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
         date = picked;
         dateOfDepController.text = formatDate(date, [dd, "/", mm, "/", yyyy]);
       });
+  }
+
+  setDefault() {
+    packageNameController.text = widget.getPackageDetailsData.title;
+    nameController.text = profileController.profileData.first.name;
+    emailController.text = profileController.profileData.first.email;
+    mobileController.text = profileController.profileData.first.email;
   }
 
   @override
@@ -137,11 +150,12 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
                                 color:
                                     const Color.fromARGB(255, 254, 252, 252)),
                             alignment: Alignment.center,
-                            child: const Padding(
-                              padding: EdgeInsets.only(left: 15, right: 10),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 15, right: 10),
                               child: TextField(
-                                //controller: usernamecontroller,
-                                decoration: InputDecoration(
+                                controller: packageNameController,
+                                decoration: const InputDecoration(
                                     isCollapsed: true,
                                     isDense: true,
                                     border: InputBorder.none,

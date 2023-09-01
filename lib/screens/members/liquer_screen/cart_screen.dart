@@ -361,7 +361,7 @@ class _CartScreenState extends State<CartScreen> {
                                 id: 0,
                                 amount: tempAmount.toStringAsFixed(2),
                                 customerName:
-                                    profileController.profileData.first.name,
+                                    profileController.profileData.first.name.trim().split(" ").first,
                                 email:
                                     "${profileController.profileData.first.name}@gmail.com",
                                 phone:

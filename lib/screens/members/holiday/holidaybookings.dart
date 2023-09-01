@@ -197,6 +197,9 @@ class _HolidayScreenState extends State<HolidayScreen> {
                                         onTap: () {
                                           Get.to(EnquiryNowWidget(
                                             packageId: widget.packageId,
+                                            getPackageDetailsData: holidayPackageController
+                                                    .getPackageDetailsData
+                                                    .first,
                                           ));
                                         },
                                         child: Container(

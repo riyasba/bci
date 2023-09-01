@@ -81,7 +81,7 @@ class _TodayOfferScreenState extends State<TodayOfferScreen> {
             return Center(
               child: InkWell(
                 onTap: (){
-                  Get.to(OffersDetail(todayOfferListData: homeController.todayOfferListData[index],));
+                  Get.to(OffersDetail(todayOfferListData: homeController.todayOfferListData[index]));
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

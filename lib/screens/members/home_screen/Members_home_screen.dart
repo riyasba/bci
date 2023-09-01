@@ -77,7 +77,7 @@ class _Home_screen1State extends State<Home_screen1> {
     var randomStr = DateTime.now().microsecondsSinceEpoch.toString();
     Map map = {
       'version': "1",
-      'txnRefNo': "ORD00001", // Should change on every request
+      'txnRefNo': "ORD00011", // Should change on every request
       'amount': 100,
       'passCode': 'SVPL4257',
       'bankId': '000004',
@@ -170,8 +170,8 @@ class _Home_screen1State extends State<Home_screen1> {
                                             if (homeController
                                                     .sliderData[i].product ==
                                                 "Hotel") {
-                                              // Get.to(HotelListScreen());
-                                              startPlugin();
+                                              Get.to(HotelListScreen());
+                                              // startPlugin();
                                             } else if (homeController
                                                     .sliderData[i].product ==
                                                 "Liquors") {

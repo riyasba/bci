@@ -202,7 +202,10 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
               profileController.payUseingEaseBuzzWallet(
                 id: 0, 
                 amount: amountController.text, 
-                customerName: profileController.profileData.first.name,
+                customerName: profileController.profileData.first.name
+                      .trim()
+                      .split(" ")
+                      .first,
                 email: "${profileController.profileData.first.name}@gmail.com",
                 phone:profileController.profileData.first.mobile,
                 status: "");

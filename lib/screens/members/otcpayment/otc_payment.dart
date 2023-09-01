@@ -123,9 +123,12 @@ class _OtcPaymentState extends State<OtcPayment> {
                 profileController.payUseingEaseBuzzSubs(
                     id: widget.plansData.id,
                     amount: widget.plansData.saleAmount,
-                    customerName: "sanucf",
-                    email: "sanu323@gmail.com",
-                    phone: "9597688211",
+                    customerName: profileController.profileData.first.name
+                        .trim()
+                        .split(" ")
+                        .first,
+                    email: profileController.profileData.first.email,
+                    phone: profileController.profileData.first.mobile,
                     status: "");
                 print(
                     ">>>>>>>>>>>>>>>>>..............easebuzz end..........>>>>>>>>>>");

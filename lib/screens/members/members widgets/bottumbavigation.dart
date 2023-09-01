@@ -41,7 +41,6 @@ class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
 
   setDefaultPage() async{
     selectedpage = widget.index;
-
   }
 
   final List1 = [
@@ -69,11 +68,11 @@ class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
     TabItem(Icons.wallet, "Wallet", korange,
         circleStrokeColor: Colors.white,
         labelStyle:
-            TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
     TabItem(Icons.book_online, "Booking", korange,
         circleStrokeColor: Colors.white,
         labelStyle:
-            TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
     TabItem(Icons.settings, "Settings", korange,
         circleStrokeColor: Colors.white,
         labelStyle:

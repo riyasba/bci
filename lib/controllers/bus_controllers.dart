@@ -95,7 +95,7 @@ class BusController extends GetxController {
             fromCityId: fromCityId, toCityId: toCityId, travelDate: travelDate);
     isLoading(false);
     if (response.statusCode == 200) {
-      if (response.data["Error_Code"] == "0001") {
+      if (response.data["Response_Header"]["Error_Code"] == "0001") {
         Get.rawSnackbar(
             backgroundColor: Colors.red,
             messageText: Text(
@@ -222,7 +222,7 @@ class BusController extends GetxController {
         payUseingEaseBuzzSubs(
             amount: amount,
             bookingRef: bookingRefernceNo,
-            customerName: customerName,
+            customerName: customerName.trim().split(" ").first,
             email: customerEmail,
             phone: mobileNumber);
 
