@@ -86,6 +86,7 @@ dependencies:
   flutter_typeahead: ^4.6.2
   readmore: ^2.1.0
   coupon_uikit: ^0.2.0
+  url_launcher: ^6.1.14
 
 dev_dependencies:
   flutter_test:

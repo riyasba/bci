@@ -1,10 +1,12 @@
 import 'package:bci/models/hotel_booking_models/hotel_booking_list_model.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/hotel_booking_models/hotel_booking_store_data_model.dart';
+import 'package:bci/models/hotel_booking_models/hotel_detials_model.dart' as htDetails;
 import 'package:bci/models/hotel_booking_models/hotel_info_model.dart';
 import 'package:bci/models/hotel_booking_models/search_hotel_list_model.dart';
 import 'package:bci/models/hotel_booking_models/store_temp_search_data.dart';
 import 'package:bci/screens/members/hottel/wigets/sucsessful.dart';
+import 'package:bci/services/network/hotel_api_services/get_room_details_api_services.dart';
 import 'package:bci/services/network/hotel_api_services/hotel_booking_list_api_service.dart';
 import 'package:bci/services/network/hotel_api_services/hotel_info_api_service.dart';
 import 'package:bci/services/network/hotel_api_services/store_hotel_booking_data_api.dart';
@@ -336,5 +338,18 @@ class HotelBookingController extends GetxController {
         .storeHotelBooking(hotelBookingStoreData: hotelBookingStoreData);
 
     if (response.statusCode == 200) {}
+  }
+
+GetHotelRoomDetailsApiServices getHotelRoomDetailsApiServices = GetHotelRoomDetailsApiServices();
+  getHotelDetails(String bookingId) async{
+     htDetails.Result? result;
+    dio.Response<dynamic> response = await getHotelRoomDetailsApiServices.getHotelRoomDetailsApiServices(userIp: "", bookingId: bookingId);
+
+
+    if(response.statusCode == 200){
+      htDetails.HotelBookingDetailModel hotelBookingDetailModel = htDetails.HotelBookingDetailModel.fromJson(response.data);
+      result = hotelBookingDetailModel.result;
+    }
+   return result;
   }
 }

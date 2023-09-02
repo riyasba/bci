@@ -5,7 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../constands/constands.dart';
+import '../../../../models/hotel_booking_models/hotel_detials_model.dart';
 
 class HotelBookingScreen extends StatefulWidget {
   const HotelBookingScreen({super.key});
@@ -25,6 +27,17 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
     hotelBookingController.hotelBookingList();
   }
 
+
+  void launchGoogleMaps(String latitude, String longitude) async {
+  final url = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+
+  if (await canLaunchUrl(Uri.parse(url))) {
+    await launchUrl(Uri.parse(url));
+  } else {
+    throw 'Could not launch Google Maps';
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -41,9 +54,11 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                 itemBuilder: (context, index) {
                   return Card(
                     child: InkWell(
-                      onTap: (){
+                      onTap: () async
+                      {
+                        Result result =await hotelBookingController.getHotelDetails(hotelBookingController.bookingList[index].bookingId);
                          dialogBuilder(
-                            context, hotelBookingController.bookingList[index]);
+                            context, hotelBookingController.bookingList[index],result);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -121,7 +136,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
   }
 
   Future<void> dialogBuilder(
-      BuildContext context, BookingList bookingData) {
+      BuildContext context, BookingList bookingData, Result result) {
     return showDialog<void>(
       context: context,
       builder: (
@@ -129,7 +144,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       ) {
         return AlertDialog(
           title: Container(
-            height: 400,
+           
             width: 300,
             color: Colors.white,
             child: Column(
@@ -247,21 +262,77 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Place',
+                      'Address',
                       style: TextStyle(
                           fontSize: 16,
                           color: kblue,
                           fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      bookingData.place,
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: kgrey,
-                          fontWeight: FontWeight.w500),
+                    Container(
+                      width: 150,
+                      child: Text(
+                        result.addressLine1,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: kgrey,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ),
                   ],
                 ),
+                const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Location',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    InkWell(
+                      onTap: (){
+                        launchGoogleMaps(result.latitude, result.longitude);
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 70,
+                      
+                        alignment: Alignment.center,
+                        child: Icon(Icons.directions, color: Colors.blue,size: 26,),
+                      ),
+                    )
+                  ],
+                ),
+                 const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Contact',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      width: 120,
+                      child: Text(
+                        result.addressLine2,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: kgrey,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ],
+                ),
+                
                 const Divider(
                   thickness: 1,
                 ),
