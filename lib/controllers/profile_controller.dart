@@ -1,13 +1,17 @@
 import 'dart:io';
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/auth_controllers.dart';
+import 'package:bci/models/bank_account_no_model.dart';
 import 'package:bci/models/business_user_profile.dart';
 import 'package:bci/models/merchant_update_profile.dart';
 import 'package:bci/models/profile_model.dart';
+import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:bci/screens/bussiness/views/home_screen/settings/my_account_screen.dart';
 import 'package:bci/services/network/profile_api_services/profile_api_services.dart';
 import 'package:bci/services/network/profile_api_services/profile_pic_update_api.dart';
 import 'package:bci/services/network/profile_api_services/profile_update_api.dart';
+import 'package:bci/services/network/profile_api_services/update_bank_account_api_services.dart';
+import 'package:bci/services/network/wallet_api_services/withdraw_from_wallet_api_services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,6 +23,12 @@ class ProfileController extends GetxController {
       ProfileUpdateApiServices();
   ProfilePIcUpdateApiServices profilePIcUpdateApiServices =
       ProfilePIcUpdateApiServices();
+
+  WithdrawWalletApiServices withdrawWalletApiServices =
+      WithdrawWalletApiServices();
+
+  UpdateBankApiServices updateBankApiServices = UpdateBankApiServices();
+
   List<BusinessUser> profileData = [];
   RxBool isLoading = false.obs;
 
@@ -33,8 +43,9 @@ class ProfileController extends GetxController {
       //fcmtoken
       var token = await FirebaseMessaging.instance.getToken();
       Get.find<AuthController>().fcmtoken(
-          token: token.toString(),);
-      print("............firebase token.......=====================>>>");
+        token: token.toString(),
+      );
+      print("<<<............firebase_token.............>>>");
       print(token);
       update();
     } else if (response.statusCode == 401) {
@@ -48,8 +59,10 @@ class ProfileController extends GetxController {
 
   updateProfile({required MerchantUpdateModel merchantUpdateModel}) async {
     isLoading(true);
-    dio.Response<dynamic> response = await profileUpdateApiServices
-        .profileUpdate(merchantUpdateModel: merchantUpdateModel,);
+    dio.Response<dynamic> response =
+        await profileUpdateApiServices.profileUpdate(
+      merchantUpdateModel: merchantUpdateModel,
+    );
     isLoading(false);
     if (response.statusCode == 200 || response.statusCode == 201) {
       Get.off(() => const MyAccountScreen());
@@ -67,5 +80,31 @@ class ProfileController extends GetxController {
         await profilePIcUpdateApiServices.profilepicUpdate(image: image);
 
     getProfile();
+  }
+
+  withdrawAmountFromWallet({required String amount}) async {
+    dio.Response<dynamic> response = await withdrawWalletApiServices
+        .withdrawWalletApiServices(amount: amount);
+
+    if (response.statusCode == 200) {
+      // Get.snackbar("Amount ", message)
+    }
+  }
+
+  updateBankAccount({required UpdateBankModel merchantUpdateModel}) async {
+    isLoading(true);
+    dio.Response<dynamic> response = await updateBankApiServices.updateBank(
+      merchantUpdateModel: merchantUpdateModel,
+    );
+    isLoading(false);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      Get.off(() =>  HomeBottomnavigationBar());
+      Get.rawSnackbar(
+          backgroundColor: Colors.green,
+          messageText: Text(
+            "Bank Account updated",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
   }
 }

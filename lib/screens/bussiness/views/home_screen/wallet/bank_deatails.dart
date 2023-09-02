@@ -1,4 +1,6 @@
+import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/models/bank_account_no_model.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,9 +19,6 @@ class BankDetailsScreen extends StatefulWidget {
 }
 
 class _BankDetailsScreenState extends State<BankDetailsScreen> {
- 
-
-
   var bankNameController = TextEditingController();
   var bankAccountNameController = TextEditingController();
   var bankAccountNumberController = TextEditingController();
@@ -31,17 +30,20 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    setDefault();
+    // setDefault();
   }
 
   setDefault() async {
     await profileController.getProfile();
     profileController.update();
     if (profileController.profileData.isNotEmpty) {
-      bankAccountNameController.text = profileController.profileData.first.bankAccountName;
-      bankAccountNumberController.text = profileController.profileData.first.bankAccountNumber;
+      bankAccountNameController.text =
+          profileController.profileData.first.bankAccountName;
+      bankAccountNumberController.text =
+          profileController.profileData.first.bankAccountNumber;
       bankNameController.text = profileController.profileData.first.bankName;
-      accountTypeController.text = profileController.profileData.first.accountType;
+      accountTypeController.text =
+          profileController.profileData.first.accountType;
       ifscCodeController.text = profileController.profileData.first.ifscCode;
     }
   }
@@ -78,9 +80,10 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
   bool conpasswordvisible = false;
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -97,13 +100,11 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                         Icons.arrow_back_ios,
                         color: kwhite,
                       )),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 25),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 25),
                     child: Text(
                       'Bank Details',
-                      style: TextStyle(
-                          fontSize: 21,
-                          color: Colors.white),
+                      style: TextStyle(fontSize: 21, color: Colors.white),
                     ),
                   ),
                   Container()
@@ -128,140 +129,100 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
             ),
           )),
       body: ListView(children: [
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
-              child: TextField(
-                controller: bankNameController,
-                readOnly: true,
-                decoration: InputDecoration(
-                    hintText: 'Bank Name',
-                    hintStyle: TextStyle(fontSize: 16, color: kblue),
-                    border: OutlineInputBorder()),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
-              child: TextField(
-                controller: bankAccountNameController,
-                readOnly: true,
-                decoration: InputDecoration(
-                    hintText: 'Bank Account Name',
-                    hintStyle: TextStyle(fontSize: 16, color: kblue),
-                    border: OutlineInputBorder()),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
-              child: TextField(
-                controller: accountTypeController,
-                readOnly: true,
-                decoration: InputDecoration(
-                    hintText: ' Account Type',
-                    hintStyle: TextStyle(fontSize: 16, color: kblue),
-                    border: OutlineInputBorder()),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
-              child: TextField(
-                controller: bankAccountNumberController,
-                readOnly: true,
-                decoration: InputDecoration(
-                    hintText: 'Bank Account Number',
-                    hintStyle: TextStyle(fontSize: 16, color: kblue),
-                    border: OutlineInputBorder()),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
-              child: TextField(
-                controller: ifscCodeController,
-                readOnly: true,
-                decoration: InputDecoration(
-                    hintText: 'IFSC code',
-                    hintStyle: TextStyle(fontSize: 16, color: kblue),
-                    border: OutlineInputBorder()),
-              ),
-            ),
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
-            //   child: TextField(
-            //     controller: passwordController,
-            //     decoration: InputDecoration(
-            //         hintText: 'Password',
-            //         suffixIcon: IconButton(
-            //             onPressed: () {
-            //               setState(() {
-            //                 passwordvisible = !passwordvisible;
-            //               });
-            //             },
-            //             icon: passwordvisible
-            //                 ? Icon(Icons.visibility)
-            //                 : Icon(Icons.visibility_off)),
-            //         hintStyle: TextStyle(fontSize: 18, color: kblue),
-            //         border: OutlineInputBorder()),
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
-            //   child: TextField(
-            //     keyboardType: TextInputType.visiblePassword,
-            //     controller: confirmController,
-            //     decoration: InputDecoration(
-            //         hintText: 'Confirm Password',
-            //         suffixIcon: IconButton(
-            //             onPressed: () {},
-            //             icon: conpasswordvisible
-            //                 ? Icon(Icons.visibility)
-            //                 : Icon(Icons.visibility_off)),
-            //         hintStyle: TextStyle(fontSize: 18, color: kblue),
-            //         border: OutlineInputBorder()),
-            //   ),
-            // ),
-            // ksizedbox40,
-            ksizedbox20,
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: GetBuilder<ProfileController>(
-                builder: (_) {
-                  return Row(
-                    children: [
-                      profileController.profileData.isEmpty
-                                  ? Image.asset('assets/images/settingprofile.png')
-                                  : Container(
-                                      height: 130,
-                                      width: 130,
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(profileController
-                                                  .profileData.first.shopImage)),
-                                          borderRadius: BorderRadius.circular(5)),
-                                    ),
-                            
-                    ],
-                  );
-                }
-              ),
-            ),
-            ksizedbox10,
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                children: [
-                  Text(
-                    'Your Shop Photo',
-                    style: TextStyle(fontSize: 15, color: kblue),
-                  ),
-                ],
-              ),
-            ),
-            ksizedbox20,
-            
-          ],
+        Padding(
+          padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
+          child: TextField(
+            controller: bankNameController,
+            // readOnly: true,
+            decoration: InputDecoration(
+                hintText: 'Bank Name',
+                hintStyle: TextStyle(fontSize: 16, color: kblue),
+                border: const OutlineInputBorder()),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
+          child: TextField(
+            controller: bankAccountNameController,
+            // readOnly: true,
+            decoration: InputDecoration(
+                hintText: 'Bank Account Name',
+                hintStyle: TextStyle(fontSize: 16, color: kblue),
+                border: const OutlineInputBorder()),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
+          child: TextField(
+            controller: accountTypeController,
+            // readOnly: true,
+            decoration: InputDecoration(
+                hintText: ' Account Type',
+                hintStyle: TextStyle(fontSize: 16, color: kblue),
+                border: const OutlineInputBorder()),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
+          child: TextField(
+            controller: bankAccountNumberController,
+            // readOnly: true,
+            decoration: InputDecoration(
+                hintText: 'Bank Account Number',
+                hintStyle: TextStyle(fontSize: 16, color: kblue),
+                border: const OutlineInputBorder()),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
+          child: TextField(
+            controller: ifscCodeController,
+            // readOnly: true,
+            decoration: InputDecoration(
+                hintText: 'IFSC code',
+                hintStyle: TextStyle(fontSize: 16, color: kblue),
+                border: const OutlineInputBorder()),
+          ),
         ),
       ]),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Obx(()=>profileController.isLoading.isTrue ? Container(
+              height: 55,
+              width: size.width,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), color: kOrange),
+                  alignment: Alignment.center,
+                  child:  const CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+            ):  InkWell(
+            onTap: (){
+                UpdateBankModel updateBankModel = UpdateBankModel(
+                  accountType: accountTypeController.text,
+                  bankAccountName: bankAccountNameController.text,
+                  bankAccountNumber: bankAccountNumberController.text ,
+                  bankName: bankNameController.text,
+                  ifscCode: ifscCodeController.text
+                );
+              profileController.updateBankAccount(merchantUpdateModel: updateBankModel);
+        
+            },
+            child: Container(
+              height: 55,
+              width: size.width,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), color: kOrange),
+                  alignment: Alignment.center,
+                  child:  Text("Save",style: primaryFont.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18
+                  ),),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bci/authentications/generate_otp/generate_otp.dart';
 import 'package:bci/authentications/otp_verification/otp_verification.dart';
 import 'package:bci/constands/app_fonts.dart';

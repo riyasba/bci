@@ -65,19 +65,29 @@ abstract class BaseApiService {
   final String transactionHistoryApiUrl =
       "https://bci.batechnology.in/api/auth/transaction_history";
 
-   //Get notification_list
-   final String notificationlistURL = "https://bci.batechnology.in/api/auth/notification_list"; 
-    
-    //fcmtoken
-   final String fcmTokenStoreApiUrl = "https://bci.batechnology.in/api/auth/fcm-token";
+  //Get notification_list
+  final String notificationlistURL =
+      "https://bci.batechnology.in/api/auth/notification_list";
 
-   //vendorbanner 
-   final String vendorbannerURL = 'https://bci.batechnology.in/api/auth/get_vendor_slider';
+  //fcmtoken
+  final String fcmTokenStoreApiUrl =
+      "https://bci.batechnology.in/api/auth/fcm-token";
 
-   //vendor redeemption coupons
-   final String redeemprtionCouponsApiUrl = "https://bci.batechnology.in/api/auth/vedorRedeemCoupons";
+  //vendorbanner
+  final String vendorbannerURL =
+      'https://bci.batechnology.in/api/auth/get_vendor_slider';
 
-    //generate referral code
+  //vendor redeemption coupons
+  final String redeemprtionCouponsApiUrl =
+      "https://bci.batechnology.in/api/auth/vedorRedeemCoupons";
+
+  //generate referral code
   final String generateReferralApiUrl =
       "https://bci.batechnology.in/api/generateReferralregister";
+
+  //withdraw amount
+  final String withdrawAmountURL =
+      "https://bci.batechnology.in/api/auth/withdrawAmount";
+
+  final String hotelBookingDetailsURL = "https://bci.batechnology.in/api/auth/get_booking_detail";
 }

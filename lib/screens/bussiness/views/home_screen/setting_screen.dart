@@ -32,11 +32,11 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
             child: Container(
               height: 158,
               color: kblue,
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 20),
+                    padding:  EdgeInsets.only(left: 20),
                     child: Text(
                       'Settings',
                       style: TextStyle(fontSize: 25, color: Colors.white),
@@ -50,7 +50,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
         children: [
           InkWell(
             onTap: () {
-              Get.to(MyAccountScreen());
+              Get.to(()=> MyAccountScreen());
             },
             child: Container(
               width: MediaQuery.of(context).size.width,

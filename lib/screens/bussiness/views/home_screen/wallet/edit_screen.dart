@@ -110,7 +110,7 @@ class _EditScreenState extends State<EditScreen> {
                 decoration: InputDecoration(
                     hintText: 'Bank Name',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
-                    border: OutlineInputBorder()),
+                    border: const OutlineInputBorder()),
               ),
             ),
             Padding(
@@ -120,7 +120,7 @@ class _EditScreenState extends State<EditScreen> {
                 decoration: InputDecoration(
                     hintText: 'Bank Account Name',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
-                    border: OutlineInputBorder()),
+                    border:const OutlineInputBorder()),
               ),
             ),
             Padding(
@@ -130,7 +130,7 @@ class _EditScreenState extends State<EditScreen> {
                 decoration: InputDecoration(
                     hintText: ' Account Type',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
-                    border: OutlineInputBorder()),
+                    border: const OutlineInputBorder()),
               ),
             ),
             Padding(
@@ -140,7 +140,7 @@ class _EditScreenState extends State<EditScreen> {
                 decoration: InputDecoration(
                     hintText: 'Bank Account Number',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
-                    border: OutlineInputBorder()),
+                    border: const OutlineInputBorder()),
               ),
             ),
             Padding(
@@ -166,10 +166,10 @@ class _EditScreenState extends State<EditScreen> {
                           });
                         },
                         icon: passwordvisible
-                            ? Icon(Icons.visibility)
-                            : Icon(Icons.visibility_off)),
+                            ? const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off)),
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
-                    border: OutlineInputBorder()),
+                    border: const OutlineInputBorder()),
               ),
             ),
             Padding(

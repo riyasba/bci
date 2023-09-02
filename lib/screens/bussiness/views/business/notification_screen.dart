@@ -79,51 +79,59 @@ final notificationController = Get.find<NotificationController>();
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 110,
-                            width: MediaQuery.of(context).size.width,
-                            decoration:const BoxDecoration(
-                          
-                                //  boxShadow: <BoxShadow>[
-                                //   BoxShadow(
-                                //     offset: Offset(0.0, 0.75),
-                                //     blurRadius: 5,
-                                //     color: kgrey
-                                //   )
-                                //  ]
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  notificationController.notificationlist[index].title,
-                                  style:const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  notificationController.notificationlist[index].message,
-                                  style: TextStyle(
-                                      fontSize: 12, color: kgrey),
-                                ),
-                                Text(
-                                  formatDate(notificationController.notificationlist[index].createdAt,
-                                   [dd ,'-',mm,'-',yyyy])
-                                  ,
-                                  style:const TextStyle(
-                                      fontSize: 13.5,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: const [
+                            BoxShadow(
+                              blurRadius: 2,
+                              color: Color.fromARGB(255, 202, 202, 202)
+                            )
+                          ]
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                                const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                notificationController.notificationlist[index].title,
+                                style:const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(
+                                height: 4,
+                              ),
+                              Text(
+                                notificationController.notificationlist[index].message,
+                                style: const TextStyle(
+                                    fontSize: 13, color: Colors.black),
+                              ),
+                               const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                formatDate(notificationController.notificationlist[index].createdAt,
+                                 [dd ,'-',mm,'-',yyyy])
+                                ,
+                                style:const TextStyle(
+                                    fontSize: 11.5,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.grey
+                                    ),
+                              ),
+                               const SizedBox(
+                                height: 10,
+                              ),
+                            ],
                           ),
-                          const Divider(
-                            thickness: 1.5,
-                          )
-                        ],
+                        ),
                       ),
                     );
                   }):Center(child: Text('No Notification')),
