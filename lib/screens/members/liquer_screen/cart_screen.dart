@@ -357,16 +357,17 @@ class _CartScreenState extends State<CartScreen> {
                       : InkWell(
                           onTap: () {
                             var tempAmount = homeController.getGrandTotal();
-                            profileController.payUseingEaseBuzz(
-                                id: 0,
-                                amount: tempAmount.toStringAsFixed(2),
-                                customerName:
-                                    profileController.profileData.first.name.trim().split(" ").first,
-                                email:
-                                    "${profileController.profileData.first.name}@gmail.com",
-                                phone:
-                                    profileController.profileData.first.mobile,
-                                status: "");
+                            profileController.payFromCart(tempAmount);
+                            // profileController.payUseingEaseBuzz(
+                            //     id: 0,
+                            //     amount: tempAmount.toStringAsFixed(2),
+                            //     customerName:
+                            //         profileController.profileData.first.name.trim().split(" ").first,
+                            //     email:
+                            //         "${profileController.profileData.first.name}@gmail.com",
+                            //     phone:
+                            //         profileController.profileData.first.mobile,
+                            //     status: "");
 
                             // for(int i = 0; i < homeController.cartListData.length; i++){
                             //   homeController.addBooking(

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/models/flight_booking_models/air_port_search_model.dart';
 import 'package:bci/models/flight_booking_models/air_repricing_model.dart';
 import 'package:bci/models/flight_booking_models/air_reprint_model.dart';
@@ -26,6 +27,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
@@ -57,8 +59,6 @@ class FlightsController extends GetxController {
   RxBool isGoFirst = false.obs;
   RxBool isSpiceJet = false.obs;
   RxBool indiGo = false.obs;
-
-  
 
   List<Flight> flightCodelist = [];
 
@@ -224,14 +224,13 @@ class FlightsController extends GetxController {
     } else {}
   }
 
-
-   downloadTicketHistory({required String refernceNo}) async {
+  downloadTicketHistory({required String refernceNo}) async {
     dio.Response<dynamic> response = await airRePrintingServices
         .airRePrintingApi(clientReferneNo: "", refrenceNo: refernceNo);
 
     if (response.statusCode == 200) {
       AirReprintModel airReprintModel = AirReprintModel.fromJson(response.data);
-      
+
       downloadFlightTicketInvoice(airReprintModel);
     } else {}
   }
@@ -277,6 +276,66 @@ class FlightsController extends GetxController {
           backgroundColor: Colors.red,
           snackPosition: SnackPosition.BOTTOM);
     }
+  }
+
+  // String responseData = "Nothing";
+  final _isgpayuiPlugin = IsgpayuiPlugin();
+
+  void payForFlight(
+      {required double amount, required BookingModel bookingModel}) async {
+    String? result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result =
+          await _isgpayuiPlugin.initiateISGPayUI(getArguments(amount * 100)) ??
+              'Unknown platform version';
+    } on PlatformException catch (e) {
+      result = e.message;
+    }
+    debugPrint('Result ::: $result');
+
+    var responseData = jsonDecode(result!);
+    var data = jsonDecode(responseData);
+    print("<<----response-data---->>${data.runtimeType}");
+    print(data);
+    if (data["ResponseCode"] == "00") {
+      //need to give id
+      Get.to(() => FlightLoadingPage());
+
+      bookAirTicket(bookingModel: bookingModel);
+    } else {
+      Get.closeAllSnackbars();
+      Get.snackbar(
+          "The last transaction has been cancelled!", "Please try again!",
+          colorText: Colors.white,
+          backgroundColor: Colors.red,
+          snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+
+  Map<String, String> getArguments(var amount) {
+    var randomStr = DateTime.now().microsecondsSinceEpoch.toString();
+    Map<String, String> map = {
+      'version': "1",
+      'txnRefNo': "ORD$randomStr", // Should change on every request
+      'amount': "$amount",
+      'passCode': 'SVPL4257',
+      'bankId': '000004',
+      'terminalId': '10100781',
+      'merchantId': '101000000000781',
+      'mcc': "4112",
+      'paymentType': 'Pay',
+      'currency': "356",
+      'email': 'manu@gmail.com',
+      'phone': '+917907886767',
+      'hashKey': 'E59CD2BF6F4D86B5FB3897A680E0DD3E',
+      'aesKey': '5EC4A697141C8CE45509EF485EE7D4B1',
+      'payOpt': 'cc',
+      'orderInfo': 'NARUTO00001',
+      'env': 'UAT', //UAT PROD
+      'url': 'https://sandbox.isgpay.com/ISGPay-Genius/request.action',
+    };
+    return map;
   }
 
   //flight ticket pdf
@@ -389,7 +448,7 @@ class FlightsController extends GetxController {
                   ),
                   pw.Text(
                     airReprintModel.airPnrDetails.first.flights.first.origin,
-                    style: pw.TextStyle(
+                    style: const pw.TextStyle(
                       fontSize: 10,
                       color: PdfColors.grey,
                     ),
@@ -430,7 +489,7 @@ class FlightsController extends GetxController {
                   pw.Text(
                     airReprintModel
                         .airPnrDetails.first.flights.first.travelDate,
-                    style: pw.TextStyle(
+                    style: const pw.TextStyle(
                       fontSize: 10,
                       color: PdfColors.grey,
                     ),
@@ -450,7 +509,7 @@ class FlightsController extends GetxController {
                   ),
                   pw.Text(
                     "",
-                    style: pw.TextStyle(
+                    style: const pw.TextStyle(
                       fontSize: 10,
                       color: PdfColors.grey,
                     ),
@@ -461,7 +520,7 @@ class FlightsController extends GetxController {
           ),
           //to
           pw.Padding(
-            padding: pw.EdgeInsets.only(left: 30, right: 30, top: 10),
+            padding: const pw.EdgeInsets.only(left: 30, right: 30, top: 10),
             child: pw.Divider(
               thickness: 1.2,
             ),
@@ -968,8 +1027,7 @@ class FlightsController extends GetxController {
     return flightKey;
   }
 
-
-Future<bool>  getSeatMapApiServises({
+  Future<bool> getSeatMapApiServises({
     required String searchKey,
     required String flightKey,
     required dynamic paxDetails,

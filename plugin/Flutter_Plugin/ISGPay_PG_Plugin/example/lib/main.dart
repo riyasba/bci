@@ -96,13 +96,11 @@ class _MyAppState extends State<MyApp> {
   }
 
 
-  Map getArguments(var amount) {
+  Map<String, String> getArguments(var amount) {
 
     var randomStr = DateTime.now().microsecondsSinceEpoch.toString();
 
-    Map map = {
-
-
+    Map<String, String> map = {
       'version': "1",
       'txnRefNo': "TX$randomStr", // Should change on every request
       'amount': '$amount',

@@ -6,8 +6,7 @@ class IsgpayuiPlugin {
     return IsgpayuiPluginPlatform.instance.getPlatformVersion();
   }
 
-
-  Future<String?> initiateISGPayUI(Map inputArgs) async {
+  Future<String?> initiateISGPayUI(Map<String, String> inputArgs) async {
     return IsgpayuiPluginPlatform.instance.initiateISGPayUI(inputArgs);
   }
 }

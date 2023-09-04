@@ -70,7 +70,7 @@ public class IsgpayuiPlugin implements FlutterPlugin, MethodCallHandler, Activit
     ISGPayRequest isgPay = new ISGPayRequest();
 
     // Set data to request
-    isgPay.setBaseUrl("https://pgcloudpoc.insolutionsglobal.com:8464/ISGPay-Genius/request.action"); // Optional - use default URL
+    isgPay.setBaseUrl(inputParams.getString("url")); // Optional - use default URL
     isgPay.setVersion(inputParams.getString("version")); // fix pass 1
     isgPay.setTxnRefNo(inputParams.getString("txnRefNo"));//this should be unique code every request
     isgPay.setAmount(inputParams.getString("amount"));//amount should be in paisa

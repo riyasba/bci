@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/models/bus_booking_models/bus_booking_history_model.dart';
@@ -26,6 +27,7 @@ import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
@@ -219,12 +221,15 @@ class BusController extends GetxController {
       if (response.data["Response_Header"]["Error_Desc"] == "SUCCESS") {
         var bookingRefernceNo = response.data["Booking_RefNo"];
 
-        payUseingEaseBuzzSubs(
-            amount: amount,
-            bookingRef: bookingRefernceNo,
-            customerName: customerName.trim().split(" ").first,
-            email: customerEmail,
-            phone: mobileNumber);
+        payForBusBooking(
+            amount: double.parse(amount), bookingRef: bookingRefernceNo);
+
+        // payUseingEaseBuzzSubs(
+        //     amount: amount,
+        //     bookingRef: bookingRefernceNo,
+        //     customerName: customerName.trim().split(" ").first,
+        //     email: customerEmail,
+        //     phone: mobileNumber);
 
         //booking api
       } else {
@@ -273,6 +278,66 @@ class BusController extends GetxController {
           backgroundColor: Colors.red,
           snackPosition: SnackPosition.BOTTOM);
     }
+  }
+
+  // String responseData = "Nothing";
+  final _isgpayuiPlugin = IsgpayuiPlugin();
+
+  void payForBusBooking(
+      {required double amount, required String bookingRef}) async {
+    String? result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result =
+          await _isgpayuiPlugin.initiateISGPayUI(getArguments(amount * 100)) ??
+              'Unknown platform version';
+    } on PlatformException catch (e) {
+      result = e.message;
+    }
+    debugPrint('Result ::: $result');
+
+    var responseData = jsonDecode(result!);
+    var data = jsonDecode(responseData);
+    print("<<----response-data---->>${data.runtimeType}");
+    print(data);
+    if (data["ResponseCode"] == "00") {
+      //
+      //need to give id
+      Get.to(() => FlightLoadingPage());
+      busAddPayment(refernceNo: bookingRef);
+    } else {
+      Get.closeAllSnackbars();
+      Get.snackbar(
+          "The last transaction has been cancelled!", "Please try again!",
+          colorText: Colors.white,
+          backgroundColor: Colors.red,
+          snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+
+  Map<String, String> getArguments(var amount) {
+    var randomStr = DateTime.now().microsecondsSinceEpoch.toString();
+    Map<String, String> map = {
+      'version': "1",
+      'txnRefNo': "ORD$randomStr", // Should change on every request
+      'amount': "$amount",
+      'passCode': 'SVPL4257',
+      'bankId': '000004',
+      'terminalId': '10100781',
+      'merchantId': '101000000000781',
+      'mcc': "4112",
+      'paymentType': 'Pay',
+      'currency': "356",
+      'email': 'manu@gmail.com',
+      'phone': '+917907886767',
+      'hashKey': 'E59CD2BF6F4D86B5FB3897A680E0DD3E',
+      'aesKey': '5EC4A697141C8CE45509EF485EE7D4B1',
+      'payOpt': 'cc',
+      'orderInfo': 'NARUTO00001',
+      'env': 'UAT', //UAT PROD
+      'url': 'https://sandbox.isgpay.com/ISGPay-Genius/request.action',
+    };
+    return map;
   }
 
   busAddPayment({required String refernceNo}) async {
@@ -932,5 +997,4 @@ class BusController extends GetxController {
     }
     update();
   }
-  
 }

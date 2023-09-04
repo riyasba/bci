@@ -861,17 +861,19 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                               profileController.profileData.first.mobile,
                           paxDetails: [paxDetails],
                           searchKey: widget.searchKey);
-
-                      flightsController.payUseingEaseBuzzSubs(
-                          id: 0,
-                          amount: widget
-                              .flight.fares.first.fareDetails.first.totalAmount
-                              .toString(),
-                          customerName:
-                              profileController.profileData.first.name.trim().split(" ").first,
-                          email: profileController.profileData.first.email,
-                          phone: profileController.profileData.first.mobile,
-                          bookingModel: bookingModel);
+                    
+                      flightsController.payForFlight(amount: widget.flight.fares.first.fareDetails.first
+                              .totalAmount.toDouble(),bookingModel: bookingModel);
+                      // flightsController.payUseingEaseBuzzSubs(
+                      //     id: 0,
+                      //     amount: widget
+                      //         .flight.fares.first.fareDetails.first.totalAmount
+                      //         .toString(),
+                      //     customerName:
+                      //         profileController.profileData.first.name.trim().split(" ").first,
+                      //     email: profileController.profileData.first.email,
+                      //     phone: profileController.profileData.first.mobile,
+                      //     bookingModel: bookingModel);
 
                       // showDialog(
                       //     context: context,

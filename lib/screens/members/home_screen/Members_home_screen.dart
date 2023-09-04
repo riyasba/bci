@@ -55,49 +55,6 @@ class _Home_screen1State extends State<Home_screen1> {
     });
   }
 
-  String responseData = "Nothing";
-  final _isgpayuiPlugin = IsgpayuiPlugin();
-
-  void startPlugin() async {
-    String? result;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      result = await _isgpayuiPlugin.initiateISGPayUI(getArguments(100)) ??
-          'Unknown platform version';
-    } on PlatformException catch (e) {
-      result = e.message;
-    }
-    debugPrint('Result ::: $result');
-    setState(() {
-      responseData = result!;
-    });
-  }
-
-  Map getArguments(var amount) {
-    var randomStr = DateTime.now().microsecondsSinceEpoch.toString();
-    Map map = {
-      'version': "1",
-      'txnRefNo': "ORD00011", // Should change on every request
-      'amount': 100,
-      'passCode': 'SVPL4257',
-      'bankId': '000004',
-      'terminalId': '10100781',
-      'merchantId': '101000000000781',
-      'mcc': 4112,
-      'paymentType': 'Pay',
-      'currency': 356,
-      'email': 'manu@gmail.com',
-      'phone': '+917907886767',
-      'hashKey': 'E59CD2BF6F4D86B5FB3897A680E0DD3E',
-      'aesKey': '5EC4A697141C8CE45509EF485EE7D4B1',
-      'payOpt': 'cc',
-      'orderInfo': 'NARUTO00001',
-      'env': 'UAT', //UAT PROD
-      'url': 'https://sandbox.isgpay.com/ISGPay-Genius/request.action',
-    };
-    return map;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,8 +127,8 @@ class _Home_screen1State extends State<Home_screen1> {
                                             if (homeController
                                                     .sliderData[i].product ==
                                                 "Hotel") {
-                                              Get.to(HotelListScreen());
-                                              // startPlugin();
+                                              Get.to(
+                                                  SerchHotelScreen()); // startPlugin();
                                             } else if (homeController
                                                     .sliderData[i].product ==
                                                 "Liquors") {
@@ -187,8 +144,11 @@ class _Home_screen1State extends State<Home_screen1> {
                                                   FlightBookingLandingScreen());
                                             }
                                           },
-                                          child: Image.network(homeController
-                                              .sliderData[i].image),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                                            child: Image.network(homeController
+                                                .sliderData[i].image),
+                                          ),
                                         )
                                     ],
                                     options: CarouselOptions(
@@ -600,8 +560,12 @@ class _Home_screen1State extends State<Home_screen1> {
                             //         homeController.sliderList[i].image),
                             //   )),
                             // ),
-                            child: Image.network(
-                                homeController.sliderList[i].image),
+                            child: Padding(
+                               padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Image.network(
+                                  homeController.sliderList[i].image),
+                            ),
                           ),
                         // Container(
                         //   decoration: BoxDecoration(

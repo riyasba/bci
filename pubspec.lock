@@ -718,7 +718,7 @@ packages:
       path: "plugin/Flutter_Plugin/ISGPay_PG_Plugin"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "1.0.3"
   js:
     dependency: transitive
     description:

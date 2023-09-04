@@ -198,17 +198,17 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
           ksizedbox40,
           InkWell(
             onTap: () {
-              
-              profileController.payUseingEaseBuzzWallet(
-                id: 0, 
-                amount: amountController.text, 
-                customerName: profileController.profileData.first.name
-                      .trim()
-                      .split(" ")
-                      .first,
-                email: "${profileController.profileData.first.name}@gmail.com",
-                phone:profileController.profileData.first.mobile,
-                status: "");
+            profileController.payforWallet(amount:  double.parse(amountController.text));
+              // profileController.payUseingEaseBuzzWallet(
+              //   id: 0, 
+              //   amount: amountController.text, 
+              //   customerName: profileController.profileData.first.name
+              //         .trim()
+              //         .split(" ")
+              //         .first,
+              //   email: "${profileController.profileData.first.name}@gmail.com",
+              //   phone:profileController.profileData.first.mobile,
+              //   status: "");
               //Get.to(const SucessfulScreenOtc());
             },
             child: Padding(

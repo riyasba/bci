@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/models/get_booking_list_model.dart';
 import 'package:bci/models/get_cart_list_model.dart';
@@ -30,8 +32,10 @@ import 'package:bci/services/network/subscriptions_api_services/get_plans_list_a
 import 'package:dio/dio.dart' as dio;
 import 'package:bci/services/network/slider_api_services/slider_api_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 
 class HomeController extends GetxController {
   GetSliderApiServices getSliderApiServices = GetSliderApiServices();
@@ -124,14 +128,13 @@ class HomeController extends GetxController {
     update();
   }
 
-  VendorServiceListApiServices vendorServiceListApiServices = VendorServiceListApiServices();
+  VendorServiceListApiServices vendorServiceListApiServices =
+      VendorServiceListApiServices();
   List<GetServiceListData> vendorServiceListData = [];
 
-    vendorServiceList(String vendorId) async {
-    dio.Response<dynamic> response =
-        await vendorServiceListApiServices.vendorServiceListApiServices(
-          vendorId: vendorId
-        );
+  vendorServiceList(String vendorId) async {
+    dio.Response<dynamic> response = await vendorServiceListApiServices
+        .vendorServiceListApiServices(vendorId: vendorId);
 
     if (response.statusCode == 200) {
       GetServiceList getServiceList = GetServiceList.fromJson(response.data);
@@ -152,9 +155,10 @@ class HomeController extends GetxController {
       SearchServiceListApiServices();
   List<SearchServiceListData> searchServiceListData = [];
 
-  searchServiceList({required String searchKey,dynamic categoryid}) async {
-    dio.Response<dynamic> response = await searchServiceListApiServices
-        .searchServiceListApiServices(searchKey: searchKey,categoryid: categoryid);
+  searchServiceList({required String searchKey, dynamic categoryid}) async {
+    dio.Response<dynamic> response =
+        await searchServiceListApiServices.searchServiceListApiServices(
+            searchKey: searchKey, categoryid: categoryid);
 
     if (response.statusCode == 200) {
       SearchServiceList searchServiceList =
@@ -226,7 +230,7 @@ class HomeController extends GetxController {
   GetCartListApiServices getCartListApiServices = GetCartListApiServices();
   List<CartListData> cartListData = [];
 
-   getCartdetails() async {
+  getCartdetails() async {
     dio.Response<dynamic> response =
         await getCartListApiServices.getCartListApiServices();
 
@@ -356,17 +360,18 @@ class HomeController extends GetxController {
   }
 
   //get today offers list
-  GetTodayOffersListApiServices getTodayOffersListApiServices = GetTodayOffersListApiServices();
+  GetTodayOffersListApiServices getTodayOffersListApiServices =
+      GetTodayOffersListApiServices();
   List<OffersListModel> todayOfferListData = [];
 
   todayOffers() async {
-
-    dio.Response<dynamic> response = await getTodayOffersListApiServices.getTodayOffersListApiServices();
-    if(response.statusCode == 200){
-      
-      List<OffersListModel> getTodayOffersList = List<OffersListModel>.from(response.data.map((x) => OffersListModel.fromJson(x)));;
+    dio.Response<dynamic> response =
+        await getTodayOffersListApiServices.getTodayOffersListApiServices();
+    if (response.statusCode == 200) {
+      List<OffersListModel> getTodayOffersList = List<OffersListModel>.from(
+          response.data.map((x) => OffersListModel.fromJson(x)));
+      ;
       todayOfferListData = getTodayOffersList;
-
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -376,20 +381,20 @@ class HomeController extends GetxController {
           ));
     }
     update();
-
   }
 
   //liquor list api
-  LiquorVendorListApiService liquorVendorListApiService = LiquorVendorListApiService();
+  LiquorVendorListApiService liquorVendorListApiService =
+      LiquorVendorListApiService();
   List<VendorListData> vendorListData = [];
 
   liquorVendors({required String categoryid}) async {
-
-    dio.Response<dynamic> response = await liquorVendorListApiService.
-    liquorVendorListApiService(categoryid: categoryid);
-    if(response.statusCode == 200){
-      LiquorVendorList liquorVendorList = LiquorVendorList.fromJson(response.data);
-      vendorListData = liquorVendorList.vendors; 
+    dio.Response<dynamic> response = await liquorVendorListApiService
+        .liquorVendorListApiService(categoryid: categoryid);
+    if (response.statusCode == 200) {
+      LiquorVendorList liquorVendorList =
+          LiquorVendorList.fromJson(response.data);
+      vendorListData = liquorVendorList.vendors;
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -402,16 +407,13 @@ class HomeController extends GetxController {
   }
 
   //liquor service list
-  LiquorServiceListApiService liquorServiceListApiService = LiquorServiceListApiService();
+  LiquorServiceListApiService liquorServiceListApiService =
+      LiquorServiceListApiService();
 
-  liquorService({
-    required String vendor,
-    required String categoryid
-  }) async {
-
-    dio.Response<dynamic> response = await liquorServiceListApiService.
-    liquorServiceListApiService(vendor: vendor, categoryid: categoryid);
-    if(response.statusCode == 200){
+  liquorService({required String vendor, required String categoryid}) async {
+    dio.Response<dynamic> response = await liquorServiceListApiService
+        .liquorServiceListApiService(vendor: vendor, categoryid: categoryid);
+    if (response.statusCode == 200) {
       SearchServiceList searchServiceList =
           SearchServiceList.fromJson(response.data);
       searchServiceListData = searchServiceList.data;
@@ -424,21 +426,20 @@ class HomeController extends GetxController {
           ));
     }
     update();
-
   }
 
   //get slider product
-  GetSliderProductApiServices getSliderProductApiServices = GetSliderProductApiServices();
+  GetSliderProductApiServices getSliderProductApiServices =
+      GetSliderProductApiServices();
   List<SliderData> sliderData = [];
 
   sliderProduct() async {
-
-    dio.Response<dynamic> response = await getSliderProductApiServices.getSliderproduct();
-    if(response.statusCode == 200){
-
-      SliderProductModel sliderProductModel = SliderProductModel.fromJson(response.data);
+    dio.Response<dynamic> response =
+        await getSliderProductApiServices.getSliderproduct();
+    if (response.statusCode == 200) {
+      SliderProductModel sliderProductModel =
+          SliderProductModel.fromJson(response.data);
       sliderData = sliderProductModel.posts;
-
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -448,8 +449,49 @@ class HomeController extends GetxController {
           ));
     }
     update();
-
   }
 
+  // String responseData = "Nothing";
+  final _isgpayuiPlugin = IsgpayuiPlugin();
 
+  void startPlugin() async {
+    String? result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _isgpayuiPlugin.initiateISGPayUI(getArguments(100)) ??
+          'Unknown platform version';
+    } on PlatformException catch (e) {
+      result = e.message;
+    }
+    debugPrint('Result ::: $result');
+
+    var responseData = jsonDecode(result!);
+     print("<<----response-data---->>");
+    print(responseData);
+  }
+
+  Map<String, String> getArguments(var amount) {
+    var randomStr = DateTime.now().microsecondsSinceEpoch.toString();
+    Map<String, String> map = {
+      'version': "1",
+      'txnRefNo': "ORD00011", // Should change on every request
+      'amount': "$amount",
+      'passCode': 'SVPL4257',
+      'bankId': '000004',
+      'terminalId': '10100781',
+      'merchantId': '101000000000781',
+      'mcc': "4112",
+      'paymentType': 'Pay',
+      'currency': "356",
+      'email': 'manu@gmail.com',
+      'phone': '+917907886767',
+      'hashKey': 'E59CD2BF6F4D86B5FB3897A680E0DD3E',
+      'aesKey': '5EC4A697141C8CE45509EF485EE7D4B1',
+      'payOpt': 'cc',
+      'orderInfo': 'NARUTO00001',
+      'env': 'UAT', //UAT PROD
+      'url': 'https://sandbox.isgpay.com/ISGPay-Genius/request.action',
+    };
+    return map;
+  }
 }

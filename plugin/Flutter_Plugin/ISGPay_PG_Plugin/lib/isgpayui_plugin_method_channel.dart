@@ -18,7 +18,7 @@ class MethodChannelIsgpayuiPlugin extends IsgpayuiPluginPlatform {
   }
 
   @override
-  Future<String?> initiateISGPayUI(Map inputArgs) async {
+  Future<String?> initiateISGPayUI(Map<String, String> inputArgs) async {
     dynamic result = await methodChannel.invokeMethod<dynamic>('initiateISGPayUI', {"inputParams":inputArgs});
     final data = jsonEncode(result);
     print("CALL: initiateISGPayUI() :  $data");

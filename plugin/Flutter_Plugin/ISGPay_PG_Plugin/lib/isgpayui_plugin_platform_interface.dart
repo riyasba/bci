@@ -27,7 +27,7 @@ abstract class IsgpayuiPluginPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  Future<String?> initiateISGPayUI(Map inputArgs) {
+  Future<String?> initiateISGPayUI(Map<String, String> inputArgs) {
     throw UnimplementedError('initiateISGPayUI has not been implemented.');
   }
 }
