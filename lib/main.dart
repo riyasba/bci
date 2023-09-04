@@ -144,10 +144,10 @@ class _MyAppState extends State<MyApp> {
     return ScreenUtilInit(
       designSize: const Size(392, 850),
       minTextAdapt: true,
-      splitScreenMode: true,
+      // splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
         return GetMaterialApp(
-          navigatorKey: MyApp.navigatorKey,
+          // navigatorKey: MyApp.navigatorKey,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,

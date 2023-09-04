@@ -26,7 +26,7 @@ class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
     Home_screen1(),
     Members_search_screen(
       title: 'Search Result',
-      items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
+      items: const ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
     ),
     WalletScreen_members(),
     Members_booking(),
@@ -43,7 +43,7 @@ class _HelloConvexAppBarState extends State<HelloConvexAppBar> {
           backgroundColor: kblue,
           color: kwhite,
           style: TabStyle.reactCircle,
-          items: [
+          items: const [
             TabItem(icon: Icons.home, title: 'Home'),
             TabItem(icon: Icons.search, title: 'Search'),
             TabItem(icon: Icons.wallet, title: 'Wallet'),

@@ -35,7 +35,7 @@ class bookings_containers extends StatelessWidget {
                         ksizedbox10,
                         Row(
                           children: [
-                            Text(
+                            const Text(
                               'Rich Hotels, Chennai',
                               style: TextStyle(fontSize: 21),
                             ),SizedBox(width: 30,),

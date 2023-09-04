@@ -83,11 +83,25 @@ class ProfileController extends GetxController {
   }
 
   withdrawAmountFromWallet({required String amount}) async {
+    isLoading(true);
     dio.Response<dynamic> response = await withdrawWalletApiServices
         .withdrawWalletApiServices(amount: amount);
+    isLoading(false);
+    print(response.data);
 
     if (response.statusCode == 200) {
-      // Get.snackbar("Amount ", message)
+      Get.rawSnackbar(
+        message: "Withrawal submitted successfully",
+        backgroundColor: Colors.green,
+      );
+      Get.offAll(() => HomeBottomnavigationBar(
+            index: 2,
+          ));
+    }else{
+       Get.rawSnackbar(
+        message: "Something went wrong, please try again!",
+        backgroundColor: Colors.red,
+      );
     }
   }
 
@@ -98,7 +112,7 @@ class ProfileController extends GetxController {
     );
     isLoading(false);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      Get.off(() =>  HomeBottomnavigationBar());
+      Get.off(() => HomeBottomnavigationBar());
       Get.rawSnackbar(
           backgroundColor: Colors.green,
           messageText: Text(
