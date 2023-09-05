@@ -17,7 +17,6 @@ class HotelBookingScreen extends StatefulWidget {
 }
 
 class _HotelBookingScreenState extends State<HotelBookingScreen> {
-
   final hotelBookingController = Get.find<HotelBookingController>();
 
   @override
@@ -27,16 +26,20 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
     hotelBookingController.hotelBookingList();
   }
 
-
   void launchGoogleMaps(String latitude, String longitude) async {
-  final url = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    final url =
+        // 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
 
-  if (await canLaunchUrl(Uri.parse(url))) {
-    await launchUrl(Uri.parse(url));
-  } else {
-    throw 'Could not launch Google Maps';
+        "google.navigation:q=$latitude,$longitude&mode=d";
+
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw 'Could not launch Google Maps';
+    }
   }
-}
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -48,89 +51,130 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
             ? const Center(
                 child: Text("No bookings found"),
               )
-            : ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: hotelBookingController.bookingList.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: InkWell(
-                      onTap: () async
-                      {
-                        Result result =await hotelBookingController.getHotelDetails(hotelBookingController.bookingList[index].bookingId);
-                         dialogBuilder(
-                            context, hotelBookingController.bookingList[index],result);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          height: 125,
-                          width: size.width,
-                          decoration: BoxDecoration(
-                            color: kwhite,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(5),
-                                    child:hotelBookingController.bookingList[index].hotelImage == "null" ?
-                                    Image.asset("assets/icons/no-photo.png",height: 100,width: 100,fit: BoxFit.cover,) :
-                                     Image.network(
-                                      hotelBookingController.bookingList[index].hotelImage,
-                                      height: 100,
-                                      width: 100,
-                                      fit: BoxFit.cover,
-                                    )),
-                              ),
-                              kwidth10,
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ksizedbox10,
-                                  Container(
-                                    width: 200,
-                                    child: Text(
-                                      hotelBookingController.bookingList[index].hotelName
-                                          .toString(),
-                                          maxLines: 2,
-                                      style: const TextStyle(fontSize: 21),
+            : Stack(
+                children: [
+                  ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: hotelBookingController.bookingList.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: InkWell(
+                            onTap: () async {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              Result result = await hotelBookingController
+                                  .getHotelDetails(hotelBookingController
+                                      .bookingList[index].bookingId);
+                              setState(() {
+                                isLoading = false;
+                              });
+                              dialogBuilder(
+                                  context,
+                                  hotelBookingController.bookingList[index],
+                                  result);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                height: 125,
+                                width: size.width,
+                                decoration: BoxDecoration(
+                                  color: kwhite,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          child: hotelBookingController
+                                                      .bookingList[index]
+                                                      .hotelImage ==
+                                                  "null"
+                                              ? Image.asset(
+                                                  "assets/icons/no-photo.png",
+                                                  height: 100,
+                                                  width: 100,
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : Image.network(
+                                                  hotelBookingController
+                                                      .bookingList[index]
+                                                      .hotelImage,
+                                                  height: 100,
+                                                  width: 100,
+                                                  fit: BoxFit.cover,
+                                                )),
                                     ),
-                                  ),
-                                  Container(
-                                    width: 200,
-                                    child: Text(
-                                      hotelBookingController.bookingList[index].place,
-                                      maxLines: 4,
-                                      style: TextStyle(color: kblue),
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                     "Booking Date :",
-                                      maxLines: 4,
-                                      style: TextStyle(color: kblue),
-                                    ),
-                                      Text(
-                                          hotelBookingController.bookingList[index].bookingDate,
-                                          maxLines: 4,
-                                          style: TextStyle(color: kgrey),
+                                    kwidth10,
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ksizedbox10,
+                                        Container(
+                                          width: 200,
+                                          child: Text(
+                                            hotelBookingController
+                                                .bookingList[index].hotelName
+                                                .toString(),
+                                            maxLines: 2,
+                                            style:
+                                                const TextStyle(fontSize: 21),
+                                          ),
                                         ),
-                                    ],
-                                  ),
-                                  ksizedbox10
-                                ],
-                              )
-                            ],
+                                        Container(
+                                          width: 200,
+                                          child: Text(
+                                            hotelBookingController
+                                                .bookingList[index].place,
+                                            maxLines: 4,
+                                            style: TextStyle(color: kblue),
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Booking Date :",
+                                              maxLines: 4,
+                                              style: TextStyle(color: kblue),
+                                            ),
+                                            Text(
+                                              hotelBookingController
+                                                  .bookingList[index]
+                                                  .bookingDate,
+                                              maxLines: 4,
+                                              style: TextStyle(color: kgrey),
+                                            ),
+                                          ],
+                                        ),
+                                        ksizedbox10
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                  );
-                }),
+                        );
+                      }),
+                if(isLoading)  Container(
+                    height: size.height,
+                    width: size.width,
+                    decoration:
+                        const BoxDecoration(color: Color.fromARGB(22, 0, 0, 0)),
+                    child: Center(
+                        child: CircularProgressIndicator(
+                      color: kOrange,
+                    )),
+                  )
+                ],
+              ),
       );
     });
   }
@@ -144,7 +188,6 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       ) {
         return AlertDialog(
           title: Container(
-           
             width: 300,
             color: Colors.white,
             child: Column(
@@ -174,20 +217,27 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                 ),
                 Row(
                   children: [
-                    bookingData.hotelImage == "null" ? 
-                    Image.asset("assets/icons/no-photo.png",height: 100,width: 100,fit: BoxFit.cover,) :
-                    Image.network(bookingData.hotelImage,
-                      height: 50,
-                      width: 60,
-                      fit: BoxFit.cover,
-                    ),
+                    bookingData.hotelImage == "null"
+                        ? Image.asset(
+                            "assets/icons/no-photo.png",
+                            height: 100,
+                            width: 100,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.network(
+                            bookingData.hotelImage,
+                            height: 50,
+                            width: 60,
+                            fit: BoxFit.cover,
+                          ),
                     const SizedBox(
                       width: 10,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(bookingData.hotelName,
+                        Text(
+                          bookingData.hotelName,
                           style: TextStyle(
                               fontSize: 16,
                               color: kblue,
@@ -294,20 +344,23 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                           fontWeight: FontWeight.bold),
                     ),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         launchGoogleMaps(result.latitude, result.longitude);
                       },
                       child: Container(
                         height: 50,
                         width: 70,
-                      
                         alignment: Alignment.center,
-                        child: Icon(Icons.directions, color: Colors.blue,size: 26,),
+                        child: Icon(
+                          Icons.directions,
+                          color: Colors.blue,
+                          size: 26,
+                        ),
                       ),
                     )
                   ],
                 ),
-                 const Divider(
+                const Divider(
                   thickness: 1,
                 ),
                 Row(
@@ -332,7 +385,6 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                     ),
                   ],
                 ),
-                
                 const Divider(
                   thickness: 1,
                 ),
@@ -390,7 +442,8 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                           color: kblue,
                           fontWeight: FontWeight.bold),
                     ),
-                    Text(bookingData.noOfPeople,
+                    Text(
+                      bookingData.noOfPeople,
                       style: TextStyle(
                           fontSize: 15,
                           color: kgrey,
@@ -401,17 +454,18 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                 const Divider(
                   thickness: 1,
                 ),
-                 Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                     const Text(
+                    const Text(
                       'Price',
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.green,
                           fontWeight: FontWeight.bold),
                     ),
-                  Text("₹ ${bookingData.price}",
+                    Text(
+                      "₹ ${bookingData.price}",
                       style: const TextStyle(
                           fontSize: 15,
                           color: Colors.green,
