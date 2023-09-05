@@ -90,8 +90,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     carouselController: sliderController,
                     items: [
                      for(var i=0; i<vendorController.postlist.length;i++)
-                  
-                                          Container(
+                      Container(
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image:
@@ -111,8 +110,8 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                       enableInfiniteScroll: true,
                       reverse: false,
                       autoPlay: true,
-                      autoPlayInterval: Duration(seconds: 3),
-                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayInterval: const Duration(seconds: 3),
+                      autoPlayAnimationDuration: const Duration(milliseconds: 800),
                       autoPlayCurve: Curves.fastOutSlowIn,
                       enlargeCenterPage: true,
                       enlargeFactor: 0.3,

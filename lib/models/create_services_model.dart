@@ -16,6 +16,8 @@ class CreateServiceModel {
   dynamic couponAmount;
   dynamic unit;
   dynamic quantity;
+  dynamic cgst;
+  dynamic sgst;
 
   CreateServiceModel(
       {required this.title,
@@ -34,6 +36,8 @@ class CreateServiceModel {
       this.offerPercentage,
       this.quantity,
       this.unit,
+      this.cgst,
+      this.sgst,
       required this.image});
 }
 

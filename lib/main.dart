@@ -144,6 +144,7 @@ class _MyAppState extends State<MyApp> {
     return ScreenUtilInit(
       designSize: const Size(392, 850),
       minTextAdapt: true,
+      useInheritedMediaQuery: true,
       // splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
         return GetMaterialApp(

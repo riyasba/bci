@@ -34,6 +34,8 @@ class AddServicesApiServices extends BaseApiService {
         "editor-value": createServiceModel.description,
         "isOffer": createServiceModel.isOfferAvailable,
         "isCoupon": createServiceModel.isCouponsAvailable,
+        "cgst": createServiceModel.cgst,
+        "sgst": createServiceModel.sgst,
         // if (createServiceModel.offerPercentage != null)
         //   "offerPercentage": "${createServiceModel.offerPercentage}%",
         // if (createServiceModel.offerAmount != null)

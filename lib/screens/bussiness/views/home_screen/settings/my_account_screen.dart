@@ -223,7 +223,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       controller: displayNameController,
                       readOnly: true,
                       decoration: InputDecoration(
-                          hintText: '  Merchant display name',
+                          labelText: 'Merchant display name',
                           hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: OutlineInputBorder()),
                     ),
@@ -237,7 +237,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       controller: addressController,
                       readOnly: true,
                       decoration: InputDecoration(
-                          hintText: '  Business Address',
+                          labelText: 'Business Address',
                           hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
@@ -271,7 +271,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       controller: numberController,
                       readOnly: true,
                       decoration: InputDecoration(
-                          hintText: '  Mobile Number',
+                          labelText: 'Mobile Number',
                           hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border:const OutlineInputBorder()),
                     ),
@@ -285,7 +285,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       controller: aleternativeController,
                       readOnly: true,
                       decoration: InputDecoration(
-                          hintText: 'Alternate Phone Number',
+                          labelText: 'Alternate Phone Number',
                           hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
@@ -299,60 +299,60 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       controller: gstnoController,
                       readOnly: true,
                       decoration: InputDecoration(
-                          hintText: 'GST No.',
+                          labelText: 'GST No.',
                           hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
                   ),
                 ),
                 ksizedbox10,
-                GetBuilder<AuthController>(builder: (_) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-                    child: Container(
-                      height: 55,
-                      width: size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(3),
-                          border: Border.all(
-                              color: const Color.fromARGB(255, 5, 5, 5)
-                                  .withOpacity(0.8))),
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 10, right: 10, top: 15),
-                        child: DropdownButton<CategoryList>(
-                          value: merchantCategory,
-                          isExpanded: true,
-                          icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                          elevation: 0,
-                          itemHeight: 55,
-                          isDense: true,
-                          dropdownColor: Colors.grey[250],
-                          style: const TextStyle(color: Colors.black54),
-                          hint: Text(
-                            "Merchant Category Name",
-                            style: TextStyle(fontSize: 16, color: kblue),
-                          ),
-                          onChanged: (CategoryList? value) {
-                            setState(() {
-                              merchantCategory = value!;
-                              categoryController.text = value.id.toString();
-                            });
-                          },
-                          items: authController.categoryList
-                              .map<DropdownMenuItem<CategoryList>>(
-                                  (CategoryList value) {
-                            return DropdownMenuItem<CategoryList>(
-                              value: value,
-                              child: Text(value.title),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
-                  );
-                }
-                ),
+                // GetBuilder<AuthController>(builder: (_) {
+                //   return Padding(
+                //     padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+                //     child: Container(
+                //       height: 55,
+                //       width: size.width,
+                //       decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(3),
+                //           border: Border.all(
+                //               color: const Color.fromARGB(255, 5, 5, 5)
+                //                   .withOpacity(0.8))),
+                //       child: Padding(
+                //         padding:
+                //             const EdgeInsets.only(left: 10, right: 10, top: 15),
+                //         child: DropdownButton<CategoryList>(
+                //           value: merchantCategory,
+                //           isExpanded: true,
+                //           icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                //           elevation: 0,
+                //           itemHeight: 55,
+                //           isDense: true,
+                //           dropdownColor: Colors.grey[250],
+                //           style: const TextStyle(color: Colors.black54),
+                //           hint: Text(
+                //             "Merchant Category Name",
+                //             style: TextStyle(fontSize: 16, color: kblue),
+                //           ),
+                //           onChanged: (CategoryList? value) {
+                //             setState(() {
+                //               merchantCategory = value!;
+                //               categoryController.text = value.id.toString();
+                //             });
+                //           },
+                //           items: authController.categoryList
+                //               .map<DropdownMenuItem<CategoryList>>(
+                //                   (CategoryList value) {
+                //             return DropdownMenuItem<CategoryList>(
+                //               value: value,
+                //               child: Text(value.title),
+                //             );
+                //           }).toList(),
+                //         ),
+                //       ),
+                //     ),
+                //   );
+                // }
+                // ),
                 Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: Container(
@@ -361,7 +361,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       controller: bankAccountNameController,
                       readOnly: true,
                       decoration: InputDecoration(
-                          hintText: 'Bank Name',
+                          labelText: 'Bank Name',
                           hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
@@ -375,7 +375,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       controller: bankAccountNameController,
                       readOnly: true,
                       decoration: InputDecoration(
-                          hintText: 'Bank Account Name',
+                          labelText: 'Bank Account Name',
                           hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
@@ -389,7 +389,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       controller: accountTypeController,
                       readOnly: true,
                       decoration: InputDecoration(
-                          hintText: 'Account Type',
+                          labelText: 'Account Type',
                           hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
@@ -403,7 +403,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       controller: bankAccountNumberController,
                       readOnly: true,
                       decoration: InputDecoration(
-                          hintText: 'Bank Account Number',
+                          labelText: 'Bank Account Number',
                           hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),
@@ -417,7 +417,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       controller: ifscCodeController,
                       readOnly: true,
                       decoration: InputDecoration(
-                          hintText: 'IFSC Code',
+                          labelText: 'IFSC Code',
                           hintStyle: TextStyle(fontSize: 16, color: kblue),
                           border: const OutlineInputBorder()),
                     ),

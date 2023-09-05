@@ -108,7 +108,7 @@ class _EditScreenState extends State<EditScreen> {
               child: TextField(
                 controller: nameController,
                 decoration: InputDecoration(
-                    hintText: 'Bank Name',
+                    labelText: 'Bank Name',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
                     border: const OutlineInputBorder()),
               ),
@@ -118,7 +118,7 @@ class _EditScreenState extends State<EditScreen> {
               child: TextField(
                 controller: accountController,
                 decoration: InputDecoration(
-                    hintText: 'Bank Account Name',
+                    labelText: 'Bank Account Name',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
                     border:const OutlineInputBorder()),
               ),
@@ -138,7 +138,7 @@ class _EditScreenState extends State<EditScreen> {
               child: TextField(
                 controller: numberController,
                 decoration: InputDecoration(
-                    hintText: 'Bank Account Number',
+                    labelText: 'Bank Account Number',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
                     border: const OutlineInputBorder()),
               ),
@@ -148,7 +148,7 @@ class _EditScreenState extends State<EditScreen> {
               child: TextField(
                 controller: ifscController,
                 decoration: InputDecoration(
-                    hintText: 'IFSC code',
+                    labelText: 'IFSC code',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
                     border: OutlineInputBorder()),
               ),
@@ -158,7 +158,7 @@ class _EditScreenState extends State<EditScreen> {
               child: TextField(
                 controller: passwordController,
                 decoration: InputDecoration(
-                    hintText: 'Password',
+                    labelText: 'Password',
                     suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
@@ -178,7 +178,7 @@ class _EditScreenState extends State<EditScreen> {
                 keyboardType: TextInputType.visiblePassword,
                 controller: confirmController,
                 decoration: InputDecoration(
-                    hintText: 'Confirm Password',
+                    labelText: 'Confirm Password',
                     suffixIcon: IconButton(
                         onPressed: () {},
                         icon: conpasswordvisible

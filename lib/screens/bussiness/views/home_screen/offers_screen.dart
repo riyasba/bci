@@ -176,10 +176,10 @@ class _OffersScreenState extends State<OffersScreen> {
                           color: Colors.white),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Image.asset('assets/images/helps.png'),
-                  )
+                  // Padding(
+                  //   padding: const EdgeInsets.only(right: 20),
+                  //   child: Image.asset('assets/images/helps.png'),
+                  // )
                 ],
               ),
             ),
@@ -570,28 +570,28 @@ class _OffersScreenState extends State<OffersScreen> {
                     style: TextStyle(fontSize: 21, color: kwhite),
                   )),
             ),
-            ksizedbox20,
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: kyellow,
-                      minimumSize:
-                          Size(MediaQuery.of(context).size.width * 0.8, 50)),
-                  onPressed: () {
-                    Get.to(const LastOffers());
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Last Offers',
-                        style: TextStyle(fontSize: 21, color: kwhite),
-                      ),
-                     const Icon(Icons.arrow_forward)
-                    ],
-                  )),
-            ),
+            // ksizedbox20,
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 20, right: 20),
+            //   child: ElevatedButton(
+            //       style: ElevatedButton.styleFrom(
+            //           backgroundColor: kyellow,
+            //           minimumSize:
+            //               Size(MediaQuery.of(context).size.width * 0.8, 50)),
+            //       onPressed: () {
+            //         Get.to(const LastOffers());
+            //       },
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [
+            //           Text(
+            //             'Last Offers',
+            //             style: TextStyle(fontSize: 21, color: kwhite),
+            //           ),
+            //          const Icon(Icons.arrow_forward)
+            //         ],
+            //       )),
+            // ),
             ksizedbox20
           ],
         ),

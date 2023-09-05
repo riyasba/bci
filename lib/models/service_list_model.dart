@@ -46,11 +46,13 @@ class ServiceData {
     dynamic isRecomended;
     dynamic status;
     List<Amenty> amenties;
-    String image;
+    dynamic image;
     DateTime createdAt;
     DateTime updatedAt;
     dynamic shareOption;
-    dynamic bvcAmount;
+    // dynamic bvcAmount;
+    dynamic sgst;
+    dynamic cgst;
 
     ServiceData({
         required this.id,
@@ -70,11 +72,13 @@ class ServiceData {
         required this.isRecomended,
         required this.status,
         required this.amenties,
-        required this.image,
+         this.image,
         required this.createdAt,
         required this.updatedAt,
         this.shareOption,
-        this.bvcAmount,
+        // this.bvcAmount,
+        this.sgst,
+        this.cgst,
     });
 
     factory ServiceData.fromJson(Map<String, dynamic> json) => ServiceData(
@@ -99,7 +103,9 @@ class ServiceData {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         shareOption: json["share_option"]?? "",
-        bvcAmount: json["bvc_amount"]?? "",
+        // bvcAmount: json["bvc_amount"]?? "",
+        sgst: json["cgst"],
+        cgst: json["sgst"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -124,7 +130,7 @@ class ServiceData {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "share_option": shareOption,
-        "bvc_amount": bvcAmount,
+        // "bvc_amount": bvcAmount,
     };
 }
 

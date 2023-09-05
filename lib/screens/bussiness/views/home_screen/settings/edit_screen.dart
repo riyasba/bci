@@ -36,7 +36,6 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
   var bankAccountNumberController = TextEditingController();
   var accountTypeController = TextEditingController();
   var ifscCodeController = TextEditingController();
-  
 
   File? image;
   File? image2;
@@ -49,6 +48,10 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
   var merchantCategory;
 
   bool isGSTNum = true;
+
+  var aadharCardImage;
+  var panCardImage;
+  var shopImage;
 
   @override
   void initState() {
@@ -78,15 +81,22 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
           profileController.profileData.first.alternateMobile ?? "";
       gstnoController.text = profileController.profileData.first.gstNo ?? "";
       categoryController.text = profileController.profileData.first.category;
-       bankAccountNameController.text = profileController.profileData.first.bankAccountName;
-      bankAccountNumberController.text = profileController.profileData.first.bankAccountNumber;
+      bankAccountNameController.text =
+          profileController.profileData.first.bankAccountName;
+      bankAccountNumberController.text =
+          profileController.profileData.first.bankAccountNumber;
       bankNameController.text = profileController.profileData.first.bankName;
-      accountTypeController.text = profileController.profileData.first.accountType;
+      accountTypeController.text =
+          profileController.profileData.first.accountType;
       ifscCodeController.text = profileController.profileData.first.ifscCode;
+      aadharCardImage = profileController.profileData.first.adharProof;
+      panCardImage = profileController.profileData.first.panProof;
+      shopImage = profileController.profileData.first.shopImage;
+      setState(() {});
       getCategorybyID();
     }
   }
-  
+
   //
   File? simage;
 
@@ -124,6 +134,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
       final imagetemp = File(image.path);
       setState(() {
         this.image = imagetemp;
+        aadharCardImage = null;
       });
     } catch (e) {
       print('Failed to pick image:$e');
@@ -137,6 +148,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
       final imagetemp = File(image.path);
       setState(() {
         this.image = imagetemp;
+        aadharCardImage = null;
       });
     } catch (e) {
       print('Failed to pick image:$e');
@@ -263,7 +275,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                     decoration: const BoxDecoration(
                                         shape: BoxShape.circle),
                                     child: profileController.profileData.first
-                                                .profilePicture.isEmpty
+                                            .profilePicture.isEmpty
                                         ? Image.asset(
                                             'assets/images/settingprofile.png',
                                             fit: BoxFit.fitWidth,
@@ -284,7 +296,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                     Icons.camera_alt_outlined,
                     shadows: [
                       BoxShadow(
-                          offset: Offset(0.0, 0.75),
+                          offset: const Offset(0.0, 0.75),
                           blurRadius: 1,
                           color: kgrey)
                     ],
@@ -301,7 +313,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               child: TextField(
                 controller: displayNameController,
                 decoration: InputDecoration(
-                    hintText: '  Merchant display name',
+                    labelText: 'Merchant display name',
                     hintStyle: TextStyle(fontSize: 20, color: kblue),
                     border: const OutlineInputBorder()),
               ),
@@ -314,7 +326,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               child: TextField(
                 controller: addressController,
                 decoration: InputDecoration(
-                    hintText: '  Business Address',
+                    labelText: 'Business Address',
                     hintStyle: TextStyle(fontSize: 20, color: kblue),
                     border: const OutlineInputBorder()),
               ),
@@ -343,7 +355,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                   FilteringTextInputFormatter.deny(RegExp(r'\s')),
                 ],
                 decoration: InputDecoration(
-                    hintText: '  Mobile Number',
+                    labelText: 'Mobile Number',
                     hintStyle: TextStyle(fontSize: 20, color: kblue),
                     border: const OutlineInputBorder()),
               ),
@@ -362,7 +374,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                   FilteringTextInputFormatter.deny(RegExp(r'\s')),
                 ],
                 decoration: InputDecoration(
-                    hintText: 'Alternate Phone Number',
+                    labelText: 'Alternate Phone Number',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
                     border: const OutlineInputBorder()),
               ),
@@ -374,101 +386,105 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               height: 55,
               child: TextField(
                 onChanged: (value) {
-                                      setState(() {
-                                         isGSTNum = gstvalidate(value);
-                                      });
-                                    },
+                  setState(() {
+                    isGSTNum = gstvalidate(value);
+                  });
+                },
                 controller: gstnoController,
                 textCapitalization: TextCapitalization.characters,
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(15),
                 ],
                 decoration: InputDecoration(
-                    hintText: 'GST No',
+                    labelText: 'GST No',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
                     border: const OutlineInputBorder()),
               ),
             ),
           ),
-          if(isGSTNum == false && gstnoController.text.isNotEmpty) const Padding(
-                            padding: EdgeInsets.only(top: 10,left: 15),
-                            child: Text("GST number is not valid",style: TextStyle(color: Colors.red),),
-                          ),
+          if (isGSTNum == false && gstnoController.text.isNotEmpty)
+            const Padding(
+              padding: EdgeInsets.only(top: 10, left: 15),
+              child: Text(
+                "GST number is not valid",
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
           Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: Container(
-                height: 55,
-                child: TextField(
-                  controller: bankNameController,
-                  decoration: InputDecoration(
-                      hintText: 'Bank Name',
-                      hintStyle: TextStyle(fontSize: 18, color: kblue),
-                      border: const OutlineInputBorder()),
-                ),
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: Container(
+              height: 55,
+              child: TextField(
+                controller: bankNameController,
+                decoration: InputDecoration(
+                    labelText: 'Bank Name',
+                    hintStyle: TextStyle(fontSize: 18, color: kblue),
+                    border: const OutlineInputBorder()),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: Container(
-                height: 55,
-                child: TextField(
-                  controller: bankAccountNameController,
-                  decoration: InputDecoration(
-                      hintText: 'Bank Account Name',
-                      hintStyle: TextStyle(fontSize: 18, color: kblue),
-                      border: const OutlineInputBorder()),
-                ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: Container(
+              height: 55,
+              child: TextField(
+                controller: bankAccountNameController,
+                decoration: InputDecoration(
+                    labelText: 'Bank Account Name',
+                    hintStyle: TextStyle(fontSize: 18, color: kblue),
+                    border: const OutlineInputBorder()),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: Container(
-                height: 55,
-                child: TextField(
-                  controller: accountTypeController,
-                  decoration: InputDecoration(
-                      hintText: 'Account Type',
-                      hintStyle: TextStyle(fontSize: 18, color: kblue),
-                      border: const OutlineInputBorder()),
-                ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: Container(
+              height: 55,
+              child: TextField(
+                controller: accountTypeController,
+                decoration: InputDecoration(
+                    labelText: 'Account Type',
+                    hintStyle: TextStyle(fontSize: 18, color: kblue),
+                    border: const OutlineInputBorder()),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: Container(
-                height: 55,
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  controller: bankAccountNumberController,
-                  inputFormatters: [
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: Container(
+              height: 55,
+              child: TextField(
+                keyboardType: TextInputType.number,
+                controller: bankAccountNumberController,
+                inputFormatters: [
                   LengthLimitingTextInputFormatter(16),
                   FilteringTextInputFormatter.digitsOnly,
                   FilteringTextInputFormatter.deny(RegExp(r'\s')),
                 ],
-                  decoration: InputDecoration(
-                      hintText: 'Bank Account Number',
-                      hintStyle: TextStyle(fontSize: 18, color: kblue),
-                      border: const OutlineInputBorder()),
-                ),
+                decoration: InputDecoration(
+                    labelText: 'Bank Account Number',
+                    hintStyle: TextStyle(fontSize: 18, color: kblue),
+                    border: const OutlineInputBorder()),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: Container(
-                height: 55,
-                child: TextField(
-                  controller: ifscCodeController,
-                  inputFormatters: [
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: Container(
+              height: 55,
+              child: TextField(
+                controller: ifscCodeController,
+                inputFormatters: [
                   LengthLimitingTextInputFormatter(11),
                 ],
-                  textCapitalization: TextCapitalization.characters,
-                  decoration: InputDecoration(
-                      hintText: 'IFSC Code',
-                      hintStyle: TextStyle(fontSize: 18, color: kblue),
-                      border: const OutlineInputBorder()),
-                ),
+                textCapitalization: TextCapitalization.characters,
+                decoration: InputDecoration(
+                    labelText: 'IFSC Code',
+                    hintStyle: TextStyle(fontSize: 18, color: kblue),
+                    border: const OutlineInputBorder()),
               ),
             ),
+          ),
           // Padding(
           //   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
           //   child: TextField(
@@ -496,52 +512,60 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                image != null
+                aadharCardImage != null
                     ? Container(
-                        height: 100, width: 100, child: Image.file(image!))
-                    : InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      TextButton(
-                                          onPressed: () {
-                                            pickerimage();
-                                          },
-                                          child: const Text(
-                                            'Choose ur gallery',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16),
-                                          )),
-                                      TextButton(
-                                          onPressed: () {
-                                            imagepic();
-                                          },
-                                          child: const Text(
-                                            'Choose ur Camera',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16),
-                                          ))
-                                    ],
-                                  ),
-                                );
-                              });
-                        },
-                        child: Container(
-                            height: 100,
-                            width: 100,
-                            color: const Color(0xffE4E4E4),
-                            child:
-                                Image.asset('assets/images/imageupload.png')),
-                      ),
-                image2 != null
+                        height: 100,
+                        width: 100,
+                        child: Image.network(aadharCardImage))
+                    : image != null
+                        ? Container(
+                            height: 100, width: 100, child: Image.file(image!))
+                        : InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) {
+                                    return Container(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          TextButton(
+                                              onPressed: () {
+                                                  Get.back();
+                                                pickerimage();
+                                              },
+                                              child: const Text(
+                                                'Choose ur gallery',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16),
+                                              )),
+                                          TextButton(
+                                              onPressed: () {
+                                                  Get.back();
+                                                imagepic();
+                                              },
+                                              child: const Text(
+                                                'Choose ur Camera',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16),
+                                              ))
+                                        ],
+                                      ),
+                                    );
+                                  });
+                            },
+                            child: Container(
+                                height: 100,
+                                width: 100,
+                                color: const Color(0xffE4E4E4),
+                                child: Image.asset(
+                                    'assets/images/imageupload.png')),
+                          ),
+             panCardImage != null ? Container(
+                        height: 100, width: 100, child: Image.network(panCardImage)):   image2 != null
                     ? Container(
                         height: 100, width: 100, child: Image.file(image2!))
                     : InkWell(
@@ -556,6 +580,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                     children: [
                                       TextButton(
                                           onPressed: () {
+                                            Get.back();
                                             pickerimage2();
                                           },
                                           child: const Text(
@@ -566,6 +591,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                           )),
                                       TextButton(
                                           onPressed: () {
+                                              Get.back();
                                             imagepic2();
                                           },
                                           child: const Text(
@@ -586,52 +612,52 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                             child:
                                 Image.asset('assets/images/imageupload.png')),
                       ),
-                      //
-                      simage != null
-                      ? Container(
-                          height: 100, width: 100, child: Image.file(simage!))
-                      : InkWell(
-                          onTap: () {
-                            showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return Container(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        TextButton(
-                                            onPressed: () {
-                                              spickerimage();
-                                            },
-                                            child: Text(
-                                              'Choose ur gallery',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16),
-                                            )),
-                                        TextButton(
-                                            onPressed: () {
-                                              simagepic();
-                                            },
-                                            child: Text(
-                                              'Choose ur Camera',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16),
-                                            ))
-                                      ],
-                                    ),
-                                  );
-                                });
-                          },
-                          child: Container(
-                              height: 100,
-                              width: 100,
-                              color: Color(0xffE4E4E4),
-                              child:
-                                  Image.asset('assets/images/imageupload.png')),
-                        ),
+                //
+                // simage != null
+                //     ? Container(
+                //         height: 100, width: 100, child: Image.file(simage!))
+                //     : InkWell(
+                //         onTap: () {
+                //           showModalBottomSheet(
+                //               context: context,
+                //               builder: (context) {
+                //                 return Container(
+                //                   child: Row(
+                //                     mainAxisAlignment:
+                //                         MainAxisAlignment.spaceAround,
+                //                     children: [
+                //                       TextButton(
+                //                           onPressed: () {
+                //                             spickerimage();
+                //                           },
+                //                           child: const Text(
+                //                             'Choose ur gallery',
+                //                             style: TextStyle(
+                //                                 color: Colors.black,
+                //                                 fontSize: 16),
+                //                           )),
+                //                       TextButton(
+                //                           onPressed: () {
+                //                             simagepic();
+                //                           },
+                //                           child: const Text(
+                //                             'Choose ur Camera',
+                //                             style: TextStyle(
+                //                                 color: Colors.black,
+                //                                 fontSize: 16),
+                //                           ))
+                //                     ],
+                //                   ),
+                //                 );
+                //               });
+                //         },
+                //         child: Container(
+                //             height: 100,
+                //             width: 100,
+                //             color: const Color(0xffE4E4E4),
+                //             child:
+                //                 Image.asset('assets/images/imageupload.png')),
+                //       ),
               ],
             ),
           ),
@@ -647,57 +673,57 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                 'Pan Card',
                 style: TextStyle(fontSize: 16, color: kblue),
               ),
-              Text(
-                'Shop Image',
-                style: TextStyle(fontSize: 16, color: kblue),
-              ),
+              // Text(
+              //   'Shop Image',
+              //   style: TextStyle(fontSize: 16, color: kblue),
+              // ),
             ],
           ),
-          GetBuilder<AuthController>(builder: (_) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-              child: Container(
-                height: 55,
-                width: size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 5, 5, 5)
-                            .withOpacity(0.8))),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
-                  child: DropdownButton<CategoryList>(
-                    value: merchantCategory,
-                    isExpanded: true,
-                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                    elevation: 0,
-                    itemHeight: 55,
-                    isDense: true,
-                    dropdownColor: Colors.grey[250],
-                    style: const TextStyle(color: Colors.black54),
-                    hint: Text(
-                      "Merchant Category Name",
-                      style: TextStyle(fontSize: 16, color: kblue),
-                    ),
-                    onChanged: (CategoryList? value) {
-                      setState(() {
-                        merchantCategory = value!;
-                        categoryController.text = value.id.toString();
-                      });
-                    },
-                    items: authController.categoryList
-                        .map<DropdownMenuItem<CategoryList>>(
-                            (CategoryList value) {
-                      return DropdownMenuItem<CategoryList>(
-                        value: value,
-                        child: Text(value.title),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-            );
-          }),
+          // GetBuilder<AuthController>(builder: (_) {
+          //   return Padding(
+          //     padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+          //     child: Container(
+          //       height: 55,
+          //       width: size.width,
+          //       decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(3),
+          //           border: Border.all(
+          //               color: const Color.fromARGB(255, 5, 5, 5)
+          //                   .withOpacity(0.8))),
+          //       child: Padding(
+          //         padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
+          //         child: DropdownButton<CategoryList>(
+          //           value: merchantCategory,
+          //           isExpanded: true,
+          //           icon: const Icon(Icons.keyboard_arrow_down_outlined),
+          //           elevation: 0,
+          //           itemHeight: 55,
+          //           isDense: true,
+          //           dropdownColor: Colors.grey[250],
+          //           style: const TextStyle(color: Colors.black54),
+          //           hint: Text(
+          //             "Merchant Category Name",
+          //             style: TextStyle(fontSize: 16, color: kblue),
+          //           ),
+          //           onChanged: (CategoryList? value) {
+          //             setState(() {
+          //               merchantCategory = value!;
+          //               categoryController.text = value.id.toString();
+          //             });
+          //           },
+          //           items: authController.categoryList
+          //               .map<DropdownMenuItem<CategoryList>>(
+          //                   (CategoryList value) {
+          //             return DropdownMenuItem<CategoryList>(
+          //               value: value,
+          //               child: Text(value.title),
+          //             );
+          //           }).toList(),
+          //         ),
+          //       ),
+          //     ),
+          //   );
+          // }),
           ksizedbox30,
           Obx(
             () => profileController.isLoading.isTrue
@@ -720,19 +746,21 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                         onPressed: () {
                           MerchantUpdateModel merchantUpdateModel =
                               MerchantUpdateModel(
-                                  address: addressController.text,
-                                  alternateMobile: aleternativeController.text,
-                                  categoryId: categoryController.text,
-                                  gstNo: gstnoController.text,
-                                  mobile: numberController.text,
-                                  name: displayNameController.text,
-                                  accountType: accountTypeController.text,
-                                  bankAccountName: bankAccountNameController.text,
-                                  bankAccountNumber: bankAccountNumberController.text,
-                                  bankName: bankNameController.text,
-                                  ifscCode: ifscCodeController.text,
-                                  shopImage:simage == null ? "null" : simage!.path,
-                                  );
+                            address: addressController.text,
+                            alternateMobile: aleternativeController.text,
+                            categoryId: categoryController.text,
+                            gstNo: gstnoController.text,
+                            mobile: numberController.text,
+                            name: displayNameController.text,
+                            accountType: accountTypeController.text,
+                            bankAccountName: bankAccountNameController.text,
+                            bankAccountNumber: bankAccountNumberController.text,
+                            bankName: bankNameController.text,
+                            ifscCode: ifscCodeController.text,
+                            shopImage: simage == null ? "null" : simage!.path,
+                            aadharProof: image,
+                            panProof: image2
+                          );
                           profileController.updateProfile(
                               merchantUpdateModel: merchantUpdateModel);
                         },
@@ -750,51 +778,48 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
     );
   }
 
+  var mult = [
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [1, 2, 3, 4, 0, 6, 7, 8, 9, 5],
+    [2, 3, 4, 0, 1, 7, 8, 9, 5, 6],
+    [3, 4, 0, 1, 2, 8, 9, 5, 6, 7],
+    [4, 0, 1, 2, 3, 9, 5, 6, 7, 8],
+    [5, 9, 8, 7, 6, 0, 4, 3, 2, 1],
+    [6, 5, 9, 8, 7, 1, 0, 4, 3, 2],
+    [7, 6, 5, 9, 8, 2, 1, 0, 4, 3],
+    [8, 7, 6, 5, 9, 3, 2, 1, 0, 4],
+    [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+  ];
+  var perm = [
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [1, 5, 7, 6, 2, 8, 3, 0, 9, 4],
+    [5, 8, 0, 3, 7, 9, 6, 1, 4, 2],
+    [8, 9, 1, 6, 0, 4, 3, 5, 2, 7],
+    [9, 4, 5, 3, 1, 2, 6, 8, 7, 0],
+    [4, 2, 8, 6, 5, 7, 3, 9, 0, 1],
+    [2, 7, 9, 3, 8, 0, 6, 4, 1, 5],
+    [7, 0, 4, 6, 9, 1, 3, 2, 5, 8]
+  ];
+  var i, j, x;
 
-var mult = [
-  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 0, 6, 7, 8, 9, 5],
-  [2, 3, 4, 0, 1, 7, 8, 9, 5, 6],
-  [3, 4, 0, 1, 2, 8, 9, 5, 6, 7],
-  [4, 0, 1, 2, 3, 9, 5, 6, 7, 8],
-  [5, 9, 8, 7, 6, 0, 4, 3, 2, 1],
-  [6, 5, 9, 8, 7, 1, 0, 4, 3, 2],
-  [7, 6, 5, 9, 8, 2, 1, 0, 4, 3],
-  [8, 7, 6, 5, 9, 3, 2, 1, 0, 4],
-  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-];
-var perm = [
-  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 5, 7, 6, 2, 8, 3, 0, 9, 4],
-  [5, 8, 0, 3, 7, 9, 6, 1, 4, 2],
-  [8, 9, 1, 6, 0, 4, 3, 5, 2, 7],
-  [9, 4, 5, 3, 1, 2, 6, 8, 7, 0],
-  [4, 2, 8, 6, 5, 7, 3, 9, 0, 1],
-  [2, 7, 9, 3, 8, 0, 6, 4, 1, 5],
-  [7, 0, 4, 6, 9, 1, 3, 2, 5, 8]
-];
-var i, j, x;
-
-String reverseString(String gstNum) {
-  var chars = gstNum.split('');
-  return chars.reversed.join();
-}
-
-int listElementsSum(List a) {
-  int sum = 0;
-  if (a.length <= 1) {
-    return a[0];
-  } else {
-    for (int e in a) {
-      sum += e;
-    }
+  String reverseString(String gstNum) {
+    var chars = gstNum.split('');
+    return chars.reversed.join();
   }
-  return sum;
-}
 
+  int listElementsSum(List a) {
+    int sum = 0;
+    if (a.length <= 1) {
+      return a[0];
+    } else {
+      for (int e in a) {
+        sum += e;
+      }
+    }
+    return sum;
+  }
 
-
-   bool gstvalidate(String gstNum) {
+  bool gstvalidate(String gstNum) {
     var check, lmo, gst, csum;
     check = reverseString(gstNum)[0];
     lmo = gstNum.substring(0, 14);
@@ -821,4 +846,3 @@ int listElementsSum(List a) {
     return val;
   }
 }
-

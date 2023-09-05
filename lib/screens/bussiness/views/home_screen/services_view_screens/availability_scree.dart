@@ -382,74 +382,99 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                               child: Stack(children: [
                                 Column(
                                   children: [
-                                    Container(
-                                      height: 140,
-                                      width: MediaQuery.of(context).size.width,
-                                      color: Colors.white,
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            height: 180,
-                                            width: 140,
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 10,
-                                                  left: 5,
-                                                  right: 10,
-                                                  bottom: 10),
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(4),
-                                                child: Image.network(
-                                                  servicesController
-                                                      .serviceDataList[index]
-                                                      .image,
-                                                  fit: BoxFit.cover,
+                                    InkWell(
+                                      onTap: (){
+                                         Get.to(() => UpdateServicesView(
+                                            serviceData: servicesController
+                                                .serviceDataList[index]));
+                                      },
+                                      child: Container(
+                                        height: 140,
+                                        width: MediaQuery.of(context).size.width,
+                                        color: Colors.white,
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              height: 180,
+                                              width: 140,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 10,
+                                                    left: 5,
+                                                    right: 10,
+                                                    bottom: 10),
+                                                child: ClipRRect(
+                                                  borderRadius: BorderRadius.circular(4),
+                                                  child: Image.network(
+                                                    servicesController
+                                                        .serviceDataList[index]
+                                                        .image,
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              top: 10,
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  width: 169,
-                                                  child: Text(
-                                                    servicesController
-                                                        .serviceDataList[index]
-                                                        .title,
-                                                    style: const TextStyle(
-                                                        fontSize: 17,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5),
-                                                  child: Container(
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                top: 10,
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
                                                     width: 169,
                                                     child: Text(
                                                       servicesController
-                                                          .serviceDataList[
-                                                              index]
-                                                          .description,
-                                                      maxLines: 4,
-                                                      style: TextStyle(
-                                                          fontSize: 13,
-                                                          color: kgrey),
+                                                          .serviceDataList[index]
+                                                          .title,
+                                                      style: const TextStyle(
+                                                          fontSize: 17,
+                                                          fontWeight:
+                                                              FontWeight.bold),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        ],
+                                                   Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 5),
+                                                    child: Container(
+                                                      width: 169,
+                                                      child: Text(
+                                                        "₹${servicesController
+                                                            .serviceDataList[
+                                                                index]
+                                                            .saleAmount}",
+                                                        maxLines: 4,
+                                                        style:const TextStyle(
+                                                            fontSize: 14,
+                                                            color: Colors.black87),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 5),
+                                                    child: Container(
+                                                      width: 169,
+                                                      child: Text(
+                                                        servicesController
+                                                            .serviceDataList[
+                                                                index]
+                                                            .description,
+                                                        maxLines: 4,
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            color: kgrey),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                     const Divider(

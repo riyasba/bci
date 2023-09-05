@@ -30,7 +30,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    // setDefault();
+    setDefault();
   }
 
   setDefault() async {
@@ -135,7 +135,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
             controller: bankNameController,
             // readOnly: true,
             decoration: InputDecoration(
-                hintText: 'Bank Name',
+                labelText: 'Bank Name',
                 hintStyle: TextStyle(fontSize: 16, color: kblue),
                 border: const OutlineInputBorder()),
           ),
@@ -146,7 +146,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
             controller: bankAccountNameController,
             // readOnly: true,
             decoration: InputDecoration(
-                hintText: 'Bank Account Name',
+                labelText: 'Bank Account Name',
                 hintStyle: TextStyle(fontSize: 16, color: kblue),
                 border: const OutlineInputBorder()),
           ),
@@ -157,7 +157,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
             controller: accountTypeController,
             // readOnly: true,
             decoration: InputDecoration(
-                hintText: ' Account Type',
+                labelText: ' Account Type',
                 hintStyle: TextStyle(fontSize: 16, color: kblue),
                 border: const OutlineInputBorder()),
           ),
@@ -168,7 +168,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
             controller: bankAccountNumberController,
             // readOnly: true,
             decoration: InputDecoration(
-                hintText: 'Bank Account Number',
+                labelText: 'Bank Account Number',
                 hintStyle: TextStyle(fontSize: 16, color: kblue),
                 border: const OutlineInputBorder()),
           ),
@@ -179,7 +179,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
             controller: ifscCodeController,
             // readOnly: true,
             decoration: InputDecoration(
-                hintText: 'IFSC code',
+                labelText: 'IFSC code',
                 hintStyle: TextStyle(fontSize: 16, color: kblue),
                 border: const OutlineInputBorder()),
           ),

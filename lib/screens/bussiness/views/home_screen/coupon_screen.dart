@@ -95,7 +95,9 @@ class _CouponScreenState extends State<CouponScreen> {
               builder: (_) {
                 return Container(
                   height: _mediaQuery.height*0.70,
-                  child: ListView.builder(
+                  child: authController.couponRedeemptionData.isEmpty? const Center(
+                    child: Text("No history found"),
+                  ) : ListView.builder(
                               itemCount: authController.couponRedeemptionData.length,
                               itemBuilder: (context, index) {
                                 return Padding(

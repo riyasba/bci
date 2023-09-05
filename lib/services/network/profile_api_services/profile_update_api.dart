@@ -25,12 +25,22 @@ class ProfileUpdateApiServices extends BaseApiService {
         "account_type": merchantUpdateModel.accountType,
         "bank_account_number": merchantUpdateModel.bankAccountNumber,
         "ifsc_code": merchantUpdateModel.ifscCode,
-        if(merchantUpdateModel.shopImage != "null" ) "shop_image": await MultipartFile.fromFile(merchantUpdateModel.shopImage, filename: "shopImage"),
+        if (merchantUpdateModel.shopImage != "null")
+          "shop_image": await MultipartFile.fromFile(
+              merchantUpdateModel.shopImage,
+              filename: "shopImage"),
+        if (merchantUpdateModel.aadharProof != null)
+          "adhar_proof": await MultipartFile.fromFile(
+              merchantUpdateModel.aadharProof.path,
+              filename: "aadhar"),
+        if (merchantUpdateModel.panProof != null)
+          "pan_proof": await MultipartFile.fromFile(
+              merchantUpdateModel.panProof.path,
+              filename: "pancard"),
       });
 
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
-
 
       var response = await dio.post(profileUpdateURL,
           options: Options(
@@ -56,7 +66,7 @@ class ProfileUpdateApiServices extends BaseApiService {
   dynamic returnResponse(Response<dynamic> response) {
     switch (response.statusCode) {
       case 200:
-        dynamic responseJson = response.data; 
+        dynamic responseJson = response.data;
         print("here.>>>>>>>>>>>>");
         return responseJson;
       case 400:

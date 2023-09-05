@@ -14,6 +14,8 @@ class MerchantUpdateModel {
   String accountType;
   String ifscCode;
   String shopImage;
+  dynamic aadharProof;
+  dynamic panProof;
   
 
   MerchantUpdateModel({
@@ -30,5 +32,7 @@ class MerchantUpdateModel {
     required this.bankName,
     required this.ifscCode,
     required this.shopImage,
+     this.aadharProof,
+     this.panProof,
   });
 }

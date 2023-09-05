@@ -38,7 +38,7 @@ class _AddServicesViewState extends State<AddServicesView> {
   var unitController = TextEditingController();
   var quantityController = TextEditingController();
 
-
+ 
   @override
   void initState() {
     super.initState();
@@ -69,9 +69,15 @@ class _AddServicesViewState extends State<AddServicesView> {
 
   var shareValue;
 
+  List<int> gstPercentageList = [5, 12, 18, 28];
+
+  var cgstPercentage ;
+  var sgstPercentage;
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    print(":::::Data ${MediaQuery.of(context).viewInsets.bottom}");
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(250),
@@ -142,7 +148,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
-                  hintText: "Product title",
+                  labelText: "Product title",
                   hintStyle: TextStyle(
                     color: kblue,
                     fontWeight: FontWeight.w400,
@@ -194,6 +200,7 @@ class _AddServicesViewState extends State<AddServicesView> {
               ),
             );
           }),
+
           ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -228,7 +235,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
-                  hintText: "Actual Amount",
+                  labelText: "Actual Amount",
                   hintStyle: TextStyle(
                     color: kblue,
                     fontWeight: FontWeight.w400,
@@ -269,15 +276,104 @@ class _AddServicesViewState extends State<AddServicesView> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
-                  hintText: "Sale Amount",
+                  labelText: "Sale Amount",
                   hintStyle: TextStyle(
                     color: kblue,
                     fontWeight: FontWeight.w400,
                   )),
             ),
           ),
-          
-           ksizedbox10,
+          ksizedbox10,
+          GetBuilder<AuthController>(builder: (_) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+              child: Container(
+                height: 44,
+                width: 330,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 5, 5, 5)
+                            .withOpacity(0.8))),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                  child: DropdownButton<int>(
+                    value: cgstPercentage,
+                    isExpanded: true,
+                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                    elevation: 0,
+                    itemHeight: 55,
+                    isDense: true,
+                    dropdownColor: Colors.grey[250],
+                    style: const TextStyle(color: Colors.black54),
+                    hint: Text(
+                      "CGST",
+                      style: TextStyle(fontSize: 16, color: kblue),
+                    ),
+                    onChanged: (int? value) {
+                      setState(() {
+                        cgstPercentage = value!;
+                      });
+                    },
+                    items: gstPercentageList
+                        .map<DropdownMenuItem<int>>(
+                            (int value) {
+                      return DropdownMenuItem<int>(
+                        value: value,
+                        child: Text("$value%"),
+                      );
+                    }
+                    ).toList(),
+                  ),
+                ),
+              ),
+            );
+          }),
+            ksizedbox10,
+          GetBuilder<AuthController>(builder: (_) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+              child: Container(
+                height: 44,
+                width: 330,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 5, 5, 5)
+                            .withOpacity(0.8))),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                  child: DropdownButton<int>(
+                    value: sgstPercentage,
+                    isExpanded: true,
+                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                    elevation: 0,
+                    itemHeight: 55,
+                    isDense: true,
+                    dropdownColor: Colors.grey[250],
+                    style: const TextStyle(color: Colors.black54),
+                    hint: Text(
+                      "SGST",
+                      style: TextStyle(fontSize: 16, color: kblue),
+                    ),
+                    onChanged: (int? value) {
+                      setState(() {
+                        sgstPercentage = value!;
+                      });
+                    },
+                    items: gstPercentageList
+                        .map<DropdownMenuItem<int>>((int value) {
+                      return DropdownMenuItem<int>(
+                        value: value,
+                        child: Text("$value%"),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            );
+          }),
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
@@ -306,7 +402,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
-                  hintText: "Quantity",
+                  labelText: "Quantity",
                   hintStyle: TextStyle(
                     color: kblue,
                     fontWeight: FontWeight.w400,
@@ -341,14 +437,14 @@ class _AddServicesViewState extends State<AddServicesView> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
-                  hintText: "Unit",
+                  labelText: "Unit",
                   hintStyle: TextStyle(
                     color: kblue,
                     fontWeight: FontWeight.w400,
                   )),
             ),
           ),
-         
+
           // ksizedbox10,
           // Padding(
           //     padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -594,7 +690,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                           width: 3.0,
                         ),
                       ),
-                      helperText: 'Enter Amenties',
+                      labelText: 'Enter Amenties',
                       helperStyle: TextStyle(
                         color: kblue,
                       ),
@@ -687,7 +783,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
-                  hintText: "Description",
+                  labelText: "Description",
                   hintStyle: TextStyle(
                     color: kblue,
                     fontWeight: FontWeight.w400,
@@ -791,7 +887,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                             borderRadius: BorderRadius.circular(5),
                             borderSide:
                                 const BorderSide(color: Color(0xff707070))),
-                        hintText: "Offer Percentage",
+                        labelText: "Offer Percentage",
                         hintStyle: TextStyle(
                           color: kblue,
                           fontWeight: FontWeight.w400,
@@ -835,7 +931,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                             borderRadius: BorderRadius.circular(5),
                             borderSide:
                                 const BorderSide(color: Color(0xff707070))),
-                        hintText: "Offer Upto Amount",
+                        labelText: "Offer Upto Amount",
                         hintStyle: TextStyle(
                           color: kblue,
                           fontWeight: FontWeight.w400,
@@ -879,7 +975,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: const BorderSide(color: Color(0xff707070))),
-                    hintText: "Coupon Amount",
+                    labelText: "Coupon Amount",
                     hintStyle: TextStyle(
                       color: kblue,
                       fontWeight: FontWeight.w400,
@@ -943,8 +1039,10 @@ class _AddServicesViewState extends State<AddServicesView> {
                                 offerAmount: offerAmountController.text.isEmpty
                                     ? null
                                     : offerAmountController.text,
-                                    unit: unitController.text,
-                                    quantity: quantityController.text);
+                                unit: unitController.text,
+                                cgst: cgstPercentage,
+                                sgst: sgstPercentage,
+                                quantity: quantityController.text);
 
                         serviceController.addServices(
                             createServiceModel: createServiceModel);
@@ -968,6 +1066,9 @@ class _AddServicesViewState extends State<AddServicesView> {
             ),
           ),
           ksizedbox20,
+          // SizedBox(
+          //   height: MediaQuery.of(context).viewInsets.bottom ,
+          // )
         ],
       ),
     );
