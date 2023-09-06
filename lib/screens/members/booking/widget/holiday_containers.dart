@@ -17,7 +17,6 @@ class HoliaysContainors extends StatefulWidget {
 }
 
 class _HoliaysContainorsState extends State<HoliaysContainors> {
-
   final holidayPackageController = Get.find<HolidayPackageController>();
 
   @override
@@ -43,9 +42,9 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
                 itemBuilder: (context, index) {
                   return Card(
                     child: InkWell(
-                      onTap: (){
-                         dialogBuilder(
-                            context, holidayPackageController.enquiryData[index]);
+                      onTap: () {
+                        dialogBuilder(context,
+                            holidayPackageController.enquiryData[index]);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -57,13 +56,18 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(5),
                                     child: Image.network(
-                                      holidayPackageController.enquiryData[index].packageDetails.image.first,
+                                      holidayPackageController
+                                          .enquiryData[index]
+                                          .packageDetails
+                                          .image
+                                          .first,
                                       height: 100,
                                       width: 100,
                                       fit: BoxFit.cover,
@@ -71,19 +75,38 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
                               ),
                               kwidth10,
                               Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ksizedbox10,
                                   Container(
                                     width: 200,
                                     child: Text(
-                                      holidayPackageController.enquiryData[index].packageDetails.title
+                                      holidayPackageController
+                                          .enquiryData[index]
+                                          .packageDetails
+                                          .title
                                           .toString(),
-                                          maxLines: 2,
+                                      maxLines: 2,
                                       style: const TextStyle(fontSize: 21),
                                     ),
                                   ),
+                                   Container(
+                                    width: 200,
+                                    child: Text(
+                                      '₹${holidayPackageController.enquiryData[index].packageDetails.amount}',
+                                      maxLines: 4,
+                                      style: const TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                     Container(
+                                    width: 200,
+                                    child: Text(
+                                      '${holidayPackageController.enquiryData[index].packageDetails.duration}',
+                                      maxLines: 4,
+                                      style: TextStyle(color: kblue),
+                                    ),
+                                  ),
+                                  
                                   Container(
                                     width: 200,
                                     child: Text(
@@ -118,8 +141,7 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
     });
   }
 
-  Future<void> dialogBuilder(
-      BuildContext context, EnquiryData enquiryDatas) {
+  Future<void> dialogBuilder(BuildContext context, EnquiryData enquiryDatas) {
     return showDialog<void>(
       context: context,
       builder: (
@@ -157,7 +179,8 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
                 ),
                 Row(
                   children: [
-                    Image.network(enquiryDatas.packageDetails.image.first,
+                    Image.network(
+                      enquiryDatas.packageDetails.image.first,
                       height: 50,
                       width: 60,
                       fit: BoxFit.cover,
@@ -168,7 +191,8 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(enquiryDatas.packageDetails.title,
+                        Text(
+                          enquiryDatas.packageDetails.title,
                           style: TextStyle(
                               fontSize: 16,
                               color: kblue,
@@ -207,7 +231,7 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
                     ),
                     Text(
                       formatDate(enquiryDatas.packageDetails.createdAt,
-                                   [dd ,'-',mm,'-',yyyy]),
+                          [dd, '-', mm, '-', yyyy]),
                       style: TextStyle(
                           fontSize: 15,
                           color: kgrey,
@@ -244,7 +268,7 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Country',
+                      'Places',
                       style: TextStyle(
                           fontSize: 16,
                           color: kblue,
@@ -294,7 +318,8 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
                           color: kblue,
                           fontWeight: FontWeight.bold),
                     ),
-                    Text(enquiryDatas.childCount,
+                    Text(
+                      enquiryDatas.childCount,
                       style: TextStyle(
                           fontSize: 15,
                           color: kgrey,
@@ -305,17 +330,18 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
                 const Divider(
                   thickness: 1,
                 ),
-                 Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                     const Text(
+                    const Text(
                       'Price',
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.green,
                           fontWeight: FontWeight.bold),
                     ),
-                  Text("₹ ${enquiryDatas.packageDetails.amount.toString()}",
+                    Text(
+                      "₹ ${enquiryDatas.packageDetails.amount.toString()}",
                       style: const TextStyle(
                           fontSize: 15,
                           color: Colors.green,

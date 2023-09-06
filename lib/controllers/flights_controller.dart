@@ -175,28 +175,28 @@ class FlightsController extends GetxController {
     }
   }
 
-  bookAirTicket({required BookingModel bookingModel}) async {
+  bookAirTicket({required BookingModel bookingModel,required String transactionId}) async {
     dio.Response<dynamic> response = await airTicketBookingApiServices
         .airTicketBookingApiServices(bookingModel: bookingModel);
 
     if (response.statusCode == 200) {
-      airAddPayment(refernceNo: response.data["Booking_RefNo"]);
+      airAddPayment(refernceNo: response.data["Booking_RefNo"],transactionId: transactionId);
     }
   }
 
-  airAddPayment({required String refernceNo}) async {
+  airAddPayment({required String refernceNo,required String transactionId}) async {
     dio.Response<dynamic> response =
         await airAddPaymentApiServices.addPaymentApiServices(
             clientReferneNo: "Testing Team", refrenceNo: refernceNo);
 
     if (response.statusCode == 200) {
-      airReprint(refernceNo: refernceNo);
+      airReprint(refernceNo: refernceNo,transactionId: transactionId);
       Get.rawSnackbar(
           message: "Payment Added Success", backgroundColor: Colors.green);
     } else {}
   }
 
-  airReprint({required String refernceNo}) async {
+  airReprint({required String refernceNo,required String transactionId}) async {
     dio.Response<dynamic> response = await airRePrintingServices
         .airRePrintingApi(clientReferneNo: "", refrenceNo: refernceNo);
 
@@ -214,6 +214,8 @@ class FlightsController extends GetxController {
           toCityName:
               airReprintModel.airPnrDetails.first.flights.first.destination,
           bookingRefNo: airReprintModel.bookingRefNo,
+          price: airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.totalAmount.toString(),
+          transactionId: transactionId,
           airlineCode:
               airReprintModel.airPnrDetails.first.flights.first.airlineCode,
           date: airReprintModel.bookingDateTime);
@@ -265,9 +267,9 @@ class FlightsController extends GetxController {
     isLoading(false);
     if (payment_response["result"] == "payment_successfull") {
       //need to give id
+      String transactionId = "";
       Get.to(() => FlightLoadingPage());
-
-      bookAirTicket(bookingModel: bookingModel);
+      bookAirTicket(bookingModel: bookingModel,transactionId: transactionId);
     } else {
       Get.closeAllSnackbars();
       Get.snackbar(
@@ -296,13 +298,14 @@ class FlightsController extends GetxController {
 
     var responseData = jsonDecode(result!);
     var data = jsonDecode(responseData);
-    print("<<----response-data---->>${data.runtimeType}");
+    print("<<----response-data---->>$data");
     print(data);
     if (data["ResponseCode"] == "00") {
       //need to give id
-      Get.to(() => FlightLoadingPage());
+      String transactionId = "";
+      Get.to(() => const FlightLoadingPage());
 
-      bookAirTicket(bookingModel: bookingModel);
+      bookAirTicket(bookingModel: bookingModel,transactionId: transactionId);
     } else {
       Get.closeAllSnackbars();
       Get.snackbar(
@@ -975,6 +978,8 @@ class FlightsController extends GetxController {
     required String bookingRefNo,
     required String airlineCode,
     required String date,
+    required String price,
+    required String transactionId
   }) async {
     dio.Response<dynamic> response =
         await addFlightBookingHistoryAPIServices.addFlightBookingAPIServices(
@@ -986,6 +991,8 @@ class FlightsController extends GetxController {
             invoiceNumber: invoiceNumber,
             remark: remark,
             toCityCode: toCityCode,
+            price: price,
+            transactionId: price,
             toCityName: toCityName);
 
     if (response.statusCode == 201) {}

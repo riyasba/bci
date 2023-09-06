@@ -186,7 +186,7 @@ class _HolidayScreenState extends State<HolidayScreen> {
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      Text('Per Person on twing Sharing')
+                                      const Text('Per Person on twing Sharing')
                                           .text
                                           .semiBold
                                           .blue900

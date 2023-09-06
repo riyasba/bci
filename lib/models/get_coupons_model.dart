@@ -29,9 +29,6 @@ class GetCouponsList {
 }
 
 class CouponsData {
-
-
-
     int id;
     String userId;
     String cId;
@@ -69,7 +66,6 @@ class CouponsData {
     });
 
     factory CouponsData.fromJson(Map<String, dynamic> json) => CouponsData(
-
         id: json["id"],
         userId: json["user_id"],
         cId: json["c_id"],
@@ -84,7 +80,6 @@ class CouponsData {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         name: json["name"],
-        
     );
 
     Map<String, dynamic> toJson() => {

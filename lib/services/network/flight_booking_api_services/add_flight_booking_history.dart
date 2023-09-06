@@ -14,6 +14,8 @@ class AddFlightBookingHistoryAPIServices extends BaseApiService {
     required String bookingRefNo,
     required String airlineCode,
     required String date,
+    required String price,
+    required String transactionId
   }) async {
     dynamic responseJson;
     try {
@@ -40,7 +42,8 @@ class AddFlightBookingHistoryAPIServices extends BaseApiService {
             "ToCityName": toCityName,
             "Booking_RefNo": bookingRefNo,
             "AirLineCode": airlineCode,
-            "Date": date
+            "Date": date,
+            "price": price
           });
       print(
           "::::::::<--add flight History requiry-->::::::::status code:::::::::");

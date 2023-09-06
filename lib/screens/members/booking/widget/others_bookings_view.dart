@@ -52,6 +52,7 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -67,8 +68,6 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                               ),
                               kwidth10,
                               Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ksizedbox10,
@@ -81,7 +80,15 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                                   Container(
                                     width: 200,
                                     child: Text(
-                                      '${homeController.bookingListData[index].description}',
+                                      '₹${homeController.bookingListData[index].purchasePrice}',
+                                      maxLines: 4,
+                                      style:const TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 200,
+                                    child: Text(
+                                      homeController.bookingListData[index].description,
                                       maxLines: 4,
                                       style: TextStyle(color: kblue),
                                     ),

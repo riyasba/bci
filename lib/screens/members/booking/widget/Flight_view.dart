@@ -26,14 +26,14 @@ class _FlightWidgetState extends State<FlightWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<FlightsController>(builder: (_) {
-        return ListView.builder(
+        return flightController.flightBookingHistoyrList.isEmpty
+            ? const Center(
+                child: Text("No Data Found"),
+              )
+            : ListView.builder(
           itemCount: flightController.flightBookingHistoyrList.length,
           itemBuilder: (context, index) {
-            return flightController.flightBookingHistoyrList.isEmpty
-                ? const Center(
-                    child: Text("No Data Found"),
-                  )
-                : Padding(
+            return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: InkWell(
                       onTap: () {

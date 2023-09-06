@@ -1,7 +1,10 @@
 import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/search_service_list_model.dart';
 import 'package:custom_clippers/custom_clippers.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
@@ -16,6 +19,9 @@ class LiquorDetailScreen extends StatefulWidget {
 
 class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
   final homeController = Get.find<HomeController>();
+  final profileController = Get.find<ProfileController>();
+
+   var redeemCouponcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +105,9 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
                         //   style: TextStyle(fontSize: 16),
                         // ),
                     //    ksizedbox20,
-                        Text('Quantity ${widget.searchServicelist.status}'),
+                        Text('Quantity: ${widget.searchServicelist.status}'),
                         ksizedbox20,
-                        Text('MFG ${widget.searchServicelist.createdAt}'),
+                        Text('MRP: ₹${widget.searchServicelist.actualAmount}'),
                         ksizedbox20,
                         // const Text(
                         //   'Apple, Rich, Vanilla',
@@ -204,6 +210,77 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
                 //   style: TextStyle(fontSize: 11, color: kgrey),
                 // ),
                 ksizedbox40,
+                 ksizedbox20,
+                Padding(
+                  padding: const EdgeInsets.only(left: 15,right: 15),
+                  child: TextField(
+                    controller: redeemCouponcontroller,
+                    decoration: InputDecoration(
+                      disabledBorder: const OutlineInputBorder(),
+                      hintText: 'Enter Your Coupon code',
+                      fillColor: kwhite,
+                      focusColor: kwhite,
+                      isDense: true,
+                      filled: true,
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Container(
+                          height: 20,
+                          width: 130,
+                          decoration: BoxDecoration(
+                            color: kblue,
+                            borderRadius: BorderRadius.circular(6.0),
+                          ),
+                          child: InkWell(
+                            onTap: () async {
+                              String tempSaleAmount =
+                                  widget.searchServicelist.saleAmount;
+                              String amount =
+                                  await profileController.redeemCoupon(
+                                      couponcode: redeemCouponcontroller.text,
+                                      serviceId:
+                                          widget.searchServicelist.id.toString(),
+                                      vendorId:
+                                          widget.searchServicelist.vendorId);
+                
+                              double tAmount = double.parse(amount);
+                              double tempSaleAmounz =
+                                  double.parse(tempSaleAmount);
+                
+                              if (tAmount < tempSaleAmounz) {
+                                double totalAmountTobeAdded =
+                                    tempSaleAmounz - tAmount;
+                
+                                setState(() {
+                                  widget.searchServicelist.saleAmount =
+                                      totalAmountTobeAdded.toStringAsFixed(2);
+                                });
+                              } else {
+                                Get.rawSnackbar(
+                                    message:
+                                        "Coupon is not applicable for this service",
+                                    backgroundColor: Colors.red);
+                              }
+                            },
+                            child: Center(
+                              child: Text(
+                                'Redeem Now',
+                                style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                    ),
+                  ),
+                ),
+                // ksizedbox20,
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: InkWell(

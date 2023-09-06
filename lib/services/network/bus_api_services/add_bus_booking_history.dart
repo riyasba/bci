@@ -12,6 +12,7 @@ class AddBusBookingHistoryAPIServices extends BaseApiService {
     required String bookingRefNo,
     required String busName,
     required String date,
+    required String price,
   }) async {
     dynamic responseJson;
     try {
@@ -36,7 +37,8 @@ class AddBusBookingHistoryAPIServices extends BaseApiService {
             "ToCityName": toCityName,
             "Booking_RefNo": bookingRefNo,
             "BusName": busName,
-            "Date": date
+            "Date": date,
+            "price": price
           });
       print(
           "::::::::<--add Bus History requiry-->::::::::status code:::::::::");

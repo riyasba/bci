@@ -201,24 +201,24 @@ class Fare {
 }
 
 class FareDetail {
-  int airportTaxAmount;
+  dynamic airportTaxAmount;
   List<AirportTax> airportTaxes;
-  int basicAmount;
+  dynamic basicAmount;
   List<Charge> cancellationCharges;
   String currencyCode;
   List<FareClass> fareClasses;
   FreeBaggage freeBaggage;
-  int gst;
-  int grossCommission;
-  int netCommission;
-  int paxType;
-  int promoDiscount;
+  dynamic gst;
+  dynamic grossCommission;
+  dynamic netCommission;
+  dynamic paxType;
+  dynamic promoDiscount;
   List<Charge> rescheduleCharges;
-  int serviceFeeAmount;
-  int tds;
-  int totalAmount;
-  int tradeMarkupAmount;
-  int yqAmount;
+  dynamic serviceFeeAmount;
+  dynamic tds;
+  dynamic totalAmount;
+  dynamic tradeMarkupAmount;
+  dynamic yqAmount;
 
   FareDetail({
     required this.airportTaxAmount,
@@ -243,22 +243,28 @@ class FareDetail {
 
   factory FareDetail.fromJson(Map<String, dynamic> json) => FareDetail(
         airportTaxAmount: json["AirportTax_Amount"],
-        airportTaxes: List<AirportTax>.from(
-            json["AirportTaxes"].map((x) => AirportTax.fromJson(x))),
+        airportTaxes: json["AirportTaxes"] == null
+            ? []
+            : List<AirportTax>.from(
+                json["AirportTaxes"].map((x) => AirportTax.fromJson(x))),
         basicAmount: json["Basic_Amount"],
         cancellationCharges: List<Charge>.from(
             json["CancellationCharges"].map((x) => Charge.fromJson(x))),
         currencyCode: json["Currency_Code"],
-        fareClasses: List<FareClass>.from(
+        fareClasses: json["FareClasses"] == null ? []: List<FareClass>.from(
             json["FareClasses"].map((x) => FareClass.fromJson(x))),
-        freeBaggage: FreeBaggage.fromJson(json["Free_Baggage"]),
+        freeBaggage: json["Free_Baggage"] == null
+            ? FreeBaggage(checkInBaggage: "-", handBaggage: "-")
+            : FreeBaggage.fromJson(json["Free_Baggage"]),
         gst: json["GST"],
         grossCommission: json["Gross_Commission"],
         netCommission: json["Net_Commission"],
         paxType: json["PAX_Type"],
         promoDiscount: json["Promo_Discount"],
-        rescheduleCharges: List<Charge>.from(
-            json["RescheduleCharges"].map((x) => Charge.fromJson(x))),
+        rescheduleCharges: json["RescheduleCharges"] == null
+            ? []
+            : List<Charge>.from(
+                json["RescheduleCharges"].map((x) => Charge.fromJson(x))),
         serviceFeeAmount: json["Service_Fee_Amount"],
         tds: json["TDS"],
         totalAmount: json["Total_Amount"],
@@ -291,7 +297,7 @@ class FareDetail {
 }
 
 class AirportTax {
-  int taxAmount;
+  dynamic taxAmount;
   String taxCode;
   String taxDesc;
 
@@ -468,21 +474,21 @@ class Segment {
   });
 
   factory Segment.fromJson(Map<String, dynamic> json) => Segment(
-        aircraftType: json["Aircraft_Type"],
-        airlineCode: json["Airline_Code"],
-        airlineName: json["Airline_Name"],
-        arrivalDateTime: json["Arrival_DateTime"],
-        departureDateTime: json["Departure_DateTime"],
-        destination: json["Destination"],
-        destinationCity: json["Destination_City"],
-        destinationTerminal: json["Destination_Terminal"],
-        duration: json["Duration"],
-        flightNumber: json["Flight_Number"],
+        aircraftType: json["Aircraft_Type"] ?? "",
+        airlineCode: json["Airline_Code"] ?? "",
+        airlineName: json["Airline_Name"] ?? "",
+        arrivalDateTime: json["Arrival_DateTime"] ?? "",
+        departureDateTime: json["Departure_DateTime"] ?? "",
+        destination: json["Destination"] ?? "",
+        destinationCity: json["Destination_City"] ?? "",
+        destinationTerminal: json["Destination_Terminal"] ?? "",
+        duration: json["Duration"] ?? "",
+        flightNumber: json["Flight_Number"] ,
         legIndex: json["Leg_Index"],
         operatedBy: json["OperatedBy"],
-        origin: json["Origin"],
-        originCity: json["Origin_City"],
-        originTerminal: json["Origin_Terminal"],
+        origin: json["Origin"] ?? "",
+        originCity: json["Origin_City"] ?? "",
+        originTerminal: json["Origin_Terminal"] ?? "",
         returnFlight: json["Return_Flight"],
         segmentId: json["Segment_Id"],
         stopOver: json["Stop_Over"],

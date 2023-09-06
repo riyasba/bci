@@ -288,7 +288,11 @@ class FareDetail {
         currencyCode: json["Currency_Code"],
         fareClasses: json["FareClasses"] == null ? [] : List<FareClass>.from(
             json["FareClasses"].map((x) => FareClass.fromJson(x))),
-        freeBaggage: FreeBaggage.fromJson(json["Free_Baggage"]),
+        freeBaggage:json["Free_Baggage"] == null ? FreeBaggage(
+          checkInBaggage: "-",
+          handBaggage: "-"
+        )
+            : FreeBaggage.fromJson(json["Free_Baggage"]),
         gst: json["GST"],
         grossCommission: json["Gross_Commission"],
         netCommission: json["Net_Commission"],

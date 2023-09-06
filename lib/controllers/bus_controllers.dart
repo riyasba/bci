@@ -269,7 +269,7 @@ class BusController extends GetxController {
     if (payment_response["result"] == "payment_successfull") {
       //need to give id
       Get.to(() => FlightLoadingPage());
-      busAddPayment(refernceNo: bookingRef);
+      busAddPayment(refernceNo: bookingRef,price: amount);
     } else {
       Get.closeAllSnackbars();
       Get.snackbar(
@@ -304,7 +304,7 @@ class BusController extends GetxController {
       //
       //need to give id
       Get.to(() => FlightLoadingPage());
-      busAddPayment(refernceNo: bookingRef);
+      busAddPayment(refernceNo: bookingRef,price: amount.toStringAsFixed(2));
     } else {
       Get.closeAllSnackbars();
       Get.snackbar(
@@ -340,24 +340,24 @@ class BusController extends GetxController {
     return map;
   }
 
-  busAddPayment({required String refernceNo}) async {
+  busAddPayment({required String refernceNo, required String price}) async {
     dio.Response<dynamic> response =
         await busAddPaymentApiServices.addPaymentForBusApiServices(
             clientReferneNo: "Testing Team", refrenceNo: refernceNo);
 
     if (response.statusCode == 200) {
-      busTicketing(refernceNo: refernceNo);
+      busTicketing(refernceNo: refernceNo,price: price);
       // Get.rawSnackbar(
       //     message: "Payment Added Success", backgroundColor: Colors.green);
     } else {}
   }
 
-  busTicketing({required String refernceNo}) async {
+  busTicketing({required String refernceNo, required String price}) async {
     dio.Response<dynamic> response =
         await busTicketingApiServices.busTicketingApi(refrenceNo: refernceNo);
 
     if (response.statusCode == 200) {
-      busRequery(refernceNo: refernceNo);
+      busRequery(refernceNo: refernceNo, price: price);
       // AirReprintModel airReprintModel = AirReprintModel.fromJson(response.data);
 
       // Get.off(() => FlightBookingSuccessPage(
@@ -367,7 +367,10 @@ class BusController extends GetxController {
     } else {}
   }
 
-  busRequery({required String refernceNo}) async {
+  busRequery({
+    required String refernceNo,
+    required String price,
+  }) async {
     dio.Response<dynamic> response =
         await busRequieyApiServices.busRequiryApi(refrenceNo: refernceNo);
 
@@ -381,6 +384,7 @@ class BusController extends GetxController {
           fromCityCode: busRequeryModel.busDetail.fromCity,
           fromCityName: busRequeryModel.busDetail.fromCity,
           toCityCode: busRequeryModel.busDetail.toCity,
+          price: price,
           toCityName: busRequeryModel.busDetail.toCity);
 
       Get.off(() => BusBookingSuccessPage(
@@ -968,6 +972,7 @@ class BusController extends GetxController {
     required String bookingRefNo,
     required String busName,
     required String date,
+    required String price,
   }) async {
     dio.Response<dynamic> response =
         await addBusBookingHistoryAPIServices.addBusBookingAPIServices(
@@ -977,6 +982,7 @@ class BusController extends GetxController {
             toCityName: toCityName,
             bookingRefNo: bookingRefNo,
             busName: busName,
+            price: price,
             date: date);
 
     if (response.statusCode == 201) {}

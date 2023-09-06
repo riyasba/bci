@@ -36,10 +36,11 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
     // TODO: implement initState
     super.initState();
     holidayPackageController.packageDetails(packageid: widget.packageId);
-    profileController.getProfile();
-    holidayPackageController.adult(0);
+    
+    holidayPackageController.adult(1);
     holidayPackageController.child(0);
     holidayPackageController.infant(0);
+      setDefault();
   }
 
   DateTime date = DateTime.now();
@@ -79,11 +80,13 @@ class _EnquiryNowWidgetState extends State<EnquiryNowWidget> {
       });
   }
 
-  setDefault() {
+  setDefault() async{
+    
     packageNameController.text = widget.getPackageDetailsData.title;
-    nameController.text = profileController.profileData.first.name;
-    emailController.text = profileController.profileData.first.email;
-    mobileController.text = profileController.profileData.first.email;
+  //  await profileController.getProfile();
+  //   print("--------------------->>${profileController.profileData}");
+  //   nameController.text = profileController.profileData.first.name;
+    // emailController.text = profileController.profileData.first.email;
   }
 
   @override

@@ -64,70 +64,72 @@ class _CouponsState extends State<VendorCoupons> {
                            fit: BoxFit.cover,
                           ),
                         ),
-                        secondChild: Column(
-                          mainAxisAlignment:
-                              MainAxisAlignment.spaceEvenly,
-                          children: [
-                           const Text(
-                              "Coupon Code :",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              profileController
-                                  .redeemcouponsData[index].couponcode,
-                              style: primaryFont.copyWith(
-                                  fontSize: 14,
-                                  color: Color(
-                                          (math.Random().nextDouble() *
-                                                  0xFFFFFF)
-                                              .toInt())
-                                      .withOpacity(1.0),
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                // FlutterClipboard.copy(profileController
-                                //         .redeemcouponsData[index].couponcode)
-                                //     .then(
-                                //   (value) => Fluttertoast.showToast(
-                                //       msg: "Copy to clipboard",
-                                //       toastLength: Toast.LENGTH_SHORT,
-                                //       gravity: ToastGravity.CENTER,
-                                //       timeInSecForIosWeb: 1,
-                                //       backgroundColor: Colors.white,
-                                //       textColor: Colors.black,
-                                //       fontSize: 16.0),
-                                //   //print("code copied")
-                                // );
-                              },
-                              child: Container(
-                                height: 25,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius:
-                                        BorderRadius.circular(4)),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Redeemed",
-                                      style: primaryFont.copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    
-                                  ],
+                        secondChild: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Column(
+                            mainAxisAlignment:
+                                MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                profileController.redeemcouponsData[index].name ??
+                                    "Coupon Code:",
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
-                          ],
+                              Text(
+                                "Coupom code: ${profileController.redeemcouponsData[index].couponcode}",
+                                style: primaryFont.copyWith(
+                                    fontSize: 14,
+                                    color: Color((math.Random().nextDouble() *
+                                                0xFFFFFF)
+                                            .toInt())
+                                        .withOpacity(1.0),
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  // FlutterClipboard.copy(profileController
+                                  //         .redeemcouponsData[index].couponcode)
+                                  //     .then(
+                                  //   (value) => Fluttertoast.showToast(
+                                  //       msg: "Copy to clipboard",
+                                  //       toastLength: Toast.LENGTH_SHORT,
+                                  //       gravity: ToastGravity.CENTER,
+                                  //       timeInSecForIosWeb: 1,
+                                  //       backgroundColor: Colors.white,
+                                  //       textColor: Colors.black,
+                                  //       fontSize: 16.0),
+                                  //   //print("code copied")
+                                  // );
+                                },
+                                child: Container(
+                                  height: 25,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius:
+                                          BorderRadius.circular(4)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Redeemed",
+                                        style: primaryFont.copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
