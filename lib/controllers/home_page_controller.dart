@@ -370,8 +370,9 @@ class HomeController extends GetxController {
     if (response.statusCode == 200) {
       List<OffersListModel> getTodayOffersList = List<OffersListModel>.from(
           response.data.map((x) => OffersListModel.fromJson(x)));
-      ;
       todayOfferListData = getTodayOffersList;
+    }else if(response.statusCode == 404){
+
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,

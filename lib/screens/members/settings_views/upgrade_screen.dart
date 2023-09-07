@@ -66,7 +66,11 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
             ),
           )),
       body: GetBuilder<PlanController>(builder: (_) {
-        return ListView(
+        return plansController.plansdataList.isEmpty? Container(
+           child: const Center(
+            child: Text("No Plans found"),
+           ),
+        ): ListView(
           physics: const BouncingScrollPhysics(),
           //  crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -469,7 +473,7 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
             const SizedBox(
               height: 40,
             ),
-            Padding(
+          if(plansController.plansdataList.isNotEmpty)  Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
