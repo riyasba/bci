@@ -49,7 +49,7 @@ class ProfileController extends GetxController {
       print(token);
       update();
     } else if (response.statusCode == 401) {
-      Get.snackbar("Session has expired", "",
+      Get.snackbar("Please login again", "",
           colorText: Colors.white,
           backgroundColor: Colors.red,
           snackPosition: SnackPosition.BOTTOM);
@@ -97,8 +97,8 @@ class ProfileController extends GetxController {
       Get.offAll(() => HomeBottomnavigationBar(
             index: 2,
           ));
-    }else{
-       Get.rawSnackbar(
+    } else {
+      Get.rawSnackbar(
         message: "Something went wrong, please try again!",
         backgroundColor: Colors.red,
       );

@@ -18,14 +18,6 @@ class VendorBannerController extends GetxController{
     BannerModel bannerModel = BannerModel.fromJson(response.data);
     postlist = bannerModel.posts; 
    }
-else{
-  Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            "Something went wrong",
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
-}
 update();
   }
 } 

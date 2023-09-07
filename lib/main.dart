@@ -138,7 +138,6 @@ static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>(
 
 class _MyAppState extends State<MyApp> {
 
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

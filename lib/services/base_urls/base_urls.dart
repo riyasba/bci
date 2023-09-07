@@ -1,93 +1,93 @@
 abstract class BaseApiService {
-  final String baseUrl = "https://bci.batechnology.in";
+  final String baseUrl = "https://www.portal.bcipvtltd.com";
 
   // old url - https://bci.generation360tech.in/
-  // new url - https://bci.batechnology.in/
+  // new url - https://www.portal.bcipvtltd.com/
 
   //register url
-  final String registerURl = "https://bci.batechnology.in/api/register_user";
+  final String registerURl = "https://www.portal.bcipvtltd.com/api/register_user";
 
   //login url
-  final String getOtpUrl = "https://bci.batechnology.in/api/get_otp";
+  final String getOtpUrl = "https://www.portal.bcipvtltd.com/api/get_otp";
 
   //login url
-  final String loginURL = "https://bci.batechnology.in/api/login";
+  final String loginURL = "https://www.portal.bcipvtltd.com/api/login";
 
   //category url
-  final String categoryURL = "https://bci.batechnology.in/api/category";
+  final String categoryURL = "https://www.portal.bcipvtltd.com/api/category";
 
   //sub category URL
-  final String subCategoryURL = "https://bci.batechnology.in/api/sub_category";
+  final String subCategoryURL = "https://www.portal.bcipvtltd.com/api/sub_category";
 
   //api URL
-  final String otpVerifyApiUrl = "https://bci.batechnology.in/api/otp_verrify";
+  final String otpVerifyApiUrl = "https://www.portal.bcipvtltd.com/api/otp_verrify";
 
   //get profile api
-  final String getProfileURL = "https://bci.batechnology.in/api/auth/profile";
+  final String getProfileURL = "https://www.portal.bcipvtltd.com/api/auth/profile";
 
 //profile update API URL
   final String profileUpdateURL =
-      "https://bci.batechnology.in/api/auth/profile_update";
+      "https://www.portal.bcipvtltd.com/api/auth/profile_update";
 
   //Add services
   final String addServicesURL =
-      "https://bci.batechnology.in/api/auth/merchant_create_service";
+      "https://www.portal.bcipvtltd.com/api/auth/merchant_create_service";
 
   //get Services
   final String getServicesURL =
-      "https://bci.batechnology.in/api/auth/service_list";
+      "https://www.portal.bcipvtltd.com/api/auth/service_list";
 
   //get booking list
   final String bookingListApiUrl =
-      "https://bci.batechnology.in/api/auth/vendor_booking_list";
+      "https://www.portal.bcipvtltd.com/api/auth/vendor_booking_list";
 
   // add today offers
   final String addTodayOffersApiUrl =
-      "https://bci.batechnology.in/api/auth/merchant_offers";
+      "https://www.portal.bcipvtltd.com/api/auth/merchant_offers";
 
   //vendor offer list
   final String vendorOfferListApiUrl =
-      "https://bci.batechnology.in/api/auth/vendor_offers_list";
+      "https://www.portal.bcipvtltd.com/api/auth/vendor_offers_list";
 
   //create support
   final String createSupportApiUrl =
-      "https://bci.batechnology.in/api/auth/create_ticket";
+      "https://www.portal.bcipvtltd.com/api/auth/create_ticket";
 
   //get wallet details
   final String getWalletDetailsApiUrl =
-      "https://bci.batechnology.in/api/auth/getUserwallet";
+      "https://www.portal.bcipvtltd.com/api/auth/getUserwallet";
 
   //generate referral code
   final String generateReferralCodeApiUrl =
-      "https://bci.batechnology.in/api/auth/generateReferralCode";
+      "https://www.portal.bcipvtltd.com/api/auth/generateReferralCode";
 
 //Get Transactionhistory
   final String transactionHistoryApiUrl =
-      "https://bci.batechnology.in/api/auth/transaction_history";
+      "https://www.portal.bcipvtltd.com/api/auth/transaction_history";
 
   //Get notification_list
   final String notificationlistURL =
-      "https://bci.batechnology.in/api/auth/notification_list";
+      "https://www.portal.bcipvtltd.com/api/auth/notification_list";
 
   //fcmtoken
   final String fcmTokenStoreApiUrl =
-      "https://bci.batechnology.in/api/auth/fcm-token";
+      "https://www.portal.bcipvtltd.com/api/auth/fcm-token";
 
   //vendorbanner
   final String vendorbannerURL =
-      'https://bci.batechnology.in/api/auth/get_vendor_slider';
+      'https://www.portal.bcipvtltd.com/api/auth/get_vendor_slider';
 
   //vendor redeemption coupons
   final String redeemprtionCouponsApiUrl =
-      "https://bci.batechnology.in/api/auth/vedorRedeemCoupons";
+      "https://www.portal.bcipvtltd.com/api/auth/vedorRedeemCoupons";
 
   //generate referral code
   final String generateReferralApiUrl =
-      "https://bci.batechnology.in/api/generateReferralregister";
+      "https://www.portal.bcipvtltd.com/api/generateReferralregister";
 
   //withdraw amount
   final String withdrawAmountURL =
-      "https://bci.batechnology.in/api/auth/withdrawAmount";
+      "https://www.portal.bcipvtltd.com/api/auth/withdrawAmount";
 
-  final String hotelBookingDetailsURL = "https://bci.batechnology.in/api/auth/get_booking_detail";
+  final String hotelBookingDetailsURL = "https://www.portal.bcipvtltd.com/api/auth/get_booking_detail";
 }
