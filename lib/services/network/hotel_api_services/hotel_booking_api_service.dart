@@ -132,24 +132,23 @@ class HotelBookingApiServices extends BaseApiService {
         "HotelRoomsDetails": [
           {
             "AvailabilityType": hotelRoomsDetail.availabilityType.toString(),
-            "ChildCount": int.parse(hotelRoomsDetail.childCount.toString()),
+            "ChildCount": hotelRoomsDetail.childCount,
             "RequireAllPaxDetails": hotelRoomsDetail.requireAllPaxDetails,
-            "RoomId": int.parse(hotelRoomsDetail.roomId.toString()),
-            "RoomStatus": int.parse(hotelRoomsDetail.roomId.toString()),
-            "RoomIndex": int.parse(hotelRoomsDetail.roomIndex.toString()),
+            "RoomId": hotelRoomsDetail.roomId,
+            "RoomStatus": hotelRoomsDetail.roomStatus,
+            "RoomIndex": hotelRoomsDetail.roomIndex,
             "RoomTypeCode": hotelRoomsDetail.roomTypeCode.toString(),
             "RoomDescription": hotelRoomsDetail.roomDescription.toString(),
             "RoomTypeName": hotelRoomsDetail.roomTypeName.toString(),
             "RatePlanCode": hotelRoomsDetail.ratePlanCode.toString(),
-            "RatePlan": int.parse(hotelRoomsDetail.ratePlan.toString()),
+            "RatePlan": hotelRoomsDetail.ratePlan,
             "RatePlanName": hotelRoomsDetail.ratePlanName.toString(),
             "InfoSource": hotelRoomsDetail.infoSource.toString(),
             "SequenceNo": hotelRoomsDetail.sequenceNo.toString(),
             "DayRates": [
               for (int i = 0; i < hotelRoomsDetail.dayRates.length; i++)
                 {
-                  "Amount": double.parse(
-                      hotelRoomsDetail.dayRates[i].amount.toString()),
+                  "Amount": hotelRoomsDetail.dayRates[i].amount,
                   "Date": hotelRoomsDetail.dayRates[i].date.toIso8601String()
                 }
             ],
@@ -157,55 +156,36 @@ class HotelBookingApiServices extends BaseApiService {
             "SupplierPrice": hotelRoomsDetail.supplierPrice,
             "Price": {
               "CurrencyCode": hotelRoomsDetail.price.currencyCode.toString(),
-              "RoomPrice":
-                  double.parse(hotelRoomsDetail.price.roomPrice.toString()),
-              "Tax": double.parse(hotelRoomsDetail.price.tax.toString()),
-              "ExtraGuestCharge":
-                  int.parse(hotelRoomsDetail.price.extraGuestCharge.toString()),
-              "ChildCharge":
-                  int.parse(hotelRoomsDetail.price.childCharge.toString()),
+              "RoomPrice": hotelRoomsDetail.price.roomPrice,
+              "Tax": hotelRoomsDetail.price.tax,
+              "ExtraGuestCharge": hotelRoomsDetail.price.extraGuestCharge,
+              "ChildCharge": hotelRoomsDetail.price.childCharge,
               "OtherCharges":
-                  double.parse(hotelRoomsDetail.price.otherCharges.toString()),
-              "Discount": int.parse(hotelRoomsDetail.price.discount.toString()),
-              "PublishedPrice": double.parse(
-                  hotelRoomsDetail.price.publishedPrice.toString()),
-              "PublishedPriceRoundedOff": int.parse(
-                  hotelRoomsDetail.price.publishedPriceRoundedOff.toString()),
-              "OfferedPrice":
-                  double.parse(hotelRoomsDetail.price.offeredPrice.toString()),
-              "OfferedPriceRoundedOff": int.parse(
-                  hotelRoomsDetail.price.offeredPriceRoundedOff.toString()),
+                  hotelRoomsDetail.price.otherCharges,
+              "Discount": hotelRoomsDetail.price.discount,
+              "PublishedPrice": hotelRoomsDetail.price.publishedPrice,
+              "PublishedPriceRoundedOff": hotelRoomsDetail.price.publishedPriceRoundedOff,
+              "OfferedPrice": hotelRoomsDetail.price.offeredPrice,
+              "OfferedPriceRoundedOff": hotelRoomsDetail.price.offeredPriceRoundedOff,
               "AgentCommission":
-                  int.parse(hotelRoomsDetail.price.agentCommission.toString()),
-              "AgentMarkUp":
-                  int.parse(hotelRoomsDetail.price.agentMarkUp.toString()),
-              "ServiceTax":
-                  double.parse(hotelRoomsDetail.price.serviceTax.toString()),
-              "TCS": int.parse(hotelRoomsDetail.price.tcs.toString()),
-              "TDS": int.parse(hotelRoomsDetail.price.tds.toString()),
-              "ServiceCharge":
-                  int.parse(hotelRoomsDetail.price.serviceCharge.toString()),
-              "TotalGSTAmount": double.parse(
-                  hotelRoomsDetail.price.totalGstAmount.toString()),
+                  hotelRoomsDetail.price.agentCommission,
+              "AgentMarkUp":hotelRoomsDetail.price.agentMarkUp
+                  ,
+              "ServiceTax": hotelRoomsDetail.price.serviceTax,
+              "TCS": hotelRoomsDetail.price.tcs,
+              "TDS": hotelRoomsDetail.price.tds,
+              "ServiceCharge": hotelRoomsDetail.price.serviceCharge,
+              "TotalGSTAmount": hotelRoomsDetail.price.totalGstAmount,
               "GST": {
-                "CGSTAmount":
-                    int.parse(hotelRoomsDetail.price.gst.cgstAmount.toString()),
-                "CGSTRate":
-                    int.parse(hotelRoomsDetail.price.gst.cgstRate.toString()),
-                "CessAmount":
-                    int.parse(hotelRoomsDetail.price.gst.cessAmount.toString()),
-                "CessRate":
-                    int.parse(hotelRoomsDetail.price.gst.cessRate.toString()),
-                "IGSTAmount": double.parse(
-                    hotelRoomsDetail.price.gst.igstAmount.toString()),
-                "IGSTRate":
-                    int.parse(hotelRoomsDetail.price.gst.igstRate.toString()),
-                "SGSTAmount":
-                    int.parse(hotelRoomsDetail.price.gst.sgstAmount.toString()),
-                "SGSTRate":
-                    int.parse(hotelRoomsDetail.price.gst.sgstRate.toString()),
-                "TaxableAmount": double.parse(
-                    hotelRoomsDetail.price.gst.taxableAmount.toString()),
+                "CGSTAmount": hotelRoomsDetail.price.gst.cgstAmount,
+                "CGSTRate": hotelRoomsDetail.price.gst.cgstRate,
+                "CessAmount": hotelRoomsDetail.price.gst.cessAmount,
+                "CessRate": hotelRoomsDetail.price.gst.cessRate,
+                "IGSTAmount": hotelRoomsDetail.price.gst.igstAmount,
+                "IGSTRate": hotelRoomsDetail.price.gst.igstRate,
+                "SGSTAmount": hotelRoomsDetail.price.gst.sgstAmount,
+                "SGSTRate": hotelRoomsDetail.price.gst.sgstRate,
+                "TaxableAmount": hotelRoomsDetail.price.gst.taxableAmount,
               }
             },
             "HotelPassenger": [

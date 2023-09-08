@@ -1,4 +1,5 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,10 +47,18 @@ class _CouponViewHistoryState extends State<CouponViewHistory> {
                             color: Colors.white),
                       ),
                     ),
-                    Padding(
+                   InkWell(
+                    onTap: () {
+                      Get.to(SupportScreen());
+                    },
+                    child: Padding(
                       padding: const EdgeInsets.only(right: 20),
-                      child: Image.asset('assets/images/helps.png'),
-                    )
+                      child: Container(
+                          height: 30,
+                          width: 30,
+                          child: Image.asset('assets/images/helps.png')),
+                    ),
+                  )
                   ],
                 ),
               ),

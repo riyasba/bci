@@ -1,7 +1,7 @@
 abstract class BaseApiService {
   final String baseUrl = "https://www.portal.bcipvtltd.com";
 
-  //old url - https://bci.generation360tech.in
+  //old url - https://www.portal.bcipvtltd.com
   //new url - https://www.portal.bcipvtltd.com
 
   //register url

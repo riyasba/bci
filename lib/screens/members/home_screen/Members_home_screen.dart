@@ -3,6 +3,7 @@ import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_booking_landing_screen.dart';
 import 'package:bci/screens/members/home_screen/others_service_screen.dart';
+import 'package:bci/screens/members/offer%20screen/offer_screen_list_view.dart';
 import 'package:bci/screens/members/settings_views/aditional_coupons.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -57,6 +58,7 @@ class _Home_screen1State extends State<Home_screen1> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(250),
@@ -290,7 +292,34 @@ class _Home_screen1State extends State<Home_screen1> {
                           ],
                         ),
                         //
-                        InkWell(
+                       InkWell(
+                          onTap: () {
+                            Get.to(const BusScreen());
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 58,
+                                width: 58,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: kblue),
+                                child: Image.asset("assets/icons/buslogo.png"),
+                              ),
+                              const SizedBox(
+                                height: 7,
+                              ),
+                              const Text(
+                                'Bus',
+                                style: TextStyle(fontWeight: FontWeight.w700),
+                              )
+                            ],
+                          ),
+                        ),
+                        //
+                       
+                        //
+                         InkWell(
                           onTap: () {
                             Get.to(SerchHotelScreen());
                           },
@@ -310,32 +339,6 @@ class _Home_screen1State extends State<Home_screen1> {
                               ),
                               const Text(
                                 'Hotels',
-                                style: TextStyle(fontWeight: FontWeight.w700),
-                              )
-                            ],
-                          ),
-                        ),
-                        //
-                        InkWell(
-                          onTap: () {
-                            Get.to(const LiquorScreen());
-                          },
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 58,
-                                width: 58,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: kblue),
-                                child:
-                                    Image.asset("assets/icons/icons (3).png"),
-                              ),
-                              const SizedBox(
-                                height: 7,
-                              ),
-                              const Text(
-                                'Liquors',
                                 style: TextStyle(fontWeight: FontWeight.w700),
                               )
                             ],
@@ -414,30 +417,31 @@ class _Home_screen1State extends State<Home_screen1> {
                           ],
                         ),
                         //
-                        InkWell(
-                          onTap: () {
-                            Get.to(const BusScreen());
-                          },
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 58,
-                                width: 58,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: kblue),
-                                child: Image.asset("assets/icons/buslogo.png"),
-                              ),
-                              const SizedBox(
-                                height: 7,
-                              ),
-                              const Text(
-                                'Bus',
-                                style: TextStyle(fontWeight: FontWeight.w700),
-                              )
-                            ],
-                          ),
-                        ),
+                        //  InkWell(
+                        //   onTap: () {
+                        //     Get.to(const LiquorScreen());
+                        //   },
+                        //   child: Column(
+                        //     children: [
+                        //       Container(
+                        //         height: 58,
+                        //         width: 58,
+                        //         decoration: BoxDecoration(
+                        //             borderRadius: BorderRadius.circular(5),
+                        //             color: kblue),
+                        //         child:
+                        //             Image.asset("assets/icons/icons (3).png"),
+                        //       ),
+                        //       const SizedBox(
+                        //         height: 7,
+                        //       ),
+                        //       const Text(
+                        //         'Liquors',
+                        //         style: TextStyle(fontWeight: FontWeight.w700),
+                        //       )
+                        //     ],
+                        //   ),
+                        // ),
                         Container(
                           height: 58,
                           width: 58,
@@ -631,7 +635,7 @@ class _Home_screen1State extends State<Home_screen1> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  Get.to(const TodayOfferScreen());
+                                  Get.to(const OfferScreenListView());
                                 },
                                 child: Text(
                                   'See All',
@@ -645,27 +649,42 @@ class _Home_screen1State extends State<Home_screen1> {
                     Container(
                       height: 150,
                       child: GetBuilder<HomeController>(builder: (_) {
-                        return ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: homeController.todayOfferListData.length,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  child: InkWell(
-                                      onTap: () {
-                                        Get.to(const TodayOfferScreen());
-                                      },
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(homeController
-                                            .todayOfferListData[index].image),
-                                      )),
-                                ),
-                              );
-                            });
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: homeController.todayOfferListData.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    height: 140,
+                                    width: size.width * 0.45,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 2,
+                                          color: Colors.grey.withOpacity(0.5)
+                                        )
+                                      ]
+                                    ),
+                                    child: InkWell(
+                                        onTap: () {
+                                          Get.to(const OfferScreenListView());
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(10),
+                                          child: Image.network(homeController
+                                              .todayOfferListData[index].image,fit: BoxFit.fill,),
+                                        )),
+                                  ),
+                                );
+                              }),
+                        );
                       }),
                     )
                 ],

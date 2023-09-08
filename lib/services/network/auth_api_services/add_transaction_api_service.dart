@@ -22,7 +22,7 @@ class AddTransactionApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"user_id": userid, "amount": amount});
+          data: {"user_id": userid, "amount": amount,"type": "deposit_to_wallet"});
       print(
           "::::::::<add transaction Api>::::::::status code::::::::::");
       print(response.statusCode);

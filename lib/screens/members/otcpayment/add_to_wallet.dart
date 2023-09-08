@@ -1,5 +1,6 @@
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/bussiness/views/home_screen/contact_admin.dart';
+import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -16,7 +17,6 @@ class AddWaletScreen extends StatefulWidget {
 }
 
 class _AddWaletScreenState extends State<AddWaletScreen> {
-
   final profileController = Get.find<ProfileController>();
 
   final amountController = TextEditingController();
@@ -26,7 +26,7 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
     final _mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -38,10 +38,13 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: (){
-                        Get.back();
-                      },
-                      child:const Icon(Icons.arrow_back_ios,color: Colors.white,)),
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: const Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                        )),
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: Text(
@@ -64,7 +67,7 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
             ),
           )),
       body: ListView(
-        physics:const BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +80,7 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
           ),
           ksizedbox30,
           Padding(
-            padding: const EdgeInsets.only(left: 10,right: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: Text(
               'Add To Wallet Amounts or Default Amount Choose Payment Methods...',
               textAlign: TextAlign.center,
@@ -86,33 +89,32 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
           ),
           ksizedbox30,
           Padding(
-            padding: const EdgeInsets.only(left: 15,right: 15),
+            padding: const EdgeInsets.only(left: 15, right: 15),
             child: Container(
-                   height: 40,
-                              width: _mediaQuery.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  border: Border.all(color: kblue),
-                                  color:
-                                      const Color.fromARGB(255, 254, 252, 252)),
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding:const EdgeInsets.only(left: 15, right: 10),
-                                child: TextField(
-                                  controller: amountController,
-                                  keyboardType: TextInputType.number,
-                                  decoration:const InputDecoration(
-                                      isCollapsed: true,
-                                      isDense: true,
-                                      border: InputBorder.none,
-                                      hintText: "Add amount to wallet",
-                                      hintStyle: TextStyle(
-                                        color: Color(0xff6E6D6E),
-                                        fontWeight: FontWeight.w400,
-                                      )),
-                                ),
-                              ),
-                            ),
+              height: 40,
+              width: _mediaQuery.width,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(2),
+                  border: Border.all(color: kblue),
+                  color: const Color.fromARGB(255, 254, 252, 252)),
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 10),
+                child: TextField(
+                  controller: amountController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                      isCollapsed: true,
+                      isDense: true,
+                      border: InputBorder.none,
+                      hintText: "Add amount to wallet",
+                      hintStyle: TextStyle(
+                        color: Color(0xff6E6D6E),
+                        fontWeight: FontWeight.w400,
+                      )),
+                ),
+              ),
+            ),
           ),
           // ksizedbox40,
           // Padding(
@@ -198,10 +200,11 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
           ksizedbox40,
           InkWell(
             onTap: () {
-            profileController.payforWallet(amount:  double.parse(amountController.text));
+              profileController.payforWallet(
+                  amount: double.parse(amountController.text));
               // profileController.payUseingEaseBuzzWallet(
-              //   id: 0, 
-              //   amount: amountController.text, 
+              //   id: 0,
+              //   amount: amountController.text,
               //   customerName: profileController.profileData.first.name
               //         .trim()
               //         .split(" ")
@@ -212,7 +215,7 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
               //Get.to(const SucessfulScreenOtc());
             },
             child: Padding(
-              padding: const EdgeInsets.only(left: 15,right: 15),
+              padding: const EdgeInsets.only(left: 15, right: 15),
               child: Container(
                 width: double.infinity,
                 height: 50.h,
@@ -257,7 +260,7 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                               const Text(
+                                const Text(
                                   'Cancel Transaction',
                                   style: TextStyle(
                                       fontSize: 25,
@@ -274,7 +277,7 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
                                     color: kgrey,
                                   ),
                                 ),
-                               const SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 ksizedbox20,
@@ -291,13 +294,14 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
                                                     0.1,
                                                 40),
                                             backgroundColor: kOrange),
-                                            
-                                        onPressed: () {Get.back();
+                                        onPressed: () {
+                                          Get.back();
 
                                           showModalBottomSheet(
-                                              shape:const RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.vertical(
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.vertical(
                                                 top: Radius.circular(26.0),
                                               )),
                                               context: context,
@@ -325,7 +329,10 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
                                                         ksizedbox10,
                                                         InkWell(
                                                           onTap: () {
-                                                            Get.back();
+                                                            Get.offAll(
+                                                                MemberBottomNavBar(
+                                                              index: 2,
+                                                            ));
                                                           },
                                                           child: Container(
                                                             height: 45.h,
@@ -392,7 +399,7 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
               }
             },
             child: Padding(
-              padding: const EdgeInsets.only(left: 15,right: 15,top: 10),
+              padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
               child: Container(
                 width: double.infinity,
                 height: 50.h,

@@ -31,7 +31,7 @@ import '../services/network/categorys_api_services/filter_category_api_service.d
 
 class AuthController extends GetxController {
 //apis method call
-RxInt filterindex = 0.obs;
+  RxInt filterindex = 0.obs;
   MerchantRegisterApiServices merchantRegisterApiServices =
       MerchantRegisterApiServices();
 
@@ -76,10 +76,9 @@ RxInt filterindex = 0.obs;
     }
   }
 
-  registerMember({
-    required MemberRegisterModel memberRegisterModel,
-    required String referralCode
-  }) async {
+  registerMember(
+      {required MemberRegisterModel memberRegisterModel,
+      required String referralCode}) async {
     isLoading(true);
     dio.Response<dynamic> response =
         await memberRegisterApiServices.memberRegister(
@@ -105,22 +104,21 @@ RxInt filterindex = 0.obs;
   }
 
   //referral register
-  ReferralRegisterApiServices referralRegisterApiServices = ReferralRegisterApiServices();
+  ReferralRegisterApiServices referralRegisterApiServices =
+      ReferralRegisterApiServices();
 
   memReferralRegister({required String referralCode}) async {
-      
-      dio.Response<dynamic> response = await referralRegisterApiServices.
-      referralRegister(referralCode: referralCode);
-      if(response.data["success"] == true){
-
-      }else{
-        // Get.rawSnackbar(
-        //   backgroundColor: Colors.red,
-        //   messageText: Text(
-        //     response.data["message"],
-        //     style: primaryFont.copyWith(color: Colors.white),
-        //   ));
-      }
+    dio.Response<dynamic> response = await referralRegisterApiServices
+        .referralRegister(referralCode: referralCode);
+    if (response.data["success"] == true) {
+    } else {
+      // Get.rawSnackbar(
+      //   backgroundColor: Colors.red,
+      //   messageText: Text(
+      //     response.data["message"],
+      //     style: primaryFont.copyWith(color: Colors.white),
+      //   ));
+    }
   }
 
   getOtpFunction({required String mobileNumber}) async {
@@ -139,7 +137,7 @@ RxInt filterindex = 0.obs;
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "User not found",
+            response.data["message"],
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }
@@ -204,7 +202,7 @@ RxInt filterindex = 0.obs;
         Get.rawSnackbar(
             backgroundColor: Colors.red,
             messageText: Text(
-              "Invalid Login",
+              response.data["message"],
               style: primaryFont.copyWith(color: Colors.white),
             ));
       }
@@ -212,7 +210,7 @@ RxInt filterindex = 0.obs;
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "The otp field is required",
+            response.data["message"],
             style: primaryFont.copyWith(color: Colors.white),
           ));
     } else if (response.statusCode == 401) {
@@ -223,12 +221,12 @@ RxInt filterindex = 0.obs;
             style: primaryFont.copyWith(color: Colors.white),
           ));
     } else {
-      Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            "something went wrong",
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
+      // Get.rawSnackbar(
+      //     backgroundColor: Colors.red,
+      //     messageText: Text(
+      //       "something went wrong",
+      //       style: primaryFont.copyWith(color: Colors.white),
+      //     ));
     }
   }
 
@@ -276,27 +274,30 @@ RxInt filterindex = 0.obs;
     update();
   }
 
-  //offers filter 
-    FilterCategoryApiService filtercategoryapiservice = FilterCategoryApiService();
+  //offers filter
+  FilterCategoryApiService filtercategoryapiservice =
+      FilterCategoryApiService();
 
-     List<OffersListModel> offerslistdata = [];
+  List<OffersListModel> offerslistdata = [];
 
-  getoffersfilterCategory({required String categoryid})async{
-    dio.Response<dynamic> response = await filtercategoryapiservice.filtercategory(categoryId: categoryid);
-    if(response.statusCode == 200){
-       List<OffersListModel> offerslistModel = offersListModelFromJson(response.data);
-        offerslistdata = offerslistModel;
-         update();
-         Get.back();
-        } else {
-          Get.rawSnackbar(
+  getoffersfilterCategory({required String categoryid}) async {
+    dio.Response<dynamic> response =
+        await filtercategoryapiservice.filtercategory(categoryId: categoryid);
+    if (response.statusCode == 200) {
+      List<OffersListModel> offerslistModel =
+          offersListModelFromJson(response.data);
+      offerslistdata = offerslistModel;
+      update();
+      Get.back();
+    } else {
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             " Offers not available today",
             style: primaryFont.copyWith(color: Colors.white),
           ));
-        }
-        update();
+    }
+    update();
   }
 
   getSubCategoryList() async {
@@ -321,51 +322,54 @@ RxInt filterindex = 0.obs;
   FcmTokenStoreApiService fcmTokenStoreApiService = FcmTokenStoreApiService();
 
   fcmtoken({required String token}) async {
-    dio.Response<dynamic> response = await fcmTokenStoreApiService
-        .fcmTokenStoreApiService(token: token,);
+    dio.Response<dynamic> response =
+        await fcmTokenStoreApiService.fcmTokenStoreApiService(
+      token: token,
+    );
     if (response.statusCode == 200) {
     } else {
-      Get.snackbar("Something went wrong", response.statusCode.toString(),
-          colorText: Colors.white,
-          backgroundColor: Colors.red,
-          snackPosition: SnackPosition.BOTTOM);
+      // Get.snackbar("Something went wrong", response.statusCode.toString(),
+      //     colorText: Colors.white,
+      //     backgroundColor: Colors.red,
+      //     snackPosition: SnackPosition.BOTTOM);
     }
   }
 
   //add transaction
-  AddTransactionApiServices addTransactionApiServices = AddTransactionApiServices();
+  AddTransactionApiServices addTransactionApiServices =
+      AddTransactionApiServices();
 
   addTransaction({required String amount}) async {
-      
-      dio.Response<dynamic> response = await addTransactionApiServices.
-       addTransactionApi(amount: amount);
-       if(response.statusCode == 200){
-
-       } else {
-          Get.rawSnackbar(
+    dio.Response<dynamic> response =
+        await addTransactionApiServices.addTransactionApi(amount: amount);
+    if (response.statusCode == 200) {
+    } else {
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "something went wrong",
+            response.data["message"],
             style: primaryFont.copyWith(color: Colors.white),
           ));
-       }
+    }
   }
 
   //transaction history
-  TransactionHistoryApiServices transactionHistoryApiServices = TransactionHistoryApiServices();
+  TransactionHistoryApiServices transactionHistoryApiServices =
+      TransactionHistoryApiServices();
   List<TransactionHistory> transactionHistorydata = [];
 
   transactionHistoryDetails() async {
-
-    dio.Response<dynamic> response = await transactionHistoryApiServices.transactionHistoryApi();
-    if(response.statusCode == 200){
-      TransactionHistoryModel transactionHistoryModel = TransactionHistoryModel.fromJson(response.data);
+    dio.Response<dynamic> response =
+        await transactionHistoryApiServices.transactionHistoryApi();
+    if (response.statusCode == 200) {
+      TransactionHistoryModel transactionHistoryModel =
+          TransactionHistoryModel.fromJson(response.data);
       transactionHistorydata = transactionHistoryModel.transactionHistory;
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "something went wrong",
+            response.data["message"],
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }
@@ -373,24 +377,25 @@ RxInt filterindex = 0.obs;
   }
 
   //notification list
-  NotificationListApiService notificationListApiService = NotificationListApiService();
+  NotificationListApiService notificationListApiService =
+      NotificationListApiService();
   List<NotificationData> notificationData = [];
 
   notification() async {
-
-    dio.Response<dynamic> response = await notificationListApiService.notificationListApiService();
-    if(response.statusCode == 200){
-      NotificationListModel notificationListModel = NotificationListModel.fromJson(response.data);
+    dio.Response<dynamic> response =
+        await notificationListApiService.notificationListApiService();
+    if (response.statusCode == 200) {
+      NotificationListModel notificationListModel =
+          NotificationListModel.fromJson(response.data);
       notificationData = notificationListModel.data;
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "something went wrong",
+           response.data["message"],
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }
-   update();
+    update();
   }
-
 }

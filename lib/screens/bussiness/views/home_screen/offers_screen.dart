@@ -1,4 +1,5 @@
 import 'package:bci/screens/bussiness/views/home_screen/offers/last_offers.dart';
+import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,9 +50,17 @@ class _OffersScreenState extends State<OffersScreen> {
                           color: Colors.white),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Image.asset('assets/images/helps.png'),
+                 InkWell(
+                    onTap: () {
+                      Get.to(SupportScreen());
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Container(
+                          height: 30,
+                          width: 30,
+                          child: Image.asset('assets/images/helps.png')),
+                    ),
                   )
                 ],
               ),

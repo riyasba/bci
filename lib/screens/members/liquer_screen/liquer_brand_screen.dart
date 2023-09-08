@@ -35,10 +35,15 @@ class liqor_brands extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [  
-                        InkWell(
-                            onTap: Get.back,
-                            child: Image.asset(
-                                'assets/images/chevron-left (2).png')),
+                      InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Container(
+                                height: 30,
+                                width: 30,
+                                child: Image.asset(
+                                    'assets/images/chevron-left (2).png'))),
                         Padding(
                           padding: const EdgeInsets.only(right: 20),
                           child: Text(

@@ -534,23 +534,23 @@ class HotelPassenger {
 
 class Price {
     String currencyCode;
-    double roomPrice;
-    double tax;
-    int extraGuestCharge;
-    int childCharge;
-    double otherCharges;
-    int discount;
-    double publishedPrice;
-    int publishedPriceRoundedOff;
-    double offeredPrice;
-    int offeredPriceRoundedOff;
-    int agentCommission;
-    int agentMarkUp;
-    double serviceTax;
-    int tcs;
-    int tds;
-    int serviceCharge;
-    double totalGstAmount;
+    dynamic roomPrice;
+    dynamic tax;
+    dynamic extraGuestCharge;
+    dynamic childCharge;
+    dynamic otherCharges;
+    dynamic discount;
+    dynamic publishedPrice;
+    dynamic publishedPriceRoundedOff;
+    dynamic offeredPrice;
+    dynamic offeredPriceRoundedOff;
+    dynamic agentCommission;
+    dynamic agentMarkUp;
+    dynamic serviceTax;
+    dynamic tcs;
+    dynamic tds;
+    dynamic serviceCharge;
+    dynamic totalGstAmount;
     Gst gst;
 
     Price({

@@ -1,3 +1,4 @@
+import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -75,16 +76,24 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                       style: TextStyle(fontSize: 23, color: Color(0xffF8F9FD)),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Image.asset('assets/images/helps.png'),
+                  InkWell(
+                    onTap: () {
+                      Get.to(SupportScreen());
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Container(
+                          height: 30,
+                          width: 30,
+                          child: Image.asset('assets/images/helps.png')),
+                    ),
                   )
                 ],
               ),
             ),
           )),
-      body: ListView(
-        children:[ Column(
+      body: ListView(children: [
+        Column(
           children: [
             ksizedbox20,
             Row(
@@ -104,53 +113,56 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                         context: context,
                         builder: (context) {
                           return Padding(
-                            padding: const EdgeInsets.only(top: 80,bottom: 65),
+                            padding: const EdgeInsets.only(top: 80, bottom: 65),
                             child: Dialog(
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)
-                              ),
+                                  borderRadius: BorderRadius.circular(10)),
                               child: Container(
                                 child: Column(
                                   children: [
                                     Row(
                                       children: [
-                                        IconButton(onPressed: (){}, 
-                                        icon: Icon(Icons.arrow_back)),
-                                        Text('Add Service',
-                                        style: TextStyle(fontSize: 16,color: kblue),)
+                                        IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(Icons.arrow_back)),
+                                        Text(
+                                          'Add Service',
+                                          style: TextStyle(
+                                              fontSize: 16, color: kblue),
+                                        )
                                       ],
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 10,right: 10,top: 5),
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10, top: 5),
                                       child: TextField(
                                         controller: serviceController,
                                         decoration: InputDecoration(
-                                          
-                                          labelText: 'Service',labelStyle: TextStyle(fontSize: 16,color: kgrey),
-                                          border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: kgrey
-                                    )
-                                          )
-                                        ),
+                                            labelText: 'Service',
+                                            labelStyle: TextStyle(
+                                                fontSize: 16, color: kgrey),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide:
+                                                    BorderSide(color: kgrey))),
                                       ),
                                     ),
                                     ksizedbox20,
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 10,right: 10),
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10),
                                       child: TextField(
                                         controller: serviceController,
                                         decoration: InputDecoration(
-                                          
-                                          labelText: 'Description',labelStyle: TextStyle(fontSize: 16,color: kgrey),
-                                          border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: kgrey
-                                    )
-                                          )
-                                        ),
+                                            labelText: 'Description',
+                                            labelStyle: TextStyle(
+                                                fontSize: 16, color: kgrey),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide:
+                                                    BorderSide(color: kgrey))),
                                       ),
                                     ),
                                     ksizedbox30,
@@ -159,31 +171,40 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                                       width: 200,
                                       decoration: BoxDecoration(
                                         color: Color(0xffE5E5E5),
-
                                       ),
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Image.asset('assets/images/avaiimageupload.png'),
-                                          
+                                          Image.asset(
+                                              'assets/images/avaiimageupload.png'),
                                           Padding(
-                                            padding: const EdgeInsets.only(top: 8),
-                                            child: Text('Add Images',style: TextStyle(color: kgrey,
-                                            fontSize: 15),),
+                                            padding:
+                                                const EdgeInsets.only(top: 8),
+                                            child: Text(
+                                              'Add Images',
+                                              style: TextStyle(
+                                                  color: kgrey, fontSize: 15),
+                                            ),
                                           )
                                         ],
                                       ),
                                     ),
                                     ksizedbox30,
                                     ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                      backgroundColor: kblue,
-                                      minimumSize: Size(MediaQuery.of(context).size.width*0.6, 40)
-                                      ),
-                                      onPressed: (){}, 
-                                    child: Text('Submit',style: TextStyle(
-                                      color: kwhite
-                                    ),))
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: kblue,
+                                            minimumSize: Size(
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.6,
+                                                40)),
+                                        onPressed: () {},
+                                        child: Text(
+                                          'Submit',
+                                          style: TextStyle(color: kwhite),
+                                        ))
                                   ],
                                 ),
                               ),
@@ -302,7 +323,10 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                                   width: 140,
                                   child: Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 10, left: 5, right: 10, bottom: 10),
+                                        top: 10,
+                                        left: 5,
+                                        right: 10,
+                                        bottom: 10),
                                     child: Image.asset(
                                       serviceimage[index],
                                       fit: BoxFit.contain,
@@ -314,7 +338,8 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                                     top: 10,
                                   ),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         title[index].toString(),
@@ -322,7 +347,6 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold),
                                       ),
-
                                       Padding(
                                         padding: const EdgeInsets.only(top: 5),
                                         child: Text(
@@ -342,20 +366,19 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                           )
                         ],
                       ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              IconButton(onPressed: (){},
-                                icon: Icon(Icons.more_vert)),
-                            ],
-                          ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          IconButton(
+                              onPressed: () {}, icon: Icon(Icons.more_vert)),
+                        ],
+                      ),
                     ]),
                   );
                 }),
           ],
         ),
-        ]
-      ),
+      ]),
     );
   }
 }

@@ -135,16 +135,27 @@ class FlightsController extends GetxController {
             flightSearchModel: flightSearchModel, airlineCode: airlineCode);
     isLoading(false);
     isLoading2(false);
-    if (response.data["Response_Header"]["Error_Code"] == "0000") {
-      AirSearchModel airSearchModel = AirSearchModel.fromJson(response.data);
-      flightList = airSearchModel.tripDetails.first.flights;
-      seachKey = airSearchModel.searchKey;
-    }
+    if (response.statusCode == 200) {
+  if (response.data["Response_Header"]["Error_Code"] == "0000") {
+    AirSearchModel airSearchModel = AirSearchModel.fromJson(response.data);
+    flightList = airSearchModel.tripDetails.first.flights;
+    seachKey = airSearchModel.searchKey;
+  }
+  
+  Get.to(ParNycSCreen(
+    flightSearchDataModel: flightSearchModel,
+    searchKey: seachKey,
+  ));
+}else if(response.statusCode == 500){
+    Get.rawSnackbar(
+          message: "Server not responding", backgroundColor: Colors.red);
 
-    Get.to(ParNycSCreen(
-      flightSearchDataModel: flightSearchModel,
-      searchKey: seachKey,
-    ));
+}else{
+   Get.rawSnackbar(
+          message: "Something went wrong", backgroundColor: Colors.red);
+
+
+}
 
     update();
   }

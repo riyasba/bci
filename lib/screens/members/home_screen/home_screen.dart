@@ -1,6 +1,8 @@
+import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import '../../../constands/constands.dart';
 
 class Home_screen1 extends StatelessWidget {
@@ -30,7 +32,15 @@ class Home_screen1 extends StatelessWidget {
                         color: Colors.white),
                   ),
                 ),
-                Image.asset('assets/images/helps.png')
+                InkWell(
+                  onTap: () {
+                    Get.to(SupportScreen());
+                  },
+                  child: Container(
+                      height: 30,
+                      width: 30,
+                      child: Image.asset('assets/images/helps.png')),
+                )
               ],
             ),
           ),

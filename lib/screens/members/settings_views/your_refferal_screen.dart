@@ -1,5 +1,6 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/settings_controllers.dart';
+import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,18 @@ class _YourReferralScreenState extends State<YourReferralScreen> {
                             color:const Color(0xffF9F8FD)),
                       ),
                     ),
-                    Image.asset('assets/images/helps.png')
+                    InkWell(
+                      onTap: () {
+                        Get.to(SupportScreen());
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Container(
+                            height: 30,
+                            width: 30,
+                            child: Image.asset('assets/images/helps.png')),
+                      ),
+                    )
                   ],
                 ),
               ),

@@ -72,12 +72,12 @@ class BusController extends GetxController {
       getBusCityList = List<GetBusCityList>.from(
           response.data.map((x) => GetBusCityList.fromJson(x)));
     } else {
-      Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            "something went wrong ${response.statusCode}",
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
+      // Get.rawSnackbar(
+      //     backgroundColor: Colors.red,
+      //     messageText: Text(
+      //       response.data["message"],
+      //       style: primaryFont.copyWith(color: Colors.white),
+      //     ));
     }
     update();
   }
@@ -119,7 +119,7 @@ class BusController extends GetxController {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "something went wrong ${response.statusCode}",
+            "something went wrong ",
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }
@@ -269,7 +269,7 @@ class BusController extends GetxController {
     if (payment_response["result"] == "payment_successfull") {
       //need to give id
       Get.to(() => FlightLoadingPage());
-      busAddPayment(refernceNo: bookingRef,price: amount);
+      busAddPayment(refernceNo: bookingRef, price: amount);
     } else {
       Get.closeAllSnackbars();
       Get.snackbar(
@@ -304,7 +304,7 @@ class BusController extends GetxController {
       //
       //need to give id
       Get.to(() => FlightLoadingPage());
-      busAddPayment(refernceNo: bookingRef,price: amount.toStringAsFixed(2));
+      busAddPayment(refernceNo: bookingRef, price: amount.toStringAsFixed(2));
     } else {
       Get.closeAllSnackbars();
       Get.snackbar(
@@ -346,7 +346,7 @@ class BusController extends GetxController {
             clientReferneNo: "Testing Team", refrenceNo: refernceNo);
 
     if (response.statusCode == 200) {
-      busTicketing(refernceNo: refernceNo,price: price);
+      busTicketing(refernceNo: refernceNo, price: price);
       // Get.rawSnackbar(
       //     message: "Payment Added Success", backgroundColor: Colors.green);
     } else {}

@@ -240,19 +240,19 @@ class HomeController extends GetxController {
     } else if (response.statusCode == 200) {
       cartListData.clear();
       update();
-      Get.rawSnackbar(
-          backgroundColor: Colors.black,
-          messageText: Text(
-            response.data["message"],
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
+      // Get.rawSnackbar(
+      //     backgroundColor: Colors.black,
+      //     messageText: Text(
+      //       response.data["message"],
+      //       style: primaryFont.copyWith(color: Colors.white),
+      //     ));
     } else {
-      Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            "Something went wrong",
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
+      // Get.rawSnackbar(
+      //     backgroundColor: Colors.red,
+      //     messageText: Text(
+      //       "Something went wrong",
+      //       style: primaryFont.copyWith(color: Colors.white),
+      //     ));
     }
     update();
   }
@@ -374,12 +374,12 @@ class HomeController extends GetxController {
     }else if(response.statusCode == 404){
 
     } else {
-      Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            "Something went wrong",
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
+      // Get.rawSnackbar(
+      //     backgroundColor: Colors.red,
+      //     messageText: Text(
+      //       "Something went wrong",
+      //       style: primaryFont.copyWith(color: Colors.white),
+      //     ));
     }
     update();
   }
@@ -441,13 +441,6 @@ class HomeController extends GetxController {
       SliderProductModel sliderProductModel =
           SliderProductModel.fromJson(response.data);
       sliderData = sliderProductModel.posts;
-    } else {
-      Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            "Something went wrong",
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
     }
     update();
   }

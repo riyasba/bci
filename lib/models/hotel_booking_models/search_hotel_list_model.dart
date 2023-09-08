@@ -147,21 +147,21 @@ class SearchHotelData {
 class Price {
     CurrencyCode currencyCode;
     double roomPrice;
-    int tax;
-    int extraGuestCharge;
-    int childCharge;
+    dynamic tax;
+    dynamic extraGuestCharge;
+    dynamic childCharge;
     double otherCharges;
-    int discount;
+    dynamic discount;
     double publishedPrice;
-    int publishedPriceRoundedOff;
-    double offeredPrice;
-    int offeredPriceRoundedOff;
-    int agentCommission;
-    int agentMarkUp;
+    dynamic publishedPriceRoundedOff;
+    dynamic offeredPrice;
+    dynamic offeredPriceRoundedOff;
+    dynamic agentCommission;
+    dynamic agentMarkUp;
     double serviceTax;
-    int tcs;
-    int tds;
-    int serviceCharge;
+    dynamic tcs;
+    dynamic tds;
+    dynamic serviceCharge;
     double totalGstAmount;
     Gst gst;
 

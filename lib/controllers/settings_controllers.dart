@@ -97,14 +97,8 @@ class SettingsController extends GetxController{
       if(response.statusCode == 200){
         GetWalletDetails getWalletDetails = GetWalletDetails.fromJson(response.data);
         getWalletData.add(getWalletDetails);
-      } else {
-        Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            "Something went wrong",
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
-      }
+        print(getWalletData);
+      } 
       update();
    }
    
@@ -120,11 +114,11 @@ class SettingsController extends GetxController{
     List<OffersListModel> offerslistModel = List<OffersListModel>.from(response.data.map((x) => OffersListModel.fromJson(x)));;
         offerslistdata = offerslistModel;
       }
-      else {
+      else if(response.statusCode == 404){
        Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "Something went wrong",
+            response.data["message"],
             style: primaryFont.copyWith(color: Colors.white),
           ));
      }

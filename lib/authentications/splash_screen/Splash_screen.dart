@@ -8,13 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../constands/image_string.dart';
 
 
-
-
 class splash extends StatefulWidget {
   const splash({super.key});
-
-
-
   @override
   State<splash> createState() => _splashState();
 }

@@ -20,7 +20,6 @@ class _LiquorScreenState extends State<LiquorScreen> {
 
   @override
   void initState() {
-    
     super.initState();
     homeController.liquorVendors(categoryid: "6");
   }
@@ -36,7 +35,7 @@ class _LiquorScreenState extends State<LiquorScreen> {
               ClipPath(
                 clipper: SinCosineWaveClipper(),
                 child: Container(
-                  height: 150.h,
+                  height: 145.h,
                   color: kblue,
                   child: Padding(
                     padding: const EdgeInsets.all(15),
@@ -101,7 +100,9 @@ class _LiquorScreenState extends State<LiquorScreen> {
         padding: const EdgeInsets.only(top: 20),
         child: GetBuilder<HomeController>(
           builder: (_) {
-            return ListView.builder(
+            return homeController.vendorListData.isEmpty ? const  Center(
+                child: Text("No data found"),
+            ) : ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 itemCount: homeController.vendorListData.length,
                 itemBuilder: (context, index) {

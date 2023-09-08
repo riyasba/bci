@@ -102,22 +102,22 @@ class _DashBoardScreenMenbersState extends State<DashBoardScreenMenbers> {
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 56, left: 20),
-                    child: InkWell(
-                      onTap: () {
-                        Get.to(const MyAccountScreen());
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'View Profile',
-                            style: TextStyle(color: kblue, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 56, left: 20),
+                  //   child: InkWell(
+                  //     onTap: () {
+                  //       Get.to(const MyAccountScreen());
+                  //     },
+                  //     child: Row(
+                  //       children: [
+                  //         Text(
+                  //           'View Profile',
+                  //           style: TextStyle(color: kblue, fontSize: 13),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 ]),
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 10),

@@ -1,4 +1,5 @@
 import 'package:bci/controllers/auth_controllers.dart';
+import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
@@ -90,10 +91,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           //fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                  ),Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: InkWell(onTap: (){Get.to(ContactAdmin());},
-                      child: Image.asset('assets/images/3669173_help_ic_icon.png')),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.to(const SupportScreen());
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Container(
+                          height: 30,
+                          width: 30,
+                          child: Image.asset('assets/images/helps.png')),
+                    ),
                   )
                   // Padding(
                   //   padding: const EdgeInsets.only(right: 20),
@@ -103,67 +112,74 @@ class _NotificationScreenState extends State<NotificationScreen> {
               ),
             ),
           )),
-      body: GetBuilder<AuthController>(
-        builder: (_) {
-          return ListView.builder(
-              itemCount: authController.notificationData.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 90,
-                        width: MediaQuery.of(context).size.width,
-                        color: Colors.white,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 20,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    authController.notificationData[index].title,
-                                    style:const TextStyle(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 6),
-                                    child: Text(
-                                      authController.notificationData[index].message,
-                                      style: TextStyle(
-                                          fontSize: 14, color: kgrey),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10),
-                                    child: Text(
-                                      formatDate(authController.notificationData[index].createdAt,
-                                   [dd ,'-',mm,'-',yyyy]),
-                                      style:const TextStyle(
-                                          fontSize: 13.5,
+      body: GetBuilder<AuthController>(builder: (_) {
+        return authController.notificationData.isEmpty
+            ? const Center(
+                child: Text("No data found"),
+              )
+            : ListView.builder(
+                itemCount: authController.notificationData.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 90,
+                          width: MediaQuery.of(context).size.width,
+                          color: Colors.white,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 20,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      authController
+                                          .notificationData[index].title,
+                                      style: const TextStyle(
+                                          fontSize: 19,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 6),
+                                      child: Text(
+                                        authController
+                                            .notificationData[index].message,
+                                        style: TextStyle(
+                                            fontSize: 14, color: kgrey),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Text(
+                                        formatDate(
+                                            authController
+                                                .notificationData[index]
+                                                .createdAt,
+                                            [dd, '-', mm, '-', yyyy]),
+                                        style: const TextStyle(
+                                            fontSize: 13.5,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      const Divider(
-                        thickness: 1.5,
-                      )
-                    ],
-                  ),
-                );
-              });
-        }
-      ),
+                        const Divider(
+                          thickness: 1.5,
+                        )
+                      ],
+                    ),
+                  );
+                });
+      }),
     );
   }
 }

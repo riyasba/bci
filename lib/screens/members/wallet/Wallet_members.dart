@@ -1,3 +1,4 @@
+import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
@@ -58,7 +59,7 @@ class _WalletScreenMembersState extends State<WalletScreenMembers> {
     var _mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -90,198 +91,253 @@ class _WalletScreenMembersState extends State<WalletScreenMembers> {
               ),
             ),
           )),
-      body: GetBuilder<ProfileController>(
-        builder: (_) {
-          return ListView(
-            physics:const BouncingScrollPhysics(), 
+      body: GetBuilder<ProfileController>(builder: (_) {
+        return ListView(physics: const BouncingScrollPhysics(), children: [
+          Column(
             children: [
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 5),
-                      child: Text(
-                        'Total Wallet',
-                        style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 10),
-                      child: Container(
-                        height: 110.h,
-                        width: 245.w,
-                        child: Padding(
-                          padding:  EdgeInsets.only(top: 20, right: 40,left: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Total Wallet Amount',
-                                style: TextStyle(color: kwhite, fontSize: 17.sp),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10, right: 70),
-                                child:profileController.profileData.isEmpty ? Text("") : Text(
-                                  '₹${profileController.profileData.first.walletAmount}',
-                                  style: TextStyle(fontSize: 21.sp, color: kwhite),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                                offset:const Offset(0.0, 0.75),
-                                blurRadius: 7.0,
-                                color: kyellow)
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, top: 5),
+                    child: Text(
+                      'Total Wallet',
+                      style: TextStyle(
+                          fontSize: 24.sp, fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, top: 10),
+                    child: Container(
+                      height: 110.h,
+                      width: 245.w,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 20, right: 40, left: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Total Wallet Amount',
+                              style: TextStyle(color: kwhite, fontSize: 17.sp),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 10, right: 70),
+                              child: profileController.profileData.isEmpty
+                                  ? Text("")
+                                  : Text(
+                                      '₹${profileController.profileData.first.walletAmount}',
+                                      style: TextStyle(
+                                          fontSize: 21.sp, color: kwhite),
+                                    ),
+                            )
                           ],
-                          borderRadius: BorderRadius.circular(10),
-                          color: kOrange,
                         ),
+                      ),
+                      decoration: BoxDecoration(
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                              offset: const Offset(0.0, 0.75),
+                              blurRadius: 7.0,
+                              color: kyellow)
+                        ],
+                        borderRadius: BorderRadius.circular(10),
+                        color: kOrange,
                       ),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 10),
-                          child: InkWell(onTap: (){
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, top: 10),
+                        child: InkWell(
+                          onTap: () {
                             Get.to(const AddWaletScreen());
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: kyellow,
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: kOrange, width: 1)),
-                              height: _mediaQuery.height>700?108:110.h,
-                              width: _mediaQuery.width>700?90:95.w,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 11),
-                                    child: CircleAvatar(
-                                      backgroundColor: kwhite,
-                                      radius: 22.r,
-                                      child: Image.asset(
-                                        'assets/images/cirlewallet.png',
-                                        fit: BoxFit.contain,
-                                      ),
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: kyellow,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: kOrange, width: 1)),
+                            height: _mediaQuery.height > 700 ? 108 : 110.h,
+                            width: _mediaQuery.width > 700 ? 90 : 95.w,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 11),
+                                  child: CircleAvatar(
+                                    backgroundColor: kwhite,
+                                    radius: 22.r,
+                                    child: Image.asset(
+                                      'assets/images/cirlewallet.png',
+                                      fit: BoxFit.contain,
                                     ),
                                   ),
-                                 const SizedBox(
-                                    height: 5,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'Deposit \nCash',
+                                  style:
+                                      TextStyle(fontSize: 15.sp, color: kwhite),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      'Transaction History',
+                      style: TextStyle(fontSize: 25.sp, color: kblue),
+                    ),
+                  ),
+                  // Image.asset('assets/images/transactionicon.png')
+                ],
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              GetBuilder<AuthController>(builder: (_) {
+                return Container(
+                  height: _mediaQuery.height * 0.4,
+                  child: ListView.builder(
+                      itemCount: authController.transactionHistorydata.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            height: 65,
+                            width: _mediaQuery.width,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 2,
+                                    color: Colors.grey.withOpacity(0.5))
+                              ],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 7),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      authController
+                                                  .transactionHistorydata[index]
+                                                  .status ==
+                                              "credit"
+                                          ? Text(
+                                              "Credited",
+                                              style: primaryFont.copyWith(
+                                                  color: Colors.black,
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.w600),
+                                            )
+                                          : Text(
+                                              "Debited",
+                                              style: primaryFont.copyWith(
+                                                  color: Colors.black,
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
+                                      authController
+                                                  .transactionHistorydata[index]
+                                                  .status ==
+                                              "credit"
+                                          ? Text(
+                                              "Credited on ${formatDate(authController.transactionHistorydata[index].createdAt, [
+                                                    dd,
+                                                    "-",
+                                                    mm,
+                                                    "-",
+                                                    yyyy,
+                                                    " ",
+                                                    hh,
+                                                    ":",
+                                                    nn,
+                                                    " ",
+                                                    am
+                                                  ])}",
+                                              style: primaryFont.copyWith(
+                                                  color: Colors.black45,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500),
+                                            )
+                                          : Text(
+                                              "Debited on ${formatDate(authController.transactionHistorydata[index].createdAt, [
+                                                    dd,
+                                                    "-",
+                                                    mm,
+                                                    "-",
+                                                    yyyy,
+                                                    " ",
+                                                    hh,
+                                                    ":",
+                                                    nn,
+                                                    " ",
+                                                    am
+                                                  ])}",
+                                              style: primaryFont.copyWith(
+                                                  color: Colors.black45,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500),
+                                            )
+                                    ],
                                   ),
-                                  Text(
-                                    'Deposit \nCash',
-                                    style: TextStyle(fontSize: 15.sp, color: kwhite),
-                                  )
+                                  authController.transactionHistorydata[index]
+                                              .status ==
+                                          "credit"
+                                      ? Text(
+                                          "+ ₹${authController.transactionHistorydata[index].amount}",
+                                          style: primaryFont.copyWith(
+                                              fontSize: 16,
+                                              color: Colors.green),
+                                        )
+                                      : Text(
+                                          "- ₹${authController.transactionHistorydata[index].amount}",
+                                          style: primaryFont.copyWith(
+                                              fontSize: 16, color: Colors.red),
+                                        )
                                 ],
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Text(
-                        'Transaction History',
-                        style: TextStyle(fontSize: 25.sp, color: kblue),
-                      ),
-                    ),
-                   // Image.asset('assets/images/transactionicon.png')
-                  ],
-                ),
-               
-                SizedBox(
-                  height: 10.h,
-                ),
-                GetBuilder<AuthController>(
-                  builder: (_) {
-                    return Container(
-                      height: _mediaQuery.height * 0.4,
-                      child: ListView.builder(
-                          itemCount: authController.transactionHistorydata.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: kwhite,
-                                        boxShadow: <BoxShadow>[
-                                          BoxShadow(
-                                              offset:const Offset(0.0, 0.75),
-                                              blurRadius: 1.0,
-                                              color: kgrey)
-                                        ]),
-                                    height: 100,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                      children: [
-                                        //Image.asset(amountimage[index]),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 35, left: 10),
-                                          child: Text(
-                                            authController.transactionHistorydata[index].type,
-                                            style:const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Positioned(
-                                      right: 15,
-                                      top: 50,
-                                      child: Text(
-                                        "₹ ${authController.transactionHistorydata[index].amount}",
-                                        style: TextStyle(
-                                            color: index == 0 ? kOrange : kblue,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
-                                      )),
-                                  Positioned(
-                                    left: 10,
-                                    top: 70,
-                                    child: Text(formatDate(authController.transactionHistorydata[index].createdAt,
-                                   [dd ,'-',mm,'-',yyyy]),),
-                                  ),
-                                  // Positioned(
-                                  //     left: 170,
-                                  //     top: 70,
-                                  //     child: Text(refno[index].toString()))
-                                ],
-                              ),
-                            );
-                          }),
-                    );
-                  }
-                ),
-               
-              ],
-            ),
-          ]);
-        }
-      ),
+                        );
+                      }),
+                );
+              }),
+            ],
+          ),
+        ]);
+      }),
     );
   }
 }

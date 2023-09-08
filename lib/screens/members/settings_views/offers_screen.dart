@@ -1,4 +1,5 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -59,7 +60,15 @@ var selectItem = '';
                             color: Color(0xffF9F8FD)),
                       ),
                     ),
-                    Image.asset('assets/images/helps.png')
+                    InkWell(
+                      onTap: (){
+                        Get.to(SupportScreen());
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        child: Image.asset('assets/images/helps.png')),
+                    )
                   ],
                 ),
               ),
@@ -190,8 +199,10 @@ var selectItem = '';
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    height: 500,
-                    child: ListView.builder(
+                    height: size.height *0.7,
+                    child: settingcontroller.offerslistdata.isEmpty ? const Center(
+                      child: Text("No data found"),
+                    ) :ListView.builder(
                       shrinkWrap: true,
                       itemCount:settingcontroller.offerslistdata.length ,
                       itemBuilder: (context, index) {
