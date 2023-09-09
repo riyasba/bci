@@ -101,7 +101,7 @@ class _LoginBusinessOtpverificationState extends State<LoginBusinessOtpverificat
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+             const Text(
                 "Don't Receive OTP ",
                 style: TextStyle(
                   fontSize: 19,

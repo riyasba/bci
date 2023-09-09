@@ -71,6 +71,7 @@ dependencies:
   awesome_notifications: ^0.7.4+1
   flutter_sticky_widgets: ^0.0.3
   coupon_uikit: ^0.2.0
+  dropdown_search: ^5.0.6
 
 dev_dependencies:
   flutter_test:

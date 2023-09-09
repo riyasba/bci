@@ -220,7 +220,7 @@ class AuthController extends GetxController {
         Get.rawSnackbar(
             backgroundColor: Colors.red,
             messageText: Text(
-              "Invalid Login",
+              "Invalid User",
               style: primaryFont.copyWith(color: Colors.white),
             ));
       }

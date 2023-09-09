@@ -7,6 +7,7 @@ import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/models/category_model.dart';
 import 'package:bci/models/merchants_register_model.dart';
 import 'package:bci/screens/bussiness/views/generations/generate_otp_screen.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -46,6 +47,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
     authController.getCategoryList();
     authController.getSubCategoryList();
   }
+
   bool checkvalue = false;
   @override
   Widget build(BuildContext context) {
@@ -77,50 +79,51 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                   image: AssetImage("assets/images/Group 6011.png")),
               ksizedbox30,
               GetBuilder<AuthController>(builder: (_) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: Container(
-                    height: 44,
-                    width: 330,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(
-                            color: const Color.fromARGB(255, 5, 5, 5)
-                                .withOpacity(0.8))),
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 10, right: 10, top: 10),
-                      child: DropdownButton<CategoryList>(
-                        value: merchantCategory,
-                        isExpanded: true,
-                        icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                        elevation: 0,
-                        itemHeight: 55,
-                        isDense: true,
-                        dropdownColor: Colors.grey[250],
-                        style: const TextStyle(color: Colors.black54),
-                        hint: Text(
-                          "Merchant Category Name",
-                          style: TextStyle(fontSize: 16, color: kblue),
-                        ),
-                        onChanged: (CategoryList? value) {
-                          setState(() {
-                            merchantCategory = value!;
-                          });
-                        },
-                        items: authController.categoryList
-                            .map<DropdownMenuItem<CategoryList>>(
-                                (CategoryList value) {
-                          return DropdownMenuItem<CategoryList>(
-                            value: value,
-                            child: Text(value.title),
-                          );
-                        }).toList(),
-                      ), 
+                return Container(
+                  height: 55,
+                  width: 330,
+                  child: DropdownSearch<CategoryList>(
+                    itemAsString: (CategoryList u) => u.title,
+                    popupProps: PopupProps.menu(
+                      showSelectedItems: false,
+                      showSearchBox: true,
+                      menuProps:
+                          MenuProps(borderRadius: BorderRadius.circular(15)),
+                      searchFieldProps: const TextFieldProps(),
                     ),
+                    items: authController.categoryList,
+                    dropdownDecoratorProps: DropDownDecoratorProps(
+                      dropdownSearchDecoration: InputDecoration(
+                          // labelText: "Department *",
+                          hintText: "Department",
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Color(0xff707070)),
+                              borderRadius: BorderRadius.circular(5)),
+                              focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Color(0xff707070)),
+                              borderRadius: BorderRadius.circular(5)),
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xff707070)
+                            ),
+                              borderRadius: BorderRadius.circular(5))),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        // authController
+                        //     .isDesignationSelected(false);
+                        merchantCategory = value!;
+                        // requiremtsSelected = null;
+                      });
+                    },
+                    // selectedItem: selectedState,
                   ),
                 );
               }),
+              // ksizedbox30,
+            
               // GetBuilder<AuthController>(builder: (_) {
               //   return Padding(
               //     padding: const EdgeInsets.only(top: 15),
@@ -174,6 +177,10 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                   textInputAction: TextInputAction.next,
                   controller: merchantDistplaynameController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
+                  textCapitalization: TextCapitalization.words,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+                  ],
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Merchant display name can't be empty";
@@ -185,12 +192,12 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       filled: true,
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              const BorderSide(color: Color.fromARGB(255, 14, 13, 13))),
+                          borderSide: const BorderSide(
+                              color: Color(0xff707070))),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
+                              const BorderSide(color: Color(0xff707070))),
                       isCollapsed: false,
                       isDense: true,
                       contentPadding:
@@ -198,7 +205,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
+                              const BorderSide(color: Color(0xff707070))),
                       hintText: "Merchant Display Name",
                       hintStyle: TextStyle(
                         color: kblue,
@@ -225,11 +232,11 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
+                              const BorderSide(color: Color(0xff707070))),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
+                              const BorderSide(color: Color(0xff707070))),
                       isCollapsed: false,
                       isDense: true,
                       contentPadding:
@@ -237,7 +244,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
+                              const BorderSide(color: Color(0xff707070))),
                       hintText: "Email ID",
                       hintStyle: TextStyle(
                         color: kblue,
@@ -272,11 +279,11 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
+                              const BorderSide(color: Color(0xff707070))),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
+                              const BorderSide(color: Color(0xff707070))),
                       isCollapsed: false,
                       isDense: true,
                       contentPadding:
@@ -284,7 +291,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
-                              const BorderSide(color:  Color(0xff707070))),
+                              const BorderSide(color: Color(0xff707070))),
                       hintText: "Phone Number",
                       hintStyle: TextStyle(
                         color: kblue,
@@ -293,7 +300,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                 ),
               ),
 
-                    if(isReferral == true)
+              if (isReferral == true)
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
                   child: TextFormField(
@@ -306,19 +313,19 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
                             borderSide:
-                                const BorderSide(color:  Color(0xff707070))),
+                                const BorderSide(color: Color(0xff707070))),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
                             borderSide:
-                                const BorderSide(color:  Color(0xff707070))),
+                                const BorderSide(color: Color(0xff707070))),
                         isCollapsed: false,
                         isDense: true,
-                        contentPadding:
-                            const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                        contentPadding: const EdgeInsets.only(
+                            top: 12, bottom: 12, left: 15),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
                             borderSide:
-                                const BorderSide(color:  Color(0xff707070))),
+                                const BorderSide(color: Color(0xff707070))),
                         hintText: "Referral Code",
                         hintStyle: TextStyle(
                           color: kblue,
@@ -326,364 +333,28 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                         )),
                   ),
                 ),
-                Row(
-                  children: [
-                    Checkbox(
-                          checkColor: Colors.white,
-                           fillColor:
-                           MaterialStateProperty.all(kblue),
-                            value: isReferral,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isReferral = value!;
-                              });
-                             },
-                     ),
-                     Text(
-                  "Referral Code",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w400, color: kblue),
-                ),
-                  ],
-                ),
-
-
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 15),
-              //   child: TextFormField(
-              //     textInputAction: TextInputAction.next,
-              //     controller: alternativeMobileController,
-              //     keyboardType: TextInputType.phone,
-              //     inputFormatters: [
-              //       LengthLimitingTextInputFormatter(10),
-              //       FilteringTextInputFormatter.digitsOnly,
-              //       FilteringTextInputFormatter.deny(RegExp(r'\s')),
-              //     ],
-              //     autovalidateMode: AutovalidateMode.onUserInteraction,
-              //     decoration: InputDecoration(
-              //         fillColor: Colors.white,
-              //         filled: true,
-              //         enabledBorder: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(5),
-              //             borderSide:
-              //                 const BorderSide(color:  Color(0xff707070))),
-              //         focusedBorder: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(5),
-              //             borderSide:
-              //                 const BorderSide(color:  Color(0xff707070))),
-              //         isCollapsed: false,
-              //         isDense: true,
-              //         contentPadding:
-              //             const EdgeInsets.only(top: 12, bottom: 12, left: 15),
-              //         border: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(5),
-              //             borderSide:
-              //                 const BorderSide(color:  Color(0xff707070))),
-              //         hintText: "Alternate Phone Number",
-              //         hintStyle: TextStyle(
-              //           color: kblue,
-              //           fontWeight: FontWeight.w400,
-              //         )),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 15),
-              //   child: TextFormField(
-              //     textInputAction: TextInputAction.next,
-              //     controller: businessAddressController,
-              //     autovalidateMode: AutovalidateMode.onUserInteraction,
-              //     validator: (value) {
-              //       if (value!.isEmpty) {
-              //         return "Business Address can't be empty";
-              //       }
-              //       return null;
-              //     },
-              //     decoration: InputDecoration(
-              //         fillColor: Colors.white,
-              //         filled: true,
-              //         enabledBorder: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(5),
-              //             borderSide:
-              //                 const BorderSide(color:  Color(0xff707070))),
-              //         focusedBorder: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(5),
-              //             borderSide:
-              //                 const BorderSide(color:  Color(0xff707070))),
-              //         isCollapsed: false,
-              //         isDense: true,
-              //         contentPadding:
-              //             const EdgeInsets.only(top: 12, bottom: 12, left: 15),
-              //         border: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(5),
-              //             borderSide:
-              //                 const BorderSide(color:  Color(0xff707070))),
-              //         hintText: "Business Address",
-              //         hintStyle: TextStyle(
-              //           color: kblue,
-              //           fontWeight: FontWeight.w400,
-              //         )),
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 15,
-              // ),
-              // Obx(
-              //   () => Row(
-              //     children: [
-              //       InkWell(
-              //         onTap: () {
-              //           authController.isGstAvailable(true);
-              //         },
-              //         child: Container(
-              //           height: 17,
-              //           width: 17,
-              //           decoration: BoxDecoration(
-              //               border: Border.all(color: kblue),
-              //               color: authController.isGstAvailable.isTrue
-              //                   ? kblue
-              //                   : Colors.white,
-              //               borderRadius: BorderRadius.circular(10)),
-              //         ),
-              //       ),
-              //       const SizedBox(
-              //         width: 7,
-              //       ),
-              //       InkWell(
-              //         onTap: () {
-              //           authController.isGstAvailable(true);
-              //         },
-              //         child: Text(
-              //           "Yes",
-              //           textAlign: TextAlign.center,
-              //           style: TextStyle(
-              //               fontSize: 17,
-              //               fontWeight: FontWeight.w400,
-              //               color: kblue),
-              //         ),
-              //       ),
-              //       const SizedBox(
-              //         width: 15,
-              //       ),
-              //       InkWell(
-              //         onTap: () {
-              //           authController.isGstAvailable(false);
-              //         },
-              //         child: Container(
-              //           height: 17,
-              //           width: 17,
-              //           decoration: BoxDecoration(
-              //               color: authController.isGstAvailable.isFalse
-              //                   ? kblue
-              //                   : Colors.white,
-              //               border: Border.all(color: kblue),
-              //               borderRadius: BorderRadius.circular(10)),
-              //         ),
-              //       ),
-              //       const SizedBox(
-              //         width: 7,
-              //       ),
-              //       InkWell(
-              //         onTap: () {
-              //           authController.isGstAvailable(false);
-              //         },
-              //         child: Text(
-              //           "No",
-              //           textAlign: TextAlign.center,
-              //           style: TextStyle(
-              //               fontSize: 17,
-              //               fontWeight: FontWeight.w400,
-              //               color: kblue),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 15),
-              //   child: TextFormField(
-              //     textInputAction: TextInputAction.none,
-              //     //controller: usernamecontroller,
-              //     autovalidateMode: AutovalidateMode.onUserInteraction,
-              //     validator: (value) {
-              //       if (authController.isGstAvailable.isTrue &&
-              //           value!.isEmpty) {
-              //         return "Gst Number can't be empty";
-              //       }
-              //       return null;
-              //     },
-              //     textCapitalization: TextCapitalization.characters,
-              //     inputFormatters: [
-              //       LengthLimitingTextInputFormatter(15),
-              //     ],
-              //     decoration: InputDecoration(
-              //         fillColor: Colors.white,
-              //         filled: true,
-              //         enabledBorder: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(5),
-              //             borderSide:
-              //                 const BorderSide(color: Color(0xff707070))),
-              //         focusedBorder: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(5),
-              //             borderSide:
-              //                 const BorderSide(color: Color(0xff707070))),
-              //         isCollapsed: false,
-              //         isDense: true,
-              //         contentPadding:
-              //             const EdgeInsets.only(top: 12, bottom: 12, left: 15),
-              //         border: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(5),
-              //             borderSide:
-              //                 const BorderSide(color: Color(0xff707070))),
-              //         hintText: "Gst No",
-              //         hintStyle: TextStyle(
-              //           color: kblue,
-              //           fontWeight: FontWeight.w400,
-              //         )
-              //         ),
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 15,
-              // ),
-              //    checkvalue==true? TextField(
-              //     controller: referalcodeController,
-              //       decoration: InputDecoration(
-              //         fillColor: Colors.white,
-              //         filled: true,
-              //         enabledBorder: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(5),
-              //             borderSide:
-              //                 const BorderSide(color: Color(0xff707070))),
-              //         focusedBorder: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(5),
-              //             borderSide:
-              //                 const BorderSide(color: Color(0xff707070))),
-              //         isCollapsed: false,
-              //         isDense: true,
-              //         contentPadding:
-              //             const EdgeInsets.only(top: 12, bottom: 12, left: 15),
-              //         border: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(5),
-              //             borderSide:
-              //                 const BorderSide(color: Color(0xff707070))),
-              //                   hintText: 'Referal Code',
-              //                     hintStyle: TextStyle(
-              //           color: kblue,
-              //           fontWeight: FontWeight.w400,
-              //         )
-                          
-              //     ),
-                                 
-              //                   ):Text(''),
-              //                   ksizedbox20,
-                              //   Row(
-                              //     children: [
-                              //       Checkbox(value: checkvalue, 
-                              //       onChanged: (value){
-                              //         setState(() {
-                              //           checkvalue = value!;
-                              //         });
-                              //       }),
-                              //       Text('Referal Code')
-                              //     ],
-                              //   ),
-                              // SizedBox(
-                              //   height: 15,
-                              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         InkWell(
-              //           onTap: () async {
-              //             final ImagePicker _picker = ImagePicker();
-              //             // Pick an image
-              //             final XFile? tempimage = await _picker.pickImage(
-              //                 source: ImageSource.gallery);
-
-              //             setState(() {
-              //               aadharCardImage = File(tempimage!.path);
-              //             });
-              //           },
-              //           child: Container(
-              //             height: 130,
-              //             width: 150,
-              //             decoration: BoxDecoration(
-              //                 color: const Color.fromARGB(255, 215, 215, 213),
-              //                 borderRadius: BorderRadius.circular(3)),
-              //             child: aadharCardImage != null
-              //                 ? Image.file(aadharCardImage!)
-              //                 : const Center(
-              //                     child: Icon(
-              //                       Icons.cloud_upload,
-              //                       color: Colors.grey,
-              //                       size: 45,
-              //                     ),
-              //                   ),
-              //           ),
-              //         ),
-              //         const SizedBox(
-              //           height: 5,
-              //         ),
-              //         Text(
-              //           "Aadhaar Card",
-              //           textAlign: TextAlign.center,
-              //           style: TextStyle(
-              //               fontSize: 17,
-              //               fontWeight: FontWeight.w400,
-              //               color: kblue),
-              //         ),
-              //       ],
-              //     ),
-              //     Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         InkWell(
-              //           onTap: () async {
-              //             final ImagePicker _picker = ImagePicker();
-              //             // Pick an image
-              //             final XFile? tempimage = await _picker.pickImage(
-              //                 source: ImageSource.gallery);
-
-              //             setState(() {
-              //               panCardImage = File(tempimage!.path);
-              //             });
-              //           },
-              //           child: Container(
-              //             height: 130,
-              //             width: 150,
-              //             decoration: BoxDecoration(
-              //                 color: const Color.fromARGB(255, 215, 215, 213),
-              //                 borderRadius: BorderRadius.circular(3)),
-              //             child: panCardImage != null
-              //                 ? Image.file(panCardImage!)
-              //                 : const Center(
-              //                     child: Icon(
-              //                       Icons.cloud_upload,
-              //                       color: Colors.grey,
-              //                       size: 45,
-              //                     ),
-              //                   ),
-              //           ),
-              //         ),
-              //         const SizedBox(
-              //           height: 5,
-              //         ),
-              //         Text(
-              //           "Pan Card",
-              //           textAlign: TextAlign.center,
-              //           style: TextStyle(
-              //               fontSize: 17,
-              //               fontWeight: FontWeight.w400,
-              //               color: kblue),
-              //         ),
-              //       ],
-              //     ),
-              //   ],
-              // ),
+              Row(
+                children: [
+                  Checkbox(
+                    checkColor: Colors.white,
+                    fillColor: MaterialStateProperty.all(kblue),
+                    value: isReferral,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isReferral = value!;
+                      });
+                    },
+                  ),
+                  Text(
+                    "Referral Code",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: kblue),
+                  ),
+                ],
+              ),
               ksizedbox40,
               Obx(
                 () => authController.isLoading.isTrue
@@ -718,34 +389,26 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
                             if (merchantCategory != null) {
-                            
-                                MerchantRegisterModel merchantRegisterModel =
-                                    MerchantRegisterModel(
-                      
-        
-                                       
-                                        email: emailIdController.text,
-            
-                                        mobile: phoneNumberController.text,
-                                        name: merchantDistplaynameController.text,
-                              
-                                        roleId: "5");
+                              MerchantRegisterModel merchantRegisterModel =
+                                  MerchantRegisterModel(
+                                      email: emailIdController.text,
+                                      mobile: phoneNumberController.text,
+                                      name: merchantDistplaynameController.text,
+                                      roleId: "5");
 
-                                authController.registerMerchants(
+                              authController.registerMerchants(
                                   referralCode: referalcodeController.text,
-                                    merchantRegisterModel:
-                                        merchantRegisterModel);
-                              }
-                            } else {
-                              Get.rawSnackbar(
-                                  backgroundColor: Colors.red,
-                                  messageText: Text(
-                                    "Fill All the Fields",
-                                    style: primaryFont.copyWith(
-                                        color: Colors.white),
-                                  ));
+                                  merchantRegisterModel: merchantRegisterModel);
                             }
-                      
+                          } else {
+                            Get.rawSnackbar(
+                                backgroundColor: Colors.red,
+                                messageText: Text(
+                                  "Fill All the Fields",
+                                  style:
+                                      primaryFont.copyWith(color: Colors.white),
+                                ));
+                          }
                         },
                         child: Container(
                           height: 50,
