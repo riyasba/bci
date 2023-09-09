@@ -53,12 +53,10 @@ class AuthController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isOTPLoading = false.obs;
 
-
 //api callings
-  registerMerchants({
-    required MerchantRegisterModel merchantRegisterModel,
-    required String referralCode
-    }) async {
+  registerMerchants(
+      {required MerchantRegisterModel merchantRegisterModel,
+      required String referralCode}) async {
     isLoading(true);
     dio.Response<dynamic> response = await merchantRegisterApiServices
         .merchantRegister(merchantRegisterModel: merchantRegisterModel);
@@ -68,6 +66,7 @@ class AuthController extends GetxController {
       Get.to(BusinessOtpvarification(
         phoneNumber: merchantRegisterModel.mobile,
         otp: response.data["user"]["otp"].toString(),
+        isFromRegister: true,
       ));
     } else {
       Get.rawSnackbar(
@@ -135,7 +134,10 @@ class AuthController extends GetxController {
     isLoading(false);
 
     if (response.statusCode == 200) {
-      Get.to(LoginBusinessOtpverification(phoneNumber: mobileNumber,otp: response.data["otp"].toString(),));
+      Get.to(LoginBusinessOtpverification(
+        phoneNumber: mobileNumber,
+        otp: response.data["otp"].toString(),
+      ));
       // Get.to(BusinessOtpvarification(
       //   phoneNumber: mobileNumber,
       //   otp: response.data["otp"].toString(),
@@ -187,12 +189,24 @@ class AuthController extends GetxController {
   //verify otp
   VerifyOtpApiServices verifyOtpApiServices = VerifyOtpApiServices();
 
-  verifyOtp({required String mobile, required String otp}) async {
-
-    dio.Response<dynamic> response = await verifyOtpApiServices.
-    verifyOtpApiServices(mobile: mobile, otp: otp);
-    if(response.statusCode == 200){
-       Get.offAll(const BusinessverifiedScreen());
+  verifyOtp(
+      {required String mobile,
+      required String otp,
+      required bool isFromRegister}) async {
+    dio.Response<dynamic> response = await verifyOtpApiServices
+        .verifyOtpApiServices(mobile: mobile, otp: otp);
+    if (response.statusCode == 200) {
+      if (isFromRegister) {
+        Get.offAll(() => const BusinessLoginScreen());
+        Get.rawSnackbar(
+            backgroundColor: Colors.blue,
+            messageText: Text(
+              "Thank you for registering! Your account is pending approval.",
+              style: primaryFont.copyWith(color: Colors.white),
+            ));
+      } else {
+        Get.offAll(const BusinessverifiedScreen());
+      }
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -201,8 +215,6 @@ class AuthController extends GetxController {
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }
-
-
   }
 
   loginUsersbusiness({required String mobile, required String otp}) async {
@@ -224,7 +236,7 @@ class AuthController extends GetxController {
               style: primaryFont.copyWith(color: Colors.white),
             ));
       }
-    }  else if (response.statusCode == 422) {
+    } else if (response.statusCode == 422) {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
@@ -238,8 +250,8 @@ class AuthController extends GetxController {
             "Invalid OTP",
             style: primaryFont.copyWith(color: Colors.white),
           ));
-    } else if (response.statusCode == 401){
-       Get.rawSnackbar(
+    } else if (response.statusCode == 401) {
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             "Account not approved",
@@ -297,17 +309,17 @@ class AuthController extends GetxController {
     return otpCode;
   }
 
-
-
-    //transaction history
-  TransactionHistoryApiServices transactionHistoryApiServices = TransactionHistoryApiServices();
+  //transaction history
+  TransactionHistoryApiServices transactionHistoryApiServices =
+      TransactionHistoryApiServices();
   List<TransactionHistory> transactionHistorydata = [];
 
   transactionHistoryDetails() async {
-
-    dio.Response<dynamic> response = await transactionHistoryApiServices.transactionHistoryApi();
-    if(response.statusCode == 200){
-      TransactionHistoryModel transactionHistoryModel = TransactionHistoryModel.fromJson(response.data);
+    dio.Response<dynamic> response =
+        await transactionHistoryApiServices.transactionHistoryApi();
+    if (response.statusCode == 200) {
+      TransactionHistoryModel transactionHistoryModel =
+          TransactionHistoryModel.fromJson(response.data);
       transactionHistorydata = transactionHistoryModel.transactionHistory;
       print('transaction data');
     } else {
@@ -325,8 +337,10 @@ class AuthController extends GetxController {
   FcmTokenStoreApiService fcmTokenStoreApiService = FcmTokenStoreApiService();
 
   fcmtoken({required String token}) async {
-    dio.Response<dynamic> response = await fcmTokenStoreApiService
-        .fcmTokenStoreApiService(token: token,);
+    dio.Response<dynamic> response =
+        await fcmTokenStoreApiService.fcmTokenStoreApiService(
+      token: token,
+    );
     if (response.statusCode == 200) {
     } else {
       Get.snackbar("Something went wrong", response.statusCode.toString(),
@@ -337,42 +351,41 @@ class AuthController extends GetxController {
   }
 
   //coupon redeemption api
-  CouponsRedeemptionApiService couponsRedeemptionApiService = CouponsRedeemptionApiService();
+  CouponsRedeemptionApiService couponsRedeemptionApiService =
+      CouponsRedeemptionApiService();
   List<CouponRedeemptionData> couponRedeemptionData = [];
 
   redeemptionCoupon() async {
-     
-     dio.Response<dynamic> response = await couponsRedeemptionApiService.couponsRedeemptionApiService();
-     if(response.statusCode == 200){
-       RedeemtioncouponsListModel redeemtioncouponsListModel = RedeemtioncouponsListModel.fromJson(response.data);
-       couponRedeemptionData = redeemtioncouponsListModel.data;
-     } else {
-       Get.snackbar("Something went wrong", "",
+    dio.Response<dynamic> response =
+        await couponsRedeemptionApiService.couponsRedeemptionApiService();
+    if (response.statusCode == 200) {
+      RedeemtioncouponsListModel redeemtioncouponsListModel =
+          RedeemtioncouponsListModel.fromJson(response.data);
+      couponRedeemptionData = redeemtioncouponsListModel.data;
+    } else {
+      Get.snackbar("Something went wrong", "",
           colorText: Colors.white,
           backgroundColor: Colors.red,
           snackPosition: SnackPosition.BOTTOM);
-     }
-     update();
+    }
+    update();
   }
 
   //referral register
-  ReferralRegisterApiServices referralRegisterApiServices = ReferralRegisterApiServices();
+  ReferralRegisterApiServices referralRegisterApiServices =
+      ReferralRegisterApiServices();
 
   memReferralRegister({required String referralCode}) async {
-      
-      dio.Response<dynamic> response = await referralRegisterApiServices.
-      referralRegister(referralCode: referralCode);
-      if(response.data["success"] == true){
-
-      }else{
-        // Get.rawSnackbar(
-        //   backgroundColor: Colors.red,
-        //   messageText: Text(
-        //     response.data["message"],
-        //     style: primaryFont.copyWith(color: Colors.white),
-        //   ));
-      }
+    dio.Response<dynamic> response = await referralRegisterApiServices
+        .referralRegister(referralCode: referralCode);
+    if (response.data["success"] == true) {
+    } else {
+      // Get.rawSnackbar(
+      //   backgroundColor: Colors.red,
+      //   messageText: Text(
+      //     response.data["message"],
+      //     style: primaryFont.copyWith(color: Colors.white),
+      //   ));
+    }
   }
-
-
 }

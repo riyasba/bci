@@ -55,13 +55,15 @@ class _Home_screen1State extends State<Home_screen1> {
                       padding: const EdgeInsets.only(right: 20),
                       child: profileController.profileData.isEmpty
                           ? Container()
-                          : Text(
-                              'Hello, ${profileController.profileData.first.name}',
-                              style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
+                          : Container(
+                            child: Text(
+                                'Hello, ${profileController.profileData.first.name}',
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                          ),
                     );
                   }),
                   IconButton(

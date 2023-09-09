@@ -104,6 +104,7 @@ class BusinessUser {
   dynamic shopImage;
   DateTime createdAt;
   DateTime updatedAt;
+  dynamic locationAddress;
 
   BusinessUser({
     required this.id,
@@ -162,6 +163,7 @@ class BusinessUser {
     this.shopImage,
     required this.createdAt,
     required this.updatedAt,
+    this.locationAddress,
   });
 
   factory BusinessUser.fromJson(Map<String, dynamic> json) => BusinessUser(
@@ -221,6 +223,7 @@ class BusinessUser {
         shopImage: json["shop_image"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        locationAddress: json["location_address"] 
       );
 
   Map<String, dynamic> toJson() => {

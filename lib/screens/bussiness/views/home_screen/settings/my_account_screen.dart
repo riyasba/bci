@@ -7,6 +7,7 @@ import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart
 import 'package:bci/screens/bussiness/views/home_screen/settings/edit_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -22,6 +23,7 @@ class MyAccountScreen extends StatefulWidget {
 class _MyAccountScreenState extends State<MyAccountScreen> {
   var displayNameController = TextEditingController();
   var addressController = TextEditingController();
+  var mapUrlController = TextEditingController();
   var signatureController = TextEditingController();
   var contactController = TextEditingController();
   var numberController = TextEditingController();
@@ -121,6 +123,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
       bankNameController.text = profileController.profileData.first.bankName;
       accountTypeController.text = profileController.profileData.first.accountType;
       ifscCodeController.text = profileController.profileData.first.ifscCode;
+      mapUrlController.text = profileController.profileData.first.locationAddress;
       getCategorybyID();
     }
   }
@@ -222,6 +225,9 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                     child: TextField(
                       controller: displayNameController,
                       readOnly: true,
+                      inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+                    ],
                       decoration: InputDecoration(
                           labelText: 'Merchant display name',
                           hintStyle: TextStyle(fontSize: 16, color: kblue),
@@ -243,6 +249,20 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                     ),
                   ),
                 ),
+                Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                child: Container(
+                  height: 55,
+                  child: TextField(
+                    controller: mapUrlController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                        labelText: 'Map Url',
+                        hintStyle: TextStyle(fontSize: 16, color: kblue),
+                        border: const OutlineInputBorder()),
+                  ),
+                ),
+              ),
                 // Padding(
                 //   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
                 //   child: TextField(

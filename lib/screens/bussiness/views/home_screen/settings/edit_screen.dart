@@ -22,6 +22,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
   var nameController = TextEditingController();
   var displayNameController = TextEditingController();
   var addressController = TextEditingController();
+  var mapUrlController = TextEditingController();
   var signatureController = TextEditingController();
   var contactController = TextEditingController();
   var numberController = TextEditingController();
@@ -92,6 +93,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
       aadharCardImage = profileController.profileData.first.adharProof;
       panCardImage = profileController.profileData.first.panProof;
       shopImage = profileController.profileData.first.shopImage;
+      mapUrlController.text = profileController.profileData.first.locationAddress;
       setState(() {});
       getCategorybyID();
     }
@@ -248,22 +250,57 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
           )),
       body: ListView(
         children: [
-          Stack(
-            children: [
-              GetBuilder<ProfileController>(builder: (_) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    imageprofile != null
-                        ? Container(
-                            decoration:
-                                const BoxDecoration(shape: BoxShape.circle),
-                            height: 130,
-                            width: 135,
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(60),
-                                child: Image.file(imageprofile!)))
-                        : InkWell(
+          GetBuilder<ProfileController>(builder: (_) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                imageprofile != null
+                    ? Stack(
+                        children: [
+                          Container(
+                              decoration:
+                                  const BoxDecoration(shape: BoxShape.circle),
+                              height: 130,
+                              width: 135,
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(60),
+                                  child: Image.file(imageprofile!))),
+                          Positioned(
+                            bottom: 5,
+                            right: 5,
+                            child: InkWell(
+                              onTap: () {
+                                profileimage();
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 2,
+                                        color: Colors.grey.withOpacity(0.5),
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: Icon(
+                                  Icons.camera_alt_outlined,
+                                  shadows: [
+                                    BoxShadow(
+                                        offset: const Offset(0.0, 0.75),
+                                        blurRadius: 1,
+                                        color: kgrey)
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      )
+                    : Stack(
+                        children: [
+                          InkWell(
                             onTap: () {
                               profileimage();
                             },
@@ -276,35 +313,60 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                         shape: BoxShape.circle),
                                     child: profileController.profileData.first
                                             .profilePicture.isEmpty
-                                        ? Image.asset(
-                                            'assets/images/settingprofile.png',
-                                            fit: BoxFit.fitWidth,
-                                            width: 110,
+                                        ? ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(60),
+                                            child: Image.asset(
+                                              'assets/images/settingprofile.png',
+                                              fit: BoxFit.fitWidth,
+                                              width: 110,
+                                            ),
                                           )
-                                        : Image.network(profileController
-                                            .profileData.first.profilePicture),
+                                        : ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(60),
+                                            child: Image.network(
+                                                profileController.profileData
+                                                    .first.profilePicture),
+                                          ),
                                   ),
                           ),
-                  ],
-                );
-              }),
-              Padding(
-                padding: const EdgeInsets.only(top: 95, left: 50),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Icon(
-                    Icons.camera_alt_outlined,
-                    shadows: [
-                      BoxShadow(
-                          offset: const Offset(0.0, 0.75),
-                          blurRadius: 1,
-                          color: kgrey)
-                    ],
-                  )
-                ]),
-              )
-            ],
-          ),
+                          Positioned(
+                            bottom: 5,
+                            right: 5,
+                            child: InkWell(
+                              onTap: () {
+                                profileimage();
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 2,
+                                        color: Colors.grey.withOpacity(0.5),
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: Icon(
+                                  Icons.camera_alt_outlined,
+                                  shadows: [
+                                    BoxShadow(
+                                        offset: const Offset(0.0, 0.75),
+                                        blurRadius: 1,
+                                        color: kgrey)
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+              ],
+            );
+          }),
           ksizedbox20,
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
@@ -312,6 +374,9 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               height: 55,
               child: TextField(
                 controller: displayNameController,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+                ],
                 decoration: InputDecoration(
                     labelText: 'Merchant display name',
                     hintStyle: TextStyle(fontSize: 20, color: kblue),
@@ -327,6 +392,19 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                 controller: addressController,
                 decoration: InputDecoration(
                     labelText: 'Business Address',
+                    hintStyle: TextStyle(fontSize: 20, color: kblue),
+                    border: const OutlineInputBorder()),
+              ),
+            ),
+          ),
+           Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: Container(
+              height: 55,
+              child: TextField(
+                controller: mapUrlController ,
+                decoration: InputDecoration(
+                    labelText: 'Map Url',
                     hintStyle: TextStyle(fontSize: 20, color: kblue),
                     border: const OutlineInputBorder()),
               ),
@@ -354,6 +432,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                   FilteringTextInputFormatter.digitsOnly,
                   FilteringTextInputFormatter.deny(RegExp(r'\s')),
                 ],
+                readOnly: true,
                 decoration: InputDecoration(
                     labelText: 'Mobile Number',
                     hintStyle: TextStyle(fontSize: 20, color: kblue),
@@ -416,6 +495,9 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               height: 55,
               child: TextField(
                 controller: bankNameController,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+                ],
                 decoration: InputDecoration(
                     labelText: 'Bank Name',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
@@ -429,8 +511,11 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               height: 55,
               child: TextField(
                 controller: bankAccountNameController,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+                ],
                 decoration: InputDecoration(
-                    labelText: 'Bank Account Name',
+                    labelText: 'Bank Account Holder Name',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
                     border: const OutlineInputBorder()),
               ),
@@ -442,6 +527,9 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               height: 55,
               child: TextField(
                 controller: accountTypeController,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+                ],
                 decoration: InputDecoration(
                     labelText: 'Account Type',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
@@ -532,7 +620,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                         children: [
                                           TextButton(
                                               onPressed: () {
-                                                  Get.back();
+                                                Get.back();
                                                 pickerimage();
                                               },
                                               child: const Text(
@@ -543,7 +631,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                               )),
                                           TextButton(
                                               onPressed: () {
-                                                  Get.back();
+                                                Get.back();
                                                 imagepic();
                                               },
                                               child: const Text(
@@ -564,54 +652,58 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                 child: Image.asset(
                                     'assets/images/imageupload.png')),
                           ),
-             panCardImage != null ? Container(
-                        height: 100, width: 100, child: Image.network(panCardImage)):   image2 != null
+                panCardImage != null
                     ? Container(
-                        height: 100, width: 100, child: Image.file(image2!))
-                    : InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      TextButton(
-                                          onPressed: () {
-                                            Get.back();
-                                            pickerimage2();
-                                          },
-                                          child: const Text(
-                                            'Choose ur gallery',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16),
-                                          )),
-                                      TextButton(
-                                          onPressed: () {
-                                              Get.back();
-                                            imagepic2();
-                                          },
-                                          child: const Text(
-                                            'Choose ur Camera',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16),
-                                          ))
-                                    ],
-                                  ),
-                                );
-                              });
-                        },
-                        child: Container(
-                            height: 100,
-                            width: 100,
-                            color: const Color(0xffE4E4E4),
-                            child:
-                                Image.asset('assets/images/imageupload.png')),
-                      ),
+                        height: 100,
+                        width: 100,
+                        child: Image.network(panCardImage))
+                    : image2 != null
+                        ? Container(
+                            height: 100, width: 100, child: Image.file(image2!))
+                        : InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) {
+                                    return Container(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Get.back();
+                                                pickerimage2();
+                                              },
+                                              child: const Text(
+                                                'Choose ur gallery',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16),
+                                              )),
+                                          TextButton(
+                                              onPressed: () {
+                                                Get.back();
+                                                imagepic2();
+                                              },
+                                              child: const Text(
+                                                'Choose ur Camera',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16),
+                                              ))
+                                        ],
+                                      ),
+                                    );
+                                  });
+                            },
+                            child: Container(
+                                height: 100,
+                                width: 100,
+                                color: const Color(0xffE4E4E4),
+                                child: Image.asset(
+                                    'assets/images/imageupload.png')),
+                          ),
                 //
                 // simage != null
                 //     ? Container(
@@ -746,21 +838,24 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                         onPressed: () {
                           MerchantUpdateModel merchantUpdateModel =
                               MerchantUpdateModel(
-                            address: addressController.text,
-                            alternateMobile: aleternativeController.text,
-                            categoryId: categoryController.text,
-                            gstNo: gstnoController.text,
-                            mobile: numberController.text,
-                            name: displayNameController.text,
-                            accountType: accountTypeController.text,
-                            bankAccountName: bankAccountNameController.text,
-                            bankAccountNumber: bankAccountNumberController.text,
-                            bankName: bankNameController.text,
-                            ifscCode: ifscCodeController.text,
-                            shopImage: simage == null ? "null" : simage!.path,
-                            aadharProof: image,
-                            panProof: image2
-                          );
+                                  address: addressController.text,
+                                  alternateMobile: aleternativeController.text,
+                                  categoryId: categoryController.text,
+                                  gstNo: gstnoController.text,
+                                  mobile: numberController.text,
+                                  name: displayNameController.text,
+                                  accountType: accountTypeController.text,
+                                  bankAccountName:
+                                      bankAccountNameController.text,
+                                  bankAccountNumber:
+                                      bankAccountNumberController.text,
+                                  bankName: bankNameController.text,
+                                  ifscCode: ifscCodeController.text,
+                                  shopImage:
+                                      simage == null ? "null" : simage!.path,
+                                      locationAddress: mapUrlController.text,
+                                  aadharProof: image,
+                                  panProof: image2);
                           profileController.updateProfile(
                               merchantUpdateModel: merchantUpdateModel);
                         },

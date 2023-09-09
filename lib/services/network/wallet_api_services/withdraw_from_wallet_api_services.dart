@@ -22,7 +22,7 @@ class WithdrawWalletApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"amount": amount});
+          data: {"amount": amount, "type": "bank_withdrawal"});
       print(
           "::::::::<Withdraw wallet Amount api>::::::::status code::::::::::");
       print(response.statusCode);

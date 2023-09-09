@@ -72,6 +72,10 @@ dependencies:
   flutter_sticky_widgets: ^0.0.3
   coupon_uikit: ^0.2.0
   dropdown_search: ^5.0.6
+  permission_handler: ^10.4.5
+  download_assets: ^3.1.1    
+  open_file: ^3.3.2
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -103,6 +107,7 @@ flutter:
     - assets/images/
     - assets/images/flight_booking/
     - assets/icons/
+    - assets/pdf/
   
 
   # An image asset can refer to one or more resolution-specific "variants", see

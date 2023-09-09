@@ -215,21 +215,14 @@ class ServicesController extends GetxController {
 
   //vendor offer list
   GetVendorOfferListApiServices getVendorOfferListApiServices = GetVendorOfferListApiServices();
-  List<OfferListData> offerListData = [];
+  List<VendorOfferList> offerListData = [];
 
   offerList() async {
     dio.Response<dynamic> response = await getVendorOfferListApiServices.getVendorOfferListApiServices();
     if(response.statusCode == 200){
-       VendorOfferList vendorOfferList = VendorOfferList.fromJson(response.data);
-       offerListData = vendorOfferList.message;
-    } else {
-      Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            "Something went wrong",
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
-    }
+        offerListData = List<VendorOfferList>.from(
+          response.data.map((x) => VendorOfferList.fromJson(x)));
+    } 
     update();
   }
 

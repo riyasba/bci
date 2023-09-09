@@ -13,11 +13,13 @@ import 'package:get/get.dart';
 import 'authentications/splash_screen/Splash_screen.dart';
 import 'controllers/notification_controller.dart';
 import 'controllers/vendorbanner_controller.dart';
+import 'package:download_assets/download_assets.dart';
+
 
 Future main()async {
   WidgetsFlutterBinding.ensureInitialized(); 
   await Firebase.initializeApp();
-
+ 
     AwesomeNotifications().initialize(
   // set the icon to null if you want to use the default app icon
   null,

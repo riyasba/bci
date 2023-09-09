@@ -4,43 +4,27 @@
 
 import 'dart:convert';
 
-VendorOfferList vendorOfferListFromJson(String str) => VendorOfferList.fromJson(json.decode(str));
+List<VendorOfferList> vendorOfferListFromJson(String str) => List<VendorOfferList>.from(json.decode(str).map((x) => VendorOfferList.fromJson(x)));
 
-String vendorOfferListToJson(VendorOfferList data) => json.encode(data.toJson());
+String vendorOfferListToJson(List<VendorOfferList> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class VendorOfferList {
-    List<OfferListData> message;
-
-    VendorOfferList({
-        required this.message,
-    });
-
-    factory VendorOfferList.fromJson(Map<String, dynamic> json) => VendorOfferList(
-        message: List<OfferListData>.from(json["message"].map((x) => OfferListData.fromJson(x))),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "message": List<dynamic>.from(message.map((x) => x.toJson())),
-    };
-}
-
-class OfferListData {
     int id;
-    dynamic vendorId;
-    dynamic categoryId;
+    String vendorId;
+    String categoryId;
     String title;
     DateTime startsAt;
     DateTime endsAt;
     String businessValue;
     String discountValue;
     String noOfClaimUser;
-    dynamic status;
+    String status;
     String image;
     dynamic description;
     DateTime createdAt;
     DateTime updatedAt;
 
-    OfferListData({
+    VendorOfferList({
         required this.id,
         required this.vendorId,
         required this.categoryId,
@@ -52,12 +36,12 @@ class OfferListData {
         required this.noOfClaimUser,
         required this.status,
         required this.image,
-        this.description,
+        required this.description,
         required this.createdAt,
         required this.updatedAt,
     });
 
-    factory OfferListData.fromJson(Map<String, dynamic> json) => OfferListData(
+    factory VendorOfferList.fromJson(Map<String, dynamic> json) => VendorOfferList(
         id: json["id"],
         vendorId: json["vendor_id"],
         categoryId: json["category_id"],

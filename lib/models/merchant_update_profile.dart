@@ -16,6 +16,7 @@ class MerchantUpdateModel {
   String shopImage;
   dynamic aadharProof;
   dynamic panProof;
+  dynamic locationAddress;
   
 
   MerchantUpdateModel({
@@ -34,5 +35,6 @@ class MerchantUpdateModel {
     required this.shopImage,
      this.aadharProof,
      this.panProof,
+     this.locationAddress,
   });
 }

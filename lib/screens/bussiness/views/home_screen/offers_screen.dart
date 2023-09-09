@@ -5,6 +5,7 @@ import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/services_controller.dart';
 import 'package:bci/models/category_model.dart';
 import 'package:bci/screens/bussiness/views/home_screen/offers/last_offers.dart';
+import 'package:bci/screens/bussiness/views/home_screen/offers/offers_list_view.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
@@ -166,14 +167,19 @@ class _OffersScreenState extends State<OffersScreen> {
                           color: kwhite,
                         )),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Text(
-                      'Offers',
-                      style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                   Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: InkWell(
+                      onTap: (){
+                        Get.to(()=> OfferScreenListView());
+                      },
+                      child: const Text(
+                        'View Offers',
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
                     ),
                   ),
                   // Padding(

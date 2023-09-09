@@ -12,10 +12,15 @@ import 'package:bci/services/network/profile_api_services/profile_pic_update_api
 import 'package:bci/services/network/profile_api_services/profile_update_api.dart';
 import 'package:bci/services/network/profile_api_services/update_bank_account_api_services.dart';
 import 'package:bci/services/network/wallet_api_services/withdraw_from_wallet_api_services.dart';
+import 'package:download_assets/download_assets.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ProfileController extends GetxController {
   GetProfileApiServices getProfileApiServices = GetProfileApiServices();
@@ -120,5 +125,28 @@ class ProfileController extends GetxController {
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }
+  }
+
+  // DownloadAssetsController downloadAssetsController =
+  //     DownloadAssetsController();
+
+  downloadBroucher() async {
+    var _byteData = await rootBundle.load('assets/pdf/bci_vendor_brochure.pdf');
+
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
+
+    Directory root = await getTemporaryDirectory();
+    final file = File(root.path + '/bci_brochure.pdf');
+    final buffer = _byteData.buffer;
+
+    await file.writeAsBytes(
+        buffer.asUint8List(_byteData.offsetInBytes, _byteData.lengthInBytes));
+    print("------------------------>>>");
+    print(file.path);
+
+    OpenFile.open(file.path);
   }
 }

@@ -16,8 +16,12 @@ import 'package:get/instance_manager.dart';
 class BusinessOtpvarification extends StatefulWidget {
   String phoneNumber;
   String otp;
+  bool isFromRegister;
   BusinessOtpvarification(
-      {super.key, required this.otp, required this.phoneNumber});
+      {super.key,
+      required this.otp,
+      required this.phoneNumber,
+      required this.isFromRegister});
 
   @override
   State<BusinessOtpvarification> createState() =>
@@ -65,14 +69,14 @@ class _BusinessOtpvarificationState extends State<BusinessOtpvarification> {
             children: [
               Text(
                 'Enter the OTP send to ${widget.phoneNumber}',
-                style:const TextStyle(
+                style: const TextStyle(
                   fontSize: 22,
                   color: Colors.black,
                 ),
               ),
               Text(
                 'Otp is ${widget.otp}',
-                style:const TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   color: Colors.black,
                 ),
@@ -83,7 +87,7 @@ class _BusinessOtpvarificationState extends State<BusinessOtpvarification> {
           SingleChildScrollView(
             child: OtpTextField(
               numberOfFields: 4,
-              borderColor:const Color(0xFF512DA8),
+              borderColor: const Color(0xFF512DA8),
               //set to true to show as box or false to show as dash
               showFieldAsBox: true,
               //runs when a code is typed in
@@ -110,30 +114,29 @@ class _BusinessOtpvarificationState extends State<BusinessOtpvarification> {
                 ),
               ),
               _isActive
-                      ? Text(
-                          "Resend in $_start",
-                          style: primaryFont.copyWith(color: Colors.blue),
-                        )
-                      : InkWell(
-                          onTap: () async {
-                            String tempOtp =
-                                await authController.rendOtpFunction(
-                                    mobileNumber: widget.phoneNumber);
-                            setState(() {
-                              _isActive = true;
-                              widget.otp = tempOtp;
-                            });
-                            startTimer();
-                          },
-                          child: Text(
-                            "Resend",
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                decoration: TextDecoration.underline,
-                                color: kOrange),
-                          ),
-                        ),
+                  ? Text(
+                      "Resend in $_start",
+                      style: primaryFont.copyWith(color: Colors.blue),
+                    )
+                  : InkWell(
+                      onTap: () async {
+                        String tempOtp = await authController.rendOtpFunction(
+                            mobileNumber: widget.phoneNumber);
+                        setState(() {
+                          _isActive = true;
+                          widget.otp = tempOtp;
+                        });
+                        startTimer();
+                      },
+                      child: Text(
+                        "Resend",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            decoration: TextDecoration.underline,
+                            color: kOrange),
+                      ),
+                    ),
               ksizedbox20,
             ],
           ),
@@ -214,7 +217,8 @@ class _BusinessOtpvarificationState extends State<BusinessOtpvarification> {
                   )
                 : InkWell(
                     onTap: () {
-                      authController.verifyOtp(mobile: widget.phoneNumber, otp: otpString);
+                      authController.verifyOtp(
+                          mobile: widget.phoneNumber, otp: otpString,isFromRegister: widget.isFromRegister);
                       // authController.loginUsersbusiness(
                       //     mobile: widget.phoneNumber, otp: otpString);
                     },
