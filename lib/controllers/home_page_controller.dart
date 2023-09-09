@@ -488,4 +488,9 @@ class HomeController extends GetxController {
     };
     return map;
   }
+
+
+  getVendorsList() async{
+    
+  }
 }

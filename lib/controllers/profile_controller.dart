@@ -23,6 +23,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:isgpayui_plugin/isgpayui_plugin.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../services/network/profile_api_services/update_residencial_address_api_services.dart';
 
 class ProfileController extends GetxController {
@@ -623,6 +626,24 @@ class ProfileController extends GetxController {
     }
   }
 
- 
+   downloadBroucher() async {
+    var _byteData = await rootBundle.load('assets/pdf/bci_member_brochure.pdf');
+
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
+
+    Directory root = await getTemporaryDirectory();
+    final file = File(root.path + '/bci_brochure.pdf');
+    final buffer = _byteData.buffer;
+
+    await file.writeAsBytes(
+        buffer.asUint8List(_byteData.offsetInBytes, _byteData.lengthInBytes));
+    print("------------------------>>>");
+    print(file.path);
+
+    OpenFile.open(file.path);
+  }
 
 }

@@ -545,9 +545,45 @@ class _Home_screen1State extends State<Home_screen1> {
                   //     kwidth10
                   //   ],
                   // ),
-                  ksizedbox30,
-                  // if (homeController.sliderList.isNotEmpty)
-                  CarouselSlider(
+                  ksizedbox20,
+                   Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+              child: InkWell(
+                onTap: (){
+                  profileController.downloadBroucher();
+                },
+                child: Container(
+                  height: 45,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [kOrange, kyellow]),
+                      boxShadow: [
+                        BoxShadow(
+                            blurRadius: 2, color: Colors.grey.withOpacity(0.5))
+                      ],
+                      borderRadius: BorderRadius.circular(30)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 25,right: 25),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset("assets/images/pdf.png",height: 25,),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                          const  Text("Download Brochure",style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18
+                            ),)
+                          ],
+                        ),
+                      ),
+                ),
+              ),
+            ),
+            // if (homeController.sliderList.isNotEmpty)
+            CarouselSlider(
                       carouselController: sliderController,
                       items: [
                         for (int i = 0;

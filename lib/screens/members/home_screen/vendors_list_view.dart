@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class OthersServiceScreen extends StatefulWidget {
-  const OthersServiceScreen({super.key});
+class VendorsListView extends StatefulWidget {
+  const VendorsListView({super.key});
 
   @override
-  State<OthersServiceScreen> createState() => _OthersServiceScreenState();
+  State<VendorsListView> createState() => _VendorsListViewState();
 }
 
-class _OthersServiceScreenState extends State<OthersServiceScreen> {
+class _VendorsListViewState extends State<VendorsListView> {
   final homeController = Get.find<HomeController>();
 
   @override

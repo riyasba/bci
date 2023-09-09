@@ -73,7 +73,7 @@ dependencies:
   velocity_x: ^4.1.0
   flutter_super_html_viewer: ^0.1.0
   pdf: ^3.10.4
-  path_provider: ^2.0.11
+  path_provider: ^2.1.1
   permission_handler: ^10.2.0
   open_file: ^3.3.2
   textfield_tags: ^2.0.2
@@ -120,6 +120,7 @@ flutter:
     - assets/images/
     - assets/images/flight_booking/
     - assets/icons/
+    - assets/pdf/
   
 
   # An image asset can refer to one or more resolution-specific "variants", see
