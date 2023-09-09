@@ -279,8 +279,8 @@ class _SettingScreenState extends State<SettingScreen> {
                     MaterialPageRoute(
                         builder: (context) => const YourReferralScreen()));
               },
-              child: Row(
-                children: const [
+              child: const Row(
+                children:  [
                   Image(
                     image: AssetImage("assets/icons/refferels.png"),
                     width: 20,
@@ -312,8 +312,8 @@ class _SettingScreenState extends State<SettingScreen> {
                     MaterialPageRoute(
                         builder: (context) => const OurPartnerScreen()));
               },
-              child: Row(
-                children: const [
+              child: const Row(
+                children:  [
                   Image(
                     image: AssetImage("assets/icons/partner.png"),
                     width: 20,
@@ -345,8 +345,8 @@ class _SettingScreenState extends State<SettingScreen> {
                     MaterialPageRoute(
                         builder: (context) => const UpgradeScreen()));
               },
-              child: Row(
-                children: const [
+              child: const Row(
+                children:  [
                   Image(
                     image: AssetImage("assets/icons/upgrade.png"),
                     width: 20,
@@ -378,8 +378,8 @@ class _SettingScreenState extends State<SettingScreen> {
                     MaterialPageRoute(
                         builder: (context) => const SupportScreen()));
               },
-              child: Row(
-                children: const [
+              child: const Row(
+                children:  [
                   Image(image: AssetImage("assets/icons/sprt.png"), width: 20),
                   SizedBox(
                     width: 10,

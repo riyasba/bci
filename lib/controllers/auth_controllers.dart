@@ -284,8 +284,9 @@ class AuthController extends GetxController {
     dio.Response<dynamic> response =
         await filtercategoryapiservice.filtercategory(categoryId: categoryid);
     if (response.statusCode == 200) {
-      List<OffersListModel> offerslistModel =
-          offersListModelFromJson(response.data);
+      List<OffersListModel> offerslistModel = List<OffersListModel>.from(
+          response.data.map((x) => OffersListModel.fromJson(x)));
+          // offersListModelFromJson();
       offerslistdata = offerslistModel;
       update();
       Get.back();

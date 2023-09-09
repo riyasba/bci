@@ -60,6 +60,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(250),
@@ -125,14 +126,29 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: Column(
                       children: [
                         Container(
-                          height: 90,
                           width: MediaQuery.of(context).size.width,
                           color: Colors.white,
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
+                                padding: const EdgeInsets.only(top: 15),
+                                child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(40)
+                                  ),
+                                  child: Image.asset("assets/images/logo.png"),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Padding(
                                 padding: const EdgeInsets.only(
-                                  top: 20,
+                                  top: 15,
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,11 +162,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 6),
-                                      child: Text(
-                                        authController
-                                            .notificationData[index].message,
-                                        style: TextStyle(
-                                            fontSize: 14, color: kgrey),
+                                      child: Container(
+                                        width: size.width * 0.81,
+                                        child: Text(
+                                          authController
+                                              .notificationData[index].message,
+                                          style: TextStyle(
+                                              fontSize: 14, color: kgrey),
+                                        ),
                                       ),
                                     ),
                                     Padding(
@@ -162,8 +181,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                                 .createdAt,
                                             [dd, '-', mm, '-', yyyy]),
                                         style: const TextStyle(
-                                            fontSize: 13.5,
-                                            fontWeight: FontWeight.bold),
+                                            fontSize: 11.5,
+                                            color: Colors.black45,
+                                            fontWeight: FontWeight.w300),
                                       ),
                                     )
                                   ],
