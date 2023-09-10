@@ -11,6 +11,7 @@ import 'package:bci/models/liquor_vendor_list_models/liquor_vendor_list_model.da
 import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/models/slider_model.dart';
 import 'package:bci/models/slider_product_model.dart';
+import 'package:bci/models/vendor_list_model.dart';
 import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
 import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
 import 'package:bci/services/network/categorys_api_services/add_booking_api_services.dart';
@@ -29,6 +30,7 @@ import 'package:bci/services/network/slider_api_services/slider_product_api_serv
 import 'package:bci/services/network/subscriptions_api_services/add_subscription_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plan_details_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plans_list_api_services.dart';
+import 'package:bci/services/network/vendor_list_api_services/vendor_list_api_services.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:bci/services/network/slider_api_services/slider_api_services.dart';
 import 'package:flutter/material.dart';
@@ -371,8 +373,7 @@ class HomeController extends GetxController {
       List<OffersListModel> getTodayOffersList = List<OffersListModel>.from(
           response.data.map((x) => OffersListModel.fromJson(x)));
       todayOfferListData = getTodayOffersList;
-    }else if(response.statusCode == 404){
-
+    } else if (response.statusCode == 404) {
     } else {
       // Get.rawSnackbar(
       //     backgroundColor: Colors.red,
@@ -460,7 +461,7 @@ class HomeController extends GetxController {
     debugPrint('Result ::: $result');
 
     var responseData = jsonDecode(result!);
-     print("<<----response-data---->>");
+    print("<<----response-data---->>");
     print(responseData);
   }
 
@@ -489,8 +490,16 @@ class HomeController extends GetxController {
     return map;
   }
 
+  VendorListApiServices vendorListApiServices = VendorListApiServices();
+  List<VendorListModelData> vendorList = [];
+  getVendorsList() async {
+    dio.Response<dynamic> response =
+        await vendorListApiServices.vendorListApiServices();
 
-  getVendorsList() async{
-    
+    if (response.statusCode == 200) {
+      VendorListModel vendorListModel = VendorListModel.fromJson(response.data);
+      vendorList = vendorListModel.data;
+    }
+    update();
   }
 }

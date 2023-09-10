@@ -9,14 +9,14 @@ OurPartnersList ourPartnersListFromJson(String str) => OurPartnersList.fromJson(
 String ourPartnersListToJson(OurPartnersList data) => json.encode(data.toJson());
 
 class OurPartnersList {
-    List<OurPartnersData> data;
+    List<OurPartnerData> data;
 
     OurPartnersList({
         required this.data,
     });
 
     factory OurPartnersList.fromJson(Map<String, dynamic> json) => OurPartnersList(
-        data: List<OurPartnersData>.from(json["data"].map((x) => OurPartnersData.fromJson(x))),
+        data: List<OurPartnerData>.from(json["data"].map((x) => OurPartnerData.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -24,28 +24,34 @@ class OurPartnersList {
     };
 }
 
-class OurPartnersData {
+class OurPartnerData {
     int id;
     String title;
     String image;
-    dynamic status;
+    String description;
+    String mapUrl;
+    String status;
     DateTime createdAt;
     DateTime updatedAt;
 
-    OurPartnersData({
+    OurPartnerData({
         required this.id,
         required this.title,
         required this.image,
+        required this.description,
+        required this.mapUrl,
         required this.status,
         required this.createdAt,
         required this.updatedAt,
     });
 
-    factory OurPartnersData.fromJson(Map<String, dynamic> json) => OurPartnersData(
-        id: json["id"]?? 0,
-        title: json["title"]?? "",
-        image: json["image"]?? "",
-        status: json["status"]?? "",
+    factory OurPartnerData.fromJson(Map<String, dynamic> json) => OurPartnerData(
+        id: json["id"],
+        title: json["title"],
+        image: json["image"],
+        description: json["description"],
+        mapUrl: json["map_url"],
+        status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );
@@ -54,6 +60,8 @@ class OurPartnersData {
         "id": id,
         "title": title,
         "image": image,
+        "description": description,
+        "map_url": mapUrl,
         "status": status,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),

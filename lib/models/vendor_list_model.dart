@@ -4,22 +4,22 @@
 
 import 'dart:convert';
 
-VendorOfferList vendorOfferListFromJson(String str) =>
-    VendorOfferList.fromJson(json.decode(str));
+VendorListModel vendorOfferListFromJson(String str) =>
+    VendorListModel.fromJson(json.decode(str));
 
-String vendorOfferListToJson(VendorOfferList data) =>
+String vendorOfferListToJson(VendorListModel data) =>
     json.encode(data.toJson());
 
-class VendorOfferList {
-  List<Datum> data;
+class VendorListModel {
+  List<VendorListModelData> data;
 
-  VendorOfferList({
+  VendorListModel({
     required this.data,
   });
 
-  factory VendorOfferList.fromJson(Map<String, dynamic> json) =>
-      VendorOfferList(
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+  factory VendorListModel.fromJson(Map<String, dynamic> json) =>
+      VendorListModel(
+        data: List<VendorListModelData>.from(json["data"].map((x) => VendorListModelData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -27,7 +27,7 @@ class VendorOfferList {
       };
 }
 
-class Datum {
+class VendorListModelData {
   int id;
   String roleId;
   String userId;
@@ -90,7 +90,7 @@ class Datum {
   DateTime createdAt;
   DateTime updatedAt;
 
-  Datum({
+  VendorListModelData({
     required this.id,
     required this.roleId,
     required this.userId,
@@ -154,7 +154,7 @@ class Datum {
     required this.updatedAt,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory VendorListModelData.fromJson(Map<String, dynamic> json) => VendorListModelData(
         id: json["id"],
         roleId: json["role_id"],
         userId: json["user_id"],

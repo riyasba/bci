@@ -1,6 +1,7 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/widgets/home_widgets/payment_bottom_sheet.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -362,7 +363,8 @@ class _CartScreenState extends State<CartScreen> {
                           onTap: () {
                             if (homeController.cartListData.isNotEmpty) {
                               var tempAmount = homeController.getGrandTotal();
-                              profileController.payFromCart(tempAmount);
+                              // profileController.payFromCart(tempAmount);
+                              paymentBottomSheet(context,tempAmount);
                             } else {
                               Get.rawSnackbar(
                                   message: "No Cart item found",

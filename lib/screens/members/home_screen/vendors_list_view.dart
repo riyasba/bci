@@ -2,6 +2,7 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
+import 'package:bci/screens/members/home_screen/vedor_detail_screen.dart';
 import 'package:bci/screens/members/members_search_screen/member_service_details_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,7 +26,7 @@ class _VendorsListViewState extends State<VendorsListView> {
 
     super.initState();
 
-    homeController.serviceList();
+    homeController.getVendorsList();
   }
 
   @override
@@ -82,13 +83,13 @@ class _VendorsListViewState extends State<VendorsListView> {
             ],
           )),
       body: GetBuilder<HomeController>(builder: (_) {
-        return homeController.serviceListData.isEmpty
+        return homeController.vendorList.isEmpty
             ? const Center(
                 child: Text("No Data Found"),
               )
             : GridView.builder(
                 physics: const BouncingScrollPhysics(),
-                itemCount: homeController.serviceListData.length,
+                itemCount: homeController.vendorList.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 10,
@@ -99,48 +100,10 @@ class _VendorsListViewState extends State<VendorsListView> {
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
                       onTap: () {
-                        SearchServiceListData searchServiceListData =
-                            SearchServiceListData(
-                                actualAmount: homeController
-                                    .serviceListData[index].actualAmount,
-                                bvcAmount: homeController
-                                    .serviceListData[index].bvcAmount,
-                                categoryId: homeController
-                                    .serviceListData[index].categoryId,
-                                createdAt: homeController
-                                    .serviceListData[index].createdAt,
-                                description: homeController
-                                    .serviceListData[index].description,
-                                id: homeController.serviceListData[index].id,
-                                image:
-                                    homeController.serviceListData[index].image,
-                                // isBooking: homeController
-                                //     .serviceListData[index].isBooking,
-                                saleAmount: homeController
-                                    .serviceListData[index].saleAmount,
-                                status: homeController
-                                    .serviceListData[index].status,
-                                title:
-                                    homeController.serviceListData[index].title,
-                                updatedAt: homeController
-                                    .serviceListData[index].updatedAt,
-                                amenties: homeController
-                                    .serviceListData[index].amenties,
-                                vendorId: homeController
-                                    .serviceListData[index].vendorId,
-                                isCoupon: "",
-                                isOffer: "",
-                                isRecomended: "",
-                                quantity: homeController
-                                    .serviceListData[index].quantity,
-                                unit: "",
-                                couponAmount: "",
-                                offerPercentage: "",
-                                offerUptoAmount: "",
-                                shareOption: "");
                         Get.to(
-                          ServiceDetailsScreen(
-                            searchServicelist: searchServiceListData,
+                          VendorDetailScreen(
+                            vendorListModelData:
+                                homeController.vendorList[index],
                           ),
                         );
                       },
@@ -156,12 +119,22 @@ class _VendorsListViewState extends State<VendorsListView> {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(15),
-                              child: Image.network(
-                                homeController.serviceListData[index].image,
-                                height: 125,
-                                width: size.width,
-                                fit: BoxFit.cover,
-                              ),
+                              child:
+                                  homeController.vendorList[index].profilePicture !=
+                                          null
+                                      ? Image.network(
+                                          homeController.vendorList[index]
+                                              .profilePicture!,
+                                          height: 125,
+                                          width: size.width,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.asset(
+                                          "assets/icons/no-photo.png",
+                                          height: 125,
+                                          width: size.width,
+                                          fit: BoxFit.cover,
+                                        ),
                             ),
                             ksizedbox10,
                             Padding(
@@ -172,7 +145,7 @@ class _VendorsListViewState extends State<VendorsListView> {
                                 child: FittedBox(
                                   fit: BoxFit.scaleDown,
                                   child: Text(
-                                    homeController.serviceListData[index].title,
+                                    homeController.vendorList[index].name,
                                     style: TextStyle(
                                         fontSize: 19.sp,
                                         fontWeight: FontWeight.bold,

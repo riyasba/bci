@@ -227,4 +227,13 @@ abstract class BaseApiService {
 
   final String hotelBookingDetailsURL = "https://www.portal.bcipvtltd.com/api/auth/get_booking_detail";
 
+
+  final String vendorListURL = "https://www.portal.bcipvtltd.com/api/auth/vendor_list";
+
+
+
+ //withdraw amount
+  final String withdrawAmountURL =
+      "https://www.portal.bcipvtltd.com/api/auth/withdrawAmount";
+
 }

@@ -165,6 +165,7 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
                             ksizedbox10,
                             Text(
                               homeController.vendorServiceListData[index].title,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   fontSize: 20.sp,
                                   fontWeight: FontWeight.bold,

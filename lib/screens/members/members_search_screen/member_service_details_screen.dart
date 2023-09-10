@@ -52,6 +52,18 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
             width: size.width,
             fit: BoxFit.cover,
           ),
+          ksizedbox10,
+          Padding(
+            padding: const EdgeInsets.only(left: 15),
+            child: Text(
+                    widget.searchServicelist.title,
+                    style: TextStyle(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.bold,
+                        color: kblue),
+                  ),
+          ),
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(

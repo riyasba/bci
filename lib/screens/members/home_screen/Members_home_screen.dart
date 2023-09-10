@@ -3,6 +3,7 @@ import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_booking_landing_screen.dart';
 import 'package:bci/screens/members/home_screen/others_service_screen.dart';
+import 'package:bci/screens/members/home_screen/vendors_list_view.dart';
 import 'package:bci/screens/members/offer%20screen/offer_screen_list_view.dart';
 import 'package:bci/screens/members/settings_views/aditional_coupons.dart';
 import 'package:carousel_slider/carousel_options.dart';
@@ -390,7 +391,8 @@ class _Home_screen1State extends State<Home_screen1> {
                           children: [
                             InkWell(
                               onTap: () {
-                                Get.to(const OthersServiceScreen());
+                                // Get.to(const OthersServiceScreen());
+                                Get.to(()=> VendorsListView());
                               },
                               child: Column(
                                 children: [

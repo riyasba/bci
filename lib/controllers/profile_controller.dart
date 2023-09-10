@@ -16,6 +16,7 @@ import 'package:bci/services/network/profile_api_services/redeem_coupons_api_ser
 import 'package:bci/services/network/profile_api_services/update_official_address_api.dart';
 import 'package:bci/services/network/profile_api_services/user_redeem_coupon_api_service.dart';
 import 'package:bci/services/network/subscriptions_api_services/ease_buzz_payment_api_services.dart';
+import 'package:bci/services/network/wallet_api_services/withdraw_from_api_services.dart';
 import 'package:bci/widgets/home_widgets/loading_widgets.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,8 @@ class ProfileController extends GetxController {
   RxBool isLoading = false.obs;
 
   RxString planid = "".obs;
+
+  RxInt isWalletOrNot = 0.obs;
 
   getProfile() async {
     profileData.clear();
@@ -313,8 +316,9 @@ class ProfileController extends GetxController {
     String? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      result = await _isgpayuiPlugin.initiateISGPayUI(getArguments(amount * 100)) ??
-          'Unknown platform version';
+      result =
+          await _isgpayuiPlugin.initiateISGPayUI(getArguments(amount * 100)) ??
+              'Unknown platform version';
     } on PlatformException catch (e) {
       result = e.message;
     }
@@ -324,7 +328,7 @@ class ProfileController extends GetxController {
     var data = jsonDecode(responseData);
     print("<<----response-data---->>${data.runtimeType}");
     print(data);
-    if(data["ResponseCode"] == "00"){
+    if (data["ResponseCode"] == "00") {
       final homeController = Get.find<HomeController>();
       print(">>-------------->>---------->>");
       for (int i = 0; i < homeController.cartListData.length; i++) {
@@ -371,6 +375,59 @@ class ProfileController extends GetxController {
           backgroundColor: Colors.red,
           snackPosition: SnackPosition.BOTTOM);
     }
+  }
+
+  WithdrawWalletApiServices withdrawWalletApiServices =
+      WithdrawWalletApiServices();
+
+  payFromWallet({required String amount}) async {
+    final homeController = Get.find<HomeController>();
+
+    dio.Response<dynamic> respone = await withdrawWalletApiServices
+        .withdrawWalletApiServices(amount: amount);
+
+    if (respone.statusCode == 200) {
+      print(">>-------------->>---------->>");
+      for (int i = 0; i < homeController.cartListData.length; i++) {
+        homeController.addBooking(
+            serviceid: homeController.cartListData[i].serviceId.toString(),
+            cartid: homeController.cartListData[i].id.toString(),
+            qty: homeController.cartListData[i].quantity.toString(),
+            offerOrCoupon: "",
+            couponcode: "",
+            amount: homeController.cartListData[i].price);
+      }
+
+      Get.offAll(
+        () => LoadingWidgets(),
+      );
+
+      // Get.find<HomeController>().addSubscription(
+      //     planId: id,
+      //     customerId: Get.find<ProfileController>().profileData.first.id);
+
+      //need to give id
+      Get.snackbar(
+        "Payment Successfully Paid",
+        "",
+        icon: const Icon(Icons.check_circle_outline_outlined,
+            color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+    } else {
+      Get.rawSnackbar(
+          message: respone.data["error"], backgroundColor: Colors.red);
+    }
+
+    // print(response);
   }
 
   Map<String, String> getArguments(var amount) {
@@ -461,7 +518,8 @@ class ProfileController extends GetxController {
     }
   }
 
-  void payfoSubscription({required double amount,
+  void payfoSubscription({
+    required double amount,
     required int id,
   }) async {
     String? result;
@@ -480,7 +538,7 @@ class ProfileController extends GetxController {
     print("<<----response-data---->>${data.runtimeType}");
     print(data);
     if (data["ResponseCode"] == "00") {
-        final homeController = Get.find<HomeController>();
+      final homeController = Get.find<HomeController>();
 
       Get.find<HomeController>().addSubscription(
           planId: id,
@@ -511,7 +569,6 @@ class ProfileController extends GetxController {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
-
 
   //add wallet amount
   payUseingEaseBuzzWallet({
@@ -574,11 +631,9 @@ class ProfileController extends GetxController {
     }
   }
 
+  // String responseData = "Nothing";
 
-   // String responseData = "Nothing";
-
-  void payforWallet(
-      {required double amount}) async {
+  void payforWallet({required double amount}) async {
     String? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
@@ -595,7 +650,8 @@ class ProfileController extends GetxController {
     print("<<----response-data---->>${data.runtimeType}");
     print(data);
     if (data["ResponseCode"] == "00") {
-      Get.find<AuthController>().addTransaction(amount: amount.toStringAsFixed(2));
+      Get.find<AuthController>()
+          .addTransaction(amount: amount.toStringAsFixed(2));
 
       Get.to(const SucessfulScreenOtc());
 
@@ -615,7 +671,6 @@ class ProfileController extends GetxController {
         dismissDirection: DismissDirection.horizontal,
         forwardAnimationCurve: Curves.easeOutBack,
       );
-
     } else {
       Get.closeAllSnackbars();
       Get.snackbar(
@@ -626,7 +681,7 @@ class ProfileController extends GetxController {
     }
   }
 
-   downloadBroucher() async {
+  downloadBroucher() async {
     var _byteData = await rootBundle.load('assets/pdf/bci_member_brochure.pdf');
 
     var status = await Permission.storage.status;
@@ -645,5 +700,4 @@ class ProfileController extends GetxController {
 
     OpenFile.open(file.path);
   }
-
 }

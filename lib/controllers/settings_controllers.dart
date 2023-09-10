@@ -68,7 +68,7 @@ class SettingsController extends GetxController{
 
    //our partners api
    OurPartnersApiService ourPartnersApiService = OurPartnersApiService();
-   List<OurPartnersData> ourPartnersData = [];
+   List<OurPartnerData> ourPartnersData = [];
 
    ourPartner() async {
      
@@ -76,14 +76,7 @@ class SettingsController extends GetxController{
      if(response.statusCode == 200){
        OurPartnersList ourPartnersList = OurPartnersList.fromJson(response.data);
        ourPartnersData = ourPartnersList.data;
-     } else {
-       Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            "Something went wrong",
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
-     }
+     } 
      update();
    }
 
