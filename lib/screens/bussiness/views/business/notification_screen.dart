@@ -134,7 +134,9 @@ final notificationController = Get.find<NotificationController>();
                         ),
                       ),
                     );
-                  }):Center(child: Text('No Notification')),
+                  })
+                  :
+                  Center(child: Image.asset("assets/images/no_data_found.gif")),
             );
           }
         ),

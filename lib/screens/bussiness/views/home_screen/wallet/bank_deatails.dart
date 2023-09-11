@@ -134,6 +134,9 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
           child: TextField(
             controller: bankNameController,
             // readOnly: true,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+            ],
             decoration: InputDecoration(
                 labelText: 'Bank Name',
                 hintStyle: TextStyle(fontSize: 16, color: kblue),
@@ -145,6 +148,9 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
           child: TextField(
             controller: bankAccountNameController,
             // readOnly: true,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+            ],
             decoration: InputDecoration(
                 labelText: 'Bank Account Name',
                 hintStyle: TextStyle(fontSize: 16, color: kblue),
@@ -156,6 +162,9 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
           child: TextField(
             controller: accountTypeController,
             // readOnly: true,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
+            ],
             decoration: InputDecoration(
                 labelText: ' Account Type',
                 hintStyle: TextStyle(fontSize: 16, color: kblue),
@@ -167,6 +176,12 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
           child: TextField(
             controller: bankAccountNumberController,
             // readOnly: true,
+             keyboardType: TextInputType.phone,
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(16),
+              FilteringTextInputFormatter.digitsOnly,
+              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+            ],
             decoration: InputDecoration(
                 labelText: 'Bank Account Number',
                 hintStyle: TextStyle(fontSize: 16, color: kblue),
@@ -178,6 +193,10 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
           child: TextField(
             controller: ifscCodeController,
             // readOnly: true,
+            textCapitalization: TextCapitalization.characters,
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(11),
+            ],
             decoration: InputDecoration(
                 labelText: 'IFSC code',
                 hintStyle: TextStyle(fontSize: 16, color: kblue),
@@ -187,40 +206,45 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
       ]),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: Obx(()=>profileController.isLoading.isTrue ? Container(
-              height: 55,
-              width: size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: kOrange),
+        child: Obx(
+          () => profileController.isLoading.isTrue
+              ? Container(
+                  height: 55,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10), color: kOrange),
                   alignment: Alignment.center,
-                  child:  const CircularProgressIndicator(
+                  child: const CircularProgressIndicator(
                     color: Colors.white,
                   ),
-            ):  InkWell(
-            onTap: (){
-                UpdateBankModel updateBankModel = UpdateBankModel(
-                  accountType: accountTypeController.text,
-                  bankAccountName: bankAccountNameController.text,
-                  bankAccountNumber: bankAccountNumberController.text ,
-                  bankName: bankNameController.text,
-                  ifscCode: ifscCodeController.text
-                );
-              profileController.updateBankAccount(merchantUpdateModel: updateBankModel);
-        
-            },
-            child: Container(
-              height: 55,
-              width: size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: kOrange),
-                  alignment: Alignment.center,
-                  child:  Text("Save",style: primaryFont.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18
-                  ),),
-            ),
-          ),
+                )
+              : InkWell(
+                  onTap: () {
+                    UpdateBankModel updateBankModel = UpdateBankModel(
+                        accountType: accountTypeController.text,
+                        bankAccountName: bankAccountNameController.text,
+                        bankAccountNumber: bankAccountNumberController.text,
+                        bankName: bankNameController.text,
+                        ifscCode: ifscCodeController.text);
+                    profileController.updateBankAccount(
+                        merchantUpdateModel: updateBankModel);
+                  },
+                  child: Container(
+                    height: 55,
+                    width: size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: kOrange),
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Save",
+                      style: primaryFont.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18),
+                    ),
+                  ),
+                ),
         ),
       ),
     );

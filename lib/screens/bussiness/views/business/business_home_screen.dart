@@ -201,11 +201,11 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     Get.to(const AvailabilityScreen());
                   },
                   child: Container(
-                    height: 140,
+                     height: 115,
                     child: Column(
                       children: [
                         Image.asset('assets/images/availability.png'),
-                        const Text('Availability\n')
+                        const Text('Availability')
                       ],
                     ),
                   ),
@@ -217,12 +217,12 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     ));
                   },
                   child: Container(
-                    height: 140,
+                    height: 115,
                     child: Column(
                       children: [
                         Image.asset('assets/images/wallet.png'),
                         const Text(
-                          'Wallet\n',
+                          'Wallet',
                           textAlign: TextAlign.center,
                         ),
                       ],
@@ -237,12 +237,12 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     //Get.to(const BusinessBookingScreen());
                   },
                   child: Container(
-                    height: 140,
+                    height: 115,
                     child: Column(
                       children: [
                         Image.asset('assets/images/booking.png'),
                         const Text(
-                          'Bookings\n\n',
+                          'Bookings',
                           textAlign: TextAlign.center,
                         )
                       ],
@@ -251,9 +251,9 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 15,
-            ),
+            // const SizedBox(
+            //   height: 15,
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -364,9 +364,6 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 // ),
               ],
             ),
-            const SizedBox(
-              height: 50,
-            )
           ],
         ),
       ]),

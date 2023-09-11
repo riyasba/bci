@@ -324,13 +324,13 @@ class _Home_screen1State extends State<Home_screen1> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Container(
                       height: 106,
                       width: 144,
                       child: InkWell(
                           onTap: () {
-                            Get.to(offer_screen());
+                            Get.to(()=> offer_screen());
                           },
                           child: Image.asset('assets/images/aaaa.png')),
                     ),

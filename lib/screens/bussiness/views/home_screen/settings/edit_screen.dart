@@ -400,9 +400,9 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
            Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
             child: Container(
-              height: 55,
+              height: 60,
               child: TextField(
-                controller: mapUrlController ,
+                controller: mapUrlController,
                 decoration: InputDecoration(
                     labelText: 'Map Url',
                     hintStyle: TextStyle(fontSize: 20, color: kblue),
@@ -432,6 +432,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                   FilteringTextInputFormatter.digitsOnly,
                   FilteringTextInputFormatter.deny(RegExp(r'\s')),
                 ],
+
                 readOnly: true,
                 decoration: InputDecoration(
                     labelText: 'Mobile Number',
@@ -452,6 +453,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                   FilteringTextInputFormatter.digitsOnly,
                   FilteringTextInputFormatter.deny(RegExp(r'\s')),
                 ],
+
                 decoration: InputDecoration(
                     labelText: 'Alternate Phone Number',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),

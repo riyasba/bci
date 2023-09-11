@@ -5,6 +5,7 @@ import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/services_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
+import 'package:bci/screens/bussiness/views/generations/waiting_for_approval_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -154,7 +155,7 @@ class _MyAppState extends State<MyApp> {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          // home:  splash(),
+          // home:  const WaitingForApprovalScreen(),
           home:const splash(),
         );
       },

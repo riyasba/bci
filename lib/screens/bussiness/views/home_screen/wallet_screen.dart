@@ -1,3 +1,4 @@
+import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
 import 'package:bci/screens/bussiness/views/home_screen/wallet/bank_deatails.dart';
 import 'package:bci/screens/bussiness/views/home_screen/wallet/enter_amount_for_withdrawal_screen.dart';
@@ -67,7 +68,7 @@ class _WalletScreenState extends State<WalletScreen> {
               color: kblue,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children:  [
                   Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: Text(
@@ -248,7 +249,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
+                               const SizedBox(
                                   height: 5,
                                 ),
                                 Text(
@@ -266,7 +267,7 @@ class _WalletScreenState extends State<WalletScreen> {
                   )
                 ],
               ),
-              SizedBox(
+             const SizedBox(
                 height: 20,
               ),
               Padding(
@@ -293,97 +294,119 @@ class _WalletScreenState extends State<WalletScreen> {
                   height: _mediaQuery.height * 0.4,
                   child: authController.transactionHistorydata.isNotEmpty
                       ? ListView.builder(
-                          shrinkWrap: true,
-                          itemCount:
-                              authController.transactionHistorydata.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Stack(
+                      itemCount: authController.transactionHistorydata.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            height: 65,
+                            width: _mediaQuery.width,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 2,
+                                    color: Colors.grey.withOpacity(0.5))
+                              ],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 7),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: kwhite,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: <BoxShadow>[
-                                          BoxShadow(
-                                              offset: const Offset(0.0, 0.75),
-                                              blurRadius: 1.0,
-                                              color: kgrey)
-                                        ]),
-                                    height: 100,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                      children: [
-                                        //Image.asset(amountimage[index]),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 35, left: 10),
-                                          child: authController
-                                                  .transactionHistorydata
-                                                  .isNotEmpty
-                                              ? Text(
-                                                  authController
-                                                      .transactionHistorydata[
-                                                          index]
-                                                      .type,
-                                                  style: const TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )
-                                              : const Text('No Found Data'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Positioned(
-                                      right: 15,
-                                      top: 60,
-                                      child: authController
-                                              .transactionHistorydata.isNotEmpty
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      authController
+                                                  .transactionHistorydata[index]
+                                                  .status ==
+                                              "credit"
                                           ? Text(
-                                              "₹${authController.transactionHistorydata[index].amount}",
-                                              style: TextStyle(
-                                                  color: index == 0
-                                                      ? kOrange
-                                                      : kblue,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18),
+                                              "Credited",
+                                              style: primaryFont.copyWith(
+                                                  color: Colors.black,
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.w600),
                                             )
-                                          : const Text('No Found Data')),
-                                  Positioned(
-                                    left: 15,
-                                    top: 70,
-                                    child: authController
-                                            .transactionHistorydata.isNotEmpty
-                                        ? Text(formatDate(
-                                            authController
-                                                .transactionHistorydata[index]
-                                                .updatedAt,
-                                            [
-                                                dd,
-                                                "-",
-                                                mm,
-                                                "-",
-                                                yyyy,
-                                                " ",
-                                                hh,
-                                                ":",
-                                                nn,
-                                                " ",
-                                                am
-                                              ]))
-                                        : const Text('No Found Data'),
+                                          : Text(
+                                              "Debited",
+                                              style: primaryFont.copyWith(
+                                                  color: Colors.black,
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
+                                      authController
+                                                  .transactionHistorydata[index]
+                                                  .status ==
+                                              "credit"
+                                          ? Text(
+                                              "Credited on ${formatDate(authController.transactionHistorydata[index].createdAt, [
+                                                    dd,
+                                                    "-",
+                                                    mm,
+                                                    "-",
+                                                    yyyy,
+                                                    " ",
+                                                    hh,
+                                                    ":",
+                                                    nn,
+                                                    " ",
+                                                    am
+                                                  ])}",
+                                              style: primaryFont.copyWith(
+                                                  color: Colors.black45,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500),
+                                            )
+                                          : Text(
+                                              "Debited on ${formatDate(authController.transactionHistorydata[index].createdAt, [
+                                                    dd,
+                                                    "-",
+                                                    mm,
+                                                    "-",
+                                                    yyyy,
+                                                    " ",
+                                                    hh,
+                                                    ":",
+                                                    nn,
+                                                    " ",
+                                                    am
+                                                  ])}",
+                                              style: primaryFont.copyWith(
+                                                  color: Colors.black45,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500),
+                                            )
+                                    ],
                                   ),
-                                  // Positioned(
-                                  //     left: 170,
-                                  //     top: 70,
-                                  //     child: Text(refno[index].toString()))
+                                  authController.transactionHistorydata[index]
+                                              .status ==
+                                          "credit"
+                                      ? Text(
+                                          "+ ₹${authController.transactionHistorydata[index].amount}",
+                                          style: primaryFont.copyWith(
+                                              fontSize: 16,
+                                              color: Colors.green),
+                                        )
+                                      : Text(
+                                          "- ₹${authController.transactionHistorydata[index].amount}",
+                                          style: primaryFont.copyWith(
+                                              fontSize: 16, color: Colors.red),
+                                        )
                                 ],
                               ),
-                            );
-                          })
+                            ),
+                          ),
+                        );
+                      })
                       : Center(child: Text('No Found Data')),
                 );
               }),

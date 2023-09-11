@@ -182,10 +182,10 @@ class _EditScreenState extends State<EditScreen> {
                     suffixIcon: IconButton(
                         onPressed: () {},
                         icon: conpasswordvisible
-                            ? Icon(Icons.visibility)
-                            : Icon(Icons.visibility_off)),
+                            ? const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off)),
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
-                    border: OutlineInputBorder()),
+                    border: const OutlineInputBorder()),
               ),
             ),
             ksizedbox40,
@@ -210,7 +210,7 @@ class _EditScreenState extends State<EditScreen> {
                                             onPressed: () {
                                               pickerimage();
                                             },
-                                            child: Text(
+                                            child: const Text(
                                               'Choose ur gallery',
                                               style: TextStyle(
                                                   color: Colors.black,
@@ -220,7 +220,7 @@ class _EditScreenState extends State<EditScreen> {
                                             onPressed: () {
                                               imagepic();
                                             },
-                                            child: Text(
+                                            child: const Text(
                                               'Choose ur Camera',
                                               style: TextStyle(
                                                   color: Colors.black,
@@ -234,7 +234,7 @@ class _EditScreenState extends State<EditScreen> {
                           child: Container(
                               height: 130,
                               width: 135,
-                              color: Color(0xffE4E4E4),
+                              color: const Color(0xffE4E4E4),
                               child:
                                   Image.asset('assets/images/imageupload.png')),
                         
@@ -264,7 +264,7 @@ class _EditScreenState extends State<EditScreen> {
                     color: kOrange,
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                          offset: Offset(0.0, 0.75),
+                          offset: const Offset(0.0, 0.75),
                           blurRadius: 7,
                           color: kyellow)
                     ]),

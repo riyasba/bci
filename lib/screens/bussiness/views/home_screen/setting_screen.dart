@@ -36,7 +36,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding:  EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.only(left: 20),
                     child: Text(
                       'Settings',
                       style: TextStyle(fontSize: 25, color: Colors.white),
@@ -50,17 +50,20 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
         children: [
           InkWell(
             onTap: () {
-              Get.to(()=> MyAccountScreen());
+              Get.to(() => MyAccountScreen());
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
               child: Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/settingperson.png'),
+                    Container(
+                      width: 25,
+                      child: Image.asset('assets/images/settingperson.png')),
                     Padding(
-                      padding: const EdgeInsets.only(left: 17, top: 10),
+                      padding: const EdgeInsets.only(left: 17),
                       child: Text(
                         'My Account',
                         style: TextStyle(
@@ -74,7 +77,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox20,
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
@@ -82,6 +85,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               color: kgrey,
             ),
           ),
+          ksizedbox10,
           InkWell(
             onTap: () {
               Get.to(const BankDetailsScreen());
@@ -91,10 +95,16 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/settingbank.png'),
+                    Container(
+                        width: 25,
+                        child: Image.asset(
+                          'assets/images/settingbank.png',
+                          fit: BoxFit.fill,
+                        )),
                     Padding(
-                      padding: const EdgeInsets.only(left: 17, top: 6),
+                      padding: const EdgeInsets.only(left: 17),
                       child: Text(
                         'Bank Details',
                         style: TextStyle(
@@ -108,7 +118,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox20,
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
@@ -116,6 +126,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               color: kgrey,
             ),
           ),
+          ksizedbox10,
           InkWell(
             onTap: () {
               Get.to(const DashBoardScreen());
@@ -125,10 +136,16 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/settingdasbord.png'),
+                    Container(
+                        width: 25,
+                        child: Image.asset(
+                          'assets/images/settingdasbord.png',
+                          fit: BoxFit.fill,
+                        )),
                     Padding(
-                      padding: const EdgeInsets.only(left: 17, top: 6),
+                      padding: const EdgeInsets.only(left: 17),
                       child: Text(
                         'Dashboard',
                         style: TextStyle(
@@ -142,7 +159,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox20,
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
@@ -150,6 +167,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               color: kgrey,
             ),
           ),
+          ksizedbox10,
           InkWell(
             onTap: () {
               Get.to(const BusinessYourReferralScreen());
@@ -159,10 +177,14 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/settingreferal.png'),
+                    Container(
+                        width: 25,
+                        child: Image.asset('assets/images/settingreferal.png',
+                            fit: BoxFit.fill)),
                     Padding(
-                      padding: const EdgeInsets.only(left: 17, top: 6),
+                      padding: const EdgeInsets.only(left: 17),
                       child: Text(
                         'Your Referral',
                         style: TextStyle(
@@ -176,7 +198,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox20,
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 10),
             child: Divider(
@@ -184,6 +206,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               color: kgrey,
             ),
           ),
+          ksizedbox10,
           // InkWell(
           //   onTap: () {
           //     Get.to(const SubscriptionScreen());
@@ -218,7 +241,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
           //     color: kgrey,
           //   ),
           // ),
-          
+
           InkWell(
             onTap: () {
               Get.to(const ContactAdmin());
@@ -228,10 +251,17 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Image.asset('assets/images/settinghelps.png'),
+                    Container(
+                        width: 25,
+                        child: Image.asset(
+                          'assets/images/settinghelps.png',
+                          fit: BoxFit.fill,
+                        )),
                     Padding(
-                      padding: const EdgeInsets.only(left: 17, top: 6),
+                      padding: const EdgeInsets.only(left: 17),
                       child: Text(
                         'Support',
                         style: TextStyle(
@@ -245,7 +275,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               ),
             ),
           ),
-          ksizedbox20,
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
@@ -253,13 +283,14 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               color: kgrey,
             ),
           ),
+          ksizedbox10,
           InkWell(
             onTap: () {
               showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return mAlertItem2;
-                });
+                  context: context,
+                  builder: (BuildContext context) {
+                    return mAlertItem2;
+                  });
               //Get.find<AuthController>().logout();
             },
             child: Container(
@@ -267,12 +298,14 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Image.asset('assets/images/settinglogout.png'),
                     Padding(
-                      padding: const EdgeInsets.only(left: 17, top: 6),
+                      padding: const EdgeInsets.only(left: 17),
                       child: Text(
-                        'LogOut',
+                        'Log out',
                         style: TextStyle(
                             fontSize: 20,
                             color: kblue,
@@ -289,30 +322,29 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
     );
   }
 
- AlertDialog mAlertItem2 = AlertDialog(
-      backgroundColor: Colors.white,
-      title: Text("Confirmation", style: boldTextStyle(color: Colors.black)),
-      content: Text(
-        "Are you sure you want to logout?",
-        style: secondaryTextStyle(color: Colors.black),
+  AlertDialog mAlertItem2 = AlertDialog(
+    backgroundColor: Colors.white,
+    title: Text("Confirmation", style: boldTextStyle(color: Colors.black)),
+    content: Text(
+      "Are you sure you want to logout?",
+      style: secondaryTextStyle(color: Colors.black),
+    ),
+    actions: [
+      TextButton(
+        child: Text(
+          "Yes",
+          style: primaryTextStyle(color: kblue),
+        ),
+        onPressed: () {
+          Get.find<AuthController>().logout();
+        },
       ),
-      actions: [
-        TextButton(
-          child: Text(
-            "Yes",
-            style: primaryTextStyle(color: kblue),
-          ),
-          onPressed: () {
-           Get.find<AuthController>().logout();
-          },
-        ),
-        TextButton(
-          child: Text("No", style: primaryTextStyle(color: kblue)),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-      ],
-    );
-
+      TextButton(
+        child: Text("No", style: primaryTextStyle(color: kblue)),
+        onPressed: () {
+          Get.back();
+        },
+      ),
+    ],
+  );
 }

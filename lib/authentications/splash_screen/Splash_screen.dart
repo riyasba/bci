@@ -46,7 +46,7 @@ class _splashState extends State<splash> {
     await Future.delayed(const Duration(seconds: 2));
 
     Get.offAll(
-      () => BusinessLoginScreen(),
+      () => const BusinessLoginScreen(),
     );
   }
 

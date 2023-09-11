@@ -252,7 +252,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                 Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
                 child: Container(
-                  height: 55,
+                  height: 60,
                   child: TextField(
                     controller: mapUrlController,
                     readOnly: true,
