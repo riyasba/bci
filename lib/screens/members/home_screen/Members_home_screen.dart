@@ -226,7 +226,7 @@ class _Home_screen1State extends State<Home_screen1> {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(Holiday_Home());
+                  Get.to(const Holiday_Home());
                 },
                 child: Column(
                   children: [

@@ -39,7 +39,9 @@ class UpdateServicesApiServices extends BaseApiService {
           "offerUpto_amount": createServiceModel.offerAmount,
         if (createServiceModel.couponAmount != null)
           "coupon_amount": createServiceModel.couponAmount,
-        "id": id
+        "id": id,
+        "cgst": createServiceModel.cgst,
+        "sgst": createServiceModel.sgst,
       });
 
       print(formData.fields);

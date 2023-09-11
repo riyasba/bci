@@ -90,4 +90,14 @@ abstract class BaseApiService {
       "https://www.portal.bcipvtltd.com/api/auth/withdrawAmount";
 
   final String hotelBookingDetailsURL = "https://www.portal.bcipvtltd.com/api/auth/get_booking_detail";
+
+
+   // add today offers
+  final String addCouponsURL =
+      "https://www.portal.bcipvtltd.com/api/auth/vendor_coupon";
+
+
+   // add today offers
+  final String addedCouponListURL =
+      "https://www.portal.bcipvtltd.com/api/auth/vendor_coupon_list";
 }

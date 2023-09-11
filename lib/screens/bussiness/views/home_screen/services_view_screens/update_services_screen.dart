@@ -8,6 +8,7 @@ import 'package:bci/models/category_model.dart';
 import 'package:bci/models/service_list_model.dart' as ss;
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -25,7 +26,6 @@ class UpdateServicesView extends StatefulWidget {
 }
 
 class _AddServicesViewState extends State<UpdateServicesView> {
-  
   final authController = Get.find<AuthController>();
   final serviceController = Get.find<ServicesController>();
   List<String>? initialTags = [];
@@ -43,6 +43,8 @@ class _AddServicesViewState extends State<UpdateServicesView> {
   var shareOptionController = TextEditingController();
   var unitController = TextEditingController();
   var quantityController = TextEditingController();
+  var cGstController = TextEditingController();
+  var sGstController = TextEditingController();
 
   @override
   void initState() {
@@ -50,7 +52,6 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     _controller = TextfieldTagsController();
     authController.getCategoryList();
     authController.getSubCategoryList();
-    
     setDefault();
   }
 
@@ -85,19 +86,18 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     offerPercentageController.text = widget.serviceData.offerPercentage ?? "";
     unitController.text = widget.serviceData.unit ?? "";
     quantityController.text = widget.serviceData.quantity ?? "";
+    cGstController.text = widget.serviceData.cgst.toString();
+    sGstController.text = widget.serviceData.sgst.toString();
     //  _controller!. = "updated";
-    setState(() {
-      cgstPercentage = widget.serviceData.cgst != null
-          ? int.parse(widget.serviceData.cgst)
-          : null;
-      sgstPercentage = widget.serviceData.sgst != null
-          ? int.parse(widget.serviceData.sgst)
-          : null;
-          productImage = widget.serviceData.image;
-    });
-
-
- 
+    // setState(() {
+    //   cgstPercentage = widget.serviceData.cgst != null
+    //       ? int.parse(widget.serviceData.cgst)
+    //       : null;
+    //   sgstPercentage = widget.serviceData.sgst != null
+    //       ? int.parse(widget.serviceData.sgst)
+    //       : null;
+    //       productImage = widget.serviceData.image;
+    // });
   }
 
   //List share = ["fixed","percentage"];
@@ -110,6 +110,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
 
   var cgstPercentage;
   var sgstPercentage;
+    var gstPercentage;
 
   @override
   Widget build(BuildContext context) {
@@ -192,46 +193,93 @@ class _AddServicesViewState extends State<UpdateServicesView> {
             ),
           ),
           ksizedbox10,
+          // GetBuilder<AuthController>(builder: (_) {
+          //   return Padding(
+          //     padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+          //     child: Container(
+          //       height: 44,
+          //       width: 330,
+          //       decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(3),
+          //           border: Border.all(
+          //               color: const Color.fromARGB(255, 5, 5, 5)
+          //                   .withOpacity(0.8))),
+          //       child: Padding(
+          //         padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+          //         child: DropdownButton<CategoryList>(
+          //           value: merchantCategory,
+          //           isExpanded: true,
+          //           icon: const Icon(Icons.keyboard_arrow_down_outlined),
+          //           elevation: 0,
+          //           itemHeight: 55,
+          //           isDense: true,
+          //           dropdownColor: Colors.grey[250],
+          //           style: const TextStyle(color: Colors.black54),
+          //           hint: Text(
+          //             "Product Category Name",
+          //             style: TextStyle(fontSize: 16, color: kblue),
+          //           ),
+          //           onChanged: (CategoryList? value) {
+          //             setState(() {
+          //               merchantCategory = value!;
+          //             });
+          //           },
+          //           items: authController.categoryList
+          //               .map<DropdownMenuItem<CategoryList>>(
+          //                   (CategoryList value) {
+          //             return DropdownMenuItem<CategoryList>(
+          //               value: value,
+          //               child: Text(value.title),
+          //             );
+          //           }).toList(),
+          //         ),
+          //       ),
+          //     ),
+          //   );
+          // }),
           GetBuilder<AuthController>(builder: (_) {
             return Padding(
-              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Container(
-                height: 44,
-                width: 330,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 5, 5, 5)
-                            .withOpacity(0.8))),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: DropdownButton<CategoryList>(
-                    value: merchantCategory,
-                    isExpanded: true,
-                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                    elevation: 0,
-                    itemHeight: 55,
-                    isDense: true,
-                    dropdownColor: Colors.grey[250],
-                    style: const TextStyle(color: Colors.black54),
-                    hint: Text(
-                      "Product Category Name",
-                      style: TextStyle(fontSize: 16, color: kblue),
-                    ),
-                    onChanged: (CategoryList? value) {
-                      setState(() {
-                        merchantCategory = value!;
-                      });
-                    },
-                    items: authController.categoryList
-                        .map<DropdownMenuItem<CategoryList>>(
-                            (CategoryList value) {
-                      return DropdownMenuItem<CategoryList>(
-                        value: value,
-                        child: Text(value.title),
-                      );
-                    }).toList(),
+                height: 55,
+                width: size.width,
+                child: DropdownSearch<CategoryList>(
+                  itemAsString: (CategoryList u) => u.title,
+                  selectedItem: merchantCategory,
+                  popupProps: PopupProps.menu(
+                    showSelectedItems: false,
+                    showSearchBox: true,
+                    menuProps:
+                        MenuProps(borderRadius: BorderRadius.circular(15)),
+                    searchFieldProps: const TextFieldProps(),
                   ),
+                  items: authController.categoryList,
+                  dropdownDecoratorProps: DropDownDecoratorProps(
+                    dropdownSearchDecoration: InputDecoration(
+                        // labelText: "Department *",
+                        hintText: "Product Category Name",
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Color(0xff707070)),
+                            borderRadius: BorderRadius.circular(5)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Color(0xff707070)),
+                            borderRadius: BorderRadius.circular(5)),
+                        border: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Color(0xff707070)),
+                            borderRadius: BorderRadius.circular(5))),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      // authController
+                      //     .isDesignationSelected(false);
+                      merchantCategory = value!;
+                      // requiremtsSelected = null;
+                    });
+                  },
+                  // selectedItem: selectedState,
                 ),
               ),
             );
@@ -319,70 +367,23 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                   )),
             ),
           ),
-         ksizedbox10,
-          GetBuilder<AuthController>(builder: (_) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-              child: Row(
-                children: [
-                  Container(
-                    height: 44,
-                    width: 330,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(
-                            color: const Color.fromARGB(255, 5, 5, 5)
-                                .withOpacity(0.8))),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                      child: DropdownButton<int>(
-                        value: cgstPercentage,
-                        isExpanded: true,
-                        icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                        elevation: 0,
-                        itemHeight: 55,
-                        isDense: true,
-                        dropdownColor: Colors.grey[250],
-                        style: const TextStyle(color: Colors.black54),
-                        hint: Text(
-                          "CGST",
-                          style: TextStyle(fontSize: 16, color: kblue),
-                        ),
-                        onChanged: (int? value) {
-                          setState(() {
-                            cgstPercentage = value!;
-                          });
-                        },
-                        items: gstPercentageList
-                            .map<DropdownMenuItem<int>>((int value) {
-                          return DropdownMenuItem<int>(
-                            value: value,
-                            child: Text("$value%"),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }),
           ksizedbox10,
           GetBuilder<AuthController>(builder: (_) {
             return Padding(
               padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
               child: Container(
                 height: 44,
-                width: 330,
+                width: size.width,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(3),
                     border: Border.all(
                         color: const Color.fromARGB(255, 5, 5, 5)
                             .withOpacity(0.8))),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                  padding:
+                      const EdgeInsets.only(left: 10, right: 10, top: 10),
                   child: DropdownButton<int>(
-                    value: cgstPercentage,
+                    value: gstPercentage,
                     isExpanded: true,
                     icon: const Icon(Icons.keyboard_arrow_down_outlined),
                     elevation: 0,
@@ -391,12 +392,16 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                     dropdownColor: Colors.grey[250],
                     style: const TextStyle(color: Colors.black54),
                     hint: Text(
-                      "CGST",
+                      "GST",
                       style: TextStyle(fontSize: 16, color: kblue),
                     ),
                     onChanged: (int? value) {
                       setState(() {
-                        cgstPercentage = value!;
+                        gstPercentage = value;
+                        cgstPercentage = value! / 2;
+                        sgstPercentage = value / 2;
+                        cGstController.text = cgstPercentage.toString();
+                        sGstController.text = sgstPercentage.toString();
                       });
                     },
                     items: gstPercentageList
@@ -412,49 +417,77 @@ class _AddServicesViewState extends State<UpdateServicesView> {
             );
           }),
           ksizedbox10,
-          GetBuilder<AuthController>(builder: (_) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-              child: Container(
-                height: 44,
-                width: 330,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 5, 5, 5)
-                            .withOpacity(0.8))),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: DropdownButton<int>(
-                    value: sgstPercentage,
-                    isExpanded: true,
-                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                    elevation: 0,
-                    itemHeight: 55,
-                    isDense: true,
-                    dropdownColor: Colors.grey[250],
-                    style: const TextStyle(color: Colors.black54),
-                    hint: Text(
-                      "SGST",
-                      style: TextStyle(fontSize: 16, color: kblue),
-                    ),
-                    onChanged: (int? value) {
-                      setState(() {
-                        sgstPercentage = value!;
-                      });
-                    },
-                    items: gstPercentageList
-                        .map<DropdownMenuItem<int>>((int value) {
-                      return DropdownMenuItem<int>(
-                        value: value,
-                        child: Text("$value%"),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-            );
-          }),
+          Padding(
+            padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+            child: TextFormField(
+              controller: cGstController,
+              keyboardType: TextInputType.number,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "CGST Can't be Empty";
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  isCollapsed: false,
+                  isDense: true,
+                  contentPadding:
+                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  labelText: "CGST",
+                  hintStyle: TextStyle(
+                    color: kblue,
+                    fontWeight: FontWeight.w400,
+                  )),
+            ),
+          ),
+          ksizedbox10,
+         Padding(
+            padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+            child: TextFormField(
+              controller: sGstController,
+              keyboardType: TextInputType.number,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "SGST Can't be Empty";
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  isCollapsed: false,
+                  isDense: true,
+                  contentPadding:
+                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  labelText: "SGST",
+                  hintStyle: TextStyle(
+                    color: kblue,
+                    fontWeight: FontWeight.w400,
+                  )),
+            ),
+          ),
           ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -709,7 +742,8 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 215, 215, 213),
                     borderRadius: BorderRadius.circular(3)),
-                child: productImage != null?Image.network(productImage!)
+                child: productImage != null
+                    ? Image.network(productImage!)
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -1126,7 +1160,10 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                                         : couponAmountController.text,
                                 offerAmount: offerAmountController.text.isEmpty
                                     ? null
-                                    : offerAmountController.text);
+                                    : offerAmountController.text,
+                                    cgst: cgstPercentage,
+                                    sgst: sgstPercentage
+                                    );
 
                         serviceController.updateServices(
                             createServiceModel: createServiceModel,

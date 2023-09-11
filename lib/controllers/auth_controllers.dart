@@ -3,6 +3,7 @@ import 'package:bci/authentications/otp_verification/otp_verification.dart';
 import 'package:bci/authentications/verified_screen/verified_screen.dart';
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/models/category_model.dart';
+import 'package:bci/models/get_coupons_list_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/merchants_register_model.dart';
 import 'package:bci/models/redeemption_Coupons_model.dart';
@@ -20,6 +21,7 @@ import 'package:bci/services/network/auth_api_services/verify_otp_api_services.d
 import 'package:bci/services/network/categorys_api_services/get_category_services.dart';
 import 'package:bci/services/network/categorys_api_services/sub_category_api_services.dart';
 import 'package:bci/services/network/coupons_redeemption_api_service.dart';
+import 'package:bci/services/network/services_api_service/added_coupon_list_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
@@ -355,6 +357,9 @@ class AuthController extends GetxController {
   CouponsRedeemptionApiService couponsRedeemptionApiService =
       CouponsRedeemptionApiService();
   List<CouponRedeemptionData> couponRedeemptionData = [];
+  List<CouponsListData> addedCouponList = [];
+
+  AdeedCouponListApiService addedCouponsServices = AdeedCouponListApiService();
 
   redeemptionCoupon() async {
     dio.Response<dynamic> response =
@@ -368,6 +373,19 @@ class AuthController extends GetxController {
           colorText: Colors.white,
           backgroundColor: Colors.red,
           snackPosition: SnackPosition.BOTTOM);
+    }
+    update();
+  }
+
+
+
+  addedCouponsList() async {
+    dio.Response<dynamic> response =
+        await addedCouponsServices.addedCouponListApiservices();
+    if (response.statusCode == 200) {
+      GetCouponListModel redeemtioncouponsListModel =
+          GetCouponListModel.fromJson(response.data);
+      addedCouponList = redeemtioncouponsListModel.posts;
     }
     update();
   }

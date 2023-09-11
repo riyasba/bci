@@ -1,5 +1,6 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/screens/bussiness/views/business/create_coupons_screens.dart';
 import 'package:bci/screens/members/offer%20screen/offer_screen_grid.dart';
 import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/availability_scree.dart';
@@ -107,14 +108,14 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                       ),
                   ],
                   options: CarouselOptions(
-                    height: 180,
+                    height: 200,
                     onPageChanged: (index, reason) {
                       setState(() {
                         activeIndex = index;
                       });
                     },
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 0.8,
+                    aspectRatio: 15 / 9,
+                    viewportFraction: 0.9,
                     initialPage: 0,
                     enableInfiniteScroll: true,
                     reverse: false,
@@ -311,7 +312,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
 
                 InkWell(
                   onTap: () {
-                    Get.to(const ContactAdmin());
+                    Get.to(const CreateCouponsScreen());
                   },
                   child: Container(
                       height: 140,
@@ -319,7 +320,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                         children: [
                           Image.asset('assets/images/contactadmin.png'),
                           const Text(
-                            'Contact\n Admin',
+                            'Create\n Coupons',
                             textAlign: TextAlign.center,
                           )
                         ],

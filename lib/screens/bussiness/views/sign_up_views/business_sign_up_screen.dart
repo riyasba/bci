@@ -95,7 +95,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
                     dropdownDecoratorProps: DropDownDecoratorProps(
                       dropdownSearchDecoration: InputDecoration(
                           // labelText: "Department *",
-                          hintText: "Department",
+                          hintText: "Category",
                           enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(
                                   color: Color(0xff707070)),

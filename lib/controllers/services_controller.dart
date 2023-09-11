@@ -6,6 +6,7 @@ import 'package:bci/models/service_list_model.dart';
 import 'package:bci/models/vendor_offer_list_model.dart';
 import 'package:bci/services/network/categorys_api_services/get_booking_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_booking_date_filter.dart';
+import 'package:bci/services/network/services_api_service/add_coupons_api_services.dart';
 import 'package:bci/services/network/services_api_service/add_today_offers_api_services.dart';
 import 'package:bci/services/network/services_api_service/get_service_by_category.dart';
 import 'package:bci/services/network/services_api_service/get_services_api_services.dart';
@@ -173,7 +174,7 @@ class ServicesController extends GetxController {
 
   //add today offers
   AddTodayOffersApiServices addTodayOffersApiServices = AddTodayOffersApiServices();
-
+AddCouponsApiServices addCouponsApiServices = AddCouponsApiServices();
   addTodayOffers({
     required String image,
     required String title,
@@ -182,9 +183,7 @@ class ServicesController extends GetxController {
     required String endsat,
     required String discountValue,
     required String claimUser,
-    required String bsValue,
   }) async {
-
     dio.Response<dynamic> response = await addTodayOffersApiServices.addTodayOffersApiServices(
       image: image, 
       title: title, 
@@ -192,14 +191,53 @@ class ServicesController extends GetxController {
       startsat: startsat, 
       endsat: endsat, 
       discountValue: discountValue, 
-      claimUser: claimUser, 
-      bsValue: bsValue);
+      claimUser: claimUser,);
       if(response.statusCode == 200){
          Get.back();
          Get.rawSnackbar(
           backgroundColor: Colors.green,
           messageText: Text(
             "Offer created successfully",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+      } else {
+         Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            "Something went wrong",
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+      }
+
+  }
+
+
+
+
+    addCoupons({
+    required String image,
+    required String title,
+    required String category,
+    required String startsat,
+    required String endsat,
+    required String discountValue,
+    required String claimUser,
+  }) async {
+    dio.Response<dynamic> response = await addCouponsApiServices.addCouponsApiServices(
+      image: image, 
+      title: title, 
+      category: category, 
+      startsat: startsat, 
+      endsat: endsat, 
+      discountValue: discountValue, 
+      merchantId: Get.find<ProfileController>().profileData.first.id.toString(),
+      description: claimUser,);
+      if(response.statusCode == 201){
+         Get.back();
+         Get.rawSnackbar(
+          backgroundColor: Colors.green,
+          messageText: Text(
+            "Coupon created successfully",
             style: primaryFont.copyWith(color: Colors.white),
           ));
       } else {

@@ -18,6 +18,8 @@ class CreateServiceModel {
   dynamic quantity;
   dynamic cgst;
   dynamic sgst;
+  dynamic startTime;
+  dynamic endTime;
 
   CreateServiceModel(
       {required this.title,
@@ -38,6 +40,8 @@ class CreateServiceModel {
       this.unit,
       this.cgst,
       this.sgst,
+      this.startTime,
+      this.endTime,
       required this.image});
 }
 

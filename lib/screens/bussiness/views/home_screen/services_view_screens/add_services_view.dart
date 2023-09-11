@@ -9,6 +9,7 @@ import 'package:bci/models/create_services_model.dart';
 import 'package:bci/models/sub_category_model.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -23,10 +24,9 @@ class AddServicesView extends StatefulWidget {
 }
 
 class _AddServicesViewState extends State<AddServicesView> {
-  
-   String ?_setTime, _setDate;
+  String? _setTime, _setDate;
 
-   String ?_hour, _minute, _time;
+  String? _hour, _minute, _time;
 
   String? dateTime;
 
@@ -37,7 +37,9 @@ class _AddServicesViewState extends State<AddServicesView> {
   TextEditingController _endtimeController = TextEditingController();
   TextEditingController _startTimeController = TextEditingController();
 
- 
+
+  dynamic startTime,endTime;
+
 
   Future<Null> _startTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
@@ -50,13 +52,16 @@ class _AddServicesViewState extends State<AddServicesView> {
         _hour = selectedTime.hour.toString();
         _minute = selectedTime.minute.toString();
         _time = _hour! + ' : ' + _minute!;
-        _startTimeController.text = _time!;
+        // _startTimeController.text = _time!;
         _startTimeController.text = formatDate(
             DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
             [hh, ':', nn, " ", am]).toString();
+          print(_hour);
+          startTime = "${_hour}:${_minute}";
       });
   }
- Future<Null> _endtime(BuildContext context) async {
+
+  Future<Null> _endtime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: selectedTime,
@@ -71,8 +76,10 @@ class _AddServicesViewState extends State<AddServicesView> {
         _endtimeController.text = formatDate(
             DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
             [hh, ':', nn, " ", am]).toString();
+             endTime = "${_hour}:${_minute}";
       });
   }
+
   final authController = Get.find<AuthController>();
   final serviceController = Get.find<ServicesController>();
 
@@ -89,7 +96,9 @@ class _AddServicesViewState extends State<AddServicesView> {
   var unitController = TextEditingController();
   var quantityController = TextEditingController();
 
- 
+  var cgstController = TextEditingController();
+  var sgstController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -99,7 +108,7 @@ class _AddServicesViewState extends State<AddServicesView> {
     _startTimeController.text = formatDate(
         DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
         [hh, ':', nn, " ", am]).toString();
-        _endtimeController.text = formatDate(
+    _endtimeController.text = formatDate(
         DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
         [hh, ':', nn, " ", am]).toString();
   }
@@ -128,7 +137,8 @@ class _AddServicesViewState extends State<AddServicesView> {
 
   List<int> gstPercentageList = [5, 12, 18, 28];
 
-  var cgstPercentage ;
+  var gstPercentage;
+  var cgstPercentage;
   var sgstPercentage;
 
   @override
@@ -201,11 +211,11 @@ class _AddServicesViewState extends State<AddServicesView> {
                   isCollapsed: false,
                   isDense: true,
                   contentPadding:
-                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                      const EdgeInsets.only(top: 18, bottom: 18, left: 15),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
-                  labelText: "Product title",
+                  labelText: "Product title *",
                   hintStyle: TextStyle(
                     color: kblue,
                     fontWeight: FontWeight.w400,
@@ -213,51 +223,101 @@ class _AddServicesViewState extends State<AddServicesView> {
             ),
           ),
           ksizedbox10,
+        const SizedBox(
+          height: 15,
+         ),
+          // GetBuilder<AuthController>(builder: (_) {
+          //   return Padding(
+          //     padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+          //     child: Container(
+          //       height: 44,
+          //       width: 330,
+          //       decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(3),
+          //           border: Border.all(
+          //               color: const Color.fromARGB(255, 5, 5, 5)
+          //                   .withOpacity(0.8))),
+          //       child: Padding(
+          //         padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+          //         child: DropdownButton<CategoryList>(
+          //           value: merchantCategory,
+          //           isExpanded: true,
+          //           icon: const Icon(Icons.keyboard_arrow_down_outlined),
+          //           elevation: 0,
+          //           itemHeight: 55,
+          //           isDense: true,
+          //           dropdownColor: Colors.grey[250],
+          //           style: const TextStyle(color: Colors.black54),
+          //           hint: Text(
+          //             "Product Category Name",
+          //             style: TextStyle(fontSize: 16, color: kblue),
+          //           ),
+          //           onChanged: (CategoryList? value) {
+          //             setState(() {
+          //               merchantCategory = value!;
+          //             });
+          //           },
+          //           items: authController.categoryList
+          //               .map<DropdownMenuItem<CategoryList>>(
+          //                   (CategoryList value) {
+          //             return DropdownMenuItem<CategoryList>(
+          //               value: value,
+          //               child: Text(value.title),
+          //             );
+          //           }).toList(),
+          //         ),
+          //       ),
+          //     ),
+          //   );
+          // }),
+
           GetBuilder<AuthController>(builder: (_) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-              child: Container(
-                height: 44,
-                width: 330,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 5, 5, 5)
-                            .withOpacity(0.8))),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: DropdownButton<CategoryList>(
-                    value: merchantCategory,
-                    isExpanded: true,
-                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                    elevation: 0,
-                    itemHeight: 55,
-                    isDense: true,
-                    dropdownColor: Colors.grey[250],
-                    style: const TextStyle(color: Colors.black54),
-                    hint: Text(
-                      "Product Category Name",
-                      style: TextStyle(fontSize: 16, color: kblue),
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Container(
+                  height: 55,
+                  width: size.width,
+                  child: DropdownSearch<CategoryList>(
+                    itemAsString: (CategoryList u) => u.title,
+                    selectedItem: merchantCategory,
+                    popupProps: PopupProps.menu(
+                      showSelectedItems: false,
+                      showSearchBox: true,
+                      menuProps: MenuProps(borderRadius: BorderRadius.circular(15)),
+                      searchFieldProps: const TextFieldProps(),
                     ),
-                    onChanged: (CategoryList? value) {
+                    items: authController.categoryList,
+                    dropdownDecoratorProps: DropDownDecoratorProps(
+                      dropdownSearchDecoration: InputDecoration(
+                          // labelText: "Department *",
+                          hintText: "Product Category Name *",
+                          enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Color(0xff707070)),
+                              borderRadius: BorderRadius.circular(5)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Color(0xff707070)),
+                              borderRadius: BorderRadius.circular(5)),
+                          border: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Color(0xff707070)),
+                              borderRadius: BorderRadius.circular(5))),
+                    ),
+                    onChanged: (value) {
                       setState(() {
+                        // authController
+                        //     .isDesignationSelected(false);
                         merchantCategory = value!;
+                        // requiremtsSelected = null;
                       });
                     },
-                    items: authController.categoryList
-                        .map<DropdownMenuItem<CategoryList>>(
-                            (CategoryList value) {
-                      return DropdownMenuItem<CategoryList>(
-                        value: value,
-                        child: Text(value.title),
-                      );
-                    }).toList(),
+                    // selectedItem: selectedState,
                   ),
                 ),
-              ),
-            );
-          }),
-
+              );
+            }
+          ),
           ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -288,11 +348,11 @@ class _AddServicesViewState extends State<AddServicesView> {
                   isCollapsed: false,
                   isDense: true,
                   contentPadding:
-                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                      const EdgeInsets.only(top: 18, bottom: 18, left: 15),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
-                  labelText: "Actual Amount",
+                  labelText: "Actual Amount *",
                   hintStyle: TextStyle(
                     color: kblue,
                     fontWeight: FontWeight.w400,
@@ -329,96 +389,100 @@ class _AddServicesViewState extends State<AddServicesView> {
                   isCollapsed: false,
                   isDense: true,
                   contentPadding:
-                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                      const EdgeInsets.only(top: 18, bottom: 18, left: 15),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
-                  labelText: "Sale Amount",
+                  labelText: "Sale Amount *",
                   hintStyle: TextStyle(
                     color: kblue,
                     fontWeight: FontWeight.w400,
                   )),
             ),
           ),
-           ksizedbox10,
-          GetBuilder<AuthController>(
-            builder: (_) {
-              return Padding(
-                padding: const EdgeInsets.only(left: 15,right: 15),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ksizedbox10,
+          GetBuilder<AuthController>(builder: (_) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                         children: [
-                           Text("Starts At",
-                               style: TextStyle(
+                      Text(
+                        "Starts At",
+                        style: TextStyle(
                             color: kblue,
                             fontSize: 16,
-                            fontWeight: FontWeight.w400),),
-                             const SizedBox(height: 5,),
-                             ksizedbox10,
-                              InkWell(
-                                onTap: (){
-                                 _startTime(context);
-                                },
-                                child: Container(
-                  height: 32,
-                  width: 120,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color:const Color(0xff707070)),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(_startTimeController.text),
-                  )
-                    
-                                ),
-                              ),
-                         ],
-                       ),
-                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                                 Text("Ends At",
-                               style: TextStyle(
-                            color: kblue,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400),),
-                            const SizedBox(height: 5,),
-                            ksizedbox10,
-                            InkWell(
-                                onTap: (){
-                                  _endtime(context);
-                                },
-                                 child: Container(
-                                  height: 32,
-                                  width: 120,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border.all(color: const Color(0xff707070)),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Center(
-                                    child: Text(_endtimeController.text),
-                                  )
-                                                     ),
-                               ),
-                        ],
-                       ),
-                        
+                            fontWeight: FontWeight.w400),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      ksizedbox10,
+                      InkWell(
+                        onTap: () {
+                          _startTime(context);
+                        },
+                        child: Container(
+                            height: 32,
+                            width: 120,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border:
+                                  Border.all(color: const Color(0xff707070)),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(
+                              child: Text(_startTimeController.text),
+                            )),
+                      ),
                     ],
                   ),
-              );
-            }
-          ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Ends At",
+                        style: TextStyle(
+                            color: kblue,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      ksizedbox10,
+                      InkWell(
+                        onTap: () {
+                          _endtime(context);
+                        },
+                        child: Container(
+                            height: 32,
+                            width: 120,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border:
+                                  Border.all(color: const Color(0xff707070)),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(
+                              child: Text(_endtimeController.text),
+                            )),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          }),
           ksizedbox10,
           GetBuilder<AuthController>(builder: (_) {
             return Padding(
               padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
               child: Container(
-                height: 44,
+                height: 55,
                 width: 330,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(3),
@@ -426,9 +490,9 @@ class _AddServicesViewState extends State<AddServicesView> {
                         color: const Color.fromARGB(255, 5, 5, 5)
                             .withOpacity(0.8))),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
                   child: DropdownButton<int>(
-                    value: cgstPercentage,
+                    value: gstPercentage,
                     isExpanded: true,
                     icon: const Icon(Icons.keyboard_arrow_down_outlined),
                     elevation: 0,
@@ -437,58 +501,16 @@ class _AddServicesViewState extends State<AddServicesView> {
                     dropdownColor: Colors.grey[250],
                     style: const TextStyle(color: Colors.black54),
                     hint: Text(
-                      "CGST",
+                      "GST *",
                       style: TextStyle(fontSize: 16, color: kblue),
                     ),
                     onChanged: (int? value) {
                       setState(() {
-                        cgstPercentage = value!;
-                      });
-                    },
-                    items: gstPercentageList
-                        .map<DropdownMenuItem<int>>(
-                            (int value) {
-                      return DropdownMenuItem<int>(
-                        value: value,
-                        child: Text("$value%"),
-                      );
-                    }
-                    ).toList(),
-                  ),
-                ),
-              ),
-            );
-          }),
-            ksizedbox10,
-          GetBuilder<AuthController>(builder: (_) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-              child: Container(
-                height: 44,
-                width: 330,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 5, 5, 5)
-                            .withOpacity(0.8))),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: DropdownButton<int>(
-                    value: sgstPercentage,
-                    isExpanded: true,
-                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                    elevation: 0,
-                    itemHeight: 55,
-                    isDense: true,
-                    dropdownColor: Colors.grey[250],
-                    style: const TextStyle(color: Colors.black54),
-                    hint: Text(
-                      "SGST",
-                      style: TextStyle(fontSize: 16, color: kblue),
-                    ),
-                    onChanged: (int? value) {
-                      setState(() {
-                        sgstPercentage = value!;
+                        gstPercentage = value!;
+                        cgstPercentage = gstPercentage/2;
+                        sgstPercentage = gstPercentage/2;
+                        cgstController.text = cgstPercentage.toString();
+                        sgstController.text = cgstPercentage.toString();
                       });
                     },
                     items: gstPercentageList
@@ -503,6 +525,124 @@ class _AddServicesViewState extends State<AddServicesView> {
               ),
             );
           }),
+          ksizedbox10,
+          // GetBuilder<AuthController>(builder: (_) {
+          //   return Padding(
+          //     padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+          //     child: Container(
+          //       height: 44,
+          //       width: 330,
+          //       decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(3),
+          //           border: Border.all(
+          //               color: const Color.fromARGB(255, 5, 5, 5)
+          //                   .withOpacity(0.8))),
+          //       child: Padding(
+          //         padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+          //         child: DropdownButton<int>(
+          //           value: sgstPercentage,
+          //           isExpanded: true,
+          //           icon: const Icon(Icons.keyboard_arrow_down_outlined),
+          //           elevation: 0,
+          //           itemHeight: 55,
+          //           isDense: true,
+          //           dropdownColor: Colors.grey[250],
+          //           style: const TextStyle(color: Colors.black54),
+          //           hint: Text(
+          //             "SGST",
+          //             style: TextStyle(fontSize: 16, color: kblue),
+          //           ),
+          //           onChanged: (int? value) {
+          //             setState(() {
+          //               sgstPercentage = value!;
+          //             });
+          //           },
+          //           items: gstPercentageList
+          //               .map<DropdownMenuItem<int>>((int value) {
+          //             return DropdownMenuItem<int>(
+          //               value: value,
+          //               child: Text("$value%"),
+          //             );
+          //           }).toList(),
+          //         ),
+          //       ),
+          //     ),
+          //   );
+          // }),
+           // ksizedbox10,
+          Padding(
+            padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+            child: TextFormField(
+              controller: cgstController,
+              readOnly: true,
+              keyboardType: TextInputType.number,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "CGST Can't be Empty";
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  isCollapsed: false,
+                  isDense: true,
+                  contentPadding:
+                      const EdgeInsets.only(top: 18, bottom: 18, left: 15),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  labelText: "CGST",
+                  hintStyle: TextStyle(
+                    color: kblue,
+                    fontWeight: FontWeight.w400,
+                  )),
+            ),
+          ),
+           ksizedbox10,
+          Padding(
+            padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+            child: TextFormField(
+              controller: sgstController,
+              readOnly: true,
+              keyboardType: TextInputType.number,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "SGST Can't be Empty";
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  isCollapsed: false,
+                  isDense: true,
+                  contentPadding:
+                      const EdgeInsets.only(top: 18, bottom: 18, left: 15),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Color(0xff707070))),
+                  labelText: "SGST",
+                  hintStyle: TextStyle(
+                    color: kblue,
+                    fontWeight: FontWeight.w400,
+                  )),
+            ),
+          ),
           ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -528,11 +668,11 @@ class _AddServicesViewState extends State<AddServicesView> {
                   isCollapsed: false,
                   isDense: true,
                   contentPadding:
-                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                      const EdgeInsets.only(top: 18, bottom: 18, left: 15),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
-                  labelText: "Quantity",
+                  labelText: "Quantity *",
                   hintStyle: TextStyle(
                     color: kblue,
                     fontWeight: FontWeight.w400,
@@ -545,12 +685,12 @@ class _AddServicesViewState extends State<AddServicesView> {
             child: TextFormField(
               controller: unitController,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Unit Can't be Empty";
-                }
-                return null;
-              },
+              // validator: (value) {
+              //   if (value!.isEmpty) {
+              //     return "Unit Can't be Empty";
+              //   }
+              //   return null;
+              // },
               decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -563,7 +703,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                   isCollapsed: false,
                   isDense: true,
                   contentPadding:
-                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                      const EdgeInsets.only(top: 18, bottom: 18, left: 15),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
@@ -785,105 +925,108 @@ class _AddServicesViewState extends State<AddServicesView> {
           const SizedBox(
             height: 10,
           ),
-          TextFieldTags(
-            textfieldTagsController: _controller,
-            initialTags: const [],
-            textSeparators: const [','],
-            letterCase: LetterCase.normal,
-            validator: (String tag) {
-              if (tag == 'php') {
-                return 'No, please just no';
-              } else if (_controller!.getTags!.contains(tag)) {
-                return 'you already entered that';
-              }
-              return null;
-            },
-            inputfieldBuilder:
-                (context, tec, fn, error, onChanged, onSubmitted) {
-              return ((context, sc, tags, onTagDelete) {
-                return Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: TextField(
-                    controller: tec,
-                    focusNode: fn,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 74, 137, 92),
-                          width: 3.0,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 7),
+            child: TextFieldTags(
+              textfieldTagsController: _controller,
+              initialTags: const [],
+              textSeparators: const [','],
+              letterCase: LetterCase.normal,
+              validator: (String tag) {
+                if (tag == 'php') {
+                  return 'No, please just no';
+                } else if (_controller!.getTags!.contains(tag)) {
+                  return 'you already entered that';
+                }
+                return null;
+              },
+              inputfieldBuilder:
+                  (context, tec, fn, error, onChanged, onSubmitted) {
+                return ((context, sc, tags, onTagDelete) {
+                  return Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: TextField(
+                      controller: tec,
+                      focusNode: fn,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        border: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 74, 137, 92),
+                            width: 3.0,
+                          ),
                         ),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 74, 137, 92),
-                          width: 3.0,
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 74, 137, 92),
+                            width: 3.0,
+                          ),
                         ),
-                      ),
-                      labelText: 'Enter Amenties',
-                      helperStyle: TextStyle(
-                        color: kblue,
-                      ),
-                      hintText: _controller!.hasTags ? '' : "Enter Amenties...",
-                      errorText: error,
-                      prefixIconConstraints:
-                          BoxConstraints(maxWidth: _distanceToField! * 0.74),
-                      prefixIcon: tags.isNotEmpty
-                          ? SingleChildScrollView(
-                              controller: sc,
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                  children: tags.map((String tag) {
-                                return Container(
-                                  decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20.0),
-                                    ),
-                                    color: Color.fromARGB(255, 74, 137, 92),
-                                  ),
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 5.0),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10.0, vertical: 5.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      InkWell(
-                                        child: Text(
-                                          '$tag',
-                                          style: const TextStyle(
-                                              color: Colors.white),
-                                        ),
-                                        onTap: () {
-                                          print("$tag selected");
-                                        },
+                        labelText: 'Enter Amenties',
+                        helperStyle: TextStyle(
+                          color: kblue,
+                        ),
+                        hintText: _controller!.hasTags ? '' : "Enter Amenties...",
+                        errorText: error,
+                        prefixIconConstraints:
+                            BoxConstraints(maxWidth: _distanceToField! * 0.74),
+                        prefixIcon: tags.isNotEmpty
+                            ? SingleChildScrollView(
+                                controller: sc,
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                    children: tags.map((String tag) {
+                                  return Container(
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20.0),
                                       ),
-                                      const SizedBox(width: 4.0),
-                                      InkWell(
-                                        child: const Icon(
-                                          Icons.cancel,
-                                          size: 14.0,
-                                          color: Color.fromARGB(
-                                              255, 233, 233, 233),
+                                      color: Color.fromARGB(255, 74, 137, 92),
+                                    ),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 5.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0, vertical: 5.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                          child: Text(
+                                            '$tag',
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                          onTap: () {
+                                            print("$tag selected");
+                                          },
                                         ),
-                                        onTap: () {
-                                          onTagDelete(tag);
-                                        },
-                                      )
-                                    ],
-                                  ),
-                                );
-                              }).toList()),
-                            )
-                          : null,
+                                        const SizedBox(width: 4.0),
+                                        InkWell(
+                                          child: const Icon(
+                                            Icons.cancel,
+                                            size: 14.0,
+                                            color: Color.fromARGB(
+                                                255, 233, 233, 233),
+                                          ),
+                                          onTap: () {
+                                            onTagDelete(tag);
+                                          },
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                }).toList()),
+                              )
+                            : null,
+                      ),
+                      onChanged: onChanged,
+                      onSubmitted: onSubmitted,
                     ),
-                    onChanged: onChanged,
-                    onSubmitted: onSubmitted,
-                  ),
-                );
-              });
-            },
+                  );
+                });
+              },
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -1172,6 +1315,8 @@ class _AddServicesViewState extends State<AddServicesView> {
                                 unit: unitController.text,
                                 cgst: cgstPercentage,
                                 sgst: sgstPercentage,
+                                endTime: endTime,
+                                startTime: startTime,
                                 quantity: quantityController.text);
 
                         serviceController.addServices(

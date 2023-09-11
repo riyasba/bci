@@ -48,7 +48,7 @@ class VendorOfferList {
         title: json["title"],
         startsAt: DateTime.parse(json["starts_at"]),
         endsAt: DateTime.parse(json["ends_at"]),
-        businessValue: json["business_value"],
+        businessValue: json["business_value"] ?? "",
         discountValue: json["discount_value"],
         noOfClaimUser: json["no_of_claim_user"],
         status: json["status"],

@@ -4,10 +4,12 @@ import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/services_controller.dart';
 import 'package:bci/models/category_model.dart';
+import 'package:bci/models/service_list_model.dart';
 import 'package:bci/screens/bussiness/views/home_screen/offers/last_offers.dart';
 import 'package:bci/screens/bussiness/views/home_screen/offers/offers_list_view.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -140,6 +142,7 @@ class _OffersScreenState extends State<OffersScreen> {
     // TODO: implement initState
     super.initState();
     authController.getCategoryList();
+    servicesController.getServicesByVendor();
   }
 
   @override
@@ -227,7 +230,7 @@ class _OffersScreenState extends State<OffersScreen> {
                   isCollapsed: false,
                   isDense: true,
                   contentPadding:
-                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                      const EdgeInsets.only(top: 18, bottom: 18, left: 18),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
@@ -239,50 +242,98 @@ class _OffersScreenState extends State<OffersScreen> {
             ),
           ),
           ksizedbox10,
-          GetBuilder<AuthController>(builder: (_) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
-              child: Container(
-                height: 44,
-                width: size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 5, 5, 5)
-                            .withOpacity(0.8))),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: DropdownButton<CategoryList>(
-                    value: merchantCategory,
-                    isExpanded: true,
-                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                    elevation: 0,
-                    itemHeight: 55,
-                    isDense: true,
-                    dropdownColor: Colors.grey[250],
-                    style: const TextStyle(color: Colors.black54),
-                    hint: Text(
-                      "Product Category Name",
-                      style: TextStyle(fontSize: 16, color: kblue),
-                    ),
-                    onChanged: (CategoryList? value) {
-                      setState(() {
-                        merchantCategory = value!;
-                      });
-                    },
-                    items: authController.categoryList
-                        .map<DropdownMenuItem<CategoryList>>(
-                            (CategoryList value) {
-                      return DropdownMenuItem<CategoryList>(
-                        value: value,
-                        child: Text(value.title),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-            );
-          }),
+          // GetBuilder<AuthController>(builder: (_) {
+          //   return Padding(
+          //     padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
+          //     child: Container(
+          //       height: 44,
+          //       width: size.width,
+          //       decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(3),
+          //           border: Border.all(
+          //               color: const Color.fromARGB(255, 5, 5, 5)
+          //                   .withOpacity(0.8))),
+          //       child: Padding(
+          //         padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+          //         child: DropdownButton<CategoryList>(
+          //           value: merchantCategory,
+          //           isExpanded: true,
+          //           icon: const Icon(Icons.keyboard_arrow_down_outlined),
+          //           elevation: 0,
+          //           itemHeight: 55,
+          //           isDense: true,
+          //           dropdownColor: Colors.grey[250],
+          //           style: const TextStyle(color: Colors.black54),
+          //           hint: Text(
+          //             "Product",
+          //             style: TextStyle(fontSize: 16, color: kblue),
+          //           ),
+          //           onChanged: (CategoryList? value) {
+          //             setState(() {
+          //               merchantCategory = value!;
+          //             });
+          //           },
+          //           items: authController.categoryList
+          //               .map<DropdownMenuItem<CategoryList>>(
+          //                   (CategoryList value) {
+          //             return DropdownMenuItem<CategoryList>(
+          //               value: value,
+          //               child: Text(value.title),
+          //             );
+          //           }).toList(),
+          //         ),
+          //       ),
+          //     ),
+          //   );
+          // }),
+          GetBuilder<ServicesController>(builder: (_) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Container(
+                        height: 55,
+                        width: size.width,
+                        child: DropdownSearch<ServiceData>(
+                          itemAsString: (ServiceData u) => u.title,
+                          popupProps: PopupProps.menu(
+                            showSelectedItems: false,
+                            showSearchBox: true,
+                            menuProps:
+                                MenuProps(borderRadius: BorderRadius.circular(15)),
+                            searchFieldProps: const TextFieldProps(),
+                          ),
+                          items: servicesController.serviceDataList,
+                          dropdownDecoratorProps: DropDownDecoratorProps(
+                            dropdownSearchDecoration: InputDecoration(
+                                // labelText: "Department *",
+                                hintText: "Products",
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Color(0xff707070)),
+                                    borderRadius: BorderRadius.circular(5)),
+                                    focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Color(0xff707070)),
+                                    borderRadius: BorderRadius.circular(5)),
+                                border: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0xff707070)
+                                  ),
+                                    borderRadius: BorderRadius.circular(5))),
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              // authController
+                              //     .isDesignationSelected(false);
+                              merchantCategory = value!;
+                              // requiremtsSelected = null;
+                            });
+                          },
+                          // selectedItem: selectedState,
+                        ),
+                      ),
+              );
+            }
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
             child: TextFormField(
@@ -306,7 +357,7 @@ class _OffersScreenState extends State<OffersScreen> {
                   isCollapsed: false,
                   isDense: true,
                   contentPadding:
-                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                      const EdgeInsets.only(top: 18, bottom: 18, left: 15),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
@@ -328,6 +379,7 @@ class _OffersScreenState extends State<OffersScreen> {
               //   }
               //   return null;
               // },
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -340,7 +392,7 @@ class _OffersScreenState extends State<OffersScreen> {
                   isCollapsed: false,
                   isDense: true,
                   contentPadding:
-                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                      const EdgeInsets.only(top: 18, bottom: 18, left: 15),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: const BorderSide(color: Color(0xff707070))),
@@ -351,40 +403,7 @@ class _OffersScreenState extends State<OffersScreen> {
                   )),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
-            child: TextFormField(
-              controller: bsValueController,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              // validator: (value) {
-              //   if (value!.isEmpty) {
-              //     return "Title Can't be Empty";
-              //   }
-              //   return null;
-              // },
-              decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: const BorderSide(color: Color(0xff707070))),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: const BorderSide(color: Color(0xff707070))),
-                  isCollapsed: false,
-                  isDense: true,
-                  contentPadding:
-                      const EdgeInsets.only(top: 12, bottom: 12, left: 15),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: const BorderSide(color: Color(0xff707070))),
-                  hintText: "Bs Value",
-                  hintStyle: TextStyle(
-                    color: kblue,
-                    fontWeight: FontWeight.w400,
-                  )),
-            ),
-          ),
+         
           ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 20,right: 20),
@@ -545,7 +564,6 @@ class _OffersScreenState extends State<OffersScreen> {
                   onPressed: () {
                     if(titleController.text.isNotEmpty &&
                        merchantCategory != null &&
-                       bsValueController.text.isNotEmpty &&
                        claimUserController.text.isNotEmpty &&
                        discountValueController.text.isNotEmpty &&
                        image != null
@@ -557,8 +575,7 @@ class _OffersScreenState extends State<OffersScreen> {
                           startsat: selectdt, 
                           endsat: selectdt1, 
                           discountValue: discountValueController.text, 
-                          claimUser: claimUserController.text, 
-                          bsValue: bsValueController.text
+                          claimUser: claimUserController.text,
                           );
                     } else {
                        Get.rawSnackbar(

@@ -3,29 +3,32 @@ import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AddTodayOffersApiServices extends BaseApiService {
-  Future addTodayOffersApiServices({
+class AddCouponsApiServices extends BaseApiService {
+  Future addCouponsApiServices({
     required String image,
     required String title,
     required String category,
     required String startsat,
     required String endsat,
     required String discountValue,
-    required String claimUser,
+    required String description,
+    required String merchantId,
   }) async {
     dynamic responseJson;
     try {
       var dio = Dio();
 
       FormData formData = FormData.fromMap({
-        "image": await MultipartFile.fromFile(image, filename: image.split("/").last),
+        "image": await MultipartFile.fromFile(image,
+            filename: image.split("/").last),
         "title": title,
         "category": category.toString(),
         "starts_at": startsat,
         "ends_at": endsat,
-        "discount_value": discountValue,
-        "claim_user": claimUser,
-        // "bs_value": bsValue,
+        "coupon_amount": discountValue,
+        "description": description,
+        "merchant": merchantId,
+        "buy_amount": discountValue
       });
 
       print(formData.fields);
@@ -33,7 +36,7 @@ class AddTodayOffersApiServices extends BaseApiService {
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(addTodayOffersApiUrl,
+      var response = await dio.post(addCouponsURL,
           options: Options(
               headers: {'Authorization': 'Bearer $authtoken'},
               followRedirects: false,
@@ -41,7 +44,7 @@ class AddTodayOffersApiServices extends BaseApiService {
                 return status! <= 500;
               }),
           data: formData);
-      print("::::::::<Add today offers list>::::::::status code::::::::::");
+      print("::::::::<Add Coupons api services>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;
