@@ -48,7 +48,7 @@ class _Home_screen1State extends State<Home_screen1> {
   @override
   void initState() {
     super.initState();
-        _dateController.text = formatDate(selectedDate, [MM,'-',dd]);
+    _dateController.text = formatDate(selectedDate, [MM, '-', dd]);
 
     _timeController.text = formatDate(
         DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
@@ -65,10 +65,10 @@ class _Home_screen1State extends State<Home_screen1> {
       homeController.sliderProduct();
     });
   }
-  
-   String ?_setTime, _setDate;
 
-   String ?_hour, _minute, _time;
+  String? _setTime, _setDate;
+
+  String? _hour, _minute, _time;
 
   String? dateTime;
 
@@ -89,7 +89,7 @@ class _Home_screen1State extends State<Home_screen1> {
     if (picked != null)
       setState(() {
         selectedDate = picked;
-        _dateController.text = formatDate(selectedDate, [MM,'-',dd]);
+        _dateController.text = formatDate(selectedDate, [MM, '-', dd]);
       });
   }
 
@@ -110,8 +110,6 @@ class _Home_screen1State extends State<Home_screen1> {
             [hh, ':', nn, " ", am]).toString();
       });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -521,7 +519,7 @@ class _Home_screen1State extends State<Home_screen1> {
                         Expanded(
                           flex: 3,
                           child: InkWell(
-                            onTap: (){
+                            onTap: () {
                               Get.to(() => const VendorsListView());
                             },
                             child: Container(
@@ -560,8 +558,8 @@ class _Home_screen1State extends State<Home_screen1> {
                         Expanded(
                           flex: 1,
                           child: InkWell(
-                            onTap: (){
-                               profileController.downloadBroucher();
+                            onTap: () {
+                              profileController.downloadBroucher();
                             },
                             child: Container(
                               height: 60,
@@ -582,7 +580,7 @@ class _Home_screen1State extends State<Home_screen1> {
                   //       const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   //   child: InkWell(
                   //     onTap: () {
-                       
+
                   //     },
                   //     child: Container(
                   //       height: 45,
