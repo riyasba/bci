@@ -125,13 +125,13 @@ class _VendorsListViewState extends State<VendorsListView> {
                                       ? Image.network(
                                           homeController.vendorList[index]
                                               .profilePicture!,
-                                          height: 125,
+                                          height: 125.h,
                                           width: size.width,
                                           fit: BoxFit.cover,
                                         )
                                       : Image.asset(
                                           "assets/icons/no-photo.png",
-                                          height: 125,
+                                          height: 125.h,
                                           width: size.width,
                                           fit: BoxFit.cover,
                                         ),

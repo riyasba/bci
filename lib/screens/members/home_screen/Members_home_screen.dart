@@ -1,3 +1,4 @@
+import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/flights_controller.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
@@ -203,7 +204,8 @@ class _Home_screen1State extends State<Home_screen1> {
                                             }
                                           },
                                           child: Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10),
                                             child: Image.network(homeController
                                                 .sliderData[i].image),
                                           ),
@@ -348,7 +350,7 @@ class _Home_screen1State extends State<Home_screen1> {
                           ],
                         ),
                         //
-                       InkWell(
+                        InkWell(
                           onTap: () {
                             Get.to(const BusScreen());
                           },
@@ -373,9 +375,9 @@ class _Home_screen1State extends State<Home_screen1> {
                           ),
                         ),
                         //
-                       
+
                         //
-                         InkWell(
+                        InkWell(
                           onTap: () {
                             Get.to(SerchHotelScreen());
                           },
@@ -435,212 +437,192 @@ class _Home_screen1State extends State<Home_screen1> {
                     ),
                   ),
                   ksizedbox20,
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 10, right: 10),
+                  //   child: Row(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       //
+                  //       Row(
+                  //         children: [
+                  //           InkWell(
+                  //             onTap: () {
+                  //               // Get.to(const OthersServiceScreen());
+                  //               Get.to(() => VendorsListView());
+                  //             },
+                  //             child: Column(
+                  //               children: [
+                  //                 Container(
+                  //                   height: 58,
+                  //                   width: 58,
+                  //                   decoration: BoxDecoration(
+                  //                       borderRadius: BorderRadius.circular(5),
+                  //                       color: kblue),
+                  //                   child: Image.asset(
+                  //                       "assets/icons/icons (2).png"),
+                  //                 ),
+                  //                 const SizedBox(
+                  //                   height: 7,
+                  //                 ),
+                  //                 const Text(
+                  //                   'BCI Direct\nPartners',
+                  //                   style:
+                  //                       TextStyle(fontWeight: FontWeight.w700),
+                  //                 )
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       //
+                  //       //  InkWell(
+                  //       //   onTap: () {
+                  //       //     Get.to(const LiquorScreen());
+                  //       //   },
+                  //       //   child: Column(
+                  //       //     children: [
+                  //       //       Container(
+                  //       //         height: 58,
+                  //       //         width: 58,
+                  //       //         decoration: BoxDecoration(
+                  //       //             borderRadius: BorderRadius.circular(5),
+                  //       //             color: kblue),
+                  //       //         child:
+                  //       //             Image.asset("assets/icons/icons (3).png"),
+                  //       //       ),
+                  //       //       const SizedBox(
+                  //       //         height: 7,
+                  //       //       ),
+                  //       //       const Text(
+                  //       //         'Liquors',
+                  //       //         style: TextStyle(fontWeight: FontWeight.w700),
+                  //       //       )
+                  //       //     ],
+                  //       //   ),
+                  //       // ),
+                  //       Container(
+                  //         height: 58,
+                  //         width: 58,
+                  //       ),
+                  //       Container(
+                  //         height: 58,
+                  //         width: 58,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+
+                  // ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        //
-                        Row(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                // Get.to(const OthersServiceScreen());
-                                Get.to(()=> VendorsListView());
-                              },
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 58,
-                                    width: 58,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        color: kblue),
-                                    child: Image.asset(
-                                        "assets/icons/icons (2).png"),
-                                  ),
-                                  const SizedBox(
-                                    height: 7,
-                                  ),
-                                  const Text(
-                                    'BCI Direct\nPartners',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w700),
-                                  )
-                                ],
+                        Expanded(
+                          flex: 3,
+                          child: InkWell(
+                            onTap: (){
+                              Get.to(() => const VendorsListView());
+                            },
+                            child: Container(
+                              height: 60,
+                              decoration: BoxDecoration(
+                                  color: kblue,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                child: Row(
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/projectlogo.png",
+                                      height: 25,
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "BCI Associate",
+                                      style: primaryFont.copyWith(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                        //
-                        //  InkWell(
-                        //   onTap: () {
-                        //     Get.to(const LiquorScreen());
-                        //   },
-                        //   child: Column(
-                        //     children: [
-                        //       Container(
-                        //         height: 58,
-                        //         width: 58,
-                        //         decoration: BoxDecoration(
-                        //             borderRadius: BorderRadius.circular(5),
-                        //             color: kblue),
-                        //         child:
-                        //             Image.asset("assets/icons/icons (3).png"),
-                        //       ),
-                        //       const SizedBox(
-                        //         height: 7,
-                        //       ),
-                        //       const Text(
-                        //         'Liquors',
-                        //         style: TextStyle(fontWeight: FontWeight.w700),
-                        //       )
-                        //     ],
-                        //   ),
-                        // ),
-                        Container(
-                          height: 58,
-                          width: 58,
+                        const SizedBox(
+                          width: 10,
                         ),
-                        Container(
-                          height: 58,
-                          width: 58,
-                        ),
+                        Expanded(
+                          flex: 1,
+                          child: InkWell(
+                            onTap: (){
+                               profileController.downloadBroucher();
+                            },
+                            child: Container(
+                              height: 60,
+                              decoration: BoxDecoration(
+                                  color: kOrange,
+                                  borderRadius: BorderRadius.circular(5)),
+                              alignment: Alignment.center,
+                              child: Image.asset("assets/icons/pdf_img.png"),
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
-
-                  // ksizedbox20,
-                  // Row(
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //   children: [
-                  //     InkWell(
-                  //       onTap: () {
-                  //         Get.to(() => const FlightBookingLandingScreen());
-                  //       },
-                  //       child: Column(
-                  //         children: [
-                  //           Image.asset('assets/images/Group 5778.png'),
-                  //           const Text(
-                  //             'Flight',
-                  //             style: TextStyle(fontWeight: FontWeight.w700),
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-                  //     InkWell(
-                  //       onTap: () {
-                  //         Get.to(Hotel());
-                  //       },
-                  //       child: Column(
-                  //         children: [
-                  //           Image.asset('assets/images/Group 5827.png'),
-                  //           Text(
-                  //             'Hotel',
-                  //             style: TextStyle(fontWeight: FontWeight.w700),
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-                  //     InkWell(
-                  //       onTap: () {
-                  //         Get.to(const liquer_screen());
-                  //       },
-                  //       child: Column(
-                  //         children: [
-                  //           Image.asset('assets/images/Group 5828.png'),
-                  //           const Text(
-                  //             'Liquors',
-                  //             style: TextStyle(fontWeight: FontWeight.w700),
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-                  //     InkWell(
-                  //       onTap: () {
-                  //         Get.to(const Holiday_Home());
-                  //       },
-                  //       child: Column(
-                  //         children: [
-                  //           Image.asset('assets/images/Group 5829.png'),
-                  //           const Text(
-                  //             'Holiday\nPackage',
-                  //             style: TextStyle(fontWeight: FontWeight.w700),
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-                  //     InkWell(
-                  //       onTap: () {
-                  //         Get.to(const OthersServiceScreen());
-                  //       },
-                  //       child: Column(
-                  //         children: [
-                  //           const SizedBox(
-                  //             height: 6,
-                  //           ),
-                  //           Container(
-                  //               height: 58,
-                  //               width: 55,
-                  //               decoration: BoxDecoration(
-                  //                   color: kblue,
-                  //                   borderRadius: BorderRadius.circular(3)),
-                  //               child: const Icon(
-                  //                 Icons.open_with,
-                  //                 color: Colors.white,
-                  //               )),
-                  //           ksizedbox10,
-                  //           const Text(
-                  //             'Others',
-                  //             style: TextStyle(fontWeight: FontWeight.w700),
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-                  //     kwidth10
-                  //   ],
-                  // ),
                   ksizedbox20,
-                   Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
-              child: InkWell(
-                onTap: (){
-                  profileController.downloadBroucher();
-                },
-                child: Container(
-                  height: 45,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [kOrange, kyellow]),
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 2, color: Colors.grey.withOpacity(0.5))
-                      ],
-                      borderRadius: BorderRadius.circular(30)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 25,right: 25),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/images/pdf.png",height: 25,),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                          const  Text("Download Brochure",style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18
-                            ),)
-                          ],
-                        ),
-                      ),
-                ),
-              ),
-            ),
-            // if (homeController.sliderList.isNotEmpty)
-            CarouselSlider(
+                  // Padding(
+                  //   padding:
+                  //       const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  //   child: InkWell(
+                  //     onTap: () {
+                       
+                  //     },
+                  //     child: Container(
+                  //       height: 45,
+                  //       width: size.width,
+                  //       decoration: BoxDecoration(
+                  //           gradient:
+                  //               LinearGradient(colors: [kOrange, kyellow]),
+                  //           boxShadow: [
+                  //             BoxShadow(
+                  //                 blurRadius: 2,
+                  //                 color: Colors.grey.withOpacity(0.5))
+                  //           ],
+                  //           borderRadius: BorderRadius.circular(30)),
+                  //       child: Padding(
+                  //         padding: const EdgeInsets.only(left: 25, right: 25),
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.center,
+                  //           children: [
+                  //             Image.asset(
+                  //               "assets/images/pdf.png",
+                  //               height: 25,
+                  //             ),
+                  //             const SizedBox(
+                  //               width: 20,
+                  //             ),
+                  //             const Text(
+                  //               "Download Brochure",
+                  //               style: TextStyle(
+                  //                   color: Colors.white,
+                  //                   fontWeight: FontWeight.w500,
+                  //                   fontSize: 18),
+                  //             )
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // if (homeController.sliderList.isNotEmpty)
+                  CarouselSlider(
                       carouselController: sliderController,
                       items: [
                         for (int i = 0;
@@ -658,7 +640,7 @@ class _Home_screen1State extends State<Home_screen1> {
                             //   )),
                             // ),
                             child: Padding(
-                               padding:
+                              padding:
                                   const EdgeInsets.symmetric(horizontal: 10),
                               child: Image.network(
                                   homeController.sliderList[i].image),
@@ -747,7 +729,8 @@ class _Home_screen1State extends State<Home_screen1> {
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               physics: const BouncingScrollPhysics(),
-                              itemCount: homeController.todayOfferListData.length,
+                              itemCount:
+                                  homeController.todayOfferListData.length,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 return Padding(
@@ -756,23 +739,27 @@ class _Home_screen1State extends State<Home_screen1> {
                                     height: 140,
                                     width: size.width * 0.45,
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 2,
-                                          color: Colors.grey.withOpacity(0.5)
-                                        )
-                                      ]
-                                    ),
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurRadius: 2,
+                                              color:
+                                                  Colors.grey.withOpacity(0.5))
+                                        ]),
                                     child: InkWell(
                                         onTap: () {
                                           Get.to(const OfferScreenListView());
                                         },
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
-                                          child: Image.network(homeController
-                                              .todayOfferListData[index].image,fit: BoxFit.fill,),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.network(
+                                            homeController
+                                                .todayOfferListData[index]
+                                                .image,
+                                            fit: BoxFit.fill,
+                                          ),
                                         )),
                                   ),
                                 );

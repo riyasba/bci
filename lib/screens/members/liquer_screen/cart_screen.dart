@@ -131,13 +131,17 @@ class _CartScreenState extends State<CartScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          homeController
-                                              .cartListData[index].serviceName,
-                                          style: const TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w600),
+                                        Container(
+                                          width: 150,
+                                          child: Text(
+                                            homeController
+                                                .cartListData[index].serviceName,
+                                                overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w600),
+                                          ),
                                         ),
                                         const SizedBox(
                                           height: 5,

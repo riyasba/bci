@@ -153,8 +153,8 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                   child: Container(
                     child: Column(
                       children: [
-                       Image.asset('assets/images/cupenimage.png'),
-                       const Text(
+                        Image.asset('assets/images/cupenimage.png'),
+                        const Text(
                           'Coupon\nRedemention',
                           textAlign: TextAlign.center,
                         ),
@@ -172,7 +172,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     child: Column(
                       children: [
                         Image.asset('assets/images/wallet.png'),
-                        Text(
+                       const Text(
                           'Wallet\n',
                           textAlign: TextAlign.center,
                         ),
@@ -182,13 +182,13 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(ContactAdmin());
+                    Get.to(const ContactAdmin());
                   },
                   child: Container(
                       child: Column(
                     children: [
                       Image.asset('assets/images/contactadmin.png'),
-                      Text(
+                     const Text(
                         'Contact\n Admin',
                         textAlign: TextAlign.center,
                       )
@@ -211,7 +211,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     child: Column(
                       children: [
                         Image.asset('assets/images/booking.png'),
-                        Text(
+                       const Text(
                           'Bookings\n\n',
                           textAlign: TextAlign.center,
                         )
@@ -221,13 +221,13 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(OffersScreen());
+                    Get.to(const OffersScreen());
                   },
                   child: Container(
                     child: Column(
                       children: [
                         Image.asset('assets/images/offers.png'),
-                      const  Text(
+                        const Text(
                           'Offers\n\n',
                           textAlign: TextAlign.center,
                         )
@@ -237,13 +237,13 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(ServiceBookingScreen());
+                    Get.to(const ServiceBookingScreen());
                   },
                   child: Container(
                     child: Column(
                       children: [
                         Image.asset('assets/images/servicebooking.png'),
-                        Text(
+                       const Text(
                           'Service\nBookings\nRequest',
                           textAlign: TextAlign.center,
                         )
@@ -258,26 +258,26 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    Get.to(AvailabilityScreen());
+                    Get.to(const AvailabilityScreen());
                   },
                   child: Container(
                     child: Column(
                       children: [
                         Image.asset('assets/images/availability.png'),
-                        Text('Availability')
+                        const Text('Availability')
                       ],
                     ),
                   ),
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(MyAccountScreen());
+                    Get.to(const MyAccountScreen());
                   },
                   child: Container(
                     child: Column(
                       children: [
                         Image.asset('assets/images/jhon.png'),
-                        Text('Jhon')
+                        const Text('Jhon')
                       ],
                     ),
                   ),

@@ -365,7 +365,7 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       TransactionHistoryModel transactionHistoryModel =
           TransactionHistoryModel.fromJson(response.data);
-      transactionHistorydata = transactionHistoryModel.transactionHistory;
+      transactionHistorydata = transactionHistoryModel.transactionHistory.reversed.toList();
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,

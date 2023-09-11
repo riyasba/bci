@@ -126,46 +126,52 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                         color: Colors.black87),
                   ),
                   ksizedbox10,
-                 if(widget.vendorListModelData.locationAddress != null) Row(
-                    children: [
-                      InkWell(
-                        onTap: (){
-                          launchUrl(Uri.parse(widget.vendorListModelData.locationAddress));
-                        },
-                        child: Container(
-                          height: 45,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 2,
-                                    color: Colors.grey.withOpacity(0.5))
-                              ],
-                              borderRadius: BorderRadius.circular(40)),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Location",
-                                  style: primaryFont.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                      color: Colors.black, fontSize: 12),
-                                ),
-                                const SizedBox(
-                                  width: 7,
-                                ),
-                                const Icon(
-                                  Icons.location_on,
-                                  color: Colors.blue,
-                                ),
-                              ],
+                  if (widget.vendorListModelData.locationAddress != null)
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            launchUrl(
+                                Uri.parse(
+                                    widget.vendorListModelData.locationAddress),
+                                mode: LaunchMode.externalApplication);
+                          },
+                          child: Container(
+                            height: 45,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 2,
+                                      color: Colors.grey.withOpacity(0.5))
+                                ],
+                                borderRadius: BorderRadius.circular(40)),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Location",
+                                    style: primaryFont.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black,
+                                        fontSize: 12),
+                                  ),
+                                  const SizedBox(
+                                    width: 7,
+                                  ),
+                                  const Icon(
+                                    Icons.location_on,
+                                    color: Colors.blue,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
                   ksizedbox20,
                 ],
               ),

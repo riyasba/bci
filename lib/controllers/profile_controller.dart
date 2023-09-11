@@ -7,6 +7,7 @@ import 'package:bci/models/get_coupons_model.dart';
 import 'package:bci/models/member_profile_model.dart';
 import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
+import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
 import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
 import 'package:bci/services/network/profile_api_services/our_coupons_api_service.dart';
 import 'package:bci/services/network/profile_api_services/profile_api_services.dart';
@@ -167,6 +168,7 @@ class ProfileController extends GetxController {
     if (response.statusCode == 200) {
       GetCouponsList getCouponsList = GetCouponsList.fromJson(response.data);
       couponsData = getCouponsList.data;
+      couponsData.shuffle();
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -387,6 +389,7 @@ class ProfileController extends GetxController {
         .withdrawWalletApiServices(amount: amount);
 
     if (respone.statusCode == 200) {
+      Get.to(() => const FlightLoadingPage());
       print(">>-------------->>---------->>");
       for (int i = 0; i < homeController.cartListData.length; i++) {
         homeController.addBooking(
@@ -435,22 +438,22 @@ class ProfileController extends GetxController {
     Map<String, String> map = {
       'version': "1",
       'txnRefNo': "ORD$randomStr", // Should change on every request
-      'amount': "$amount",
-      'passCode': 'PTVA7538',
+      'amount': "1000",
+      'passCode': 'KHKZ7396',
       'bankId': '000004',
-      'terminalId': '10043344',
+      'terminalId': '10043345',
       'merchantId': '120000000043345',
-      'mcc': "7997",
+      'mcc': "4722",
       'paymentType': 'Pay',
       'currency': "356",
       'email': "manu@gmail.com",
       'phone': '+918157868855',
-      'hashKey': '4B7841581CEB2A8D77A4F6CE4C6CB051',
-      'aesKey': 'F238AD044C08838D2726E3291F554C8D',
+      'hashKey': '3EB5718FB544D878AFEF33F28D2ABB79',
+      'aesKey': 'DA4247F2A35302A10CE1933FCBDFFA48',
       'payOpt': 'cc',
-      'orderInfo': 'NARUTO00002',
+      'orderInfo': 'NARUTO00001',
       'env': 'PROD', //UAT PROD
-      'url': 'https://sandbox.isgpay.com/ISGPay-Genius/request.action',
+      'url': 'https://isgpay.com/ISGPay-Genius/request.action',
     };
     return map;
   }
