@@ -2,7 +2,6 @@ import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
-import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/models/vendor_list_model.dart';
 import 'package:bci/screens/members/offer%20screen/view_vendors_offers_screen.dart';
 import 'package:flutter/material.dart';

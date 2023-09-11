@@ -76,7 +76,7 @@ class _FlightBookingHeaderState extends State<FlightBookingHeader> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  "assets/images/flight_booking/Group.png",
+                                  "assets/images/Group 6978 (3).png",
                                   height: 20,
                                   color:
                                       flightBookingController.wayIndex.value ==

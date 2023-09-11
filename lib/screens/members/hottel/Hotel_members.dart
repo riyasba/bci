@@ -8,6 +8,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math' as math;
 import '../../../constands/constands.dart';
+import '../../../controllers/home_page_controller.dart';
 import 'final_booking.dart';
 
 class HotelListScreen extends StatefulWidget {
@@ -20,41 +21,25 @@ class HotelListScreen extends StatefulWidget {
 }
 
 class _HotelListScreenState extends State<HotelListScreen> {
-
   final hotelBookingController = Get.find<HotelBookingController>();
-
+  final homeController = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: kwhite,
-        title: Text(
-          'Hello',
-          style: TextStyle(color: Colors.grey),
-        ),
-        actions: [],
         leading: InkWell(
             onTap: () {
               Get.back();
             },
             child: Image.asset('assets/images/Group 5814.png')),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(90.0),
-          child: Column(
+          preferredSize: Size.fromHeight(220.0),
+          child: Stack(
             children: [
-              Row(
-                children: [
-                  SizedBox(
-                    width: 30,
-                  ),
-                  Text(
-                    'Find Your hotel',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
-                  ),
-                ],
-              ),
-              Padding(padding: const EdgeInsets.all(8.0), child: search()),
+              Image.asset(homeController.bannerData.first.image),
+              Positioned(top: -5, child: search())
             ],
           ),
         ),
@@ -141,7 +126,6 @@ class _HotelListScreenState extends State<HotelListScreen> {
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: InkWell(
                         onTap: () async {
-                        
                           final prefs = await SharedPreferences.getInstance();
                           var searchtocken = prefs.getString("searchtoken");
                           Get.to(HotelInfobooking(
@@ -152,8 +136,8 @@ class _HotelListScreenState extends State<HotelListScreen> {
                                 .toString(),
                             searchToken: searchtocken ?? "",
                             userIp: '122.160.83.78',
-                           
-                               // hotelBookingController.blockroomdata[index].hotelRoomsDetails.toString(),
+
+                            // hotelBookingController.blockroomdata[index].hotelRoomsDetails.toString(),
                           ));
                           hotelBookingController.update();
                           // print(

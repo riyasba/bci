@@ -38,6 +38,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:isgpayui_plugin/isgpayui_plugin.dart';
+import '../models/banner_model.dart';
+import '../services/network/settings_api_services/banner_api_service.dart';
 
 class HomeController extends GetxController {
   GetSliderApiServices getSliderApiServices = GetSliderApiServices();
@@ -499,6 +501,20 @@ class HomeController extends GetxController {
     if (response.statusCode == 200) {
       VendorListModel vendorListModel = VendorListModel.fromJson(response.data);
       vendorList = vendorListModel.data;
+    }
+    update();
+  }
+
+  //get slider product
+  BannersApiService bannerapiservice = BannersApiService();
+   List<Post> bannerData = [];
+
+  banners({required String catogories}) async {
+    dio.Response<dynamic> response =
+        await bannerapiservice.bannersApiService(catogories: catogories);
+    if (response.statusCode == 200) {
+      BannerModel bannerermodel = BannerModel.fromJson(response.data);
+      //  sliderData = sliderProductModel.posts;
     }
     update();
   }

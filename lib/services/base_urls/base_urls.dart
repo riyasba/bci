@@ -5,7 +5,8 @@ abstract class BaseApiService {
   //new url - https://www.portal.bcipvtltd.com
 
   //register url
-  final String registerURl = "https://www.portal.bcipvtltd.com/api/register_user";
+  final String registerURl =
+      "https://www.portal.bcipvtltd.com/api/register_user";
 
   //login url
   final String getOtpUrl = "https://www.portal.bcipvtltd.com/api/get_otp";
@@ -17,17 +18,20 @@ abstract class BaseApiService {
   final String categoryURL = "https://www.portal.bcipvtltd.com/api/category";
 
   //sub category URL
-  final String subCategoryURL = "https://www.portal.bcipvtltd.com/api/sub_category";
+  final String subCategoryURL =
+      "https://www.portal.bcipvtltd.com/api/sub_category";
 
   //get profile api
-  final String getProfileURL = "https://www.portal.bcipvtltd.com/api/auth/profile";
+  final String getProfileURL =
+      "https://www.portal.bcipvtltd.com/api/auth/profile";
 
 //profile update API URL
   final String profileUpdateURL =
       "https://www.portal.bcipvtltd.com/api/auth/profile_update";
 
   //sliders Api
-  final String getSliderURL = "https://www.portal.bcipvtltd.com/api/auth/get_slider";
+  final String getSliderURL =
+      "https://www.portal.bcipvtltd.com/api/auth/get_slider";
 
   //Get plan list
   final String getPlanList =
@@ -139,16 +143,20 @@ abstract class BaseApiService {
 
   //bus booking api
 
-  final getCityListApiUrl = "https://www.portal.bcipvtltd.com/api/auth/Bus_CityList";
+  final getCityListApiUrl =
+      "https://www.portal.bcipvtltd.com/api/auth/Bus_CityList";
 
-  final searchBusApiUrl = "https://www.portal.bcipvtltd.com/api/auth/Bus_Search";
+  final searchBusApiUrl =
+      "https://www.portal.bcipvtltd.com/api/auth/Bus_Search";
 
-  final busSeatMapApiUrl = "https://www.portal.bcipvtltd.com/api/auth/bus_seat_map";
+  final busSeatMapApiUrl =
+      "https://www.portal.bcipvtltd.com/api/auth/bus_seat_map";
 
   final busTempBooking =
       "https://www.portal.bcipvtltd.com/api/auth/bus_temp_booking";
 
-  final busTicketing = "https://www.portal.bcipvtltd.com/api/auth/bus_ticketing";
+  final busTicketing =
+      "https://www.portal.bcipvtltd.com/api/auth/bus_ticketing";
 
   final busRequiryURL = "https://www.portal.bcipvtltd.com/api/auth/bus_requery";
 
@@ -209,31 +217,35 @@ abstract class BaseApiService {
       "https://www.portal.bcipvtltd.com/api/auth/hotel_booking";
 
   //block room api
-  final blockRoomApiUrl = "https://www.portal.bcipvtltd.com/api/auth/block_room";
+  final blockRoomApiUrl =
+      "https://www.portal.bcipvtltd.com/api/auth/block_room";
 
   //notification list
   final String notificationListApiUrl =
       "https://www.portal.bcipvtltd.com/api/auth/notification_list";
 
-
   //user redeemded coupon
-  final String userRedeemCoupons ="https://www.portal.bcipvtltd.com/api/auth/userRedeemCoupons";
+  final String userRedeemCoupons =
+      "https://www.portal.bcipvtltd.com/api/auth/userRedeemCoupons";
 
-  //hotel booking list 
-  final String hotelBookinglistApiUrl = "https://www.portal.bcipvtltd.com/api/auth/list_hotel_booking";
+  //hotel booking list
+  final String hotelBookinglistApiUrl =
+      "https://www.portal.bcipvtltd.com/api/auth/list_hotel_booking";
 
-  final String storeHotelBookingURL ="https://www.portal.bcipvtltd.com/api/auth/store_hotel_booking";
+  final String storeHotelBookingURL =
+      "https://www.portal.bcipvtltd.com/api/auth/store_hotel_booking";
 
+  final String hotelBookingDetailsURL =
+      "https://www.portal.bcipvtltd.com/api/auth/get_booking_detail";
 
-  final String hotelBookingDetailsURL = "https://www.portal.bcipvtltd.com/api/auth/get_booking_detail";
+  final String vendorListURL =
+      "https://www.portal.bcipvtltd.com/api/auth/vendor_list";
 
-
-  final String vendorListURL = "https://www.portal.bcipvtltd.com/api/auth/vendor_list";
-
-
-
- //withdraw amount
+  //withdraw amount
   final String withdrawAmountURL =
       "https://www.portal.bcipvtltd.com/api/auth/withdrawAmount";
 
+  //banner
+  final String bannerURL =
+      "https://www.portal.bcipvtltd.com/api/auth/getslider_booking";
 }

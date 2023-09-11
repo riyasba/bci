@@ -15,7 +15,6 @@ class LiquorScreen extends StatefulWidget {
 }
 
 class _LiquorScreenState extends State<LiquorScreen> {
-
   final homeController = Get.find<HomeController>();
 
   @override
@@ -27,9 +26,9 @@ class _LiquorScreenState extends State<LiquorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:const Color(0xFFF9F8FD),
+      backgroundColor: const Color(0xFFF9F8FD),
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(110),
+          preferredSize: const Size.fromHeight(110),
           child: Column(
             children: [
               ClipPath(
@@ -43,14 +42,17 @@ class _LiquorScreenState extends State<LiquorScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
-                            onTap: (){
-                        Get.back();
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Icon(Icons.arrow_back_ios,color: kwhite,),
-                      )
-                                ),
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: kwhite,
+                            ),
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(right: 0),
                           child: Text(
@@ -62,13 +64,14 @@ class _LiquorScreenState extends State<LiquorScreen> {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {
-                              Get.to(const NotificationScreen());
-                            },
-                            icon: Icon(
-                              Icons.notifications,
-                              color: kwhite,
-                            ))
+                          onPressed: () {
+                            Get.to(const NotificationScreen());
+                          },
+                          icon: Icon(
+                            Icons.notifications,
+                            color: kwhite,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -94,68 +97,83 @@ class _LiquorScreenState extends State<LiquorScreen> {
               //     ),
               //   ),
               // ),
-            ],
+          Image.asset('assets/images/Group 6975 (2).png'),  ],
           )),
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
-        child: GetBuilder<HomeController>(
-          builder: (_) {
-            return homeController.vendorListData.isEmpty ? const  Center(
-                child: Text("No data found"),
-            ) : ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: homeController.vendorListData.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding:const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
-                    child: InkWell(
-                      onTap: (){
-                        Get.to( LiquorListScreen(vendor: homeController.vendorListData[index].vendorId.toString(),));
-                      },
-                      child: Container(
-                              height: 150,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: kwhite,
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 0.5,
-                                    color: kgrey
-                                  )
-                                ]
+        child: GetBuilder<HomeController>(builder: (_) {
+          return homeController.vendorListData.isEmpty
+              ? const Center(
+                  child: Text("No data found"),
+                )
+              : ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: homeController.vendorListData.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                          left: 10, right: 10, top: 10, bottom: 10),
+                      child: InkWell(
+                        onTap: () {
+                          Get.to(LiquorListScreen(
+                            vendor: homeController
+                                .vendorListData[index].vendorId
+                                .toString(),
+                          ));
+                        },
+                        child: Container(
+                          height: 150,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              color: kwhite,
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(blurRadius: 0.5, color: kgrey)
+                              ]),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(5),
+                                    child: Image.network(
+                                      homeController
+                                          .vendorListData[index].image,
+                                      fit: BoxFit.cover,
+                                      width: 100,
+                                      height: 130,
+                                    )),
                               ),
-                              
-                              child: Row(
-                                children: [
-                                  Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: Image.network(homeController.vendorListData[index].image,fit: BoxFit.cover,width: 100,height: 130,)),
-                                  ),kwidth10,
-                                  Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(homeController.vendorListData[index].title),
-                          Container(
-                            width: 170,
-                            child: Text(homeController.vendorListData[index].description,maxLines: 3,overflow: TextOverflow.ellipsis,)),
-                          Text(homeController.vendorListData[index].saleAmount),
-                        ],
+                              kwidth10,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(homeController
+                                        .vendorListData[index].title),
+                                    Container(
+                                        width: 170,
+                                        child: Text(
+                                          homeController.vendorListData[index]
+                                              .description,
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                        )),
+                                    Text(homeController
+                                        .vendorListData[index].saleAmount),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                                  )
-                                ],
-                              ),
-                            ),
-                    ),
-                  );
-                });
-          }
-        ),
+                    );
+                  });
+        }),
       ),
     );
   }
