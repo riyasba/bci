@@ -3,6 +3,7 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/search_service_list_model.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,63 @@ class ServiceDetailsScreen extends StatefulWidget {
 }
 
 class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
+  
+   String ?_setTime, _setDate;
+
+   String ?_hour, _minute, _time;
+
+  String? dateTime;
+
+  DateTime selectedDate = DateTime.now();
+
+  TimeOfDay selectedTime = TimeOfDay(hour: 00, minute: 00);
+
+  TextEditingController _dateController = TextEditingController();
+  TextEditingController _timeController = TextEditingController();
+
+  Future<Null> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        initialDatePickerMode: DatePickerMode.day,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2101));
+    if (picked != null)
+      setState(() {
+        selectedDate = picked;
+        _dateController.text = formatDate(selectedDate, [MM,'-',dd]);
+      });
+      _selectTime(context);
+  }
+
+  Future<Null> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (picked != null)
+      setState(() {
+        selectedTime = picked;
+        _hour = selectedTime.hour.toString();
+        _minute = selectedTime.minute.toString();
+        _time = _hour! + ' : ' + _minute!;
+        _timeController.text = _time!;
+        _timeController.text = formatDate(
+            DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
+            [hh, ':', nn, " ", am]).toString();
+      });
+  }
+
+  @override
+  void initState() {
+    
+    _dateController.text = formatDate(selectedDate, [M,',',dd,',',yyyy]);
+
+    _timeController.text = formatDate(
+        DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
+        [hh, ':', nn, " ", am]).toString();
+    super.initState();
+  }
   final homeController = Get.find<HomeController>();
 
   final redeemCouponcontroller = TextEditingController();
@@ -68,6 +126,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
             padding: const EdgeInsets.all(15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   'About',
@@ -93,6 +152,25 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black),
                 ),
+                ksizedbox10,
+                Text('Time Slot',
+                         style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.bold,
+                                ),
+                        ),  
+                        Row(
+                          children: [
+                             Text(_dateController.text),
+                            IconButton(onPressed: (){
+                              _selectDate(context);
+                            }, 
+                            icon:Icon(Icons.date_range)),
+                           
+                           
+                          ],
+                        ),
+                         Text(_timeController.text),
                 ksizedbox10,
                 for (int i = 0;
                     i < widget.searchServicelist.amenties!.length;
