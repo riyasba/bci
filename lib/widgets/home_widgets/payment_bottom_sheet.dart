@@ -129,7 +129,7 @@ paymentBottomSheet(BuildContext context, double amount) {
                               0) {
                             Get.find<ProfileController>().payFromCart(amount);
                           } else {
-                            Get.to(() => FlightLoadingPage());
+                            Get.to(() => const FlightLoadingPage());
                             Get.find<ProfileController>().payFromWallet(
                                 amount: amount.toStringAsFixed(2));
                           }

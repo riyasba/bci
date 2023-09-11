@@ -197,7 +197,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Row(
@@ -205,7 +205,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    Get.to(BusinessBookingScreen());
+                    Get.to(const BusinessBookingScreen());
                   },
                   child: Container(
                     child: Column(

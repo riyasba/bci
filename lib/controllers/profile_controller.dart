@@ -436,24 +436,30 @@ class ProfileController extends GetxController {
       'version': "1",
       'txnRefNo': "ORD$randomStr", // Should change on every request
       'amount': "$amount",
-      'passCode': 'SVPL4257',
+      'passCode': 'PTVA7538',
       'bankId': '000004',
-      'terminalId': '10100781',
-      'merchantId': '101000000000781',
-      'mcc': "4112",
+      'terminalId': '10043344',
+      'merchantId': '120000000043345',
+      'mcc': "7997",
       'paymentType': 'Pay',
       'currency': "356",
-      'email': 'manu@gmail.com',
-      'phone': '+917907886767',
-      'hashKey': 'E59CD2BF6F4D86B5FB3897A680E0DD3E',
-      'aesKey': '5EC4A697141C8CE45509EF485EE7D4B1',
+      'email': "manu@gmail.com",
+      'phone': '+918157868855',
+      'hashKey': '4B7841581CEB2A8D77A4F6CE4C6CB051',
+      'aesKey': 'F238AD044C08838D2726E3291F554C8D',
       'payOpt': 'cc',
-      'orderInfo': 'NARUTO00001',
-      'env': 'UAT', //UAT PROD
+      'orderInfo': 'NARUTO00002',
+      'env': 'PROD', //UAT PROD
       'url': 'https://sandbox.isgpay.com/ISGPay-Genius/request.action',
     };
     return map;
   }
+
+  // 'email': Get.find<ProfileController>().profileData.isEmpty
+  //         ? "user@gmail.com"
+  //         : Get.find<ProfileController>().profileData.first.email,
+  //     'phone':
+  //         '+91${Get.find<ProfileController>().profileData.isEmpty ? "1234567891" : Get.find<ProfileController>().profileData.first.mobile}',
 
 //add subcription
   payUseingEaseBuzzSubs({
