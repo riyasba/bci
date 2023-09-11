@@ -7,6 +7,7 @@ import 'package:bci/controllers/services_controller.dart';
 import 'package:bci/models/category_model.dart';
 import 'package:bci/models/service_list_model.dart' as ss;
 import 'package:custom_clippers/custom_clippers.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -24,6 +25,7 @@ class UpdateServicesView extends StatefulWidget {
 }
 
 class _AddServicesViewState extends State<UpdateServicesView> {
+  
   final authController = Get.find<AuthController>();
   final serviceController = Get.find<ServicesController>();
   List<String>? initialTags = [];
@@ -48,6 +50,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     _controller = TextfieldTagsController();
     authController.getCategoryList();
     authController.getSubCategoryList();
+    
     setDefault();
   }
 
@@ -316,6 +319,54 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                   )),
             ),
           ),
+         ksizedbox10,
+          GetBuilder<AuthController>(builder: (_) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+              child: Row(
+                children: [
+                  Container(
+                    height: 44,
+                    width: 330,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                        border: Border.all(
+                            color: const Color.fromARGB(255, 5, 5, 5)
+                                .withOpacity(0.8))),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                      child: DropdownButton<int>(
+                        value: cgstPercentage,
+                        isExpanded: true,
+                        icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                        elevation: 0,
+                        itemHeight: 55,
+                        isDense: true,
+                        dropdownColor: Colors.grey[250],
+                        style: const TextStyle(color: Colors.black54),
+                        hint: Text(
+                          "CGST",
+                          style: TextStyle(fontSize: 16, color: kblue),
+                        ),
+                        onChanged: (int? value) {
+                          setState(() {
+                            cgstPercentage = value!;
+                          });
+                        },
+                        items: gstPercentageList
+                            .map<DropdownMenuItem<int>>((int value) {
+                          return DropdownMenuItem<int>(
+                            value: value,
+                            child: Text("$value%"),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
           ksizedbox10,
           GetBuilder<AuthController>(builder: (_) {
             return Padding(

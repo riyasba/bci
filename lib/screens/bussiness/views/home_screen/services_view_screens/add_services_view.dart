@@ -8,6 +8,7 @@ import 'package:bci/models/category_model.dart';
 import 'package:bci/models/create_services_model.dart';
 import 'package:bci/models/sub_category_model.dart';
 import 'package:custom_clippers/custom_clippers.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,56 @@ class AddServicesView extends StatefulWidget {
 }
 
 class _AddServicesViewState extends State<AddServicesView> {
+  
+   String ?_setTime, _setDate;
+
+   String ?_hour, _minute, _time;
+
+  String? dateTime;
+
+  DateTime selectedDate = DateTime.now();
+
+  TimeOfDay selectedTime = TimeOfDay(hour: 00, minute: 00);
+
+  TextEditingController _endtimeController = TextEditingController();
+  TextEditingController _startTimeController = TextEditingController();
+
+ 
+
+  Future<Null> _startTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (picked != null)
+      setState(() {
+        selectedTime = picked;
+        _hour = selectedTime.hour.toString();
+        _minute = selectedTime.minute.toString();
+        _time = _hour! + ' : ' + _minute!;
+        _startTimeController.text = _time!;
+        _startTimeController.text = formatDate(
+            DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
+            [hh, ':', nn, " ", am]).toString();
+      });
+  }
+ Future<Null> _endtime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (picked != null)
+      setState(() {
+        selectedTime = picked;
+        _hour = selectedTime.hour.toString();
+        _minute = selectedTime.minute.toString();
+        _time = _hour! + ' : ' + _minute!;
+        _endtimeController.text = _time!;
+        _endtimeController.text = formatDate(
+            DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
+            [hh, ':', nn, " ", am]).toString();
+      });
+  }
   final authController = Get.find<AuthController>();
   final serviceController = Get.find<ServicesController>();
 
@@ -45,6 +96,12 @@ class _AddServicesViewState extends State<AddServicesView> {
     authController.getCategoryList();
     authController.getSubCategoryList();
     _controller = TextfieldTagsController();
+    _startTimeController.text = formatDate(
+        DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
+        [hh, ':', nn, " ", am]).toString();
+        _endtimeController.text = formatDate(
+        DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
+        [hh, ':', nn, " ", am]).toString();
   }
 
   double? _distanceToField;
@@ -282,6 +339,79 @@ class _AddServicesViewState extends State<AddServicesView> {
                     fontWeight: FontWeight.w400,
                   )),
             ),
+          ),
+           ksizedbox10,
+          GetBuilder<AuthController>(
+            builder: (_) {
+              return Padding(
+                padding: const EdgeInsets.only(left: 15,right: 15),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           Text("Starts At",
+                               style: TextStyle(
+                            color: kblue,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400),),
+                             const SizedBox(height: 5,),
+                             ksizedbox10,
+                              InkWell(
+                                onTap: (){
+                                 _startTime(context);
+                                },
+                                child: Container(
+                  height: 32,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color:const Color(0xff707070)),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Text(_startTimeController.text),
+                  )
+                    
+                                ),
+                              ),
+                         ],
+                       ),
+                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                                 Text("Ends At",
+                               style: TextStyle(
+                            color: kblue,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400),),
+                            const SizedBox(height: 5,),
+                            ksizedbox10,
+                            InkWell(
+                                onTap: (){
+                                  _endtime(context);
+                                },
+                                 child: Container(
+                                  height: 32,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(color: const Color(0xff707070)),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Center(
+                                    child: Text(_endtimeController.text),
+                                  )
+                                                     ),
+                               ),
+                        ],
+                       ),
+                        
+                    ],
+                  ),
+              );
+            }
           ),
           ksizedbox10,
           GetBuilder<AuthController>(builder: (_) {
