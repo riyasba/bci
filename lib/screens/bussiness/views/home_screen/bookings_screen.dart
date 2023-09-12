@@ -311,8 +311,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                                 serviceController
                                     .bookingListData[index].user.name,
                                 serviceController
-                                    .bookingListData[index].user.mobile
-                                    .toString(),
+                                    .bookingListData[index].user.mobile,
                                 serviceController
                                     .bookingListData[index].user.email);
                           },
@@ -397,7 +396,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
       String amt,
       String qty,
       String cusName,
-      String mobileno,
+      String mobile, 
       String email) {
     return showDialog<void>(
       context: context,
@@ -597,7 +596,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                     Container(
                       width: 90,
                       child: Text(
-                        mobileno,
+                        mobile,
                         style: TextStyle(
                             fontSize: 15,
                             color: kgrey,
