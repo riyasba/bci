@@ -108,6 +108,7 @@ class _VendorsListViewState extends State<VendorsListView> {
                         );
                       },
                       child: Container(
+                        
                         decoration: BoxDecoration(
                             color: Colors.white,
                             boxShadow: [

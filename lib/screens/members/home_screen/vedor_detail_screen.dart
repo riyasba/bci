@@ -4,6 +4,7 @@ import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/vendor_list_model.dart';
 import 'package:bci/screens/members/offer%20screen/view_vendors_offers_screen.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -49,82 +50,120 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
         body: ListView(
           children: [
             widget.vendorListModelData.profilePicture != null
-                ? Image.network(
-                    widget.vendorListModelData.profilePicture!,
-                    height: 350,
-                    width: size.width,
-                    fit: BoxFit.cover,
-                  )
+                ? Padding(
+                  padding: const EdgeInsets.only(left: 15,right: 15,top: 10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                        widget.vendorListModelData.profilePicture!,
+                        height: 350,
+                        width: size.width,
+                        fit: BoxFit.cover,
+                      ),
+                  ),
+                )
                 : Image.asset(
                     "assets/icons/no-photo.png",
                     height: 350,
                     width: size.width,
                     fit: BoxFit.cover,
                   ),
+
+
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                 Container(
+                  height: 80,
+                   child: ListView.builder(
+                     scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: widget.vendorListModelData.profilePicture!.length,
+                    itemBuilder: (context,index){
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 10,right: 10),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(widget.vendorListModelData.profilePicture.toString(),
+                        height: 50,width: 80,fit: BoxFit.cover,)),
+                    );
+                   }),
+                 ),
+                 ksizedbox20,
                   Text(
                     widget.vendorListModelData.name,
                     style: TextStyle(
                         fontSize: 24.sp,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                        color: kblue),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  Text(
-                    'Details',
-                    style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black54),
-                  ),
                   ksizedbox10,
+                  Text(
+                    'Address',
+                    style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500,
+                        color:kblue),
+                  ),
+                  ksizedbox20,
                   if (widget.vendorListModelData.address != null)
-                    Text(
-                      "${widget.vendorListModelData.address ?? ""}",
-                      style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black87),
-                    ),
-                  if (widget.vendorListModelData.address != null)
+                  
+                    Row(
+                      children: [
+                        Text(
+                          "${widget.vendorListModelData.address ?? ""}",
+                          style: TextStyle(
+                              fontSize: 15.sp,
+                              color:kblue),
+                        ),
+                        Text(","),
+                         if (widget.vendorListModelData.address != null)
                     Text(
                       "${widget.vendorListModelData.city}",
                       style: TextStyle(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.normal,
-                          color: Colors.black87),
+                          color:kblue),
                     ),
+                      Text(","),
                   if (widget.vendorListModelData.address != null)
                     Text(
                       "${widget.vendorListModelData.state}",
                       style: TextStyle(
                           fontSize: 15.sp,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black87),
+                          color:kblue),
                     ),
+                      ],
+                    ),
+                
                   Text(
-                    "Mobile: ${widget.vendorListModelData.mobile}",
+                    "Mobile : ${widget.vendorListModelData.mobile}",
                     style: TextStyle(
                         fontSize: 15.sp,
-                        fontWeight: FontWeight.normal,
                         height: 1.5,
-                        color: Colors.black87),
+                        color: kblue),
                   ),
                   Text(
-                    "Email: ${widget.vendorListModelData.email}",
+                    "Email  : ${widget.vendorListModelData.email}",
                     style: TextStyle(
                         fontSize: 15.sp,
-                        fontWeight: FontWeight.normal,
                         height: 1.5,
-                        color: Colors.black87),
+                        color: kblue),
                   ),
-                  ksizedbox10,
+                  ksizedbox20,
+                  Text('Location',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                    color: kblue,
+                    fontSize: 18.sp
+                  ),),
+                  ksizedbox20,
+
                   if (widget.vendorListModelData.locationAddress != null)
                     Row(
                       children: [
@@ -136,7 +175,8 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                                 mode: LaunchMode.externalApplication);
                           },
                           child: Container(
-                            height: 45,
+                            height: 35,
+                            width: 120,
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 boxShadow: [
@@ -144,26 +184,27 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                                       blurRadius: 2,
                                       color: Colors.grey.withOpacity(0.5))
                                 ],
-                                borderRadius: BorderRadius.circular(40)),
+                                borderRadius: BorderRadius.circular(10)),
                             child: Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
+                                  const EdgeInsets.only(left: 7,right: 7),
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
+                                   const Icon(
+                                    Icons.my_location,
+                                    color: Colors.red,
+                                    size: 20,
+                                  ),
                                   Text(
                                     "Location",
                                     style: primaryFont.copyWith(
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black,
-                                        fontSize: 12),
+                                        fontSize: 14),
                                   ),
-                                  const SizedBox(
-                                    width: 7,
-                                  ),
-                                  const Icon(
-                                    Icons.location_on,
-                                    color: Colors.blue,
-                                  ),
+                                  
+                                 
                                 ],
                               ),
                             ),

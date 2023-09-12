@@ -104,22 +104,46 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
       ),
       body: ListView(
         children: [
-          Image.network(
-            widget.searchServicelist.image,
-            height: 350,
-            width: size.width,
-            fit: BoxFit.cover,
+          Padding(
+            padding: const EdgeInsets.only(left: 10,right: 10),
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              child: Image.network(
+                widget.searchServicelist.image,
+                height: 350,
+                width: size.width,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           ksizedbox10,
           Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Text(
-                    widget.searchServicelist.title,
-                    style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.bold,
-                        color: kblue),
-                  ),
+            padding: const EdgeInsets.only(left: 15,right: 15),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 200,
+                  child: Text(
+                          widget.searchServicelist.title,
+                          maxLines: 2,
+                          style: TextStyle(
+                            
+                              fontSize: 22.sp,
+                              fontWeight: FontWeight.bold,
+                              color: kblue),
+                        ),
+                ),
+                      Text(
+                       "₹${widget.searchServicelist.actualAmount}",
+                        style: TextStyle(
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.bold,
+                            color: kblue),
+                      ),
+              ],
+            ),
           ),
           ksizedbox10,
           Padding(
@@ -133,7 +157,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                   style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                      color: kblue),
                 ),
                 ksizedbox10,
                 Text(
@@ -142,7 +166,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.normal,
                       height: 1.5,
-                      color: kgrey),
+                      color: kblue),
                 ),
                 ksizedbox10,
                 Text(
@@ -150,58 +174,83 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                   style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                      color:kblue),
                 ),
-                ksizedbox10,
+                ksizedbox20,
                 Text('Time Slot',
                          style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.bold,
+                                color: kblue
                                 ),
-                        ),  
+                        ), ksizedbox20, 
                         Row(
                           children: [
-                             Text(_dateController.text),
-                            IconButton(onPressed: (){
+                          InkWell(
+                            onTap: (){
                               _selectDate(context);
-                            }, 
-                            icon:Icon(Icons.date_range)),
+                            },
+                            child: Icon(Icons.date_range)),
+                             Padding(
+                               padding: const EdgeInsets.only(left: 4,),
+                               child: Text(_dateController.text),
+                             ),
+                             Padding(
+                               padding: const EdgeInsets.only(left: 2,right: 2),
+                               child: Text('-'),
+                             ),
+                               Text(_timeController.text),
+                            
                            
                            
                           ],
                         ),
-                         Text(_timeController.text),
+                       
                 ksizedbox10,
-                for (int i = 0;
-                    i < widget.searchServicelist.amenties!.length;
-                    i++)
-                  Row(
-                    children: [
-                      Container(
-                        height: 10,
-                        width: 10,
-                        decoration: BoxDecoration(
-                          color: kgrey,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        widget.searchServicelist.amenties![i].value,
-                        style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                            color: kgrey),
-                      ),
-                    ],
-                  ),
-                ksizedbox20,
+                // for (int i = 0;
+                //     i < widget.searchServicelist.amenties!.length;
+                //     i++)
+                  // Row(
+                  //   children: [
+                  //     Container(
+                  //       height: 10,
+                  //       width: 10,
+                  //       decoration: BoxDecoration(
+                  //         color: kgrey,
+                  //         borderRadius: BorderRadius.circular(5),
+                  //       ),
+                  //     ),
+                      // const SizedBox(
+                      //   width: 10,
+                      // ),
+                      // Text(
+                      //   widget.searchServicelist.amenties![i].value,
+                      //   style: TextStyle(
+                      //       fontSize: 16.sp,
+                      //       fontWeight: FontWeight.bold,
+                      //       color: kgrey),
+                      // ),
+                  //   ],
+                  // ),
+                  ksizedbox10,
+                  Text('Promo Code',
+                  style: TextStyle(
+                    fontSize: 16.5,
+                    color: kblue,
+                    fontWeight: FontWeight.w500
+                  ),),
+                ksizedbox10,
                 TextField(
                   controller: redeemCouponcontroller,
                   decoration: InputDecoration(
-                    disabledBorder: const OutlineInputBorder(),
+                    disabledBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10)
+                      )
+                    ),
                     hintText: 'Enter Your Coupon code',
                     fillColor: kwhite,
                     focusColor: kwhite,
@@ -214,7 +263,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                         width: 130,
                         decoration: BoxDecoration(
                           color: kblue,
-                          borderRadius: BorderRadius.circular(6.0),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: InkWell(
                           onTap: () async {
@@ -260,7 +309,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                       ),
                     ),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4.0),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
