@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer' as developer;
 
 class SearchHotelListApiService extends BaseApiService {
   Future searchhotelListApiService({
@@ -66,8 +67,10 @@ class SearchHotelListApiService extends BaseApiService {
     "MinRating": "0",
     "UserIp": "122.160.83.78"
 };
-
-      print(data2);
+   
+       developer.log(
+          "----------------------------------------------------->>Search Data");
+      developer.log(data2.toString(), name: "hotel Search request");
 
       var response = await dio.post(searchHotelApiUrl,
           options: Options(
@@ -82,8 +85,12 @@ class SearchHotelListApiService extends BaseApiService {
           ),
           data: data2);
       print("::::::::<search HOTEL - list Api>::::::::status code::::::::::");
-      print(response.statusCode);
-      print(response.data);
+        print(response.statusCode);
+        developer.log(
+          "----------------------------------------------------->>Search Data Response");
+      developer.log(response.data.toString(), name: "hotel Search response");
+     
+      // print(response.data);
       responseJson = response;
     } on SocketException {
       print("no internet");

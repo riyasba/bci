@@ -144,7 +144,8 @@ class BlockRoomApiService extends BaseApiService {
       print(
           "::::::::<block room api service>:hotelroomdatails${hotelRoomsDetail}:::hotel name${hotelName}::::status code::::::::::");
       print(response.statusCode);
-      print(response.data);
+      developer.log(response.data.toString(), name: "block data response");
+      // print(response.data);
       responseJson = response;
     } on SocketException {
       print("no internet");

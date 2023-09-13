@@ -34,15 +34,15 @@ class _HotelListScreenState extends State<HotelListScreen> {
               Get.back();
             },
             child: Image.asset('assets/images/Group 5814.png')),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(220.0),
-          child: Stack(
-            children: [
-              Image.asset(homeController.bannerData.first.image),
-              Positioned(top: -5, child: search())
-            ],
-          ),
-        ),
+        // bottom: PreferredSize(
+        //   preferredSize: Size.fromHeight(50.0),
+        //   child: Stack(
+        //     children: [
+        //       // Image.asset(homeController.bannerData.first.image),
+        //       // Positioned(top: -5, child: search())
+        //     ],
+        //   ),
+        // ),
       ),
       backgroundColor: kwhite,
       body: ListView.builder(
@@ -71,7 +71,7 @@ class _HotelListScreenState extends State<HotelListScreen> {
                           ),
                         ),
                       ),
-                      Padding(
+                    Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,

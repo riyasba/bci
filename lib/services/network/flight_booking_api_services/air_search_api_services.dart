@@ -14,6 +14,24 @@ class AirSearchApiServices extends BaseApiService {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
+      
+      var data = {
+            "imei_number": "64654546546546",
+            "origin": flightSearchModel.fromIata,
+            "destination": flightSearchModel.toIata,
+            "travel_date": formatDate(
+                flightSearchModel.depatureDate, [mm, "/", dd, "/", yyyy]),
+            "travel_type": flightSearchModel.isDomOrINTL,
+            "booking_type": flightSearchModel.isOneWayOrRoundTrip,
+            "adult_count": "${flightSearchModel.adultsCount}",
+            "child_count": "${flightSearchModel.childCount}",
+            "infant_count": "0",
+            "class_of_travel": "${flightSearchModel.cabinClass}",
+            "inventory_type": 0,
+            "airline_code": airlineCode
+          };
+
+          print(data);
 
       var response = await dio.post(airSearchUrl,
           options: Options(

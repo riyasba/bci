@@ -160,17 +160,16 @@ class HotelBookingApiServices extends BaseApiService {
               "Tax": hotelRoomsDetail.price.tax,
               "ExtraGuestCharge": hotelRoomsDetail.price.extraGuestCharge,
               "ChildCharge": hotelRoomsDetail.price.childCharge,
-              "OtherCharges":
-                  hotelRoomsDetail.price.otherCharges,
+              "OtherCharges": hotelRoomsDetail.price.otherCharges,
               "Discount": hotelRoomsDetail.price.discount,
               "PublishedPrice": hotelRoomsDetail.price.publishedPrice,
-              "PublishedPriceRoundedOff": hotelRoomsDetail.price.publishedPriceRoundedOff,
+              "PublishedPriceRoundedOff":
+                  hotelRoomsDetail.price.publishedPriceRoundedOff,
               "OfferedPrice": hotelRoomsDetail.price.offeredPrice,
-              "OfferedPriceRoundedOff": hotelRoomsDetail.price.offeredPriceRoundedOff,
-              "AgentCommission":
-                  hotelRoomsDetail.price.agentCommission,
-              "AgentMarkUp":hotelRoomsDetail.price.agentMarkUp
-                  ,
+              "OfferedPriceRoundedOff":
+                  hotelRoomsDetail.price.offeredPriceRoundedOff,
+              "AgentCommission": hotelRoomsDetail.price.agentCommission,
+              "AgentMarkUp": hotelRoomsDetail.price.agentMarkUp,
               "ServiceTax": hotelRoomsDetail.price.serviceTax,
               "TCS": hotelRoomsDetail.price.tcs,
               "TDS": hotelRoomsDetail.price.tds,
@@ -193,7 +192,9 @@ class HotelBookingApiServices extends BaseApiService {
                 "Title": "Mr",
                 "FirstName": userName.trim().split(" ").first,
                 "MiddleName": "",
-                "LastName": userName.trim().split(" ").length > 1 ?  userName.trim().split(" ").last : ".",
+                "LastName": userName.trim().split(" ").length > 1
+                    ? userName.trim().split(" ").last
+                    : ".",
                 "Phoneno": mobileNumber,
                 "Email": emailId,
                 "PaxType": 1,
@@ -229,7 +230,8 @@ class HotelBookingApiServices extends BaseApiService {
       print(
           "::::::::<hotel booking api Services>::::::::status code::::::::::");
       print(response.statusCode);
-      print(response.data);
+      // print(response.data);
+      developer.log(response.data.toString(), name: "hotel booking response");
       responseJson = response;
     } on SocketException {
       print("no internet");

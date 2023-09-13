@@ -292,7 +292,7 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
                           serviceid: widget.searchServicelist.id.toString());
                     },
                     child: Container(
-                      child: Row(
+                      child:  Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           kwidth5,

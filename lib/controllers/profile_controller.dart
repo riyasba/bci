@@ -438,7 +438,7 @@ class ProfileController extends GetxController {
     Map<String, String> map = {
       "version": "1",
       "txnRefNo": "ORD$randomStr", // Should change on every request
-      "amount": "1000",
+      "amount": "$amount",
       "passCode": "KHKZ7396",
       "bankId": "000004",
       "terminalId": "10043345",
@@ -450,13 +450,14 @@ class ProfileController extends GetxController {
       // 'phone': '+918157868855',
       "hashKey": "3EB5718FB544D878AFEF33F28D2ABB79",
       "aesKey": "DA4247F2A35302A10CE1933FCBDFFA48",
-      "payOpt": "cc",
+      "payOpt": "",
       "orderInfo": "NARUTO00001",
       "ReturnURL": "https://www.portal.bcipvtltd.com/api/auth/add_transaction",
       "env": "PROD", //UAT PROD
       "url": "https://isgpay.com/ISGPay-Genius/request.action",
     };
     print("order id --->: ORD$randomStr");
+    print("order id --->: Payout option is Empty");
     return map;
   }
 

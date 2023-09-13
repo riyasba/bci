@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer' as developer;
 
 class GetHotelRoomApiServices extends BaseApiService {
   Future getHotelRoomApiServices({
@@ -15,6 +16,17 @@ class GetHotelRoomApiServices extends BaseApiService {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
+
+      var data2 = {
+              "UserIp": "122.160.83.78",
+              "ResultIndex":resultIndex,
+              "HotelCode":hotelCode,
+              "Search_Token":searchToken,    
+            };
+
+         developer.log(
+          "----------------------------------------------------->>hotel room details");
+      developer.log(data2.toString(), name: "hotel room details request");
 
       var response = await dio.post(
         getHotelRoomApiUrl,
@@ -36,7 +48,8 @@ class GetHotelRoomApiServices extends BaseApiService {
       );
       print("::::::::<get hotel room Api>::::::::status code::::::::::");
       print(response.statusCode);
-      print(response.data);
+            developer.log(response.data.toString(), name: "hotel room details response");
+      // print(response.data);
       responseJson = response;
     } on SocketException {
       print("no internet");
