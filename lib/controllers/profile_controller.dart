@@ -315,12 +315,13 @@ class ProfileController extends GetxController {
   final _isgpayuiPlugin = IsgpayuiPlugin();
 
   void payFromCart(double amount) async {
+    int tempAmount = amount.toInt();
     String? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      result =
-          await _isgpayuiPlugin.initiateISGPayUI(getArguments(amount * 100)) ??
-              'Unknown platform version';
+      result = await _isgpayuiPlugin
+              .initiateISGPayUI(getArguments(tempAmount * 100)) ??
+          'Unknown platform version';
     } on PlatformException catch (e) {
       result = e.message;
     }
@@ -435,6 +436,7 @@ class ProfileController extends GetxController {
 
   Map<String, String> getArguments(var amount) {
     var randomStr = DateTime.now().microsecondsSinceEpoch.toString();
+    print(amount);
     Map<String, String> map = {
       "version": "1",
       "txnRefNo": "ORD$randomStr", // Should change on every request
@@ -452,12 +454,12 @@ class ProfileController extends GetxController {
       "aesKey": "DA4247F2A35302A10CE1933FCBDFFA48",
       "payOpt": "",
       "orderInfo": "NARUTO00001",
-      "ReturnURL": "https://www.portal.bcipvtltd.com/api/auth/add_transaction",
+      "returnURL": "https://www.portal.bcipvtltd.com/api/auth/add_transaction",
       "env": "PROD", //UAT PROD
       "url": "https://isgpay.com/ISGPay-Genius/request.action",
     };
     print("order id --->: ORD$randomStr");
-    print("order id --->: Payout option is Empty");
+    print("order id --->: Payout option is dc (dc)");
     return map;
   }
 
@@ -534,11 +536,12 @@ class ProfileController extends GetxController {
     required double amount,
     required int id,
   }) async {
+    int tempAmount = amount.toInt();
     String? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       result =
-          await _isgpayuiPlugin.initiateISGPayUI(getArguments(amount * 100)) ??
+          await _isgpayuiPlugin.initiateISGPayUI(getArguments(tempAmount * 100)) ??
               'Unknown platform version';
     } on PlatformException catch (e) {
       result = e.message;
@@ -646,11 +649,12 @@ class ProfileController extends GetxController {
   // String responseData = "Nothing";
 
   void payforWallet({required double amount}) async {
+    int tempAmount = amount.toInt();
     String? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       result =
-          await _isgpayuiPlugin.initiateISGPayUI(getArguments(amount * 100)) ??
+          await _isgpayuiPlugin.initiateISGPayUI(getArguments(tempAmount * 100)) ??
               'Unknown platform version';
     } on PlatformException catch (e) {
       result = e.message;
