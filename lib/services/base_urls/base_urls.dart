@@ -95,6 +95,13 @@ abstract class BaseApiService {
   final String airRePrinting =
       "https://www.portal.bcipvtltd.com/api/auth/air_reprint";
 
+  final String airGetSsrURL =
+      "https://www.portal.bcipvtltd.com/api/auth/air_get_ssr";
+
+
+  final String airCancelApiURL =
+      "https://www.portal.bcipvtltd.com/api/auth/air_ticket_cancellation";
+
   final String airAddPayment =
       "https://www.portal.bcipvtltd.com/api/auth/add_payment";
 

@@ -13,10 +13,12 @@ class PlaneDetailsScreen extends StatefulWidget {
   Flight flight;
   FlightSearchDataModel flightSearchDataModel;
   String seachKey;
+  String flightKey;
   PlaneDetailsScreen(
       {super.key,
       required this.flight,
       required this.flightSearchDataModel,
+      required this.flightKey,
       required this.seachKey});
   @override
   State<PlaneDetailsScreen> createState() => _PlaneDetailsScreenState();
@@ -239,6 +241,7 @@ class _PlaneDetailsScreenState extends State<PlaneDetailsScreen> {
                     Get.to(FlaightOrderDetailsScreen(
                         flight: widget.flight,
                         searchKey: widget.seachKey,
+                        flightKey: widget.flightKey,
                         flightSearchDataModel: widget.flightSearchDataModel));
                   },
                   child: Container(

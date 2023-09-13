@@ -3,6 +3,7 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/vendor_list_model.dart';
+import 'package:bci/screens/members/offer%20screen/view_vendor_services_list.dart';
 import 'package:bci/screens/members/offer%20screen/view_vendors_offers_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -222,7 +223,7 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
           padding: const EdgeInsets.all(10.0),
           child: InkWell(
             onTap: () {
-              Get.to(() => VendorViewOffers(
+              Get.to(() => VendorViewServicesList(
                     vendorId: widget.vendorListModelData.id.toString(),
                   ));
             },

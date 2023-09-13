@@ -337,6 +337,7 @@ class BusController extends GetxController {
       'env': 'UAT', //UAT PROD
       'url': 'https://sandbox.isgpay.com/ISGPay-Genius/request.action',
     };
+    print("Order is >>>>ORD$randomStr");
     return map;
   }
 
@@ -466,7 +467,7 @@ class BusController extends GetxController {
                                   children: [
                                     pw.Text(
                                       '${busRequeryModel.busDetail.fromCity} to ${busRequeryModel.busDetail.toCity}',
-                                      style: pw.TextStyle(
+                                      style: const pw.TextStyle(
                                           //fontWeight: pw.FontWeight.bold
                                           ),
                                     ),
@@ -505,7 +506,7 @@ class BusController extends GetxController {
                             child: pw.Container(
                               height: 100,
                               decoration:
-                                  pw.BoxDecoration(color: PdfColors.grey100),
+                                  const pw.BoxDecoration(color: PdfColors.grey100),
                               child: pw.Padding(
                                 padding: const pw.EdgeInsets.only(
                                     left: 12, right: 12, top: 5, bottom: 5),
@@ -528,11 +529,11 @@ class BusController extends GetxController {
                                                 fontWeight: pw.FontWeight.bold),
                                           ),
                                           pw.Padding(
-                                            padding: pw.EdgeInsets.only(top: 2),
+                                            padding: const pw.EdgeInsets.only(top: 2),
                                             child: pw.Text(
                                               busRequeryModel
                                                   .paxDetails.first.paxName,
-                                              style: pw.TextStyle(
+                                              style: const pw.TextStyle(
                                                 fontSize: 11,
                                                 //fontWeight: pw.FontWeight.bold
                                               ),
@@ -545,7 +546,7 @@ class BusController extends GetxController {
                                                 fontWeight: pw.FontWeight.bold),
                                           ),
                                           pw.Padding(
-                                            padding: pw.EdgeInsets.only(top: 2),
+                                            padding: const pw.EdgeInsets.only(top: 2),
                                             child: pw.Text(
                                               busRequeryModel.bookingRefNo,
                                               style: const pw.TextStyle(
@@ -621,7 +622,7 @@ class BusController extends GetxController {
                             ),
                           ),
                           pw.Padding(
-                            padding: pw.EdgeInsets.only(
+                            padding: const  pw.EdgeInsets.only(
                                 left: 30, right: 30, top: 10),
                             child: pw.Column(
                               crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -813,7 +814,7 @@ class BusController extends GetxController {
                 ),
               ),
               pw.Padding(
-                padding: pw.EdgeInsets.only(left: 20, top: 10, right: 0),
+                padding: const pw.EdgeInsets.only(left: 20, top: 10, right: 0),
                 child: pw.Column(
                   mainAxisAlignment: pw.MainAxisAlignment.start,
                   crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -824,10 +825,10 @@ class BusController extends GetxController {
                         children: [
                           pw.Text('1.'),
                           pw.Padding(
-                            padding: pw.EdgeInsets.only(left: 10),
+                            padding: const pw.EdgeInsets.only(left: 10),
                             child: pw.Text(
                               'redBus* is ONLY a bus ticket agent. It does not operate bus services of its \nown. In order to provide a comprehensive choice of bus operators, departure \ntimes and prices to customers, it has tied up with many bus operators. redBus" \nadvice to customers is to choose bus operators they are aware of and whose \nservice they are comfortable with.',
-                              style: pw.TextStyle(height: 3),
+                              style: const pw.TextStyle(height: 3),
                             ),
                           ),
                         ]),

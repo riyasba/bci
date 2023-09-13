@@ -11,9 +11,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../models/get_today_offers_list_model.dart';
+
 class VendorViewOffers extends StatefulWidget {
   String vendorId;
-   VendorViewOffers({super.key,required this.vendorId});
+  OffersListModel offersListModel;
+  VendorViewOffers(
+      {super.key, required this.vendorId, required this.offersListModel});
 
   @override
   State<VendorViewOffers> createState() => _VendorViewOffersState();
@@ -21,10 +25,10 @@ class VendorViewOffers extends StatefulWidget {
 
 class _VendorViewOffersState extends State<VendorViewOffers> {
   final homeController = Get.find<HomeController>();
-  
-   String ?_setTime, _setDate;
 
-   String ?_hour, _minute, _time;
+  String? _setTime, _setDate;
+
+  String? _hour, _minute, _time;
 
   String? dateTime;
 
@@ -45,9 +49,9 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
     if (picked != null)
       setState(() {
         selectedDate = picked;
-        _dateController.text = formatDate(selectedDate, [MM,'-',dd]);
+        _dateController.text = formatDate(selectedDate, [MM, '-', dd]);
       });
-      _selectTime(context);
+    _selectTime(context);
   }
 
   Future<Null> _selectTime(BuildContext context) async {
@@ -70,17 +74,14 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
 
   @override
   void initState() {
-     homeController.vendorServiceList(widget.vendorId);
-    _dateController.text = formatDate(selectedDate, [MM,'-',dd]);
+    homeController.vendorServiceList(widget.vendorId);
+    _dateController.text = formatDate(selectedDate, [MM, '-', dd]);
 
     _timeController.text = formatDate(
         DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
         [hh, ':', nn, " ", am]).toString();
     super.initState();
   }
-
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +102,7 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         InkWell(
+                        InkWell(
                             onTap: () {
                               Get.back();
                             },
@@ -120,7 +121,6 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
                                 color: kwhite),
                           ),
                         ),
-                        
                         IconButton(
                             onPressed: () {
                               Get.to(NotificationScreen());
@@ -150,88 +150,106 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
                   mainAxisSpacing: 10,
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: InkWell(
-                      onTap: () {
-                        SearchServiceListData searchServiceListData =
-                            SearchServiceListData(
-                                actualAmount: homeController
-                                    .vendorServiceListData[index].actualAmount,
-                                bvcAmount: homeController
-                                    .vendorServiceListData[index].bvcAmount,
-                                categoryId: homeController
-                                    .vendorServiceListData[index].categoryId,
-                                createdAt: homeController
-                                    .vendorServiceListData[index].createdAt,
-                                description: homeController
-                                    .vendorServiceListData[index].description,
-                                id: homeController.vendorServiceListData[index].id,
-                                image:
-                                    homeController.vendorServiceListData[index].image,
-                                // isBooking: homeController
-                                //     .vendorServiceListData[index].isBooking,
-                                saleAmount: homeController
-                                    .vendorServiceListData[index].saleAmount,
-                                status: homeController
-                                    .vendorServiceListData[index].status,
-                                title:
-                                    homeController.vendorServiceListData[index].title,
-                                updatedAt: homeController
-                                    .vendorServiceListData[index].updatedAt,
-                                amenties: homeController
-                                    .vendorServiceListData[index].amenties,
-                                vendorId: homeController
-                                    .vendorServiceListData[index].vendorId,
-                                isCoupon: "",
-                                isOffer: "",
-                                isRecomended: "",
-                                quantity: homeController
-                                    .vendorServiceListData[index].quantity,
-                                unit: "",
-                                couponAmount: "",
-                                offerPercentage: "",
-                                offerUptoAmount: "",
-                                shareOption: "");
-                        Get.to(
-                          ServiceDetailsScreen(
-                            searchServicelist: searchServiceListData,
-                          ),
-                        );
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(color: kgrey, blurRadius: 0.5),
-                            ],
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Image.network(
-                                homeController.vendorServiceListData[index].image,
-                                height: 125,
-                                width: size.width,
-                                fit: BoxFit.cover,
+                  return homeController.vendorServiceListData[index].id
+                              .toString() ==
+                          widget.offersListModel.categoryId
+                      ? Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: () {
+                              SearchServiceListData searchServiceListData =
+                                  SearchServiceListData(
+                                      actualAmount: homeController
+                                          .vendorServiceListData[index]
+                                          .actualAmount,
+                                      bvcAmount: homeController
+                                          .vendorServiceListData[index]
+                                          .bvcAmount,
+                                      categoryId: homeController
+                                          .vendorServiceListData[index]
+                                          .categoryId,
+                                      createdAt: homeController
+                                          .vendorServiceListData[index]
+                                          .createdAt,
+                                      description: homeController
+                                          .vendorServiceListData[index]
+                                          .description,
+                                      id: homeController
+                                          .vendorServiceListData[index].id,
+                                      image: homeController
+                                          .vendorServiceListData[index].image,
+                                      // isBooking: homeController
+                                      //     .vendorServiceListData[index].isBooking,
+                                      saleAmount: (int.parse(homeController
+                                                  .vendorServiceListData[index]
+                                                  .saleAmount) -
+                                              int.parse(widget.offersListModel
+                                                  .discountValue))
+                                          .toString(),
+                                      status: homeController
+                                          .vendorServiceListData[index].status,
+                                      title: homeController
+                                          .vendorServiceListData[index].title,
+                                      updatedAt: homeController
+                                          .vendorServiceListData[index]
+                                          .updatedAt,
+                                      amenties: homeController
+                                          .vendorServiceListData[index]
+                                          .amenties,
+                                      vendorId: homeController
+                                          .vendorServiceListData[index]
+                                          .vendorId,
+                                      isCoupon: "",
+                                      isOffer: "",
+                                      isRecomended: "",
+                                      quantity: homeController.vendorServiceListData[index].quantity,
+                                      unit: "",
+                                      couponAmount: "",
+                                      offerPercentage: "",
+                                      offerUptoAmount: "",
+                                      shareOption: "");
+                              Get.to(
+                                ServiceDetailsScreen(
+                                  searchServicelist: searchServiceListData,
+                                ),
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(color: kgrey, blurRadius: 0.5),
+                                  ],
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: Image.network(
+                                      homeController
+                                          .vendorServiceListData[index].image,
+                                      height: 125,
+                                      width: size.width,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  ksizedbox10,
+                                  Text(
+                                    homeController
+                                        .vendorServiceListData[index].title,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: kblue),
+                                  ),
+                                ],
                               ),
                             ),
-                            ksizedbox10,
-                            Text(
-                              homeController.vendorServiceListData[index].title,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: kblue),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
+                          ),
+                        )
+                      : Container();
                 },
               );
       }),

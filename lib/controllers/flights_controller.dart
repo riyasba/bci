@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/models/flight_booking_models/air_get_ssr_model.dart';
 import 'package:bci/models/flight_booking_models/air_port_search_model.dart';
 import 'package:bci/models/flight_booking_models/air_repricing_model.dart';
 import 'package:bci/models/flight_booking_models/air_reprint_model.dart';
@@ -15,6 +16,7 @@ import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.d
 import 'package:bci/screens/members/flight_booking_screens/par_nyc_screen.dart';
 import 'package:bci/services/network/flight_booking_api_services/add_flight_booking_history.dart';
 import 'package:bci/services/network/flight_booking_api_services/air_add_payment_api_services.dart';
+import 'package:bci/services/network/flight_booking_api_services/air_add_ssr_api_services.dart';
 import 'package:bci/services/network/flight_booking_api_services/air_printing_api_services.dart';
 import 'package:bci/services/network/flight_booking_api_services/air_repricing_api_services.dart';
 import 'package:bci/services/network/flight_booking_api_services/air_search_api_services.dart';
@@ -85,6 +87,8 @@ class FlightsController extends GetxController {
   AirGetSeatMapApiServices airGetSeatMapApiServices =
       AirGetSeatMapApiServices();
 
+  AirAddSsrApiServices airAddSsrApiServices = AirAddSsrApiServices();
+
   List<Airport> airports = [];
 
   RxBool airPortFound = false.obs;
@@ -135,27 +139,25 @@ class FlightsController extends GetxController {
             flightSearchModel: flightSearchModel, airlineCode: airlineCode);
     isLoading(false);
     isLoading2(false);
+
     if (response.statusCode == 200) {
-  if (response.data["Response_Header"]["Error_Code"] == "0000") {
-    AirSearchModel airSearchModel = AirSearchModel.fromJson(response.data);
-    flightList = airSearchModel.tripDetails.first.flights;
-    seachKey = airSearchModel.searchKey;
-  }
-  
-  Get.to(ParNycSCreen(
-    flightSearchDataModel: flightSearchModel,
-    searchKey: seachKey,
-  ));
-}else if(response.statusCode == 500){
-    Get.rawSnackbar(
+      if (response.data["Response_Header"]["Error_Code"] == "0000") {
+        AirSearchModel airSearchModel = AirSearchModel.fromJson(response.data);
+        flightList = airSearchModel.tripDetails.first.flights;
+        seachKey = airSearchModel.searchKey;
+      }
+
+      Get.to(ParNycSCreen(
+        flightSearchDataModel: flightSearchModel,
+        searchKey: seachKey,
+      ));
+    } else if (response.statusCode == 500) {
+      Get.rawSnackbar(
           message: "Server not responding", backgroundColor: Colors.red);
-
-}else{
-   Get.rawSnackbar(
+    } else {
+      Get.rawSnackbar(
           message: "Something went wrong", backgroundColor: Colors.red);
-
-
-}
+    }
 
     update();
   }
@@ -186,28 +188,34 @@ class FlightsController extends GetxController {
     }
   }
 
-  bookAirTicket({required BookingModel bookingModel,required String transactionId}) async {
+  bookAirTicket(
+      {required BookingModel bookingModel,
+      required String transactionId}) async {
     dio.Response<dynamic> response = await airTicketBookingApiServices
         .airTicketBookingApiServices(bookingModel: bookingModel);
 
     if (response.statusCode == 200) {
-      airAddPayment(refernceNo: response.data["Booking_RefNo"],transactionId: transactionId);
+      airAddPayment(
+          refernceNo: response.data["Booking_RefNo"],
+          transactionId: transactionId);
     }
   }
 
-  airAddPayment({required String refernceNo,required String transactionId}) async {
+  airAddPayment(
+      {required String refernceNo, required String transactionId}) async {
     dio.Response<dynamic> response =
         await airAddPaymentApiServices.addPaymentApiServices(
             clientReferneNo: "Testing Team", refrenceNo: refernceNo);
 
     if (response.statusCode == 200) {
-      airReprint(refernceNo: refernceNo,transactionId: transactionId);
+      airReprint(refernceNo: refernceNo, transactionId: transactionId);
       Get.rawSnackbar(
           message: "Payment Added Success", backgroundColor: Colors.green);
     } else {}
   }
 
-  airReprint({required String refernceNo,required String transactionId}) async {
+  airReprint(
+      {required String refernceNo, required String transactionId}) async {
     dio.Response<dynamic> response = await airRePrintingServices
         .airRePrintingApi(clientReferneNo: "", refrenceNo: refernceNo);
 
@@ -225,7 +233,9 @@ class FlightsController extends GetxController {
           toCityName:
               airReprintModel.airPnrDetails.first.flights.first.destination,
           bookingRefNo: airReprintModel.bookingRefNo,
-          price: airReprintModel.airPnrDetails.first.flights.first.fares.first.fareDetails.first.totalAmount.toString(),
+          price: airReprintModel.airPnrDetails.first.flights.first.fares.first
+              .fareDetails.first.totalAmount
+              .toString(),
           transactionId: transactionId,
           airlineCode:
               airReprintModel.airPnrDetails.first.flights.first.airlineCode,
@@ -280,7 +290,7 @@ class FlightsController extends GetxController {
       //need to give id
       String transactionId = "";
       Get.to(() => FlightLoadingPage());
-      bookAirTicket(bookingModel: bookingModel,transactionId: transactionId);
+      bookAirTicket(bookingModel: bookingModel, transactionId: transactionId);
     } else {
       Get.closeAllSnackbars();
       Get.snackbar(
@@ -316,7 +326,7 @@ class FlightsController extends GetxController {
       String transactionId = "";
       Get.to(() => const FlightLoadingPage());
 
-      bookAirTicket(bookingModel: bookingModel,transactionId: transactionId);
+      bookAirTicket(bookingModel: bookingModel, transactionId: transactionId);
     } else {
       Get.closeAllSnackbars();
       Get.snackbar(
@@ -979,19 +989,18 @@ class FlightsController extends GetxController {
     }
   }
 
-  addFlightBookingHistoy({
-    required String invoiceNumber,
-    required String remark,
-    required String fromCityCode,
-    required String toCityCode,
-    required String fromCityName,
-    required String toCityName,
-    required String bookingRefNo,
-    required String airlineCode,
-    required String date,
-    required String price,
-    required String transactionId
-  }) async {
+  addFlightBookingHistoy(
+      {required String invoiceNumber,
+      required String remark,
+      required String fromCityCode,
+      required String toCityCode,
+      required String fromCityName,
+      required String toCityName,
+      required String bookingRefNo,
+      required String airlineCode,
+      required String date,
+      required String price,
+      required String transactionId}) async {
     dio.Response<dynamic> response =
         await addFlightBookingHistoryAPIServices.addFlightBookingAPIServices(
             airlineCode: airlineCode,
@@ -1043,6 +1052,26 @@ class FlightsController extends GetxController {
       flightKey = airReprintModel.airRepriceResponses.first.flight.flightKey;
     }
     return flightKey;
+  }
+
+  List<SsrDetail> ssrDetailsList = []; 
+
+  getFightSSRDetails({
+    required String flightKey,
+    required String searchKey,
+    required String fairId,
+  }) async {
+    dio.Response<dynamic> response =
+        await airAddSsrApiServices.airGetSsrDetails(
+      flightKey: flightKey,
+      searchKey: searchKey,
+    );
+
+    if (response.statusCode == 200) {
+      GetSsrModel airReprintModel = GetSsrModel.fromJson(response.data);
+      ssrDetailsList = airReprintModel.ssrFlightDetails.first.ssrDetails;
+    }
+    update();
   }
 
   Future<bool> getSeatMapApiServises({

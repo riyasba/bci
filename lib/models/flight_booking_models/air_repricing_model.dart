@@ -172,9 +172,9 @@ class Fare {
         fareDetails: List<FareDetail>.from(
             json["FareDetails"].map((x) => FareDetail.fromJson(x))),
         fareType: json["FareType"],
-        fareId: json["Fare_Id"],
+        fareId: json["Fare_Id"] ?? "",
         fareKey: json["Fare_Key"],
-        foodOnboard: json["Food_onboard"],
+        foodOnboard: json["Food_onboard"] ?? "",
         gstMandatory: json["GSTMandatory"],
         lastFewSeats: json["LastFewSeats"],
         productClass: json["ProductClass"],
@@ -248,7 +248,7 @@ class FareDetail {
             : List<AirportTax>.from(
                 json["AirportTaxes"].map((x) => AirportTax.fromJson(x))),
         basicAmount: json["Basic_Amount"],
-        cancellationCharges: List<Charge>.from(
+        cancellationCharges:json["CancellationCharges"] == null ? []: List<Charge>.from(
             json["CancellationCharges"].map((x) => Charge.fromJson(x))),
         currencyCode: json["Currency_Code"],
         fareClasses: json["FareClasses"] == null ? []: List<FareClass>.from(

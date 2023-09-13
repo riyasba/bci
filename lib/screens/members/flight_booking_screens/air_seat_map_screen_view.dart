@@ -13,6 +13,7 @@ class AirSeatMapScreenView extends StatefulWidget {
   String flightKey;
   dynamic paxDetails;
   Flight flight;
+
   FlightSearchDataModel flightSearchDataModel;
 
   AirSeatMapScreenView({
@@ -220,6 +221,7 @@ class _AirSeatMapScreenViewState extends State<AirSeatMapScreenView> {
                   flight: widget.flight,
                   flightSearchDataModel: widget.flightSearchDataModel,
                   seachKey: widget.searchKey,
+                  flightKey: widget.flightKey,
                 ));
           },
           child: Container(

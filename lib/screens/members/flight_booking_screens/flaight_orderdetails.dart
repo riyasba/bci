@@ -1,3 +1,4 @@
+import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/flights_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
@@ -6,6 +7,7 @@ import 'package:bci/models/flight_booking_models/booking_model.dart';
 import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
 import 'package:bci/models/flight_booking_models/passenger_model.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_booking_success_page.dart';
+import 'package:bci/widgets/home_widgets/add_ssr_bottom_sheet.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,10 +17,13 @@ class FlaightOrderDetailsScreen extends StatefulWidget {
   Flight flight;
   FlightSearchDataModel flightSearchDataModel;
   String searchKey;
+  String flightKey;
+  
   FlaightOrderDetailsScreen(
       {super.key,
       required this.flight,
       required this.flightSearchDataModel,
+       required this.flightKey,
       required this.searchKey});
 
   @override
@@ -45,6 +50,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
     lastNameController.clear();
     ageController.clear();
     flightsController.isMaleOrFemale(2);
+    flightsController.getFightSSRDetails(flightKey: widget.flightKey, searchKey: widget.searchKey, fairId: widget.flight.fares.first.fareId);
   }
 
   @override
@@ -113,340 +119,239 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
             ),
           ),
           ksizedbox20,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              // InkWell(
-              //   onTap: () {
-              //     setState(() {
-              //       index = 0;
-              //     });
-              //   },
-              //   child: Column(
-              //     children: [
-              //       Text(
-              //         'Boarding Pass',
-              //         style: TextStyle(fontSize: 17),
-              //       ),
-              //      index==0? Padding(
-              //         padding: const EdgeInsets.only(top: 5),
-              //         child: Container(
-              //           height: 6,
-              //           width: 45,
-              //          decoration: BoxDecoration(
-              //            color: kOrange,
-              //            borderRadius: BorderRadius.circular(10)
-              //          ),
-              //         ),
-              //       ):Text('')
-              //     ],
-              //   ),
-              // ),
-              // InkWell(
-              //   onTap: () {
-              //     setState(() {
-              //       index = 1;
-              //     });
-              //   },
-              //   child: Column(
-              //     children: [
-              //       const Text(
-              //         'Confirmation',
-              //         style: TextStyle(fontSize: 17),
-              //       ),
-              //       index == 1
-              //           ? Padding(
-              //               padding: const EdgeInsets.only(top: 5),
-              //               child: Container(
-              //                 height: 6,
-              //                 width: 45,
-              //                 decoration: BoxDecoration(
-              //                     color: kOrange,
-              //                     borderRadius: BorderRadius.circular(10)),
-              //               ),
-              //             )
-              //           : const Text('')
-              //     ],
-              //   ),
-              // ),
-              // InkWell(
-              //   onTap: () {
-              //     setState(() {
-              //       index = 2;
-              //     });
-              //   },
-              //   child: Column(
-              //     children: [
-              //       const Text(
-              //         'Payment',
-              //         style: TextStyle(fontSize: 17),
-              //       ),
-              //       index == 2
-              //           ? Padding(
-              //               padding: const EdgeInsets.only(top: 5),
-              //               child: Container(
-              //                 height: 6,
-              //                 width: 45,
-              //                 decoration: BoxDecoration(
-              //                     color: kOrange,
-              //                     borderRadius: BorderRadius.circular(10)),
-              //               ),
-              //             )
-              //           : const Text('')
-              //     ],
-              //   ),
-              // ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 5),
+            child: Container(
+              height: 330,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                child: Container(
+                    height: 210,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        color: kwhite,
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                              offset: const Offset(0.0, 0.75),
+                              blurRadius: 10,
+                              color: kgrey),
+                        ],
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 30, top: 19),
+                              child: Text(
+                                'From',
+                                style: TextStyle(
+                                    fontSize: 20.5,
+                                    color: kblue,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 120, top: 20),
+                              child: Text(
+                                'To',
+                                style: TextStyle(
+                                    color: kblue,
+                                    fontSize: 20.5,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 27, top: 20),
+                              child: Text(
+                                widget.flightSearchDataModel.fromIata,
+                                style: TextStyle(fontSize: 15, color: kblue),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 148, top: 20),
+                              child: Text(
+                                widget.flightSearchDataModel.toIata,
+                                style: TextStyle(fontSize: 15, color: kblue),
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 27, top: 20),
+                              child: Container(
+                                width: 115,
+                                child: Text(
+                                  widget.flightSearchDataModel.fromName,
+                                  style: TextStyle(fontSize: 15, color: kblue),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 60, top: 20),
+                              child: Container(
+                                width: 150,
+                                child: Text(
+                                  widget.flightSearchDataModel.toName,
+                                  style: TextStyle(fontSize: 15, color: kblue),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 27, top: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Terminal',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: kblue,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    widget.flight.segments.first
+                                        .destinationTerminal,
+                                    style:
+                                        TextStyle(fontSize: 15, color: kblue),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 115, top: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Gate',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: kblue,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    "",
+                                    style:
+                                        TextStyle(fontSize: 15, color: kblue),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        // Row(
+                        //   children: [
+                        //     Padding(
+                        //       padding: const EdgeInsets.only(
+                        //           left: 27, top: 30),
+                        //       child: Text(
+                        //         'Seat \n\n24H',
+                        //         style: TextStyle(
+                        //             fontSize: 15, color: kblue),
+                        //       ),
+                        //     ),
+                        //     Padding(
+                        //       padding: const EdgeInsets.only(
+                        //           left: 140, top: 30),
+                        //       child: Text(
+                        //         'Boarding \n\n14:54',
+                        //         style: TextStyle(
+                        //             fontSize: 15, color: kblue),
+                        //       ),
+                        //     )
+                        //   ],
+                        // ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 27, top: 25),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Date',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: kblue,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    formatDate(
+                                        widget
+                                            .flightSearchDataModel.depatureDate,
+                                        [dd, "-", mm, "-", yyyy]),
+                                    style:
+                                        TextStyle(fontSize: 15, color: kblue),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 100, top: 30),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Flight',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: kblue,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    "${widget.flight.segments.first.airlineCode} ${widget.flight.segments.first.flightNumber}",
+                                    style:
+                                        TextStyle(fontSize: 15, color: kblue),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    )),
+              ),
+            ),
           ),
-          // if (index == 0)
-          //   Column(
-          //     children: [
-          //       Padding(
-          //         padding:
-          //             const EdgeInsets.only(left: 10, right: 10, top: 30),
-          //         child: Container(
-          //           decoration: BoxDecoration(
-          //               color: kwhite,
-          //               boxShadow: <BoxShadow>[
-          //                 BoxShadow(
-          //                     offset: const  Offset(0.0, 0.75),
-          //                     blurRadius: 10,
-          //                     color: kwhite)
-          //               ],
-          //               border: Border.all(
-          //                 color: kwhite,
-          //               ),
-          //               borderRadius: BorderRadius.circular(20)),
-          //           height: 50,
-          //           width: MediaQuery.of(context).size.width,
-          //           child: Center(
-          //             child: Padding(
-          //               padding: const EdgeInsets.only(),
-          //               child: TextField(
-          //                 controller: searchController,
-          //                 decoration: InputDecoration(
-          //                     prefixIcon: Icon(
-          //                       Icons.search,
-          //                       color: kgrey,
-          //                     ),
-          //                     suffixIcon: Icon(
-          //                       Icons.expand_more,
-          //                       color: kgrey,
-          //                     ),
-          //                     hintText: 'Your Credit Cards',
-          //                     hintStyle: TextStyle(fontSize: 16),
-          //                     border: OutlineInputBorder(
-          //                         borderSide: BorderSide(color: kwhite),
-          //                         borderRadius: BorderRadius.circular(20))),
-          //               ),
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //       Padding(
-          //         padding:
-          //             const EdgeInsets.only(left: 20, right: 20, top: 20),
-          //         child: Container(
-          //           height: MediaQuery.of(context).size.height * 0.6,
-          //           width: MediaQuery.of(context).size.width,
-          //           decoration: BoxDecoration(
-          //               color: kwhite,
-          //               boxShadow: <BoxShadow>[
-          //                 BoxShadow(
-          //                     offset: const Offset(0.0, 0.75),
-          //                     blurRadius: 5,
-          //                     color: kgrey)
-          //               ]),
-          //           child: Column(
-          //             children: [
-          //               Padding(
-          //                 padding: const EdgeInsets.only(
-          //                     top: 10, right: 10, left: 10),
-          //                 child: Container(
-          //                   height: 220,
-          //                   width: MediaQuery.of(context).size.width,
-          //                   decoration: BoxDecoration(
-          //                       image: const  DecorationImage(
-          //                           image: AssetImage(
-          //                             'assets/images/ordercontainer.png',
-          //                           ),
-          //                           fit: BoxFit.cover),
-          //                       borderRadius: BorderRadius.circular(10)),
-          //                   child: Column(
-          //                     children: [
-          //                       Padding(
-          //                         padding: const EdgeInsets.only(
-          //                             top: 30, left: 40),
-          //                         child: Row(
-          //                           children: [
-          //                             Text(
-          //                               'BlaBla Card',
-          //                               style: TextStyle(
-          //                                   color: kwhite, fontSize: 18),
-          //                             ),
-          //                           ],
-          //                         ),
-          //                       ),
-          //                       Padding(
-          //                         padding: const EdgeInsets.only(
-          //                             top: 10, left: 40),
-          //                         child: Row(
-          //                           children: [
-          //                             Text(
-          //                               '3384 4003 4885 2334',
-          //                               style: TextStyle(
-          //                                   fontSize: 18, color: kwhite),
-          //                             )
-          //                           ],
-          //                         ),
-          //                       ),
-          //                       Padding(
-          //                         padding: const EdgeInsets.only(
-          //                             right: 60, top: 30),
-          //                         child: Row(
-          //                           mainAxisAlignment:
-          //                               MainAxisAlignment.spaceEvenly,
-          //                           children: [
-          //                             Text(
-          //                               'CARD HOLDER',
-          //                               style: TextStyle(
-          //                                   color: kwhite, fontSize: 12),
-          //                             ),
-          //                             Padding(
-          //                               padding:
-          //                                   const EdgeInsets.only(left: 15),
-          //                               child: Text(
-          //                                 'EXP DATE',
-          //                                 style: TextStyle(
-          //                                     color: kwhite, fontSize: 12),
-          //                               ),
-          //                             )
-          //                           ],
-          //                         ),
-          //                       ),
-          //                       Padding(
-          //                         padding: const EdgeInsets.only(
-          //                             right: 65, top: 15),
-          //                         child: Row(
-          //                           mainAxisAlignment:
-          //                               MainAxisAlignment.spaceEvenly,
-          //                           children: [
-          //                             Text(
-          //                               'Bugra Dere',
-          //                               style: TextStyle(
-          //                                   color: kwhite, fontSize: 18),
-          //                             ),
-          //                             Text(
-          //                               '19/05',
-          //                               style: TextStyle(
-          //                                   color: kwhite, fontSize: 18),
-          //                             )
-          //                           ],
-          //                         ),
-          //                       )
-          //                     ],
-          //                   ),
-          //                 ),
-          //               ),
-          //               Padding(
-          //                 padding: const EdgeInsets.only(
-          //                     left: 15, right: 15, top: 15),
-          //                 child: TextField(
-          //                   controller: numberController,
-          //                   decoration: InputDecoration(
-          //                       hintText: '3384 4003 4885 2334'),
-          //                 ),
-          //               ),
-          //               Padding(
-          //                 padding: const EdgeInsets.only(
-          //                     left: 15, right: 15, top: 20),
-          //                 child: TextField(
-          //                   controller: cardnameController,
-          //                   decoration:
-          //                       InputDecoration(hintText: 'Card Holder'),
-          //                 ),
-          //               ),
-          //               Padding(
-          //                 padding: const EdgeInsets.only(
-          //                     left: 15, right: 15, top: 20),
-          //                 child: TextField(
-          //                   controller: expiredateController,
-          //                   decoration:
-          //                       InputDecoration(hintText: 'Expire Date'),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //       ),
-          //       ksizedbox20,
-          //       InkWell(
-          //         onTap: () {
-          //           showDialog(
-          //               context: context,
-          //               builder: (context) {
-          //                 return Dialog(
-          //                   child: Container(
-          //                     height:
-          //                         MediaQuery.of(context).size.width * 0.9,
-          //                     width: MediaQuery.of(context).size.width,
-          //                     child: Column(
-          //                       crossAxisAlignment:
-          //                           CrossAxisAlignment.center,
-          //                       children: [
-          //                         Padding(
-          //                           padding: const EdgeInsets.only(top: 60),
-          //                           child: Image.asset(
-          //                               'assets/images/ordercomplete.png'),
-          //                         ),
-          //                       const  Padding(
-          //                           padding:  EdgeInsets.only(top: 10),
-          //                           child: Text(
-          //                             'Successful!',
-          //                             style: TextStyle(
-          //                                 fontSize: 20,
-          //                                 color: Colors.green),
-          //                           ),
-          //                         ),
-          //                         ksizedbox20,
-          //                         const Padding(
-          //                           padding:
-          //                               EdgeInsets.only(left: 20),
-          //                           child: Text(
-          //                               'Lorem Ipsum has been the industry'
-          //                               's \nstandard dummy text ever since the 1500s'),
-          //                         )
-          //                       ],
-          //                     ),
-          //                   ),
-          //                 );
-          //               });
-          //         },
-          //         child: Container(
-          //           decoration: BoxDecoration(
-          //               gradient:
-          //                   LinearGradient(colors: [kyellow, korange]),
-          //               borderRadius: BorderRadius.circular(15)),
-          //           height: 45,
-          //           width: MediaQuery.of(context).size.width * 0.7,
-          //           child: Center(
-          //             child: Text(
-          //               'Complete',
-          //               style: TextStyle(fontSize: 18, color: kwhite),
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //       ksizedbox30
-          //     ],
-          //   ),
+          const SizedBox(
+            height: 10,
+          ),
           if (index == 1)
             GetBuilder<FlightsController>(builder: (_) {
               return Column(
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 15, right: 15, top: 30),
+                        const EdgeInsets.only(left: 15, right: 15),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
@@ -465,10 +370,9 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                             child: Row(
                               children: [
                                 Text(
-                                  profileController.profileData.first.name
-                                      .toUpperCase(),
+                                  "Contact Details",
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 18,
                                       color: kblue,
                                       fontWeight: FontWeight.w500),
                                 )
@@ -476,13 +380,13 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 20, top: 20),
+                            padding: const EdgeInsets.only(left: 20, top: 10),
                             child: Row(
                               children: [
                                 Text(
                                   profileController.profileData.first.email,
                                   style: const TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 14,
                                   ),
                                 )
                               ],
@@ -495,13 +399,13 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                                 const Text(
                                   '(+91)',
                                   style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 14,
                                   ),
                                 ),
                                 Text(
                                   ' ${profileController.profileData.first.mobile}',
                                   style: const TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 14,
                                   ),
                                 )
                               ],
@@ -510,6 +414,21 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                           ksizedbox20
                         ],
                       ),
+                    ),
+                  ),
+                   const SizedBox(
+                    height: 5,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Row(
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              _addNewAdult(context);
+                            },
+                            child: Text("+ Add passenger".toUpperCase())),
+                      ],
                     ),
                   ),
                   for (int i = 0;
@@ -556,6 +475,20 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                                     ),
                                   ),
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                                  child: InkWell(
+                                    onTap: (){              
+                                        addSsrDetails(context, index,size);
+                                    },
+                                    child: Text("+ Add Special Services",style: primaryFont.copyWith(
+                                      color: kOrange
+                                    ),),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                )
                               ],
                             ),
                           ),
@@ -577,267 +510,36 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                         ],
                       ),
                     ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Row(
-                      children: [
-                        TextButton(
-                            onPressed: () {
-                              _addNewAdult(context);
-                            },
-                            child: Text("+ Add New Adult".toUpperCase())),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 15, top: 5),
-                    child: Container(
-                      height: 330,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: const BoxDecoration(),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 10),
-                        child: Container(
-                            height: 210,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                color: kwhite,
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                      offset: const Offset(0.0, 0.75),
-                                      blurRadius: 10,
-                                      color: kgrey),
-                                ],
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 30, top: 19),
-                                      child: Text(
-                                        'From',
-                                        style: TextStyle(
-                                            fontSize: 20.5,
-                                            color: kblue,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 120, top: 20),
-                                      child: Text(
-                                        'To',
-                                        style: TextStyle(
-                                            color: kblue,
-                                            fontSize: 20.5,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 27, top: 20),
-                                      child: Text(
-                                        widget.flightSearchDataModel.fromIata,
-                                        style: TextStyle(
-                                            fontSize: 15, color: kblue),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 148, top: 20),
-                                      child: Text(
-                                        widget.flightSearchDataModel.toIata,
-                                        style: TextStyle(
-                                            fontSize: 15, color: kblue),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 27, top: 20),
-                                      child: Container(
-                                        width: 115,
-                                        child: Text(
-                                          widget.flightSearchDataModel.fromName,
-                                          style: TextStyle(
-                                              fontSize: 15, color: kblue),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 60, top: 20),
-                                      child: Container(
-                                        width: 150,
-                                        child: Text(
-                                          widget.flightSearchDataModel.toName,
-                                          style: TextStyle(
-                                              fontSize: 15, color: kblue),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 27, top: 20),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Terminal',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: kblue,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            widget.flight.segments.first
-                                                .destinationTerminal,
-                                            style: TextStyle(
-                                                fontSize: 15, color: kblue),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 115, top: 20),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Gate',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: kblue,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            "",
-                                            style: TextStyle(
-                                                fontSize: 15, color: kblue),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                // Row(
-                                //   children: [
-                                //     Padding(
-                                //       padding: const EdgeInsets.only(
-                                //           left: 27, top: 30),
-                                //       child: Text(
-                                //         'Seat \n\n24H',
-                                //         style: TextStyle(
-                                //             fontSize: 15, color: kblue),
-                                //       ),
-                                //     ),
-                                //     Padding(
-                                //       padding: const EdgeInsets.only(
-                                //           left: 140, top: 30),
-                                //       child: Text(
-                                //         'Boarding \n\n14:54',
-                                //         style: TextStyle(
-                                //             fontSize: 15, color: kblue),
-                                //       ),
-                                //     )
-                                //   ],
-                                // ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 27, top: 25),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Date',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: kblue,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            formatDate(
-                                                widget.flightSearchDataModel
-                                                    .depatureDate,
-                                                [dd, "-", mm, "-", yyyy]),
-                                            style: TextStyle(
-                                                fontSize: 15, color: kblue),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 100, top: 30),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Flight',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: kblue,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            "${widget.flight.segments.first.airlineCode} ${widget.flight.segments.first.flightNumber}",
-                                            style: TextStyle(
-                                                fontSize: 15, color: kblue),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            )),
-                      ),
-                    ),
-                  ),
+                 
                   ksizedbox20,
                   InkWell(
                     onTap: () async {
                       // Get.to(()=> const FlightBookingSuccessPage());
-                      PaxDetails paxDetails = PaxDetails(
-                          firstName: profileController.profileData.first.name,
-                          gender: 0,
-                          lastName: "t",
-                          title: "Mr");
+                      // PaxDetails paxDetails = PaxDetails(
+                      //     firstName: profileController.profileData.first.name,
+                      //     gender: 0,
+                      //     lastName: "t",
+                      //     title: "Mr");
+
+                      List<PaxDetails> listOfPaxDetailsList = [];
+
+                      for (var i = 0;
+                          i < flightsController.passengersDetailsList.length;
+                          i++) {
+                        PaxDetails paxDetails = PaxDetails(
+                            firstName: flightsController
+                                .passengersDetailsList[i].firstName,
+                            gender: flightsController
+                                .passengersDetailsList[i].maleOrFemale,
+                            lastName: flightsController
+                                .passengersDetailsList[i].lastName,
+                            title: flightsController.passengersDetailsList[i]
+                                        .maleOrFemale ==
+                                    0
+                                ? "Mr"
+                                : "Mrs");
+                        listOfPaxDetailsList.add(paxDetails);
+                      }
 
                       String flightKey =
                           await flightsController.getFlightRepricing(
@@ -846,8 +548,8 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                               searchKey: widget.searchKey,
                               mobileNumber:
                                   profileController.profileData.first.mobile);
-                        print("<--> <-----------> Flight key <-----------> <-->");
-                        print(flightKey);
+                      print("<--> <-----------> Flight key <-----------> <-->");
+                      print(flightKey);
 
                       BookingModel bookingModel = BookingModel(
                           bookingRemark:
@@ -859,11 +561,15 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                               profileController.profileData.first.email,
                           passengerMobile:
                               profileController.profileData.first.mobile,
-                          paxDetails: [paxDetails],
+                          paxDetails: listOfPaxDetailsList,
+                          bookingSsrDetails: [],
                           searchKey: widget.searchKey);
-                    
-                      flightsController.payForFlight(amount: widget.flight.fares.first.fareDetails.first
-                              .totalAmount.toDouble(),bookingModel: bookingModel);
+
+                      flightsController.payForFlight(
+                          amount: widget
+                              .flight.fares.first.fareDetails.first.totalAmount
+                              .toDouble(),
+                          bookingModel: bookingModel);
                       // flightsController.payUseingEaseBuzzSubs(
                       //     id: 0,
                       //     amount: widget
@@ -1304,11 +1010,11 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                     lastNameController.text.isNotEmpty &&
                     flightsController.isMaleOrFemale.value != 2) {
                   PassengerDetail passengerDetail = PassengerDetail(
-                    age: int.parse(ageController.text),
-                    firstName: firstNameController.text,
-                    lastName: lastNameController.text,
-                    maleOrFemale: flightsController.isMaleOrFemale.value,
-                  );
+                      age: int.parse(ageController.text),
+                      firstName: firstNameController.text,
+                      lastName: lastNameController.text,
+                      maleOrFemale: flightsController.isMaleOrFemale.value,
+                      bookingSsrDetails: []);
 
                   flightsController.passengersDetailsList.add(passengerDetail);
                   flightsController.update();

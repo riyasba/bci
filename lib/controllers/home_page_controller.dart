@@ -184,11 +184,15 @@ class HomeController extends GetxController {
 
   RxBool isLoading = false.obs;
 
-  addToCart({required String serviceid, required String amount}) async {
+  addToCart(
+      {required String serviceid,
+      required String amount,
+      required String startTime}) async {
     isLoading(true);
 
-    dio.Response<dynamic> response = await addToCartApiServices
-        .addToCartApiServices(serviceid: serviceid, amount: amount);
+    dio.Response<dynamic> response =
+        await addToCartApiServices.addToCartApiServices(
+            serviceid: serviceid, amount: amount, startTime: startTime);
     isLoading(false);
 
     if (response.statusCode == 201) {

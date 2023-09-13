@@ -313,6 +313,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                     ),
                   ),
                 ),
+                  
                 ksizedbox20,
                 Container(
                   height: 60,
@@ -353,6 +354,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                     homeController.addToCart(
                                         amount:
                                             widget.searchServicelist.saleAmount,
+                                            startTime: "${selectedDate.day}-${selectedDate.month}-${selectedDate.year} ${_timeController.text}",
                                         serviceid: widget.searchServicelist.id
                                             .toString());
                                   },

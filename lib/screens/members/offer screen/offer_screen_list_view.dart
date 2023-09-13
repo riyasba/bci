@@ -84,6 +84,7 @@ class _OfferScreenListViewState extends State<OfferScreenListView> {
                         Get.to(() => VendorViewOffers(
                               vendorId: homeController
                                   .todayOfferListData[index].vendorId,
+                                  offersListModel: homeController.todayOfferListData[index],
                             ));
                       },
                       child: Container(

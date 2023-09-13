@@ -182,9 +182,9 @@ class _FlightBookingLandingScreenState
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
+                          const Row(
                             children: [
-                              const Text(
+                               Text(
                                 'Adults',
                                 style: TextStyle(fontSize: 13),
                               ),

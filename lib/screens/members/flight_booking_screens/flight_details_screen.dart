@@ -31,7 +31,6 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
   final flightController = Get.find<FlightsController>();
   final profileController = Get.find<ProfileController>();
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -433,16 +432,16 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                         )
                       : InkWell(
                           onTap: () async {
-                             try {
-  String flightKey =
-     await flightController.getFlightRepricing(
-         flightSearchModel:
-             widget.flightSearchDataModel,
-         flight: widget.flight,
-         searchKey: widget.searchKey,
-         mobileNumber: profileController
-             .profileData.first.mobile);
-              bool isSeatMapvailable = await flightController
+                            try {
+                              String flightKey =
+                                  await flightController.getFlightRepricing(
+                                      flightSearchModel:
+                                          widget.flightSearchDataModel,
+                                      flight: widget.flight,
+                                      searchKey: widget.searchKey,
+                                      mobileNumber: profileController
+                                          .profileData.first.mobile);
+                              bool isSeatMapvailable = await flightController
                                   .getSeatMapApiServises(
                                       searchKey: widget.searchKey,
                                       flightKey: flightKey,
@@ -466,8 +465,9 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
 
                               if (isSeatMapvailable) {
                                 Get.to(() => AirSeatMapScreenView(
-                                  flight: widget.flight,
-                                  flightSearchDataModel: widget.flightSearchDataModel,
+                                      flight: widget.flight,
+                                      flightSearchDataModel:
+                                          widget.flightSearchDataModel,
                                       flightKey: widget.flight.flightKey,
                                       paxDetails: const [
                                         {
@@ -493,19 +493,20 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                   flight: widget.flight,
                                   flightSearchDataModel:
                                       widget.flightSearchDataModel,
+                                  flightKey: flightKey,
                                   seachKey: widget.searchKey,
                                 ));
                               }
-} on Exception catch (e) {
-  // TODO
-  Get.to(PlaneDetailsScreen(
-                                flight: widget.flight,
-                                flightSearchDataModel:
-                                    widget.flightSearchDataModel,
-                                seachKey: widget.searchKey,
-                              ));
-}
-                           
+                            } on Exception catch (e) {
+                              // TODO
+                              // Get.to(PlaneDetailsScreen(
+                              //   flight: widget.flight,
+                              //   flightSearchDataModel:
+                              //       widget.flightSearchDataModel,
+                              //   flightKey: flightKey,
+                              //   seachKey: widget.searchKey,
+                              // ));
+                            }
                           },
                           child: Container(
                             height: 45,

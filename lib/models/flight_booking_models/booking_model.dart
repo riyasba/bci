@@ -6,6 +6,7 @@ class BookingModel {
   String searchKey;
   String flightKey;
   String bookingRemark;
+  List<dynamic> bookingSsrDetails;
 
   BookingModel({
     required this.customerMobile,
@@ -15,6 +16,7 @@ class BookingModel {
     required this.searchKey,
     required this.flightKey,
     required this.bookingRemark,
+    required this.bookingSsrDetails,
   });
 }
 

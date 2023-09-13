@@ -34,14 +34,14 @@ class OffersDetail extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                        onTap: (){
+                        onTap: () {
                           Get.back();
                         },
-                        child:
-                            Container(
-                              height: 30,
-                              width: 30,
-                              child: Image.asset('assets/images/chevron-left (2).png'))),
+                        child: Container(
+                            height: 30,
+                            width: 30,
+                            child: Image.asset(
+                                'assets/images/chevron-left (2).png'))),
                     const Padding(
                       padding: EdgeInsets.only(right: 20),
                       child: Text(
@@ -71,15 +71,12 @@ class OffersDetail extends StatelessWidget {
               height: 250,
               width: size.width,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 2,
-                    color: Colors.grey.withOpacity(0.5)
-                  )
-                ]
-              ),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                        blurRadius: 2, color: Colors.grey.withOpacity(0.5))
+                  ]),
               child: Image.network(
                 todayOfferListData.image,
                 fit: BoxFit.fill,
@@ -147,6 +144,7 @@ class OffersDetail extends StatelessWidget {
           onTap: () {
             Get.to(() => VendorViewOffers(
                   vendorId: todayOfferListData.vendorId,
+                  offersListModel: todayOfferListData,
                 ));
           },
           child: Container(

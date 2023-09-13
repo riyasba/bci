@@ -249,6 +249,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                                           homeController.addToCart(
                                               amount: widget.searchServicelist
                                                   .actualAmount,
+                                                  startTime: "",
                                               serviceid: widget
                                                   .searchServicelist.id
                                                   .toString());

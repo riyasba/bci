@@ -141,6 +141,177 @@ class _BusSeatsScreenState extends State<BusSeatsScreen> {
                     height: 400,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
+                        color: Colors.blue,
+                        border: Border.all(color: Colors.grey, width: 0.5)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 30,
+                            child: ListView.builder(
+                                itemCount: busController.seatMap.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom: 5),
+                                    child: InkWell(
+                                      onTap: () {
+                                        if (busController
+                                                .seatMap[index].isSelect ==
+                                            true) {
+                                          busController
+                                              .seatMap[index].isSelect = false;
+                                          setState(() {
+                                            seatIds.remove(busController
+                                                .seatMap[index].seatNumber);
+
+                                            BusContactDetailsModel
+                                                busContactDetailsModeldata =
+                                                BusContactDetailsModel(
+                                                    ageController:
+                                                        TextEditingController(),
+                                                    gender: "",
+                                                    nameController:
+                                                        TextEditingController(),
+                                                    seats: busController
+                                                        .seatMap[index]
+                                                        .seatNumber);
+
+                                            busContactDetailsModel.removeWhere(
+                                                (element) =>
+                                                    element.seats ==
+                                                    busController.seatMap[index]
+                                                        .seatNumber);
+                                          });
+
+                                          double tempAmount =
+                                              busController.totalAmount.value -
+                                                  busController.seatMap[index]
+                                                      .fareMaster.totalAmount;
+
+                                          busController.totalAmount(tempAmount);
+
+                                          busController.update();
+                                        } else {
+                                          busController
+                                              .seatMap[index].isSelect = true;
+                                          setState(() {
+                                            seatIds.add(busController
+                                                .seatMap[index].seatNumber);
+
+                                            BusContactDetailsModel
+                                                busContactDetailsModeldata =
+                                                BusContactDetailsModel(
+                                                    ageController:
+                                                        TextEditingController(),
+                                                    gender: "",
+                                                    nameController:
+                                                        TextEditingController(),
+                                                    seats: busController
+                                                        .seatMap[index]
+                                                        .seatNumber);
+
+                                            busContactDetailsModel.add(
+                                                busContactDetailsModeldata);
+                                          });
+
+                                          double tempAmount =
+                                              busController.totalAmount.value +
+                                                  busController.seatMap[index]
+                                                      .fareMaster.totalAmount;
+
+                                          busController.totalAmount(tempAmount);
+
+                                          busController.update();
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 60,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                            color: busController.seatMap[index]
+                                                        .isSelect ==
+                                                    true
+                                                ? kOrange
+                                                : Colors.grey[200],
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            border:
+                                                Border.all(color: Colors.grey)),
+                                        child: Center(
+                                          child: Text(busController
+                                              .seatMap[index].seatNumber),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }),
+                          ),
+                          ksizedbox10,
+                          //
+                          Container(
+                            width: 70,
+                            child: ListView.builder(
+                              itemCount: busController.seatMap.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                    bottom: 5,
+                                    left: 5,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {},
+                                        child: Container(
+                                          height: 60,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                              color: Colors.grey[200],
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              border: Border.all(
+                                                  color: Colors.grey)),
+                                          child: Center(
+                                            child: Text(busController
+                                                .seatMap[index].seatNumber),
+                                          ),
+                                        ),
+                                      ),
+                                      kwidth5,
+                                      InkWell(
+                                        onTap: () {},
+                                        child: Container(
+                                          height: 60,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                              color: Colors.grey[200],
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              border: Border.all(
+                                                  color: Colors.grey)),
+                                          child: Center(
+                                            child: Text(busController
+                                                .seatMap[index].seatNumber),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 200,
+                    height: 400,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
                         color: Colors.white,
                         border: Border.all(color: Colors.grey, width: 0.5)),
                     child: Padding(

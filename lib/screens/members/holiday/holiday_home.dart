@@ -103,251 +103,253 @@ class _HolidayHomeState extends State<HolidayHome> {
             ])),
         body: Padding(
           padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Categories',
-                style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
-              ),
-              ksizedbox20,
-              Container(
-                height: 40,
-                child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount:
-                        holidayPackageController.packageCategoryData.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          holidayPackageController.catIndex(index);
-                          holidayPackageController.getPackage(
-                              categoryId: holidayPackageController
-                                  .packageCategoryData[index].id
-                                  .toString());
-                          holidayPackageController.searchInt(
-                              holidayPackageController
-                                  .getPackageDetailsData[index].id);
-                          holidayPackageController.update();
-                          print(
-                              "----------------->>>>--------------->>${holidayPackageController.getPackageDetailsData[index].id}");
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 4, right: 4, top: 2, bottom: 2),
-                          child: Container(
-                            height: 35,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 2,
-                                    color: Colors.grey.withOpacity(0.6))
-                              ],
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  color:
-                                      holidayPackageController.catIndex.value ==
-                                              index
-                                          ? kblue
-                                          : Colors.white),
-                            ),
-                            child: Center(
-                              child: Text(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Categories',
+                  style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
+                ),
+                ksizedbox20,
+                Container(
+                  height: 40,
+                  child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemCount:
+                          holidayPackageController.packageCategoryData.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            holidayPackageController.catIndex(index);
+                            holidayPackageController.getPackage(
+                                categoryId: holidayPackageController
+                                    .packageCategoryData[index].id
+                                    .toString());
+                            holidayPackageController.searchInt(
                                 holidayPackageController
-                                    .packageCategoryData[index].name,
-                                style: TextStyle(
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w400),
+                                    .getPackageDetailsData[index].id);
+                            holidayPackageController.update();
+                            print(
+                                "----------------->>>>--------------->>${holidayPackageController.getPackageDetailsData[index].id}");
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 4, right: 4, top: 2, bottom: 2),
+                            child: Container(
+                              height: 35,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 2,
+                                      color: Colors.grey.withOpacity(0.6))
+                                ],
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color:
+                                        holidayPackageController.catIndex.value ==
+                                                index
+                                            ? kblue
+                                            : Colors.white),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  holidayPackageController
+                                      .packageCategoryData[index].name,
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w400),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      );
-                    }),
-              ),
-              ksizedbox20,
-              Text(
-                'Populars',
-                style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
-              ),
-              ksizedbox20,
-              Container(
-                height: 260,
-                child: holidayPackageController.packageListData.isEmpty
-                    ? const Center(
-                        child: Text("No Data Found"),
-                      )
-                    : ListView.builder(
-                        itemCount:
-                            holidayPackageController.packageListData.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                              onTap: () {
-                                Get.to(HolidayScreen(
-                                  packageId: holidayPackageController
-                                      .packageListData[index].id
-                                      .toString(),
-                                ));
-                              },
-                              child: Container(
-                                height: 250.h,
-                                width: 165.w,
-                                decoration: BoxDecoration(
-                                    color: kwhite,
-                                    borderRadius: BorderRadius.circular(19)),
-                                child: Column(
-                                  children: [
-                                    holidayPackageController
-                                            .packageListData[index]
-                                            .images
-                                            .isEmpty
-                                        ? Container(
-                                            height: 150,
-                                          )
-                                        : ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(19),
-                                            child: Image.network(
-                                              holidayPackageController
-                                                  .packageListData[index]
-                                                  .images
-                                                  .first,
+                        );
+                      }),
+                ),
+                ksizedbox20,
+                Text(
+                  'Populars',
+                  style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
+                ),
+                ksizedbox20,
+                Container(
+                  height: 260,
+                  child: holidayPackageController.packageListData.isEmpty
+                      ? const Center(
+                          child: Text("No Data Found"),
+                        )
+                      : ListView.builder(
+                          itemCount:
+                              holidayPackageController.packageListData.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: () {
+                                  Get.to(HolidayScreen(
+                                    packageId: holidayPackageController
+                                        .packageListData[index].id
+                                        .toString(),
+                                  ));
+                                },
+                                child: Container(
+                                  height: 250.h,
+                                  width: 165.w,
+                                  decoration: BoxDecoration(
+                                      color: kwhite,
+                                      borderRadius: BorderRadius.circular(19)),
+                                  child: Column(
+                                    children: [
+                                      holidayPackageController
+                                              .packageListData[index]
+                                              .images
+                                              .isEmpty
+                                          ? Container(
                                               height: 150,
-                                              width: 165,
-                                              fit: BoxFit.cover,
+                                            )
+                                          : ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(19),
+                                              child: Image.network(
+                                                holidayPackageController
+                                                    .packageListData[index]
+                                                    .images
+                                                    .first,
+                                                height: 150,
+                                                width: 165,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                          ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            width: 100,
-                                            child: Text(
-                                              holidayPackageController
-                                                  .packageListData[index].title,
-                                              maxLines: 2,
-                                              style: TextStyle(
-                                                  fontSize: 16.sp,
-                                                  fontWeight: FontWeight.w700),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              width: 100,
+                                              child: Text(
+                                                holidayPackageController
+                                                    .packageListData[index].title,
+                                                maxLines: 2,
+                                                style: TextStyle(
+                                                    fontSize: 16.sp,
+                                                    fontWeight: FontWeight.w700),
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          children: [
+                                            Image.asset(
+                                                'assets/images/location-svgrepo-com (1).png'),
+                                            kwidth5,
+                                            //             Text(
+                                            //   holidayPackageController.packageListData[index].location,
+                                            //   style: TextStyle(fontSize: 13.sp, color: kgrey),
+                                            // ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
+                ),
+                ksizedbox20,
+                Text(
+                  'Recommended',
+                  style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
+                ),
+                ksizedbox20,
+                Container(
+                  height: 80,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: holidayPackageController.recomendedListData.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: InkWell(
+                          onTap: () {
+                            Get.to(HolidayScreen(
+                              packageId: holidayPackageController
+                                  .recomendedListData[index].id
+                                  .toString(),
+                            ));
+                          },
+                          child: Container(
+                            height: 80,
+                            width: 200,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Row(
+                              children: [
+                                holidayPackageController
+                                        .recomendedListData[index].images!.isEmpty
+                                    ? Container(
+                                        width: 75,
+                                      )
+                                    : ClipRRect(
+                                        borderRadius: BorderRadius.circular(7),
+                                        child: Image.network(
+                                          holidayPackageController
+                                              .recomendedListData[index]
+                                              .images!
+                                              .first,
+                                          height: 70,
+                                          width: 75,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width: 100,
+                                        child: Text(
+                                          holidayPackageController
+                                              .recomendedListData[index].title,
+                                          maxLines: 2,
+                                          style: TextStyle(
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ),
+                                      Row(
                                         children: [
                                           Image.asset(
                                               'assets/images/location-svgrepo-com (1).png'),
                                           kwidth5,
-                                          //             Text(
-                                          //   holidayPackageController.packageListData[index].location,
-                                          //   style: TextStyle(fontSize: 13.sp, color: kgrey),
+                                          // Text(
+                                          // holidayPackageController.recomendedListData[index].location,
+                                          // style: TextStyle(fontSize: 13.sp, color: kgrey),
                                           // ),
                                         ],
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          );
-                        }),
-              ),
-              ksizedbox20,
-              Text(
-                'Recommended',
-                style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
-              ),
-              ksizedbox20,
-              Container(
-                height: 80,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: holidayPackageController.recomendedListData.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: InkWell(
-                        onTap: () {
-                          Get.to(HolidayScreen(
-                            packageId: holidayPackageController
-                                .recomendedListData[index].id
-                                .toString(),
-                          ));
-                        },
-                        child: Container(
-                          height: 80,
-                          width: 200,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Row(
-                            children: [
-                              holidayPackageController
-                                      .recomendedListData[index].images!.isEmpty
-                                  ? Container(
-                                      width: 75,
-                                    )
-                                  : ClipRRect(
-                                      borderRadius: BorderRadius.circular(7),
-                                      child: Image.network(
-                                        holidayPackageController
-                                            .recomendedListData[index]
-                                            .images!
-                                            .first,
-                                        height: 70,
-                                        width: 75,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: 100,
-                                      child: Text(
-                                        holidayPackageController
-                                            .recomendedListData[index].title,
-                                        maxLines: 2,
-                                        style: TextStyle(
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Image.asset(
-                                            'assets/images/location-svgrepo-com (1).png'),
-                                        kwidth5,
-                                        // Text(
-                                        // holidayPackageController.recomendedListData[index].location,
-                                        // style: TextStyle(fontSize: 13.sp, color: kgrey),
-                                        // ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );
