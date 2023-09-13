@@ -36,6 +36,8 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:permission_handler/permission_handler.dart';
 
+import '../services/network/flight_booking_api_services/air_cancel_api_services.dart';
+
 class FlightsController extends GetxController {
   RxInt wayIndex = 0.obs;
   RxInt cabinClassIndex = 0.obs;
@@ -63,7 +65,7 @@ class FlightsController extends GetxController {
   RxBool indiGo = false.obs;
 
   List<Flight> flightCodelist = [];
-
+  AirCancelApiServices airCancelApiServices = AirCancelApiServices();
   AirRepriceApiServices airRepriceApiServices = AirRepriceApiServices();
 
   AirSearchApiServices airSearchApiServices = AirSearchApiServices();
@@ -257,6 +259,32 @@ class FlightsController extends GetxController {
       downloadFlightTicketInvoice(airReprintModel);
     } else {}
   }
+
+
+   airCancelTicket({required String refernceNo}) async {
+    dio.Response<dynamic> response = await airRePrintingServices
+        .airRePrintingApi(clientReferneNo: "", refrenceNo: refernceNo);
+
+    if (response.statusCode == 200) {
+      AirReprintModel airReprintModel = AirReprintModel.fromJson(response.data);
+       
+  dio.Response<dynamic> cancelresponse = await airCancelApiServices.airCancelApiServices(
+    Airlinepnr: airReprintModel.airPnrDetails.first.airlinePnr, 
+    Refno: refernceNo, 
+    Cancelcode: airReprintModel.airPnrDetails.first.crsCode,
+     ReqRemarks: airReprintModel.remark, 
+     CancellationType: airReprintModel.airPnrDetails.first.crsPnr, 
+     Imeinumber: '64654546546546');
+    if(cancelresponse.statusCode==200){
+         Get.rawSnackbar(
+          message: "Cancellation sucessfully ", 
+          backgroundColor: Colors.green);
+    }
+    } else {}
+  }
+
+
+
 
   static MethodChannel _channel = MethodChannel('easebuzz');
   EaseBuzzTokenApiService easeBuzzApi = EaseBuzzTokenApiService();

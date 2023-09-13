@@ -2,6 +2,7 @@ import 'package:bci/controllers/flights_controller.dart';
 import 'package:bci/models/flight_booking_models/get_flight_booking_history.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'dart:math' as math;
 import '../../../../constands/constands.dart';
 
@@ -328,12 +329,46 @@ class _FlightWidgetState extends State<FlightWidget> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Download',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold),
+                    InkWell(
+                      onTap: (){
+                        print(flightBookedData.remark);
+                        showDialog(context: context, 
+                        builder: (BuildContext context){
+                          return AlertDialog(
+    backgroundColor: Colors.white,
+    title: Text("Cancel Booking", style: boldTextStyle(color: Colors.black)),
+    content: Text(
+      "Are you sure you want to Cancel?",
+      style: secondaryTextStyle(color: Colors.black),
+    ),
+    actions: [
+      TextButton(
+        child: Text(
+          "Yes",
+          style: primaryTextStyle(color: kblue),
+        ),
+        onPressed: () {
+         Get.find<FlightsController>().airCancelTicket(refernceNo:flightBookedData.bookingRefNo );
+          //Get.find<AuthController>().logout();
+        },
+      ),
+      TextButton(
+        child: Text("No", style: primaryTextStyle(color: kblue)),
+        onPressed: () {
+          Get.back();
+        },
+      ),
+    ],
+  );
+                        });
+                      },
+                      child: const Text(
+                        'Cancel',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                     InkWell(
                       onTap: () {
@@ -341,8 +376,8 @@ class _FlightWidgetState extends State<FlightWidget> {
                             refernceNo: flightBookedData.bookingRefNo);
                       },
                       child: Container(
-                        height: 45,
-                        width: 120,
+                        height: 35,
+                        width: 100,
                         decoration: BoxDecoration(
                             color: Colors.green,
                             borderRadius: BorderRadius.circular(10)),

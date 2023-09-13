@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../constands/constands.dart';
 import '../../../../models/hotel_booking_models/hotel_detials_model.dart';
@@ -480,4 +481,30 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       },
     );
   }
+    AlertDialog mAlertItem2 = AlertDialog(
+    backgroundColor: Colors.white,
+    title: Text("Cancel Booking", style: boldTextStyle(color: Colors.black)),
+    content: Text(
+      "Are you sure you want to Cancel?",
+      style: secondaryTextStyle(color: Colors.black),
+    ),
+    actions: [
+      TextButton(
+        child: Text(
+          "Yes",
+          style: primaryTextStyle(color: kblue),
+        ),
+        onPressed: () {
+          Get.back();
+          //Get.find<AuthController>().logout();
+        },
+      ),
+      TextButton(
+        child: Text("No", style: primaryTextStyle(color: kblue)),
+        onPressed: () {
+          Get.back();
+        },
+      ),
+    ],
+  );
 }

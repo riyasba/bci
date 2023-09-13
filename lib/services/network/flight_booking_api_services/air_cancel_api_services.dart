@@ -9,8 +9,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AirCancelApiServices extends BaseApiService {
 
   Future airCancelApiServices({
-    required String searchKey,
-    required String flightKey,
+    required String  Airlinepnr,
+    required String  Refno,
+    required String Cancelcode,
+    required String ReqRemarks,
+    required String CancellationType,
+    required String Imeinumber,
   }) async {
     dynamic responseJson;
     try {
@@ -29,9 +33,13 @@ class AirCancelApiServices extends BaseApiService {
                 return status! <= 500;
               }),
           data: {
-            "imei_number": "64654546546546",
-            "search_key": searchKey,
-            "flight_key": flightKey,
+            "IMEI_Number": "64654546546546",
+            "CancellationType": '',
+            "ReqRemarks": '',
+            "Cancelcode":"",
+            "Refno":"",
+            "Airline_PNR":""
+
           });
       print(
           "::::::::<-- Air get ssr printing -->::::::::status code::::::::::");

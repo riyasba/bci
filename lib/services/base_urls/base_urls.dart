@@ -255,4 +255,7 @@ abstract class BaseApiService {
   //banner
   final String bannerURL =
       "https://www.portal.bcipvtltd.com/api/auth/getslider_booking";
+
+  //     //cancel 
+  // final String airTicketCancelURL = 'https://www.portal.bcipvtltd.com/api/auth/airTicketCancelDetails';    
 }
