@@ -8,9 +8,11 @@ import 'package:bci/models/get_plans_model.dart';
 import 'package:bci/models/get_service_list_model.dart';
 import 'package:bci/models/get_today_offers_list_model.dart';
 import 'package:bci/models/liquor_vendor_list_models/liquor_vendor_list_model.dart';
+import 'package:bci/models/notification_models/notification_count_model.dart';
 import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/models/slider_model.dart';
 import 'package:bci/models/slider_product_model.dart';
+import 'package:bci/models/support_admin_details_model.dart';
 import 'package:bci/models/vendor_list_model.dart';
 import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
 import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
@@ -42,6 +44,8 @@ import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import '../models/banner_model.dart';
 import '../models/get_gallery_model.dart';
 import '../services/network/get_gallery_apiservice.dart';
+import '../services/network/notification_api_services/notification_count_api_service.dart';
+import '../services/network/profile_api_services/support_admin_details_api_service.dart';
 import '../services/network/settings_api_services/banner_api_service.dart';
 
 class HomeController extends GetxController {
@@ -560,6 +564,33 @@ class HomeController extends GetxController {
       //     ));
     }
     update();
+  }
+
+  //notification count
+  NotificationCountApiServices notificationCountApiServices = NotificationCountApiServices();
+  NotificationCountData? countData;
+
+  notifyCount() async {
+    dio.Response<dynamic> response = await notificationCountApiServices.notificationCountApiServices();
+    if(response.statusCode == 200){
+      NotificationCount notificationCount = NotificationCount.fromJson(response.data);
+      countData = notificationCount.data;
+    }
+  }
+
+  //support admin details
+  SupportAdminDetailsApiServices supportAdminDetailsApiServices = SupportAdminDetailsApiServices();
+  ContactDetailsData? contactDetailsData;
+
+  supportAdminDetail() async {
+
+    dio.Response<dynamic> response = await supportAdminDetailsApiServices.supportAdminDetailsApiServices();
+    if(response.statusCode == 200){
+      SupportAdminModel supportAdminModel = SupportAdminModel.fromJson(response.data);
+      contactDetailsData = supportAdminModel.data;
+    }
+
+
   }
 
 }

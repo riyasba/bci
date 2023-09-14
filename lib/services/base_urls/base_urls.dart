@@ -272,5 +272,12 @@ abstract class BaseApiService {
 
 
   //     //cancel 
-  // final String airTicketCancelURL = 'https://www.portal.bcipvtltd.com/api/auth/airTicketCancelDetails';    
+  // final String airTicketCancelURL = 'https://www.portal.bcipvtltd.com/api/auth/airTicketCancelDetails';
+
+  //notication count
+  final String notificationCountApiUrl = "https://portal.bcipvtltd.com/api/auth/notification/count";
+
+  //support admin details 
+  final String supportAdminDetailsApiUrl = "https://portal.bcipvtltd.com/api/get/app/support/details";
+
 }

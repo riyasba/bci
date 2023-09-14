@@ -80,7 +80,7 @@ class _FlightDestinationChooserState extends State<FlightDestinationChooser> {
                           borderRadius: BorderRadius.circular(10)),
                     ),
                     Text(
-                      " ------------- ",
+                      " --------- ",
                       style: primaryFont.copyWith(
                           letterSpacing: 4,
                           color: Colors.grey.withOpacity(0.5)),

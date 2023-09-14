@@ -227,15 +227,16 @@ class _SettingScreenState extends State<SettingScreen> {
                     Icons.shopping_cart,
                     color: Color(0xff003366),
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "View Cart",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff003366)),
+                  
+                  Padding(
+                    padding: EdgeInsets.only(left: 7),
+                    child: Text(
+                      "View Cart",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff003366)),
+                    ),
                   )
                 ],
               ),
@@ -427,8 +428,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                     color: Colors.black)),
                           ],
                         ),
-                        content: Text(
-                          "Are you sure you Want to logout?",
+                        content:const Text(
+                          "Are you sure want to logout?",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black,
@@ -469,7 +470,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       borderRadius: BorderRadius.circular(5)),
                                   child: Center(
                                     child: Text(
-                                      "Yes, Logout",
+                                      "Logout",
                                       style: primaryTextStyle(color: kwhite),
                                     ),
                                   ),
@@ -477,6 +478,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               ),
                             ],
                           ),
+                          ksizedbox10
                         ],
                       );
                     });

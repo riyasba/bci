@@ -293,7 +293,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
       backgroundColor: Colors.white,
       title: Text("Confirmation", style: boldTextStyle(color: Colors.black)),
       content: Text(
-        "Are you sure you want to logout?",
+        "Are you sure want to logout?",
         style: secondaryTextStyle(color: Colors.black),
       ),
       actions: [

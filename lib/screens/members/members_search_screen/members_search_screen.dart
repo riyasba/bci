@@ -84,21 +84,26 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
                         //     child: Icon(Icons.arrow_back_ios,color: kwhite,),
                         //   ),
                         //     ),
-                        Text(
-                          'Search',
-                          style: TextStyle(
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.bold,
-                              color: kwhite),
+                        Container(),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(
+                            'Search',
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.bold,
+                                color: kwhite),
+                          ),
                         ),
-                        IconButton(
-                            onPressed: () {
-                              Get.to(const NotificationScreen());
-                            },
-                            icon: Icon(
-                              Icons.notifications,
-                              color: kwhite,
-                            ))
+                        Container()
+                        // IconButton(
+                        //     onPressed: () {
+                        //       Get.to(const NotificationScreen());
+                        //     },
+                        //     icon: Icon(
+                        //       Icons.notifications,
+                        //       color: kwhite,
+                        //     ))
                       ],
                     ),
                   ),

@@ -48,6 +48,7 @@ class _Home_screen1State extends State<Home_screen1> {
   @override
   void initState() {
     super.initState();
+    homeController.notifyCount();
     _dateController.text = formatDate(selectedDate, [MM, '-', dd]);
 
     _timeController.text = formatDate(
@@ -149,16 +150,36 @@ class _Home_screen1State extends State<Home_screen1> {
                               );
                       },
                     ),
-                    IconButton(
-                      onPressed: () {
-                        Get.to(
-                          const NotificationScreen(),
-                        );
-                      },
-                      icon: Icon(
-                        Icons.notifications,
-                        color: kwhite,
-                      ),
+                    Stack(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Get.to(
+                              const NotificationScreen(),
+                            );
+                          },
+                          icon: Icon(
+                            Icons.notifications,
+                            color: kwhite,
+                          ),
+                        ),
+                        Positioned(
+                          left: 22,
+                          top: 10,
+                          child: Container(
+                            height: 16,
+                            width: 16,
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(10)
+                            ),
+                            child:homeController.countData!.totalCount.toString().isEmpty ? const Text("") : Center(
+                              child:homeController.countData!.totalCount > 9 ? Text("${homeController.countData!.totalCount.toString()}+") : Text(homeController.countData!.totalCount.toString(),
+                              style: TextStyle(fontSize: 10,color: kwhite),),
+                            ),
+                          ),
+                        ),
+                      ],
                     )
                   ],
                 ),

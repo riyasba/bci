@@ -108,12 +108,12 @@ class SettingsController extends GetxController{
         offerslistdata = offerslistModel;
       }
       else if(response.statusCode == 404){
-       Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            response.data["message"],
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
+      //  Get.rawSnackbar(
+      //     backgroundColor: Colors.red,
+      //     messageText: Text(
+      //       response.data["message"],
+      //       style: primaryFont.copyWith(color: Colors.white),
+      //     ));
      }
      update();
    }

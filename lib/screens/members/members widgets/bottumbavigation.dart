@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/screens/members/booking/booking.dart';
 import 'package:bci/screens/members/settings_views/settings_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../home_screen/Members_home_screen.dart';
@@ -77,11 +79,75 @@ class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
   ]);
 
   back() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return mAlertItem2;
-        });
+   showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        backgroundColor: Colors.white,
+                        title: Column(
+                          children: [
+                            Image.asset('assets/icons/exit.png'),
+                            // Text("Comeback Soon!",
+                            //     style: TextStyle(
+                            //         fontSize: 25.sp,
+                            //         fontWeight: FontWeight.bold,
+                            //         color: Colors.black)),
+                          ],
+                        ),
+                        content:const Text(
+                          "Are you sure want to exit?",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 17,
+                          ),
+                        ),
+                        actions: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      // ignore: unrelated_type_equality_checks
+                                      color: kwhite),
+                                  child: Center(
+                                      child: Text("Cancel",
+                                          style: primaryTextStyle(
+                                              color: kblue))),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                 exit(0);
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      color: kblue,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Center(
+                                    child: Text(
+                                      "Exit",
+                                      style: primaryTextStyle(color: kwhite),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          ksizedbox10
+                        ],
+                      );
+                    });
   }
 
   @override

@@ -303,12 +303,12 @@ class AuthController extends GetxController {
       update();
       Get.back();
     } else {
-      Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            " Offers not available today",
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
+      // Get.rawSnackbar(
+      //     backgroundColor: Colors.red,
+      //     messageText: Text(
+      //       " Offers not available today",
+      //       style: primaryFont.copyWith(color: Colors.white),
+      //     ));
     }
     update();
   }

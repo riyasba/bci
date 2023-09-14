@@ -1,4 +1,5 @@
 import 'package:bci/constands/constands.dart';
+import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
 import 'package:custom_clippers/custom_clippers.dart';
@@ -15,6 +16,7 @@ class SupportScreen extends StatefulWidget {
 class _SupportScreenState extends State<SupportScreen> {
   final profileController = Get.find<ProfileController>();
   final settingsController = Get.find<SettingsController>();
+  final homePageController = Get.find<HomeController>();
 
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
@@ -27,6 +29,7 @@ class _SupportScreenState extends State<SupportScreen> {
     // TODO: implement initState
     super.initState();
     setDefault();
+    homePageController.supportAdminDetail();
   }
 
   setDefault() async {
@@ -246,17 +249,41 @@ class _SupportScreenState extends State<SupportScreen> {
                   children: [
                     Text(
                       'Contact Admin :',
-                      style: TextStyle(fontSize: 18, color: Color(0xff443C3C)),
+                      style: TextStyle(fontSize: 16, color: Color(0xff443C3C)),
                     ),
                   ],
                 ),
-                Column(
+                const SizedBox(
+                  width: 10,
+                ),
+                homePageController.contactDetailsData!.appPhone.isEmpty ? const Text("Not Available") :
+                Text(homePageController.contactDetailsData!.appPhone,
+                    style: TextStyle(fontSize: 16, color: kblue)),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+            child: Row(
+              children: [
+                const Row(
+                  children: [
+                    Text(
+                      'Admin Email :',
+                      style: TextStyle(fontSize: 16, color: Color(0xff443C3C)),
+                    ),
+                  ],
+                ),
+                Row(
                   children: [
                     const SizedBox(
-                      width: 15,
+                      width: 29,
                     ),
-                    Text('  +91 9914581540',
-                        style: TextStyle(fontSize: 16, color: kblue)),
+                    homePageController.contactDetailsData!.appEmail.isEmpty ? const Text("Not Available") :
+                    Container(
+                      child: Text(homePageController.contactDetailsData!.appEmail,maxLines: 2,
+                          style: TextStyle(fontSize: 16, color: kblue)),
+                    ),
                   ],
                 ),
               ],
@@ -269,18 +296,23 @@ class _SupportScreenState extends State<SupportScreen> {
                 const Row(
                   children: [
                     Text(
-                      'Admin Email :',
-                      style: TextStyle(fontSize: 18, color: Color(0xff443C3C)),
+                      'Admin Address :',
+                      style: TextStyle(fontSize: 16, color: Color(0xff443C3C)),
                     ),
                   ],
                 ),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
-                      width: 20,
+                      width: 10,
                     ),
-                    Text('  Customer@gmail.com',
-                        style: TextStyle(fontSize: 16, color: kblue)),
+                    homePageController.contactDetailsData!.appEmail.isEmpty ? const Text("Not Available") :
+                    Container(
+                      width: 200,
+                      child: Text(homePageController.contactDetailsData!.appAddress,maxLines: 4,
+                          style: TextStyle(fontSize: 16, color: kblue)),
+                    ),
                   ],
                 ),
               ],
