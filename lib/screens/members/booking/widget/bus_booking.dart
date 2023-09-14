@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -34,8 +35,23 @@ class _BusContainersState extends State<BusContainers> {
       return Padding(
         padding: const EdgeInsets.only(top: 10),
         child: busController.bookingHistoryList.isEmpty
-            ? const Center(
-                child: Text("No bookings found"),
+            ?  Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                     Padding(
+                       padding: const EdgeInsets.only(left: 20,right: 20),
+                       child: Image.asset('assets/images/busbookingnotavailableimage.png'),
+                     ),
+                     ksizedbox20,
+                     Text('Not Booking In Bus Tickets',
+                     style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.bold,
+                      color: kblue
+                     ),)
+                  ],
+                ),
               )
             : ListView.builder(
                 physics: const BouncingScrollPhysics(),
@@ -326,7 +342,7 @@ class _BusContainersState extends State<BusContainers> {
                         'Cancel',
                         style: TextStyle(
                             fontSize: 16,
-                            color: Colors.green,
+                            color: Colors.red,
                             fontWeight: FontWeight.bold),
                       ),
                     ),

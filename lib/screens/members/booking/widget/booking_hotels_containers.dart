@@ -4,6 +4,7 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -49,8 +50,23 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       return Padding(
         padding: const EdgeInsets.only(top: 20),
         child: hotelBookingController.bookingList.isEmpty
-            ? const Center(
-                child: Text("No bookings found"),
+            ?  Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20,right: 20),
+                      child: Image.asset('assets/images/hotelbookingnotavailableimage.png'),
+                    ),
+                    ksizedbox20,
+                    Text('Not Booking In Hotel Rooms',
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.bold,
+                      color: kblue
+                    ),)
+                  ],
+                ),
               )
             : Stack(
                 children: [

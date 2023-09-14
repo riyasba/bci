@@ -5,6 +5,7 @@ import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -67,7 +68,7 @@ class _OurPartnerScreenState extends State<OurPartnerScreen> {
             ),
           )),
       body: GetBuilder<SettingsController>(builder: (_) {
-        return GridView.builder(
+        return  settingsController.ourPartnersData.isNotEmpty? GridView.builder(
             physics: const BouncingScrollPhysics(),
             itemCount: settingsController.ourPartnersData.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -79,7 +80,7 @@ class _OurPartnerScreenState extends State<OurPartnerScreen> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  height: 350,
+                  height: 410.sh,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [
@@ -131,7 +132,7 @@ class _OurPartnerScreenState extends State<OurPartnerScreen> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
-                              height: 35,
+                              height: 38,
                               
                               decoration: BoxDecoration(
                                   color: kblue,
@@ -166,7 +167,22 @@ class _OurPartnerScreenState extends State<OurPartnerScreen> {
                   ),
                 ),
               );
-            });
+            }): Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/ourpartnernotavailableimage.png'),
+                      ksizedbox20,
+                      Text('No Memberships',
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        color: kblue,
+                        fontWeight: FontWeight.bold
+                      ),)
+                    ],
+                  ),
+              
+              );
       }),
     );
   }

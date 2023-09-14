@@ -218,10 +218,10 @@ class _WalletScreenMembersState extends State<WalletScreenMembers> {
               GetBuilder<AuthController>(builder: (_) {
                 return Container(
                   height: _mediaQuery.height * 0.4,
-                  child: ListView.builder(
+                  child: authController.transactionHistorydata.isNotEmpty? ListView.builder(
                       itemCount: authController.transactionHistorydata.length,
                       itemBuilder: (context, index) {
-                        return Padding(
+                        return  Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Container(
                             height: 65,
@@ -331,7 +331,23 @@ class _WalletScreenMembersState extends State<WalletScreenMembers> {
                             ),
                           ),
                         );
-                      }),
+                       
+                      }): Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/images/walletnotavailableimage.png'),
+                                ksizedbox20,
+                                Text('No Transaction History',
+                                style: TextStyle(
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: kblue
+                                ),)
+                              ],
+                            ),
+                          ),
+                      
                 );
               }),
             ],

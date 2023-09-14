@@ -5,6 +5,7 @@ import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:date_format/date_format.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer' as developer;
 
 class AirAddSsrApiServices extends BaseApiService {
   Future airGetSsrDetails({
@@ -16,6 +17,16 @@ class AirAddSsrApiServices extends BaseApiService {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
+
+      var data ={
+            "imei_number": "64654546546546",
+            "search_key": searchKey,
+            "flight_key": flightKey,
+          };
+       
+          developer.log(
+          "----------------------------------------------------->>air ssr printing");
+          developer.log(data.toString(), name: "hotel room details request");
 
       var response = await dio.post(airGetSsrURL,
           options: Options(
@@ -35,7 +46,8 @@ class AirAddSsrApiServices extends BaseApiService {
       print(
           "::::::::<-- Air get ssr printing -->::::::::status code::::::::::");
       print(response.statusCode);
-      print(response.data);
+      // print(response.data);
+        developer.log(response.data.toString(), name: "block data response");
       responseJson = response;
     } on SocketException {
       print("no internet");

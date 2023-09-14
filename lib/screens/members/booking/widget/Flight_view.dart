@@ -1,6 +1,7 @@
 import 'package:bci/controllers/flights_controller.dart';
 import 'package:bci/models/flight_booking_models/get_flight_booking_history.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'dart:math' as math;
@@ -28,8 +29,21 @@ class _FlightWidgetState extends State<FlightWidget> {
     return Scaffold(
       body: GetBuilder<FlightsController>(builder: (_) {
         return flightController.flightBookingHistoyrList.isEmpty
-            ? const Center(
-                child: Text("No Data Found"),
+            ?  Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/flightnotavailableimage.png'),
+                    ksizedbox20,
+                    Text('Not Booking In Flight Tickets',
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      color: kblue,
+                      fontWeight: FontWeight.bold
+                    ),)
+                  ],
+                ),
               )
             : ListView.builder(
           itemCount: flightController.flightBookingHistoyrList.length,
@@ -366,24 +380,25 @@ class _FlightWidgetState extends State<FlightWidget> {
                         'Cancel',
                         style: TextStyle(
                             fontSize: 16,
-                            color: Colors.green,
+                            color: Colors.red,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Get.find<FlightsController>().downloadTicketHistory(
-                            refernceNo: flightBookedData.bookingRefNo);
-                      },
-                      child: Container(
-                        height: 35,
-                        width: 100,
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: const Icon(Icons.download,color: Colors.white,),
-                      ),
-                    )
+                    Text('Download ')
+                    // InkWell(
+                    //   onTap: () {
+                    //     Get.find<FlightsController>().downloadTicketHistory(
+                    //         refernceNo: flightBookedData.bookingRefNo);
+                    //   },
+                    //   child: Container(
+                    //     height: 35,
+                    //     width: 100,
+                    //     decoration: BoxDecoration(
+                    //         color: Colors.green,
+                    //         borderRadius: BorderRadius.circular(10)),
+                    //     child: const Icon(Icons.download,color: Colors.white,),
+                    //   ),
+                    // )
                   ],
                 ),
               ],

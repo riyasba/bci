@@ -42,7 +42,7 @@ class AirCancelApiServices extends BaseApiService {
 
           });
       print(
-          "::::::::<-- Air get ssr printing -->::::::::status code::::::::::");
+          "::::::::<-- Air cancellation api -->::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

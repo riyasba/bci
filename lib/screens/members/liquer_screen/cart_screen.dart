@@ -61,7 +61,7 @@ class _CartScreenState extends State<CartScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        'Orders',
+                        'View Cart',
                         style: TextStyle(
                             fontSize: 20,
                             //  fontWeight: FontWeight.bold,
@@ -84,8 +84,20 @@ class _CartScreenState extends State<CartScreen> {
       body: GetBuilder<HomeController>(builder: (_) {
         return Container(
           child: homeController.cartListData.isEmpty
-              ? const Center(
-                  child: Text("No Items In Your Cart"),
+              ?  Center(
+                  child:Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/cartnotavailableimage.png'),
+                      ksizedbox20,
+                      Text('Cart Is Empty',
+                      style: TextStyle(
+                        fontSize: 22.sp,
+                        color: kblue,
+                        fontWeight: FontWeight.bold
+                      ),)
+                    ],
+                  ) ,
                 )
               : ListView.builder(
                   shrinkWrap: true,

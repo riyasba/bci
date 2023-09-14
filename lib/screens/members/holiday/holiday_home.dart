@@ -61,9 +61,19 @@ class _HolidayHomeState extends State<HolidayHome> {
       return Scaffold(
         backgroundColor: const Color(0xFFF9F8FD),
         appBar: PreferredSize(
+        
             preferredSize: const Size.fromHeight(300),
+            
             child: Column(children: [
-              Image.asset('assets/images/Group 6977 (4).png'),ksizedbox10,
+             
+              Stack(children:[ 
+                Image.asset('assets/images/Group 6977 (4).png'),
+                  InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: SafeArea(child: Icon(Icons.arrow_back_ios_new,color: kwhite,))),
+              ]),ksizedbox20,
              Container(
                height: 55,
                child: TextFormField(

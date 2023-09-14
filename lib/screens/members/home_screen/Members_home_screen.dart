@@ -123,11 +123,19 @@ class _Home_screen1State extends State<Home_screen1> {
               height: 140,
               color: kblue,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 22, left: 15, right: 10),
+                padding: const EdgeInsets.only(bottom: 22, left: 15, right: 10,top: 2),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset('assets/images/projectlogo.png'),
+                    Container(
+                      height: 53,
+                      width: 53,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: kwhite
+                      ),
+                      child: Image.asset('assets/images/bcilogo.png',
+                      )),
                     GetBuilder<ProfileController>(
                       builder: (_) {
                         return profileController.profileData.isEmpty
@@ -513,41 +521,41 @@ class _Home_screen1State extends State<Home_screen1> {
 
                   // ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    padding: const EdgeInsets.only(left: 10),
                     child: Row(
+
                       children: [
-                        Expanded(
-                          flex: 3,
-                          child: InkWell(
-                            onTap: () {
-                              Get.to(() => const VendorsListView());
-                            },
-                            child: Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  color: kblue,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                child: Row(
-                                  children: [
-                                    Image.asset(
-                                      "assets/images/projectlogo.png",
-                                      height: 25,
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "BCI Associate",
-                                      style: primaryFont.copyWith(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white),
-                                    )
-                                  ],
-                                ),
+                        InkWell(
+                          onTap: () {
+                            Get.to(() => const VendorsListView());
+                          },
+                          child: Container(
+                            height: 60,
+                            width: 170,
+                            decoration: BoxDecoration(
+                                color: kyellow,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/projectlogo.png",
+                                    height: 25,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "BCI Associate",
+                                    style: primaryFont.copyWith(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white
+                                        ),
+                                  )
+                                ],
                               ),
                             ),
                           ),
@@ -555,20 +563,29 @@ class _Home_screen1State extends State<Home_screen1> {
                         const SizedBox(
                           width: 10,
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: InkWell(
-                            onTap: () {
-                              profileController.downloadBroucher();
-                            },
-                            child: Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  color: kOrange,
-                                  borderRadius: BorderRadius.circular(5)),
-                              alignment: Alignment.center,
-                              child: Image.asset("assets/icons/pdf_img.png"),
-                            ),
+                        InkWell(
+                          onTap: () {
+                            profileController.downloadBroucher();
+                          },
+                          child: Container(
+                            height: 60,
+                            width: 160,
+                            decoration: BoxDecoration(
+                                color: kOrange,
+                                borderRadius: BorderRadius.circular(5)),
+                            alignment: Alignment.center,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children:[
+                              Text('BCI Brochure\nDownload',
+                               style: primaryFont.copyWith(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white
+                                        ),),
+                               Image.asset("assets/icons/pdf_img.png",
+                               )]
+                               ),
                           ),
                         )
                       ],

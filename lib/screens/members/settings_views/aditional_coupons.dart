@@ -74,7 +74,7 @@ class _MemberCouponScreenState extends State<MemberCouponScreen> {
                       labelColor: kwhite,
                       unselectedLabelColor: Colors.black,
                       indicator: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(10),
                           color: kyellow),
                       onTap: (value) {
                         setState(() {

@@ -4,6 +4,7 @@ import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/auth_controllers.dart';
@@ -221,8 +222,20 @@ class _OfferScreenState extends State<OfferScreen> {
               child: Container(
                 height: size.height * 0.7,
                 child: settingcontroller.offerslistdata.isEmpty
-                    ? const Center(
-                        child: Text("No data found"),
+                    ?  Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset('assets/images/offersnotavailableimage.png'),
+                            ksizedbox20,
+                            Text('Member Offers Not Available',
+                            style: TextStyle(
+                              fontSize: 20.sp,
+                              color: kblue,
+                              fontWeight: FontWeight.bold
+                            ),)
+                          ],
+                        ),
                       )
                     : ListView.builder(
                         shrinkWrap: true,

@@ -1,8 +1,10 @@
 import 'package:bci/constands/app_fonts.dart';
+import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:coupon_uikit/coupon_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
 
@@ -38,8 +40,23 @@ class _CouponsState extends State<VendorCoupons> {
         return Container(
           //height: size.height * 0.55,
           child: profileController.redeemcouponsData.isEmpty
-              ? const Center(
-                  child: Text("No Coupons Available"),
+              ?  Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                    
+                      Image.asset('assets/images/couponnotavailaimage.png',
+                      height: 180,
+                      fit: BoxFit.fitHeight,),
+                      ksizedbox20,
+                      Text('No Coupon Available',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.sp,
+                        color: kblue
+                      ),)
+                    ],
+                  ),
                 )
               : ListView.builder(
                   shrinkWrap: true,

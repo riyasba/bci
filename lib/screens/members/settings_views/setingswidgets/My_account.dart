@@ -537,6 +537,7 @@ class _MyAccountState extends State<MyAccount> {
                                       padding: const EdgeInsets.only(
                                           left: 15, right: 10),
                                       child: TextField(
+                                        textCapitalization: TextCapitalization.words,
                                         controller: nameController,
                                         decoration: InputDecoration(
                                             isCollapsed: true,
@@ -567,6 +568,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: emailController,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -668,6 +670,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: occupationController,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -697,6 +700,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: qualificationController,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -726,6 +730,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: fatherNameController,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -755,6 +760,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: motherNameController,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -1212,7 +1218,7 @@ class _MyAccountState extends State<MyAccount> {
                                                                 },
                                                                 child:
                                                                     const Text(
-                                                                  'Choose ur gallery',
+                                                                  'Choose gallery',
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .black,
@@ -1226,7 +1232,7 @@ class _MyAccountState extends State<MyAccount> {
                                                                 },
                                                                 child:
                                                                     const Text(
-                                                                  'Choose ur Camera',
+                                                                  'Choose Camera',
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .black,
@@ -1270,7 +1276,7 @@ class _MyAccountState extends State<MyAccount> {
                                                               pickerimage();
                                                             },
                                                             child: const Text(
-                                                              'Choose ur gallery',
+                                                              'Choose gallery',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -1282,7 +1288,7 @@ class _MyAccountState extends State<MyAccount> {
                                                               imagepic();
                                                             },
                                                             child: const Text(
-                                                              'Choose ur Camera',
+                                                              'Choose Camera',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -1476,6 +1482,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: branchController,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -1506,6 +1513,7 @@ class _MyAccountState extends State<MyAccount> {
                                       padding: const EdgeInsets.only(
                                           left: 15, right: 10),
                                       child: TextField(
+                                        textCapitalization: TextCapitalization.words,
                                         controller: spouseController,
                                         decoration: InputDecoration(
                                             isCollapsed: true,
@@ -1725,6 +1733,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: oBuildingNumberCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -1754,6 +1763,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: oAddressCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -1783,6 +1793,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: oCityCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -1812,6 +1823,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: oStateCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -2071,6 +2083,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: rBuildingNumberCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -2100,6 +2113,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: rAddressCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -2129,6 +2143,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: rCityCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -2158,6 +2173,7 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
+                                      textCapitalization: TextCapitalization.words,
                                       controller: rStateCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,

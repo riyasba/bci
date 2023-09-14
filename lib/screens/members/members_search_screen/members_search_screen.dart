@@ -273,7 +273,7 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
       //     )),
       body: GetBuilder<HomeController>(builder: (_) {
         return homeController.searchServiceListData.isEmpty &&
-                searchController.text.isNotEmpty
+                searchController.text.isEmpty
             ? Center(
                 child: Column(
                   children: [

@@ -9,6 +9,7 @@ import 'package:bci/screens/members/settings_views/upgrade_screen.dart';
 import 'package:bci/screens/members/settings_views/your_refferal_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../coupen/coupons_screen.dart';
@@ -23,6 +24,9 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  int logoutindexvalue=0;
+  final authController= Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -315,7 +319,7 @@ class _SettingScreenState extends State<SettingScreen> {
               child: const Row(
                 children:  [
                   Image(
-                    image: AssetImage("assets/icons/partner.png"),
+                    image: AssetImage("assets/icons/ourpartnericon.png"),
                     width: 20,
                   ),
                   SizedBox(
@@ -348,7 +352,7 @@ class _SettingScreenState extends State<SettingScreen> {
               child: const Row(
                 children:  [
                   Image(
-                    image: AssetImage("assets/icons/upgrade.png"),
+                    image: AssetImage("assets/icons/upgradicon.png"),
                     width: 20,
                   ),
                   SizedBox(
@@ -380,7 +384,7 @@ class _SettingScreenState extends State<SettingScreen> {
               },
               child: const Row(
                 children:  [
-                  Image(image: AssetImage("assets/icons/sprt.png"), width: 20),
+                  Image(image: AssetImage("assets/icons/supporticon.png"), width: 20),
                   SizedBox(
                     width: 10,
                   ),
@@ -406,14 +410,97 @@ class _SettingScreenState extends State<SettingScreen> {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return mAlertItem2;
+                      return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+    backgroundColor: Colors.white,
+    title: Column(
+      children: [
+        Image.asset('assets/images/logoutimage.png'),
+        Text("Comeback Soon!", style: TextStyle(
+          fontSize: 25.sp,
+          fontWeight: FontWeight.bold,
+          color: Colors.black
+        )),
+      ],
+    ),
+    content: Text(
+      
+      "Are you sure you Want to logout?",
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 17,
+        
+        
+      ),
+    ),
+    actions: [
+  
+         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+                   InkWell(
+                    onTap: (){
+                    
+      
+                         Get.back();
+      
+                    },
+                     child: Container(
+                      height: 40,
+                      width: 120,
+                      decoration: BoxDecoration(
+                        // ignore: unrelated_type_equality_checks
+                        color:kwhite
+                      ),
+                           child: Center(child: Text("Cancel", style: primaryTextStyle(
+                            color:kOrange
+                            ))),
+                          
+                         ),
+                   ),
+        
+        InkWell(
+          onTap: (){
+          
+          // authController.logoutindex(1);
+          // authController.update();
+               Get.find<AuthController>().logout();
+          },
+          child: Container(
+            height: 40,
+            width: 120,
+            decoration: BoxDecoration(
+              color:kOrange,
+              borderRadius: BorderRadius.circular(5)
+            ),
+            child: Center(
+              child: Text(
+                "Yes,Logout",
+                style: primaryTextStyle(
+                  color:kwhite
+                  ),
+              ),
+            ),
+            
+          ),
+        ),
+        
+      
+          ],
+        ),
+      
+    ],
+  );
                     });
                 //Get.find<AuthController>().logout();
               },
               child: Row(
                 children: const [
                   Image(
-                    image: AssetImage("assets/icons/logout.png"),
+                    image: AssetImage("assets/icons/logouticon.png"),
                     width: 20,
                   ),
                   SizedBox(
@@ -435,29 +522,4 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  AlertDialog mAlertItem2 = AlertDialog(
-    backgroundColor: Colors.white,
-    title: Text("Confirmation", style: boldTextStyle(color: Colors.black)),
-    content: Text(
-      "Are you sure you want to logout?",
-      style: secondaryTextStyle(color: Colors.black),
-    ),
-    actions: [
-      TextButton(
-        child: Text(
-          "Yes",
-          style: primaryTextStyle(color: kblue),
-        ),
-        onPressed: () {
-          Get.find<AuthController>().logout();
-        },
-      ),
-      TextButton(
-        child: Text("No", style: primaryTextStyle(color: kblue)),
-        onPressed: () {
-          Get.back();
-        },
-      ),
-    ],
-  );
 }

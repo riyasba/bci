@@ -32,6 +32,8 @@ import '../services/network/categorys_api_services/filter_category_api_service.d
 class AuthController extends GetxController {
 //apis method call
   RxInt filterindex = 0.obs;
+  RxInt logoutindex=0.obs;
+  RxBool logoutbool= false.obs;
   MerchantRegisterApiServices merchantRegisterApiServices =
       MerchantRegisterApiServices();
 
@@ -316,6 +318,7 @@ class AuthController extends GetxController {
   logout() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString("auth_token", "null");
+    
     Get.offAll(const MemberLoginScreen());
   }
 

@@ -3,6 +3,7 @@ import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/models/get_booking_list_model.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class OthersBookingsView extends StatefulWidget {
@@ -29,8 +30,23 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
       return Padding(
         padding: const EdgeInsets.only(top: 20),
         child: homeController.bookingListData.isEmpty
-            ? const Center(
-                child: Text("No bookings found"),
+            ?  Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20,right: 20),
+                      child: Image.asset('assets/images/othersbookingnotavailableimage.png'),
+                    ),
+                    ksizedbox20,
+                    Text('Not Booking In Other Plans',
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.bold,
+                      color: kblue
+                    ),)
+                  ],
+                ),
               )
             : ListView.builder(
                 physics: const BouncingScrollPhysics(),

@@ -108,6 +108,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
                   child: TextFormField(
+                    textCapitalization: TextCapitalization.words,
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.name,
                     controller: usernamecontroller,
@@ -189,6 +190,7 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
                   child: TextFormField(
+                    textCapitalization: TextCapitalization.words,
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.emailAddress,
                     controller: emailController,
