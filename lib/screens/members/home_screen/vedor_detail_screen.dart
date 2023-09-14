@@ -4,8 +4,7 @@ import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/vendor_list_model.dart';
 import 'package:bci/screens/members/offer%20screen/view_vendor_services_list.dart';
-import 'package:bci/screens/members/offer%20screen/view_vendors_offers_screen.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,17 +12,26 @@ import 'package:url_launcher/url_launcher.dart';
 
 class VendorDetailScreen extends StatefulWidget {
   VendorListModelData vendorListModelData;
-  VendorDetailScreen({super.key, required this.vendorListModelData});
+  final String userid;
+  VendorDetailScreen(
+      {super.key, required this.vendorListModelData, required this.userid});
 
   @override
   State<VendorDetailScreen> createState() => _VendorDetailScreenState();
 }
 
 class _VendorDetailScreenState extends State<VendorDetailScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+
+    homeController.getInstance(userid: widget.userid);
+  }
+
   final homeController = Get.find<HomeController>();
-
   final redeemCouponcontroller = TextEditingController();
-
   final profileController = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
@@ -55,47 +63,82 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
           children: [
             widget.vendorListModelData.profilePicture != null
                 ? Padding(
-                  padding: const EdgeInsets.only(left: 15,right: 15,top: 10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
+                    padding:
+                        const EdgeInsets.only(left: 15, right: 15, top: 10),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
                         widget.vendorListModelData.profilePicture!,
                         height: 350,
                         width: size.width,
                         fit: BoxFit.cover,
                       ),
-                  ),
-                )
+                    ),
+                  )
                 : Image.asset(
                     "assets/icons/no-photo.png",
-                    height: 350,
+                    height: 200,
                     width: size.width,
                     fit: BoxFit.cover,
                   ),
-
-
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 Container(
-                  height: 80,
-                   child: ListView.builder(
-                     scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemCount: widget.vendorListModelData.profilePicture!.length,
-                    itemBuilder: (context,index){
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 10,right: 10),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(widget.vendorListModelData.profilePicture.toString(),
-                        height: 50,width: 80,fit: BoxFit.cover,)),
-                    );
-                   }),
-                 ),
-                 ksizedbox20,
+                  GetBuilder<HomeController>(builder: (_) {
+                    return homeController.galleryListData.isEmpty
+                        ? Container()
+                        : Container(
+                            height: 80,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                itemCount:
+                                    homeController.galleryListData.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, right: 10),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: InkWell(
+                                        onTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10)),
+                                                  backgroundColor: Colors.white,
+                                                  title: Column(
+                                                    children: [
+                                                      Image.network(
+                                                          homeController
+                                                              .galleryListData[
+                                                                  index]
+                                                              .image),
+                                                    ],
+                                                  ),
+                                                );
+                                              });
+                                        },
+                                        child: Image.network(
+                                          homeController
+                                              .galleryListData[index].image,
+                                          height: 50,
+                                          width: 80,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }),
+                          );
+                  }),
+                  ksizedbox20,
                   Text(
                     widget.vendorListModelData.name,
                     style: TextStyle(
@@ -112,62 +155,52 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                     style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w500,
-                        color:kblue),
+                        color: kblue),
                   ),
                   ksizedbox20,
                   if (widget.vendorListModelData.address != null)
-                  
                     Row(
                       children: [
                         Text(
                           "${widget.vendorListModelData.address ?? ""}",
-                          style: TextStyle(
-                              fontSize: 15.sp,
-                              color:kblue),
+                          style: TextStyle(fontSize: 15.sp, color: kblue),
                         ),
                         Text(","),
-                         if (widget.vendorListModelData.address != null)
-                    Text(
-                      "${widget.vendorListModelData.city}",
-                      style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.normal,
-                          color:kblue),
-                    ),
-                      Text(","),
-                  if (widget.vendorListModelData.address != null)
-                    Text(
-                      "${widget.vendorListModelData.state}",
-                      style: TextStyle(
-                          fontSize: 15.sp,
-                          color:kblue),
-                    ),
+                        if (widget.vendorListModelData.address != null)
+                          Text(
+                            "${widget.vendorListModelData.city}",
+                            style: TextStyle(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.normal,
+                                color: kblue),
+                          ),
+                        Text(","),
+                        if (widget.vendorListModelData.address != null)
+                          Text(
+                            "${widget.vendorListModelData.state}",
+                            style: TextStyle(fontSize: 15.sp, color: kblue),
+                          ),
                       ],
                     ),
-                
                   Text(
                     "Mobile : ${widget.vendorListModelData.mobile}",
-                    style: TextStyle(
-                        fontSize: 15.sp,
-                        height: 1.5,
-                        color: kblue),
+                    style:
+                        TextStyle(fontSize: 15.sp, height: 1.5, color: kblue),
                   ),
                   Text(
                     "Email  : ${widget.vendorListModelData.email}",
-                    style: TextStyle(
-                        fontSize: 15.sp,
-                        height: 1.5,
-                        color: kblue),
+                    style:
+                        TextStyle(fontSize: 15.sp, height: 1.5, color: kblue),
                   ),
                   ksizedbox20,
-                  Text('Location',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                    color: kblue,
-                    fontSize: 18.sp
-                  ),),
+                  Text(
+                    'Location',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: kblue,
+                        fontSize: 18.sp),
+                  ),
                   ksizedbox20,
-
                   if (widget.vendorListModelData.locationAddress != null)
                     Row(
                       children: [
@@ -190,12 +223,12 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                                 ],
                                 borderRadius: BorderRadius.circular(10)),
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 7,right: 7),
+                              padding: const EdgeInsets.only(left: 7, right: 7),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
-                                   const Icon(
+                                  const Icon(
                                     Icons.my_location,
                                     color: Colors.red,
                                     size: 20,
@@ -207,8 +240,6 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                                         color: Colors.black,
                                         fontSize: 14),
                                   ),
-                                  
-                                 
                                 ],
                               ),
                             ),

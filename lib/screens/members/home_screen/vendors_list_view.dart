@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/profile_controller.dart';
+
 class VendorsListView extends StatefulWidget {
   const VendorsListView({super.key});
 
@@ -19,6 +21,7 @@ class VendorsListView extends StatefulWidget {
 
 class _VendorsListViewState extends State<VendorsListView> {
   final homeController = Get.find<HomeController>();
+  final profileController = Get.find<ProfileController>();
 
   @override
   void initState() {
@@ -106,11 +109,12 @@ class _VendorsListViewState extends State<VendorsListView> {
                           VendorDetailScreen(
                             vendorListModelData:
                                 homeController.vendorList[index],
+                            userid:
+                                homeController.vendorList[index].id.toString(),
                           ),
                         );
                       },
                       child: Container(
-                        
                         decoration: BoxDecoration(
                             color: Colors.white,
                             boxShadow: [
@@ -122,22 +126,22 @@ class _VendorsListViewState extends State<VendorsListView> {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(15),
-                              child:
-                                  homeController.vendorList[index].profilePicture !=
-                                          null
-                                      ? Image.network(
-                                          homeController.vendorList[index]
-                                              .profilePicture!,
-                                          height: 125.h,
-                                          width: size.width,
-                                          fit: BoxFit.cover,
-                                        )
-                                      : Image.asset(
-                                          "assets/icons/no-photo.png",
-                                          height: 125.h,
-                                          width: size.width,
-                                          fit: BoxFit.cover,
-                                        ),
+                              child: homeController
+                                          .vendorList[index].profilePicture !=
+                                      null
+                                  ? Image.network(
+                                      homeController
+                                          .vendorList[index].profilePicture!,
+                                      height: 125.h,
+                                      width: size.width,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset(
+                                      "assets/icons/no-photo.png",
+                                      height: 125.h,
+                                      width: size.width,
+                                      fit: BoxFit.cover,
+                                    ),
                             ),
                             ksizedbox10,
                             Padding(
