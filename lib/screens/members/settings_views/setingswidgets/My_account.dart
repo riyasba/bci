@@ -244,6 +244,8 @@ class _MyAccountState extends State<MyAccount> {
             profileController.profileData.first.isMarried == "0" ? false : true;
       });
       _controller?.addTag = profileController.profileData.first.childName;
+
+      print(profileController.profileData.first.childName);
     }
   }
 

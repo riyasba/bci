@@ -339,6 +339,48 @@ class ProfileController extends GetxController {
   // String responseData = "Nothing";
   final _isgpayuiPlugin = IsgpayuiPlugin();
 
+
+
+  payCart(){
+     final homeController = Get.find<HomeController>();
+      print(">>-------------->>---------->>");
+      for (int i = 0; i < homeController.cartListData.length; i++) {
+        homeController.addBooking(
+            serviceid: homeController.cartListData[i].serviceId.toString(),
+            cartid: homeController.cartListData[i].id.toString(),
+            qty: homeController.cartListData[i].quantity.toString(),
+            offerOrCoupon: "",
+            couponcode: "",
+            amount: homeController.cartListData[i].price);
+      }
+
+      Get.offAll(
+        () => LoadingWidgets(),
+      );
+
+      // Get.find<HomeController>().addSubscription(
+      //     planId: id,
+      //     customerId: Get.find<ProfileController>().profileData.first.id);
+
+      //need to give id
+      Get.snackbar(
+        "Payment Successfully Paid",
+        "",
+        icon: const Icon(Icons.check_circle_outline_outlined,
+            color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+
+  }
+
   void payFromCart(double amount) async {
     int tempAmount = amount.toInt();
     String? result;
@@ -557,6 +599,37 @@ class ProfileController extends GetxController {
     }
   }
 
+
+  payForSubscribe({
+    required int id,
+  }){
+    final homeController = Get.find<HomeController>();
+
+      Get.find<HomeController>().addSubscription(
+          planId: id,
+          customerId: Get.find<ProfileController>().profileData.first.id);
+
+      //need to give id
+      Get.snackbar(
+        "Payment Successfully Paid",
+        "",
+        icon: const Icon(Icons.check_circle_outline_outlined,
+            color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+  }
+
+
+
+
   void payfoSubscription({
     required double amount,
     required int id,
@@ -672,6 +745,33 @@ class ProfileController extends GetxController {
   }
 
   // String responseData = "Nothing";
+
+
+  payWallet(String amount) {
+
+
+    Get.find<AuthController>()
+          .addTransaction(amount: amount);
+
+      Get.to(const SucessfulScreenOtc());
+
+      //need to give id
+      Get.snackbar(
+        "Payment Successfully Paid",
+        "",
+        icon: const Icon(Icons.check_circle_outline_outlined,
+            color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+  }
 
   void payforWallet({required double amount}) async {
     int tempAmount = amount.toInt();

@@ -1,6 +1,7 @@
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/bussiness/views/home_screen/contact_admin.dart';
 import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
+import 'package:bci/screens/members/payment_gateway_view/payment_view.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -200,8 +201,14 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
           ksizedbox40,
           InkWell(
             onTap: () {
-              profileController.payforWallet(
-                  amount: double.parse(amountController.text));
+              // profileController.payforWallet(
+              //     amount: double.parse(amountController.text));
+                  Get.to(PaymentWebView(
+                    payOpt: "",
+                    payType: 2,
+                    totalAmount: amountController.text,
+                    userId: "",
+                  ));
               // profileController.payUseingEaseBuzzWallet(
               //   id: 0,
               //   amount: amountController.text,

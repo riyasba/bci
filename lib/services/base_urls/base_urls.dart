@@ -33,9 +33,8 @@ abstract class BaseApiService {
   final String getSliderURL =
       "https://www.portal.bcipvtltd.com/api/auth/get_slider";
 
-        //sliders Api
-  final String getAdsURL =
-      "https://www.portal.bcipvtltd.com/api/auth/get_ads";
+  //sliders Api
+  final String getAdsURL = "https://www.portal.bcipvtltd.com/api/auth/get_ads";
 
   //Get plan list
   final String getPlanList =
@@ -77,8 +76,7 @@ abstract class BaseApiService {
   final String redeemCouponsApiUrl =
       "https://www.portal.bcipvtltd.com/api/auth/redeemCoupon";
 
-
-    //coupons redeem api --//
+  //coupons redeem api --//
   final String subRedeemCouponsApiUrl =
       "https://www.portal.bcipvtltd.com/api/auth/subscriptionCoupon";
 
@@ -106,7 +104,6 @@ abstract class BaseApiService {
 
   final String airGetSsrURL =
       "https://www.portal.bcipvtltd.com/api/auth/air_get_ssr";
-
 
   final String airCancelApiURL =
       "https://www.portal.bcipvtltd.com/api/auth/air_ticket_cancellation";
@@ -265,12 +262,14 @@ abstract class BaseApiService {
   final String bannerURL =
       "https://www.portal.bcipvtltd.com/api/auth/getslider_booking";
 
-
   //get gallery
   final String getGalleryURI =
       "https://www.portal.bcipvtltd.com/api/auth/get_gallery";
 
+  //get gallery
+  final String initiatePayement =
+      "https://www.portal.bcipvtltd.com/paymentgateway";
 
-  //     //cancel 
-  // final String airTicketCancelURL = 'https://www.portal.bcipvtltd.com/api/auth/airTicketCancelDetails';    
+  //     //cancel
+  // final String airTicketCancelURL = 'https://www.portal.bcipvtltd.com/api/auth/airTicketCancelDetails';
 }
