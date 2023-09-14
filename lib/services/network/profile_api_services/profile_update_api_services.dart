@@ -50,7 +50,7 @@ class ProfileUpdateApiServices extends BaseApiService {
                 return status! <= 500;
               }),
           data: formData);
-      print("::::::::<profile update URL>::::::::status code::::::::::");
+      print("::::::::<profile update URL>::::::::status code:::::::::${memberProfileUpdateModel.gender}:");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

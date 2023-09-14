@@ -25,6 +25,7 @@ class OtcPayment extends StatefulWidget {
 
 class _OtcPaymentState extends State<OtcPayment> {
   final homeController = Get.find<HomeController>();
+  var redeemCouponController = TextEditingController();
 
   final profileController = Get.find<ProfileController>();
 
@@ -55,7 +56,7 @@ class _OtcPaymentState extends State<OtcPayment> {
                             child: Image.asset(
                                 'assets/images/chevron-left (2).png'))),
                     Padding(
-                      padding: const EdgeInsets.only(right: 20),
+                      padding: const EdgeInsets.only(right: 10),
                       child: Text(
                         'Payment',
                         style: TextStyle(
@@ -76,7 +77,7 @@ class _OtcPaymentState extends State<OtcPayment> {
             ),
           )),
       body: Padding(
-        padding: const EdgeInsets.all(11.0),
+        padding: const EdgeInsets.fromLTRB(15, 11, 15, 11),
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: [
@@ -89,9 +90,18 @@ class _OtcPaymentState extends State<OtcPayment> {
               children: [
                 Text(
                   widget.plansData.title,
-                  style: TextStyle(fontSize: 28.sp),
+                  style:
+                      TextStyle(fontSize: 28.sp, fontWeight: FontWeight.w600),
                 ),
               ],
+            ),
+            ksizedbox10,
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Text(
+                "₹${widget.plansData.saleAmount}",
+                style: TextStyle(fontSize: 20.sp),
+              ),
             ),
             ksizedbox20,
             Text(
@@ -99,27 +109,99 @@ class _OtcPaymentState extends State<OtcPayment> {
               style: TextStyle(fontSize: 16.sp),
             ),
             ksizedbox30,
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                // controller: _controller,
-
-                decoration: InputDecoration(
-                    hintText: 'Enter Coupon',
-                    hintStyle: TextStyle(fontSize: 17.sp, color: kgrey),
-                    fillColor: kwhite,
-                    focusColor: kwhite,
-                    isDense: true,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: kblue),
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                    suffixIcon:
-                        Image.asset('assets/images/Icon awesome-copy.png')),
-              ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: TextField(
+            //     // controller: _controller,
+            //     decoration: InputDecoration(
+            //         hintText: 'Enter Coupon',
+            //         hintStyle: TextStyle(fontSize: 17.sp, color: kgrey),
+            //         fillColor: kwhite,
+            //         focusColor: kwhite,
+            //         isDense: true,
+            //         filled: true,
+            //         border: OutlineInputBorder(
+            //           borderSide: BorderSide(color: kblue),
+            //           borderRadius: BorderRadius.circular(4.0),
+            //         ),
+            //         // suffixIcon:
+            //         //     Image.asset('assets/images/Icon awesome-copy.png'),
+            //             ),
+            //   ),
+            // ),
+            // ksizedbox10,
+            ksizedbox10,
+            Text(
+              'Promo Code',
+              style: TextStyle(
+                  fontSize: 16.5, color: kblue, fontWeight: FontWeight.w500),
             ),
             ksizedbox10,
+            TextField(
+              controller: redeemCouponController,
+              decoration: InputDecoration(
+                disabledBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10))),
+                hintText: 'Enter Your Coupon code',
+                fillColor: kwhite,
+                focusColor: kwhite,
+                isDense: true,
+                filled: true,
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    height: 20,
+                    width: 130,
+                    decoration: BoxDecoration(
+                      color: kblue,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: InkWell(
+                      onTap: () async {
+                        String tempSaleAmount = widget.plansData.saleAmount;
+                        String amount =
+                            await profileController.redeemSubscriptionCoupon(
+                                couponcode: redeemCouponController.text);
+
+                        double tAmount = double.parse(amount);
+                        double tempSaleAmounz = double.parse(tempSaleAmount);
+
+                        if (tAmount < tempSaleAmounz) {
+                          double totalAmountTobeAdded =
+                              tempSaleAmounz - tAmount;
+
+                          setState(() {
+                            widget.plansData.saleAmount =
+                                totalAmountTobeAdded.toStringAsFixed(0);
+                          });
+                        } else {
+                          Get.rawSnackbar(
+                              message:
+                                  "Coupon is not applicable for this subscription",
+                              backgroundColor: Colors.red);
+                        }
+                      },
+                      child: Center(
+                        child: Text(
+                          'Redeem Now',
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
             ksizedbox40,
             InkWell(
               onTap: () async {
@@ -160,7 +242,7 @@ class _OtcPaymentState extends State<OtcPayment> {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                      4,
+                      10,
                     ),
                     gradient: const LinearGradient(
                       begin: Alignment.centerLeft,

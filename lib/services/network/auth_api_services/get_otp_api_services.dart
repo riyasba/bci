@@ -16,7 +16,10 @@ class GetOTPApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"mobile": mobileNumber});
+          data: {
+            "mobile": mobileNumber,
+            "role_id": "3"
+          });
       print("::::::::<Get OTP>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);

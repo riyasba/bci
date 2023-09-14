@@ -15,7 +15,7 @@ import 'package:circular_bottom_navigation/tab_item.dart';
 class MemberBottomNavBar extends StatefulWidget {
   int index;
   MemberBottomNavBar({this.index = 0});
-  
+
   @override
   State<MemberBottomNavBar> createState() => _MemberBottomNavBarState();
 }
@@ -25,7 +25,6 @@ class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
 
   @override
   void initState() {
-
     super.initState();
     _navigationController = CircularBottomNavigationController(selectedpage);
     setDefaultPage();
@@ -33,13 +32,11 @@ class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
 
   @override
   void dispose() {
-
     super.dispose();
     _navigationController.dispose();
-
   }
 
-  setDefaultPage() async{
+  setDefaultPage() async {
     selectedpage = widget.index;
   }
 
@@ -60,37 +57,37 @@ class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
     TabItem(Icons.home, "Home", korange,
         circleStrokeColor: Colors.white,
         labelStyle:
-           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
     TabItem(Icons.search, "Search", korange,
         circleStrokeColor: Colors.white,
         labelStyle:
-          const  TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
     TabItem(Icons.wallet, "Wallet", korange,
         circleStrokeColor: Colors.white,
         labelStyle:
-           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
     TabItem(Icons.book_online, "Booking", korange,
         circleStrokeColor: Colors.white,
         labelStyle:
-           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
     TabItem(Icons.settings, "Settings", korange,
         circleStrokeColor: Colors.white,
         labelStyle:
-          const  TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
   ]);
 
-  back(){
+  back() {
     showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return mAlertItem2;
-                });
+        context: context,
+        builder: (BuildContext context) {
+          return mAlertItem2;
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: (){
+      onWillPop: () {
         return back();
       },
       child: Scaffold(
@@ -112,28 +109,28 @@ class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
   }
 
   AlertDialog mAlertItem2 = AlertDialog(
-      backgroundColor: Colors.white,
-      title: Text("Confirmation", style: boldTextStyle(color: Colors.black)),
-      content: Text(
-        "Are you sure you want to Exit?",
-        style: secondaryTextStyle(color: Colors.black),
+    backgroundColor: Colors.white,
+    title: Text("Confirmation", style: boldTextStyle(color: Colors.black)),
+    content: Text(
+      "Are you sure you want to Exit?",
+      style: secondaryTextStyle(color: Colors.black),
+    ),
+    actions: [
+      TextButton(
+        child: Text(
+          "Yes",
+          style: primaryTextStyle(color: kblue),
+        ),
+        onPressed: () {
+          exit(0);
+        },
       ),
-      actions: [
-        TextButton(
-          child: Text(
-            "Yes",
-            style: primaryTextStyle(color: kblue),
-          ),
-          onPressed: () {
-           exit(0);
-          },
-        ),
-        TextButton(
-          child: Text("No", style: primaryTextStyle(color: kblue)),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-      ],
-    ); 
+      TextButton(
+        child: Text("No", style: primaryTextStyle(color: kblue)),
+        onPressed: () {
+          Get.back();
+        },
+      ),
+    ],
+  );
 }

@@ -198,7 +198,6 @@ class _MyAccountState extends State<MyAccount> {
       weddingDateController.text =
           profileController.profileData.first.weddingDate;
 
-      selectedGender = profileController.profileData.first.gender;
       branchController.text = profileController.profileData.first.branch;
       spouseController.text = profileController.profileData.first.spouse;
       dateOfBirthController.text = profileController.profileData.first.dob;
@@ -238,6 +237,9 @@ class _MyAccountState extends State<MyAccount> {
           profileController.profileData.first.residentialAddress.pincode;
 
       setState(() {
+        selectedGender =  profileController
+                .profileData.first.gender;
+        print("--------------------------->>Gender is ---------------->>$selectedGender");
         isMarried =
             profileController.profileData.first.isMarried == "0" ? false : true;
       });
@@ -319,6 +321,12 @@ class _MyAccountState extends State<MyAccount> {
 
   getback() {
     Get.offAll(MemberBottomNavBar());
+  }
+
+
+
+  getChildName(){
+       
   }
 
   @override
@@ -893,6 +901,7 @@ class _MyAccountState extends State<MyAccount> {
                                   inputfieldBuilder: (context, tec, fn, error,
                                       onChanged, onSubmitted) {
                                     return ((context, sc, tags, onTagDelete) {
+
                                       return Padding(
                                         padding:
                                             const EdgeInsets.only(top: 10.0),
@@ -1347,7 +1356,7 @@ class _MyAccountState extends State<MyAccount> {
                                                               pickerimage2();
                                                             },
                                                             child: const Text(
-                                                              'Choose ur gallery',
+                                                              'Choose gallery',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -1359,7 +1368,7 @@ class _MyAccountState extends State<MyAccount> {
                                                               imagepic2();
                                                             },
                                                             child: const Text(
-                                                              'Choose ur Camera',
+                                                              'Choose Camera',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -2336,64 +2345,64 @@ class _MyAccountState extends State<MyAccount> {
                     ),
                   //
                   ksizedbox30,
-                  plansController.subscribePlansData.isEmpty
-                      ? InkWell(
-                          onTap: () {
-                            Get.to(const UpgradeScreen());
-                          },
-                          child: Image.asset('assets/images/Group 5826.png'))
-                      : Stack(
-                          children: [
-                            Image.network(
-                              plansController.subscribePlansData.first.cardImg,
-                              height: 200,
-                              width: size.width,
-                              fit: BoxFit.fill,
-                            ),
-                            Positioned(
-                              left: 15,
-                              top: 130,
-                              child: profileController
-                                      .profileData.first.profilePicture.isEmpty
-                                  ? Image.asset(
-                                      'assets/icons/prfl.png',
-                                      height: 50,
-                                      width: 50,
-                                    )
-                                  : Container(
-                                      height: 55,
-                                      width: 55,
-                                      decoration: BoxDecoration(
-                                          color: Colors.blue,
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                profileController.profileData
-                                                    .first.profilePicture,
-                                              ))),
-                                    ),
-                            ),
-                            Positioned(
-                              top: 155,
-                              left: 80,
-                              child: Text(
-                                profileController.profileData.first.name,
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
-                              ),
-                            ),
-                          ],
-                        ),
-                  //
-                  ksizedbox10,
-                  plansController.subscribePlansData.isEmpty
-                      ? Text("")
-                      : Text(plansController
-                          .subscribePlansData.first.planDescription),
+                  // plansController.subscribePlansData.isEmpty
+                  //     ? InkWell(
+                  //         onTap: () {
+                  //           Get.to(const UpgradeScreen());
+                  //         },
+                  //         child: Image.asset('assets/images/Group 5826.png'))
+                  //     : Stack(
+                  //         children: [
+                  //           Image.network(
+                  //             plansController.subscribePlansData.first.cardImg,
+                  //             height: 200,
+                  //             width: size.width,
+                  //             fit: BoxFit.fill,
+                  //           ),
+                  //           Positioned(
+                  //             left: 15,
+                  //             top: 130,
+                  //             child: profileController
+                  //                     .profileData.first.profilePicture.isEmpty
+                  //                 ? Image.asset(
+                  //                     'assets/icons/prfl.png',
+                  //                     height: 50,
+                  //                     width: 50,
+                  //                   )
+                  //                 : Container(
+                  //                     height: 55,
+                  //                     width: 55,
+                  //                     decoration: BoxDecoration(
+                  //                         color: Colors.blue,
+                  //                         borderRadius:
+                  //                             BorderRadius.circular(30),
+                  //                         image: DecorationImage(
+                  //                             fit: BoxFit.cover,
+                  //                             image: NetworkImage(
+                  //                               profileController.profileData
+                  //                                   .first.profilePicture,
+                  //                             ))),
+                  //                   ),
+                  //           ),
+                  //           Positioned(
+                  //             top: 155,
+                  //             left: 80,
+                  //             child: Text(
+                  //               profileController.profileData.first.name,
+                  //               style: const TextStyle(
+                  //                   color: Colors.white,
+                  //                   fontWeight: FontWeight.bold,
+                  //                   fontSize: 15),
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  // //
+                  // ksizedbox10,
+                  // plansController.subscribePlansData.isEmpty
+                  //     ? Text("")
+                  //     : Text(plansController
+                  //         .subscribePlansData.first.planDescription),
                 ],
               );
             });

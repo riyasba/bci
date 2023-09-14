@@ -1,3 +1,4 @@
+import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/holiday_package_controller.dart';
 import 'package:flutter/material.dart';
@@ -50,13 +51,24 @@ class _AdditionalInfoWidgetState extends State<AdditionalInfoWidget> {
                           ),
                   ],
                 ),
-                if(holidayPackageController.getPackageDetailsData.first.packageoverview.isNotEmpty)
-                HtmlContentViewer(
-                            htmlContent: holidayPackageController.getPackageDetailsData.first.packageInclude,
-                            initialContentHeight:
-                                MediaQuery.of(context).size.height,
-                            initialContentWidth: MediaQuery.of(context).size.width,
-                          ),
+                const SizedBox(
+                  height: 20,
+                ),
+                      if(holidayPackageController.getPackageDetailsData.first.packageoverview.isNotEmpty)
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  for(int i = 0; i< holidayPackageController.getPackageDetailsData.first.includes.length;i++)
+                                  Row(
+                                    children: [
+                                      Icon(Icons.arrow_right_rounded),
+                                      Text(holidayPackageController.getPackageDetailsData.first.includes[i].value,style: primaryFont.copyWith(
+                                         fontWeight: FontWeight.w500
+                                      ),),
+                                    ],
+                                  )
+                                ],
+                              )
               //   ksizedbox20,
               //   Text('Travel Validity',
               //               style: TextStyle(

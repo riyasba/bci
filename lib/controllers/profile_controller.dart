@@ -14,6 +14,7 @@ import 'package:bci/services/network/profile_api_services/profile_api_services.d
 import 'package:bci/services/network/profile_api_services/profile_pic_update_api_services.dart';
 import 'package:bci/services/network/profile_api_services/profile_update_api_services.dart';
 import 'package:bci/services/network/profile_api_services/redeem_coupons_api_services.dart';
+import 'package:bci/services/network/profile_api_services/sub_coupons_redeem_api_services.dart';
 import 'package:bci/services/network/profile_api_services/update_official_address_api.dart';
 import 'package:bci/services/network/profile_api_services/user_redeem_coupon_api_service.dart';
 import 'package:bci/services/network/subscriptions_api_services/ease_buzz_payment_api_services.dart';
@@ -203,6 +204,9 @@ class ProfileController extends GetxController {
   //redeem coupon
   RedeemCouponApiServices redeemCouponApiServices = RedeemCouponApiServices();
 
+  SubRedeemCouponApiServices subRedeemCouponApiServices =
+      SubRedeemCouponApiServices();
+
   redeemCoupon(
       {required String couponcode,
       required String serviceId,
@@ -211,6 +215,27 @@ class ProfileController extends GetxController {
     dio.Response<dynamic> response =
         await redeemCouponApiServices.redeemCouponApiServices(
             couponcode: couponcode, serviceId: serviceId, vendorId: vendorId);
+    if (response.statusCode == 200) {
+      tempAmount = response.data["amount"].toString();
+      Get.rawSnackbar(
+          message: response.data["message"], backgroundColor: Colors.green);
+    } else if (response.statusCode == 400) {
+      Get.rawSnackbar(
+          message: response.data["error"], backgroundColor: Colors.red);
+    } else {
+      Get.rawSnackbar(
+          message: response.data["error"], backgroundColor: Colors.red);
+    }
+
+    return tempAmount;
+  }
+
+  redeemSubscriptionCoupon({required String couponcode}) async {
+    String tempAmount = "0";
+    dio.Response<dynamic> response =
+        await subRedeemCouponApiServices.subRedeemCouponApiServices(
+      couponcode: couponcode,
+    );
     if (response.statusCode == 200) {
       tempAmount = response.data["amount"].toString();
       Get.rawSnackbar(
@@ -540,9 +565,9 @@ class ProfileController extends GetxController {
     String? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      result =
-          await _isgpayuiPlugin.initiateISGPayUI(getArguments(tempAmount * 100)) ??
-              'Unknown platform version';
+      result = await _isgpayuiPlugin
+              .initiateISGPayUI(getArguments(tempAmount * 100)) ??
+          'Unknown platform version';
     } on PlatformException catch (e) {
       result = e.message;
     }
@@ -653,9 +678,9 @@ class ProfileController extends GetxController {
     String? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      result =
-          await _isgpayuiPlugin.initiateISGPayUI(getArguments(tempAmount * 100)) ??
-              'Unknown platform version';
+      result = await _isgpayuiPlugin
+              .initiateISGPayUI(getArguments(tempAmount * 100)) ??
+          'Unknown platform version';
     } on PlatformException catch (e) {
       result = e.message;
     }

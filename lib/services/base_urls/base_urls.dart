@@ -33,6 +33,10 @@ abstract class BaseApiService {
   final String getSliderURL =
       "https://www.portal.bcipvtltd.com/api/auth/get_slider";
 
+        //sliders Api
+  final String getAdsURL =
+      "https://www.portal.bcipvtltd.com/api/auth/get_ads";
+
   //Get plan list
   final String getPlanList =
       "https://www.portal.bcipvtltd.com/api/auth/get_plan_list";
@@ -72,6 +76,11 @@ abstract class BaseApiService {
   //coupons redeem api --//
   final String redeemCouponsApiUrl =
       "https://www.portal.bcipvtltd.com/api/auth/redeemCoupon";
+
+
+    //coupons redeem api --//
+  final String subRedeemCouponsApiUrl =
+      "https://www.portal.bcipvtltd.com/api/auth/subscriptionCoupon";
 
   //get booking list --//
   final String bookingListApiUrl =

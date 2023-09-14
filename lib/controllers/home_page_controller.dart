@@ -26,6 +26,7 @@ import 'package:bci/services/network/categorys_api_services/get_today_offers_lis
 import 'package:bci/services/network/categorys_api_services/search_service_list_api_services.dart';
 import 'package:bci/services/network/liquors_api_services/liquor_service_list.dart';
 import 'package:bci/services/network/liquors_api_services/liquor_vendor_list_api_service.dart';
+import 'package:bci/services/network/slider_api_services/get_ads_api_services.dart';
 import 'package:bci/services/network/slider_api_services/slider_product_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/add_subscription_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plan_details_api_services.dart';
@@ -53,8 +54,22 @@ class HomeController extends GetxController {
       AddSubscriptionApiServices();
 
   List<SliderPost> sliderList = [];
+  List<SliderPost> adsSliderList = [];
   List<PlansData> plansdataList = [];
   List<PlansDetailsModel> planDetailsList = [];
+
+  GetAdSliderApiServices getAdSliderApiServices = GetAdSliderApiServices();
+
+  getAdsSlider() async {
+    dio.Response<dynamic> response =
+        await getAdSliderApiServices.getAdsSlider();
+
+    if (response.statusCode == 200) {
+      SliderModel sliderModel = SliderModel.fromJson(response.data);
+      adsSliderList = sliderModel.posts;
+    }
+    update();
+  }
 
   getSlider() async {
     dio.Response<dynamic> response = await getSliderApiServices.getSlider();
@@ -513,7 +528,7 @@ class HomeController extends GetxController {
 
   //get slider product
   BannersApiService bannerapiservice = BannersApiService();
-   List<Post> bannerData = [];
+  List<Post> bannerData = [];
 
   banners({required String catogories}) async {
     dio.Response<dynamic> response =

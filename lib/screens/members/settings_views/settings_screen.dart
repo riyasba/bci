@@ -1,6 +1,7 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
+import 'package:bci/screens/members/settings_views/my_subcriptions_screen.dart';
 import 'package:bci/screens/members/settings_views/offers_screen.dart';
 import 'package:bci/screens/members/settings_views/our_partner_screen.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/My_account.dart';
@@ -60,7 +61,7 @@ class _SettingScreenState extends State<SettingScreen> {
           )),
       body: Padding(
         padding:
-            const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 20),
+            const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 0),
         child: ListView(
           children: [
             InkWell(
@@ -93,36 +94,36 @@ class _SettingScreenState extends State<SettingScreen> {
                 color: Colors.grey,
               ),
             ),
-            // InkWell(
-            //   onTap: () {
-            //     Get.to(const MySubcriptionScreen());
-            //   },
-            //   child:const Row(
-            //     children: [
-            //       Image(
-            //         image: AssetImage("assets/icons/additionalCoupons.png"),
-            //         width: 20,
-            //       ),
-            //       SizedBox(
-            //         width: 10,
-            //       ),
-            //       Text(
-            //         "My Subscriptions",
-            //         style: TextStyle(
-            //             fontSize: 20,
-            //             fontWeight: FontWeight.w500,
-            //             color: Color(0xff003366)),
-            //       )
-            //     ],
-            //   ),
-            // ),
-            // const Padding(
-            //   padding: EdgeInsets.only(top: 5, bottom: 10),
-            //   child: Divider(
-            //     thickness: 1,
-            //     color: Colors.grey,
-            //   ),
-            // ),
+            InkWell(
+              onTap: () {
+                Get.to(const MySubcriptionScreen());
+              },
+              child: const Row(
+                children: [
+                  Image(
+                    image: AssetImage("assets/icons/additionalCoupons.png"),
+                    width: 20,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "My Subscriptions",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff003366)),
+                  )
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 5, bottom: 10),
+              child: Divider(
+                thickness: 1,
+                color: Colors.grey,
+              ),
+            ),
             InkWell(
               onTap: () {
                 Get.to(const DashBoardScreenMenbers());
@@ -468,7 +469,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       borderRadius: BorderRadius.circular(5)),
                                   child: Center(
                                     child: Text(
-                                      "Yes,Logout",
+                                      "Yes, Logout",
                                       style: primaryTextStyle(color: kwhite),
                                     ),
                                   ),

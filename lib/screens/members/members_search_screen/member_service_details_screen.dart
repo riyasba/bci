@@ -132,14 +132,13 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                           widget.searchServicelist.title,
                           maxLines: 2,
                           style: TextStyle(
-                            
                               fontSize: 22.sp,
                               fontWeight: FontWeight.bold,
                               color: kblue),
                         ),
                 ),
                       Text(
-                       "₹${widget.searchServicelist.actualAmount}",
+                       "₹${widget.searchServicelist.saleAmount}",
                         style: TextStyle(
                             fontSize: 22.sp,
                             fontWeight: FontWeight.bold,

@@ -32,8 +32,8 @@ import '../services/network/categorys_api_services/filter_category_api_service.d
 class AuthController extends GetxController {
 //apis method call
   RxInt filterindex = 0.obs;
-  RxInt logoutindex=0.obs;
-  RxBool logoutbool= false.obs;
+  RxInt logoutindex = 0.obs;
+  RxBool logoutbool = false.obs;
   MerchantRegisterApiServices merchantRegisterApiServices =
       MerchantRegisterApiServices();
 
@@ -90,7 +90,9 @@ class AuthController extends GetxController {
     );
     isLoading(false);
     if (response.statusCode == 201) {
-      memReferralRegister(referralCode: referralCode);
+      print("User id ------>>${response.data["user"]["id"]}");
+      memReferralRegister(
+          referralCode: referralCode, userId: response.data["user"]["id"]);
       Get.to(OtpVerificationView(
         phoneNumber: memberRegisterModel.mobile,
         otp: response.data["user"]["otp"].toString(),
@@ -109,9 +111,10 @@ class AuthController extends GetxController {
   ReferralRegisterApiServices referralRegisterApiServices =
       ReferralRegisterApiServices();
 
-  memReferralRegister({required String referralCode}) async {
+  memReferralRegister(
+      {required String referralCode, required String userId}) async {
     dio.Response<dynamic> response = await referralRegisterApiServices
-        .referralRegister(referralCode: referralCode);
+        .referralRegister(referralCode: referralCode, userId: userId);
     if (response.data["success"] == true) {
     } else {
       // Get.rawSnackbar(
@@ -136,6 +139,13 @@ class AuthController extends GetxController {
         otp: response.data["otp"].toString(),
       ));
     } else if (response.statusCode == 404) {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            response.data["message"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
@@ -288,7 +298,7 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       List<OffersListModel> offerslistModel = List<OffersListModel>.from(
           response.data.map((x) => OffersListModel.fromJson(x)));
-          // offersListModelFromJson();
+      // offersListModelFromJson();
       offerslistdata = offerslistModel;
       update();
       Get.back();
@@ -318,7 +328,7 @@ class AuthController extends GetxController {
   logout() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString("auth_token", "null");
-    
+
     Get.offAll(const MemberLoginScreen());
   }
 
@@ -368,7 +378,8 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       TransactionHistoryModel transactionHistoryModel =
           TransactionHistoryModel.fromJson(response.data);
-      transactionHistorydata = transactionHistoryModel.transactionHistory.reversed.toList();
+      transactionHistorydata =
+          transactionHistoryModel.transactionHistory.reversed.toList();
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -396,7 +407,7 @@ class AuthController extends GetxController {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-           response.data["message"],
+            response.data["message"],
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }

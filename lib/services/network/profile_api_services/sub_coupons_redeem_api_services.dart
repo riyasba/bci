@@ -1,26 +1,33 @@
 import 'dart:io';
 import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ReferralRegisterApiServices extends BaseApiService {
-  Future referralRegister({
-    required String referralCode,
-    required String userId,
-  }) async {
+class SubRedeemCouponApiServices extends BaseApiService {
+  Future subRedeemCouponApiServices({required String couponcode}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
-      var response = await dio.post(generateReferralApiUrl,
+      final prefs = await SharedPreferences.getInstance();
+      String? authtoken = prefs.getString("auth_token");
+
+      var response = await dio.post(subRedeemCouponsApiUrl,
           options: Options(
               headers: {
                 'Accept': 'application/json',
+                'Authorization': 'Bearer $authtoken'
               },
               followRedirects: false,
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"referral_code": referralCode, "user_id": userId});
-      print("::::::::<Referral Register URL>::::::::status code::::::::::");
+          data: {
+            "coupon_code": couponcode,
+          });
+      print(
+          "::::::::<sub redeem coupon Api Services Api>::::::::status code::::::::::");
+      print(couponcode);
+      print(".........>>>>>>>>>>>>><<<<<<<<<<>>>>>>>>>>>>>...");
       print(response.statusCode);
       print(response.data);
       responseJson = response;
