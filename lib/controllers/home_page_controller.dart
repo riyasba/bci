@@ -39,6 +39,8 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import '../models/banner_model.dart';
+import '../models/get_gallery_model.dart';
+import '../services/network/get_gallery_apiservice.dart';
 import '../services/network/settings_api_services/banner_api_service.dart';
 
 class HomeController extends GetxController {
@@ -522,4 +524,27 @@ class HomeController extends GetxController {
     }
     update();
   }
+
+
+  //get GALLERY
+
+  GetGalleryApiServices getgalleryApiService = GetGalleryApiServices();
+  List<GalleryListModel> galleryListData = [];
+  getInstance({required String userid}) async {
+    dio.Response<dynamic> response =
+        await getgalleryApiService.getgalleryApiServices(userid: userid);
+    if (response.statusCode == 200) {
+    GetGalleryModel getGalleryList = GetGalleryModel.fromJson(response.data);
+      galleryListData = getGalleryList.data;
+    } else {
+      // Get.rawSnackbar(
+      //     backgroundColor: Colors.red,
+      //     messageText: Text(
+      //       response.data["message"],
+      //       style: primaryFont.copyWith(color: Colors.white),
+      //     ));
+    }
+    update();
+  }
+
 }
