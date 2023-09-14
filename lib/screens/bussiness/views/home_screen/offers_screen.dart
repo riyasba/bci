@@ -406,7 +406,7 @@ class _OffersScreenState extends State<OffersScreen> {
          
           ksizedbox10,
           Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20),
+            padding: const EdgeInsets.only(left: 20,right: 20,top: 2),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -416,7 +416,7 @@ class _OffersScreenState extends State<OffersScreen> {
                      Text("Starts At",
                          style: TextStyle(
                       color: kblue,
-                      fontSize: 18,
+                      fontSize: 15.9,
                       fontWeight: FontWeight.w400),),
                        const SizedBox(height: 5,),
                        ksizedbox10,
@@ -449,7 +449,7 @@ class _OffersScreenState extends State<OffersScreen> {
                            Text("Ends At",
                          style: TextStyle(
                       color: kblue,
-                      fontSize: 18,
+                      fontSize: 15.9,
                       fontWeight: FontWeight.w400),),
                       const SizedBox(height: 5,),
                       ksizedbox10,
