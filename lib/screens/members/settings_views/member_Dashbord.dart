@@ -44,7 +44,7 @@ class _DashBoardScreenMenbersState extends State<DashBoardScreenMenbers> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 25),
+                    padding: const EdgeInsets.only(left: 10),
                     child: IconButton(
                         onPressed: () {
                           Get.back();
@@ -54,13 +54,11 @@ class _DashBoardScreenMenbersState extends State<DashBoardScreenMenbers> {
                           color: kwhite,
                         )),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(right: 120),
-                    child: Text(
-                      'Dashboard',
-                      style: TextStyle(fontSize: 23, color: Colors.white),
-                    ),
+                  const Text(
+                    'Dashboard',
+                    style: TextStyle(fontSize: 23, color: Colors.white),
                   ),
+                  Container(width: 40,)
                 ],
               ),
             ),

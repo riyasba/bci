@@ -25,7 +25,7 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
       end: DateTime.now().add(Duration(days: 1)));
 
   final hotelController = Get.find<HotelBookingController>();
-  final Destinationcontrolr = TextEditingController();
+  final destinationcontrolr = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,24 +34,61 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
     final end = daterange.end;
     final diffrence = daterange.duration;
     return Scaffold(
-      backgroundColor: Color(0xFFF9F8FD),
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Text(
-              'Search Your Hotel',
-              style: TextStyle(
-                  fontSize: 25, color: kblue, fontWeight: FontWeight.w500),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Container(
+      backgroundColor: const Color(0xFFF9F8FD),
+        appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(280),
+            child: Column(children: [
+              Stack(
+                children:[ 
+                Container(
+                  height: size.height*0.39,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: Container(
+                      height: size.height*0.34,
+                      width: size.width,
+                      child: Image.asset('assets/icons/hotelbanner.png',
+                      height: size.height*0.34,
+                      width: size.width,
+                      fit: BoxFit.fill,)),
+                  ),
+                ),
+                  InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 25,
+                      width: 25,
+                      decoration: BoxDecoration(
+                        color: kOrange,
+                        borderRadius: BorderRadius.circular(7)
+                      ),
+                      child: Center(
+                        child: Icon(Icons.arrow_back_ios_new,color: kwhite,size: 16,))),
+                        kwidth10,
+                        Text(
+                  'Find your hotel',
+                  style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w700,color: kwhite),
+                ),
+                  ],
+                ),
+              ))),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Padding(
+                 padding: const EdgeInsets.only(top: 10,left: 10,right: 10,),
+                 child: Container(
               decoration: BoxDecoration(
-                //  color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
               ),
               height: size.height * 0.06,
               width: size.width * 0.2,
@@ -65,10 +102,12 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                           .hotelCityList(searchCity: value.trim());
                     }
                   },
-                  controller: Destinationcontrolr,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Enter Destination'),
+                  controller: destinationcontrolr,
+                  decoration:const InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                      hintText: 'Search for hotels'),
                 ),
                 suggestionsCallback: (String pattern) async {
                   return hotelController.getHotelCityList
@@ -87,7 +126,7 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                 },
                 onSuggestionSelected: (SearchCityListModel citymodel) {
                   print("destination selected");
-                  Destinationcontrolr.text = citymodel.destination;
+                  destinationcontrolr.text = citymodel.destination;
                   //    hotelController.toCity(citymodel.cityName);
                   hotelController.hotelSearchKey(citymodel.cityid);
                   hotelController.hotelSearchKeyCode(citymodel.countrycode);
@@ -98,10 +137,14 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                 },
               ),
             ),
-          ),
-
-          ksizedbox30, //  Image.asset('assets/images/Group 5823(1).png',
-          //     height: 500, fit: BoxFit.cover),
+                           ),
+              ),
+              ]),
+            ])),
+      body: ListView(
+        physics:const BouncingScrollPhysics(),
+        children: [
+          ksizedbox10,
           GestureDetector(
             onTap: pickDateRange,
             child: Row(
@@ -110,14 +153,8 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                 Container(
                   height: 50,
                   width: 120,
-                  decoration: BoxDecoration(boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ], 
+                  decoration: BoxDecoration(
+                    border: Border.all(color: kblue),
                       color: kwhite, borderRadius: BorderRadius.circular(16)),
                   child: Center(
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -133,20 +170,15 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                     ),
                   ),
                 ),
-                Image.asset('assets/images/Repeat Grid 3.png'),
+                Icon(Icons.arrow_forward, color: kblue,),
                 Column(
                   children: [
                     Container(
                       height: 50,
                       width: 120,
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ], color: kwhite, borderRadius: BorderRadius.circular(16)),
+                      decoration: BoxDecoration(
+                       border: Border.all(color: kblue),
+                      color: kwhite, borderRadius: BorderRadius.circular(16)),
                       child: Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -247,58 +279,6 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                     ],
                   ),
                   kwidth10,
-                  // Column(
-                  //   children: [
-                  //     Text(
-                  //       'Child',
-                  //       style: TextStyle(
-                  //           fontSize: 20.sp,
-                  //           color: kblue,
-                  //           fontWeight: FontWeight.w500),
-                  //     ),
-                  //     ksizedbox10,
-                  //     Container(
-                  //       height: 25,
-                  //       width: 75,
-                  //       decoration: BoxDecoration(
-                  //         border: Border.all(),
-                  //       ),
-                  //       child: Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //         children: [
-                  //           InkWell(
-                  //             onTap: () {
-                  //               hotelController.child--;
-                  //             },
-                  //             child: const Icon(
-                  //               Icons.remove,
-                  //               size: 20,
-                  //             ),
-                  //           ),
-                  //           Container(
-                  //             height: 25,
-                  //             width: 25,
-                  //             color: Colors.orange,
-                  //             child: Center(
-                  //               child: Text(
-                  //                 hotelController.child.value.toString(),
-                  //                 style: const TextStyle(color: Colors.white),
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           InkWell(
-                  //               onTap: () {
-                  //                 hotelController.child++;
-                  //               },
-                  //               child: const Icon(
-                  //                 Icons.add,
-                  //                 size: 20,
-                  //               )),
-                  //         ],
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
                   kwidth10,
                   Column(
                     children: [
@@ -356,27 +336,6 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
               ),
             ),
           ),
-
-          // Padding(
-          //   padding: const EdgeInsets.all(10.0),
-          //   child: Row(
-          //     children: [
-          //       Text(
-          //         'Rooms',
-          //         style: TextStyle(
-          //             fontSize: 25, color: kblue, fontWeight: FontWeight.w500),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          // Container(
-          //   width: 100,
-          //   child: Dropdown_hotel(
-          //     options: ['AC', 'Non AC'],
-          //     label: 'Room Choose Ac or Non Ac',
-          //   ),
-          // ),
-          ksizedbox40,
           ksizedbox40,
           Obx(
             () => InkWell(
@@ -385,7 +344,7 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                   bookingDate: DateFormat('dd/MM/yyyy').format(start),
                   noOfDays: diffrence.inDays.toString(),
                   noOfPeople: hotelController.adult.value.toString(),
-                  place: Destinationcontrolr.text
+                  place: destinationcontrolr.text
                 );
                 hotelController.searchHotel(
                   child: hotelController.child.value,
@@ -440,7 +399,7 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                             ],
                           ),
                         ),
-                        child: Text(
+                        child:const Text(
                           'Search',
                           style: TextStyle(
                               fontSize: 17,
@@ -454,23 +413,7 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
           ksizedbox40
         ],
       ),
-      appBar: AppBar(
-        backgroundColor: Color(0xFFF9F8FD),
-        elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            Get.back();
-          },
-          child: Image.asset(
-            'assets/images/Icon awesome-arrow-right.png',
-          ),
-        ),
-        // title: Text(
-        //   'Hotel Booking',
-        //   style: TextStyle(
-        //       fontSize: 27, fontWeight: FontWeight.w500, color: kblue),
-        // ),
-      ),
+      
     );
   }
 

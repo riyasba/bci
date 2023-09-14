@@ -63,7 +63,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250),
+          preferredSize:const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -93,18 +93,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           color: Colors.white),
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(const SupportScreen());
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Container(
-                          height: 30,
-                          width: 30,
-                          child: Image.asset('assets/images/helps.png')),
-                    ),
-                  )
+                  Container(width: 20,)
+                  // InkWell(
+                  //   onTap: () {
+                  //     Get.to(const SupportScreen());
+                  //   },
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.symmetric(horizontal: 10),
+                  //     child: Container(
+                  //         height: 30,
+                  //         width: 30,
+                  //         child: Image.asset('assets/images/helps.png')),
+                  //   ),
+                  // )
                   // Padding(
                   //   padding: const EdgeInsets.only(right: 20),
                   //   child: Image.asset('assets/images/helps.png'),

@@ -61,41 +61,83 @@ class _HolidayHomeState extends State<HolidayHome> {
       return Scaffold(
         backgroundColor: const Color(0xFFF9F8FD),
         appBar: PreferredSize(
-        
-            preferredSize: const Size.fromHeight(300),
-            
+            preferredSize: const Size.fromHeight(280),
             child: Column(children: [
-             
-              Stack(children:[ 
-                Image.asset('assets/images/Group 6977 (4).png'),
+              Stack(
+                children:[ 
+                Container(
+                  height: size.height*0.39,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: Container(
+                      height: size.height*0.34,
+                      width: size.width,
+                      child: Image.asset('assets/images/Group 6977 (4).png',
+                      height: size.height*0.34,
+                      width: size.width,
+                      fit: BoxFit.fill,)),
+                  ),
+                ),
                   InkWell(
             onTap: () {
               Get.back();
             },
-            child: SafeArea(child: Icon(Icons.arrow_back_ios_new,color: kwhite,))),
-              ]),ksizedbox20,
-             Container(
-               height: 55,
-               child: TextFormField(
-                   controller: searchController,
-                   decoration: InputDecoration(
-                     hintText: 'Search',
-                     fillColor: const Color(0xFFFFFFFF),
-                     focusColor: Colors.grey[200],
-                     isDense: true,
-                     filled: true,
-                     border: OutlineInputBorder(
-                       borderSide: BorderSide(
-                           width: 0.5,
-                           color: Colors.grey.withOpacity(0.2)),
-                       borderRadius: BorderRadius.circular(19.0),
-                     ),
-                     prefixIcon: const Icon(
-                       Icons.search,
-                       color: Colors.grey,
-                     ),
-                   )),
-             ),
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 25,
+                      width: 25,
+                      decoration: BoxDecoration(
+                        color: kOrange,
+                        borderRadius: BorderRadius.circular(7)
+                      ),
+                      child: Center(
+                        child: Icon(Icons.arrow_back_ios_new,color: kwhite,size: 16,))),
+                        kwidth10,
+                        Text(
+                  'Plan your trip with us.',
+                  style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w700,color: kwhite),
+                ),
+                  ],
+                ),
+              ))),
+
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Padding(
+                 padding: const EdgeInsets.only(top: 10,left: 10,right: 10,),
+                 child: Container(
+                   height: 50,
+                   width: size.width,
+                   child: TextFormField(
+                       controller: searchController,
+                       decoration: InputDecoration(
+                         hintText: 'Search',
+                         fillColor: const Color(0xFFFFFFFF),
+                         focusColor: Colors.grey[200],
+                         isDense: true,
+                         filled: true,
+                         border: OutlineInputBorder(
+                           borderSide: BorderSide(
+                               width: 0.5,
+                               color: Colors.grey.withOpacity(0.2)),
+                           borderRadius: BorderRadius.circular(10.0),
+                         ),
+                         prefixIcon: const Icon(
+                           Icons.search,
+                           color: Colors.grey,
+                         ),
+                       )),
+                 ),
+                           ),
+              ),
+              ]),
+             
               // AppBar(
               //   backgroundColor:const Color(0xFFF9F8FD),
               //   elevation: 0,
@@ -121,7 +163,7 @@ class _HolidayHomeState extends State<HolidayHome> {
                   'Categories',
                   style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
                 ),
-                ksizedbox20,
+                ksizedbox10,
                 Container(
                   height: 40,
                   child: ListView.builder(
@@ -179,14 +221,14 @@ class _HolidayHomeState extends State<HolidayHome> {
                         );
                       }),
                 ),
-                ksizedbox20,
+                ksizedbox10,
                 Text(
                   'Populars',
                   style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
                 ),
-                ksizedbox20,
+                ksizedbox10,
                 Container(
-                  height: 260,
+                  height: 230,
                   child: holidayPackageController.packageListData.isEmpty
                       ? const Center(
                           child: Text("No Data Found"),
@@ -207,7 +249,7 @@ class _HolidayHomeState extends State<HolidayHome> {
                                   ));
                                 },
                                 child: Container(
-                                  height: 250.h,
+                                  height: 230.h,
                                   width: 165.w,
                                   decoration: BoxDecoration(
                                       color: kwhite,
@@ -252,20 +294,20 @@ class _HolidayHomeState extends State<HolidayHome> {
                                           ],
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          children: [
-                                            Image.asset(
-                                                'assets/images/location-svgrepo-com (1).png'),
-                                            kwidth5,
-                                            //             Text(
-                                            //   holidayPackageController.packageListData[index].location,
-                                            //   style: TextStyle(fontSize: 13.sp, color: kgrey),
-                                            // ),
-                                          ],
-                                        ),
-                                      ),
+                                      // Padding(
+                                      //   padding: const EdgeInsets.all(8.0),
+                                      //   child: Row(
+                                      //     children: [
+                                      //       Image.asset(
+                                      //           'assets/images/location-svgrepo-com (1).png'),
+                                      //       kwidth5,
+                                      //       //             Text(
+                                      //       //   holidayPackageController.packageListData[index].location,
+                                      //       //   style: TextStyle(fontSize: 13.sp, color: kgrey),
+                                      //       // ),
+                                      //     ],
+                                      //   ),
+                                      // ),
                                     ],
                                   ),
                                 ),
@@ -273,12 +315,12 @@ class _HolidayHomeState extends State<HolidayHome> {
                             );
                           }),
                 ),
-                ksizedbox20,
+                ksizedbox10,
                 Text(
                   'Recommended',
                   style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700),
                 ),
-                ksizedbox20,
+                ksizedbox10,
                 Container(
                   height: 80,
                   child: ListView.builder(
@@ -336,17 +378,17 @@ class _HolidayHomeState extends State<HolidayHome> {
                                               fontWeight: FontWeight.w700),
                                         ),
                                       ),
-                                      Row(
-                                        children: [
-                                          Image.asset(
-                                              'assets/images/location-svgrepo-com (1).png'),
-                                          kwidth5,
-                                          // Text(
-                                          // holidayPackageController.recomendedListData[index].location,
-                                          // style: TextStyle(fontSize: 13.sp, color: kgrey),
-                                          // ),
-                                        ],
-                                      ),
+                                      // Row(
+                                      //   children: [
+                                      //     Image.asset(
+                                      //         'assets/images/location-svgrepo-com (1).png'),
+                                      //     kwidth5,
+                                      //     // Text(
+                                      //     // holidayPackageController.recomendedListData[index].location,
+                                      //     // style: TextStyle(fontSize: 13.sp, color: kgrey),
+                                      //     // ),
+                                      //   ],
+                                      // ),
                                     ],
                                   ),
                                 ),

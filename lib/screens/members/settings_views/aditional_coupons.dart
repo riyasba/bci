@@ -37,14 +37,17 @@ class _MemberCouponScreenState extends State<MemberCouponScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          InkWell(
-                              onTap: () {
-                                Get.back();
-                              },
-                              child: Icon(
-                                Icons.arrow_back_ios,
-                                color: kwhite,
-                              )),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 7),
+                            child: InkWell(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: Icon(
+                                  Icons.arrow_back_ios,
+                                  color: kwhite,
+                                )),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(right: 20),
                             child: Text(
@@ -55,12 +58,13 @@ class _MemberCouponScreenState extends State<MemberCouponScreen> {
                                   color: kwhite),
                             ),
                           ),
-                          InkWell(
-                              onTap: () {
-                                Get.to(const ContactAdmin());
-                              },
-                              child: Image.asset(
-                                  'assets/images/3669173_help_ic_icon.png'))
+                          Container()
+                          // InkWell(
+                          //     onTap: () {
+                          //       Get.to(const ContactAdmin());
+                          //     },
+                          //     child: Image.asset(
+                          //         'assets/images/3669173_help_ic_icon.png'))
                         ],
                       ),
                     ),

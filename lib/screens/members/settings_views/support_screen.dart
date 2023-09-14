@@ -55,14 +55,17 @@ class _SupportScreenState extends State<SupportScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: const Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white,
-                        )),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 3),
+                      child: InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: const Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.white,
+                          )),
+                    ),
                     const Padding(
                       padding: EdgeInsets.only(right: 20),
                       child: Text(
@@ -73,7 +76,7 @@ class _SupportScreenState extends State<SupportScreen> {
                             color: Color(0xffF9F8FD)),
                       ),
                     ),
-                    Text("")
+                    Container()
                   ],
                 ),
               ),

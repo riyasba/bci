@@ -41,15 +41,18 @@ class _OfferScreenListViewState extends State<OfferScreenListView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Container(
-                            height: 30,
-                            width: 30,
-                            child: Image.asset(
-                                'assets/images/chevron-left (2).png'))),
+                    Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: kblue,
+              ),
+            ),
+          ),
                     const Padding(
                       padding: EdgeInsets.only(right: 20),
                       child: Text(
@@ -60,12 +63,13 @@ class _OfferScreenListViewState extends State<OfferScreenListView> {
                             color: Colors.white),
                       ),
                     ),
-                    InkWell(
-                        onTap: () {
-                          Get.to(const ContactAdmin());
-                        },
-                        child: Image.asset(
-                            'assets/images/3669173_help_ic_icon.png'))
+                    Container()
+                    // InkWell(
+                    //     onTap: () {
+                    //       Get.to(const ContactAdmin());
+                    //     },
+                    //     child: Image.asset(
+                    //         'assets/images/3669173_help_ic_icon.png'))
                   ],
                 ),
               ),

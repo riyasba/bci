@@ -32,13 +32,16 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back,
-              color: kblue,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: kblue,
+              ),
             ),
           ),
           titleSpacing: 10,

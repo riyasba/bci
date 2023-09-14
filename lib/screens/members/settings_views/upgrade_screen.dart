@@ -42,14 +42,17 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: const Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white,
-                        )),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 3),
+                      child: InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: const Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.white,
+                          )),
+                    ),
                     const Padding(
                       padding: EdgeInsets.only(right: 20),
                       child: Text(
@@ -60,18 +63,19 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                             color: Color(0xffF9F8FD)),
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(SupportScreen());
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Container(
-                            height: 30,
-                            width: 30,
-                            child: Image.asset('assets/images/helps.png')),
-                      ),
-                    )
+                    Container()
+                    // InkWell(
+                    //   onTap: () {
+                    //     Get.to(SupportScreen());
+                    //   },
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.only(right: 20),
+                    //     child: Container(
+                    //         height: 30,
+                    //         width: 30,
+                    //         child: Image.asset('assets/images/helps.png')),
+                    //   ),
+                    // )
                   ],
                 ),
               ),

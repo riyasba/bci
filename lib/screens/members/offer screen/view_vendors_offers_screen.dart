@@ -102,15 +102,18 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        InkWell(
-                            onTap: () {
-                              Get.back();
-                            },
-                            child: Container(
-                                height: 30,
-                                width: 30,
-                                child: Image.asset(
-                                    'assets/images/chevron-left (2).png'))),
+                        Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: kblue,
+              ),
+            ),
+          ),
                         Padding(
                           padding: const EdgeInsets.only(right: 0),
                           child: Text(
@@ -123,7 +126,7 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
                         ),
                         IconButton(
                             onPressed: () {
-                              Get.to(NotificationScreen());
+                              Get.to(const NotificationScreen());
                             },
                             icon: Icon(
                               Icons.notifications,
@@ -138,8 +141,21 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
           )),
       body: GetBuilder<HomeController>(builder: (_) {
         return homeController.vendorServiceListData.isEmpty
-            ? const Center(
-                child: Text("No Data Found"),
+            ?  Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Image(image: AssetImage("assets/icons/product (1).png")),
+                    ksizedbox20,
+                    Text("No Offers Found",
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      color: kblue,
+                      fontWeight: FontWeight.bold
+                    ),
+                    ),
+                  ],
+                ),
               )
             : GridView.builder(
                 physics: const BouncingScrollPhysics(),

@@ -1,7 +1,11 @@
 import 'package:bci/controllers/hotel_booking_controller.dart';
+import 'package:bci/models/hotel_booking_models/search_city_list_model.dart';
+import 'package:bci/models/hotel_booking_models/search_hotel_list_model.dart';
 import 'package:bci/screens/members/hottel/wigets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -23,28 +27,107 @@ class HotelListScreen extends StatefulWidget {
 class _HotelListScreenState extends State<HotelListScreen> {
   final hotelBookingController = Get.find<HotelBookingController>();
   final homeController = Get.find<HomeController>();
+  final hotelController = Get.find<HotelBookingController>();
+  final destinationcontrolr = TextEditingController();
+
+  List<SearchHotelData> _searchResult = [];
+
+    
+  onSearchTextChanged(String text) async {
+    _searchResult.clear();
+    if (text.isEmpty) {
+      setState(() {});
+      return;
+    }
+
+    hotelBookingController.searchHotelData.forEach((searchData) {
+      if (searchData.hotelName.contains(text) || searchData.hotelAddress.contains(text)) {
+        _searchResult.add(searchData);
+      }
+    });
+
+    setState(() {});
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: kwhite,
-        leading: InkWell(
+      backgroundColor: const Color(0xFFF9F8FD),
+        appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(280),
+            child: Column(children: [
+              Stack(
+                children:[ 
+                Container(
+                  height: size.height*0.39,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: Container(
+                      height: size.height*0.34,
+                      width: size.width,
+                      child: Image.asset('assets/icons/hotelbanner.png',
+                      height: size.height*0.34,
+                      width: size.width,
+                      fit: BoxFit.fill,)),
+                  ),
+                ),
+                  InkWell(
             onTap: () {
               Get.back();
             },
-            child: Image.asset('assets/images/Group 5814.png')),
-        // bottom: PreferredSize(
-        //   preferredSize: Size.fromHeight(50.0),
-        //   child: Stack(
-        //     children: [
-        //       // Image.asset(homeController.bannerData.first.image),
-        //       // Positioned(top: -5, child: search())
-        //     ],
-        //   ),
-        // ),
-      ),
-      backgroundColor: kwhite,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 25,
+                      width: 25,
+                      decoration: BoxDecoration(
+                        color: kOrange,
+                        borderRadius: BorderRadius.circular(7)
+                      ),
+                      child: Center(
+                        child: Icon(Icons.arrow_back_ios_new,color: kwhite,size: 16,))),
+                        kwidth10,
+                        Text(
+                  'Find your hotel',
+                  style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w700,color: kwhite),
+                ),
+                  ],
+                ),
+              ))),
+
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Padding(
+                 padding: const EdgeInsets.only(top: 10,left: 10,right: 10,),
+                 child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              height: size.height * 0.06,
+              width: size.width * 0.2,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Search for hotels",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  )
+                ),
+              )
+            ),
+                           ),
+              ),
+              ]),
+            ])),
       body: ListView.builder(
         itemCount: hotelBookingController.searchHotelData.length,
         itemBuilder: (context, index) {
@@ -163,7 +246,7 @@ class _HotelListScreenState extends State<HotelListScreen> {
                                 style: TextStyle(
                                     color: Color(0xFFD1D1D1),
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 13),
+                                    fontSize: 12),
                               ),
                             )),
                       )),

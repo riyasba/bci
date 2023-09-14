@@ -43,14 +43,17 @@ class _OurPartnerScreenState extends State<OurPartnerScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: const Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white,
-                        )),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 3),
+                      child: InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: const Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.white,
+                          )),
+                    ),
                     const Padding(
                       padding: EdgeInsets.only(right: 20),
                       child: Text(
@@ -61,7 +64,8 @@ class _OurPartnerScreenState extends State<OurPartnerScreen> {
                             color: Color(0xffF9F8FD)),
                       ),
                     ),
-                    Image.asset('assets/images/helps.png')
+                    Container()
+                   // Image.asset('assets/images/helps.png')
                   ],
                 ),
               ),

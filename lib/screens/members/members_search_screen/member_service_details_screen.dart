@@ -86,13 +86,16 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            Get.back();
-          },
-          child: Icon(
-            Icons.arrow_back,
-            color: kblue,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: kblue,
+            ),
           ),
         ),
         titleSpacing: 10,
@@ -107,7 +110,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
           Padding(
             padding: const EdgeInsets.only(left: 10,right: 10),
             child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderRadius:const BorderRadius.all(Radius.circular(10)),
               child: Image.network(
                 widget.searchServicelist.image,
                 height: 350,
@@ -190,13 +193,13 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                             onTap: (){
                               _selectDate(context);
                             },
-                            child: Icon(Icons.date_range)),
+                            child:const Icon(Icons.date_range)),
                              Padding(
                                padding: const EdgeInsets.only(left: 4,),
                                child: Text(_dateController.text),
                              ),
-                             Padding(
-                               padding: const EdgeInsets.only(left: 2,right: 2),
+                             const Padding(
+                               padding: EdgeInsets.only(left: 2,right: 2),
                                child: Text('-'),
                              ),
                                Text(_timeController.text),

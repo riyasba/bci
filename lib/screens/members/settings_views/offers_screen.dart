@@ -64,15 +64,16 @@ class _OfferScreenState extends State<OfferScreen> {
                             color: Color(0xffF9F8FD)),
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(SupportScreen());
-                      },
-                      child: Container(
-                          height: 30,
-                          width: 30,
-                          child: Image.asset('assets/images/helps.png')),
-                    )
+                    Container()
+                    // InkWell(
+                    //   onTap: () {
+                    //     Get.to(SupportScreen());
+                    //   },
+                    //   child: Container(
+                    //       height: 30,
+                    //       width: 30,
+                    //       child: Image.asset('assets/images/helps.png')),
+                    // )
                   ],
                 ),
               ),

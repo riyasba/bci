@@ -53,12 +53,12 @@ class _MembersBookingState extends State<MembersBooking> {
                                   color: kwhite),
                             ),
                           ),
-                          InkWell(
-                              onTap: () {
-                                Get.to(const ContactAdmin());
-                              },
-                              child: Image.asset(
-                                  'assets/images/3669173_help_ic_icon.png'))
+                          // InkWell(
+                          //     onTap: () {
+                          //       Get.to(const ContactAdmin());
+                          //     },
+                          //     child: Image.asset(
+                          //         'assets/images/3669173_help_ic_icon.png'))
                         ],
                       ),
                     ),
