@@ -74,13 +74,13 @@ class _BusinessOtpvarificationState extends State<BusinessOtpvarification> {
                   color: Colors.black,
                 ),
               ),
-              Text(
-                'Otp is ${widget.otp}',
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.black,
-                ),
-              ),
+              // Text(
+              //   'Otp is ${widget.otp}',
+              //   style: const TextStyle(
+              //     fontSize: 12,
+              //     color: Colors.black,
+              //   ),
+              // ),
             ],
           ),
           ksizedbox20,

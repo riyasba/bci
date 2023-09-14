@@ -56,14 +56,14 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                         //   decoration: TextDecoration.underline,
                         color: kblue),
                   ),
-                  Text(
-                    'OTP is ${widget.otp}',
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        //   decoration: TextDecoration.underline,
-                        color: kblue),
-                  ),
+                  // Text(
+                  //   'OTP is ${widget.otp}',
+                  //   style: TextStyle(
+                  //       fontSize: 12,
+                  //       fontWeight: FontWeight.w400,
+                  //       //   decoration: TextDecoration.underline,
+                  //       color: kblue),
+                  // ),
                 ],
               ),
             ],
