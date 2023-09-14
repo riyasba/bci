@@ -29,7 +29,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:isgpayui_plugin/isgpayui_plugin.dart';
+// import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
@@ -302,15 +302,15 @@ class FlightsController extends GetxController {
   }
 
   // String responseData = "Nothing";
-  final _isgpayuiPlugin = IsgpayuiPlugin();
+  // final _isgpayuiPlugin = IsgpayuiPlugin();
 
   void payForFlight(
       {required double amount, required BookingModel bookingModel}) async {
     String? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      result =
-          await _isgpayuiPlugin.initiateISGPayUI(getArguments(amount * 100)) ??
+      // result =
+      //     await _isgpayuiPlugin.initiateISGPayUI(getArguments(amount * 100)) ??
               'Unknown platform version';
     } on PlatformException catch (e) {
       result = e.message;

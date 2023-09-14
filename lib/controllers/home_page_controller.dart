@@ -37,7 +37,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:isgpayui_plugin/isgpayui_plugin.dart';
+// import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import '../models/banner_model.dart';
 import '../services/network/settings_api_services/banner_api_service.dart';
 
@@ -453,14 +453,14 @@ class HomeController extends GetxController {
   }
 
   // String responseData = "Nothing";
-  final _isgpayuiPlugin = IsgpayuiPlugin();
+  // final _isgpayuiPlugin = IsgpayuiPlugin();
 
   void startPlugin() async {
     String? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      result = await _isgpayuiPlugin.initiateISGPayUI(getArguments(100)) ??
-          'Unknown platform version';
+      // result = await _isgpayuiPlugin.initiateISGPayUI(getArguments(100)) ??
+      //     'Unknown platform version';
     } on PlatformException catch (e) {
       result = e.message;
     }
