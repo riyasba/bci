@@ -157,7 +157,7 @@ class VendorListModelData {
   factory VendorListModelData.fromJson(Map<String, dynamic> json) => VendorListModelData(
         id: json["id"],
         roleId: json["role_id"],
-        userId: json["user_id"],
+        userId: json["user_id"] ?? "",
         name: json["name"]??"",
         email: json["email"]??"",
         fcmToken: json["fcm_token"]??"",
@@ -176,7 +176,7 @@ class VendorListModelData {
         gstNo: json["gst_no"],
         adharProof: json["adhar_proof"]??"",
         panProof: json["pan_proof"]??"",
-        profilePicture: json["profile_picture"]??"",
+        profilePicture: json["profile_picture"],
         clientSecret: json["client_secret"],
         clientId: json["client_id"],
         keyName: json["Key_name"],

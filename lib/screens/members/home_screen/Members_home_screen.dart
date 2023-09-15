@@ -40,6 +40,7 @@ class Home_screen1 extends StatefulWidget {
 
 class _Home_screen1State extends State<Home_screen1> {
   CarouselController sliderController = CarouselController();
+  CarouselController sliderController2 = CarouselController();
   final profileController = Get.find<ProfileController>();
   final homeController = Get.find<HomeController>();
   final flightController = Get.find<FlightsController>();
@@ -62,6 +63,7 @@ class _Home_screen1State extends State<Home_screen1> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       profileController.getProfile();
       homeController.getSlider();
+      homeController.getAdsSlider();
       homeController.todayOffers();
       homeController.sliderProduct();
     });
@@ -124,19 +126,19 @@ class _Home_screen1State extends State<Home_screen1> {
               height: 150,
               color: kblue,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 22, left: 15, right: 8,top: 2),
+                padding: const EdgeInsets.only(
+                    bottom: 22, left: 15, right: 8, top: 2),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      height: 53,
-                      width: 53,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: kwhite
-                      ),
-                      child: Image.asset('assets/images/bcilogo.png',
-                      )),
+                        height: 53,
+                        width: 53,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: kwhite),
+                        child: Image.asset(
+                          'assets/images/bcilogo.png',
+                        )),
                     GetBuilder<ProfileController>(
                       builder: (_) {
                         return profileController.profileData.isEmpty
@@ -150,41 +152,49 @@ class _Home_screen1State extends State<Home_screen1> {
                               );
                       },
                     ),
-                    GetBuilder<HomeController>(
-                      builder: (_) {
-                        return Stack(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                Get.to(
-                                  const NotificationScreen(),
-                                );
-                              },
-                              icon: Icon(
-                                Icons.notifications,
-                                color: kwhite,
-                              ),
+                    GetBuilder<HomeController>(builder: (_) {
+                      return Stack(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              Get.to(
+                                const NotificationScreen(),
+                              );
+                            },
+                            icon: Icon(
+                              Icons.notifications,
+                              color: kwhite,
                             ),
-                            Positioned(
-                              left: 22,
-                              top: 10,
-                              child: Container(
-                                height: 16,
-                                width: 16,
-                                decoration: BoxDecoration(
+                          ),
+                          Positioned(
+                            left: 22,
+                            top: 10,
+                            child: homeController.countData != null && homeController.countData!.totalCount
+                                > 0? Container(
+                              height: 16,
+                              width: 16,
+                              decoration: BoxDecoration(
                                   color: Colors.red,
-                                  borderRadius: BorderRadius.circular(10)
-                                ),
-                                child:homeController.countData!.totalCount.toString().isEmpty ? const Text("") : Center(
-                                  child:homeController.countData!.totalCount > 9 ? Text("${homeController.countData!.totalCount.toString()}+") : Text(homeController.countData!.totalCount.toString(),
-                                  style: TextStyle(fontSize: 10,color: kwhite),),
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      }
-                    ),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Center(
+                                      child:
+                                          homeController.countData!.totalCount >
+                                                  9
+                                              ? const Text("9+")
+                                              : Text(
+                                                  homeController
+                                                      .countData!.totalCount
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontSize: 10,
+                                                      color: kwhite),
+                                                ),
+                                    ),
+                            ) : Container(),
+                          ),
+                        ],
+                      );
+                    }),
                   ],
                 ),
               ),
@@ -341,9 +351,10 @@ class _Home_screen1State extends State<Home_screen1> {
                       ),
                     ],
                   ),
-                  
+
                   Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10,top: 15),
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10, top: 15),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -466,7 +477,9 @@ class _Home_screen1State extends State<Home_screen1> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 15,),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   // Padding(
                   //   padding: const EdgeInsets.only(left: 10, right: 10),
                   //   child: Row(
@@ -545,7 +558,7 @@ class _Home_screen1State extends State<Home_screen1> {
 
                   // ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 10,right: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Row(
                       children: [
                         Expanded(
@@ -575,8 +588,7 @@ class _Home_screen1State extends State<Home_screen1> {
                                       style: primaryFont.copyWith(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.white
-                                          ),
+                                          color: Colors.white),
                                     )
                                   ],
                                 ),
@@ -599,24 +611,29 @@ class _Home_screen1State extends State<Home_screen1> {
                                   borderRadius: BorderRadius.circular(5)),
                               alignment: Alignment.center,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children:[
-                                Text('BCI Brochure\nDownload',
-                                 style: primaryFont.copyWith(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      'BCI Brochure\nDownload',
+                                      style: primaryFont.copyWith(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.white
-                                          ),),
-                                 Image.asset("assets/icons/pdf_img.png",
-                                 )]
-                                 ),
+                                          color: Colors.white),
+                                    ),
+                                    Image.asset(
+                                      "assets/icons/pdf_img.png",
+                                    )
+                                  ]),
                             ),
                           ),
                         )
                       ],
                     ),
                   ),
-                  const SizedBox(height: 15,),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   // Padding(
                   //   padding:
                   //       const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
@@ -661,12 +678,12 @@ class _Home_screen1State extends State<Home_screen1> {
                   //     ),
                   //   ),
                   // ),
-                  // if (homeController.sliderList.isNotEmpty)
+                  if (homeController.adsSliderList.isNotEmpty)
                   CarouselSlider(
-                      carouselController: sliderController,
+                      carouselController: sliderController2,
                       items: [
                         for (int i = 0;
-                            i < homeController.sliderList.length;
+                            i < homeController.adsSliderList.length;
                             i++)
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
@@ -683,7 +700,7 @@ class _Home_screen1State extends State<Home_screen1> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10),
                               child: Image.network(
-                                  homeController.sliderList[i].image),
+                                  homeController.adsSliderList[i].image),
                             ),
                           ),
                         // Container(
@@ -713,7 +730,7 @@ class _Home_screen1State extends State<Home_screen1> {
                         enlargeFactor: 0.3,
                         scrollDirection: Axis.horizontal,
                       )),
-                  if (homeController.sliderList.isNotEmpty)
+                  // if (homeController.adsSliderList.isNotEmpty)
                     // Padding(
                     //   padding: const EdgeInsets.only(top: 15),
                     //   child: Row(
@@ -731,34 +748,34 @@ class _Home_screen1State extends State<Home_screen1> {
                     //     ],
                     //   ),
                     // ),
-                  homeController.todayOfferListData.isEmpty
-                      ? Container(
-                          height: 20,
-                        )
-                      : Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Today Offer',
-                                style: TextStyle(
-                                    color: knavblue,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Get.to(const OfferScreenListView());
-                                },
-                                child: Text(
-                                  'See All',
-                                  style: TextStyle(color: korange),
+                    homeController.todayOfferListData.isEmpty
+                        ? Container(
+                            height: 5,
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Today Offer',
+                                  style: TextStyle(
+                                      color: knavblue,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w700),
                                 ),
-                              )
-                            ],
+                                InkWell(
+                                  onTap: () {
+                                    Get.to(const OfferScreenListView());
+                                  },
+                                  child: Text(
+                                    'See All',
+                                    style: TextStyle(color: korange),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
                   if (homeController.todayOfferListData.isNotEmpty)
                     Container(
                       height: 150,

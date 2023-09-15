@@ -189,7 +189,7 @@ class MemberUser {
         occupation: json["occupation"]?? "",
         fatherName: json["father_name"]?? "",
         motherName: json["mother_name"]?? "",
-        isMarried: json["is_married"]?? "",
+        isMarried: json["is_married"],
         residentialAddress:json["residential_address"] == null ? ResidentialAddress(doorNo: "", address: "", buildingName: "", state: "", city: "", personalId: "", pincode: "",) : ResidentialAddress.fromJson(json["residential_address"]),
         officialAddress:json["official_address"] == null ? OfficialAddress(doorNo: "", address: "", buildingName: "", state: "", city: "", proofIdNo: "", pincode: "") : OfficialAddress.fromJson(json["official_address"]),
         panNo: json["pan_no"]?? "",

@@ -65,14 +65,15 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
               Column(
                 children: [
                   Expanded(
-                      child: PageView(controller: _pageController, 
-                      children:const [
-                    Onbording(),
-                    Onbording2(),
-                    Onbording3(),
-                    Onbording4(),
-                    Onbording5()
-                  ])),
+                      child: PageView(
+                          controller: _pageController,
+                          children: const [
+                        Onbording(),
+                        Onbording2(),
+                        Onbording3(),
+                        Onbording4(),
+                        Onbording5()
+                      ])),
                   Padding(
                     padding:
                         const EdgeInsets.only(bottom: 30, left: 20, right: 20),
@@ -128,9 +129,10 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
                                 isPageViewEnabled = true;
                               });
                               if (_pageController.page!.toInt() == 4) {
-                                if(profileController.profileData.first.occupation.isEmpty){
+                                if (profileController
+                                    .profileData.first.occupation.isEmpty) {
                                   Get.to(const MyAccount());
-                                }else{
+                                } else {
                                   Get.offAll(MemberBottomNavBar());
                                 }
                               } else {
@@ -151,12 +153,12 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
                   top: 7,
                   child: InkWell(
                       onTap: () async {
-                        await profileController.getProfile();
-                        if(profileController.profileData.first.occupation.isEmpty){
-                                  Get.to(const MyAccount());
-                                }else{
-                                  Get.offAll(MemberBottomNavBar());
-                                }
+                        if (profileController
+                            .profileData.first.occupation.isEmpty) {
+                          Get.to(const MyAccount());
+                        } else {
+                          Get.offAll(MemberBottomNavBar());
+                        }
                       },
                       child: const Text(
                         "Skip",
@@ -223,7 +225,7 @@ class _Onbording2State extends State<Onbording2> {
       children: [
         Image.asset(
           'assets/images/onbording2.png',
-         height: size.height*0.62.h,
+          height: size.height * 0.62.h,
         ),
         Text(
           'HOTELS & SERVICES',
@@ -251,8 +253,9 @@ class Onbording3 extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Image.asset('assets/images/onbording3.png',
-        height: size.height*0.62.h,
+        Image.asset(
+          'assets/images/onbording3.png',
+          height: size.height * 0.62.h,
         ),
         Text(
           'ESSENTIAL BAZZAR',
@@ -280,8 +283,9 @@ class Onbording4 extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Image.asset('assets/images/onbording4.png',
-        height: size.height*0.62.h,
+        Image.asset(
+          'assets/images/onbording4.png',
+          height: size.height * 0.62.h,
         ),
         Text(
           'A TO Z UTILITY SERVICE &\n ONLINE DISCOUNTS',

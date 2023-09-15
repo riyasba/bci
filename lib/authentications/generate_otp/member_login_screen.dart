@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-
+import 'package:phone_number_hint/phone_number_hint.dart';
 
 class MemberLoginScreen extends StatefulWidget {
   const MemberLoginScreen({super.key});
@@ -19,6 +19,37 @@ class _MemberLoginScreenState extends State<MemberLoginScreen> {
   var phoneNumberController = TextEditingController();
 
   final authController = Get.find<AuthController>();
+
+  String _result = 'Unknown';
+  final _phoneNumberHintPlugin = PhoneNumberHint();
+
+  Future<void> getPhoneNumber() async {
+    String? result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    // We also handle the message potentially returning null.
+    try {
+      result = await _phoneNumberHintPlugin.requestHint() ?? '';
+      phoneNumberController.text = result;
+    } on PlatformException {
+      result = 'Failed to get hint.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _result = result ?? '';
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getPhoneNumber();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -45,20 +76,25 @@ class _MemberLoginScreenState extends State<MemberLoginScreen> {
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                text: 'We will send you an ',
-                style: TextStyle(fontSize: 17, color: kblue),
-                 children:  <TextSpan>[
-                   TextSpan(text: 'One Time Password', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: kblue)),
-                   TextSpan(text: '\non this mobile number',
-                   style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: kblue),
-                   ),
-                 ],
-               ),
+                  text: 'We will send you an ',
+                  style: TextStyle(fontSize: 17, color: kblue),
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'One Time Password',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                            color: kblue)),
+                    TextSpan(
+                      text: '\non this mobile number',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: kblue),
+                    ),
+                  ],
+                ),
               ),
-             
               ksizedbox40,
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -66,7 +102,7 @@ class _MemberLoginScreenState extends State<MemberLoginScreen> {
                   height: 50,
                   child: TextFormField(
                     controller: phoneNumberController,
-                     keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.phone,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(10),
                       FilteringTextInputFormatter.digitsOnly,

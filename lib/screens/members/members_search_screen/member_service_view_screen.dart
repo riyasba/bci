@@ -329,6 +329,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                               serviceid: widget.searchServicelist.id.toString(),
                               qty: "1",
                               offerOrCoupon: "",
+                              bookDateTime: "",
                               couponcode: redeemCouponcontroller.text,
                               amount: widget.searchServicelist.actualAmount);
                         } else {
@@ -339,7 +340,9 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                               qty: "1",
                               offerOrCoupon: "",
                               couponcode: redeemCouponcontroller.text,
-                              amount: widget.searchServicelist.actualAmount);
+                              amount: widget.searchServicelist.actualAmount,
+                              bookDateTime:""
+                              );
                         }
                       },
                       child: Text(

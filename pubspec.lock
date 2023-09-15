@@ -943,6 +943,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.0"
+  phone_number_hint:
+    dependency: "direct main"
+    description:
+      name: phone_number_hint
+      sha256: cf0e8f31d062c16484774fd6a84e9191cda0d757e3e7f7f9e26999473cab1125
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   platform:
     dependency: transitive
     description:

@@ -6,6 +6,7 @@ import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SupportScreen extends StatefulWidget {
   const SupportScreen({super.key});
@@ -86,245 +87,277 @@ class _SupportScreenState extends State<SupportScreen> {
               ),
             ),
           )),
-      body: GetBuilder<HomeController>(
-        builder: (_) {
-          return ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
+      body: GetBuilder<HomeController>(builder: (_) {
+        return ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: Container(
+                height: 50,
+                width: size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: const Color(0xffF2F1F1)),
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 10),
+                  child: TextField(
+                    controller: nameController,
+                    decoration: const InputDecoration(
+                        isCollapsed: true,
+                        isDense: true,
+                        border: InputBorder.none,
+                        hintText: "Name",
+                        hintStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                        )),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              child: Container(
+                height: 50,
+                width: size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: const Color(0xffF2F1F1)),
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 10),
+                  child: TextField(
+                    controller: phoneController,
+                    decoration: const InputDecoration(
+                        isCollapsed: true,
+                        isDense: true,
+                        border: InputBorder.none,
+                        hintText: "Mobile",
+                        hintStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                        )),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              child: Container(
+                height: 50,
+                width: size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: const Color(0xffF2F1F1)),
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 10),
+                  child: TextField(
+                    controller: emailController,
+                    decoration: const InputDecoration(
+                        isCollapsed: true,
+                        isDense: true,
+                        border: InputBorder.none,
+                        hintText: "Email",
+                        hintStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                        )),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              child: Container(
+                height: 50,
+                width: size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: const Color(0xffF2F1F1)),
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 10),
+                  child: TextField(
+                    controller: titleController,
+                    decoration: const InputDecoration(
+                        isCollapsed: true,
+                        isDense: true,
+                        border: InputBorder.none,
+                        hintText: "Title",
+                        hintStyle: TextStyle(
+                          color: Color(0xff6E6D6E),
+                          fontWeight: FontWeight.w400,
+                        )),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              child: Container(
+                height: 150,
+                width: size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: const Color(0xffF2F1F1)),
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 10),
+                  child: TextField(
+                    controller: descriptionController,
+                    maxLines: 100,
+                    decoration: const InputDecoration(
+                        isCollapsed: true,
+                        isDense: true,
+                        border: InputBorder.none,
+                        hintText: "Description",
+                        hintStyle: TextStyle(
+                          color: Color(0xff6E6D6E),
+                          fontWeight: FontWeight.w400,
+                        )),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              child: InkWell(
+                onTap: () {
+                  settingsController.createSupport(
+                      title: titleController.text,
+                      message: descriptionController.text);
+                },
                 child: Container(
                   height: 50,
                   width: size.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
-                      color: const Color(0xffF2F1F1)),
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 10),
-                    child: TextField(
-                      controller: nameController,
-                      decoration: const InputDecoration(
-                          isCollapsed: true,
-                          isDense: true,
-                          border: InputBorder.none,
-                          hintText: "Name",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                          )),
+                      color: const Color(0xff003366)),
+                  child: const Center(
+                    child: Text(
+                      "Submit",
+                      style: TextStyle(fontSize: 25, color: Color(0xffF9F8FD)),
                     ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                child: Container(
-                  height: 50,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: const Color(0xffF2F1F1)),
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 10),
-                    child: TextField(
-                      controller: phoneController,
-                      decoration: const InputDecoration(
-                          isCollapsed: true,
-                          isDense: true,
-                          border: InputBorder.none,
-                          hintText: "Mobile",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                          )),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                child: Container(
-                  height: 50,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: const Color(0xffF2F1F1)),
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 10),
-                    child: TextField(
-                      controller: emailController,
-                      decoration: const InputDecoration(
-                          isCollapsed: true,
-                          isDense: true,
-                          border: InputBorder.none,
-                          hintText: "Email",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                          )),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                child: Container(
-                  height: 50,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: const Color(0xffF2F1F1)),
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 10),
-                    child: TextField(
-                      controller: titleController,
-                      decoration: const InputDecoration(
-                          isCollapsed: true,
-                          isDense: true,
-                          border: InputBorder.none,
-                          hintText: "Title",
-                          hintStyle: TextStyle(
-                            color: Color(0xff6E6D6E),
-                            fontWeight: FontWeight.w400,
-                          )),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                child: Container(
-                  height: 150,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: const Color(0xffF2F1F1)),
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 10),
-                    child: TextField(
-                      controller: descriptionController,
-                      maxLines: 100,
-                      decoration: const InputDecoration(
-                          isCollapsed: true,
-                          isDense: true,
-                          border: InputBorder.none,
-                          hintText: "Description",
-                          hintStyle: TextStyle(
-                            color: Color(0xff6E6D6E),
-                            fontWeight: FontWeight.w400,
-                          )),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                child: InkWell(
-                  onTap: () {
-                    settingsController.createSupport(
-                        title: titleController.text,
-                        message: descriptionController.text);
-                  },
-                  child: Container(
-                    height: 50,
-                    width: size.width,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: const Color(0xff003366)),
-                    child: const Center(
-                      child: Text(
-                        "Submit",
-                        style: TextStyle(fontSize: 25, color: Color(0xffF9F8FD)),
+            ),
+            homePageController.contactDetailsData != null
+                ? Column(
+                    children: [
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 15),
+                        child: Row(
+                          children: [
+                            const Column(
+                              children: [
+                                Text(
+                                  'Contact Admin :',
+                                  style: TextStyle(
+                                      fontSize: 16, color: Color(0xff443C3C)),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            homePageController
+                                    .contactDetailsData!.appPhone.isEmpty
+                                ? const Text("")
+                                : InkWell(
+                                  onTap: (){
+                                    launch("tel:${homePageController.contactDetailsData!.appPhone}");
+                                  },
+                                  child: Text(
+                                      homePageController
+                                          .contactDetailsData!.appPhone,
+                                      style: TextStyle(
+                                          fontSize: 15.sp, color: kblue)),
+                                ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
-                child: Row(
-                  children: [
-                    const Column(
-                      children: [
-                        Text(
-                          'Contact Admin :',
-                          style: TextStyle(fontSize: 16, color: Color(0xff443C3C)),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 10),
+                        child: Row(
+                          children: [
+                            const Row(
+                              children: [
+                                Text(
+                                  'Admin Email :',
+                                  style: TextStyle(
+                                      fontSize: 16, color: Color(0xff443C3C)),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 29,
+                                ),
+                                homePageController
+                                        .contactDetailsData!.appEmail.isEmpty
+                                    ? const Text("")
+                                    : Container(
+                                        child: Text(
+                                            homePageController
+                                                .contactDetailsData!.appEmail,
+                                            maxLines: 2,
+                                            style: TextStyle(
+                                                fontSize: 15.sp, color: kblue)),
+                                      ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    homePageController.contactDetailsData!.appPhone.isEmpty ? const Text("Not Available") :
-                    Text(homePageController.contactDetailsData!.appPhone,
-                        style: TextStyle(fontSize: 15.sp, color: kblue)),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-                child: Row(
-                  children: [
-                    const Row(
-                      children: [
-                        Text(
-                          'Admin Email :',
-                          style: TextStyle(fontSize: 16, color: Color(0xff443C3C)),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 10),
+                        child: Row(
+                          children: [
+                            const Row(
+                              children: [
+                                Text(
+                                  'Admin Address :',
+                                  style: TextStyle(
+                                      fontSize: 16, color: Color(0xff443C3C)),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                homePageController
+                                        .contactDetailsData!.appEmail.isEmpty
+                                    ? const Text("")
+                                    : Container(
+                                        width: 200,
+                                        child: Text(
+                                            homePageController
+                                                .contactDetailsData!.appAddress,
+                                            maxLines: 4,
+                                            style: TextStyle(
+                                                fontSize: 15.sp, color: kblue)),
+                                      ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const SizedBox(
-                          width: 29,
-                        ),
-                        homePageController.contactDetailsData!.appEmail.isEmpty ? const Text("Not Available") :
-                        Container(
-                          child: Text(homePageController.contactDetailsData!.appEmail,maxLines: 2,
-                              style: TextStyle(fontSize: 15.sp, color: kblue)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-                child: Row(
-                  children: [
-                    const Row(
-                      children: [
-                        Text(
-                          'Admin Address :',
-                          style: TextStyle(fontSize: 16, color: Color(0xff443C3C)),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        homePageController.contactDetailsData!.appEmail.isEmpty ? const Text("Not Available") :
-                        Container(
-                          width: 200,
-                          child: Text(homePageController.contactDetailsData!.appAddress,maxLines: 4,
-                              style: TextStyle(fontSize: 15.sp, color: kblue)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          );
-        }
-      ),
+                      ),
+                    ],
+                  )
+                : Container(),
+          ],
+        );
+      }),
     );
   }
 }

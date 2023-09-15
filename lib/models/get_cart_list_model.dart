@@ -42,6 +42,7 @@ class CartListData {
   String price;
   String amount;
   String description;
+  String bookDateTime;
 
   CartListData({
     required this.id,
@@ -55,6 +56,7 @@ class CartListData {
     required this.price,
     required this.amount,
     required this.description,
+    required this.bookDateTime,
   });
 
   factory CartListData.fromJson(Map<String, dynamic> json) => CartListData(
@@ -69,6 +71,7 @@ class CartListData {
         price: json["price"] ?? "",
         amount: json["amount"] ?? "",
         description: json["description"] ?? "",
+        bookDateTime: json["book_date_time"] ?? ""
       );
 
   Map<String, dynamic> toJson() => {
@@ -82,5 +85,6 @@ class CartListData {
         "image": image,
         "price": price,
         "description": description,
+        "book_date_time": bookDateTime
       };
 }

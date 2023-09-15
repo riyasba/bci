@@ -67,7 +67,8 @@ class HomeController extends GetxController {
   getAdsSlider() async {
     dio.Response<dynamic> response =
         await getAdSliderApiServices.getAdsSlider();
-
+    print("------------------------------------------------>> changes ");
+    print(response.data);
     if (response.statusCode == 200) {
       SliderModel sliderModel = SliderModel.fromJson(response.data);
       adsSliderList = sliderModel.posts;
@@ -77,7 +78,8 @@ class HomeController extends GetxController {
 
   getSlider() async {
     dio.Response<dynamic> response = await getSliderApiServices.getSlider();
-
+    print("------------->> slider");
+    print(response.data);
     if (response.statusCode == 200) {
       SliderModel sliderModel = SliderModel.fromJson(response.data);
       sliderList = sliderModel.posts;
@@ -309,7 +311,8 @@ class HomeController extends GetxController {
       required String qty,
       required String offerOrCoupon,
       required String couponcode,
-      required String amount}) async {
+      required String amount,
+      required String bookDateTime}) async {
     isLoading(true);
     dio.Response<dynamic> response =
         await addBookingApiServices.addBookingApiServices(
@@ -318,7 +321,8 @@ class HomeController extends GetxController {
             qty: qty,
             offerOrCoupon: offerOrCoupon,
             couponcode: couponcode,
-            amount: amount);
+            amount: amount,
+            bookDateTime: bookDateTime);
     isLoading(false);
     if (response.statusCode == 200) {
       deleteToCart(serviceid: serviceid);
@@ -544,7 +548,6 @@ class HomeController extends GetxController {
     update();
   }
 
-
   //get GALLERY
 
   GetGalleryApiServices getgalleryApiService = GetGalleryApiServices();
@@ -553,7 +556,7 @@ class HomeController extends GetxController {
     dio.Response<dynamic> response =
         await getgalleryApiService.getgalleryApiServices(userid: userid);
     if (response.statusCode == 200) {
-    GetGalleryModel getGalleryList = GetGalleryModel.fromJson(response.data);
+      GetGalleryModel getGalleryList = GetGalleryModel.fromJson(response.data);
       galleryListData = getGalleryList.data;
     } else {
       // Get.rawSnackbar(
@@ -567,30 +570,34 @@ class HomeController extends GetxController {
   }
 
   //notification count
-  NotificationCountApiServices notificationCountApiServices = NotificationCountApiServices();
+  NotificationCountApiServices notificationCountApiServices =
+      NotificationCountApiServices();
   NotificationCountData? countData;
 
   notifyCount() async {
-    dio.Response<dynamic> response = await notificationCountApiServices.notificationCountApiServices();
-    if(response.statusCode == 200){
-      NotificationCount notificationCount = NotificationCount.fromJson(response.data);
+    dio.Response<dynamic> response =
+        await notificationCountApiServices.notificationCountApiServices();
+    if (response.statusCode == 200) {
+      NotificationCount notificationCount =
+          NotificationCount.fromJson(response.data);
       countData = notificationCount.data;
     }
+    update();
   }
 
   //support admin details
-  SupportAdminDetailsApiServices supportAdminDetailsApiServices = SupportAdminDetailsApiServices();
+  SupportAdminDetailsApiServices supportAdminDetailsApiServices =
+      SupportAdminDetailsApiServices();
   ContactDetailsData? contactDetailsData;
 
   supportAdminDetail() async {
-
-    dio.Response<dynamic> response = await supportAdminDetailsApiServices.supportAdminDetailsApiServices();
-    if(response.statusCode == 200){
-      SupportAdminModel supportAdminModel = SupportAdminModel.fromJson(response.data);
+    dio.Response<dynamic> response =
+        await supportAdminDetailsApiServices.supportAdminDetailsApiServices();
+    if (response.statusCode == 200) {
+      SupportAdminModel supportAdminModel =
+          SupportAdminModel.fromJson(response.data);
       contactDetailsData = supportAdminModel.data;
     }
-
-
+    update();
   }
-
 }

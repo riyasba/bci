@@ -98,7 +98,7 @@ class _SettingScreenState extends State<SettingScreen> {
               child: const Row(
                 children: [
                   Image(
-                    image: AssetImage("assets/icons/additionalCoupons.png"),
+                    image: AssetImage("assets/icons/subscrib.png"),
                     width: 20,
                   ),
                   SizedBox(
@@ -220,13 +220,13 @@ class _SettingScreenState extends State<SettingScreen> {
               },
               child: const Row(
                 children: [
-                  Icon(
-                    Icons.shopping_cart,
-                    color: Color(0xff003366),
+                   Image(
+                    image: AssetImage("assets/icons/cart.png"),
+                    width: 20,
                   ),
                   
                   Padding(
-                    padding: EdgeInsets.only(left: 7),
+                    padding: EdgeInsets.only(left: 10),
                     child: Text(
                       "View Cart",
                       style: TextStyle(

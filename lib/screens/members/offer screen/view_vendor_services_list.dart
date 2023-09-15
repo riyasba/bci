@@ -139,8 +139,22 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
           )),
       body: GetBuilder<HomeController>(builder: (_) {
         return homeController.vendorServiceListData.isEmpty
-            ? const Center(
-                child: Text("No Data Found"),
+            ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Image(
+                        image: AssetImage("assets/icons/Group 8891.png")),
+                    ksizedbox20,
+                    Text(
+                      "No Service Data",
+                      style: TextStyle(
+                          fontSize: 22.sp,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               )
             : GridView.builder(
                 physics: const BouncingScrollPhysics(),

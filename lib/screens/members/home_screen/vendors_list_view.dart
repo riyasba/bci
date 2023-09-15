@@ -90,8 +90,20 @@ class _VendorsListViewState extends State<VendorsListView> {
           )),
       body: GetBuilder<HomeController>(builder: (_) {
         return homeController.vendorList.isEmpty
-            ? const Center(
-                child: Text("No Data Found"),
+            ?  Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Image(image: AssetImage("assets/icons/Group 8861.png")),
+                    ksizedbox20,
+                    Text("Not Show Assoiate",
+                     style: TextStyle(
+                          fontSize: 22.sp,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               )
             : GridView.builder(
                 physics: const BouncingScrollPhysics(),
@@ -136,13 +148,16 @@ class _VendorsListViewState extends State<VendorsListView> {
                                       height: 125.h,
                                       width: size.width,
                                       fit: BoxFit.cover,
-                                    )
-                                  : Image.asset(
-                                      "assets/icons/no-photo.png",
-                                      height: 125.h,
-                                      width: size.width,
-                                      fit: BoxFit.cover,
-                                    ),
+                                    ) 
+                                  : Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: Image.asset(
+                                        "assets/images/Group 9407.png",
+                                        height: 125.h,
+                                        width: size.width,
+                                        fit: BoxFit.contain,
+                                      ),
+                                  ),
                             ),
                             ksizedbox10,
                             Padding(

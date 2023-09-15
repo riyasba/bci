@@ -19,9 +19,8 @@ import '../members widgets/bropdown.dart';
 import '../members widgets/gridciew.dart';
 
 class MembersSearchScreen extends StatefulWidget {
-  MembersSearchScreen({super.key, required this.title, required this.items});
-  final String title;
-  final List<String> items;
+  MembersSearchScreen({super.key});
+ 
 
   @override
   State<MembersSearchScreen> createState() => _MembersSearchScreenState();
@@ -61,7 +60,7 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(150),
+          preferredSize:const Size.fromHeight(250),
           child: Column(
             children: [
               ClipPath(
@@ -268,7 +267,7 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
             ? Center(
                 child: Column(
                   children: [
-                    const Image(image: AssetImage("assets/icons/search.png")),
+                    const Image(image: AssetImage("assets/images/Group 8776.png")),
                     Text(
                       'No result found',
                       style: TextStyle(

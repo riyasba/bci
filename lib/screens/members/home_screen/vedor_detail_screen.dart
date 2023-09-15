@@ -76,10 +76,10 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                     ),
                   )
                 : Image.asset(
-                    "assets/icons/no-photo.png",
+                    "assets/images/Group 9407.png",
                     height: 200,
                     width: size.width,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
             Padding(
               padding: const EdgeInsets.all(15.0),
@@ -193,14 +193,14 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                         TextStyle(fontSize: 15.sp, height: 1.5, color: kblue),
                   ),
                   ksizedbox20,
-                  Text(
+                 if (widget.vendorListModelData.locationAddress != null)  Text(
                     'Location',
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: kblue,
                         fontSize: 18.sp),
                   ),
-                  ksizedbox20,
+                 if (widget.vendorListModelData.locationAddress != null)  ksizedbox20,
                   if (widget.vendorListModelData.locationAddress != null)
                     Row(
                       children: [

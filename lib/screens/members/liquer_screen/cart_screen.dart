@@ -50,16 +50,16 @@ class _CartScreenState extends State<CartScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                            padding: const EdgeInsets.only(left: 8),
-                            child: InkWell(
-                                onTap: () {
-                                  Get.back();
-                                },
-                                child: Icon(
-                                  Icons.arrow_back_ios,
-                                  color: kwhite,
-                                )),
-                          ),
+                      padding: const EdgeInsets.only(left: 8),
+                      child: InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: kwhite,
+                          )),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 0),
                       child: Text(
@@ -70,7 +70,9 @@ class _CartScreenState extends State<CartScreen> {
                             color: kwhite),
                       ),
                     ),
-                    Container(width: 20,)
+                    Container(
+                      width: 20,
+                    )
                     // IconButton(
                     //     onPressed: () {
                     //       Get.to(const NotificationScreen());
@@ -87,20 +89,21 @@ class _CartScreenState extends State<CartScreen> {
       body: GetBuilder<HomeController>(builder: (_) {
         return Container(
           child: homeController.cartListData.isEmpty
-              ?  Center(
-                  child:Column(
+              ? Center(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/cartnotavailableimage.png'),
                       ksizedbox20,
-                      Text('Cart Is Empty',
-                      style: TextStyle(
-                        fontSize: 22.sp,
-                        color: kblue,
-                        fontWeight: FontWeight.bold
-                      ),)
+                      Text(
+                        'Cart Is Empty',
+                        style: TextStyle(
+                            fontSize: 22.sp,
+                            color: kblue,
+                            fontWeight: FontWeight.bold),
+                      )
                     ],
-                  ) ,
+                  ),
                 )
               : ListView.builder(
                   shrinkWrap: true,
@@ -148,9 +151,9 @@ class _CartScreenState extends State<CartScreen> {
                                         Container(
                                           width: 150,
                                           child: Text(
-                                            homeController
-                                                .cartListData[index].serviceName,
-                                                overflow: TextOverflow.ellipsis,
+                                            homeController.cartListData[index]
+                                                .serviceName,
+                                            overflow: TextOverflow.ellipsis,
                                             style: const TextStyle(
                                                 fontSize: 20,
                                                 color: Colors.black,
@@ -284,79 +287,82 @@ class _CartScreenState extends State<CartScreen> {
                 ),
         );
       }),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 15,left: 15,right: 15),
-        child: Container(
-          height: 70,
-          decoration: BoxDecoration(
-            color: kyellow,
-            borderRadius: BorderRadius.circular(15)
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GetBuilder<HomeController>(builder: (_) {
-                return Text(
-                  "₹ ${homeController.getGrandTotal().toStringAsFixed(2)}",
-                  style: primaryFont.copyWith(
-                      color: kwhite,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700),
-                );
-              }),
-              Obx(
-                () => profileController.isLoading.isTrue
-                    ? Container(
-                        height: 50,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          color: kblue,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(3.0),
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      )
-                    : InkWell(
-                        onTap: () {
-                          if (homeController.cartListData.isNotEmpty) {
-                            var tempAmount = homeController.getGrandTotal();
-                            // profileController.payFromCart(tempAmount);
-                            paymentBottomSheet(context,tempAmount);
-                          } else {
-                            Get.rawSnackbar(
-                                message: "No Cart item found",
-                                backgroundColor: Colors.red);
-                          }
-                        },
-                        child: Container(
-                          height: 50,
-                          width: 150,
-                          decoration: BoxDecoration(
-                            color: kblue,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child:const Center(
-                            child: Text(
-                              "Book Now",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ),
-                        ),
+      bottomNavigationBar: GetBuilder<HomeController>(builder: (_) {
+        return homeController.cartListData.isEmpty
+            ? Container(
+              height: 20,
+            )
+            : Padding(
+                padding: const EdgeInsets.only(bottom: 15, left: 15, right: 15),
+                child: Container(
+                  height: 70,
+                  decoration: BoxDecoration(
+                      color: kyellow, borderRadius: BorderRadius.circular(15)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "₹ ${homeController.getGrandTotal().toStringAsFixed(2)}",
+                        style: primaryFont.copyWith(
+                            color: kwhite,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700),
                       ),
-              ),
-            ],
-          ),
-        ),
-      ),
+                      Obx(
+                        () => profileController.isLoading.isTrue
+                            ? Container(
+                                height: 50,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  color: kblue,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: const Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(3.0),
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  if (homeController.cartListData.isNotEmpty) {
+                                    var tempAmount =
+                                        homeController.getGrandTotal();
+                                    // profileController.payFromCart(tempAmount);
+                                    paymentBottomSheet(context, tempAmount);
+                                  } else {
+                                    Get.rawSnackbar(
+                                        message: "No Cart item found",
+                                        backgroundColor: Colors.red);
+                                  }
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    color: kblue,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      "Book Now",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+      }),
     );
   }
 }

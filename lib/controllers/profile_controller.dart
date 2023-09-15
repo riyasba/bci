@@ -295,7 +295,9 @@ class ProfileController extends GetxController {
             qty: homeController.cartListData[i].quantity.toString(),
             offerOrCoupon: "",
             couponcode: "",
-            amount: homeController.cartListData[i].price);
+            amount: homeController.cartListData[i].price,
+            bookDateTime: homeController.cartListData[i].bookDateTime
+            );
       }
 
       Get.offAll(
@@ -366,7 +368,9 @@ class ProfileController extends GetxController {
             qty: homeController.cartListData[i].quantity.toString(),
             offerOrCoupon: "",
             couponcode: "",
-            amount: homeController.cartListData[i].price);
+            amount: homeController.cartListData[i].price,
+            bookDateTime: homeController.cartListData[i].bookDateTime
+            );
       }
 
       Get.offAll(
@@ -424,7 +428,9 @@ class ProfileController extends GetxController {
             qty: homeController.cartListData[i].quantity.toString(),
             offerOrCoupon: "",
             couponcode: "",
-            amount: homeController.cartListData[i].price);
+            amount: homeController.cartListData[i].price,
+            bookDateTime: homeController.cartListData[i].bookDateTime
+            );
       }
 
       Get.offAll(

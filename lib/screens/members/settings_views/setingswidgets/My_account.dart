@@ -240,8 +240,13 @@ class _MyAccountState extends State<MyAccount> {
         selectedGender =  profileController
                 .profileData.first.gender;
         print("--------------------------->>Gender is ---------------->>$selectedGender");
-        isMarried =
-            profileController.profileData.first.isMarried == "0" ? false : true;
+        print("---------------------------->>Married status = ${profileController.profileData.first.isMarried}");
+        if (profileController.profileData.first.isMarried != null) {
+      isMarried =
+      profileController.profileData.first.isMarried == "0" ? false : true;
+      }else{
+       isMarried = false;
+      }
       });
       _controller?.addTag = profileController.profileData.first.childName;
     }

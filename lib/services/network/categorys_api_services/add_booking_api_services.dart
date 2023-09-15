@@ -10,7 +10,8 @@ class AddBookingApiServices extends BaseApiService {
     required String qty,
     required String offerOrCoupon,
     required String couponcode,
-    required String amount
+    required String amount,
+    required String bookDateTime
     }) async {
     dynamic responseJson;
     try {
@@ -35,11 +36,12 @@ class AddBookingApiServices extends BaseApiService {
               "quantity":qty,
               "offer_or_coupon": "offer",
               "coupon_code": couponcode,
-              "amount": amount
+              "amount": amount,
+              "book_date_time": bookDateTime
             }
       );
       print("::::::::<Add booking Api Services Api>::::::::status code::::::::::");
-      print("....<$serviceid>...<$cartid>...<$qty>...<$amount>...<$couponcode>...***");
+      print("....<$serviceid>...<$cartid>...<$qty>...<$amount>...<$couponcode>..<$bookDateTime>.***");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

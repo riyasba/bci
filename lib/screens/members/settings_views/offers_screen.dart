@@ -1,3 +1,4 @@
+import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
@@ -5,6 +6,7 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/auth_controllers.dart';
@@ -94,103 +96,155 @@ class _OfferScreenState extends State<OfferScreen> {
                       fontWeight: FontWeight.w500,
                       color: Color(0xff003366)),
                 ),
-
-                IconButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                          shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadiusDirectional.only(
-                                  topEnd: Radius.circular(15),
-                                  topStart: Radius.circular(15))),
-                          context: context,
-                          builder: (context) {
-                            return GetBuilder<AuthController>(builder: (_) {
-                              return Container(
-                                height: 250,
-                                child: ListView.builder(
-                                    itemCount:
-                                        authcontroller.categoryList.length,
-                                    itemBuilder: (context, index) {
-                                      return Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 30, left: 0, right: 0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    authcontroller
-                                                        .filterindex(index);
-                                                    authcontroller
-                                                        .getoffersfilterCategory(
+                InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadiusDirectional.only(
+                                topEnd: Radius.circular(15),
+                                topStart: Radius.circular(15))),
+                        context: context,
+                        builder: (context) {
+                          return GetBuilder<AuthController>(builder: (_) {
+                            return Container(
+                              height: 320,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: InkWell(
+                                          onTap: () {
+                                            Get.back();
+                                            authcontroller.filterindex(9898);
+                                            settingcontroller.offersList();
+                                            authcontroller.getCategoryList();
+                                          },
+                                          child: Container(
+                                            height: 35,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                border:
+                                                    Border.all(color: kOrange)),
+                                            alignment: Alignment.center,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                              child: Text(
+                                                "Select All",
+                                                style: primaryFont.copyWith(
+                                                    color: kOrange),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    height: 250,
+                                    child: ListView.builder(
+                                        itemCount:
+                                            authcontroller.categoryList.length,
+                                        itemBuilder: (context, index) {
+                                          return Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 30, left: 0, right: 0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        authcontroller
+                                                            .filterindex(index);
+                                                        authcontroller.getoffersfilterCategory(
                                                             categoryid:
                                                                 authcontroller
                                                                     .categoryList[
                                                                         index]
                                                                     .id
                                                                     .toString());
-                                                    authcontroller.update();
-                                                    Get.back();
-                                                  },
-                                                  child: Container(
-                                                      width: 200,
-                                                      child: Text(
-                                                        authcontroller
-                                                            .categoryList[index]
-                                                            .title,
-                                                        style: const TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
-                                                      )),
-                                                ),
-                                                Container(
-                                                    width: 100,
-                                                    child: authcontroller
-                                                                .filterindex
-                                                                .value ==
-                                                            index
-                                                        ? Container(
-                                                            height: 30,
-                                                            width: 30,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                                    shape: BoxShape
-                                                                        .circle,
-                                                                    color:
-                                                                        kOrange),
-                                                            child: Center(
-                                                              child: Container(
-                                                                height: 15,
-                                                                width: 15,
+                                                        authcontroller.update();
+                                                        Get.back();
+                                                      },
+                                                      child: Container(
+                                                          width: 200,
+                                                          child: Text(
+                                                            authcontroller
+                                                                .categoryList[
+                                                                    index]
+                                                                .title,
+                                                            style: const TextStyle(
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500),
+                                                          )),
+                                                    ),
+                                                    Container(
+                                                        width: 100,
+                                                        child: authcontroller
+                                                                    .filterindex
+                                                                    .value ==
+                                                                index
+                                                            ? Container(
+                                                                height: 30,
+                                                                width: 30,
                                                                 decoration: BoxDecoration(
                                                                     shape: BoxShape
                                                                         .circle,
                                                                     color:
-                                                                        kwhite),
-                                                              ),
-                                                            ),
-                                                          )
-                                                        : Container(
-                                                            color: kwhite,
-                                                          ))
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      );
-                                    }),
-                              );
-                            });
+                                                                        kOrange),
+                                                                child: Center(
+                                                                  child:
+                                                                      Container(
+                                                                    height: 15,
+                                                                    width: 15,
+                                                                    decoration: BoxDecoration(
+                                                                        shape: BoxShape
+                                                                            .circle,
+                                                                        color:
+                                                                            kwhite),
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            : Container(
+                                                                color: kwhite,
+                                                              ))
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          );
+                                        }),
+                                  ),
+                                ],
+                              ),
+                            );
                           });
-                    },
-                    icon: const Icon(Icons.filter_alt_rounded))
+                        });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: SvgPicture.asset(
+                      "assets/icons/filter.svg",
+                      width: 25,
+                      height: 25,
+                      color: kblue,
+                    ),
+                  ),
+                ),
+
                 //     GetBuilder<AuthController>(
                 //       builder: (_) {
                 //         return PopupMenuButton(
@@ -223,18 +277,20 @@ class _OfferScreenState extends State<OfferScreen> {
               child: Container(
                 height: size.height * 0.63,
                 child: settingcontroller.offerslistdata.isEmpty
-                    ?  Center(
+                    ? Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset('assets/images/offersnotavailableimage.png'),
+                            Image.asset(
+                                'assets/images/offersnotavailableimage.png'),
                             ksizedbox20,
-                            Text('Member Offers Not Available',
-                            style: TextStyle(
-                              fontSize: 20.sp,
-                              color: kblue,
-                              fontWeight: FontWeight.bold
-                            ),)
+                            Text(
+                              'Member Offers Not Available',
+                              style: TextStyle(
+                                  fontSize: 20.sp,
+                                  color: kblue,
+                                  fontWeight: FontWeight.bold),
+                            )
                           ],
                         ),
                       )
@@ -263,7 +319,9 @@ class _OfferScreenState extends State<OfferScreen> {
                                           Expanded(
                                             child: Container(
                                               child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
                                                 children: [
                                                   Text(
                                                     settingcontroller
@@ -278,9 +336,7 @@ class _OfferScreenState extends State<OfferScreen> {
                                                             Color(0xffFAE7E3)),
                                                   ),
                                                   Text(
-                                                  "₹${settingcontroller
-                                                      .offerslistdata[index]
-                                                      .discountValue} Off",
+                                                    "₹${settingcontroller.offerslistdata[index].discountValue} Off",
                                                     style: const TextStyle(
                                                         fontSize: 20,
                                                         fontWeight:
@@ -289,8 +345,14 @@ class _OfferScreenState extends State<OfferScreen> {
                                                         color:
                                                             Color(0xffFAE7E3)),
                                                   ),
-                                                   Text(
-                                                    "Ends on\n${formatDate(settingcontroller.offerslistdata[index].endsAt,[dd,"-",mm,"-",yyyy])}",
+                                                  Text(
+                                                    "Ends on\n${formatDate(settingcontroller.offerslistdata[index].endsAt, [
+                                                          dd,
+                                                          "-",
+                                                          mm,
+                                                          "-",
+                                                          yyyy
+                                                        ])}",
                                                     textAlign: TextAlign.center,
                                                     style: const TextStyle(
                                                         fontSize: 15,

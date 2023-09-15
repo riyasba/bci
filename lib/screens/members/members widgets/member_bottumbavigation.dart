@@ -44,10 +44,7 @@ class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
 
   final List1 = [
     const Home_screen1(),
-    MembersSearchScreen(
-      title: 'Search Result',
-      items: const ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
-    ),
+    MembersSearchScreen(),
     const WalletScreenMembers(),
     const MembersBooking(),
     const SettingScreen(),
@@ -79,75 +76,73 @@ class _MemberBottomNavBarState extends State<MemberBottomNavBar> {
   ]);
 
   back() {
-   showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        backgroundColor: Colors.white,
-                        title: Column(
-                          children: [
-                            Image.asset('assets/icons/exit.png'),
-                            // Text("Comeback Soon!",
-                            //     style: TextStyle(
-                            //         fontSize: 25.sp,
-                            //         fontWeight: FontWeight.bold,
-                            //         color: Colors.black)),
-                          ],
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            backgroundColor: Colors.white,
+            title: Column(
+              children: [
+                Image.asset('assets/icons/exit.png'),
+                // Text("Comeback Soon!",
+                //     style: TextStyle(
+                //         fontSize: 25.sp,
+                //         fontWeight: FontWeight.bold,
+                //         color: Colors.black)),
+              ],
+            ),
+            content: const Text(
+              "Are you sure want to exit?",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 17,
+              ),
+            ),
+            actions: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          // ignore: unrelated_type_equality_checks
+                          color: kwhite),
+                      child: Center(
+                          child: Text("Cancel",
+                              style: primaryTextStyle(color: kblue))),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      exit(0);
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          color: kblue, borderRadius: BorderRadius.circular(5)),
+                      child: Center(
+                        child: Text(
+                          "Exit",
+                          style: primaryTextStyle(color: kwhite),
                         ),
-                        content:const Text(
-                          "Are you sure want to exit?",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 17,
-                          ),
-                        ),
-                        actions: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Get.back();
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: 120,
-                                  decoration: BoxDecoration(
-                                      // ignore: unrelated_type_equality_checks
-                                      color: kwhite),
-                                  child: Center(
-                                      child: Text("Cancel",
-                                          style: primaryTextStyle(
-                                              color: kblue))),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                 exit(0);
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: 120,
-                                  decoration: BoxDecoration(
-                                      color: kblue,
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: Center(
-                                    child: Text(
-                                      "Exit",
-                                      style: primaryTextStyle(color: kwhite),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          ksizedbox10
-                        ],
-                      );
-                    });
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              ksizedbox10
+            ],
+          );
+        });
   }
 
   @override

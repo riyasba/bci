@@ -31,7 +31,7 @@ import '../services/network/categorys_api_services/filter_category_api_service.d
 
 class AuthController extends GetxController {
 //apis method call
-  RxInt filterindex = 0.obs;
+  RxInt filterindex = 90909.obs;
   RxInt logoutindex = 0.obs;
   RxBool logoutbool = false.obs;
   MerchantRegisterApiServices merchantRegisterApiServices =
@@ -101,7 +101,7 @@ class AuthController extends GetxController {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            response.data["errors"],
+            response.data["message"],
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }
