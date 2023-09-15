@@ -5,7 +5,8 @@ abstract class BaseApiService {
   // new url - https://www.portal.bcipvtltd.com/
 
   //register url
-  final String registerURl = "https://www.portal.bcipvtltd.com/api/register_user";
+  final String registerURl =
+      "https://www.portal.bcipvtltd.com/api/register_user";
 
   //login url
   final String getOtpUrl = "https://www.portal.bcipvtltd.com/api/get_otp";
@@ -17,13 +18,16 @@ abstract class BaseApiService {
   final String categoryURL = "https://www.portal.bcipvtltd.com/api/category";
 
   //sub category URL
-  final String subCategoryURL = "https://www.portal.bcipvtltd.com/api/sub_category";
+  final String subCategoryURL =
+      "https://www.portal.bcipvtltd.com/api/sub_category";
 
   //api URL
-  final String otpVerifyApiUrl = "https://www.portal.bcipvtltd.com/api/otp_verrify";
+  final String otpVerifyApiUrl =
+      "https://www.portal.bcipvtltd.com/api/otp_verrify";
 
   //get profile api
-  final String getProfileURL = "https://www.portal.bcipvtltd.com/api/auth/profile";
+  final String getProfileURL =
+      "https://www.portal.bcipvtltd.com/api/auth/profile";
 
 //profile update API URL
   final String profileUpdateURL =
@@ -89,15 +93,23 @@ abstract class BaseApiService {
   final String withdrawAmountURL =
       "https://www.portal.bcipvtltd.com/api/auth/withdrawAmount";
 
-  final String hotelBookingDetailsURL = "https://www.portal.bcipvtltd.com/api/auth/get_booking_detail";
+  final String hotelBookingDetailsURL =
+      "https://www.portal.bcipvtltd.com/api/auth/get_booking_detail";
 
-
-   // add today offers
+  // add today offers
   final String addCouponsURL =
       "https://www.portal.bcipvtltd.com/api/auth/vendor_coupon";
 
-
-   // add today offers
+  // add today offers
   final String addedCouponListURL =
       "https://www.portal.bcipvtltd.com/api/auth/vendor_coupon_list";
+
+//add gallery
+  final String addGallery =
+      "https://www.portal.bcipvtltd.com/api/auth/user_gallery";
+
+      
+  //get gallery
+  final String getGalleryURI =
+      "https://www.portal.bcipvtltd.com/api/auth/get_gallery";
 }

@@ -1,1 +1,1 @@
-const splashImage = 'assets/images/logo.png';
+const splashImage = 'assets/images/bci.png';

@@ -4,7 +4,7 @@ import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/models/bank_account_no_model.dart';
 import 'package:bci/models/business_user_profile.dart';
 import 'package:bci/models/merchant_update_profile.dart';
-import 'package:bci/models/profile_model.dart';
+
 import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:bci/screens/bussiness/views/home_screen/settings/my_account_screen.dart';
 import 'package:bci/services/network/profile_api_services/profile_api_services.dart';
@@ -12,7 +12,7 @@ import 'package:bci/services/network/profile_api_services/profile_pic_update_api
 import 'package:bci/services/network/profile_api_services/profile_update_api.dart';
 import 'package:bci/services/network/profile_api_services/update_bank_account_api_services.dart';
 import 'package:bci/services/network/wallet_api_services/withdraw_from_wallet_api_services.dart';
-import 'package:download_assets/download_assets.dart';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +21,10 @@ import 'package:dio/dio.dart' as dio;
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import '../models/get_gallery_model.dart';
+import '../services/network/profile_api_services/add_gallery_api_services.dart';
+import '../services/network/profile_api_services/get_gallery_apiservice.dart';
 
 class ProfileController extends GetxController {
   GetProfileApiServices getProfileApiServices = GetProfileApiServices();
@@ -33,6 +37,7 @@ class ProfileController extends GetxController {
       WithdrawWalletApiServices();
 
   UpdateBankApiServices updateBankApiServices = UpdateBankApiServices();
+  AddGalleryApiServices addgalleryapi = AddGalleryApiServices();
 
   List<BusinessUser> profileData = [];
   RxBool isLoading = false.obs;
@@ -148,5 +153,42 @@ class ProfileController extends GetxController {
     print(file.path);
 
     OpenFile.open(file.path);
+  }
+
+  //get GALLERY
+
+  GetGalleryApiServices getgalleryApiService = GetGalleryApiServices();
+  List<GalleryListModel> galleryListData = [];
+  getInstance({required String userid}) async {
+    dio.Response<dynamic> response =
+        await getgalleryApiService.getgalleryApiServices(userid: userid);
+    if (response.statusCode == 200) {
+      GetGalleryModel getGalleryList = GetGalleryModel.fromJson(response.data);
+      galleryListData = getGalleryList.data;
+    } else {
+      // Get.rawSnackbar(
+      //     backgroundColor: Colors.red,
+      //     messageText: Text(
+      //       response.data["message"],
+      //       style: primaryFont.copyWith(color: Colors.white),
+      //     ));
+    }
+    update();
+  }
+
+  addgalleryApiServices({required String imageprofiletemp}) async {
+    isLoading(true);
+    dio.Response<dynamic> response =
+        await addgalleryapi.addgalleryApiServices(gallery:imageprofiletemp );
+    isLoading(false);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      Get.rawSnackbar(
+        backgroundColor: Colors.green,
+        messageText: Text(
+          "Gallery updated",
+          style: primaryFont.copyWith(color: Colors.white),
+        ),
+      );
+    }
   }
 }
