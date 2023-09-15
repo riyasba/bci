@@ -1,6 +1,7 @@
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/services_controller.dart';
 import 'package:bci/models/category_model.dart';
+import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/add_services_view.dart';
 import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/update_services_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
@@ -11,7 +12,8 @@ import 'package:get/get.dart';
 import '../../../../../constands/constands.dart';
 
 class AvailabilityScreen extends StatefulWidget {
-  const AvailabilityScreen({super.key});
+  dynamic isAvailable;
+   AvailabilityScreen({super.key,this.isAvailable});
 
   @override
   State<AvailabilityScreen> createState() => _AvailabilityScreenState();
@@ -57,7 +59,17 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
   void initState() {
     super.initState();
     servicesController.getServicesByVendor();
+    authController.getCategoryList();
+    checkValue();
   }
+
+  checkValue() async{
+
+     if (widget.isAvailable != null) {
+  servicesController.getServicesByCategory(
+  categoryId: widget.isAvailable.toString());
+}
+}
 
   var merchantCategory;
 
@@ -82,7 +94,10 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                       padding: const EdgeInsets.only(left: 10),
                       child: IconButton(
                           onPressed: () {
-                            Get.back();
+                           
+                           Get.offAll(()=>HomeBottomnavigationBar(
+                            index: 0,
+                           ));
                           },
                           icon: Icon(
                             Icons.arrow_back_ios,
@@ -114,7 +129,7 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  'Your Products',
+                  'Your Services',
                   style: TextStyle(
                     fontSize: 22,
                     color: kblue,
@@ -138,7 +153,7 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                           Padding(
                             padding: const EdgeInsets.only(left: 5),
                             child: Text(
-                              'Add Product',
+                              'Add Service',
                               style: TextStyle(fontSize: 18, color: kOrange),
                             ),
                           ),
@@ -180,7 +195,7 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                         dropdownColor: Colors.grey[250],
                         style: const TextStyle(color: Colors.black54),
                         hint: Text(
-                          "All Products",
+                          "All Services",
                           style: TextStyle(fontSize: 16, color: kblue),
                         ),
                         onChanged: (CategoryList? value) {
@@ -399,7 +414,7 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                                     PopupMenuButton(
                                       // Callback that sets the selected popup menu item.
                                       onSelected: (var item) {
-                                        Get.to(() => UpdateServicesView(
+                                        Get.off(() => UpdateServicesView(
                                             serviceData: servicesController
                                                 .serviceDataList[index]));
                                       },

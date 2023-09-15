@@ -71,7 +71,7 @@ class ServicesController extends GetxController {
 
   getServicesByCategory({required String categoryId}) async {
     dio.Response<dynamic> response = await getServicesByCategoryApiServices
-        .getServicesByCategory(categoryId: categoryId);
+        .getServicesByCategory(categoryId: categoryId,vendorId: Get.find<ProfileController>().profileData.first.id.toString());
 
     if (response.statusCode == 200) {
       ServiceListModel serviceListModel =

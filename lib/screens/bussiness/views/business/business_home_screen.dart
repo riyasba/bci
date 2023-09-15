@@ -226,7 +226,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 //
                 InkWell(
                   onTap: () {
-                    Get.to(const AvailabilityScreen());
+                    Get.to( AvailabilityScreen());
                   },
                   child: Container(
                      height: 115,

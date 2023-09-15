@@ -6,6 +6,7 @@ import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/services_controller.dart';
 import 'package:bci/models/category_model.dart';
 import 'package:bci/models/service_list_model.dart' as ss;
+import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/availability_scree.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -50,9 +51,22 @@ class _AddServicesViewState extends State<UpdateServicesView> {
   void initState() {
     super.initState();
     _controller = TextfieldTagsController();
-    authController.getCategoryList();
-    authController.getSubCategoryList();
+    checkIfCategory() ;
+    // authController.getSubCategoryList();
     setDefault();
+  }
+
+  checkIfCategory() async{
+    await authController.getCategoryList();
+    for(int i =0;i< authController.categoryList.length;i++){
+      if(widget.serviceData.categoryId.toString() == authController.categoryList[i].id.toString()){
+        print("----->> available");
+        print(authController.categoryList[i].title);
+        setState(() {
+          merchantCategory = authController.categoryList[i];
+        });
+      }
+    }
   }
 
   double? _distanceToField;
@@ -75,6 +89,8 @@ class _AddServicesViewState extends State<UpdateServicesView> {
 
   var productImage;
 
+  String productCategoryHint = 'Product Category Name';
+
   setDefault() {
     serviceTitleController.text = widget.serviceData.title;
     saleAmountController.text = widget.serviceData.saleAmount;
@@ -88,6 +104,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     quantityController.text = widget.serviceData.quantity ?? "";
     cGstController.text = widget.serviceData.cgst.toString();
     sGstController.text = widget.serviceData.sgst.toString();
+    // productCategoryHint =  widget.serviceData.categoryId;
     //  _controller!. = "updated";
     // setState(() {
     //   cgstPercentage = widget.serviceData.cgst != null
@@ -96,7 +113,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     //   sgstPercentage = widget.serviceData.sgst != null
     //       ? int.parse(widget.serviceData.sgst)
     //       : null;
-    //       productImage = widget.serviceData.image;
+          productImage = widget.serviceData.image;
     // });
   }
 
@@ -110,7 +127,9 @@ class _AddServicesViewState extends State<UpdateServicesView> {
 
   var cgstPercentage;
   var sgstPercentage;
-    var gstPercentage;
+  var gstPercentage;
+
+  var productNetworkImage;
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +151,12 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                       padding: const EdgeInsets.only(left: 20),
                       child: IconButton(
                           onPressed: () {
-                            Get.back();
+                            // authController.getCategoryList();
+                            // Get.back();
+
+                            Get.offAll((AvailabilityScreen(
+                              isAvailable: widget.serviceData.categoryId,
+                            )));
                           },
                           icon: Icon(
                             Icons.arrow_back_ios,
@@ -257,7 +281,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                   dropdownDecoratorProps: DropDownDecoratorProps(
                     dropdownSearchDecoration: InputDecoration(
                         // labelText: "Department *",
-                        hintText: "Product Category Name",
+                        hintText: productCategoryHint,
                         enabledBorder: OutlineInputBorder(
                             borderSide:
                                 const BorderSide(color: Color(0xff707070)),
@@ -756,7 +780,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                           ),
                           ksizedbox10,
                           Text(
-                            "Product Image",
+                            "Service Image",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 17,
@@ -787,6 +811,11 @@ class _AddServicesViewState extends State<UpdateServicesView> {
             inputfieldBuilder:
                 (context, tec, fn, error, onChanged, onSubmitted) {
               return ((context, sc, tags, onTagDelete) {
+                 if (tags.isEmpty) {
+  widget.serviceData.amenties.forEach((element) {
+    tags.add(element.value);
+  });
+}
                 return Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextField(
@@ -1123,6 +1152,8 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                         for (var i = 0; i < tagsList!.length; i++) {
                           listTags.add(Amenty(value: tagsList[i]));
                         }
+
+                      
 
                         CategoryList? categoryModel;
                         if (merchantCategory != null) {
