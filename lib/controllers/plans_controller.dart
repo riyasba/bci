@@ -55,6 +55,7 @@ class PlanController extends GetxController {
           PlansDetailsModel.fromJson(response.data);
 
       subscribePlansData.add(plansDetailsModel.plan);
+       update();
     }
     update();
   }

@@ -29,7 +29,8 @@ class _MemberLoginScreenState extends State<MemberLoginScreen> {
     // We also handle the message potentially returning null.
     try {
       result = await _phoneNumberHintPlugin.requestHint() ?? '';
-      phoneNumberController.text = result;
+
+      phoneNumberController.text =  getNumber(result);
     } on PlatformException {
       result = 'Failed to get hint.';
     }
@@ -43,6 +44,25 @@ class _MemberLoginScreenState extends State<MemberLoginScreen> {
       _result = result ?? '';
     });
   }
+
+   getNumber(String phone){
+     String testAp = "";
+  String testAp2 = "";
+  
+  int length = phone.length - 10;
+  
+  
+  for(int i = phone.length-1; i > length - 1;i--){
+    testAp = testAp + phone[i];
+  }
+  
+  for(int i = testAp.length-1; i >= 0;i--){
+   
+    testAp2 = testAp2 + testAp[i];
+  }
+  return testAp2;
+  }
+
 
   @override
   void initState() {

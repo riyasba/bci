@@ -23,7 +23,7 @@ class _FlightBookingHeaderState extends State<FlightBookingHeader> {
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(
-                      "assets/images/flight_booking/above-aeroplane-aircraft-engine-91217.png"),
+                      "assets/images/Group 6978 (3).png"),
                   fit: BoxFit.cover),
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(20),
@@ -153,32 +153,32 @@ class _FlightBookingHeaderState extends State<FlightBookingHeader> {
             ),
           ),
         ),
-        Positioned(
-          bottom: 120,
-          left: 10,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Fly to Your",
-                style: primaryFont.copyWith(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w200),
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              Text(
-                "Dreams".toUpperCase(),
-                style: primaryFont.copyWith(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        )
+        // Positioned(
+        //   bottom: 120,
+        //   left: 10,
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       Text(
+        //         "Fly to Your",
+        //         style: primaryFont.copyWith(
+        //             color: Colors.white,
+        //             fontSize: 14,
+        //             fontWeight: FontWeight.w200),
+        //       ),
+        //       const SizedBox(
+        //         height: 6,
+        //       ),
+        //       Text(
+        //         "Dreams".toUpperCase(),
+        //         style: primaryFont.copyWith(
+        //             color: Colors.white,
+        //             fontSize: 20,
+        //             fontWeight: FontWeight.bold),
+        //       ),
+        //     ],
+        //   ),
+        // )
       ],
     );
   }

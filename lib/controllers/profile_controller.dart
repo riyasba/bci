@@ -170,6 +170,7 @@ class ProfileController extends GetxController {
       GetCouponsList getCouponsList = GetCouponsList.fromJson(response.data);
       couponsData = getCouponsList.data;
       couponsData.shuffle();
+      update();
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,

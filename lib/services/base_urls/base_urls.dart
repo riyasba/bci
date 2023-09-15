@@ -35,7 +35,7 @@ abstract class BaseApiService {
 
         //sliders Api
   final String getAdsURL =
-      "https://www.portal.bcipvtltd.com/api/auth/get_ads";
+      "https://www.portal.bcipvtltd.com/api/auth/getslider_ads";
 
   //Get plan list
   final String getPlanList =
