@@ -3,6 +3,7 @@ import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_plans_model.dart';
 import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
+import 'package:bci/screens/members/payment_gateway_view/payment_view.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -207,10 +208,19 @@ class _OtcPaymentState extends State<OtcPayment> {
               onTap: () async {
                 print(
                     ">>>>>>>>>>>>>>>>>..............payment start..........>>>>>>>>>>${widget.plansData.id}");
-                profileController.payfoSubscription(
-                  id: widget.plansData.id,
-                  amount: double.parse(widget.plansData.saleAmount),
-                );
+                // profileController.payfoSubscription(
+                //   id: widget.plansData.id,
+                //   amount: double.parse(widget.plansData.saleAmount),
+                // );
+
+                Get.to(()=> PaymentWebView(
+                  payOpt: "",
+                  payType: 1,
+                  totalAmount: widget.plansData.saleAmount,
+                  userId: profileController.profileData.first.id.toString(),
+                  planId: widget.plansData.id,
+                  
+                ));
                 // profileController.payUseingEaseBuzzSubs(
                 //     id: widget.plansData.id,
                 //     amount: widget.plansData.saleAmount,

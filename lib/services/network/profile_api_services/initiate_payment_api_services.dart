@@ -8,7 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IntiatePayementApiServices extends BaseApiService {
-  Future initiatePayment({required String amount, required String userId}) async {
+  Future initiatePayment({required String url,}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
@@ -27,7 +27,7 @@ class IntiatePayementApiServices extends BaseApiService {
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.get(profileUpdateURL,
+      var response = await dio.post(url,
           options: Options(
               headers: {
                 'Accept': 'application/json',
@@ -37,7 +37,7 @@ class IntiatePayementApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          queryParameters: {"amount": amount, "payOpt": "", "user_id": userId});
+          );
       print("::::::::<initiate payent URL>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);

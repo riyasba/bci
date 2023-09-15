@@ -2,6 +2,7 @@ import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
+import 'package:bci/screens/members/payment_gateway_view/payment_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -127,7 +128,14 @@ paymentBottomSheet(BuildContext context, double amount) {
                                   .isWalletOrNot
                                   .value ==
                               0) {
-                            Get.find<ProfileController>().payFromCart(amount);
+                            // Get.find<ProfileController>().payFromCart(amount);
+                               Get.to(() => PaymentWebView(
+                                  payOpt: "",
+                                  payType: 3,
+                                  totalAmount: amount.toStringAsFixed(0),
+                                  userId: Get.find<ProfileController>().profileData.first.id
+                                      .toString(),
+                                ));
                           } else {
                            
                             Get.find<ProfileController>().payFromWallet(

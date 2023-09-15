@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/services/network/profile_api_services/initiate_payment_api_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 // import 'package:havyou/src/controllers/Instant_top_up_controller.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:dio/dio.dart' as dio;
 
 class PaymentWebView extends StatefulWidget {
   String userId;
@@ -21,6 +23,7 @@ class PaymentWebView extends StatefulWidget {
     required this.totalAmount,
     required this.payOpt,
     required this.payType,
+    this.planId,
   });
 
   @override
@@ -83,7 +86,8 @@ class _PaymentWebViewState extends State<PaymentWebView> {
         onWillPop: _onBack,
         child: SafeArea(
             child: WebView(
-          initialUrl: "https://www.portal.bcipvtltd.com/paymentgateway?amount=${widget.totalAmount}&payOpt=&user_id=${widget.userId}",
+          initialUrl:
+              "https://www.portal.bcipvtltd.com/paymentgateway?amount=${widget.totalAmount}&payOpt=dc&user_id=${widget.userId}",
           javascriptMode: JavascriptMode.unrestricted,
           allowsInlineMediaPlayback: true,
           gestureNavigationEnabled: true,
@@ -105,15 +109,28 @@ class _PaymentWebViewState extends State<PaymentWebView> {
 
             if (url.trim() ==
                 "https://www.portal.bcipvtltd.com/api/response_transaction") {
+              IntiatePayementApiServices initatePay =
+                  IntiatePayementApiServices();
 
-                      if(widget.payType == 0){
-                        profileController.payForSubscribe( id: widget.planId);
-                      }else if(widget.payType == 1){
-                                  profileController.payCart();
-                      } else if (widget.payType == 2) {
-                            profileController.payFromWallet(amount: widget.totalAmount);
-                      }
-                  
+              if (widget.payType == 1) {
+                profileController.payForSubscribe(id: widget.planId);
+              } else if (widget.payType == 3) {
+                profileController.payCart();
+              } else if (widget.payType == 2) {
+                profileController.payFromWallet(amount: widget.totalAmount);
+              }
+
+              dio.Response<dynamic> response = await initatePay.initiatePayment(
+                  url:
+                      "https://www.portal.bcipvtltd.com/api/response_transaction");
+
+              if (response.data["status"] == "success") {
+                //
+              } else {
+                Get.rawSnackbar(
+                    message: response.data["message"],
+                    backgroundColor: Colors.red);
+              }
             }
 
             // paymentController.getPaymantResponse(widget.orderId);
