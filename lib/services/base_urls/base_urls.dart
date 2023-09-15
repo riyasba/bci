@@ -91,7 +91,7 @@ abstract class BaseApiService {
 
   //withdraw amount
   final String withdrawAmountURL =
-      "https://www.portal.bcipvtltd.com/api/auth/withdrawAmount";
+      "https://www.portal.bcipvtltd.com/api/auth/withdraw_wallet";
 
   final String hotelBookingDetailsURL =
       "https://www.portal.bcipvtltd.com/api/auth/get_booking_detail";
@@ -112,4 +112,12 @@ abstract class BaseApiService {
   //get gallery
   final String getGalleryURI =
       "https://www.portal.bcipvtltd.com/api/auth/get_gallery";
+
+   //support admin details
+      final String supportAdminDetailsApiUrl =
+      "https://portal.bcipvtltd.com/api/get/app/support/details";
+
+      //notification count
+      final String notificationCountApiUrl =
+      "https://portal.bcipvtltd.com/api/auth/notification/count";
 }

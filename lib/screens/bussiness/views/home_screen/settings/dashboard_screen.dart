@@ -31,17 +31,17 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(250),
+          preferredSize:const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 158,
+              height: 150,
               color: kblue,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 25),
+                    padding: const EdgeInsets.only(left: 10),
                     child: IconButton(
                         onPressed: () {
                           Get.back();
@@ -52,12 +52,16 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         )),
                   ),
                   const Padding(
-                    padding: const EdgeInsets.only(right: 120),
+                    padding: EdgeInsets.only(right: 20),
                     child: Text(
                       'Dashboard',
-                      style: TextStyle(fontSize: 23, color: Colors.white),
+                      style: TextStyle(fontSize: 20,
+                       color: Colors.white,
+                       fontWeight: FontWeight.w700
+                       ),
                     ),
                   ),
+                  Container(width: 20,)
                 ],
               ),
             ),

@@ -36,7 +36,7 @@ class _BusinessYourReferralScreenState extends State<BusinessYourReferralScreen>
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 150.h,
+              height: 150,
               color: kblue,
               child: Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
@@ -52,16 +52,17 @@ class _BusinessYourReferralScreenState extends State<BusinessYourReferralScreen>
                           color: Colors.white,
                         )),
                     Padding(
-                      padding:const EdgeInsets.only(right: 20),
+                      padding:const EdgeInsets.only(right: 10),
                       child: Text(
                         'Invite',
                         style: TextStyle(
-                            fontSize: 22.sp,
-                            fontWeight: FontWeight.w600,
-                            color:const Color(0xffF9F8FD)),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color:kwhite),
                       ),
                     ),
-                    Image.asset('assets/images/helps.png')
+                    Container(width: 10,)
+                    //Image.asset('assets/images/helps.png')
                   ],
                 ),
               ),
@@ -89,48 +90,51 @@ class _BusinessYourReferralScreenState extends State<BusinessYourReferralScreen>
               ),
             ),ksizedbox10,
             Obx( () =>
-               Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(color: kblue)
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10,right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(settingsController.referralCode.value,style: TextStyle(
-                           fontSize: 16, color: kblue, fontWeight: FontWeight.w500),),
-                        InkWell(
-                          onTap: (){
-                            FlutterClipboard.copy(settingsController.referralCode.value).then(
-                                                  (value) =>
-                                                      Fluttertoast.showToast(
-                                                          msg:
-                                                              "Copy to clipboard",
-                                                          toastLength: Toast
-                                                              .LENGTH_SHORT,
-                                                          gravity: ToastGravity
-                                                              .CENTER,
-                                                          timeInSecForIosWeb: 1,
-                                                          backgroundColor:
-                                                              kblue,
-                                                          textColor:
-                                                              Colors.white,
-                                                          fontSize: 16.0),
-                                                  //print("code copied")
-                                                );
-                          },
-                          child: Image.asset('assets/images/Icon awesome-copy.png')),
-                      ],
+               Padding(
+                 padding: const EdgeInsets.only(left: 15,right: 15),
+                 child: Container(
+                  height: 50,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: kblue)
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10,right: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(settingsController.referralCode.value,style: TextStyle(
+                             fontSize: 16, color: kblue, fontWeight: FontWeight.w500),),
+                          InkWell(
+                            onTap: (){
+                              FlutterClipboard.copy(settingsController.referralCode.value).then(
+                                                    (value) =>
+                                                        Fluttertoast.showToast(
+                                                            msg:
+                                                                "Copy to clipboard",
+                                                            toastLength: Toast
+                                                                .LENGTH_SHORT,
+                                                            gravity: ToastGravity
+                                                                .CENTER,
+                                                            timeInSecForIosWeb: 1,
+                                                            backgroundColor:
+                                                                kblue,
+                                                            textColor:
+                                                                Colors.white,
+                                                            fontSize: 16.0),
+                                                    //print("code copied")
+                                                  );
+                            },
+                            child: Image.asset('assets/images/Icon awesome-copy.png')),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ),
+                             ),
+               ),
             ),
 
             // authController.referralcode();
@@ -138,36 +142,39 @@ class _BusinessYourReferralScreenState extends State<BusinessYourReferralScreen>
             //     Share.share('$referralmsg');
 
             ksizedbox30,
-            Row(
-              children: [
-                Text(
-                  'Referral Count :  ',
-                  style: TextStyle(
-                      fontSize: 20.sp,
-                      color: kblue,
-                      fontWeight: FontWeight.w600),
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: Row(
+                children: [
+                  Text(
+                    'Referral Count :  ',
+                    style: TextStyle(
+                        fontSize: 20.sp,
+                        color: kblue,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Container(
+                    height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(7), color: korange),
+                  child: Center(
+                      child:settingsController.getWalletData.isEmpty ? const Text("") : 
+                      Text(settingsController.getWalletData.first.referrals.totalReferrals.toString(),
+                    style: TextStyle(
+              color: kwhite,
+              fontSize: 18,
+              fontWeight: FontWeight.w600),
+                  )),
+                  
                 ),
-                Container(
-                  height: 30,
-      width: 30,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(7), color: korange),
-      child: Center(
-          child:settingsController.getWalletData.isEmpty ? const Text("") : 
-          Text(settingsController.getWalletData.first.referrals.totalReferrals.toString(),
-        style: TextStyle(
-            color: kwhite,
-            fontSize: 18,
-            fontWeight: FontWeight.w600),
-      )),
-      
-    ),
-              ],
+                ],
+              ),
             ),
-            ksizedbox40,
+            ksizedbox20,
             ksizedbox20,
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
+              padding: const EdgeInsets.only(left: 15, right: 15),
               child: InkWell(
                 onTap: () {
                   String referralmsg = "Use my referral code ${settingsController.referralCode.value} when you sign up, and we'll both receive fantastic rewards. Don't forget to click on the link below to download the app and start enjoying the perks right away!\n\n";

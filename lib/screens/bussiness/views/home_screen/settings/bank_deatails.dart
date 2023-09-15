@@ -83,31 +83,37 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 158,
+              height: 150,
               color: kblue,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: kwhite,
-                      )),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: kwhite,
+                        )),
+                  ),
                   const Padding(
                     padding: EdgeInsets.only(right: 25),
                     child: Text(
                       'Bank Details',
-                      style: TextStyle(fontSize: 21, color: Colors.white),
+                      style: TextStyle(fontSize: 20,
+                       color: Colors.white,
+                       fontWeight: FontWeight.w700
+                       ),
                     ),
                   ),
-                  Container()
+                  Container(width: 20,)
                   // Padding(
                   //   padding: const EdgeInsets.only(right: 10),
                   //   child: ElevatedButton(

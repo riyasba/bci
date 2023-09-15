@@ -147,19 +147,19 @@ class _AddServicesViewState extends State<AddServicesView> {
     print(":::::Data ${MediaQuery.of(context).viewInsets.bottom}");
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 158,
+              height: 150,
               color: kblue,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 17),
+                padding: const EdgeInsets.only(bottom: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20),
+                      padding: const EdgeInsets.only(left: 10),
                       child: IconButton(
                           onPressed: () {
                             Get.back();
@@ -174,13 +174,13 @@ class _AddServicesViewState extends State<AddServicesView> {
                       child: Text(
                         'Add Products',
                         style:
-                            TextStyle(fontSize: 22, color: Color(0xffF8F9FD)),
+                            TextStyle(fontSize: 20, 
+                            color: Color(0xffF8F9FD),
+                            fontWeight: FontWeight.w700
+                            ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Image.asset('assets/images/helps.png'),
-                    )
+                    Container(width: 20,)
                   ],
                 ),
               ),

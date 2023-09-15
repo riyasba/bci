@@ -1,24 +1,15 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/bussiness/views/business/create_coupons_screens.dart';
-import 'package:bci/screens/members/offer%20screen/offer_screen_grid.dart';
 import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/availability_scree.dart';
-import 'package:bci/screens/bussiness/views/home_screen/bookings_screen.dart';
 import 'package:bci/screens/bussiness/views/home_screen/offers_screen.dart';
-import 'package:bci/screens/bussiness/views/home_screen/service_booking_screen.dart';
-import 'package:bci/screens/bussiness/views/home_screen/settings/my_account_screen.dart';
-import 'package:bci/screens/bussiness/views/home_screen/wallet_screen.dart';
-import 'package:download_assets/download_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../../../controllers/vendorbanner_controller.dart';
-import '../home_screen/contact_admin.dart';
 import '../home_screen/coupon_screen.dart';
 import 'notification_screen.dart';
 
@@ -40,10 +31,10 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
     super.initState();
     profileController.getProfile();
     vendorController.getvendorbanner();
+    profileController.notifyCount();
   
   }
 
- 
 
   final vendorController = Get.find<VendorBannerController>();
   @override
@@ -51,7 +42,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -63,7 +54,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                   Image.asset('assets/images/projectlogo.png'),
                   GetBuilder<ProfileController>(builder: (_) {
                     return Padding(
-                      padding: const EdgeInsets.only(right: 20),
+                      padding: const EdgeInsets.only(right: 0),
                       child: profileController.profileData.isEmpty
                           ? Container()
                           : Container(
@@ -73,21 +64,57 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                                 'Hello, ${profileController.profileData.first.name}',
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
-                                    fontSize: 23,
-                                    //fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
                                     color: Colors.white),
                               ),
                             ),
                     );
                   }),
-                  IconButton(
-                      onPressed: () {
-                        Get.to(const NotificationScreen());
-                      },
-                      icon: Icon(
-                        Icons.notifications,
-                        color: kwhite,
-                      ))
+                  GetBuilder<ProfileController>(builder: (_) {
+                    return Stack(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Get.offAll(HomeBottomnavigationBar(index: 1,),
+                            );
+                          },
+                          icon: Icon(
+                            Icons.notifications,
+                            color: kwhite,
+                          ),
+                        ),
+                        Positioned(
+                          left: 22,
+                          top: 10,
+                          child: profileController.countData != null &&
+                                  profileController.countData!.totalCount > 0
+                              ? Container(
+                                  height: 16,
+                                  width: 16,
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Center(
+                                    child:
+                                        profileController
+                                                .countData!.totalCount > 9
+                                            ? const Text("9+")
+                                            : Text(
+                                                profileController
+                                                    .countData!.totalCount
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontSize: 10,
+                                                    color: kwhite),
+                                              ),
+                                  ),
+                                )
+                              : Container(),
+                        ),
+                      ],
+                    );
+                  }),
                 ],
               ),
             ),

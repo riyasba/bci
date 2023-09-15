@@ -67,11 +67,11 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 158,
+              height: 150,
               color: kblue,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 15),
@@ -79,7 +79,7 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20),
+                      padding: const EdgeInsets.only(left: 10),
                       child: IconButton(
                           onPressed: () {
                             Get.back();
@@ -94,13 +94,13 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                       child: Text(
                         'Availability',
                         style:
-                            TextStyle(fontSize: 23, color: Color(0xffF8F9FD)),
+                            TextStyle(fontSize: 20,
+                             color: Color(0xffF8F9FD),
+                             fontWeight: FontWeight.w700
+                             ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Image.asset('assets/images/helps.png'),
-                    )
+                   Container(width: 20,)
                   ],
                 ),
               ),
@@ -124,110 +124,7 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                 InkWell(
                   onTap: () {
                     Get.to(() => const AddServicesView());
-                    // showDialog(
-                    //     context: context,
-                    //     builder: (context) {
-                    //       return Padding(
-                    //         padding: const EdgeInsets.only(top: 80, bottom: 65),
-                    //         child: Dialog(
-                    //           shape: RoundedRectangleBorder(
-                    //               borderRadius: BorderRadius.circular(10)),
-                    //           child: Container(
-                    //             child: Column(
-                    //               children: [
-                    //                 Row(
-                    //                   children: [
-                    //                     IconButton(
-                    //                         onPressed: () {
-
-                    //                         },
-                    //                         icon: Icon(Icons.arrow_back)),
-                    //                     Text(
-                    //                       'Add Service',
-                    //                       style: TextStyle(
-                    //                           fontSize: 16, color: kblue),
-                    //                     )
-                    //                   ],
-                    //                 ),
-                    //                 Padding(
-                    //                   padding: const EdgeInsets.only(
-                    //                       left: 10, right: 10, top: 5),
-                    //                   child: TextField(
-                    //                     controller: serviceController,
-                    //                     decoration: InputDecoration(
-                    //                         labelText: 'Service',
-                    //                         labelStyle: TextStyle(
-                    //                             fontSize: 16, color: kgrey),
-                    //                         border: OutlineInputBorder(
-                    //                             borderRadius:
-                    //                                 BorderRadius.circular(10),
-                    //                             borderSide:
-                    //                                 BorderSide(color: kgrey))),
-                    //                   ),
-                    //                 ),
-                    //                 ksizedbox20,
-                    //                 Padding(
-                    //                   padding: const EdgeInsets.only(
-                    //                       left: 10, right: 10),
-                    //                   child: TextField(
-                    //                     controller: serviceController,
-                    //                     decoration: InputDecoration(
-                    //                         labelText: 'Description',
-                    //                         labelStyle: TextStyle(
-                    //                             fontSize: 16, color: kgrey),
-                    //                         border: OutlineInputBorder(
-                    //                             borderRadius:
-                    //                                 BorderRadius.circular(10),
-                    //                             borderSide:
-                    //                                 BorderSide(color: kgrey))),
-                    //                   ),
-                    //                 ),
-                    //                 ksizedbox30,
-                    //                 Container(
-                    //                   height: 200,
-                    //                   width: 200,
-                    //                   decoration: BoxDecoration(
-                    //                     color: Color(0xffE5E5E5),
-                    //                   ),
-                    //                   child: Column(
-                    //                     mainAxisAlignment:
-                    //                         MainAxisAlignment.center,
-                    //                     children: [
-                    //                       Image.asset(
-                    //                           'assets/images/avaiimageupload.png'),
-                    //                       Padding(
-                    //                         padding:
-                    //                             const EdgeInsets.only(top: 8),
-                    //                         child: Text(
-                    //                           'Add Images',
-                    //                           style: TextStyle(
-                    //                               color: kgrey, fontSize: 15),
-                    //                         ),
-                    //                       )
-                    //                     ],
-                    //                   ),
-                    //                 ),
-                    //                 ksizedbox30,
-                    //                 ElevatedButton(
-                    //                     style: ElevatedButton.styleFrom(
-                    //                         backgroundColor: kblue,
-                    //                         minimumSize: Size(
-                    //                             MediaQuery.of(context)
-                    //                                     .size
-                    //                                     .width *
-                    //                                 0.6,
-                    //                             40)),
-                    //                     onPressed: () {},
-                    //                     child: Text(
-                    //                       'Submit',
-                    //                       style: TextStyle(color: kwhite),
-                    //                     ))
-                    //               ],
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       );
-                    //     });
+                    
                   },
                   child: Container(
                       height: 40,
@@ -377,9 +274,9 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                           ksizedbox20,
                           Text('No Data Availability',
                           style: TextStyle(
-                            fontSize: 16.sp,
+                            fontSize: 16,
                             color: kblue,
-                          
+                            fontWeight: FontWeight.w700
                           ),)
                         ],
                       ),

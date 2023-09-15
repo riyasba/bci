@@ -132,7 +132,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(280),
+          preferredSize:const Size.fromHeight(280),
           child: Stack(children: [
             Container(
               height: 250,
@@ -142,41 +142,20 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
             ClipPath(
               clipper: SinCosineWaveClipper(),
               child: Container(
-                height: 158,
+                height: 150,
                 color: kblue,
-                child: Row(
+                child:const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                      Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          color: kwhite,
-                        )),
-                  ),
-                    // IconButton(
-                    //   onPressed: () {
-                    //     Get.off(BusinessHomeScreen());
-                    //   },
-                    //   icon: Icon(
-                    //     Icons.arrow_back_ios,
-                    //     color: kwhite,
-                    //   )),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 0),
+                      padding: EdgeInsets.only(left: 20),
                       child: Text(
                         'Bookings',
-                        style: TextStyle(fontSize: 23, color: Colors.white),
+                        style: TextStyle(fontSize: 20, 
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Image.asset('assets/images/helps.png'),
-                    )
                   ],
                 ),
               ),
@@ -305,8 +284,9 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                    ksizedbox20,
                    Text('No Booking History',
                    style: TextStyle(
-                    fontSize: 16.sp,
-                    color: kblue
+                    fontSize: 16,
+                    color: kblue,
+                    fontWeight: FontWeight.w700
                    ),)]),
               )
             : ListView.builder(

@@ -36,41 +36,41 @@ class _CouponsListViewState extends State<CouponsListView> {
     final _mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 158,
+              height: 150,
               color: kblue,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          color: kwhite,
-                        )),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Text(
-                      'Coupon List',
-                      style: TextStyle(
-                          fontSize: 23,
-                          //fontWeight: FontWeight.bold,
-                          color: Colors.white),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(
+                            Icons.arrow_back_ios,
+                            color: kwhite,
+                          )),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Image.asset('assets/images/helps.png'),
-                  )
-                ],
+                    const Padding(
+                      padding: EdgeInsets.only(right: 20),
+                      child: Text(
+                        'Coupon List',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white),
+                      ),
+                    ),
+                    Container(width: 20,)
+                  ],
+                ),
               ),
             ),
           )),
@@ -82,7 +82,20 @@ class _CouponsListViewState extends State<CouponsListView> {
               height: _mediaQuery.height * 0.70,
               child: authController.addedCouponList.isEmpty
                   ? Center(
-                      child: Image.asset("assets/images/no_data_found.gif"),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset("assets/icons/vector.png"),
+                          ksizedbox20,
+                          Text(
+                            'No Coupons Available',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: kblue,
+                                fontWeight: FontWeight.w700),
+                          )
+                        ],
+                      ),
                     )
                   : ListView.builder(
                       itemCount: authController.addedCouponList.length,

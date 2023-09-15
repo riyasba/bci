@@ -64,41 +64,21 @@ class _WalletScreenState extends State<WalletScreen> {
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 158,
+              height: 150,
               color: kblue,
-              child: Row(
+              child:const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          color: kwhite,
-                        )),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 0),
+                    padding: EdgeInsets.only(left:20),
                     child: Text(
                       'Wallet',
                       style: TextStyle(
-                          fontSize: 23,
-                          //fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
                           color: Colors.white),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: InkWell(
-                        onTap: () {
-                          Get.to(NotificationScreen());
-                        },
-                        child:
-                            Image.asset('assets/images/notificationimage.png')),
-                  )
                 ],
               ),
             ),
@@ -122,7 +102,7 @@ class _WalletScreenState extends State<WalletScreen> {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 20),
+                    padding: const EdgeInsets.only(left: 15, top: 10),
                     child: Container(
                       height: 110.h,
                       width: 235.w,
@@ -178,7 +158,7 @@ class _WalletScreenState extends State<WalletScreen> {
                           profileController.profileData.first.bankAccountName !=
                               "" &&
                           profileController.profileData.first.ifscCode != "") {
-                        Get.to(() => EnterAmountForWithdrawalScreen());
+                        Get.to(() => const EnterAmountForWithdrawalScreen());
                       } else {
                         showModalBottomSheet(
                             shape: RoundedRectangleBorder(
@@ -244,7 +224,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                 color: kyellow,
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(color: kOrange, width: 1)),
-                            height: _mediaQuery.height > 700 ? 108.h : 110.h,
+                            height: _mediaQuery.height > 700 ? 110.h : 110.h,
                             width: _mediaQuery.width > 700 ? 90.w : 95.w,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -302,7 +282,7 @@ class _WalletScreenState extends State<WalletScreen> {
               ),
               GetBuilder<AuthController>(builder: (_) {
                 return Container(
-                  height: _mediaQuery.height,
+                  height: _mediaQuery.height*0.50,
                   child: authController.transactionHistorydata.isNotEmpty
                       ? ListView.builder(
                           itemCount:
@@ -434,15 +414,16 @@ class _WalletScreenState extends State<WalletScreen> {
                             children: [
                               Image.asset(
                                 'assets/images/walletnotavailableimage.png',
-                                fit: BoxFit.fitHeight,
+                               // fit: BoxFit.fitHeight,
                                 height: 200,
                               ),
                               ksizedbox20,
                               Text(
                                 'No Wallet Data',
                                 style: TextStyle(
-                                  fontSize: 16.sp,
+                                  fontSize: 16,
                                   color: kblue,
+                                  fontWeight: FontWeight.w700
                                 ),
                               ),
                             ],

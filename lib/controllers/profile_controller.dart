@@ -4,6 +4,8 @@ import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/models/bank_account_no_model.dart';
 import 'package:bci/models/business_user_profile.dart';
 import 'package:bci/models/merchant_update_profile.dart';
+import 'package:bci/models/notification_count_model.dart';
+import 'package:bci/models/support_admin_details_model.dart';
 
 import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:bci/screens/bussiness/views/home_screen/settings/my_account_screen.dart';
@@ -11,6 +13,8 @@ import 'package:bci/services/network/profile_api_services/profile_api_services.d
 import 'package:bci/services/network/profile_api_services/profile_pic_update_api.dart';
 import 'package:bci/services/network/profile_api_services/profile_update_api.dart';
 import 'package:bci/services/network/profile_api_services/update_bank_account_api_services.dart';
+import 'package:bci/services/network/settings_api_services/notification_count_api_service.dart';
+import 'package:bci/services/network/settings_api_services/support_admin_details_api_service.dart';
 import 'package:bci/services/network/wallet_api_services/withdraw_from_wallet_api_services.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -191,4 +195,36 @@ class ProfileController extends GetxController {
       );
     }
   }
+
+  //support admin detail
+  SupportAdminDetailsApiServices supportAdminDetailsApiServices = SupportAdminDetailsApiServices();
+  ContactDetailsData? contactDetailsData;
+  
+  supportAdminDetail() async {
+    dio.Response<dynamic> response =
+        await supportAdminDetailsApiServices.supportAdminDetailsApiServices();
+    if (response.statusCode == 200) {
+      SupportAdminModel supportAdminModel =
+          SupportAdminModel.fromJson(response.data);
+      contactDetailsData = supportAdminModel.data;
+    }
+    update();
+  }
+
+  //notification count
+  NotificationCountApiServices notificationCountApiServices = NotificationCountApiServices();
+  NotificationCountData? countData;
+
+
+  notifyCount() async {
+    dio.Response<dynamic> response =
+        await notificationCountApiServices.notificationCountApiServices();
+    if (response.statusCode == 200) {
+      NotificationCount notificationCount =
+          NotificationCount.fromJson(response.data);
+      countData = notificationCount.data;
+    }
+    update();
+  }
+
 }

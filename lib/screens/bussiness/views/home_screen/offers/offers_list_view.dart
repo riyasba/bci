@@ -40,15 +40,17 @@ class _OfferScreenListViewState extends State<OfferScreenListView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Container(
-                            height: 30,
-                            width: 30,
-                            child: Image.asset(
-                                'assets/images/chevron-left (2).png'))),
+                     Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(
+                            Icons.arrow_back_ios,
+                            color: kwhite,
+                          )),
+                    ),
                     const Padding(
                       padding: EdgeInsets.only(right: 20),
                       child: Text(
@@ -59,19 +61,41 @@ class _OfferScreenListViewState extends State<OfferScreenListView> {
                             color: Colors.white),
                       ),
                     ),
-                    InkWell(
-                        onTap: () {
-                          Get.to(const ContactAdmin());
-                        },
-                        child: Image.asset(
-                            'assets/images/3669173_help_ic_icon.png'))
+                    Container(width: 20,)
+                    // InkWell(
+                    //     onTap: () {
+                    //       Get.to(const ContactAdmin());
+                    //     },
+                    //     child: Image.asset(
+                    //         'assets/images/3669173_help_ic_icon.png'))
                   ],
                 ),
               ),
             ),
           )),
       body: GetBuilder<ServicesController>(builder: (_) {
-        return ListView.builder(
+        return servicesController.offerListData.isEmpty ?
+         Container(
+                    child: Center(
+                      child:Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/icons/offer.jpeg',
+                          //height: 300,
+                          //fit: BoxFit.fitHeight,
+                          ),
+                          ksizedbox20,
+                          Text('No offers Available',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: kblue,
+                            fontWeight: FontWeight.w700
+                          ),)
+                        ],
+                      ),
+                    ),
+                  ) :
+          ListView.builder(
             itemCount: servicesController.offerListData.length,
             itemBuilder: ((context, index) {
               return Column(

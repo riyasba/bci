@@ -27,11 +27,11 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 158,
+              height: 150,
               color: kblue,
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,7 +40,10 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
                     padding: EdgeInsets.only(left: 20),
                     child: Text(
                       'Settings',
-                      style: TextStyle(fontSize: 25, color: Colors.white),
+                      style: TextStyle(fontSize: 20,
+                       color: Colors.white,
+                       fontWeight: FontWeight.w700
+                       ),
                     ),
                   ),
                 ],
@@ -51,7 +54,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
         children: [
           InkWell(
             onTap: () {
-              Get.to(() => MyAccountScreen());
+              Get.to(() => const MyAccountScreen());
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -79,7 +82,6 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
             ),
           ),
           ksizedbox10,
-
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
@@ -87,7 +89,6 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
               color: kgrey,
             ),
           ),
-
           ksizedbox10,
           InkWell(
             onTap: () {
@@ -104,8 +105,9 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
                     Container(
                         width: 25,
                         child: Icon(
-                          Icons.add_a_photo,
+                          Icons.camera_alt,
                           color: kblue,
+                          size: 27,
                         )),
                     Padding(
                       padding: const EdgeInsets.only(left: 17),
@@ -414,7 +416,7 @@ class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
                   children: [
                     Image.asset('assets/images/settinglogout.png'),
                     Padding(
-                      padding: const EdgeInsets.only(left: 17),
+                      padding: const EdgeInsets.only(left: 22),
                       child: Text(
                         'Log out',
                         style: TextStyle(

@@ -150,46 +150,45 @@ class _OffersScreenState extends State<OffersScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(250),
+          preferredSize:const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 158,
+              height: 150,
               color: kblue,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          color: kwhite,
-                        )),
-                  ),
-                   Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: InkWell(
-                      onTap: (){
-                        Get.to(()=> OfferScreenListView());
-                      },
-                      child: const Text(
-                        'View Offers',
-                        style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(
+                            Icons.arrow_back_ios,
+                            color: kwhite,
+                          )),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Image.asset('assets/images/helps.png'),
-                  )
-                ],
+                     const Text(
+                       'View Offers',
+                       style: TextStyle(
+                           fontSize: 22,
+                           fontWeight: FontWeight.bold,
+                           color: Colors.white),
+                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: InkWell(
+                        onTap: (){
+                          Get.to(() => const OfferScreenListView());
+                        },
+                        child: Image.asset('assets/icons/offers.png',color: kwhite,)),
+                    )
+                  ],
+                ),
               ),
             ),
           )),

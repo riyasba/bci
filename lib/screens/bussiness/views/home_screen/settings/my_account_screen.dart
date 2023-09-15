@@ -147,38 +147,41 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 158,
+              height: 150,
               color: kblue,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: IconButton(
-                      onPressed: () {
-                        Get.offAll(
-                          HomeBottomnavigationBar(
-                            index: 4,
-                          ),
-                        );
+                    padding: const EdgeInsets.only(left: 20),
+                    child: InkWell(
+                      onTap: (){
+                         Get.offAll(
+                            HomeBottomnavigationBar(
+                              index: 4,
+                            ),
+                          );
                       },
-                      icon: Icon(
+                      child: Icon(
                         Icons.arrow_back_ios,
                         color: kwhite,
-                      ),
-                    ),
+                        )),
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(right: 85),
+                    padding: EdgeInsets.only(right: 0),
                     child: Text(
                       'My Account',
-                      style: TextStyle(fontSize: 23, color: Colors.white),
+                      style: TextStyle(fontSize: 20,
+                       color: Colors.white,
+                       fontWeight: FontWeight.w700
+                       ),
                     ),
                   ),
+                  Container(width: 20,)
                 ],
               ),
             ),
