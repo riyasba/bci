@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/profile_controller.dart';
-import 'package:bci/models/category_model.dart';
 import 'package:bci/screens/bussiness/views/busines_widget/bottumnavigation.dart';
 import 'package:bci/screens/bussiness/views/home_screen/settings/edit_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
@@ -118,12 +117,16 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
           profileController.profileData.first.alternateMobile ?? "";
       gstnoController.text = profileController.profileData.first.gstNo ?? "";
       categoryController.text = profileController.profileData.first.category;
-      bankAccountNameController.text = profileController.profileData.first.bankAccountName;
-      bankAccountNumberController.text = profileController.profileData.first.bankAccountNumber;
+      bankAccountNameController.text =
+          profileController.profileData.first.bankAccountName;
+      bankAccountNumberController.text =
+          profileController.profileData.first.bankAccountNumber;
       bankNameController.text = profileController.profileData.first.bankName;
-      accountTypeController.text = profileController.profileData.first.accountType;
+      accountTypeController.text =
+          profileController.profileData.first.accountType;
       ifscCodeController.text = profileController.profileData.first.ifscCode;
-      mapUrlController.text = profileController.profileData.first.locationAddress;
+      mapUrlController.text =
+          profileController.profileData.first.locationAddress;
       getCategorybyID();
     }
   }
@@ -156,13 +159,18 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                   Padding(
                     padding: const EdgeInsets.only(right: 20),
                     child: IconButton(
-                        onPressed: () {
-                          Get.offAll(HomeBottomnavigationBar(index: 4,));
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          color: kwhite,
-                        )),
+                      onPressed: () {
+                        Get.offAll(
+                          HomeBottomnavigationBar(
+                            index: 4,
+                          ),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color: kwhite,
+                      ),
+                    ),
                   ),
                   const Padding(
                     padding: EdgeInsets.only(right: 85),
@@ -175,81 +183,86 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               ),
             ),
           )),
-      body: GetBuilder<ProfileController>(
-        builder: (_) {
-          return ListView(children: [
-            Column(
-              children: [
-                Stack(children: [
-                  if (profileController.profileData.isNotEmpty)
-                    GetBuilder<ProfileController>(builder: (_) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          profileController.profileData.isEmpty
-                              ? Image.asset('assets/images/settingprofile.png')
-                              : Container(
-                                  height: 80,
-                                  width: 80,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: NetworkImage(profileController
-                                              .profileData.first.profilePicture)),
-                                      borderRadius: BorderRadius.circular(50)),
-                                ),
-                        ],
-                      );
-                    }),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10, bottom: 10),
-                        child: TextButton(
-                            onPressed: () {
-                              Get.to(const SettingEditScreen());
-                            },
-                            child: Text(
-                              'Edit',
-                              style: TextStyle(fontSize: 20, color: kOrange),
-                            )),
-                      ),
-                    ],
-                  )
-                ]),
-                ksizedbox20,
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                  child: Container(
-                    height: 55,
-                    child: TextField(
-                      controller: displayNameController,
-                      readOnly: true,
-                      inputFormatters: [
+      body: GetBuilder<ProfileController>(builder: (_) {
+        return ListView(children: [
+          Column(
+            children: [
+              Stack(children: [
+                if (profileController.profileData.isNotEmpty)
+                  GetBuilder<ProfileController>(builder: (_) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        profileController.profileData.isEmpty
+                            ? Image.asset('assets/images/settingprofile.png')
+                            : CircleAvatar(
+                                backgroundImage: NetworkImage(profileController
+                                    .profileData.first.profilePicture),
+                                radius: 50,
+                              )
+
+                        // Container(
+                        //     height: 80,
+                        //     width: 80,
+                        //     decoration: BoxDecoration(
+                        //         image: DecorationImage(
+                        //             image: NetworkImage(profileController
+                        //                 .profileData.first.profilePicture)),
+                        //         borderRadius: BorderRadius.circular(50)),
+                        //   ),
+                      ],
+                    );
+                  }),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10, bottom: 10),
+                      child: TextButton(
+                          onPressed: () {
+                            Get.to(const SettingEditScreen());
+                          },
+                          child: Text(
+                            'Edit',
+                            style: TextStyle(fontSize: 20, color: kOrange,fontWeight: FontWeight.w500),
+                          )),
+                    ),
+                  ],
+                )
+              ]),
+              ksizedbox20,
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                child: Container(
+                  height: 55,
+                  child: TextField(
+                    controller: displayNameController,
+                    readOnly: true,
+                    inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
                     ],
-                      decoration: InputDecoration(
-                          labelText: 'Merchant display name',
-                          hintStyle: TextStyle(fontSize: 16, color: kblue),
-                          border: OutlineInputBorder()),
-                    ),
+                    decoration: InputDecoration(
+                        labelText: 'Merchant display name',
+                        hintStyle: TextStyle(fontSize: 16, color: kblue),
+                        border: OutlineInputBorder()),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                  child: Container(
-                    height: 55,
-                    child: TextField(
-                      controller: addressController,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                          labelText: 'Business Address',
-                          hintStyle: TextStyle(fontSize: 16, color: kblue),
-                          border: const OutlineInputBorder()),
-                    ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                child: Container(
+                  height: 55,
+                  child: TextField(
+                    controller: addressController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                        labelText: 'Business Address',
+                        hintStyle: TextStyle(fontSize: 16, color: kblue),
+                        border: const OutlineInputBorder()),
                   ),
                 ),
-                Padding(
+              ),
+              Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
                 child: Container(
                   height: 60,
@@ -263,192 +276,191 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                   ),
                 ),
               ),
-                // Padding(
-                //   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                //   child: TextField(
-                //     controller: signatureController,
-                //     decoration: InputDecoration(
-                //         hintText: '  Authorized signature name',
-                //         hintStyle: TextStyle(fontSize: 20, color: kblue),
-                //         border: OutlineInputBorder()),
-                //   ),
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                //   child: TextField(
-                //     controller: contactController,
-                //     decoration: InputDecoration(
-                //         hintText: '  Contact Person',
-                //         hintStyle: TextStyle(fontSize: 20, color: kblue),
-                //         border: OutlineInputBorder()),
-                //   ),
-                // ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                  child: Container(
-                    height: 55,
-                    child: TextField(
-                      controller: numberController,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                          labelText: 'Mobile Number',
-                          hintStyle: TextStyle(fontSize: 16, color: kblue),
-                          border:const OutlineInputBorder()),
-                    ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+              //   child: TextField(
+              //     controller: signatureController,
+              //     decoration: InputDecoration(
+              //         hintText: '  Authorized signature name',
+              //         hintStyle: TextStyle(fontSize: 20, color: kblue),
+              //         border: OutlineInputBorder()),
+              //   ),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+              //   child: TextField(
+              //     controller: contactController,
+              //     decoration: InputDecoration(
+              //         hintText: '  Contact Person',
+              //         hintStyle: TextStyle(fontSize: 20, color: kblue),
+              //         border: OutlineInputBorder()),
+              //   ),
+              // ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                child: Container(
+                  height: 55,
+                  child: TextField(
+                    controller: numberController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                        labelText: 'Mobile Number',
+                        hintStyle: TextStyle(fontSize: 16, color: kblue),
+                        border: const OutlineInputBorder()),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                  child: Container(
-                    height: 55,
-                    child: TextField(
-                      controller: aleternativeController,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                          labelText: 'Alternate Phone Number',
-                          hintStyle: TextStyle(fontSize: 16, color: kblue),
-                          border: const OutlineInputBorder()),
-                    ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                child: Container(
+                  height: 55,
+                  child: TextField(
+                    controller: aleternativeController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                        labelText: 'Alternate Phone Number',
+                        hintStyle: TextStyle(fontSize: 16, color: kblue),
+                        border: const OutlineInputBorder()),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                  child: Container(
-                    height: 55,
-                    child: TextField(
-                      controller: gstnoController,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                          labelText: 'GST No.',
-                          hintStyle: TextStyle(fontSize: 16, color: kblue),
-                          border: const OutlineInputBorder()),
-                    ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                child: Container(
+                  height: 55,
+                  child: TextField(
+                    controller: gstnoController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                        labelText: 'GST No.',
+                        hintStyle: TextStyle(fontSize: 16, color: kblue),
+                        border: const OutlineInputBorder()),
                   ),
                 ),
-                ksizedbox10,
-                // GetBuilder<AuthController>(builder: (_) {
-                //   return Padding(
-                //     padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-                //     child: Container(
-                //       height: 55,
-                //       width: size.width,
-                //       decoration: BoxDecoration(
-                //           borderRadius: BorderRadius.circular(3),
-                //           border: Border.all(
-                //               color: const Color.fromARGB(255, 5, 5, 5)
-                //                   .withOpacity(0.8))),
-                //       child: Padding(
-                //         padding:
-                //             const EdgeInsets.only(left: 10, right: 10, top: 15),
-                //         child: DropdownButton<CategoryList>(
-                //           value: merchantCategory,
-                //           isExpanded: true,
-                //           icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                //           elevation: 0,
-                //           itemHeight: 55,
-                //           isDense: true,
-                //           dropdownColor: Colors.grey[250],
-                //           style: const TextStyle(color: Colors.black54),
-                //           hint: Text(
-                //             "Merchant Category Name",
-                //             style: TextStyle(fontSize: 16, color: kblue),
-                //           ),
-                //           onChanged: (CategoryList? value) {
-                //             setState(() {
-                //               merchantCategory = value!;
-                //               categoryController.text = value.id.toString();
-                //             });
-                //           },
-                //           items: authController.categoryList
-                //               .map<DropdownMenuItem<CategoryList>>(
-                //                   (CategoryList value) {
-                //             return DropdownMenuItem<CategoryList>(
-                //               value: value,
-                //               child: Text(value.title),
-                //             );
-                //           }).toList(),
-                //         ),
-                //       ),
-                //     ),
-                //   );
-                // }
-                // ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                  child: Container(
-                    height: 55,
-                    child: TextField(
-                      controller: bankAccountNameController,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                          labelText: 'Bank Name',
-                          hintStyle: TextStyle(fontSize: 16, color: kblue),
-                          border: const OutlineInputBorder()),
-                    ),
+              ),
+              ksizedbox10,
+              // GetBuilder<AuthController>(builder: (_) {
+              //   return Padding(
+              //     padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+              //     child: Container(
+              //       height: 55,
+              //       width: size.width,
+              //       decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(3),
+              //           border: Border.all(
+              //               color: const Color.fromARGB(255, 5, 5, 5)
+              //                   .withOpacity(0.8))),
+              //       child: Padding(
+              //         padding:
+              //             const EdgeInsets.only(left: 10, right: 10, top: 15),
+              //         child: DropdownButton<CategoryList>(
+              //           value: merchantCategory,
+              //           isExpanded: true,
+              //           icon: const Icon(Icons.keyboard_arrow_down_outlined),
+              //           elevation: 0,
+              //           itemHeight: 55,
+              //           isDense: true,
+              //           dropdownColor: Colors.grey[250],
+              //           style: const TextStyle(color: Colors.black54),
+              //           hint: Text(
+              //             "Merchant Category Name",
+              //             style: TextStyle(fontSize: 16, color: kblue),
+              //           ),
+              //           onChanged: (CategoryList? value) {
+              //             setState(() {
+              //               merchantCategory = value!;
+              //               categoryController.text = value.id.toString();
+              //             });
+              //           },
+              //           items: authController.categoryList
+              //               .map<DropdownMenuItem<CategoryList>>(
+              //                   (CategoryList value) {
+              //             return DropdownMenuItem<CategoryList>(
+              //               value: value,
+              //               child: Text(value.title),
+              //             );
+              //           }).toList(),
+              //         ),
+              //       ),
+              //     ),
+              //   );
+              // }
+              // ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                child: Container(
+                  height: 55,
+                  child: TextField(
+                    controller: bankAccountNameController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                        labelText: 'Bank Name',
+                        hintStyle: TextStyle(fontSize: 16, color: kblue),
+                        border: const OutlineInputBorder()),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                  child: Container(
-                    height: 55,
-                    child: TextField(
-                      controller: bankAccountNameController,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                          labelText: 'Bank Account Name',
-                          hintStyle: TextStyle(fontSize: 16, color: kblue),
-                          border: const OutlineInputBorder()),
-                    ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                child: Container(
+                  height: 55,
+                  child: TextField(
+                    controller: bankAccountNameController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                        labelText: 'Bank Account Name',
+                        hintStyle: TextStyle(fontSize: 16, color: kblue),
+                        border: const OutlineInputBorder()),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                  child: Container(
-                    height: 55,
-                    child: TextField(
-                      controller: accountTypeController,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                          labelText: 'Account Type',
-                          hintStyle: TextStyle(fontSize: 16, color: kblue),
-                          border: const OutlineInputBorder()),
-                    ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                child: Container(
+                  height: 55,
+                  child: TextField(
+                    controller: accountTypeController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                        labelText: 'Account Type',
+                        hintStyle: TextStyle(fontSize: 16, color: kblue),
+                        border: const OutlineInputBorder()),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                  child: Container(
-                    height: 55,
-                    child: TextField(
-                      controller: bankAccountNumberController,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                          labelText: 'Bank Account Number',
-                          hintStyle: TextStyle(fontSize: 16, color: kblue),
-                          border: const OutlineInputBorder()),
-                    ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                child: Container(
+                  height: 55,
+                  child: TextField(
+                    controller: bankAccountNumberController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                        labelText: 'Bank Account Number',
+                        hintStyle: TextStyle(fontSize: 16, color: kblue),
+                        border: const OutlineInputBorder()),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                  child: Container(
-                    height: 55,
-                    child: TextField(
-                      controller: ifscCodeController,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                          labelText: 'IFSC Code',
-                          hintStyle: TextStyle(fontSize: 16, color: kblue),
-                          border: const OutlineInputBorder()),
-                    ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                child: Container(
+                  height: 55,
+                  child: TextField(
+                    controller: ifscCodeController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                        labelText: 'IFSC Code',
+                        hintStyle: TextStyle(fontSize: 16, color: kblue),
+                        border: const OutlineInputBorder()),
                   ),
                 ),
-                ksizedbox20
-              ],
-            ),
-          ]);
-        }
-      ),
+              ),
+              ksizedbox20
+            ],
+          ),
+        ]);
+      }),
     );
   }
 }

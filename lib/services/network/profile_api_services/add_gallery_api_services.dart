@@ -13,8 +13,8 @@ class AddGalleryApiServices extends BaseApiService {
       String? authtoken = prefs.getString("auth_token");
 
       var formData = FormData.fromMap({
-        "gallery[0]": MultipartFile.fromString(gallery,filename: ""),
-        "description": "gallery image"
+        "gallery": MultipartFile.fromFile(gallery,filename: "gallery"),
+      
       });
 
       var response = await dio.post(addGallery,

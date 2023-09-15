@@ -7,13 +7,11 @@ import 'package:bci/screens/bussiness/views/home_screen/settings/your_referal_sc
 import 'package:bci/screens/bussiness/views/home_screen/settings/bank_deatails.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../../../constands/constands.dart';
 import '../../../../controllers/profile_controller.dart';
-
-
-
 
 class BusinessSettingScreen extends StatefulWidget {
   const BusinessSettingScreen({super.key});
@@ -23,7 +21,7 @@ class BusinessSettingScreen extends StatefulWidget {
 }
 
 class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
-final profileController = Get.find<ProfileController>();
+  final profileController = Get.find<ProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +77,10 @@ final profileController = Get.find<ProfileController>();
                 ),
               ),
             ),
-          ),ksizedbox10,
+          ),
+          ksizedbox10,
 
-   Padding(
+          Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Divider(
               thickness: 1,
@@ -90,10 +89,10 @@ final profileController = Get.find<ProfileController>();
           ),
 
           ksizedbox10,
-           InkWell(
+          InkWell(
             onTap: () {
-              Get.to(() => AddGallery( userid:
-                                profileController.profileData.first.id.toString()));
+              Get.to(() => AddGallery(
+                  userid: profileController.profileData.first.id.toString()));
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -104,7 +103,10 @@ final profileController = Get.find<ProfileController>();
                   children: [
                     Container(
                         width: 25,
-                        child:Icon(Icons.add_a_photo,color: kblue,)),
+                        child: Icon(
+                          Icons.add_a_photo,
+                          color: kblue,
+                        )),
                     Padding(
                       padding: const EdgeInsets.only(left: 17),
                       child: Text(
@@ -329,11 +331,77 @@ final profileController = Get.find<ProfileController>();
           ksizedbox10,
           InkWell(
             onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return mAlertItem2;
-                  });
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        backgroundColor: Colors.white,
+                        title: Column(
+                          children: [
+                            Image.asset('assets/images/logoutimage.png'),
+                            Text("Comeback Soon!",
+                                style: TextStyle(
+                                    fontSize: 25.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black)),
+                          ],
+                        ),
+                        content:const Text(
+                          "Are you sure want to logout?",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 17,
+                          ),
+                        ),
+                        actions: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      // ignore: unrelated_type_equality_checks
+                                      color: kwhite),
+                                  child: Center(
+                                      child: Text("Cancel",
+                                          style: primaryTextStyle(
+                                              color: kOrange))),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  // authController.logoutindex(1);
+                                  // authController.update();
+                                  Get.find<AuthController>().logout();
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      color: kOrange,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Center(
+                                    child: Text(
+                                      "Logout",
+                                      style: primaryTextStyle(color: kwhite),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          ksizedbox10
+                        ],
+                      );
+                    });
               //Get.find<AuthController>().logout();
             },
             child: Container(

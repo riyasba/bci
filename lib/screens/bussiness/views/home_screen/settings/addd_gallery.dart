@@ -36,7 +36,7 @@ class _AddGalleryState extends State<AddGallery> {
       final imageprofile =
           await ImagePicker().pickImage(source: ImageSource.gallery);
       if (imageprofile == null) return;
-      final imageprofiletemp = XFile(imageprofile.path);
+      final imageprofiletemp = File(imageprofile.path);
 
       profileController.addgalleryApiServices(
           imageprofiletemp: imageprofiletemp.path);

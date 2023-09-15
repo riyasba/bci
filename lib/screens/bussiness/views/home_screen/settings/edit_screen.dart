@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/profile_controller.dart';
-import 'package:bci/models/category_model.dart';
 import 'package:bci/models/merchant_update_profile.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +92,8 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
       aadharCardImage = profileController.profileData.first.adharProof;
       panCardImage = profileController.profileData.first.panProof;
       shopImage = profileController.profileData.first.shopImage;
-      mapUrlController.text = profileController.profileData.first.locationAddress;
+      mapUrlController.text =
+          profileController.profileData.first.locationAddress;
       setState(() {});
       getCategorybyID();
     }
@@ -257,6 +257,8 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                 imageprofile != null
                     ? Stack(
                         children: [
+//CircleAvatar(backgroundImage: NetworkImage(imageprofile!),),
+
                           Container(
                               decoration:
                                   const BoxDecoration(shape: BoxShape.circle),
@@ -264,7 +266,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                               width: 135,
                               child: ClipRRect(
                                   borderRadius: BorderRadius.circular(60),
-                                  child: Image.file(imageprofile!))),
+                                  child: Image.file(imageprofile!,fit: BoxFit.cover,))),
                           Positioned(
                             bottom: 5,
                             right: 5,
@@ -322,14 +324,20 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                               width: 110,
                                             ),
                                           )
-                                        : ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(60),
-                                            child: Image.network(
+                                        : CircleAvatar(
+                                            backgroundImage: NetworkImage(
                                                 profileController.profileData
                                                     .first.profilePicture),
-                                          ),
-                                  ),
+                                          )
+
+                                    //  ClipRRect(
+                                    //     borderRadius:
+                                    //         BorderRadius.circular(60),
+                                    //     child: Image.network(
+                                    //         profileController.profileData
+                                    //             .first.profilePicture),
+                                    //   ),
+                                    ),
                           ),
                           Positioned(
                             bottom: 5,
@@ -398,7 +406,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               ),
             ),
           ),
-           Padding(
+          Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
             child: Container(
               height: 60,
@@ -433,7 +441,6 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                   FilteringTextInputFormatter.digitsOnly,
                   FilteringTextInputFormatter.deny(RegExp(r'\s')),
                 ],
-
                 readOnly: true,
                 decoration: InputDecoration(
                     labelText: 'Mobile Number',
@@ -454,7 +461,6 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                   FilteringTextInputFormatter.digitsOnly,
                   FilteringTextInputFormatter.deny(RegExp(r'\s')),
                 ],
-
                 decoration: InputDecoration(
                     labelText: 'Alternate Phone Number',
                     hintStyle: TextStyle(fontSize: 18, color: kblue),
@@ -497,7 +503,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
             child: Container(
               height: 55,
               child: TextField(
-                textCapitalization: TextCapitalization.words ,
+                textCapitalization: TextCapitalization.words,
                 controller: bankNameController,
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
@@ -858,7 +864,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                   ifscCode: ifscCodeController.text,
                                   shopImage:
                                       simage == null ? "null" : simage!.path,
-                                      locationAddress: mapUrlController.text,
+                                  locationAddress: mapUrlController.text,
                                   aadharProof: image,
                                   panProof: image2);
                           profileController.updateProfile(
