@@ -38,10 +38,11 @@ class _AddGalleryState extends State<AddGallery> {
           await ImagePicker().pickImage(source: ImageSource.gallery);
       if (imageprofile == null) return;
       final imageprofiletemp = File(imageprofile.path);
-        profileController.getInstance(userid: widget.userid);
+      
 
-      profileController.addgalleryApiServices(
+   await   profileController.addgalleryApiServices(
           imageprofiletemp: imageprofiletemp.path);
+           profileController.getInstance(userid: widget.userid);
     } catch (e) {
       print('Failed to pick image:$e');
     }
@@ -124,6 +125,7 @@ class _AddGalleryState extends State<AddGallery> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           profileimage();
+           
         },
         child: Icon(
           Icons.add_a_photo,
