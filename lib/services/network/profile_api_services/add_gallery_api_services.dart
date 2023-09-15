@@ -13,7 +13,8 @@ class AddGalleryApiServices extends BaseApiService {
       String? authtoken = prefs.getString("auth_token");
 
       var formData = FormData.fromMap({
-        "gallery": MultipartFile.fromFile(gallery,filename: "gallery"),
+        "gallery[0]":
+        await MultipartFile.fromFile(gallery,filename: "gallery"),
       
       });
 

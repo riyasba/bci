@@ -25,6 +25,7 @@ class _AddGalleryState extends State<AddGallery> {
     super.initState();
 
     profileController.getInstance(userid: widget.userid);
+    profileController.update();
   }
 
   final profileController = Get.find<ProfileController>();
@@ -37,6 +38,7 @@ class _AddGalleryState extends State<AddGallery> {
           await ImagePicker().pickImage(source: ImageSource.gallery);
       if (imageprofile == null) return;
       final imageprofiletemp = File(imageprofile.path);
+        profileController.getInstance(userid: widget.userid);
 
       profileController.addgalleryApiServices(
           imageprofiletemp: imageprofiletemp.path);
@@ -61,18 +63,19 @@ class _AddGalleryState extends State<AddGallery> {
                 Padding(
                   padding: const EdgeInsets.only(right: 20),
                   child: IconButton(
-                      onPressed: () {
-                        Get.offAll(HomeBottomnavigationBar(
-                          index: 4,
-                        ));
-                      },
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: kwhite,
-                      )),
+                    onPressed: () {
+                      Get.offAll(HomeBottomnavigationBar(
+                        index: 4,
+                      ));
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: kwhite,
+                    ),
+                  ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(right: 85),
+                  padding: EdgeInsets.only(right: 90),
                   child: Text(
                     'Gallery',
                     style: TextStyle(fontSize: 23, color: Colors.white),
@@ -85,35 +88,48 @@ class _AddGalleryState extends State<AddGallery> {
       ),
       body: GetBuilder<ProfileController>(builder: (_) {
         return profileController.galleryListData.isEmpty
-            ? Container()
+            ? Container(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/logoutimage.png'),
+                      Text('No data')
+                    ],
+                  ),
+                ),
+              )
             : Container(
                 child: GridView.builder(
                   shrinkWrap: true,
                   itemCount: profileController.galleryListData.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      padding:
+                          const EdgeInsets.only(left: 10, right: 10, bottom: 5),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
-                          profileController.galleryListData.first.image,
+                          profileController.galleryListData[index].image,
                           fit: BoxFit.cover,
                         ),
                       ),
                     );
                   },
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  ),
+                      crossAxisCount: 2, mainAxisSpacing: 10),
                 ),
               );
       }),
-      floatingActionButton: IconButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           profileimage();
         },
-        icon: Icon(Icons.add_a_photo),
-        color: kblue,
+        child: Icon(
+          Icons.add_a_photo,
+          color: kwhite,
+        ),
+        backgroundColor: kblue,
       ),
     );
   }

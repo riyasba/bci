@@ -45,10 +45,10 @@ class GalleryListModel {
 
     factory GalleryListModel.fromJson(Map<String, dynamic> json) => GalleryListModel(
         id: json["id"],
-        userId: json["user_id"],
-        image: json["image"],
-        description: json["description"],
-        status: json["status"],
+        userId: json["user_id"]??"",
+        image: json["image"]??"",
+        description: json["description"]??"",
+        status: json["status"]??"",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );
