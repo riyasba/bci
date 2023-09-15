@@ -25,7 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:isgpayui_plugin/isgpayui_plugin.dart';
+// import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -339,16 +339,16 @@ class ProfileController extends GetxController {
 //payment gateway isgPay
 
   // String responseData = "Nothing";
-  final _isgpayuiPlugin = IsgpayuiPlugin();
+  // final _isgpayuiPlugin = IsgpayuiPlugin();
 
   void payFromCart(double amount) async {
     int tempAmount = amount.toInt();
     String? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      result = await _isgpayuiPlugin
-              .initiateISGPayUI(getArguments(tempAmount * 100)) ??
-          'Unknown platform version';
+      // result = await _isgpayuiPlugin
+      //         .initiateISGPayUI(getArguments(tempAmount * 100)) ??
+      //     'Unknown platform version';
     } on PlatformException catch (e) {
       result = e.message;
     }
@@ -571,9 +571,9 @@ class ProfileController extends GetxController {
     String? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      result = await _isgpayuiPlugin
-              .initiateISGPayUI(getArguments(tempAmount * 100)) ??
-          'Unknown platform version';
+      // result = await _isgpayuiPlugin
+      //         .initiateISGPayUI(getArguments(tempAmount * 100)) ??
+      //     'Unknown platform version';
     } on PlatformException catch (e) {
       result = e.message;
     }
@@ -684,9 +684,9 @@ class ProfileController extends GetxController {
     String? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      result = await _isgpayuiPlugin
-              .initiateISGPayUI(getArguments(tempAmount * 100)) ??
-          'Unknown platform version';
+      // result = await _isgpayuiPlugin
+      //         .initiateISGPayUI(getArguments(tempAmount * 100)) ??
+      //     'Unknown platform version';
     } on PlatformException catch (e) {
       result = e.message;
     }
@@ -746,5 +746,102 @@ class ProfileController extends GetxController {
     print(file.path);
 
     OpenFile.open(file.path);
+  }
+
+
+
+
+  payForSubscribe({
+    required int id,
+    required int userId,
+  }){
+    final homeController = Get.find<HomeController>();
+
+      Get.find<HomeController>().addSubscription(
+          planId: id,
+          customerId: userId);
+
+      //need to give id
+      Get.snackbar(
+        "Payment Successfully Paid",
+        "",
+        icon: const Icon(Icons.check_circle_outline_outlined,
+            color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+  }
+
+
+  payCart(){
+     final homeController = Get.find<HomeController>();
+      print(">>-------------->>---------->>");
+      for (int i = 0; i < homeController.cartListData.length; i++) {
+        homeController.addBooking(
+            serviceid: homeController.cartListData[i].serviceId.toString(),
+            cartid: homeController.cartListData[i].id.toString(),
+            qty: homeController.cartListData[i].quantity.toString(),
+            offerOrCoupon: "",
+            couponcode: "",
+            bookDateTime: homeController.cartListData[i].bookDateTime,
+            amount: homeController.cartListData[i].price);
+      }
+
+      Get.offAll(
+        () => LoadingWidgets(),
+      );
+
+      // Get.find<HomeController>().addSubscription(
+      //     planId: id,
+      //     customerId: Get.find<ProfileController>().profileData.first.id);
+
+      //need to give id
+      Get.snackbar(
+        "Payment Successfully Paid",
+        "",
+        icon: const Icon(Icons.check_circle_outline_outlined,
+            color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+
+  }
+
+    void payforWalletTransaction({required String amount}) async {
+      Get.find<AuthController>()
+          .addTransaction(amount: amount);
+
+      Get.to(const SucessfulScreenOtc());
+
+      //need to give id
+      Get.snackbar(
+        "Payment Successfully Paid",
+        "",
+        icon: const Icon(Icons.check_circle_outline_outlined,
+            color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
   }
 }

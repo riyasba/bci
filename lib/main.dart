@@ -20,6 +20,8 @@ import 'authentications/splash_screen/Splash_screen.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseMessaging.instance.requestPermission();
+
 
   AwesomeNotifications().initialize(
       // set the icon to null if you want to use the default app icon

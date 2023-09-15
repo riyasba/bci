@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_plans_model.dart';
+import 'package:bci/payment_gateway/payment_gateway_view/payment_view.dart';
 import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
@@ -205,12 +208,28 @@ class _OtcPaymentState extends State<OtcPayment> {
             ksizedbox40,
             InkWell(
               onTap: () async {
+             await   Get.find<ProfileController>().getProfile();
                 print(
                     ">>>>>>>>>>>>>>>>>..............payment start..........>>>>>>>>>>${widget.plansData.id}");
-                profileController.payfoSubscription(
-                  id: widget.plansData.id,
-                  amount: double.parse(widget.plansData.saleAmount),
-                );
+                    // if(Platform.isIOS){
+                                  Get.offAll(() => PaymentWebView(
+                                  payOpt: "",
+                                  payType: 1,
+                                  planId: widget.plansData.id,
+                                  totalAmount: widget.plansData.saleAmount,
+                                  userId: Get.find<ProfileController>().profileData.first.id
+                                      .toString(),
+                                ));
+                                // profileController.payForSubscribe(id: widget.plansData.id,userId: Get.find<ProfileController>().profileData.first.id);
+                //                 }else{
+
+                //                    profileController.payfoSubscription(
+                //   id: widget.plansData.id,
+                //   amount: double.parse(widget.plansData.saleAmount),
+                // );
+
+                //                 }
+               
                 // profileController.payUseingEaseBuzzSubs(
                 //     id: widget.plansData.id,
                 //     amount: widget.plansData.saleAmount,

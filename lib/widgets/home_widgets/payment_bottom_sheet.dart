@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/payment_gateway/payment_gateway_view/payment_view.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +40,7 @@ paymentBottomSheet(BuildContext context, double amount) {
                                 profileCn.isWalletOrNot(0);
                               },
                               child: Text(
-                                "Payment from UPI/CARD/Online Bank",
+                                "Payment from CARD",
                                 style: primaryFont.copyWith(
                                     fontWeight: FontWeight.bold, fontSize: 16),
                               ),
@@ -122,12 +125,30 @@ paymentBottomSheet(BuildContext context, double amount) {
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: InkWell(
-                        onTap: () {
+                        onTap: () async{
                           if (Get.find<ProfileController>()
                                   .isWalletOrNot
                                   .value ==
                               0) {
-                            Get.find<ProfileController>().payFromCart(amount);
+                                // if(Platform.isIOS){
+                                  
+                                // }else{
+                                //   Get.find<ProfileController>().payFromCart(amount);
+                                // }
+                                 await   Get.find<ProfileController>().getProfile();
+                                 print("your id--->${Get.find<ProfileController>().profileData.first.id
+                                      .toString()}");
+
+                                
+  Get.offAll(() => PaymentWebView(
+    payOpt: "",
+    payType: 3,
+    totalAmount: amount.toString(),
+    userId: Get.find<ProfileController>().profileData.first.id
+        .toString(),
+  ));
+
+                            
                           } else {
                            
                             Get.find<ProfileController>().payFromWallet(

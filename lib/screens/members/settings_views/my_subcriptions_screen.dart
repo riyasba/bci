@@ -1,3 +1,4 @@
+import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
@@ -25,8 +26,10 @@ class _MySubcriptionScreenState extends State<MySubcriptionScreen> {
     // TODO: implement initState
     super.initState();
     profileController.getProfile();
+   if(profileController.planid.value != ""){
     plansController.getPlanDetails(
         id: int.parse(profileController.planid.value));
+   } 
   }
 
   @override
@@ -81,11 +84,28 @@ class _MySubcriptionScreenState extends State<MySubcriptionScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   plansController.subscribePlansData.isEmpty
-                      ? InkWell(
-                          onTap: () {
-                            Get.to(const UpgradeScreen());
-                          },
-                          child: Image.asset('assets/images/Group 5826.png'))
+                      ?  Container(
+                child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset("assets/images/offersnotavailableimage.png"),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        "No Plans Found",
+                        style: primaryFont.copyWith(
+                            color: kblue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            
                       : Stack(
                           children: [
                             Image.network(
@@ -156,7 +176,7 @@ class _MySubcriptionScreenState extends State<MySubcriptionScreen> {
                 ],
               ),
             ),
-            Padding(
+           if(plansController.subscribePlansData.isNotEmpty) Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [

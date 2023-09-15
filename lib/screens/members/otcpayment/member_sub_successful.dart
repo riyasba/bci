@@ -41,10 +41,15 @@ class SucessfulScreenOtc extends StatelessWidget {
                   color: kblue, fontSize: 28.sp, fontWeight: FontWeight.w700),
             ),
             ksizedbox10,
-            Text(
-              'Thank you! Your payment is complete',
-              style: TextStyle(
-                  fontSize: 22.sp, fontWeight: FontWeight.w600, color: kblue),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Thank you! Your payment is completed',
+                  style: TextStyle(
+                      fontSize: 19.sp, fontWeight: FontWeight.w600, color: kblue),
+                ),
+              ],
             ),
             ksizedbox40,
             ksizedbox40,
