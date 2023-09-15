@@ -38,29 +38,26 @@ class _MembersBookingState extends State<MembersBooking> {
                   child: Container(
                     height: 150,
                     color: kblue,
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Text(
-                              'Bookings',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: kwhite),
-                            ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Bookings',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: kwhite),
                           ),
-                          // InkWell(
-                          //     onTap: () {
-                          //       Get.to(const ContactAdmin());
-                          //     },
-                          //     child: Image.asset(
-                          //         'assets/images/3669173_help_ic_icon.png'))
-                        ],
-                      ),
+                        ),
+                        // InkWell(
+                        //     onTap: () {
+                        //       Get.to(const ContactAdmin());
+                        //     },
+                        //     child: Image.asset(
+                        //         'assets/images/3669173_help_ic_icon.png'))
+                      ],
                     ),
                   ),
                 ),

@@ -30,7 +30,7 @@ class _OfferScreenListViewState extends State<OfferScreenListView> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -42,14 +42,14 @@ class _OfferScreenListViewState extends State<OfferScreenListView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 5),
             child: InkWell(
               onTap: () {
                 Get.back();
               },
               child: Icon(
                 Icons.arrow_back_ios,
-                color: kblue,
+                color: kwhite,
               ),
             ),
           ),
@@ -59,7 +59,7 @@ class _OfferScreenListViewState extends State<OfferScreenListView> {
                         'Offers',
                         style: TextStyle(
                             fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w700,
                             color: Colors.white),
                       ),
                     ),

@@ -61,7 +61,7 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
                         'Select Membership',
                         style: TextStyle(
                             fontSize: 20,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w700,
                             color: Color(0xffF9F8FD)),
                       ),
                     ),

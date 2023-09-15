@@ -8,7 +8,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../constands/constands.dart';
-import '../../screens/members/members widgets/bottumbavigation.dart';
+import '../../screens/members/members widgets/member_bottumbavigation.dart';
 
 class MemberOnbordingScreen extends StatefulWidget {
   const MemberOnbordingScreen({super.key});
@@ -149,7 +149,7 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
               Positioned(
                   right: 7,
                   top: 7,
-                  child: GestureDetector(
+                  child: InkWell(
                       onTap: () async {
                         await profileController.getProfile();
                         if(profileController.profileData.first.occupation.isEmpty){
@@ -218,10 +218,12 @@ class Onbording2 extends StatefulWidget {
 class _Onbording2State extends State<Onbording2> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Column(
       children: [
         Image.asset(
           'assets/images/onbording2.png',
+         height: size.height*0.62.h,
         ),
         Text(
           'HOTELS & SERVICES',
@@ -246,9 +248,12 @@ class Onbording3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Image.asset('assets/images/onbording3.png'),
+        Image.asset('assets/images/onbording3.png',
+        height: size.height*0.62.h,
+        ),
         Text(
           'ESSENTIAL BAZZAR',
           style: TextStyle(
@@ -260,7 +265,7 @@ class Onbording3 extends StatelessWidget {
               color: kwhite, fontWeight: FontWeight.w600, fontSize: 17.sp),
           textAlign: TextAlign.center,
         ),
-        ksizedbox30,
+        ksizedbox20,
         Image.asset('assets/images/50.png')
       ],
     );
@@ -272,9 +277,12 @@ class Onbording4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Image.asset('assets/images/onbording4.png'),
+        Image.asset('assets/images/onbording4.png',
+        height: size.height*0.62.h,
+        ),
         Text(
           'A TO Z UTILITY SERVICE &\n ONLINE DISCOUNTS',
           textAlign: TextAlign.center,

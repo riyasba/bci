@@ -1,6 +1,6 @@
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/bussiness/views/home_screen/contact_admin.dart';
-import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
+import 'package:bci/screens/members/members%20widgets/member_bottumbavigation.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';

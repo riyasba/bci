@@ -56,7 +56,7 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
           title: Text(
             'Details',
             style: TextStyle(
-                fontSize: 20.sp, fontWeight: FontWeight.w500, color: kblue),
+                fontSize: 20, fontWeight: FontWeight.w700, color: kblue),
           ),
         ),
         body: ListView(
@@ -269,7 +269,7 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
               alignment: Alignment.center,
               child: Text(
                 "View Services",
-                style: primaryFont.copyWith(fontSize: 16, color: Colors.white),
+                style: primaryFont.copyWith(fontSize: 17, color: Colors.white,fontWeight: FontWeight.w700),
               ),
             ),
           ),

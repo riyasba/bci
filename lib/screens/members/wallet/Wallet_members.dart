@@ -59,34 +59,34 @@ class _WalletScreenMembersState extends State<WalletScreenMembers> {
     var _mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 158,
+              height: 150,
               color: kblue,
-              child: Row(
+              child:const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: Text(
                       'Wallet',
                       style: TextStyle(
-                          fontSize: 23,
-                          //fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
                           color: Colors.white),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: InkWell(
-                        onTap: () {
-                          Get.to(const NotificationScreen());
-                        },
-                        child:
-                            Image.asset('assets/images/notificationimage.png')),
-                  )
+                  // Padding(
+                  //   padding: const EdgeInsets.only(right: 20),
+                  //   child: InkWell(
+                  //       onTap: () {
+                  //         Get.to(const NotificationScreen());
+                  //       },
+                  //       child:
+                  //           Image.asset('assets/images/notificationimage.png')),
+                  // )
                 ],
               ),
             ),

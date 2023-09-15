@@ -61,41 +61,27 @@ class _MembersSearchScreenState extends State<MembersSearchScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(250.h),
+          preferredSize:const Size.fromHeight(150),
           child: Column(
             children: [
               ClipPath(
                 clipper: SinCosineWaveClipper(),
                 child: Container(
-                  height: 150.h,
+                  height: 150,
                   color: kblue,
                   child: Padding(
                     padding:
-                        const EdgeInsets.only(left: 20, right: 15, bottom: 30),
+                        const EdgeInsets.only(left: 20,),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // InkWell(
-                        //   onTap: (){
-                        //     Get.back();
-                        //   },
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.only(left: 10),
-                        //     child: Icon(Icons.arrow_back_ios,color: kwhite,),
-                        //   ),
-                        //     ),
-                        Container(),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Text(
-                            'Search',
-                            style: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.bold,
-                                color: kwhite),
-                          ),
+                        Text(
+                          'Search',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              color: kwhite),
                         ),
-                        Container()
                         // IconButton(
                         //     onPressed: () {
                         //       Get.to(const NotificationScreen());

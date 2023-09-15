@@ -117,11 +117,11 @@ class _Home_screen1State extends State<Home_screen1> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 140,
+              height: 150,
               color: kblue,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 22, left: 15, right: 8,top: 2),
@@ -145,42 +145,46 @@ class _Home_screen1State extends State<Home_screen1> {
                                 'Hello, ${profileController.profileData.first.name}',
                                 style: const TextStyle(
                                     fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w700,
                                     color: Colors.white),
                               );
                       },
                     ),
-                    Stack(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Get.to(
-                              const NotificationScreen(),
-                            );
-                          },
-                          icon: Icon(
-                            Icons.notifications,
-                            color: kwhite,
-                          ),
-                        ),
-                        Positioned(
-                          left: 22,
-                          top: 10,
-                          child: Container(
-                            height: 16,
-                            width: 16,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(10)
+                    GetBuilder<HomeController>(
+                      builder: (_) {
+                        return Stack(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                Get.to(
+                                  const NotificationScreen(),
+                                );
+                              },
+                              icon: Icon(
+                                Icons.notifications,
+                                color: kwhite,
+                              ),
                             ),
-                            child:homeController.countData!.totalCount.toString().isEmpty ? const Text("") : Center(
-                              child:homeController.countData!.totalCount > 9 ? Text("${homeController.countData!.totalCount.toString()}+") : Text(homeController.countData!.totalCount.toString(),
-                              style: TextStyle(fontSize: 10,color: kwhite),),
+                            Positioned(
+                              left: 22,
+                              top: 10,
+                              child: Container(
+                                height: 16,
+                                width: 16,
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(10)
+                                ),
+                                child:homeController.countData!.totalCount.toString().isEmpty ? const Text("") : Center(
+                                  child:homeController.countData!.totalCount > 9 ? Text("${homeController.countData!.totalCount.toString()}+") : Text(homeController.countData!.totalCount.toString(),
+                                  style: TextStyle(fontSize: 10,color: kwhite),),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ],
-                    )
+                          ],
+                        );
+                      }
+                    ),
                   ],
                 ),
               ),
@@ -314,13 +318,12 @@ class _Home_screen1State extends State<Home_screen1> {
                       ),
                     ],
                   ),
-                  ksizedbox20,
+                  ksizedbox10,
                   InkWell(
                       onTap: () {
                         Get.to(const MemberCouponScreen());
                       },
                       child: Image.asset('assets/icons/homecoupon.jpg')),
-                  ksizedbox20,
                   Row(
                     children: [
                       kwidth10,
@@ -338,9 +341,9 @@ class _Home_screen1State extends State<Home_screen1> {
                       ),
                     ],
                   ),
-                  ksizedbox20,
+                  
                   Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10,top: 15),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -463,7 +466,7 @@ class _Home_screen1State extends State<Home_screen1> {
                       ],
                     ),
                   ),
-                  ksizedbox20,
+                  const SizedBox(height: 15,),
                   // Padding(
                   //   padding: const EdgeInsets.only(left: 10, right: 10),
                   //   child: Row(
@@ -613,7 +616,7 @@ class _Home_screen1State extends State<Home_screen1> {
                       ],
                     ),
                   ),
-                  ksizedbox20,
+                  const SizedBox(height: 15,),
                   // Padding(
                   //   padding:
                   //       const EdgeInsets.symmetric(horizontal: 15, vertical: 5),

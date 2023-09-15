@@ -2,7 +2,7 @@ import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/flights_controller.dart';
 import 'package:bci/models/flight_booking_models/air_reprint_model.dart';
-import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
+import 'package:bci/screens/members/members%20widgets/member_bottumbavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';

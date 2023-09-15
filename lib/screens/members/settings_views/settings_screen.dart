@@ -39,23 +39,20 @@ class _SettingScreenState extends State<SettingScreen> {
             child: Container(
               height: 150,
               color: kblue,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 20, right: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(right: 20),
-                      child: Text(
-                        'Settings',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xffF9F8FD)),
-                      ),
+              child:const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Text(
+                      'Settings',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xffF9F8FD)),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           )),

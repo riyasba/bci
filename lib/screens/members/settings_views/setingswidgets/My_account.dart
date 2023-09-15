@@ -5,7 +5,7 @@ import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/screens/bussiness/views/home_screen/contact_admin.dart';
-import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
+import 'package:bci/screens/members/members%20widgets/member_bottumbavigation.dart';
 import 'package:bci/screens/members/settings_views/upgrade_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
@@ -341,41 +341,38 @@ class _MyAccountState extends State<MyAccount> {
             child: Container(
               height: 150,
               color: kblue,
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: InkWell(
-                          onTap: () {
-                            getback();
-                          },
-                          child: const Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.white,
-                          )),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: InkWell(
+                        onTap: () {
+                          getback();
+                        },
+                        child: const Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                        )),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Text(
+                      'My Account',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 20),
-                      child: Text(
-                        'My Account',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ),
-                    Container()
-                    // InkWell(
-                    //     onTap: () {
-                    //       Get.to(const ContactAdmin());
-                    //     },
-                    //     child: Image.asset(
-                    //         'assets/images/3669173_help_ic_icon.png'))
-                  ],
-                ),
+                  ),
+                  Container()
+                  // InkWell(
+                  //     onTap: () {
+                  //       Get.to(const ContactAdmin());
+                  //     },
+                  //     child: Image.asset(
+                  //         'assets/images/3669173_help_ic_icon.png'))
+                ],
               ),
             ),
           )),

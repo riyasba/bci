@@ -30,7 +30,7 @@ class _MemberCouponScreenState extends State<MemberCouponScreen> {
                 ClipPath(
                   clipper: SinCosineWaveClipper(),
                   child: Container(
-                    height: 137,
+                    height: 150,
                     color: kblue,
                     child: Padding(
                       padding: const EdgeInsets.all(15),
@@ -54,7 +54,7 @@ class _MemberCouponScreenState extends State<MemberCouponScreen> {
                               'All Coupons',
                               style: TextStyle(
                                   fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w700,
                                   color: kwhite),
                             ),
                           ),

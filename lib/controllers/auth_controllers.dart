@@ -92,7 +92,7 @@ class AuthController extends GetxController {
     if (response.statusCode == 201) {
       print("User id ------>>${response.data["user"]["id"]}");
       memReferralRegister(
-          referralCode: referralCode, userId: response.data["user"]["id"]);
+          referralCode: referralCode, userId: response.data["user"]["id"].toString());
       Get.to(OtpVerificationView(
         phoneNumber: memberRegisterModel.mobile,
         otp: response.data["user"]["otp"].toString(),
@@ -101,7 +101,7 @@ class AuthController extends GetxController {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            response.data["errors"].first,
+            response.data["errors"],
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }

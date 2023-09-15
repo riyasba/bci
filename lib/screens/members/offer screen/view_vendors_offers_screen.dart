@@ -103,19 +103,19 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 12),
             child: InkWell(
               onTap: () {
                 Get.back();
               },
               child: Icon(
                 Icons.arrow_back_ios,
-                color: kblue,
+                color: kwhite,
               ),
             ),
           ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 0),
+                          padding: const EdgeInsets.only(right: 20),
                           child: Text(
                             'Services',
                             style: TextStyle(
@@ -124,14 +124,15 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
                                 color: kwhite),
                           ),
                         ),
-                        IconButton(
-                            onPressed: () {
-                              Get.to(const NotificationScreen());
-                            },
-                            icon: Icon(
-                              Icons.notifications,
-                              color: kwhite,
-                            ))
+                        Container()
+                        // IconButton(
+                        //     onPressed: () {
+                        //       Get.to(const NotificationScreen());
+                        //     },
+                        //     icon: Icon(
+                        //       Icons.notifications,
+                        //       color: kwhite,
+                        //     ))
                       ],
                     ),
                   ),

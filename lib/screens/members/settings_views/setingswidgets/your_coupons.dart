@@ -101,7 +101,7 @@ class _CouponsState extends State<Coupons> {
                                 ),
                                                          ),
                               Text(
-                                "Coupom code: ${profileController
+                                "Coupon code: ${profileController
                                     .couponsData[index].couponcode}",
                                 style: primaryFont.copyWith(
                                     fontSize: 14,

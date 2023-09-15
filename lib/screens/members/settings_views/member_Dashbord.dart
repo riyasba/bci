@@ -34,11 +34,11 @@ class _DashBoardScreenMenbersState extends State<DashBoardScreenMenbers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(250),
+          preferredSize:const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 158,
+              height: 150,
               color: kblue,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,7 +56,7 @@ class _DashBoardScreenMenbersState extends State<DashBoardScreenMenbers> {
                   ),
                   const Text(
                     'Dashboard',
-                    style: TextStyle(fontSize: 23, color: Colors.white),
+                    style: TextStyle(fontSize: 20, color: Colors.white,fontWeight: FontWeight.w700),
                   ),
                   Container(width: 40,)
                 ],

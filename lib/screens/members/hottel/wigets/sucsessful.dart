@@ -1,4 +1,4 @@
-import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
+import 'package:bci/screens/members/members%20widgets/member_bottumbavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';

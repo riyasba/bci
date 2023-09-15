@@ -9,7 +9,7 @@ import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/screens/members/holiday/controllers/holidaycontroller.dart';
-import 'package:bci/screens/members/members%20widgets/bottumbavigation.dart';
+import 'package:bci/screens/members/members%20widgets/member_bottumbavigation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';

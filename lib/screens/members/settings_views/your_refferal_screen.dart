@@ -36,7 +36,7 @@ class _YourReferralScreenState extends State<YourReferralScreen> {
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 150.h,
+              height: 150,
               color: kblue,
               child: Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
@@ -54,14 +54,14 @@ class _YourReferralScreenState extends State<YourReferralScreen> {
                             color: Colors.white,
                           )),
                     ),
-                    Padding(
-                      padding:const EdgeInsets.only(right: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(right: 20),
                       child: Text(
                         'Invite',
                         style: TextStyle(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w600,
-                            color:const Color(0xffF9F8FD)),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xffF9F8FD)),
                       ),
                     ),
                     Container()

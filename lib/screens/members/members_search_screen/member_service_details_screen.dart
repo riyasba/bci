@@ -93,7 +93,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
               Get.back();
             },
             child: Icon(
-              Icons.arrow_back,
+              Icons.arrow_back_ios,
               color: kblue,
             ),
           ),
@@ -102,7 +102,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
         title: Text(
           'Details',
           style: TextStyle(
-              fontSize: 20.sp, fontWeight: FontWeight.w500, color: kblue),
+              fontSize: 20, fontWeight: FontWeight.w700, color: kblue),
         ),
       ),
       body: ListView(
@@ -332,7 +332,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                           style: primaryFont.copyWith(
                               color: Colors.white,
                               fontSize: 17,
-                              fontWeight: FontWeight.w600),
+                              fontWeight: FontWeight.w700),
                         ),
                       ),
                       Obx(
@@ -371,8 +371,8 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                         child: Text(
                                       "Add To Cart",
                                       style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500),
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w700),
                                     )),
                                   ),
                                 ),

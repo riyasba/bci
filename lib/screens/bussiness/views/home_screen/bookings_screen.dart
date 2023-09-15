@@ -34,7 +34,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(280),
+          preferredSize:const Size.fromHeight(250),
           child: Stack(children: [
             Container(
               height: 250,

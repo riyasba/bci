@@ -38,7 +38,7 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       backgroundColor: kwhite,
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -61,23 +61,24 @@ class _CartScreenState extends State<CartScreen> {
                                 )),
                           ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.only(left: 0),
                       child: Text(
                         'View Cart',
                         style: TextStyle(
                             fontSize: 20,
-                            //  fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w700,
                             color: kwhite),
                       ),
                     ),
-                    IconButton(
-                        onPressed: () {
-                          Get.to(const NotificationScreen());
-                        },
-                        icon: Icon(
-                          Icons.notifications,
-                          color: kwhite,
-                        ))
+                    Container(width: 20,)
+                    // IconButton(
+                    //     onPressed: () {
+                    //       Get.to(const NotificationScreen());
+                    //     },
+                    //     icon: Icon(
+                    //       Icons.notifications,
+                    //       color: kwhite,
+                    //     ))
                   ],
                 ),
               ),
@@ -109,7 +110,6 @@ class _CartScreenState extends State<CartScreen> {
                       padding: const EdgeInsets.all(5.0),
                       child: Container(
                           width: size.width,
-                          height: 110,
                           decoration: BoxDecoration(
                               color: kwhite,
                               borderRadius: BorderRadius.circular(10),
@@ -284,157 +284,79 @@ class _CartScreenState extends State<CartScreen> {
                 ),
         );
       }),
-      // const Divider(
-      //   thickness: 1,
-      // ),
-      // Expanded(
-      //     child: Container(
-      //   height: 100.h,
-      //   width: double.infinity,
-      //   color: kwhite,
-      //   child: Padding(
-      //     padding: const EdgeInsets.all(8.0),
-      //     child: Column(
-      //         crossAxisAlignment: CrossAxisAlignment.start,
-      //         children: [
-      //           // ksizedbox40,
-      //           Text(
-      //             'Support',
-      //             style: TextStyle(
-      //                 fontSize: 25.sp, fontWeight: FontWeight.w600),
-      //           ),
-      //           ksizedbox10,
-      //           Text(
-      //             'Member ID Number:',
-      //             style: TextStyle(
-      //                 fontSize: 20.sp,
-      //                 fontWeight: FontWeight.w400,
-      //                 color: korange),
-      //           ),
-      //           Text(
-      //             'BCI123456QWE',
-      //             style: TextStyle(fontSize: 15.sp),
-      //           ),
-      //           ksizedbox10,
-      //           Text(
-      //             'Phone Number:',
-      //             style: TextStyle(
-      //                 fontSize: 20.sp,
-      //                 fontWeight: FontWeight.w400,
-      //                 color: korange),
-      //           ),
-      //           Text(
-      //             '92345 43453',
-      //             style: TextStyle(fontSize: 15.sp),
-      //           ),
-      //           ksizedbox10,
-      //           Text(
-      //             'Delivery Address:',
-      //             style: TextStyle(
-      //                 fontSize: 20.sp,
-      //                 fontWeight: FontWeight.w400,
-      //                 color: korange),
-      //           ),
-      //           Text(
-      //             '2A,Street Nager, Anna Nagar, Chennai, 600021.',
-      //             style: TextStyle(fontSize: 15.sp),
-      //           ),
-      //         ]),
-      //   ),
-      // )),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 15),
+        padding: const EdgeInsets.only(bottom: 15,left: 15,right: 15),
         child: Container(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GetBuilder<HomeController>(builder: (_) {
-                  return Text(
-                    "₹${homeController.getGrandTotal().toStringAsFixed(2)}",
-                    style: primaryFont.copyWith(
-                        color: kblue,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),
-                  );
-                }),
-                Obx(
-                  () => profileController.isLoading.isTrue
-                      ? Container(
-                          height: 40,
+          height: 70,
+          decoration: BoxDecoration(
+            color: kyellow,
+            borderRadius: BorderRadius.circular(15)
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              GetBuilder<HomeController>(builder: (_) {
+                return Text(
+                  "₹ ${homeController.getGrandTotal().toStringAsFixed(2)}",
+                  style: primaryFont.copyWith(
+                      color: kwhite,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700),
+                );
+              }),
+              Obx(
+                () => profileController.isLoading.isTrue
+                    ? Container(
+                        height: 50,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          color: kblue,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(3.0),
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      )
+                    : InkWell(
+                        onTap: () {
+                          if (homeController.cartListData.isNotEmpty) {
+                            var tempAmount = homeController.getGrandTotal();
+                            // profileController.payFromCart(tempAmount);
+                            paymentBottomSheet(context,tempAmount);
+                          } else {
+                            Get.rawSnackbar(
+                                message: "No Cart item found",
+                                backgroundColor: Colors.red);
+                          }
+                        },
+                        child: Container(
+                          height: 50,
                           width: 150,
                           decoration: BoxDecoration(
                             color: kblue,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(3.0),
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        )
-                      : InkWell(
-                          onTap: () {
-                            if (homeController.cartListData.isNotEmpty) {
-                              var tempAmount = homeController.getGrandTotal();
-                              // profileController.payFromCart(tempAmount);
-                              paymentBottomSheet(context,tempAmount);
-                            } else {
-                              Get.rawSnackbar(
-                                  message: "No Cart item found",
-                                  backgroundColor: Colors.red);
-                            }
-                            // profileController.payUseingEaseBuzz(
-                            //     id: 0,
-                            //     amount: tempAmount.toStringAsFixed(2),
-                            //     customerName:
-                            //         profileController.profileData.first.name.trim().split(" ").first,
-                            //     email:
-                            //         "${profileController.profileData.first.name}@gmail.com",
-                            //     phone:
-                            //         profileController.profileData.first.mobile,
-                            //     status: "");
-
-                            // for(int i = 0; i < homeController.cartListData.length; i++){
-                            //   homeController.addBooking(
-                            //   serviceid: homeController.cartListData[i].serviceId,
-                            //   qty: homeController.cartListData[i].quantity,
-                            //   offerOrCoupon: "",
-                            //   couponcode: "",
-                            //   amount: homeController.cartListData[i].price
-                            //   );
-                            // }
-                          },
-                          child: Container(
-                            height: 40,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              color: kblue,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Book Now",
-                                style: TextStyle(
-                                    fontSize: 15.sp,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500),
-                              ),
+                          child:const Center(
+                            child: Text(
+                              "Book Now",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700),
                             ),
                           ),
                         ),
-                ),
-              ],
-            ),
+                      ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
-
-  // AlertDialog mAlertItem2 = ;
 }

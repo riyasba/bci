@@ -129,7 +129,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                     kwidth10,
                                     Column(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
+                                          MainAxisAlignment.spaceBetween,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [

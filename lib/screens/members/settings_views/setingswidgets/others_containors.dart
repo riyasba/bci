@@ -98,7 +98,7 @@ class _CouponsState extends State<VendorCoupons> {
                                 ),
                               ),
                               Text(
-                                "Coupom code: ${profileController.redeemcouponsData[index].couponcode}",
+                                "Coupon code: ${profileController.redeemcouponsData[index].couponcode}",
                                 style: primaryFont.copyWith(
                                     fontSize: 14,
                                     color: Color((math.Random().nextDouble() *

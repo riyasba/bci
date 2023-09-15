@@ -61,7 +61,7 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Container(
-                          height: 125,
+                        //  height: 125,
                           width: size.width,
                           decoration: BoxDecoration(
                             color: kwhite,

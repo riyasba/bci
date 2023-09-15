@@ -39,7 +39,7 @@ class _MySubcriptionScreenState extends State<MySubcriptionScreen> {
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 150.h,
+              height: 150,
               color: kblue,
               child: Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
@@ -54,29 +54,26 @@ class _MySubcriptionScreenState extends State<MySubcriptionScreen> {
                           Icons.arrow_back_ios,
                           color: Colors.white,
                         )),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Text(
+                      const Text(
                         'Subcriptions',
                         style: TextStyle(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w600,
-                            color: const Color(0xffF9F8FD)),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xffF9F8FD)),
                       ),
-                    ),
-                    InkWell(
-                        onTap: () {
-                          Get.to(const SupportScreen());
-                        },
-                        child: Image.asset('assets/images/helps.png'))
+                    Container(width: 20,)
+                    // InkWell(
+                    //     onTap: () {
+                    //       Get.to(const SupportScreen());
+                    //     },
+                    //     child: Image.asset('assets/images/helps.png'))
                   ],
                 ),
               ),
             ),
           )),
       body: GetBuilder<PlanController>(builder: (_) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        return ListView(
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),

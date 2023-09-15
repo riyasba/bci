@@ -60,7 +60,7 @@ class _OurPartnerScreenState extends State<OurPartnerScreen> {
                         'Our Partner',
                         style: TextStyle(
                             fontSize: 20,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w700,
                             color: Color(0xffF9F8FD)),
                       ),
                     ),
@@ -97,7 +97,7 @@ class _OurPartnerScreenState extends State<OurPartnerScreen> {
                       Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Container(
-                            height: 100,
+                            height: 90,
                             child: Image.network(
                               settingsController.ourPartnersData[index].image,
                               fit: BoxFit.fill,
@@ -136,7 +136,7 @@ class _OurPartnerScreenState extends State<OurPartnerScreen> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
-                              height: 38,
+                              height: 35,
                               
                               decoration: BoxDecoration(
                                   color: kblue,

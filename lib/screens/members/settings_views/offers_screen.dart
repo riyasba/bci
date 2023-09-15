@@ -60,7 +60,7 @@ class _OfferScreenState extends State<OfferScreen> {
                         'Offers',
                         style: TextStyle(
                             fontSize: 20,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w700,
                             color: Color(0xffF9F8FD)),
                       ),
                     ),
@@ -190,7 +190,7 @@ class _OfferScreenState extends State<OfferScreen> {
                             });
                           });
                     },
-                    icon: const Icon(Icons.filter_alt))
+                    icon: const Icon(Icons.filter_alt_rounded))
                 //     GetBuilder<AuthController>(
                 //       builder: (_) {
                 //         return PopupMenuButton(
@@ -221,7 +221,7 @@ class _OfferScreenState extends State<OfferScreen> {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                height: size.height * 0.7,
+                height: size.height * 0.63,
                 child: settingcontroller.offerslistdata.isEmpty
                     ?  Center(
                         child: Column(

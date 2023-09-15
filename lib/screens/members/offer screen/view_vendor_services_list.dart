@@ -85,13 +85,13 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(150.h),
+          preferredSize:const Size.fromHeight(150),
           child: Column(
             children: [
               ClipPath(
                 clipper: SinCosineWaveClipper(),
                 child: Container(
-                  height: 150.h,
+                  height: 150,
                   color: kblue,
                   child: Padding(
                     padding:
@@ -116,19 +116,20 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                           child: Text(
                             'Services',
                             style: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
                                 color: kwhite),
                           ),
                         ),
-                        IconButton(
-                            onPressed: () {
-                              Get.to(NotificationScreen());
-                            },
-                            icon: Icon(
-                              Icons.notifications,
-                              color: kwhite,
-                            ))
+                        Container(width: 20,)
+                        // IconButton(
+                        //     onPressed: () {
+                        //       Get.to(NotificationScreen());
+                        //     },
+                        //     icon: Icon(
+                        //       Icons.notifications,
+                        //       color: kwhite,
+                        //     ))
                       ],
                     ),
                   ),
