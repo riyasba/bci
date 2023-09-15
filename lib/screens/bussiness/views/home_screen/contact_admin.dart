@@ -55,9 +55,10 @@ class _ContactAdminState extends State<ContactAdmin> {
               height: 158,
               color: kblue,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 20),
+                    padding: const EdgeInsets.only(left: 0),
                     child: IconButton(
                         onPressed: () {
                           Get.back();
@@ -68,12 +69,16 @@ class _ContactAdminState extends State<ContactAdmin> {
                         )),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 81),
+                    padding: const EdgeInsets.only(right: 40),
                     child: Text(
                       'Support',
                       style: TextStyle(fontSize: 23, color: Color(0xffF8F9FD)),
                     ),
                   ),
+                   Padding(
+                      padding: const EdgeInsets.only(right: 0),
+                      child: Image.asset('assets/images/helps.png'),
+                    )
                 ],
               ),
             ),
@@ -94,6 +99,7 @@ class _ContactAdminState extends State<ContactAdmin> {
                 child: Padding(
                   padding:const EdgeInsets.only(left: 15, right: 10),
                   child: TextField(
+                    textCapitalization: TextCapitalization.words,
                     controller: nameController,
                     decoration:const InputDecoration(
                         isCollapsed: true,
@@ -172,6 +178,7 @@ class _ContactAdminState extends State<ContactAdmin> {
                 child: Padding(
                   padding:const EdgeInsets.only(left: 15, right: 10),
                   child: TextField(
+                    textCapitalization: TextCapitalization.words,
                     controller: titleController,
                     decoration:const InputDecoration(
                         isCollapsed: true,
@@ -198,6 +205,7 @@ class _ContactAdminState extends State<ContactAdmin> {
                 child: Padding(
                   padding:const EdgeInsets.only(left: 15, right: 10),
                   child: TextField(
+                    textCapitalization: TextCapitalization.words,
                     controller: descriptionController,
                     maxLines: 100,
                     decoration:const InputDecoration(

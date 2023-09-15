@@ -5,6 +5,7 @@ import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/ad
 import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/update_services_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../constands/constands.dart';
@@ -365,12 +366,25 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
             ),
             GetBuilder<ServicesController>(builder: (_) {
               return servicesController.serviceDataList.isEmpty
-                  ? const Padding(
-                      padding: EdgeInsets.only(top: 200),
-                      child: Center(
-                        child: Text("No Service Added"),
+                  ?  Container(
+                    child: Center(
+                      child:Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ksizedbox30,
+                          Image.asset('assets/images/availablitynotavailableimage.png',
+                          height: 300,fit: BoxFit.fitHeight,),
+                          ksizedbox20,
+                          Text('No Data Availability',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: kblue,
+                          
+                          ),)
+                        ],
                       ),
-                    )
+                    ),
+                  )
                   : Container(
                       height: size.height * 0.65,
                       child: ListView.builder(

@@ -1,5 +1,5 @@
 import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
-import 'package:bci/screens/bussiness/views/home_screen/wallet/bank_deatails.dart';
+import 'package:bci/screens/bussiness/views/home_screen/settings/bank_deatails.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

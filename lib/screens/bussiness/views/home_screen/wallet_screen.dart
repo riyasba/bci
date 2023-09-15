@@ -1,6 +1,6 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
-import 'package:bci/screens/bussiness/views/home_screen/wallet/bank_deatails.dart';
+import 'package:bci/screens/bussiness/views/home_screen/settings/bank_deatails.dart';
 import 'package:bci/screens/bussiness/views/home_screen/wallet/enter_amount_for_withdrawal_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
@@ -69,8 +69,19 @@ class _WalletScreenState extends State<WalletScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children:  [
+                   Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: kwhite,
+                        )),
+                  ),
                   Padding(
-                    padding: EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.only(left: 0),
                     child: Text(
                       'Wallet',
                       style: TextStyle(
@@ -407,7 +418,19 @@ class _WalletScreenState extends State<WalletScreen> {
                           ),
                         );
                       })
-                      : Center(child: Text('No Found Data')),
+                      : Center(child:Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:[
+                         Image.asset('assets/images/walletnotavailableimage.png',
+                         fit: BoxFit.fitHeight,height: 200,),
+                         ksizedbox20,
+                         Text('No Wallet Data',
+                         style: TextStyle(
+                          fontSize: 16.sp,
+                          color: kblue,
+                        
+                         ),)
+                         ])),
                 );
               }),
             ],

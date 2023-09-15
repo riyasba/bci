@@ -5,6 +5,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:coupon_uikit/coupon_uikit.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -82,7 +83,7 @@ class _CouponScreenState extends State<CouponScreen> {
                   child: Text(
                     'VIEW HISTORY',
                     style: TextStyle(
-                        fontSize: 23,
+                        fontSize: 20.sp,
                         color: kblue,
                         fontWeight: FontWeight.bold),
                   ),
@@ -96,7 +97,17 @@ class _CouponScreenState extends State<CouponScreen> {
                 return Container(
                   height: _mediaQuery.height*0.70,
                   child: authController.couponRedeemptionData.isEmpty?  Center(
-                    child: Image.asset("assets/images/no_data_found.gif"),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:[
+                       Image.asset("assets/images/couponredimnoavailableimage.png",
+                       height: 250,fit: BoxFit.fitHeight,),
+                       ksizedbox20,
+                       Text('No Coupon Redemention Data',
+                       style: TextStyle(
+                        fontSize: 16.sp,
+                        color: kblue
+                       ),)],),
                   ) : ListView.builder(
                               itemCount: authController.couponRedeemptionData.length,
                               itemBuilder: (context, index) {

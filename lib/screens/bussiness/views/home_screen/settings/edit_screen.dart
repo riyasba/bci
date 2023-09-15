@@ -389,6 +389,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
             child: Container(
               height: 55,
               child: TextField(
+                textCapitalization: TextCapitalization.words,
                 controller: addressController,
                 decoration: InputDecoration(
                     labelText: 'Business Address',
@@ -496,6 +497,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
             child: Container(
               height: 55,
               child: TextField(
+                textCapitalization: TextCapitalization.words ,
                 controller: bankNameController,
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))
@@ -512,6 +514,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
             child: Container(
               height: 55,
               child: TextField(
+                textCapitalization: TextCapitalization.words,
                 controller: bankAccountNameController,
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]"))

@@ -1,6 +1,7 @@
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -136,7 +137,18 @@ final notificationController = Get.find<NotificationController>();
                     );
                   })
                   :
-                  Center(child: Image.asset("assets/images/no_data_found.gif")),
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:[
+                       Image.asset("assets/images/notificationnotavailableimage.png"),
+                       ksizedbox20,
+                       Text('No Notification Data',
+                       style: TextStyle(
+                        fontSize: 16.sp,
+                        color: kblue,
+                       ),)
+                       ])),
             );
           }
         ),

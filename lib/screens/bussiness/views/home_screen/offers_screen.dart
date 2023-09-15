@@ -185,10 +185,10 @@ class _OffersScreenState extends State<OffersScreen> {
                       ),
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(right: 20),
-                  //   child: Image.asset('assets/images/helps.png'),
-                  // )
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: Image.asset('assets/images/helps.png'),
+                  )
                 ],
               ),
             ),
@@ -210,6 +210,7 @@ class _OffersScreenState extends State<OffersScreen> {
             Padding(
             padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
             child: TextFormField(
+              textCapitalization: TextCapitalization.words,
               controller: titleController,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               // validator: (value) {
@@ -218,6 +219,7 @@ class _OffersScreenState extends State<OffersScreen> {
               //   }
               //   return null;
               // },
+
               decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -527,6 +529,7 @@ class _OffersScreenState extends State<OffersScreen> {
             Padding(
             padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
             child: TextFormField(
+              textCapitalization: TextCapitalization.words,
               controller: descriptionController,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               maxLines: 5,

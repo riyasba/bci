@@ -147,6 +147,17 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                     Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: kwhite,
+                        )),
+                  ),
                     // IconButton(
                     //   onPressed: () {
                     //     Get.off(BusinessHomeScreen());
@@ -156,7 +167,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                     //     color: kwhite,
                     //   )),
                     const Padding(
-                      padding: EdgeInsets.only(left: 25),
+                      padding: EdgeInsets.only(left: 0),
                       child: Text(
                         'Bookings',
                         style: TextStyle(fontSize: 23, color: Colors.white),
@@ -285,7 +296,18 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
       body: GetBuilder<ServicesController>(builder: (_) {
         return serviceController.bookingListData.isEmpty
             ?  Center(
-                child: Image.asset("assets/images/no_data_found.gif"),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:[
+                   Image.asset("assets/images/bookingnotavailable.png",
+                   height: 250,fit: BoxFit.fitHeight,
+                   ),
+                   ksizedbox20,
+                   Text('No Booking History',
+                   style: TextStyle(
+                    fontSize: 16.sp,
+                    color: kblue
+                   ),)]),
               )
             : ListView.builder(
                 itemCount: serviceController.bookingListData.length,

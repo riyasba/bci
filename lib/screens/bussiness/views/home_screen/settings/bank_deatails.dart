@@ -9,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../../constands/constands.dart';
 import 'dart:io';
 
-import 'edit_screen.dart';
+import '../wallet/edit_screen.dart';
 
 class BankDetailsScreen extends StatefulWidget {
   const BankDetailsScreen({super.key});
@@ -132,6 +132,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
         Padding(
           padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
           child: TextField(
+            textCapitalization: TextCapitalization.words,
             controller: bankNameController,
             // readOnly: true,
             inputFormatters: [
@@ -146,6 +147,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
         Padding(
           padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
           child: TextField(
+            textCapitalization: TextCapitalization.words,
             controller: bankAccountNameController,
             // readOnly: true,
             inputFormatters: [
