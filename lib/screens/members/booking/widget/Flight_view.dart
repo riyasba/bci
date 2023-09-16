@@ -26,7 +26,7 @@ class _FlightWidgetState extends State<FlightWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: kwhite,
       body: GetBuilder<FlightsController>(builder: (_) {
         return flightController.flightBookingHistoyrList.isEmpty
             ?  Center(
