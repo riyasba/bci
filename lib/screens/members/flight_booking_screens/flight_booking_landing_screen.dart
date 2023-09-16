@@ -41,7 +41,7 @@ class _FlightBookingLandingScreenState
       
       body: Obx(
         () => ListView(
-          physics: const BouncingScrollPhysics(),
+          //physics: const BouncingScrollPhysics(),
           children: [
             FlightBookingHeader(),
             ksizedbox20,

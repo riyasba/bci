@@ -1230,7 +1230,7 @@ class _MyAccountState extends State<MyAccount> {
                                                                 },
                                                                 child:
                                                                     const Text(
-                                                                  'Choose gallery',
+                                                                  'Choose Gallery',
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .black,
@@ -1288,7 +1288,7 @@ class _MyAccountState extends State<MyAccount> {
                                                               pickerimage();
                                                             },
                                                             child: const Text(
-                                                              'Choose gallery',
+                                                              'Choose Gallery',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -1358,7 +1358,7 @@ class _MyAccountState extends State<MyAccount> {
                                                               pickerimage2();
                                                             },
                                                             child: const Text(
-                                                              'Choose gallery',
+                                                              'Choose Gallery',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -1413,7 +1413,7 @@ class _MyAccountState extends State<MyAccount> {
                                                               pickerimage2();
                                                             },
                                                             child: const Text(
-                                                              'Choose ur gallery',
+                                                              'Choose Gallery',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -1425,7 +1425,7 @@ class _MyAccountState extends State<MyAccount> {
                                                               imagepic2();
                                                             },
                                                             child: const Text(
-                                                              'Choose ur Camera',
+                                                              'Choose Camera',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,

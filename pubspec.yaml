@@ -88,6 +88,7 @@ dependencies:
   coupon_uikit: ^0.2.0
   url_launcher: ^6.1.14
   phone_number_hint: ^0.0.4
+  connectivity_plus: ^3.0.2
 
 dev_dependencies:
   flutter_test:

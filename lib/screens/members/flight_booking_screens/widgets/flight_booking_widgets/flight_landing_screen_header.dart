@@ -31,13 +31,24 @@ class _FlightBookingHeaderState extends State<FlightBookingHeader> {
               )),
         ),
         Positioned(
-            left: 5,
+            left: 15,
             top: 3,
             child: InkWell(
                 onTap: () {
                   Get.back();
                 },
-                child: Image.asset('assets/images/Back.png'))),
+                child: Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                      color: kOrange, borderRadius: BorderRadius.circular(7)),
+                  child: Center(
+                      child: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: kwhite,
+                    size: 16,
+                  ))),
+            )),
         Positioned(
           bottom: 2,
           left: 0,
