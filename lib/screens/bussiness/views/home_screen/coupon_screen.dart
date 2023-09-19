@@ -96,7 +96,7 @@ class _CouponScreenState extends State<CouponScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset("assets/images/Voucher.png"),
+                          Image.asset("assets/images/Voucher.png",height: _mediaQuery.height*0.4,),
                           ksizedbox20,
                           Text(
                             'No Coupons History',

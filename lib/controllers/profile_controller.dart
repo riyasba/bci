@@ -113,7 +113,7 @@ class ProfileController extends GetxController {
           ));
     } else {
       Get.rawSnackbar(
-        message: "Something went wrong, please try again!",
+        message:response.data["error"],
         backgroundColor: Colors.red,
       );
     }

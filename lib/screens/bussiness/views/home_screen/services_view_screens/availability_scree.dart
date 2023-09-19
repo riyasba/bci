@@ -65,10 +65,10 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
 
   checkValue() async{
 
-     if (widget.isAvailable != null) {
-  servicesController.getServicesByCategory(
-  categoryId: widget.isAvailable.toString());
-}
+//      if (widget.isAvailable != null) {
+//   servicesController.getServicesByCategory(
+//   categoryId: widget.isAvailable.toString());
+// }
 }
 
   var merchantCategory;

@@ -26,37 +26,54 @@ class _EnterAmountForWithdrawalScreenState
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              height: 158,
+              height: 150,
               color: kblue,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Text(
-                      'Payout',
-                      style: TextStyle(
-                          fontSize: 23,
-                          //fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: InkWell(
-                        onTap: () {
-                          Get.to(() => const NotificationScreen());
-                        },
-                        child:
-                            Image.asset('assets/images/notificationimage.png')),
-                  )
-                ],
+                        padding: const EdgeInsets.only(left: 10),
+                        child: IconButton(
+                            onPressed: () {
+                             
+                            Get.back();
+                            },
+                            icon: Icon(
+                              Icons.arrow_back_ios,
+                              color: kwhite,
+                            )),
+                      ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 0),
+                      child: Text(
+                        'Payout',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white),
+                      ),
+                    ),
+                    Container(
+                      width: 50,
+                    )
+                    // Padding(
+                    //   padding: const EdgeInsets.only(right: 20),
+                    //   child: InkWell(
+                    //       onTap: () {
+                    //         Get.to(() => const NotificationScreen());
+                    //       },
+                    //       child:
+                    //           Image.asset('assets/images/notificationimage.png')),
+                    // )
+                  ],
+                ),
               ),
             ),
           )),
@@ -64,7 +81,7 @@ class _EnterAmountForWithdrawalScreenState
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: SvgPicture.asset("assets/images/payment_vec_image.svg"),
+            child: SvgPicture.asset("assets/images/payment_vec_image.svg",height: size.height*0.4,),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
@@ -87,11 +104,9 @@ class _EnterAmountForWithdrawalScreenState
             ),
           ),
           const SizedBox(
-            height: 100,
+            height: 50,
           ),
-        ],
-      ),
-      bottomNavigationBar: Obx(
+          Obx(
         () => Padding(
           padding: const EdgeInsets.all(20.0),
           child: profileController.isLoading.isTrue
@@ -129,6 +144,8 @@ class _EnterAmountForWithdrawalScreenState
                   ),
                 ),
         ),
+      ),
+        ],
       ),
     );
   }
