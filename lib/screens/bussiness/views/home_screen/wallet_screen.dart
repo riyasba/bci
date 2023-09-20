@@ -413,7 +413,7 @@ class _WalletScreenState extends State<WalletScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.asset(
-                                'assets/images/walletnotavailableimage.png',
+                                'assets/icons/w.jpeg',
                                // fit: BoxFit.fitHeight,
                                 height: 200,
                               ),

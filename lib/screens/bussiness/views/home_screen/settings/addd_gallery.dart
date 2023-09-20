@@ -51,6 +51,7 @@ class _AddGalleryState extends State<AddGallery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(150),
         child: ClipPath(
@@ -96,7 +97,7 @@ class _AddGalleryState extends State<AddGallery> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset('assets/images/logoutimage.png'),
+                      Image.asset('assets/icons/imgess.jpeg'),
                       ksizedbox20,
                       Text('Empty Gallery',
                       style: TextStyle(

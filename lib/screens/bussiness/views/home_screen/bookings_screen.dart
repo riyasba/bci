@@ -278,7 +278,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children:[
-                   Image.asset("assets/images/bookingnotavailable.png",
+                   Image.asset("assets/icons/noBooking.png",
                    height: 250,fit: BoxFit.fitHeight,
                    ),
                    ksizedbox20,
