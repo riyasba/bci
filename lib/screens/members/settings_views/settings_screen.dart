@@ -481,7 +481,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     });
                 //Get.find<AuthController>().logout();
               },
-              child: Row(
+              child: const Row(
                 children: const [
                   Image(
                     image: AssetImage("assets/icons/logouticon.png"),

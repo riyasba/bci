@@ -89,6 +89,8 @@ dependencies:
   url_launcher: ^6.1.14
   phone_number_hint: ^0.0.4
   connectivity_plus: ^3.0.2
+  upgrader: ^8.1.0
+
 
 dev_dependencies:
   flutter_test:

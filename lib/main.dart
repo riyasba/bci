@@ -17,6 +17,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:upgrader/upgrader.dart';
 import 'authentications/splash_screen/Splash_screen.dart';
 
 Future main() async {
@@ -151,7 +152,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: const splash(),
+          home: UpgradeAlert(child: const splash()),
         );
       },
     );

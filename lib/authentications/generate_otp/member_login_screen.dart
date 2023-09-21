@@ -212,7 +212,7 @@ class _MemberLoginScreenState extends State<MemberLoginScreen> {
                               ),
                             ),
                             child: const Text(
-                              'Genarate OTP',
+                              'Generate OTP',
                               style: TextStyle(
                                   fontSize: 22,
                                   color: Colors.white,

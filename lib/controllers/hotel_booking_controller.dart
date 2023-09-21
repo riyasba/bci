@@ -70,6 +70,7 @@ class HotelBookingController extends GetxController {
             //   childage: childage,
             roomsno: roomsno);
     isLoading(false);
+    print(response.data);
     if (response.data["Error"]["ErrorCode"] == 0) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("searchtoken", response.data["Search_Token"]);
