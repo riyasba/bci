@@ -69,6 +69,7 @@ class HotelBookingController extends GetxController {
             destination: destination,
             //   childage: childage,
             roomsno: roomsno);
+            print(response.data);
     isLoading(false);
     if (response.data["Error"]["ErrorCode"] == 0) {
       final prefs = await SharedPreferences.getInstance();
