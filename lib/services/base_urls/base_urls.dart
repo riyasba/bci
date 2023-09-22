@@ -120,4 +120,6 @@ abstract class BaseApiService {
       //notification count
       final String notificationCountApiUrl =
       "https://portal.bcipvtltd.com/api/auth/notification/count";
+
+      final String deleteUserURL = "https://portal.bcipvtltd.com/api/auth/delete_user";
 }

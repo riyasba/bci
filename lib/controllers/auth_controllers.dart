@@ -13,6 +13,7 @@ import 'package:bci/screens/bussiness/views/generations/login_otp_screen.dart';
 import 'package:bci/screens/bussiness/views/generations/otp_verification_screen.dart';
 import 'package:bci/screens/bussiness/views/generations/verified_screen.dart';
 import 'package:bci/screens/bussiness/views/generations/waiting_for_approval_screen.dart';
+import 'package:bci/services/network/auth_api_services/delete_user_api_services.dart';
 import 'package:bci/services/network/auth_api_services/get_otp_api_services.dart';
 import 'package:bci/services/network/auth_api_services/login_api_services.dart';
 import 'package:bci/services/network/auth_api_services/merchant_api_services.dart';
@@ -407,4 +408,29 @@ class AuthController extends GetxController {
       //   ));
     }
   }
+DeleteUserAccountApi deleteUserAccountApi = DeleteUserAccountApi();
+
+deleteUser() async {
+    isLoading(true);
+    dio.Response<dynamic> response = await deleteUserAccountApi
+        .deleteUserAccountApi();
+    isLoading(false);
+    if (response.statusCode == 200) {
+     Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            response.data["message"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            response.data["message"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+  }
+
+
 }
