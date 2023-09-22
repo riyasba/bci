@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
@@ -11,8 +12,10 @@ import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../../../constands/constands.dart';
@@ -1689,9 +1692,9 @@ class _MyAccountState extends State<MyAccount> {
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
                             children: [
-                              Row(
+                             const Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
-                                children: const [
+                                children:  [
                                   Text(
                                     "",
                                     style: TextStyle(
@@ -2346,6 +2349,144 @@ class _MyAccountState extends State<MyAccount> {
                       ),
                     ),
                   //
+                  
+                  const Divider(thickness: 2),
+                  InkWell(
+                    onTap: () {
+                      print(settingsController.actIndex);
+                      if (settingsController.actIndex.value == 3) {
+                        print("-----");
+                        settingsController.actIndex(10);
+                        print(settingsController.actIndex);
+                      } else {
+                        settingsController.actIndex(3);
+                      }
+                      settingsController.update();
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Manage your account',
+                          style: TextStyle(
+                              color: kblue,
+                              fontSize: 21,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Image.asset('assets/images/Icon awesome-caret-down.png')
+                      ],
+                    ),
+                  ),
+                  if(settingsController.actIndex.value == 3)
+                   Column(
+                     children: [
+                      const SizedBox(
+                        height: 15,
+                      ),
+                       InkWell(
+                        onTap: (){
+                          showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        backgroundColor: Colors.white,
+                        title: Column(
+                          children: [
+                            Image.asset('assets/images/userdlt.png'),
+                            Text("Delete Account!",
+                                style: TextStyle(
+                                    fontSize: 25.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black)),
+                          ],
+                        ),
+                        content:const Text(
+                          "Are you sure want to this Delete account?",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 17,
+                          ),
+                        ),
+                        actions: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      // ignore: unrelated_type_equality_checks
+                                      color: kwhite),
+                                  child: Center(
+                                      child: Text("Cancel",
+                                          style: primaryTextStyle(
+                                              color: kOrange))),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  // authController.logoutindex(1);
+                                  // authController.update();
+                                  Get.find<AuthController>().deleteUser();
+                                  Get.find<AuthController>().logout();
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      color: kOrange,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Center(
+                                    child: Text(
+                                      "Delete",
+                                      style: primaryTextStyle(color: kwhite),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          ksizedbox10
+                        ],
+                      );
+                    });
+                        },
+                         child: Container(
+                                                  height: 50,
+                                                  width: size.width,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(3),
+                                                      border: Border.all(
+                                                          color: const Color(
+                                                              0xffFF9021)),
+                                                      boxShadow: const [
+                                                        BoxShadow(
+                                                          color: Color(0xffFF5003),
+                                                          blurRadius: 2.0,
+                                                        ),
+                                                      ]),
+                                                  child: const Center(
+                                                    child: Text(
+                                                      "Delete your account",
+                                                      style: TextStyle(
+                                                          fontSize: 22,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                  ),
+                                                ),
+                       ),
+                     ],
+                   ),
                   ksizedbox30,
                   // plansController.subscribePlansData.isEmpty
                   //     ? InkWell(

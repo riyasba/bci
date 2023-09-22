@@ -280,4 +280,6 @@ abstract class BaseApiService {
   //support admin details 
   final String supportAdminDetailsApiUrl = "https://portal.bcipvtltd.com/api/get/app/support/details";
 
+    //delete user Details
+  final String deleteUserURL = "https://portal.bcipvtltd.com/api/auth/delete_user";
 }
