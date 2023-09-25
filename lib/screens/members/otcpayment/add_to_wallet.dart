@@ -204,6 +204,7 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
           InkWell(
             onTap: ()async {
  await   Get.find<ProfileController>().getProfile();
+ print("wallet transaction -->>");
               // if(Platform.isIOS){
                                   Get.offAll(() => PaymentWebView(
                                   payOpt: "",

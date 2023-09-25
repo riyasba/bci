@@ -215,7 +215,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                                               pickerimage();
                                             },
                                             child: Text(
-                                              'Choose ur gallery',
+                                              'Choose gallery',
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16),
@@ -225,7 +225,7 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                                               imagepic();
                                             },
                                             child: Text(
-                                              'Choose ur Camera',
+                                              'Choose Camera',
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16),

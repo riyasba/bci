@@ -251,7 +251,7 @@ class _MyAccountState extends State<MyAccount> {
        isMarried = false;
       }
       });
-      _controller?.addTag = profileController.profileData.first.childName;
+      // _controller?.addTag = profileController.profileData.first.childName;
     }
   }
 
@@ -1416,7 +1416,7 @@ class _MyAccountState extends State<MyAccount> {
                                                               pickerimage2();
                                                             },
                                                             child: const Text(
-                                                              'Choose ur gallery',
+                                                              'Choose gallery',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -1428,7 +1428,7 @@ class _MyAccountState extends State<MyAccount> {
                                                               imagepic2();
                                                             },
                                                             child: const Text(
-                                                              'Choose ur Camera',
+                                                              'Choose Camera',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -1605,7 +1605,7 @@ class _MyAccountState extends State<MyAccount> {
                                               panproofimg: image2 == null
                                                   ? "null"
                                                   : image2!.path,
-                                              children: _controller!.getTags,
+                                              children: isMarried ?  _controller!.getTags : [],
                                             );
 
                                             profileController.updateProfile(

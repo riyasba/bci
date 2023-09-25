@@ -319,7 +319,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                             pickerimage();
                                           },
                                           child: Text(
-                                            'Choose ur gallery',
+                                            'Choose gallery',
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 16),
@@ -329,7 +329,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                             imagepic();
                                           },
                                           child: Text(
-                                            'Choose ur Camera',
+                                            'Choose Camera',
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 16),
@@ -364,7 +364,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                             pickerimage2();
                                           },
                                           child: Text(
-                                            'Choose ur gallery',
+                                            'Choose gallery',
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 16),
@@ -374,7 +374,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                             imagepic2();
                                           },
                                           child: Text(
-                                            'Choose ur Camera',
+                                            'Choose Camera',
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 16),

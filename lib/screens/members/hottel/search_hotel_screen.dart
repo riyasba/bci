@@ -41,7 +41,7 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
               Stack(
                 children:[ 
                 Container(
-                  height: size.height*0.39,
+                  height: size.height*0.35,
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 30),
                     child: Container(

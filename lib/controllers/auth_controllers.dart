@@ -10,6 +10,7 @@ import 'package:bci/models/sub_category_model.dart';
 import 'package:bci/models/transaction_history_model.dart';
 import 'package:bci/screens/bussiness/views/generations/otp_verification_screen.dart';
 import 'package:bci/screens/bussiness/views/generations/verified_screen.dart';
+import 'package:bci/screens/members/sign_up_view/member_sign_up_screen.dart';
 import 'package:bci/services/network/auth_api_services/add_transaction_api_service.dart';
 import 'package:bci/services/network/auth_api_services/delete_user_api_services.dart';
 import 'package:bci/services/network/auth_api_services/fcm_token_store_api_service.dart';
@@ -142,12 +143,15 @@ class AuthController extends GetxController {
         otp: response.data["otp"].toString(),
       ));
     } else if (response.statusCode == 404) {
-      Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            response.data["message"],
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
+      Get.to(()=> MemberSignUpScreen(
+phoneNumber: mobileNumber,
+      ));
+      // Get.rawSnackbar(
+      //     backgroundColor: Colors.red,
+      //     messageText: Text(
+      //       response.data["message"],
+      //       style: primaryFont.copyWith(color: Colors.white),
+      //     ));
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,

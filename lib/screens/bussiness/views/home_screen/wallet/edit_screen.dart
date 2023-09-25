@@ -211,7 +211,7 @@ class _EditScreenState extends State<EditScreen> {
                                               pickerimage();
                                             },
                                             child: Text(
-                                              'Choose ur gallery',
+                                              'Choose gallery',
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16),
@@ -221,7 +221,7 @@ class _EditScreenState extends State<EditScreen> {
                                               imagepic();
                                             },
                                             child: Text(
-                                              'Choose ur Camera',
+                                              'Choose Camera',
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16),

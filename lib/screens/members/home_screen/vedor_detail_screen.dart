@@ -159,13 +159,13 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                   ),
                   ksizedbox20,
                   if (widget.vendorListModelData.address != null)
-                    Row(
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           "${widget.vendorListModelData.address ?? ""}",
                           style: TextStyle(fontSize: 15.sp, color: kblue),
                         ),
-                        Text(","),
                         if (widget.vendorListModelData.address != null)
                           Text(
                             "${widget.vendorListModelData.city}",
@@ -174,7 +174,6 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                                 fontWeight: FontWeight.normal,
                                 color: kblue),
                           ),
-                        Text(","),
                         if (widget.vendorListModelData.address != null)
                           Text(
                             "${widget.vendorListModelData.state}",

@@ -23,7 +23,7 @@ class _FlightBookingHeaderState extends State<FlightBookingHeader> {
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(
-                      "assets/images/flight_booking/above-aeroplane-aircraft-engine-91217.png"),
+                      "assets/images/Group 6978 (3).png"),
                   fit: BoxFit.cover),
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(20),
@@ -31,13 +31,24 @@ class _FlightBookingHeaderState extends State<FlightBookingHeader> {
               )),
         ),
         Positioned(
-            left: 5,
+            left: 15,
             top: 3,
             child: InkWell(
                 onTap: () {
                   Get.back();
                 },
-                child: Image.asset('assets/images/Back.png'))),
+                child: Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                      color: kOrange, borderRadius: BorderRadius.circular(7)),
+                  child: Center(
+                      child: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: kwhite,
+                    size: 16,
+                  ))),
+            )),
         Positioned(
           bottom: 2,
           left: 0,
@@ -153,32 +164,32 @@ class _FlightBookingHeaderState extends State<FlightBookingHeader> {
             ),
           ),
         ),
-        Positioned(
-          bottom: 120,
-          left: 10,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Fly to Your",
-                style: primaryFont.copyWith(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w200),
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              Text(
-                "Dreams".toUpperCase(),
-                style: primaryFont.copyWith(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        )
+        // Positioned(
+        //   bottom: 120,
+        //   left: 10,
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       Text(
+        //         "Fly to Your",
+        //         style: primaryFont.copyWith(
+        //             color: Colors.white,
+        //             fontSize: 14,
+        //             fontWeight: FontWeight.w200),
+        //       ),
+        //       const SizedBox(
+        //         height: 6,
+        //       ),
+        //       Text(
+        //         "Dreams".toUpperCase(),
+        //         style: primaryFont.copyWith(
+        //             color: Colors.white,
+        //             fontSize: 20,
+        //             fontWeight: FontWeight.bold),
+        //       ),
+        //     ],
+        //   ),
+        // )
       ],
     );
   }
