@@ -10,8 +10,8 @@ import 'package:get/get.dart';
 
 
 class MemberSignUpScreen extends StatefulWidget {
-  
-   MemberSignUpScreen({super.key,});
+   String phoneNumber;
+   MemberSignUpScreen({super.key,this.phoneNumber = ""});
 
   @override
   State<MemberSignUpScreen> createState() => _MemberSignUpScreenState();
@@ -74,6 +74,18 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
 
   FocusNode emailFocusNode = FocusNode();
   FocusNode mobileNumberFocusNode = FocusNode();
+
+
+  setDefault(){
+    mobileController.text = widget.phoneNumber;
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+     setDefault();
+  }
 
   @override
   Widget build(BuildContext context) {

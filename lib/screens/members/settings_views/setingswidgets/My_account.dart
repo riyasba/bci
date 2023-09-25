@@ -242,13 +242,12 @@ class _MyAccountState extends State<MyAccount> {
         print("--------------------------->>Gender is ---------------->>$selectedGender");
         print("---------------------------->>Married status = ${profileController.profileData.first.isMarried}");
         if (profileController.profileData.first.isMarried != null) {
-      isMarried =
-      profileController.profileData.first.isMarried == "0" ? false : true;
+      isMarried = profileController.profileData.first.isMarried == "0" ? false : true;
       }else{
        isMarried = false;
       }
       });
-      _controller?.addTag = profileController.profileData.first.childName;
+      // _controller?.addTag = profileController.profileData.first.childName;
     }
   }
 
@@ -1602,13 +1601,13 @@ class _MyAccountState extends State<MyAccount> {
                                               panproofimg: image2 == null
                                                   ? "null"
                                                   : image2!.path,
-                                              children: _controller!.getTags,
+                                              children: isMarried ? _controller!.getTags : [],
                                             );
 
                                             profileController.updateProfile(
                                                 memberProfileUpdateModel:
                                                     memberProfileUpdateModel);
-                                            print(_controller!.getTags);
+                                            // print(_controller!.getTags);
                                           },
                                           child: Container(
                                             height: 50,
