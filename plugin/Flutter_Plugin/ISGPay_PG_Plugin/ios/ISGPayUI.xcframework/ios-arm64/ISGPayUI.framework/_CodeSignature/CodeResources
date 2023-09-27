@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/ISGPayController.swift</key>
 		<data>
-		LygCdCXkCAi1AvqtnUyOdTjFrrs=
+		yJ/ZhJS2rbsjNe5hCp0BZn99haA=
 		</data>
 		<key>Headers/ISGPayRequest.swift</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Headers/ISGPayUI-Swift.h</key>
 		<data>
-		GKzsQ8MoXOJqXhBW4DmB/qT+nQc=
+		/LfXwOVi/MUAr9NlA35y4+6slfc=
 		</data>
 		<key>Headers/ISGPayUI.h</key>
 		<data>
@@ -38,15 +38,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		YxVwWH0DoPmzpRvD9LI4+CyPX14=
+		fBHnbSIvkHPZQam8Ri08aieP8cM=
 		</data>
 		<key>Modules/ISGPayUI.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		LqaxNK7medysL6HePG7TiMDnIR4=
+		7bhhuFMLyc+epbKiwn4HY30BBXA=
 		</data>
 		<key>Modules/ISGPayUI.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		fo/XsWRczuCdLI9aAsKWTTxGNTc=
+		vCrDTAt3nIlpDUP0c1f1vTwEVNU=
 		</data>
 		<key>Modules/ISGPayUI.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -54,11 +54,11 @@
 		</data>
 		<key>Modules/ISGPayUI.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		fo/XsWRczuCdLI9aAsKWTTxGNTc=
+		vCrDTAt3nIlpDUP0c1f1vTwEVNU=
 		</data>
 		<key>Modules/ISGPayUI.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		Q56K3twuamUbUaHYtNBHBGKfNLE=
+		ULJIcVWKOthhaFNqX22TFX6TI3k=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -78,7 +78,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GASY0rSttc3kkeddrRxCrWJC1su68dGijE6Pl7NVss0=
+			4pqF6EBf3G9kzlyA+nIYJYqOHcYXuqfuV2bzXJbJWiA=
 			</data>
 		</dict>
 		<key>Headers/ISGPayRequest.swift</key>
@@ -99,7 +99,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7XjYbMtGcQNCZ2YcbpqjyzTTUt7sKZaZCpN0MgrXY/g=
+			6Rgv4uq3aCMioFYVYxw51K9JeTWe7TcAO3JK5IGprAw=
 			</data>
 		</dict>
 		<key>Headers/ISGPayUI.h</key>
@@ -127,14 +127,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			00+M9YgMGzqQHVfyGPicfDwwR5pdBqANrwVQikaHmEY=
+			7bYY1m1fZsk0chZOzfNSeJYXYJMV5Ue0IOznMDc9eGg=
 			</data>
 		</dict>
 		<key>Modules/ISGPayUI.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			4vECJFqpaJ31uG7iYqjFyxmz6RCzgaLjkiuciP8xDds=
+			HN+tz26XjMzke74iL5/VyBFUVK0LWBlh/YXllrN1nzk=
 			</data>
 		</dict>
 		<key>Modules/ISGPayUI.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -148,14 +148,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4vECJFqpaJ31uG7iYqjFyxmz6RCzgaLjkiuciP8xDds=
+			HN+tz26XjMzke74iL5/VyBFUVK0LWBlh/YXllrN1nzk=
 			</data>
 		</dict>
 		<key>Modules/ISGPayUI.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			WRHS/LxdolsmNWS9+NiVZj9NnFCf3R6xYC+gFtePplg=
+			cXd+oNggsiKNudiN+rNVSwLRkbZbnyKBh9u0PQibECI=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

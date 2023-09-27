@@ -63,7 +63,7 @@ class _HotelListScreenState extends State<HotelListScreen> {
               Stack(
                 children:[ 
                 Container(
-                  height: size.height*0.39,
+                  height: size.height*0.35,
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 30),
                     child: Container(
@@ -75,7 +75,7 @@ class _HotelListScreenState extends State<HotelListScreen> {
                       fit: BoxFit.fill,)),
                   ),
                 ),
-                  InkWell(
+         InkWell(
             onTap: () {
               Get.back();
             },
@@ -161,7 +161,7 @@ class _HotelListScreenState extends State<HotelListScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              width: 200,
+                              width: 180,
                               child: Text(
                                 hotelBookingController
                                     .searchHotelData[index].hotelName,
@@ -170,10 +170,11 @@ class _HotelListScreenState extends State<HotelListScreen> {
                               ),
                             ),
                             Container(
-                              width: 200,
+                              width: 180,
                               child: Text(
                                 hotelBookingController
                                     .searchHotelData[index].hotelAddress,
+                                    maxLines: 3,
                                 style: TextStyle(
                                   color: Colors.grey,
                                 ),

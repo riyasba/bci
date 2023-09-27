@@ -10416,149 +10416,6 @@
           {
             "kind": "Function",
             "name": "webView",
-            "printedName": "webView(_:shouldStartLoadWith:navigationType:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "UIWebView",
-                "printedName": "UIKit.UIWebView",
-                "usr": "c:objc(cs)UIWebView"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "URLRequest",
-                "printedName": "Foundation.URLRequest",
-                "usr": "s:10Foundation10URLRequestV"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "NavigationType",
-                "printedName": "UIKit.UIWebView.NavigationType",
-                "usr": "c:@E@UIWebViewNavigationType"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@CM@ISGPayUI@objc(cs)ISGPayController(im)webView:shouldStartLoadWithRequest:navigationType:",
-            "mangledName": "$s8ISGPayUI0A10ControllerC7webView_19shouldStartLoadWith14navigationTypeSbSo05UIWebE0C_10Foundation10URLRequestVSo0le10NavigationK0VtF",
-            "moduleName": "ISGPayUI",
-            "objc_name": "webView:shouldStartLoadWithRequest:navigationType:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "AccessControl"
-            ],
-            "isFromExtension": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "webViewDidStartLoad",
-            "printedName": "webViewDidStartLoad(_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "UIWebView",
-                "printedName": "UIKit.UIWebView",
-                "usr": "c:objc(cs)UIWebView"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@CM@ISGPayUI@objc(cs)ISGPayController(im)webViewDidStartLoad:",
-            "mangledName": "$s8ISGPayUI0A10ControllerC19webViewDidStartLoadyySo05UIWebE0CF",
-            "moduleName": "ISGPayUI",
-            "objc_name": "webViewDidStartLoad:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "AccessControl"
-            ],
-            "isFromExtension": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "webViewDidFinishLoad",
-            "printedName": "webViewDidFinishLoad(_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "UIWebView",
-                "printedName": "UIKit.UIWebView",
-                "usr": "c:objc(cs)UIWebView"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@CM@ISGPayUI@objc(cs)ISGPayController(im)webViewDidFinishLoad:",
-            "mangledName": "$s8ISGPayUI0A10ControllerC20webViewDidFinishLoadyySo05UIWebE0CF",
-            "moduleName": "ISGPayUI",
-            "objc_name": "webViewDidFinishLoad:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "AccessControl"
-            ],
-            "isFromExtension": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "webView",
-            "printedName": "webView(_:didFailLoadWithError:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "UIWebView",
-                "printedName": "UIKit.UIWebView",
-                "usr": "c:objc(cs)UIWebView"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Error",
-                "printedName": "Swift.Error",
-                "usr": "s:s5ErrorP"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@CM@ISGPayUI@objc(cs)ISGPayController(im)webView:didFailLoadWithError:",
-            "mangledName": "$s8ISGPayUI0A10ControllerC7webView_20didFailLoadWithErrorySo05UIWebE0C_s0J0_ptF",
-            "moduleName": "ISGPayUI",
-            "objc_name": "webView:didFailLoadWithError:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "AccessControl"
-            ],
-            "isFromExtension": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "webView",
             "printedName": "webView(_:decidePolicyFor:decisionHandler:)",
             "children": [
               {
@@ -10914,7 +10771,7 @@
       "kind": "StringLiteral",
       "offset": 938,
       "length": 5,
-      "value": "\"3.0\""
+      "value": "\"3.1\""
     },
     {
       "filePath": "\/Users\/isgmobile\/ISGWorkSpace\/Workspace\/PG\/ISGPayUI\/ISGPayUI\/ISGUpiPayResponse.swift",
@@ -10996,28 +10853,28 @@
     {
       "filePath": "\/Users\/isgmobile\/ISGWorkSpace\/Workspace\/PG\/ISGPayUI\/ISGPayUI\/ISGPayController.swift",
       "kind": "BooleanLiteral",
-      "offset": 1733,
+      "offset": 1735,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/isgmobile\/ISGWorkSpace\/Workspace\/PG\/ISGPayUI\/ISGPayUI\/ISGPayController.swift",
       "kind": "BooleanLiteral",
-      "offset": 3197,
+      "offset": 3199,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/isgmobile\/ISGWorkSpace\/Workspace\/PG\/ISGPayUI\/ISGPayUI\/ISGPayController.swift",
       "kind": "BooleanLiteral",
-      "offset": 6782,
+      "offset": 6784,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/isgmobile\/ISGWorkSpace\/Workspace\/PG\/ISGPayUI\/ISGPayUI\/ISGPayController.swift",
       "kind": "BooleanLiteral",
-      "offset": 38610,
+      "offset": 39340,
       "length": 5,
       "value": "false"
     }

@@ -300,15 +300,16 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
                             height: 50,
                             child: ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: hotelController.hotelRoomsData.length,
+                              itemCount: hotelController.hotelRoomsData.first
+                                  .hotelRoomsDetails.first.amenity.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return ListTile(
                                   title: Text(hotelController
                                       .hotelRoomsData
                                       .first
-                                      .hotelRoomsDetails[index]
-                                      .amenity
+                                      .hotelRoomsDetails
                                       .first
+                                      .amenity[index]
                                       .toString()),
                                 );
                               },
@@ -326,18 +327,21 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 20, top: 5),
-                    child: hotelController.hotelRoomsData.isEmpty
-                        ? const Text("")
-                        : Text(
-                            hotelController.hotelRoomsData.first
-                                .hotelRoomsDetails.first.roomDescription,
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                color: kgrey),
-                          ),
-                  ),
+                      padding: const EdgeInsets.only(left: 20, top: 5),
+                      child: hotelController.hotelRoomsData.isEmpty
+                          ? const Text("")
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: HtmlContentViewer(
+                                htmlContent: hotelController
+                                    .hotelRoomsData
+                                    .first
+                                    .hotelRoomsDetails
+                                    .first
+                                    .roomDescription,
+                              ),
+                            )),
                   Padding(
                     padding: const EdgeInsets.only(right: 10, top: 20),
                     child: Row(

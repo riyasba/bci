@@ -243,17 +243,17 @@ class FareDetail {
   String currencyCode;
   List<FareClass> fareClasses;
   FreeBaggage freeBaggage;
-  int gst;
-  int grossCommission;
-  int netCommission;
-  int paxType;
-  int promoDiscount;
+  dynamic gst;
+  dynamic grossCommission;
+  dynamic netCommission;
+  dynamic paxType;
+  dynamic promoDiscount;
   List<Charge>? rescheduleCharges;
-  int serviceFeeAmount;
-  int tds;
-  int totalAmount;
-  int tradeMarkupAmount;
-  int yqAmount;
+  dynamic serviceFeeAmount;
+  dynamic tds;
+  dynamic totalAmount;
+  dynamic tradeMarkupAmount;
+  dynamic yqAmount;
 
   FareDetail({
     required this.airportTaxAmount,

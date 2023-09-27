@@ -120,7 +120,6 @@ abstract class BaseApiService {
   final String airportSearch = "https://openflights.org/php/apsearch.php";
 
   //----------- holidays bookings ---------------//
-
   final String getPackageCategoryApiUrl =
       "https://www.portal.bcipvtltd.com/api/auth/get_package_category";
 
@@ -158,7 +157,6 @@ abstract class BaseApiService {
       "https://www.portal.bcipvtltd.com/api/auth/getVendorsByCategory";
 
   //bus booking api
-
   final getCityListApiUrl =
       "https://www.portal.bcipvtltd.com/api/auth/Bus_CityList";
 
@@ -271,7 +269,7 @@ abstract class BaseApiService {
       "https://www.portal.bcipvtltd.com/api/auth/get_gallery";
 
 
-  //     //cancel 
+  //cancel 
   // final String airTicketCancelURL = 'https://www.portal.bcipvtltd.com/api/auth/airTicketCancelDetails';
 
   //notication count

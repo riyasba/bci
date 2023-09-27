@@ -77,7 +77,7 @@ public class ISGPayController: UIViewController {
     var wkWebView:WKWebView!
 //    var transactionResponse:ISGPayResponse!
     
-    var webViewForServerTransaction:UIWebView!
+//    var webViewForServerTransaction:UIWebView!
     var isServerProcessed = false
     
     
@@ -346,15 +346,6 @@ public class ISGPayController: UIViewController {
         
         task.resume()
         
-        
-        //        if #available(iOS 12.0, *) {
-        //            // Use iOS 11 APIs.
-        //            wkWebView.load(request)
-        //
-        //        } else {
-        //            // Alternative code for earlier versions of iOS.
-        //            webViewForServerTransaction.loadRequest(request)
-        //        }
         return;
         
     }
@@ -395,21 +386,39 @@ public class ISGPayController: UIViewController {
         {
             
             activityIndicator.startAnimating()
-            if #available(iOS 12.0, *) {
+//            if #available(iOS 9.0, *) {
                 // Use iOS 11 APIs.
-                wkWebView = WKWebView(frame: self.view.bounds)
+                
+                let source: String = "var meta = document.createElement('meta');" +
+                    "meta.name = 'viewport';" +
+                    "meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';" +
+                    "var head = document.getElementsByTagName('head')[0];" +
+                    "head.appendChild(meta);"
+
+                let script: WKUserScript = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+                let userContentController: WKUserContentController = WKUserContentController()
+                let conf = WKWebViewConfiguration()
+                conf.userContentController = userContentController
+                userContentController.addUserScript(script)
+                wkWebView = WKWebView(frame: self.view.bounds, configuration: conf)
                 self.view.addSubview(wkWebView)
+//                wkWebView.frame = self.view.bounds
                 wkWebView.isHidden = true
                 wkWebView.uiDelegate = self
                 wkWebView.navigationDelegate = self
-                
-            } else {
-                // Alternative code for earlier versions of iOS.
-                webViewForServerTransaction = UIWebView(frame:self.view.bounds)
-                self.view.addSubview(webViewForServerTransaction)
-                webViewForServerTransaction.isHidden = true
-                webViewForServerTransaction.delegate = self
-            }
+            
+//Removed
+//            } else {
+//                // Alternative code for earlier versions of iOS.
+//                webViewForServerTransaction = UIWebView(frame:self.view.bounds)
+//                self.view.addSubview(webViewForServerTransaction)
+//                webViewForServerTransaction.isHidden = true
+//                webViewForServerTransaction.delegate = self
+//                webViewForServerTransaction.scrollView.minimumZoomScale = 1.0
+//                webViewForServerTransaction.scrollView.maximumZoomScale = 1.0
+//            }
+            
+            
             
             
             lblPleaseWait.isHidden = false;
@@ -1339,14 +1348,14 @@ public class ISGPayController: UIViewController {
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpBody = self.httpBodyForParamsDictionary(paramDictionary: params)
         
-        if #available(iOS 12.0, *) {
-            // Use iOS 11 APIs.
-            wkWebView.load(request)
-            
-        } else {
-            // Alternative code for earlier versions of iOS.
-            webViewForServerTransaction.loadRequest(request)
-        }
+        wkWebView.load(request)
+        
+//        if #available(iOS 12.0, *) {
+//            // Use iOS 11 APIs.
+//        } else {
+//            // Alternative code for earlier versions of iOS.
+//            webViewForServerTransaction.loadRequest(request)
+//        }
         return;
         
     }
@@ -1489,7 +1498,6 @@ public class ISGPayController: UIViewController {
                             {
                                 if self.enableLog
                                 {
-                                    
                                     print(jsonArray) // use the json here
                                 }
                                 if let tempUPIURLString = jsonArray["UPIIntentURL"] as? String, let tempUPIURL = URL(string: tempUPIURLString)
@@ -1570,7 +1578,7 @@ public class ISGPayController: UIViewController {
                 }
                 else
                 {
-                    var msg = (errorMessage == "") ? "Something went wrong" : errorMessage
+                    let msg = (errorMessage == "") ? "Something went wrong" : errorMessage
                     let error = NSError(domain: "UPI", code: 999, userInfo: [ "errorCode": errorCode, "errorMessage":msg, NSLocalizedDescriptionKey: msg])
                     self.delegate?.didFailWithError(error: error)
                     DispatchQueue.main.async {
@@ -1823,112 +1831,91 @@ extension String
 }
 
 
-extension ISGPayController: UIWebViewDelegate, URLSessionDelegate
-{
-    
-    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
-        
-        
-        if request.url?.scheme == "mobile" {
-            var responseParams = [String:String]()
-            
-            if let query = request.url?.query
-            {
-                let arrQuery = query.components(separatedBy: "&")
-                for item in arrQuery {
-                    let elts = item.components(separatedBy: "=")
-                    if(elts.count >= 2)
-                    {
-                        if let tempKey = elts.first, let tempValue = elts.last
-                        {
-                            responseParams[tempKey] = tempValue
-                        }
-                    }
-                }
-            }
-            
-            
-            
-            var dictResponseData = [String:String]()
-//            transactionResponse = ISGPayResponse()
-            
-            
-            
-            if self.isServerProcessed == true
-            {
-                dictResponseData = responseParams
-            }
-            else
-            {
-                //decrypt EncData
-                if let strEncData = responseParams["EncData"]
-                {
-                    if strEncData != "" {
-                        
-                        dictResponseData = self.decryptEncData(strEncData: strEncData, aesKey: self.payReqObj.AESKey)
-                        
-                    }
-                }
-            }
-            
-            
-//            transactionResponse.calculatedResponseSecureHash = dictResponseData["calculatedResponseSecureHash"] ?? ""
-//            transactionResponse.amount = dictResponseData["Amount"] ?? ""
-//            transactionResponse.authCode = dictResponseData["AuthCode"] ?? ""
-//            transactionResponse.cardType = dictResponseData["CardType"] ?? ""
-//            transactionResponse.merchantId = dictResponseData["MerchantId"] ?? ""
-//            transactionResponse.merchantReferenceCode = dictResponseData["merchantReferenceCode"] ?? ""
-//            transactionResponse.message = dictResponseData["Message"] ?? ""
-//            transactionResponse.receiptNumber = dictResponseData["receiptNumber"] ?? ""
-//            transactionResponse.requestId = dictResponseData["requestID"] ?? ""
-//            transactionResponse.responseCode = dictResponseData["ResponseCode"] ?? ""
-//            transactionResponse.retRefNo = dictResponseData["RetRefNo"] ?? ""
-//            transactionResponse.secureHash = dictResponseData["SecureHash"] ?? ""
-//            transactionResponse.terminalId = dictResponseData["TerminalId"] ?? ""
-//            transactionResponse.txnRefNo = dictResponseData["TxnRefNo"] ?? ""
-//            transactionResponse.bankId = dictResponseData["BankId"] ?? ""
-//            transactionResponse.orderInfo = dictResponseData["OrderInfo"] ?? ""
-            
-            
-            webViewForServerTransaction.isHidden = true;
-            self.delegate?.didFinishPaymentWithData(response: dictResponseData)
-            self.view.removeFromSuperview()
-            self.removeFromParent()
-            
-            return false
-        }
-        
-        
-        return true
-    }
-    
-    
-    public func webViewDidStartLoad(_ webView: UIWebView) {
-        
-    }
-    
-    public func webViewDidFinishLoad(_ webView: UIWebView) {
-        self.webViewForServerTransaction.isHidden = false
-        self.activityIndicator.stopAnimating()
-        self.lblPleaseWait.isHidden = true
-    }
-    
-    public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        self.delegate?.didFailWithError(error: error)
-        
-        DispatchQueue.main.async {
-            self.activityIndicator.stopAnimating()
-            self.lblPleaseWait.isHidden = true
-            self.webViewForServerTransaction.isHidden = true
-            self.view.removeFromSuperview()
-            self.removeFromParent()
-        }
-        
-        
-    }
-    
-    
-}
+//Removed
+//extension ISGPayController: URLSessionDelegate, UIWebViewDelegate
+//{
+//
+//    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
+//
+//
+//        if request.url?.scheme == "mobile" {
+//            var responseParams = [String:String]()
+//
+//            if let query = request.url?.query
+//            {
+//                let arrQuery = query.components(separatedBy: "&")
+//                for item in arrQuery {
+//                    let elts = item.components(separatedBy: "=")
+//                    if(elts.count >= 2)
+//                    {
+//                        if let tempKey = elts.first, let tempValue = elts.last
+//                        {
+//                            responseParams[tempKey] = tempValue
+//                        }
+//                    }
+//                }
+//            }
+//
+//
+//
+//            var dictResponseData = [String:String]()
+////            transactionResponse = ISGPayResponse()
+//
+//
+//
+//            if self.isServerProcessed == true
+//            {
+//                dictResponseData = responseParams
+//            }
+//            else
+//            {
+//                //decrypt EncData
+//                if let strEncData = responseParams["EncData"]
+//                {
+//                    if strEncData != "" {
+//
+//                        dictResponseData = self.decryptEncData(strEncData: strEncData, aesKey: self.payReqObj.AESKey)
+//
+//                    }
+//                }
+//            }
+//
+//            webViewForServerTransaction.isHidden = true;
+//            self.delegate?.didFinishPaymentWithData(response: dictResponseData)
+//            self.view.removeFromSuperview()
+//            self.removeFromParent()
+//
+//            return false
+//        }
+//
+//
+//        return true
+//    }
+//
+//
+//    public func webViewDidStartLoad(_ webView: UIWebView) {
+//
+//    }
+//
+//    public func webViewDidFinishLoad(_ webView: UIWebView) {
+//        self.webViewForServerTransaction.isHidden = false
+//        self.activityIndicator.stopAnimating()
+//        self.lblPleaseWait.isHidden = true
+//    }
+//
+//    public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+//        self.delegate?.didFailWithError(error: error)
+//
+//        DispatchQueue.main.async {
+//            self.activityIndicator.stopAnimating()
+//            self.lblPleaseWait.isHidden = true
+//            self.webViewForServerTransaction.isHidden = true
+//            self.view.removeFromSuperview()
+//            self.removeFromParent()
+//        }
+//
+//    }
+//}
 
 
 

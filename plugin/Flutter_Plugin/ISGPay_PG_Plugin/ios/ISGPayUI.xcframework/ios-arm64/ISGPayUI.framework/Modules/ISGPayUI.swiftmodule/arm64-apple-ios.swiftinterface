@@ -146,12 +146,6 @@ public struct ISGUpiPayResponse : Swift.Codable {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
 }
-extension ISGPayUI.ISGPayController : UIKit.UIWebViewDelegate, Foundation.URLSessionDelegate {
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: UIKit.UIWebView, shouldStartLoadWith request: Foundation.URLRequest, navigationType: UIKit.UIWebView.NavigationType) -> Swift.Bool
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func webViewDidStartLoad(_ webView: UIKit.UIWebView)
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func webViewDidFinishLoad(_ webView: UIKit.UIWebView)
-  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: UIKit.UIWebView, didFailLoadWithError error: Swift.Error)
-}
 extension ISGPayUI.ISGPayController : WebKit.WKNavigationDelegate, WebKit.WKUIDelegate {
   @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, decidePolicyFor navigationAction: WebKit.WKNavigationAction, decisionHandler: @escaping (WebKit.WKNavigationActionPolicy) -> Swift.Void)
   @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, didCommit navigation: WebKit.WKNavigation!)

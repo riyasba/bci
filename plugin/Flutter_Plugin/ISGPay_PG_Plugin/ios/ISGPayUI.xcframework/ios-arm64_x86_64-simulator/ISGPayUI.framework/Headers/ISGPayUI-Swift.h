@@ -264,16 +264,6 @@ SWIFT_CLASS("_TtC8ISGPayUI16ISGPayController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UIWebView;
-@class NSURLRequest;
-
-@interface ISGPayController (SWIFT_EXTENSION(ISGPayUI)) <NSURLSessionDelegate, UIWebViewDelegate>
-- (BOOL)webView:(UIWebView * _Nonnull)webView shouldStartLoadWithRequest:(NSURLRequest * _Nonnull)request navigationType:(UIWebViewNavigationType)navigationType SWIFT_WARN_UNUSED_RESULT;
-- (void)webViewDidStartLoad:(UIWebView * _Nonnull)webView;
-- (void)webViewDidFinishLoad:(UIWebView * _Nonnull)webView;
-- (void)webView:(UIWebView * _Nonnull)webView didFailLoadWithError:(NSError * _Nonnull)error;
-@end
-
 @class WKWebView;
 @class WKNavigationAction;
 @class WKNavigation;
@@ -566,16 +556,6 @@ SWIFT_CLASS("_TtC8ISGPayUI16ISGPayController")
 - (void)viewDidLoad;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class UIWebView;
-@class NSURLRequest;
-
-@interface ISGPayController (SWIFT_EXTENSION(ISGPayUI)) <NSURLSessionDelegate, UIWebViewDelegate>
-- (BOOL)webView:(UIWebView * _Nonnull)webView shouldStartLoadWithRequest:(NSURLRequest * _Nonnull)request navigationType:(UIWebViewNavigationType)navigationType SWIFT_WARN_UNUSED_RESULT;
-- (void)webViewDidStartLoad:(UIWebView * _Nonnull)webView;
-- (void)webViewDidFinishLoad:(UIWebView * _Nonnull)webView;
-- (void)webView:(UIWebView * _Nonnull)webView didFailLoadWithError:(NSError * _Nonnull)error;
 @end
 
 @class WKWebView;
