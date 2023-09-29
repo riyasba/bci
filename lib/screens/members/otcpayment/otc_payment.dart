@@ -11,6 +11,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:phonepe_payment_sdk/phonepe_payment_sdk.dart';
 
 import '../../bussiness/views/home_screen/contact_admin.dart';
 import 'add_to_wallet.dart';
@@ -30,6 +31,33 @@ class _OtcPaymentState extends State<OtcPayment> {
   final profileController = Get.find<ProfileController>();
 
   static MethodChannel _channel = MethodChannel('easebuzz');
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    init("", "", "", false);
+  }
+
+   var result;
+
+    init(
+    String environment,
+    String appId,
+    String merchantId,
+    bool enableLogging) async {
+ 
+	PhonePePaymentSdk.init(environment, appId, merchantId, enableLogging)
+        .then((val) => {
+              setState(() {
+                result = 'PhonePe SDK Initialized - $val';
+              })
+            })
+        .catchError((error) {
+      // handleError(error);
+      return <dynamic>{};
+    });
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -205,12 +233,40 @@ class _OtcPaymentState extends State<OtcPayment> {
             ksizedbox40,
             InkWell(
               onTap: () async {
+
+    startPGTransaction(
+      String body,
+      String callback,
+      String checksum,
+      Map<String, String> headers,
+      String apiEndPoint,
+      String? packageName) async{
+ 
+try {
+      var response = PhonePePaymentSdk.startPGTransaction(
+          body, callback, checksum, headers, apiEndPoint, packageName);
+      response
+          .then((val) => {
+                setState(() {
+                  result = val;
+                })
+              })
+          .catchError((error) {
+       // handleError(error);
+        return <dynamic>{};
+      });
+    } catch (error) {
+      //handleError(error);
+    }
+      }
+
                 print(
                     ">>>>>>>>>>>>>>>>>..............payment start..........>>>>>>>>>>${widget.plansData.id}");
-                profileController.payfoSubscription(
-                  id: widget.plansData.id,
-                  amount: double.parse(widget.plansData.saleAmount),
-                );
+                // profileController.payfoSubscription(
+                //   id: widget.plansData.id,
+                //   amount: double.parse(widget.plansData.saleAmount),
+                //);
+                
                 // profileController.payUseingEaseBuzzSubs(
                 //     id: widget.plansData.id,
                 //     amount: widget.plansData.saleAmount,

@@ -565,11 +565,11 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                           bookingSsrDetails: [],
                           searchKey: widget.searchKey);
 
-                      flightsController.payForFlight(
-                          amount: widget
-                              .flight.fares.first.fareDetails.first.totalAmount
-                              .toDouble(),
-                          bookingModel: bookingModel);
+                      // flightsController.payForFlight(
+                      //     amount: widget
+                      //         .flight.fares.first.fareDetails.first.totalAmount
+                      //         .toDouble(),
+                      //     bookingModel: bookingModel);
                       // flightsController.payUseingEaseBuzzSubs(
                       //     id: 0,
                       //     amount: widget

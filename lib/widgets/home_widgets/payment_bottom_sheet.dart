@@ -127,7 +127,7 @@ paymentBottomSheet(BuildContext context, double amount) {
                                   .isWalletOrNot
                                   .value ==
                               0) {
-                            Get.find<ProfileController>().payFromCart(amount);
+                            //Get.find<ProfileController>().payFromCart(amount);
                           } else {
                            
                             Get.find<ProfileController>().payFromWallet(

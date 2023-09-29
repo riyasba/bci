@@ -40,7 +40,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import '../models/banner_model.dart';
 import '../models/get_gallery_model.dart';
 import '../services/network/get_gallery_apiservice.dart';
@@ -478,23 +477,23 @@ class HomeController extends GetxController {
   }
 
   // String responseData = "Nothing";
-  final _isgpayuiPlugin = IsgpayuiPlugin();
+  // final _isgpayuiPlugin = IsgpayuiPlugin();
 
-  void startPlugin() async {
-    String? result;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      result = await _isgpayuiPlugin.initiateISGPayUI(getArguments(100)) ??
-          'Unknown platform version';
-    } on PlatformException catch (e) {
-      result = e.message;
-    }
-    debugPrint('Result ::: $result');
+  // void startPlugin() async {
+  //   String? result;
+  //   // Platform messages may fail, so we use a try/catch PlatformException.
+  //   try {
+  //     result = await _isgpayuiPlugin.initiateISGPayUI(getArguments(100)) ??
+  //         'Unknown platform version';
+  //   } on PlatformException catch (e) {
+  //     result = e.message;
+  //   }
+  //   debugPrint('Result ::: $result');
 
-    var responseData = jsonDecode(result!);
-    print("<<----response-data---->>");
-    print(responseData);
-  }
+  //   var responseData = jsonDecode(result!);
+  //   print("<<----response-data---->>");
+  //   print(responseData);
+  // }
 
   Map<String, String> getArguments(var amount) {
     var randomStr = DateTime.now().microsecondsSinceEpoch.toString();

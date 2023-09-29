@@ -9,7 +9,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:nb_utils/nb_utils.dart';
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
 
@@ -202,13 +201,14 @@ class _CartScreenState extends State<CartScreen> {
                                                       backgroundColor:
                                                           Colors.white,
                                                       title: Text("Remove Item",
-                                                          style: boldTextStyle(
+                                                          style: TextStyle(
+                                                            fontWeight: FontWeight.bold,
                                                               color: Colors
                                                                   .black)),
                                                       content: Text(
                                                         "Are you sure you want to remove this item?",
                                                         style:
-                                                            secondaryTextStyle(
+                                                            TextStyle(
                                                                 color: Colors
                                                                     .black),
                                                       ),
@@ -217,7 +217,7 @@ class _CartScreenState extends State<CartScreen> {
                                                           child: Text(
                                                             "cancel",
                                                             style:
-                                                                primaryTextStyle(
+                                                                TextStyle(
                                                                     color: Colors
                                                                         .grey),
                                                           ),
@@ -228,7 +228,7 @@ class _CartScreenState extends State<CartScreen> {
                                                         ),
                                                         TextButton(
                                                           child: Text("Remove",
-                                                              style: primaryTextStyle(
+                                                              style: TextStyle(
                                                                   color: Colors
                                                                       .grey)),
                                                           onPressed: () {

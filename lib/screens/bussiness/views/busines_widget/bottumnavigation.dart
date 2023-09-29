@@ -12,9 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:bci/screens/bussiness/views/business/business_home_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
-
-
 import '../business/notification_screen.dart';
 import '../home_screen/wallet_screen.dart';
 
@@ -94,7 +91,7 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
                                       color: kwhite),
                                   child: Center(
                                       child: Text("Cancel",
-                                          style: primaryTextStyle(
+                                          style: TextStyle(
                                               color: kblue))),
                                 ),
                               ),
@@ -111,7 +108,7 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
                                   child: Center(
                                     child: Text(
                                       "Exit",
-                                      style: primaryTextStyle(color: kwhite),
+                                      style: TextStyle(color: kwhite),
                                     ),
                                   ),
                                 ),
@@ -194,23 +191,23 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
 
  AlertDialog mAlertItem2 = AlertDialog(
       backgroundColor: Colors.white,
-      title: Text("Confirmation", style: boldTextStyle(color: Colors.black)),
+      title: Text("Confirmation", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
       content: Text(
         "Are you sure you want to Exit?",
-        style: secondaryTextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.black),
       ),
       actions: [
         TextButton(
           child: Text(
             "Yes",
-            style: primaryTextStyle(color: kblue),
+            style: TextStyle(color: kblue),
           ),
           onPressed: () {
            exit(0);
           },
         ),
         TextButton(
-          child: Text("No", style: primaryTextStyle(color: kblue)),
+          child: Text("No", style: TextStyle(color: kblue)),
           onPressed: () {
             Get.back();
           },

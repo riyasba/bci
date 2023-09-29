@@ -7,7 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
+// import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../constands/constands.dart';
 
@@ -374,16 +374,16 @@ class _BusContainersState extends State<BusContainers> {
   }
     AlertDialog mAlertItem2 = AlertDialog(
     backgroundColor: Colors.white,
-    title: Text("Cancel Booking", style: boldTextStyle(color: Colors.black)),
+    title: Text("Cancel Booking", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
     content: Text(
       "Are you sure you want to Cancel?",
-      style: secondaryTextStyle(color: Colors.black),
+      style: TextStyle(color: Colors.black),
     ),
     actions: [
       TextButton(
         child: Text(
           "Yes",
-          style: primaryTextStyle(color: kblue),
+          style: TextStyle(color: kblue),
         ),
         onPressed: () {
           Get.back();
@@ -391,7 +391,7 @@ class _BusContainersState extends State<BusContainers> {
         },
       ),
       TextButton(
-        child: Text("No", style: primaryTextStyle(color: kblue)),
+        child: Text("No", style: TextStyle(color: kblue)),
         onPressed: () {
           Get.back();
         },

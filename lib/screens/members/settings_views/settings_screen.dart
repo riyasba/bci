@@ -12,7 +12,6 @@ import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 import '../coupen/coupons_screen.dart';
 import 'aditional_coupons.dart';
 import 'member_Dashbord.dart';
@@ -449,7 +448,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       color: kwhite),
                                   child: Center(
                                       child: Text("Cancel",
-                                          style: primaryTextStyle(
+                                          style: TextStyle(
                                               color: kOrange))),
                                 ),
                               ),
@@ -468,7 +467,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   child: Center(
                                     child: Text(
                                       "Logout",
-                                      style: primaryTextStyle(color: kwhite),
+                                      style: TextStyle(color: kwhite),
                                     ),
                                   ),
                                 ),

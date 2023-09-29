@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../constands/constands.dart';
 import '../../../../models/hotel_booking_models/hotel_detials_model.dart';
@@ -499,16 +498,16 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
   }
     AlertDialog mAlertItem2 = AlertDialog(
     backgroundColor: Colors.white,
-    title: Text("Cancel Booking", style: boldTextStyle(color: Colors.black)),
+    title: Text("Cancel Booking", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
     content: Text(
       "Are you sure you want to Cancel?",
-      style: secondaryTextStyle(color: Colors.black),
+      style: TextStyle(color: Colors.black),
     ),
     actions: [
       TextButton(
         child: Text(
           "Yes",
-          style: primaryTextStyle(color: kblue),
+          style: TextStyle(color: kblue),
         ),
         onPressed: () {
           Get.back();
@@ -516,7 +515,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
         },
       ),
       TextButton(
-        child: Text("No", style: primaryTextStyle(color: kblue)),
+        child: Text("No", style: TextStyle(color: kblue)),
         onPressed: () {
           Get.back();
         },

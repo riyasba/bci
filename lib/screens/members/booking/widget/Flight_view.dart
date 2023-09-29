@@ -3,7 +3,7 @@ import 'package:bci/models/flight_booking_models/get_flight_booking_history.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
+// import 'package:nb_utils/nb_utils.dart';
 import 'dart:math' as math;
 import '../../../../constands/constands.dart';
 
@@ -350,16 +350,16 @@ class _FlightWidgetState extends State<FlightWidget> {
                         builder: (BuildContext context){
                           return AlertDialog(
     backgroundColor: Colors.white,
-    title: Text("Cancel Booking", style: boldTextStyle(color: Colors.black)),
+    title: Text("Cancel Booking", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
     content: Text(
       "Are you sure you want to Cancel?",
-      style: secondaryTextStyle(color: Colors.black),
+      style: TextStyle(color: Colors.black),
     ),
     actions: [
       TextButton(
         child: Text(
           "Yes",
-          style: primaryTextStyle(color: kblue),
+          style: TextStyle(color: kblue),
         ),
         onPressed: () {
          Get.find<FlightsController>().airCancelTicket(refernceNo:flightBookedData.bookingRefNo );
@@ -367,7 +367,7 @@ class _FlightWidgetState extends State<FlightWidget> {
         },
       ),
       TextButton(
-        child: Text("No", style: primaryTextStyle(color: kblue)),
+        child: Text("No", style: TextStyle(color: kblue)),
         onPressed: () {
           Get.back();
         },

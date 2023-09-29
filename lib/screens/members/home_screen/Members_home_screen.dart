@@ -17,7 +17,6 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
