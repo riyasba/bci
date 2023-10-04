@@ -367,7 +367,7 @@ class AuthController extends GetxController {
           messageText: Text(
             response.data["message"],
             style: primaryFont.copyWith(color: Colors.white),
-          ));
+      ));    
     }
   }
 

@@ -1,8 +1,13 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_plans_model.dart';
 import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
+import 'package:bci/screens/members/payment_gateway_screen/payment_gateway_web_view.dart';
+import 'package:crypto/crypto.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +20,8 @@ import 'package:phonepe_payment_sdk/phonepe_payment_sdk.dart';
 
 import '../../bussiness/views/home_screen/contact_admin.dart';
 import 'add_to_wallet.dart';
+
+import 'package:http/http.dart' as http;
 
 class OtcPayment extends StatefulWidget {
   PlansData plansData;
@@ -32,32 +39,172 @@ class _OtcPaymentState extends State<OtcPayment> {
 
   static MethodChannel _channel = MethodChannel('easebuzz');
 
+  Map<String, String> pgHeaders = {"Content-Type": "application/json"};
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    init("", "", "", false);
+    init("UTA", "com.memberapp.bci", "PGTESTPAYUAT93", true);
   }
 
-   var result;
+  var result;
 
-    init(
-    String environment,
-    String appId,
-    String merchantId,
-    bool enableLogging) async {
- 
-	PhonePePaymentSdk.init(environment, appId, merchantId, enableLogging)
+  init(String environment, String appId, String merchantId,
+      bool enableLogging) async {
+    PhonePePaymentSdk.init(environment, appId, merchantId, enableLogging)
         .then((val) => {
               setState(() {
                 result = 'PhonePe SDK Initialized - $val';
               })
             })
         .catchError((error) {
+      print(error);
       // handleError(error);
       return <dynamic>{};
     });
+  }
+
+  startPGTransaction(
+      {required String body,
+      required String callback,
+      required String checksum,
+      required Map<String, String> headers,
+      required String apiEndPoint,
+      String? packageName}) async {
+    try {
+      var response = await PhonePePaymentSdk.startPGTransaction(
+          body, callback, checksum, headers, apiEndPoint, packageName);
+
+      print(
+          "<:---::---::---::---::---:Result from phonePe:---::---::---::---:>");
+      print(response);
+      // response
+      //     .then((val) => {
+      //           setState(() {
+      //             result = val;
+      //           }),
+      //           print(
+      //               "<:---::---::---::---::---:Result from phonePe:---::---::---::---:>"),
+      //           print(result)
+      //         })
+      //     .catchError((error) {
+      //   // handleError(error);
+      //   print(
+      //       "<:---::---:1:---:1:---:1:---:Error on phonePe:---:1:---:1:---:1:---:>");
+      //   return <dynamic>{};
+      // });
+    } catch (error) {
+      print(
+          "<:---::---:2:---:2:---:2:---:Error on phonePe:---:2:---:2:---:2:---:>");
+      print(error);
+      //handleError(error);
     }
+  }
+
+  trigerPaymentGateway() async {
+    const saltKey = "875126e4-5a13-4dae-ad60-5b8c8b629035";
+    const saltIndex = 1;
+    const apiEndpoint = "/pg/v1/pay";
+
+    final jsonData = {
+      "merchantId": "PGTESTPAYUAT93",
+      "merchantTransactionId": "MT7850590068188104",
+      "merchantUserId": "MUID123",
+      "amount": '100',
+      "redirectUrl": "https://webhook.site/redirect-url",
+      "redirectMode": "POST",
+      "callbackUrl": "https://webhook.site/callback-url",
+      "mobileNumber": "9999999999",
+      "paymentInstrument": {"type": "PAY_PAGE"}
+    };
+
+    var resPond = {
+      "merchantId": "PGTESTPAYUAT93",
+      "merchantTransactionId": "transaction_123",
+      "merchantUserId": "902232560",
+      "amount": "10",
+      "mobileNumber": "8157868869",
+      "callbackUrl": "https://www.portal.bcipvtltd.com/api",
+      "paymentInstrument": {
+        "type": "UPI_INTENT",
+        "targetApp": "com.google.android.apps.walletnfcrel"
+      },
+      "deviceContext": {"deviceOS": "ANDROID"}
+    };
+
+    String jsonString = jsonEncode(resPond);
+    String base64Data = jsonString.toBase64;
+    String dataToHash = base64Data + apiEndpoint + saltKey;
+    String sHA256 = generateSha256Hash(dataToHash);
+
+    print(base64Data);
+    print('#' * 10);
+    print("$sHA256###$saltIndex");
+
+    startPGTransaction(
+        apiEndPoint:
+            "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay",
+        body: base64Data,
+        callback: "https://webhook.site/callback-url",
+        checksum: "sHA256###$saltIndex",
+        headers: {
+          "accept": "application/json",
+          'X-VERIFY': '$sHA256###$saltIndex',
+          'Content-Type': 'application/json',
+        });
+  }
+
+  test() async {
+    const saltKey = "875126e4-5a13-4dae-ad60-5b8c8b629035";
+    const saltIndex = 1;
+    const apiEndpoint = "/pg/v1/pay";
+
+    var randomNumber = Random().nextInt(100000);
+
+    final jsonData = {
+      "merchantId": "PGTESTPAYUAT93",
+      "merchantTransactionId": "MT7$randomNumber",
+      "merchantUserId": "MUID123",
+      "amount": '100',
+      "redirectUrl": "https://app.e-sankalp.com/payment-processing",
+      "redirectMode": "POST",
+      "callbackUrl": "https://webhook.site/callback-url",
+      "mobileNumber": "9999999999",
+      "paymentInstrument": {"type": "PAY_PAGE"}
+    };
+
+    String jsonString = jsonEncode(jsonData);
+    String base64Data = jsonString.toBase64;
+    String dataToHash = base64Data + apiEndpoint + saltKey;
+    String sHA256 = generateSha256Hash(dataToHash);
+
+    print(base64Data);
+    print('#' * 10);
+    print("$sHA256###$saltIndex");
+
+    final response = await http.post(
+      Uri.parse('https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay'),
+      headers: {
+        "accept": "application/json",
+        'X-VERIFY': '$sHA256###$saltIndex',
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({'request': base64Data}),
+    );
+
+    print(response.body.toString());
+
+    var res = jsonDecode(response.body.toString());
+
+    return res["data"];
+  }
+
+  String generateSha256Hash(String input) {
+    var bytes = utf8.encode(input);
+    var digest = sha256.convert(bytes);
+    return digest.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -233,40 +380,67 @@ class _OtcPaymentState extends State<OtcPayment> {
             ksizedbox40,
             InkWell(
               onTap: () async {
+                // var urls = await test();
+                // Get.to(PaymentWebView(
+                //   userId: "",
+                //   payOpt: "",
+                //   payType: 0,
+                //   totalAmount: "",
+                //   transactionType: urls["merchantTransactionId"],
+                //   url: urls["instrumentResponse"]["redirectInfo"]["url"],
+                // ));
+                // trigerPaymentGateway();
+                var resPond = {
+                  "merchantId": "PGTESTPAYUAT93",
+                  "merchantTransactionId": "trans35456446",
+                  "merchantUserId": "902232560",
+                  "amount": 10,
+                  "mobileNumber": "8157868869",
+                  "callbackUrl": "https://www.portal.bcipvtltd.com/api",
+                  "paymentInstrument": {
+                    "type": "UPI_INTENT",
+                    "targetApp": "com.phonepe.app"
+                  },
+                  "deviceContext": {"deviceOS": "ANDROID"}
+                };
 
-    startPGTransaction(
-      String body,
-      String callback,
-      String checksum,
-      Map<String, String> headers,
-      String apiEndPoint,
-      String? packageName) async{
- 
-try {
-      var response = PhonePePaymentSdk.startPGTransaction(
-          body, callback, checksum, headers, apiEndPoint, packageName);
-      response
-          .then((val) => {
-                setState(() {
-                  result = val;
-                })
-              })
-          .catchError((error) {
-       // handleError(error);
-        return <dynamic>{};
-      });
-    } catch (error) {
-      //handleError(error);
-    }
-      }
+                // Step 1: Convert JSON object to JSON string
+                String jsonString = jsonEncode(resPond);
 
+                // Step 2: Encode JSON string to Base64
+                String base64String = base64Encode(utf8.encode(jsonString));
+
+                print(base64String);
+
+                String apiEndPoint = "/pg/v1/pay";
+
+                String salt = "875126e4-5a13-4dae-ad60-5b8c8b629035";
+
+                String checksum =
+                    "${sha256.convert(utf8.encode("$base64String/pg/v1/pay$salt"))}";
+
+                print(
+                    "<-<->------<->----------<->---------Sha256 algorithm---------<->---------<->-------<->->");
+
+                print(checksum);
+                
+                print("------merchat id---->>--->>--->>-->>");
+                print(resPond["merchantTransactionId"]);
+
+                startPGTransaction(
+                    apiEndPoint: apiEndPoint,
+                    body: base64String,
+                    callback: "https://www.portal.bcipvtltd.com",
+                    checksum: checksum,
+                    headers: pgHeaders,
+                    packageName: "com.phonepe.app");
                 print(
                     ">>>>>>>>>>>>>>>>>..............payment start..........>>>>>>>>>>${widget.plansData.id}");
                 // profileController.payfoSubscription(
                 //   id: widget.plansData.id,
                 //   amount: double.parse(widget.plansData.saleAmount),
                 //);
-                
+
                 // profileController.payUseingEaseBuzzSubs(
                 //     id: widget.plansData.id,
                 //     amount: widget.plansData.saleAmount,
@@ -324,5 +498,26 @@ try {
         ),
       ),
     );
+  }
+}
+
+/// EncodingExtensions
+extension EncodingExtensions on String {
+  /// To Base64
+  /// This is used to convert the string to base64
+  String get toBase64 {
+    return base64.encode(toUtf8);
+  }
+
+  /// To Utf8
+  /// This is used to convert the string to utf8
+  List<int> get toUtf8 {
+    return utf8.encode(this);
+  }
+
+  /// To Sha256
+  /// This is used to convert the string to sha256
+  String get toSha256 {
+    return sha256.convert(toUtf8).toString();
   }
 }
