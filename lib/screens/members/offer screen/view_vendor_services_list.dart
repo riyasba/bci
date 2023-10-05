@@ -85,7 +85,7 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(150),
+          preferredSize: const Size.fromHeight(150),
           child: Column(
             children: [
               ClipPath(
@@ -99,18 +99,18 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                       Padding(
-            padding: const EdgeInsets.only(left: 17),
-            child: InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: kwhite,
-              ),
-            ),
-          ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 17),
+                          child: InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: kwhite,
+                            ),
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(right: 0),
                           child: Text(
@@ -121,7 +121,9 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                                 color: kwhite),
                           ),
                         ),
-                        Container(width: 20,)
+                        Container(
+                          width: 20,
+                        )
                         // IconButton(
                         //     onPressed: () {
                         //       Get.to(NotificationScreen());
@@ -208,6 +210,10 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                                 couponAmount: "",
                                 offerPercentage: "",
                                 offerUptoAmount: "",
+                                cgst: homeController
+                                    .vendorServiceListData[index].cgst,
+                                sgst: homeController
+                                    .vendorServiceListData[index].sgst,
                                 shareOption: "");
                         Get.to(
                           ServiceDetailsScreen(

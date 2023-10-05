@@ -48,6 +48,8 @@ class GetServiceListData {
   String image;
   DateTime createdAt;
   DateTime updatedAt;
+  dynamic cgst;
+  dynamic sgst;
 
   GetServiceListData({
     required this.id,
@@ -65,6 +67,8 @@ class GetServiceListData {
     required this.image,
     required this.createdAt,
     required this.updatedAt,
+    required this.cgst,
+    required this.sgst,
   });
 
   factory GetServiceListData.fromJson(Map<String, dynamic> json) =>
@@ -87,6 +91,8 @@ class GetServiceListData {
         image: json["image"] ?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        cgst: json["cgst"] ?? "",
+        sgst: json["sgst"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -107,5 +113,3 @@ class GetServiceListData {
         "updated_at": updatedAt.toIso8601String(),
       };
 }
-
-

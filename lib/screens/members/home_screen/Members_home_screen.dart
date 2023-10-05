@@ -76,7 +76,7 @@ class _Home_screen1State extends State<Home_screen1> {
 
   DateTime selectedDate = DateTime.now();
 
-  TimeOfDay selectedTime = TimeOfDay(hour: 00, minute: 00);
+  TimeOfDay selectedTime = const TimeOfDay(hour: 00, minute: 00);
 
   TextEditingController _dateController = TextEditingController();
   TextEditingController _timeController = TextEditingController();
@@ -227,7 +227,7 @@ class _Home_screen1State extends State<Home_screen1> {
                                                     .sliderData[i].product ==
                                                 "Hotel") {
                                               Get.to(
-                                                  SerchHotelScreen()); // startPlugin();
+                                                  const SerchHotelScreen()); // startPlugin();
                                             } else if (homeController
                                                     .sliderData[i].product ==
                                                 "Liquors") {

@@ -45,7 +45,7 @@ class _OtcPaymentState extends State<OtcPayment> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    init("UTA", "com.memberapp.bci", "PGTESTPAYUAT93", true);
+    init("UAT_SIM", "com.memberapp.bci", "PGTESTPAYUAT93", true);
   }
 
   var result;
@@ -54,8 +54,12 @@ class _OtcPaymentState extends State<OtcPayment> {
       bool enableLogging) async {
     PhonePePaymentSdk.init(environment, appId, merchantId, enableLogging)
         .then((val) => {
+             
+
               setState(() {
                 result = 'PhonePe SDK Initialized - $val';
+                print("-------------------->> value on init");
+                print(val.toString());
               })
             })
         .catchError((error) {
@@ -73,27 +77,27 @@ class _OtcPaymentState extends State<OtcPayment> {
       required String apiEndPoint,
       String? packageName}) async {
     try {
-      var response = await PhonePePaymentSdk.startPGTransaction(
+      var response =  PhonePePaymentSdk.startPGTransaction(
           body, callback, checksum, headers, apiEndPoint, packageName);
 
-      print(
-          "<:---::---::---::---::---:Result from phonePe:---::---::---::---:>");
-      print(response);
-      // response
-      //     .then((val) => {
-      //           setState(() {
-      //             result = val;
-      //           }),
-      //           print(
-      //               "<:---::---::---::---::---:Result from phonePe:---::---::---::---:>"),
-      //           print(result)
-      //         })
-      //     .catchError((error) {
-      //   // handleError(error);
-      //   print(
-      //       "<:---::---:1:---:1:---:1:---:Error on phonePe:---:1:---:1:---:1:---:>");
-      //   return <dynamic>{};
-      // });
+      // print(
+      //     "<:---::---::---::---::---:Result from phonePe:---::---::---::---:>");
+      // print(response);
+      response
+          .then((val) => {
+                setState(() {
+                  result = val;
+                }),
+                print(
+                    "<:---::---::---::---::---:Result from phonePe:---::---::---::---:>"),
+                print(result)
+              })
+          .catchError((error) {
+        // handleError(error);
+        print(
+            "<:---::---:1:---:1:---:1:---:Error on phonePe:---:1:---:1:---:1:---:>");
+        return <dynamic>{};
+      });
     } catch (error) {
       print(
           "<:---::---:2:---:2:---:2:---:Error on phonePe:---:2:---:2:---:2:---:>");
@@ -392,11 +396,11 @@ class _OtcPaymentState extends State<OtcPayment> {
                 // trigerPaymentGateway();
                 var resPond = {
                   "merchantId": "PGTESTPAYUAT93",
-                  "merchantTransactionId": "trans35456446",
-                  "merchantUserId": "902232560",
-                  "amount": 10,
-                  "mobileNumber": "8157868869",
-                  "callbackUrl": "https://www.portal.bcipvtltd.com/api",
+                  "merchantTransactionId": "transacti_98087988888",
+                  "merchantUserId": "90050770",
+                  "amount": "1000",
+                  "mobileNumber": "7907556867",
+                  "callbackUrl": "https://webhook.site/callback-url",
                   "paymentInstrument": {
                     "type": "UPI_INTENT",
                     "targetApp": "com.phonepe.app"
@@ -404,26 +408,35 @@ class _OtcPaymentState extends State<OtcPayment> {
                   "deviceContext": {"deviceOS": "ANDROID"}
                 };
 
+
+                 
+
                 // Step 1: Convert JSON object to JSON string
                 String jsonString = jsonEncode(resPond);
 
                 // Step 2: Encode JSON string to Base64
-                String base64String = base64Encode(utf8.encode(jsonString));
+                String base64String = jsonString.toBase64;
 
                 print(base64String);
 
                 String apiEndPoint = "/pg/v1/pay";
 
                 String salt = "875126e4-5a13-4dae-ad60-5b8c8b629035";
+                
+
+                int saltIndex = 1;
 
                 String checksum =
-                    "${sha256.convert(utf8.encode("$base64String/pg/v1/pay$salt"))}";
+                    "${sha256.convert(utf8.encode("$base64String/pg/v1/pay$salt###$saltIndex"))}";
+
+
+                    // String checksum = sha256(base64Body + apiEndPoint + salt) + ### + saltIndex;
 
                 print(
                     "<-<->------<->----------<->---------Sha256 algorithm---------<->---------<->-------<->->");
 
                 print(checksum);
-                
+
                 print("------merchat id---->>--->>--->>-->>");
                 print(resPond["merchantTransactionId"]);
 
@@ -434,8 +447,7 @@ class _OtcPaymentState extends State<OtcPayment> {
                     checksum: checksum,
                     headers: pgHeaders,
                     packageName: "com.phonepe.app");
-                print(
-                    ">>>>>>>>>>>>>>>>>..............payment start..........>>>>>>>>>>${widget.plansData.id}");
+                print(">>>>>>>>>>>>>>>>>..............payment start..........>>>>>>>>>>${widget.plansData.id}");
                 // profileController.payfoSubscription(
                 //   id: widget.plansData.id,
                 //   amount: double.parse(widget.plansData.saleAmount),
