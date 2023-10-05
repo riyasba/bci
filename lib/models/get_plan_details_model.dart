@@ -86,7 +86,7 @@ class SubscribePlansData {
         referalCommision: json["referal_commision"]?? "",
         amc: json["amc"]?? "",
         amcCommision: json["amc_commision"]?? "",
-        cardNo: json["card_no"]?? "",
+        cardNo: json["card_no"]?? "0000000000000000",
         planImage: json["plan_image"]?? "",
         planDescription: json["plan_description"]?? "",
         amcImage: json["amc_image"]?? "",

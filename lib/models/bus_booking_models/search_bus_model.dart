@@ -201,16 +201,16 @@ class DroppingDetail {
 }
 
 class FareMaster {
-    int basicAmount;
-    int cancellationCharges;
+    dynamic basicAmount;
+    dynamic cancellationCharges;
     List<FareDetail> fareDetails;
-    int gst;
-    int grossCommission;
-    int netCommission;
+    dynamic gst;
+    dynamic grossCommission;
+    dynamic netCommission;
     double otherAmount;
-    int serviceFeeAmount;
+    dynamic serviceFeeAmount;
     double totalAmount;
-    int tradeMarkupAmount;
+    dynamic tradeMarkupAmount;
 
     FareMaster({
         required this.basicAmount,
