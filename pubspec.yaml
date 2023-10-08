@@ -90,6 +90,8 @@ dependencies:
   phone_number_hint: ^0.0.4
   connectivity_plus: ^3.0.2
   upgrader: ^8.1.0
+  in_app_update: ^4.2.1
+  image_cropper: ^4.0.1
 
 
 dev_dependencies:

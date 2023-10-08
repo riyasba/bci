@@ -110,9 +110,17 @@ class HomeController extends GetxController {
     update();
   }
 
-  addSubscription({required int planId, required int customerId}) async {
-    dio.Response<dynamic> response = await addSubscriptionApiServices
-        .addSubscription(planId: planId, customerId: customerId);
+  addSubscription(
+      {required int planId,
+      required int customerId,
+      required String paymentMenthod,
+      required String utrNumber}) async {
+    dio.Response<dynamic> response =
+        await addSubscriptionApiServices.addSubscription(
+            planId: planId,
+            customerId: customerId,
+            paymentMenthod: paymentMenthod,
+            utrNumber: utrNumber);
 
     if (response.statusCode == 200) {
       Get.to(const SucessfulScreenOtc());
@@ -122,6 +130,36 @@ class HomeController extends GetxController {
             "Plan Activated Successfully",
             style: primaryFont.copyWith(color: Colors.white),
           ));
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            response.data["message"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+  }
+
+    addSubscriptionManual(
+      {required int planId,
+      required int customerId,
+      required String paymentMenthod,
+      required String utrNumber}) async {
+    dio.Response<dynamic> response =
+        await addSubscriptionApiServices.addSubscription(
+            planId: planId,
+            customerId: customerId,
+            paymentMenthod: paymentMenthod,
+            utrNumber: utrNumber);
+
+    if (response.statusCode == 200) {
+      // Get.to(const SucessfulScreenOtc());
+      // Get.rawSnackbar(
+      //     backgroundColor: Colors.green,
+      //     messageText: Text(
+      //       "Plan Activated Successfully",
+      //       style: primaryFont.copyWith(color: Colors.white),
+      //     ));
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,

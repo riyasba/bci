@@ -9,6 +9,7 @@ import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/screens/members/holiday/controllers/holidaycontroller.dart';
+import 'package:bci/screens/members/manual_payment_options/google_pay_screen.dart';
 import 'package:bci/screens/members/members%20widgets/member_bottumbavigation.dart';
 import 'package:bci/screens/no_internet_screen.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -17,8 +18,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'package:upgrader/upgrader.dart';
 import 'authentications/splash_screen/Splash_screen.dart';
+import 'screens/members/manual_payment_options/payment_screen.dart';
+import 'screens/members/manual_payment_options/payment_waiting_screen.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -106,6 +110,7 @@ Future main() async {
   Get.put(HolidayPackageController());
   Get.put(BusController());
   Get.put(HotelBookingController());
+  checkForUpdate();
   runApp(const MyApp());
 }
 
@@ -123,6 +128,28 @@ firebaseNotification() async {
   );
 
   print('User granted permission: ${settings.authorizationStatus}');
+}
+
+Future<void> checkForUpdate() async {
+  print(
+      "************************************On update*******************************************");
+  InAppUpdate.checkForUpdate().then((info) {
+    print(
+        "%%%%%%%%%%%%%%% ------- ${info.availableVersionCode} -------- %%%%%%%%%%%%%%%");
+    print(
+        "%%%%%%%%%%%%%%% ------- ${info.updateAvailability} -------- %%%%%%%%%%%%%%%");
+    print(
+        "%%%%%%%%%%%%%%% ------- ${info.packageName} -------- %%%%%%%%%%%%%%%");
+
+    if (info.updateAvailability == UpdateAvailability.updateAvailable) {
+      InAppUpdate.performImmediateUpdate().catchError((e) {
+        // showSnack(e.toString());
+        return AppUpdateResult.inAppUpdateFailed;
+      });
+    }
+  }).catchError((e) {
+    // showSnack(e.toString());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -152,7 +179,9 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: UpgradeAlert(child: const splash()),
+          home: const splash(),
+          // home: const PaymentScreenView(),
+          // home: PaymentWaitingScreen(),
         );
       },
     );

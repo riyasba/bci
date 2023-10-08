@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_plan_details_model.dart';
@@ -29,6 +25,8 @@ class PlanController extends GetxController {
   List<PlansData> plansdataList = [];
   //List<PlansData> planDetailsList = [];
   List<SubscribePlansData> subscribePlansData = [];
+
+  RxInt paymentIndex = 99.obs;
 
   getSlider() async {
     dio.Response<dynamic> response = await getSliderApiServices.getSlider();
@@ -59,31 +57,31 @@ class PlanController extends GetxController {
           PlansDetailsModel.fromJson(response.data);
 
       subscribePlansData.add(plansDetailsModel.plan);
-       update();
+      update();
     }
     update();
   }
 
-  addSubscription({required int planId}) async {
-    dio.Response<dynamic> response =
-        await addSubscriptionApiServices.addSubscription(
-            planId: planId,
-            customerId: Get.find<ProfileController>().profileData.first.id);
+  // addSubscription({required int planId}) async {
+  //   dio.Response<dynamic> response =
+  //       await addSubscriptionApiServices.addSubscription(
+  //           planId: planId,
+  //           customerId: Get.find<ProfileController>().profileData.first.id);
 
-    if (response.statusCode == 200) {
-      Get.rawSnackbar(
-          backgroundColor: Colors.green,
-          messageText: Text(
-            "Plan Activated Successfully",
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
-    } else {
-      Get.rawSnackbar(
-          backgroundColor: Colors.red,
-          messageText: Text(
-            response.data["message"],
-            style: primaryFont.copyWith(color: Colors.white),
-          ));
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     Get.rawSnackbar(
+  //         backgroundColor: Colors.green,
+  //         messageText: Text(
+  //           "Plan Activated Successfully",
+  //           style: primaryFont.copyWith(color: Colors.white),
+  //         ));
+  //   } else {
+  //     Get.rawSnackbar(
+  //         backgroundColor: Colors.red,
+  //         messageText: Text(
+  //           response.data["message"],
+  //           style: primaryFont.copyWith(color: Colors.white),
+  //         ));
+  //   }
+  // }
 }

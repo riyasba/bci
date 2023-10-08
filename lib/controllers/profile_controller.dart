@@ -297,8 +297,7 @@ class ProfileController extends GetxController {
             offerOrCoupon: "",
             couponcode: "",
             amount: homeController.cartListData[i].price,
-            bookDateTime: homeController.cartListData[i].bookDateTime
-            );
+            bookDateTime: homeController.cartListData[i].bookDateTime);
       }
 
       Get.offAll(
@@ -370,8 +369,7 @@ class ProfileController extends GetxController {
             offerOrCoupon: "",
             couponcode: "",
             amount: homeController.cartListData[i].price,
-            bookDateTime: homeController.cartListData[i].bookDateTime
-            );
+            bookDateTime: homeController.cartListData[i].bookDateTime);
       }
 
       Get.offAll(
@@ -430,8 +428,7 @@ class ProfileController extends GetxController {
             offerOrCoupon: "",
             couponcode: "",
             amount: homeController.cartListData[i].price,
-            bookDateTime: homeController.cartListData[i].bookDateTime
-            );
+            bookDateTime: homeController.cartListData[i].bookDateTime);
       }
 
       Get.offAll(
@@ -532,9 +529,9 @@ class ProfileController extends GetxController {
     if (payment_response["result"] == "payment_successfull") {
       final homeController = Get.find<HomeController>();
 
-      Get.find<HomeController>().addSubscription(
-          planId: id,
-          customerId: Get.find<ProfileController>().profileData.first.id);
+      // Get.find<HomeController>().addSubscription(
+      //     planId: id,
+      //     customerId: Get.find<ProfileController>().profileData.first.id);
 
       //need to give id
       Get.snackbar(
@@ -589,7 +586,9 @@ class ProfileController extends GetxController {
 
       Get.find<HomeController>().addSubscription(
           planId: id,
-          customerId: Get.find<ProfileController>().profileData.first.id);
+          customerId: Get.find<ProfileController>().profileData.first.id,
+          paymentMenthod: "5",
+          utrNumber: "");
 
       //need to give id
       Get.snackbar(

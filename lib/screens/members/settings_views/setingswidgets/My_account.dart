@@ -12,6 +12,7 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -262,9 +263,35 @@ class _MyAccountState extends State<MyAccount> {
           await ImagePicker().pickImage(source: ImageSource.gallery);
       if (imageprofile == null) return;
       final imageprofiletemp = File(imageprofile.path);
-      profileController.updateProfilePic(imageprofiletemp);
+
+      final croppedImage = await ImageCropper().cropImage(
+        sourcePath: imageprofile.path,
+        cropStyle: CropStyle.circle,
+        aspectRatioPresets: [CropAspectRatioPreset.ratio5x4],
+        uiSettings: [
+          AndroidUiSettings(
+              toolbarTitle: 'Cropper',
+              toolbarColor: kblue,
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.ratio5x4,
+              lockAspectRatio: false),
+          IOSUiSettings(
+            title: 'Cropper',
+          ),
+          WebUiSettings(
+            context: context,
+          ),
+        ],
+      );
+
+      if (croppedImage == null) return;
+
+      final croppedFile = File(croppedImage.path);
+
+
+      profileController.updateProfilePic(croppedFile);
       setState(() {
-        this.imageprofile = imageprofiletemp;
+        this.imageprofile = croppedFile;
       });
     } catch (e) {
       print('Failed to pick image:$e');
@@ -276,8 +303,35 @@ class _MyAccountState extends State<MyAccount> {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image == null) return;
       final imagetemp = File(image.path);
+
+      final croppedImage = await ImageCropper().cropImage(
+        sourcePath: imagetemp.path,
+        cropStyle: CropStyle.rectangle,
+        aspectRatioPresets: [CropAspectRatioPreset.ratio5x4],
+        uiSettings: [
+          AndroidUiSettings(
+              toolbarTitle: 'Cropper',
+              toolbarColor: kblue,
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.ratio5x4,
+              lockAspectRatio: false),
+          IOSUiSettings(
+            title: 'Cropper',
+          ),
+          WebUiSettings(
+            context: context,
+          ),
+        ],
+      );
+
+      if (croppedImage == null) return;
+
+      final croppedFile = File(croppedImage.path);
+
+      print("----------------------->> size of the image----------------->>${croppedFile.length()}");
+
       setState(() {
-        this.image = imagetemp;
+        this.image = croppedFile;
       });
     } catch (e) {
       print('Failed to pick image:$e');
@@ -289,8 +343,33 @@ class _MyAccountState extends State<MyAccount> {
       final image = await ImagePicker().pickImage(source: ImageSource.camera);
       if (image == null) return;
       final imagetemp = File(image.path);
+      
+      final croppedImage = await ImageCropper().cropImage(
+        sourcePath: imagetemp.path,
+        cropStyle: CropStyle.rectangle,
+        aspectRatioPresets: [CropAspectRatioPreset.ratio16x9],
+        uiSettings: [
+          AndroidUiSettings(
+              toolbarTitle: 'Cropper',
+              toolbarColor: kblue,
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.ratio16x9,
+              lockAspectRatio: false),
+          IOSUiSettings(
+            title: 'Cropper',
+          ),
+          WebUiSettings(
+            context: context,
+          ),
+        ],
+      );
+
+      if (croppedImage == null) return;
+
+      final croppedFile = File(croppedImage.path);
+
       setState(() {
-        this.image = imagetemp;
+        this.image = croppedFile;
       });
     } catch (e) {
       print('Failed to pick image:$e');
@@ -302,8 +381,35 @@ class _MyAccountState extends State<MyAccount> {
       final image2 = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image2 == null) return;
       final imagetemp2 = File(image2.path);
+
+         
+      final croppedImage = await ImageCropper().cropImage(
+        sourcePath: imagetemp2.path,
+        cropStyle: CropStyle.rectangle,
+        aspectRatioPresets: [CropAspectRatioPreset.ratio5x4],
+        uiSettings: [
+          AndroidUiSettings(
+              toolbarTitle: 'Cropper',
+              toolbarColor: kblue,
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.ratio5x4,
+              lockAspectRatio: false),
+          IOSUiSettings(
+            title: 'Cropper',
+          ),
+          WebUiSettings(
+            context: context,
+          ),
+        ],
+      );
+
+      if (croppedImage == null) return;
+
+      final croppedFile = File(croppedImage.path);
+
+
       setState(() {
-        this.image2 = imagetemp2;
+        this.image2 = croppedFile;
       });
     } catch (e) {
       print('Failed to pick image:$e');
@@ -315,8 +421,34 @@ class _MyAccountState extends State<MyAccount> {
       final image2 = await ImagePicker().pickImage(source: ImageSource.camera);
       if (image2 == null) return;
       final imagetemp2 = File(image2.path);
+
+        final croppedImage = await ImageCropper().cropImage(
+        sourcePath: imagetemp2.path,
+        cropStyle: CropStyle.rectangle,
+        aspectRatioPresets: [CropAspectRatioPreset.ratio5x4],
+        uiSettings: [
+          AndroidUiSettings(
+              toolbarTitle: 'Cropper',
+              toolbarColor: kblue,
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.ratio5x4,
+              lockAspectRatio: false),
+          IOSUiSettings(
+            title: 'Cropper',
+          ),
+          WebUiSettings(
+            context: context,
+          ),
+        ],
+      );
+
+      if (croppedImage == null) return;
+
+      final croppedFile = File(croppedImage.path);
+
+
       setState(() {
-        this.image2 = imagetemp2;
+        this.image2 = croppedFile;
       });
     } catch (e) {
       print('Failed to pick image:$e');
@@ -580,6 +712,7 @@ class _MyAccountState extends State<MyAccount> {
                                     child: TextField(
                                       textCapitalization: TextCapitalization.words,
                                       controller: emailController,
+                                      readOnly: true,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
                                           isDense: true,
@@ -598,6 +731,7 @@ class _MyAccountState extends State<MyAccount> {
                                 child: Container(
                                   height: 37,
                                   width: size.width,
+                                  
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(2),
                                       border: Border.all(
@@ -609,6 +743,7 @@ class _MyAccountState extends State<MyAccount> {
                                         left: 15, right: 10),
                                     child: TextField(
                                       controller: phoneController,
+                                       readOnly: true,
                                       keyboardType: TextInputType.phone,
                                       inputFormatters: [
                                         LengthLimitingTextInputFormatter(10),
