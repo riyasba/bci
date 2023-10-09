@@ -108,12 +108,9 @@ class _PaymentWebViewState extends State<PaymentWebView> {
             print(
                 'Page finished loading---------------------------------------------------: $url');
             print(
-                'Page finished loading---------------------------------------------------: $url');
+                'Page finished loading>>>--------------------------------------------------->>>>>>: $url');
             var uri = Uri.parse(url);
 
-            if(url == "https://app.e-sankalp.com/payment-processing"){
-              Get.find<PlanController>().paymentStatus(widget.transactionType);
-            }
             // if (uri.path == "/success") {
             //   if (widget.payType == 1) {
             //     profileController.payForSubscribe(

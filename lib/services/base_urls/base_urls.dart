@@ -107,7 +107,6 @@ abstract class BaseApiService {
   final String airGetSsrURL =
       "https://www.portal.bcipvtltd.com/api/auth/air_get_ssr";
 
-
   final String airCancelApiURL =
       "https://www.portal.bcipvtltd.com/api/auth/air_ticket_cancellation";
 
@@ -139,7 +138,6 @@ abstract class BaseApiService {
       "https://www.portal.bcipvtltd.com/api/auth/get_enquiry";
 
   //settings api
-
   final String createSupportApiUrl =
       "https://www.portal.bcipvtltd.com/api/auth/create_ticket";
 

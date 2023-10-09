@@ -46,6 +46,7 @@ class PlanController extends GetxController {
   getplansList() async {
     dio.Response<dynamic> response = await getPlansApiServices.getPlans();
     if (response.statusCode == 200) {
+      print(response.data);
       PlansModel plansModel = PlansModel.fromJson(response.data);
       plansdataList = plansModel.data;
     }

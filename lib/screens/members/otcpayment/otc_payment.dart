@@ -54,8 +54,6 @@ class _OtcPaymentState extends State<OtcPayment> {
       bool enableLogging) async {
     PhonePePaymentSdk.init(environment, appId, merchantId, enableLogging)
         .then((val) => {
-             
-
               setState(() {
                 result = 'PhonePe SDK Initialized - $val';
                 print("-------------------->> value on init");
@@ -77,7 +75,7 @@ class _OtcPaymentState extends State<OtcPayment> {
       required String apiEndPoint,
       String? packageName}) async {
     try {
-      var response =  PhonePePaymentSdk.startPGTransaction(
+      var response = PhonePePaymentSdk.startPGTransaction(
           body, callback, checksum, headers, apiEndPoint, packageName);
 
       // print(
@@ -171,9 +169,9 @@ class _OtcPaymentState extends State<OtcPayment> {
       "merchantTransactionId": "MT7$randomNumber",
       "merchantUserId": "MUID123",
       "amount": '100',
-      "redirectUrl": "https://app.e-sankalp.com/payment-processing",
+      "redirectUrl": "https://webhook.site/success",
       "redirectMode": "POST",
-      "callbackUrl": "https://webhook.site/callback-url",
+      "callbackUrl": "https://webhook.site/failed",
       "mobileNumber": "9999999999",
       "paymentInstrument": {"type": "PAY_PAGE"}
     };
@@ -342,6 +340,7 @@ class _OtcPaymentState extends State<OtcPayment> {
                     child: InkWell(
                       onTap: () async {
                         String tempSaleAmount = widget.plansData.saleAmount;
+                        // var sgst =  widget.plansData.sg
                         String amount =
                             await profileController.redeemSubscriptionCoupon(
                                 couponcode: redeemCouponController.text);
@@ -384,70 +383,76 @@ class _OtcPaymentState extends State<OtcPayment> {
             ksizedbox40,
             InkWell(
               onTap: () async {
-                // var urls = await test();
-                // Get.to(PaymentWebView(
-                //   userId: "",
-                //   payOpt: "",
-                //   payType: 0,
-                //   totalAmount: "",
-                //   transactionType: urls["merchantTransactionId"],
-                //   url: urls["instrumentResponse"]["redirectInfo"]["url"],
-                // ));
+                var urls = await test();
+                Get.to(PaymentWebView(
+                  userId: "",
+                  payOpt: "",
+                  payType: 0,
+                  totalAmount: "",
+                  transactionType: urls["merchantTransactionId"],
+                  url: urls["instrumentResponse"]["redirectInfo"]["url"],
+                ));
                 // trigerPaymentGateway();
-                var resPond = {
-                  "merchantId": "PGTESTPAYUAT93",
-                  "merchantTransactionId": "transacti_98087988888",
-                  "merchantUserId": "90050770",
-                  "amount": "1000",
-                  "mobileNumber": "7907556867",
-                  "callbackUrl": "https://webhook.site/callback-url",
-                  "paymentInstrument": {
-                    "type": "UPI_INTENT",
-                    "targetApp": "com.phonepe.app"
-                  },
-                  "deviceContext": {"deviceOS": "ANDROID"}
-                };
 
+                // var random = Random();
 
-                 
+                // int randomInt = random.nextInt(100000);
 
-                // Step 1: Convert JSON object to JSON string
-                String jsonString = jsonEncode(resPond);
+                // var resPond = {
+                //   "merchantId": "PGTESTPAYUAT93",
+                //   "merchantTransactionId": "transacti_$randomInt",
+                //   "merchantUserId": "90050770",
+                //   "amount": "1000",
+                //   "mobileNumber": "7907556867",
+                //   "callbackUrl": "https://webhook.site/callback-url",
+                //   "paymentInstrument": {
+                //     "type": "UPI_INTENT",
+                //     "targetApp": "com.phonepe.app"
+                //   },
+                //   "deviceContext": {"deviceOS": "ANDROID"}
+                // };
 
-                // Step 2: Encode JSON string to Base64
-                String base64String = jsonString.toBase64;
+                // // Step 1: Convert JSON object to JSON string
+                // String jsonString = jsonEncode(resPond);
 
-                print(base64String);
+                // // Step 2: Encode JSON string to Base64
+                // String base64String = jsonString.toBase64;
 
-                String apiEndPoint = "/pg/v1/pay";
+                // print(base64String);
 
-                String salt = "875126e4-5a13-4dae-ad60-5b8c8b629035";
-                
+                // String apiEndPoint = "/pg/v1/pay";
 
-                int saltIndex = 1;
+                // String salt = "875126e4-5a13-4dae-ad60-5b8c8b629035";
 
-                String checksum =
-                    "${sha256.convert(utf8.encode("$base64String/pg/v1/pay$salt###$saltIndex"))}";
+                // int saltIndex = 1;
 
+                // var encodedCheckSum =
+                //     utf8.encode("$base64String/pg/v1/pay$salt");
 
-                    // String checksum = sha256(base64Body + apiEndPoint + salt) + ### + saltIndex;
+                // var tempCheckSum = sha256.convert(encodedCheckSum);
 
+                // String checksum =
+                //     tempCheckSum.toString() + "###" + "$saltIndex";
+
+                // // String checksum = sha256(base64Body + apiEndPoint + salt) + ### + saltIndex;
+
+                // print(
+                //     "<-<->------<->----------<->---------Sha256 algorithm---------<->---------<->-------<->->");
+
+                // print(checksum);
+
+                // print("------merchat id---->>--->>--->>-->>");
+                // print(resPond["merchantTransactionId"]);
+
+                // startPGTransaction(
+                //     apiEndPoint: apiEndPoint,
+                //     body: base64String,
+                //     callback: "https://www.portal.bcipvtltd.com",
+                //     checksum: checksum,
+                //     headers: pgHeaders,
+                //     packageName: "com.phonepe.app");
                 print(
-                    "<-<->------<->----------<->---------Sha256 algorithm---------<->---------<->-------<->->");
-
-                print(checksum);
-
-                print("------merchat id---->>--->>--->>-->>");
-                print(resPond["merchantTransactionId"]);
-
-                startPGTransaction(
-                    apiEndPoint: apiEndPoint,
-                    body: base64String,
-                    callback: "https://www.portal.bcipvtltd.com",
-                    checksum: checksum,
-                    headers: pgHeaders,
-                    packageName: "com.phonepe.app");
-                print(">>>>>>>>>>>>>>>>>..............payment start..........>>>>>>>>>>${widget.plansData.id}");
+                    ">>>>>>>>>>>>>>>>>..............payment start..........>>>>>>>>>>${widget.plansData.id}");
                 // profileController.payfoSubscription(
                 //   id: widget.plansData.id,
                 //   amount: double.parse(widget.plansData.saleAmount),
