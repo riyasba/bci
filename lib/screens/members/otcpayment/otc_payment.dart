@@ -407,7 +407,7 @@ class _OtcPaymentState extends State<OtcPayment> {
                   "callbackUrl": "https://webhook.site/callback-url",
                   "paymentInstrument": {
                     "type": "UPI_INTENT",
-                    "targetApp": "com.phonepe.app"
+                    "targetApp": "com.phonepe.simulator"
                   },
                   "deviceContext": {"deviceOS": "ANDROID"}
                 };
@@ -450,7 +450,8 @@ class _OtcPaymentState extends State<OtcPayment> {
                     callback: "https://www.portal.bcipvtltd.com",
                     checksum: checksum,
                     headers: pgHeaders,
-                    packageName: "com.phonepe.app");
+                    packageName: "com.phonepe.simulator");
+                    
                 print(
                     ">>>>>>>>>>>>>>>>>..............payment start..........>>>>>>>>>>${widget.plansData.id}");
                 // profileController.payfoSubscription(
