@@ -3,23 +3,21 @@ import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AddSubscriptionApiServices extends BaseApiService {
-  Future addSubscription(
-      {required int planId,
-      required int customerId,
-      required String paymentMenthod,
-      required String gstPercentage,
-      required String percentageAmount,
-      required String totalAmount,
-      required String utrNumber}) async {
+class CheckPlanApiServices extends BaseApiService {
+  Future checkPlanApi({
+    required int userId,
+  }) async {
     dynamic responseJson;
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
+      // print(">>--->>--->>--->>--->>---->> ${userId}");
+      // print(authtoken);
+
       var response = await dio.post(
-        addPlanUrl,
+        planCheckApi,
         options: Options(
           headers: {
             'Accept': 'application/json',
@@ -31,17 +29,10 @@ class AddSubscriptionApiServices extends BaseApiService {
           },
         ),
         data: {
-          "plan_id": planId,
-          "user_id": customerId,
-          "payment_method": paymentMenthod,
-          "utr_number": utrNumber,
-          "gst_percentage": gstPercentage,
-          "percent_amount": percentageAmount,
-          "total_amount": totalAmount,
+          "user_id": userId,
         },
       );
-      print(
-          "::::::::< Get plan details Api >:::$customerId:::: : status code ::::::$planId::::");
+      print(":: status code :::< User plan check Api >::: status code ::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

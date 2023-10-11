@@ -564,6 +564,9 @@ class ProfileController extends GetxController {
   void payfoSubscription({
     required double amount,
     required int id,
+    required String gstPercentage,
+    required String percentageAmount,
+    required String totalAmount,
   }) async {
     int tempAmount = amount.toInt();
     String? result;
@@ -588,6 +591,9 @@ class ProfileController extends GetxController {
           planId: id,
           customerId: Get.find<ProfileController>().profileData.first.id,
           paymentMenthod: "5",
+          gstPercentage: gstPercentage,
+          percentageAmount: percentageAmount,
+          totalAmount: totalAmount,
           utrNumber: "");
 
       //need to give id
@@ -738,6 +744,26 @@ class ProfileController extends GetxController {
 
     Directory root = await getTemporaryDirectory();
     final file = File(root.path + '/bci_brochure.pdf');
+    final buffer = _byteData.buffer;
+
+    await file.writeAsBytes(
+        buffer.asUint8List(_byteData.offsetInBytes, _byteData.lengthInBytes));
+    print("  ------------------------>>>  ");
+    print(file.path);
+
+    OpenFile.open(file.path);
+  }
+
+  downloadPaymentQrCode() async {
+    var _byteData = await rootBundle.load('assets/images/qr_code.jpeg');
+
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
+
+    Directory root = await getTemporaryDirectory();
+    final file = File(root.path + '/qr_code.jpeg');
     final buffer = _byteData.buffer;
 
     await file.writeAsBytes(

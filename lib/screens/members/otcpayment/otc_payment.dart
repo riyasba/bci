@@ -1,5 +1,6 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_plans_model.dart';
 import 'package:bci/screens/members/manual_payment_options/payment_screen.dart';
@@ -30,7 +31,16 @@ class _OtcPaymentState extends State<OtcPayment> {
 
   final profileController = Get.find<ProfileController>();
 
+  final planController = Get.find<PlanController>();
+
   static MethodChannel _channel = MethodChannel('easebuzz');
+
+  @override
+  void initState() {
+    super.initState();
+    planController.init(
+        "PRODUCTION", "com.memberapp.bci", "M1FTWHQF8C06", true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -208,14 +218,23 @@ class _OtcPaymentState extends State<OtcPayment> {
               onTap: () async {
                 print(
                     ">>>>>>>>>>>>>>>>>..............payment start..........>>>>>>>>>>${widget.plansData.id}");
-               
+
+                        bool isValid = await planController.checkUserPlan();
 
 
-                Get.to(() => PaymentScreenView(
-                      id: widget.plansData.id,
-                      amount: double.parse(widget.plansData.saleAmount),
-                    ));
+                        if(isValid){
+                        Get.to(() => PaymentScreenView(
+                        id: widget.plansData.id,
+                        amount: double.parse(widget.plansData.saleAmount),
+                        gstPercentage: widget.plansData.gst,
+                        percentageAmount: widget.plansData.gstPercentageAmount
+                            .toStringAsFixed(2),
+                        totalAmount:
+                            widget.plansData.totalAmount.toStringAsFixed(2),
+                      ));
+               }
 
+                
 
                 // profileController.payUseingEaseBuzzSubs(
                 //     id: widget.plansData.id,

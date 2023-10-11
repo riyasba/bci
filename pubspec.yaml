@@ -92,6 +92,8 @@ dependencies:
   upgrader: ^8.1.0
   in_app_update: ^4.2.1
   image_cropper: ^4.0.1
+  phonepe_payment_sdk: ^1.0.1
+  crypto: ^3.0.3
 
 
 dev_dependencies:

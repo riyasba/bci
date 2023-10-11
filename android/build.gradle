@@ -3,6 +3,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+         
     }
 
     dependencies {
@@ -16,7 +17,9 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
+        maven {
+            url  "https://phonepe.mycloudrepo.io/public/repositories/phonepe-intentsdk-android"
+        }
     }
 }
 

@@ -10,7 +10,16 @@ import 'package:get/get.dart';
 class PaymentScreenView extends StatefulWidget {
   double amount;
   int id;
-  PaymentScreenView({super.key, required this.amount, required this.id});
+  String gstPercentage;
+  String percentageAmount;
+  String totalAmount;
+  PaymentScreenView(
+      {super.key,
+      required this.amount,
+      required this.id,
+      required this.gstPercentage,
+      required this.percentageAmount,
+      required this.totalAmount});
 
   @override
   State<PaymentScreenView> createState() => _PaymentScreenViewState();
@@ -64,6 +73,9 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                     height: 10,
                   ),
                   InkWell(
+                    onTap: () {
+                      Get.find<ProfileController>().downloadPaymentQrCode();
+                    },
                     child: Text(
                       "Download Qr code",
                       style: primaryFont.copyWith(color: Colors.blue),
@@ -366,7 +378,7 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap: () {
+                    onTap: () async{
                       String? paymentMenthod;
 
                       if (planController.paymentIndex.value == 0) {
@@ -377,11 +389,21 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                         paymentMenthod = "4";
                       }
 
+                       
+
                       if (planController.paymentIndex.value == 3) {
-                        Get.find<ProfileController>().payfoSubscription(
-                          id: widget.id,
-                          amount: widget.amount,
-                        );
+                        // Get.find<ProfileController>().payfoSubscription(
+                        //     id: widget.id,
+                        //     amount: widget.amount,
+                        //     gstPercentage: widget.gstPercentage,
+                        //     percentageAmount: widget.percentageAmount,
+                        //     totalAmount: widget.totalAmount);
+                        planController.phonePePayment(
+                            id: widget.id,
+                            amount: widget.amount,
+                            gstPercentage: widget.gstPercentage,
+                            percentageAmount: widget.percentageAmount,
+                            totalAmount: widget.totalAmount);
                       } else {
                         Get.find<HomeController>().addSubscriptionManual(
                             planId: widget.id,
@@ -392,7 +414,10 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                             paymentMenthod: paymentMenthod!,
                             utrNumber: utrTextController.text.isEmpty
                                 ? ""
-                                : utrTextController.text);
+                                : utrTextController.text,
+                            gstPercentage: widget.gstPercentage,
+                            percentageAmount: widget.percentageAmount,
+                            totalAmount: widget.totalAmount);
 
                         Get.off(() => PaymentWaitingScreen());
                       }

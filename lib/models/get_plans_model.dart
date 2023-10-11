@@ -4,6 +4,9 @@
 
 import 'dart:convert';
 
+import 'package:bci/controllers/plans_controller.dart';
+import 'package:get/get.dart';
+
 PlansModel plansModelFromJson(String str) =>
     PlansModel.fromJson(json.decode(str));
 
@@ -20,7 +23,8 @@ class PlansModel {
 
   factory PlansModel.fromJson(Map<String, dynamic> json) => PlansModel(
         message: json["message"],
-        data: List<PlansData>.from(json["data"].map((x) => PlansData.fromJson(x))),
+        data: List<PlansData>.from(
+            json["data"].map((x) => PlansData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -47,6 +51,9 @@ class PlansData {
   String cardImg;
   String amcDescription;
   dynamic status;
+  dynamic gst;
+  double gstPercentageAmount;
+  double totalAmount;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -68,28 +75,36 @@ class PlansData {
     required this.cardImg,
     required this.amcDescription,
     required this.status,
+    required this.gst,
+    required this.totalAmount,
+    required this.gstPercentageAmount,
     required this.createdAt,
     required this.updatedAt,
   });
 
   factory PlansData.fromJson(Map<String, dynamic> json) => PlansData(
-        id: json["id"]?? 0,
-        title: json["title"]?? "",
-        validityDays: json["validity_days"]?? "",
-        userType: json["user_type"]?? "",
-        actualAmount: json["actual_amount"]?? "",
-        saleAmount: json["sale_amount"]?? "",
-        dsaCommision: json["dsa_commision"]?? "",
-        referalCommision: json["referal_commision"]?? "",
-        amc: json["amc"]?? "",
-        amcCommision: json["amc_commision"]?? "",
-        cardNo: json["card_no"]?? "",
-        planImage: json["plan_image"]?? "",
-        planDescription: json["plan_description"]?? "",
-        amcImage: json["amc_image"]?? "",
-        cardImg: json["card_img"]?? "",
-        amcDescription: json["amc_description"]?? "",
-        status: json["status"]?? "",
+        id: json["id"] ?? 0,
+        title: json["title"] ?? "",
+        validityDays: json["validity_days"] ?? "",
+        userType: json["user_type"] ?? "",
+        actualAmount: json["actual_amount"] ?? "",
+        saleAmount: json["sale_amount"] ?? "",
+        dsaCommision: json["dsa_commision"] ?? "",
+        referalCommision: json["referal_commision"] ?? "",
+        amc: json["amc"] ?? "",
+        amcCommision: json["amc_commision"] ?? "",
+        cardNo: json["card_no"] ?? "",
+        planImage: json["plan_image"] ?? "",
+        planDescription: json["plan_description"] ?? "",
+        amcImage: json["amc_image"] ?? "",
+        cardImg: json["card_img"] ?? "",
+        amcDescription: json["amc_description"] ?? "",
+        status: json["status"] ?? "",
+        gst: json["gst"] ?? "",
+        gstPercentageAmount: Get.find<PlanController>()
+            .calcGstAmount(json["gst"] ?? "0", json["sale_amount"]),
+        totalAmount: Get.find<PlanController>()
+            .calcTotalAmountIncGst(json["gst"] ?? "0", json["sale_amount"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );

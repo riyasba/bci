@@ -33,7 +33,7 @@ abstract class BaseApiService {
   final String getSliderURL =
       "https://www.portal.bcipvtltd.com/api/auth/get_slider";
 
-        //sliders Api
+  //sliders Api
   final String getAdsURL =
       "https://www.portal.bcipvtltd.com/api/auth/getslider_ads";
 
@@ -77,8 +77,7 @@ abstract class BaseApiService {
   final String redeemCouponsApiUrl =
       "https://www.portal.bcipvtltd.com/api/auth/redeemCoupon";
 
-
-    //coupons redeem api --//
+  //coupons redeem api --//
   final String subRedeemCouponsApiUrl =
       "https://www.portal.bcipvtltd.com/api/auth/subscriptionCoupon";
 
@@ -106,7 +105,6 @@ abstract class BaseApiService {
 
   final String airGetSsrURL =
       "https://www.portal.bcipvtltd.com/api/auth/air_get_ssr";
-
 
   final String airCancelApiURL =
       "https://www.portal.bcipvtltd.com/api/auth/air_ticket_cancellation";
@@ -263,19 +261,22 @@ abstract class BaseApiService {
   final String bannerURL =
       "https://www.portal.bcipvtltd.com/api/auth/getslider_booking";
 
-
   //get gallery
   final String getGalleryURI =
       "https://www.portal.bcipvtltd.com/api/auth/get_gallery";
 
-
-  //cancel 
+  //cancel
   // final String airTicketCancelURL = 'https://www.portal.bcipvtltd.com/api/auth/airTicketCancelDetails';
 
   //notication count
-  final String notificationCountApiUrl = "https://portal.bcipvtltd.com/api/auth/notification/count";
+  final String notificationCountApiUrl =
+      "https://portal.bcipvtltd.com/api/auth/notification/count";
 
-  //support admin details 
-  final String supportAdminDetailsApiUrl = "https://portal.bcipvtltd.com/api/get/app/support/details";
+  //support admin details
+  final String supportAdminDetailsApiUrl =
+      "https://portal.bcipvtltd.com/api/get/app/support/details";
 
+  //plan check api url
+  final String planCheckApi =
+      "https://portal.bcipvtltd.com/api/auth/plan_trans_check";
 }

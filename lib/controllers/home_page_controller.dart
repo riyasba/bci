@@ -114,12 +114,18 @@ class HomeController extends GetxController {
       {required int planId,
       required int customerId,
       required String paymentMenthod,
+       required String gstPercentage,
+      required String percentageAmount,
+      required String totalAmount,
       required String utrNumber}) async {
     dio.Response<dynamic> response =
         await addSubscriptionApiServices.addSubscription(
             planId: planId,
             customerId: customerId,
             paymentMenthod: paymentMenthod,
+            gstPercentage: gstPercentage,
+            percentageAmount: percentageAmount,
+            totalAmount: totalAmount,
             utrNumber: utrNumber);
 
     if (response.statusCode == 200) {
@@ -140,16 +146,22 @@ class HomeController extends GetxController {
     }
   }
 
-    addSubscriptionManual(
+  addSubscriptionManual(
       {required int planId,
       required int customerId,
       required String paymentMenthod,
+      required String gstPercentage,
+      required String percentageAmount,
+      required String totalAmount,
       required String utrNumber}) async {
     dio.Response<dynamic> response =
         await addSubscriptionApiServices.addSubscription(
             planId: planId,
             customerId: customerId,
             paymentMenthod: paymentMenthod,
+            gstPercentage: gstPercentage,
+            percentageAmount: percentageAmount,
+            totalAmount: totalAmount,
             utrNumber: utrNumber);
 
     if (response.statusCode == 200) {
