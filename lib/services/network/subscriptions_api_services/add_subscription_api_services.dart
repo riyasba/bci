@@ -11,6 +11,8 @@ class AddSubscriptionApiServices extends BaseApiService {
       required String gstPercentage,
       required String percentageAmount,
       required String totalAmount,
+      required String amount,
+      required String status,
       required String utrNumber}) async {
     dynamic responseJson;
     try {
@@ -36,12 +38,14 @@ class AddSubscriptionApiServices extends BaseApiService {
           "payment_method": paymentMenthod,
           "utr_number": utrNumber,
           "gst_percentage": gstPercentage,
-          "percent_amount": percentageAmount,
+          "gst_amount": percentageAmount,
           "total_amount": totalAmount,
+          "amount": amount,
+          "status": status
         },
       );
       print(
-          "::::::::< Get plan details Api >:::$customerId:::: : status code ::::::$planId::::");
+          "::::::::< Subscribe plan details Api >:::$customerId:::: : status code ::::::$planId:::$utrNumber::::$paymentMenthod");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

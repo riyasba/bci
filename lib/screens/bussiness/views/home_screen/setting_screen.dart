@@ -22,8 +22,8 @@ class BusinessSettingScreen extends StatefulWidget {
 }
 
 class _BusinessSettingScreenState extends State<BusinessSettingScreen> {
-  @override
   
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(

@@ -5,6 +5,7 @@ import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/manual_payment_options/payment_waiting_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class PaymentScreenView extends StatefulWidget {
@@ -86,6 +87,19 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
               const SizedBox(
                 height: 50,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Amount: ₹${widget.totalAmount}",
+                    style: primaryFont.copyWith(
+                        fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 50,
+              ),
               Text(
                 "Paymemt Methods",
                 style: primaryFont.copyWith(
@@ -94,99 +108,108 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
               const SizedBox(
                 height: 20,
               ),
-              GestureDetector(
-                onTap: () {
-                  planController.paymentIndex(0);
-                },
-                child: Container(
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 2, color: Colors.grey.withOpacity(0.6))
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Google Pay",
-                              style: primaryFont.copyWith(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                planController.paymentIndex(0);
-                              },
-                              child: Container(
-                                height: 20,
-                                width: 20,
-                                decoration: BoxDecoration(
-                                    color:
-                                        planController.paymentIndex.value == 0
-                                            ? Colors.green
-                                            : Colors.white,
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(color: Colors.black)),
-                                alignment: Alignment.center,
-                                child: const Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                  size: 15,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        if (planController.paymentIndex.value == 0)
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: GestureDetector(
+                  onTap: () {
+                    planController.paymentIndex(0);
+                  },
+                  child: Container(
+                    width: size.width,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 2, color: Colors.grey.withOpacity(0.6))
+                        ]),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const SizedBox(
-                                height: 10,
+                              Text(
+                                "Google Pay",
+                                style: primaryFont.copyWith(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               ),
-                              const Text(
-                                  "UPI Transaction ID or UTR from the receipt"),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Container(
-                                height: 55,
-                                child: TextField(
-                                  controller: utrTextController,
-                                  keyboardType: TextInputType.number,
-                                  decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    hintText: 'Enter UTR Number',
+                              GestureDetector(
+                                onTap: () {
+                                  planController.paymentIndex(0);
+                                },
+                                child: Container(
+                                  height: 20,
+                                  width: 20,
+                                  decoration: BoxDecoration(
+                                      color:
+                                          planController.paymentIndex.value == 0
+                                              ? Colors.green
+                                              : Colors.white,
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(color: Colors.black)),
+                                  alignment: Alignment.center,
+                                  child: const Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 15,
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 7,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "Required",
-                                    style: primaryFont.copyWith(
-                                        fontSize: 11, color: Colors.black45),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
+                              )
                             ],
                           ),
-                      ],
+                          if (planController.paymentIndex.value == 0)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                const Text(
+                                    "UPI Transaction ID or UTR from the receipt"),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Container(
+                                  height: 55,
+                                  child: TextField(
+                                    controller: utrTextController,
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(12),
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      FilteringTextInputFormatter.deny(
+                                          RegExp(r'\s 1-9')),
+                                    ],
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      hintText: 'Enter UTR Number',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 7,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Required",
+                                      style: primaryFont.copyWith(
+                                          fontSize: 11, color: Colors.black45),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                              ],
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -194,59 +217,62 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
               const SizedBox(
                 height: 20,
               ),
-              GestureDetector(
-                onTap: () {
-                  planController.paymentIndex(1);
-                },
-                child: Container(
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 2, color: Colors.grey.withOpacity(0.6))
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Cash",
-                              style: primaryFont.copyWith(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                planController.paymentIndex(1);
-                              },
-                              child: Container(
-                                height: 20,
-                                width: 20,
-                                decoration: BoxDecoration(
-                                    color:
-                                        planController.paymentIndex.value == 1
-                                            ? Colors.green
-                                            : Colors.white,
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(color: Colors.black)),
-                                alignment: Alignment.center,
-                                child: const Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                  size: 15,
-                                ),
+           Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: GestureDetector(
+                  onTap: () {
+                    planController.paymentIndex(1);
+                  },
+                  child: Container(
+                    width: size.width,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 2, color: Colors.grey.withOpacity(0.6))
+                        ]),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Cash",
+                                style: primaryFont.copyWith(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               ),
-                            )
-                          ],
-                        )
-                      ],
+                              GestureDetector(
+                                onTap: () {
+                                  planController.paymentIndex(1);
+                                },
+                                child: Container(
+                                  height: 20,
+                                  width: 20,
+                                  decoration: BoxDecoration(
+                                      color:
+                                          planController.paymentIndex.value == 1
+                                              ? Colors.green
+                                              : Colors.white,
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(color: Colors.black)),
+                                  alignment: Alignment.center,
+                                  child: const Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 15,
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -254,59 +280,62 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
               const SizedBox(
                 height: 20,
               ),
-              GestureDetector(
-                onTap: () {
-                  planController.paymentIndex(2);
-                },
-                child: Container(
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 2, color: Colors.grey.withOpacity(0.6))
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Card Swiping",
-                              style: primaryFont.copyWith(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                planController.paymentIndex(2);
-                              },
-                              child: Container(
-                                height: 20,
-                                width: 20,
-                                decoration: BoxDecoration(
-                                    color:
-                                        planController.paymentIndex.value == 2
-                                            ? Colors.green
-                                            : Colors.white,
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(color: Colors.black)),
-                                alignment: Alignment.center,
-                                child: const Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                  size: 15,
-                                ),
+               Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: GestureDetector(
+                  onTap: () {
+                    planController.paymentIndex(2);
+                  },
+                  child: Container(
+                    width: size.width,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 2, color: Colors.grey.withOpacity(0.6))
+                        ]),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Card Swiping",
+                                style: primaryFont.copyWith(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               ),
-                            )
-                          ],
-                        )
-                      ],
+                              GestureDetector(
+                                onTap: () {
+                                  planController.paymentIndex(2);
+                                },
+                                child: Container(
+                                  height: 20,
+                                  width: 20,
+                                  decoration: BoxDecoration(
+                                      color:
+                                          planController.paymentIndex.value == 2
+                                              ? Colors.green
+                                              : Colors.white,
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(color: Colors.black)),
+                                  alignment: Alignment.center,
+                                  child: const Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 15,
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -314,59 +343,62 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
               const SizedBox(
                 height: 20,
               ),
-              GestureDetector(
-                onTap: () {
-                  planController.paymentIndex(3);
-                },
-                child: Container(
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 2, color: Colors.grey.withOpacity(0.6))
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Net Banking",
-                              style: primaryFont.copyWith(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                planController.paymentIndex(3);
-                              },
-                              child: Container(
-                                height: 20,
-                                width: 20,
-                                decoration: BoxDecoration(
-                                    color:
-                                        planController.paymentIndex.value == 3
-                                            ? Colors.green
-                                            : Colors.white,
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(color: Colors.black)),
-                                alignment: Alignment.center,
-                                child: const Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                  size: 15,
-                                ),
+                Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: GestureDetector(
+                  onTap: () {
+                    planController.paymentIndex(3);
+                  },
+                  child: Container(
+                    width: size.width,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 2, color: Colors.grey.withOpacity(0.6))
+                        ]),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Net Banking",
+                                style: primaryFont.copyWith(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               ),
-                            )
-                          ],
-                        )
-                      ],
+                              GestureDetector(
+                                onTap: () {
+                                  planController.paymentIndex(3);
+                                },
+                                child: Container(
+                                  height: 20,
+                                  width: 20,
+                                  decoration: BoxDecoration(
+                                      color:
+                                          planController.paymentIndex.value == 3
+                                              ? Colors.green
+                                              : Colors.white,
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(color: Colors.black)),
+                                  alignment: Alignment.center,
+                                  child: const Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 15,
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -378,7 +410,7 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap: () async{
+                    onTap: () async {
                       String? paymentMenthod;
 
                       if (planController.paymentIndex.value == 0) {
@@ -388,8 +420,6 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                       } else if (planController.paymentIndex.value == 2) {
                         paymentMenthod = "4";
                       }
-
-                       
 
                       if (planController.paymentIndex.value == 3) {
                         // Get.find<ProfileController>().payfoSubscription(
@@ -403,6 +433,7 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                             amount: widget.amount,
                             gstPercentage: widget.gstPercentage,
                             percentageAmount: widget.percentageAmount,
+                            planId: widget.id,
                             totalAmount: widget.totalAmount);
                       } else {
                         Get.find<HomeController>().addSubscriptionManual(
@@ -417,6 +448,7 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                                 : utrTextController.text,
                             gstPercentage: widget.gstPercentage,
                             percentageAmount: widget.percentageAmount,
+                            amount: widget.amount.toStringAsFixed(2),
                             totalAmount: widget.totalAmount);
 
                         Get.off(() => PaymentWaitingScreen());

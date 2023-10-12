@@ -594,6 +594,7 @@ class ProfileController extends GetxController {
           gstPercentage: gstPercentage,
           percentageAmount: percentageAmount,
           totalAmount: totalAmount,
+          amount: amount.toStringAsFixed(2),
           utrNumber: "");
 
       //need to give id

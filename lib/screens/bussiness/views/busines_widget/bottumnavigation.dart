@@ -44,7 +44,6 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
   int selectedpage = 0;
 @override
   void initState() {
-    
     // TODO: implement initState
     super.initState();
     setState(() {
@@ -52,8 +51,8 @@ class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
     });
   }
 
-  back(){
-    showDialog(
+                 back(){
+                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:bci/constands/app_fonts.dart';
+import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_plan_details_model.dart';
 import 'package:bci/models/get_plans_model.dart';
@@ -159,6 +160,7 @@ class PlanController extends GetxController {
       required double amount,
       required int id,
       required String gstPercentage,
+      required int planId,
       required String percentageAmount,
       required String totalAmount,
       String? packageName}) async {
@@ -175,12 +177,28 @@ class PlanController extends GetxController {
                     "<:---::---::---::---::---:Result from phonePe:---::---::---::---:>"),
                 print(val),
                 if (val!["status"] == "SUCCESS")
-                  {print("<<<<<<<<payment is Success>>>>>>>>")}
+                  {
+                    print("<<<<<<<<payment is Success>>>>>>>>"),
+                    Get.find<HomeController>().addSubscription(
+                        planId: planId,
+                        customerId:
+                            Get.find<ProfileController>().profileData.first.id,
+                        paymentMenthod: "5",
+                        utrNumber: "",
+                        gstPercentage: gstPercentage,
+                        percentageAmount: percentageAmount,
+                        amount: amount.toStringAsFixed(2),
+                        totalAmount: totalAmount)
+                  }
+                else
+                  {
+                    print("<<<<<<<<payment is Failed>>>>>>>>"),
+                  },
               })
           .catchError((error) {
         // handleError(error);
         print(
-            "<:---::---:1:---:1:---:1:---:Error on phonePe:---:1:---:1:---:1:---:>");
+            "<:---::---:1:---:1:---:1:---:_Error_on_phonePe_:---:1:---:1:---:1:---:>");
         return <dynamic>{};
       });
     } catch (error) {
@@ -197,6 +215,7 @@ class PlanController extends GetxController {
     required String gstPercentage,
     required String percentageAmount,
     required String totalAmount,
+    required int planId,
   }) async {
     var random = Random();
 
@@ -265,6 +284,7 @@ class PlanController extends GetxController {
         id: id,
         percentageAmount: percentageAmount,
         totalAmount: totalAmount,
+        planId: planId,
         packageName: "com.phonepe.app");
   }
 }
