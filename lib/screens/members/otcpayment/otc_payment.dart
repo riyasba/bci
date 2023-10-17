@@ -39,7 +39,7 @@ class _OtcPaymentState extends State<OtcPayment> {
   void initState() {
     super.initState();
     planController.init(
-        "PRODUCTION", "com.memberapp.bci", "M1FTWHQF8C06", true);
+        "PRODUCTION", "00b93714fc7e4918828632a8a3edf3f1", "M1FTWHQF8C06", true);
   }
 
   @override
@@ -219,11 +219,11 @@ class _OtcPaymentState extends State<OtcPayment> {
                 print(
                     ">>>>>>>>>>>>>>>>>..............payment start..........>>>>>>>>>>${widget.plansData.id}");
 
-                        bool isValid = await planController.checkUserPlan();
+                // bool isValid = await planController.checkUserPlan();
+                bool isValid = true;
 
-
-                        if(isValid){
-                        Get.to(() => PaymentScreenView(
+                if (isValid) {
+                  Get.to(() => PaymentScreenView(
                         id: widget.plansData.id,
                         amount: double.parse(widget.plansData.saleAmount),
                         gstPercentage: widget.plansData.gst,
@@ -232,9 +232,7 @@ class _OtcPaymentState extends State<OtcPayment> {
                         totalAmount:
                             widget.plansData.totalAmount.toStringAsFixed(2),
                       ));
-               }
-
-                
+                }
 
                 // profileController.payUseingEaseBuzzSubs(
                 //     id: widget.plansData.id,

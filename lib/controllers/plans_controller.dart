@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:bci/constands/app_fonts.dart';
@@ -142,7 +143,9 @@ class PlanController extends GetxController {
         .then((val) => {
               // result = 'PhonePe SDK Initialized - $val';
               print("-------------------->> value on init"),
-              print(val.toString())
+              print(val.toString()),
+              Get.rawSnackbar(
+                  message: val.toString(), backgroundColor: Colors.red)
             })
         .catchError((error) {
       print(error);
@@ -176,6 +179,8 @@ class PlanController extends GetxController {
                 print(
                     "<:---::---::---::---::---:Result from phonePe:---::---::---::---:>"),
                 print(val),
+                 Get.rawSnackbar(
+                  message: val.toString(), backgroundColor: Colors.red),
                 if (val!["status"] == "SUCCESS")
                   {
                     print("<<<<<<<<payment is Success>>>>>>>>"),
@@ -223,17 +228,21 @@ class PlanController extends GetxController {
 
     var signature = await PhonePePaymentSdk.getPackageSignatureForAndroid();
 
-    print("%%%%%%%%%%%%%%%%%%%%%%%%Signature%%%%%%%%%%%%%%%%%%%%%start");
+    print("-New-%%%%%%%%%%%%%%%%%%%%%%%%Signature%%%%%%%%%%%%%%%%%%%%%start");
     print(signature);
+    print((double.parse(totalAmount) * 100).round().toString());
     print("end%%%%%%%%%%%%%%%%%%%%%%%%Signature%%%%%%%%%%%%%%%%%%%%%");
+
+    print(":::::::::::Amount -->> ${(double.parse(totalAmount) * 100).round().toString()}");
 
     var resPond = {
       "merchantId": "M1FTWHQF8C06",
       "merchantTransactionId": "transacti_$randomInt",
       "merchantUserId": "90050770",
-      "amount": "1000",
+      // "amount": (double.parse(totalAmount) * 100).round().toString(),
+      "amount": 100,
       "mobileNumber": "7907556867",
-      "callbackUrl": "https://webhook.site/callback-url",
+      "callbackUrl": "https://www.portal.bcipvtltd.com",
       "paymentInstrument": {
         "type": "UPI_INTENT",
         "targetApp": "com.phonepe.app"
@@ -276,7 +285,7 @@ class PlanController extends GetxController {
     startPGTransaction(
         apiEndPoint: apiEndPoint,
         body: base64String,
-        callback: "https://www.portal.bcipvtltd.com",
+        callback: "",
         checksum: checksum,
         headers: pgHeaders,
         amount: amount,

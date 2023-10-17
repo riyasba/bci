@@ -28,7 +28,6 @@ class PaymentScreenView extends StatefulWidget {
 
 class _PaymentScreenViewState extends State<PaymentScreenView> {
   final planController = Get.find<PlanController>();
-
   var utrTextController = TextEditingController();
 
   @override
