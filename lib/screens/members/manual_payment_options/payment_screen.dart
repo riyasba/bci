@@ -120,7 +120,8 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                              blurRadius: 2, color: Colors.grey.withOpacity(0.6))
+                              blurRadius: 2,
+                              color: Colors.grey.withOpacity(0.6))
                         ]),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -216,7 +217,7 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
               const SizedBox(
                 height: 20,
               ),
-           Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: GestureDetector(
                   onTap: () {
@@ -229,7 +230,8 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                              blurRadius: 2, color: Colors.grey.withOpacity(0.6))
+                              blurRadius: 2,
+                              color: Colors.grey.withOpacity(0.6))
                         ]),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -279,7 +281,7 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
               const SizedBox(
                 height: 20,
               ),
-               Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: GestureDetector(
                   onTap: () {
@@ -292,7 +294,8 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                              blurRadius: 2, color: Colors.grey.withOpacity(0.6))
+                              blurRadius: 2,
+                              color: Colors.grey.withOpacity(0.6))
                         ]),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -342,7 +345,7 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
               const SizedBox(
                 height: 20,
               ),
-                Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: GestureDetector(
                   onTap: () {
@@ -355,7 +358,8 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                              blurRadius: 2, color: Colors.grey.withOpacity(0.6))
+                              blurRadius: 2,
+                              color: Colors.grey.withOpacity(0.6))
                         ]),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -427,7 +431,15 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                         //     gstPercentage: widget.gstPercentage,
                         //     percentageAmount: widget.percentageAmount,
                         //     totalAmount: widget.totalAmount);
-                        planController.phonePePayment(
+                        // planController.phonePePayment(
+                        //     id: widget.id,
+                        //     amount: widget.amount,
+                        //     gstPercentage: widget.gstPercentage,
+                        //     percentageAmount: widget.percentageAmount,
+                        //     planId: widget.id,
+                        //     totalAmount: widget.totalAmount);
+
+                        planController.initiatePayment(
                             id: widget.id,
                             amount: widget.amount,
                             gstPercentage: widget.gstPercentage,

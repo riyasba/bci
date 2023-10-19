@@ -11,6 +11,8 @@ import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/screens/members/holiday/controllers/holidaycontroller.dart';
 import 'package:bci/screens/members/manual_payment_options/google_pay_screen.dart';
 import 'package:bci/screens/members/members%20widgets/member_bottumbavigation.dart';
+import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
+import 'package:bci/screens/members/otcpayment/payment_failed_screen.dart';
 import 'package:bci/screens/no_internet_screen.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -132,7 +134,7 @@ firebaseNotification() async {
 
 Future<void> checkForUpdate() async {
   print(
-      "************************************On update*******************************************");
+      "******-__-***-__-***-__-***_-***-_****************---On update---*******************************************");
   InAppUpdate.checkForUpdate().then((info) {
     print(
         "%%%%%%%%%%%%%%% ------- ${info.availableVersionCode} -------- %%%%%%%%%%%%%%%");
@@ -181,7 +183,7 @@ class MyApp extends StatelessWidget {
           ),
           home: const splash(),
           // home: const PaymentScreenView(),
-          // home: PaymentWaitingScreen(),
+          // home: SucessfulScreenOtc(),
         );
       },
     );

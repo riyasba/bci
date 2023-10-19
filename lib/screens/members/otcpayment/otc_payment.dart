@@ -38,8 +38,8 @@ class _OtcPaymentState extends State<OtcPayment> {
   @override
   void initState() {
     super.initState();
-    planController.init(
-        "PRODUCTION", "00b93714fc7e4918828632a8a3edf3f1", "M1FTWHQF8C06", true);
+    // planController.init(
+    //     "PRODUCTION", "00b93714fc7e4918828632a8a3edf3f1", "M1FTWHQF8C06", true);
   }
 
   @override
@@ -219,8 +219,8 @@ class _OtcPaymentState extends State<OtcPayment> {
                 print(
                     ">>>>>>>>>>>>>>>>>..............payment start..........>>>>>>>>>>${widget.plansData.id}");
 
-                // bool isValid = await planController.checkUserPlan();
-                bool isValid = true;
+                bool isValid = await planController.checkUserPlan();
+                // bool isValid = true;
 
                 if (isValid) {
                   Get.to(() => PaymentScreenView(

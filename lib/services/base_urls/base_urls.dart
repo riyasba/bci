@@ -279,4 +279,16 @@ abstract class BaseApiService {
   //plan check api url
   final String planCheckApi =
       "https://portal.bcipvtltd.com/api/auth/plan_trans_check";
+
+  //support admin details
+  final String paymentInitiateURL =
+      "https://www.portal.bcipvtltd.com/api/pay_phonepay";
+
+  //plan check api url
+  final String paymentStatusURL =
+      "https://www.portal.bcipvtltd.com/api/checkPaymentStatus";
+
+
+
+  
 }

@@ -94,6 +94,8 @@ dependencies:
   image_cropper: ^4.0.1
   phonepe_payment_sdk: ^1.0.1
   crypto: ^3.0.3
+  webview_flutter: ^3.0.4
+  
 
 
 dev_dependencies:

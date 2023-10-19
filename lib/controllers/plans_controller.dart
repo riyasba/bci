@@ -7,7 +7,12 @@ import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_plan_details_model.dart';
 import 'package:bci/models/get_plans_model.dart';
+import 'package:bci/models/initiate_payment_model.dart';
 import 'package:bci/models/slider_model.dart';
+import 'package:bci/screens/members/manual_payment_options/phone_pe_web_view_screen.dart';
+import 'package:bci/screens/members/otcpayment/payment_failed_screen.dart';
+import 'package:bci/services/network/payment_api_services/intiate_payment_api_services.dart';
+import 'package:bci/services/network/payment_api_services/payment_status_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/add_subscription_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/check_for_previous_plan.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plan_details_api_services.dart';
@@ -37,6 +42,12 @@ class PlanController extends GetxController {
   RxInt paymentIndex = 99.obs;
 
   CheckPlanApiServices checkPlanApiServices = CheckPlanApiServices();
+
+  InitiatePaymentApiServices initiatePaymentApiServices =
+      InitiatePaymentApiServices();
+
+  PaymentResponseApiServices paymentResponseApiServices =
+      PaymentResponseApiServices();
 
   getSlider() async {
     dio.Response<dynamic> response = await getSliderApiServices.getSlider();
@@ -171,16 +182,16 @@ class PlanController extends GetxController {
       var response = PhonePePaymentSdk.startPGTransaction(
           body, callback, checksum, headers, apiEndPoint, packageName);
 
-      // print(
-      //     "<:---::---::---::---::---:Result from phonePe:---::---::---::---:>");
-      // print(response);
+      print(
+          "<:---::---::---::---::---:Result from phonePe:---::---::---::---:>");
+      print(response);
       response
           .then((val) => {
                 print(
                     "<:---::---::---::---::---:Result from phonePe:---::---::---::---:>"),
                 print(val),
-                 Get.rawSnackbar(
-                  message: val.toString(), backgroundColor: Colors.red),
+                Get.rawSnackbar(
+                    message: val.toString(), backgroundColor: Colors.red),
                 if (val!["status"] == "SUCCESS")
                   {
                     print("<<<<<<<<payment is Success>>>>>>>>"),
@@ -233,14 +244,15 @@ class PlanController extends GetxController {
     print((double.parse(totalAmount) * 100).round().toString());
     print("end%%%%%%%%%%%%%%%%%%%%%%%%Signature%%%%%%%%%%%%%%%%%%%%%");
 
-    print(":::::::::::Amount -->> ${(double.parse(totalAmount) * 100).round().toString()}");
+    print(
+        ":::::::::::Amount -->> ${(double.parse(totalAmount) * 100).round()}");
 
     var resPond = {
       "merchantId": "M1FTWHQF8C06",
       "merchantTransactionId": "transacti_$randomInt",
       "merchantUserId": "90050770",
       // "amount": (double.parse(totalAmount) * 100).round().toString(),
-      "amount": 100,
+      "amount": (double.parse(totalAmount) * 100).round(),
       "mobileNumber": "7907556867",
       "callbackUrl": "https://www.portal.bcipvtltd.com",
       "paymentInstrument": {
@@ -273,7 +285,7 @@ class PlanController extends GetxController {
     // String checksum = sha256(base64Body + apiEndPoint + salt) + ### + saltIndex;
 
     print(
-        "<-<->------<->----------<->---------Sha256 algorithm ---------<->---------<->-------<->->");
+        "<-<->------<->----------<->--------- Sha256 algorithm ---------<->---------<->-------<->->");
 
     print(checksum);
 
@@ -295,6 +307,66 @@ class PlanController extends GetxController {
         totalAmount: totalAmount,
         planId: planId,
         packageName: "com.phonepe.app");
+  }
+
+  initiatePayment(
+      {required double amount,
+      required int id,
+      required String gstPercentage,
+      required String percentageAmount,
+      required String totalAmount,
+      required int planId}) async {
+    dio.Response<dynamic> response =
+        await initiatePaymentApiServices.initiatePayment(
+            userId: Get.find<ProfileController>().profileData.first.id,
+            totalAmount: totalAmount,
+            status: "subscription");
+
+    if (response.statusCode == 200) {
+      IninitiatePaymentModel ininitiatePaymentModel =
+          IninitiatePaymentModel.fromJson(response.data);
+
+      Get.to(() => PaymentWebView(
+            amount: amount,
+            gstPercentage: gstPercentage,
+            id: id,
+            percentageAmount: percentageAmount,
+            planId: planId,
+            totalAmount: totalAmount,
+            url:
+                ininitiatePaymentModel.data.instrumentResponse.redirectInfo.url,
+            referenceId: ininitiatePaymentModel.data.merchantTransactionId,
+          ));
+    }
+  }
+
+  checkPhonePeStatus(
+      {required String refernceID,
+      required double amount,
+      required int id,
+      required String gstPercentage,
+      required String percentageAmount,
+      required String totalAmount,
+      required int planId}) async {
+    dio.Response<dynamic> response = await paymentResponseApiServices
+        .paymentResponseApi(merchantId: refernceID);
+
+    if (response.data["code"] == "PAYMENT_SUCCESS") {
+      print("<<<<<<<<payment is Success>>>>>>>>");
+      Get.find<HomeController>().addSubscription(
+          planId: planId,
+          customerId: Get.find<ProfileController>().profileData.first.id,
+          paymentMenthod: "5",
+          utrNumber: "",
+          gstPercentage: gstPercentage,
+          percentageAmount: percentageAmount,
+          amount: amount.toStringAsFixed(2),
+          totalAmount: totalAmount);
+    } else {
+      print("<<<<<<<<payment is Failed>>>>>>>>");
+
+      Get.to(() => PaymentFailedScreen());
+    }
   }
 }
 

@@ -1,7 +1,7 @@
-
 import 'package:bci/screens/members/members%20widgets/member_bottumbavigation.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/My_account.dart';
 import 'package:bci/screens/members/wallet/Wallet_members.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,8 +10,8 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../constands/constands.dart';
 //import 'holiday_home.dart';
 
-class SucessfulScreenOtc extends StatelessWidget {
-  const SucessfulScreenOtc({super.key});
+class PaymentFailedScreen extends StatelessWidget {
+  const PaymentFailedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class SucessfulScreenOtc extends StatelessWidget {
             },
             child: Image.asset('assets/images/Icon awesome-arrow-right.png')),
         title: Text(
-          'Payment Completed',
+          'Payment Status',
           style: TextStyle(
               fontSize: 27.sp, fontWeight: FontWeight.w800, color: kblue),
         ),
@@ -34,21 +34,25 @@ class SucessfulScreenOtc extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/accept-icon.png'),
-
-            const SizedBox(
-              height: 30,
+            Container(
+              height: 200,
+              width: 200,
+              child: const Icon(
+                CupertinoIcons.xmark_circle_fill,
+                color: Colors.red,
+                size: 200,
+              ),
             ),
             Text(
-              'Payment Successful',
+              'Payment Failed',
               style: TextStyle(
                   color: kblue, fontSize: 28.sp, fontWeight: FontWeight.w700),
             ),
             ksizedbox10,
             Text(
-              'Thank you! Your payment is complete',
+              'Your payment is failed',
               style: TextStyle(
-                  fontSize: 20.sp, fontWeight: FontWeight.w600, color: kblue),
+                  fontSize: 22.sp, fontWeight: FontWeight.w600, color: kblue),
             ),
             ksizedbox40,
             ksizedbox40,
@@ -76,7 +80,7 @@ class SucessfulScreenOtc extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Done',
+                  'Cancel',
                   style: TextStyle(
                       fontSize: 17.sp,
                       color: Colors.white,
