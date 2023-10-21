@@ -80,8 +80,12 @@ class PlanController extends GetxController {
     return isValid;
   }
 
+  RxBool isLoading = false.obs;
+
   getplansList() async {
+    isLoading(true);
     dio.Response<dynamic> response = await getPlansApiServices.getPlans();
+    isLoading(false);
     if (response.statusCode == 200) {
       PlansModel plansModel = PlansModel.fromJson(response.data);
       plansdataList = plansModel.data;
@@ -155,8 +159,8 @@ class PlanController extends GetxController {
               // result = 'PhonePe SDK Initialized - $val';
               print("-------------------->> value on init"),
               print(val.toString()),
-              Get.rawSnackbar(
-                  message: val.toString(), backgroundColor: Colors.red)
+              // Get.rawSnackbar(
+              //     message: val.toString(), backgroundColor: Colors.red)
             })
         .catchError((error) {
       print(error);
@@ -168,6 +172,7 @@ class PlanController extends GetxController {
   startPGTransaction(
       {required String body,
       required String callback,
+      required String referanceId,
       required String checksum,
       required Map<String, String> headers,
       required String apiEndPoint,
@@ -190,21 +195,29 @@ class PlanController extends GetxController {
                 print(
                     "<:---::---::---::---::---:Result from phonePe:---::---::---::---:>"),
                 print(val),
-                Get.rawSnackbar(
-                    message: val.toString(), backgroundColor: Colors.red),
+                // Get.rawSnackbar(
+                //     message: val.toString(), backgroundColor: Colors.red),
                 if (val!["status"] == "SUCCESS")
                   {
                     print("<<<<<<<<payment is Success>>>>>>>>"),
-                    Get.find<HomeController>().addSubscription(
-                        planId: planId,
-                        customerId:
-                            Get.find<ProfileController>().profileData.first.id,
-                        paymentMenthod: "5",
-                        utrNumber: "",
+                    checkPhonePeStatus(
+                        refernceID: referanceId,
+                        amount: amount,
+                        id: planId,
                         gstPercentage: gstPercentage,
                         percentageAmount: percentageAmount,
-                        amount: amount.toStringAsFixed(2),
-                        totalAmount: totalAmount)
+                        totalAmount: totalAmount,
+                        planId: planId),
+                    // Get.find<HomeController>().addSubscription(
+                    //     planId: planId,
+                    //     customerId:
+                    //         Get.find<ProfileController>().profileData.first.id,
+                    //     paymentMenthod: "5",
+                    //     utrNumber: "",
+                    //     gstPercentage: gstPercentage,
+                    //     percentageAmount: percentageAmount,
+                    //     amount: amount.toStringAsFixed(2),
+                    //     totalAmount: totalAmount)
                   }
                 else
                   {
@@ -231,6 +244,7 @@ class PlanController extends GetxController {
     required String gstPercentage,
     required String percentageAmount,
     required String totalAmount,
+    required String packageName,
     required int planId,
   }) async {
     var random = Random();
@@ -255,10 +269,7 @@ class PlanController extends GetxController {
       "amount": (double.parse(totalAmount) * 100).round(),
       "mobileNumber": "7907556867",
       "callbackUrl": "https://www.portal.bcipvtltd.com",
-      "paymentInstrument": {
-        "type": "UPI_INTENT",
-        "targetApp": "com.phonepe.app"
-      },
+      "paymentInstrument": {"type": "UPI_INTENT", "targetApp": packageName},
       "deviceContext": {"deviceOS": "ANDROID"}
     };
 
@@ -295,6 +306,7 @@ class PlanController extends GetxController {
     Map<String, String> pgHeaders = {"Content-Type": "application/json"};
 
     startPGTransaction(
+        referanceId: "transacti_$randomInt",
         apiEndPoint: apiEndPoint,
         body: base64String,
         callback: "",
@@ -306,7 +318,7 @@ class PlanController extends GetxController {
         percentageAmount: percentageAmount,
         totalAmount: totalAmount,
         planId: planId,
-        packageName: "com.phonepe.app");
+        packageName: packageName);
   }
 
   initiatePayment(

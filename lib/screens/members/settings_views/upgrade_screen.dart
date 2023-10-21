@@ -83,7 +83,11 @@ class _UpgradeScreenState extends State<UpgradeScreen> {
             ),
           )),
       body: GetBuilder<PlanController>(builder: (_) {
-        return plansController.plansdataList.isEmpty
+        return plansController.isLoading.isTrue ? Center(
+          child: CircularProgressIndicator(
+               color: kOrange,
+          ),
+        ): plansController.plansdataList.isEmpty
             ? Container(
                 child: Center(
                   child: Column(

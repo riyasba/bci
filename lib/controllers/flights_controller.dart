@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/flight_booking_models/air_get_ssr_model.dart';
 import 'package:bci/models/flight_booking_models/air_port_search_model.dart';
 import 'package:bci/models/flight_booking_models/air_repricing_model.dart';
@@ -11,9 +12,13 @@ import 'package:bci/models/flight_booking_models/booking_model.dart';
 import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
 import 'package:bci/models/flight_booking_models/get_flight_booking_history.dart';
 import 'package:bci/models/flight_booking_models/passenger_model.dart';
+import 'package:bci/models/initiate_payment_model.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_booking_success_page.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
 import 'package:bci/screens/members/flight_booking_screens/par_nyc_screen.dart';
+import 'package:bci/screens/members/manual_payment_options/phone_pe_payment_flight.dart';
+import 'package:bci/screens/members/manual_payment_options/phone_pe_web_view_screen.dart';
+import 'package:bci/screens/members/otcpayment/payment_failed_screen.dart';
 import 'package:bci/services/network/flight_booking_api_services/add_flight_booking_history.dart';
 import 'package:bci/services/network/flight_booking_api_services/air_add_payment_api_services.dart';
 import 'package:bci/services/network/flight_booking_api_services/air_add_ssr_api_services.dart';
@@ -24,6 +29,8 @@ import 'package:bci/services/network/flight_booking_api_services/air_ticket_book
 import 'package:bci/services/network/flight_booking_api_services/airport_search_api_services.dart';
 import 'package:bci/services/network/flight_booking_api_services/get_flight_booking_list.dart';
 import 'package:bci/services/network/flight_booking_api_services/get_seat_map_api_services.dart';
+import 'package:bci/services/network/payment_api_services/intiate_payment_api_services.dart';
+import 'package:bci/services/network/payment_api_services/payment_status_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/ease_buzz_payment_api_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -260,31 +267,28 @@ class FlightsController extends GetxController {
     } else {}
   }
 
-
-   airCancelTicket({required String refernceNo}) async {
+  airCancelTicket({required String refernceNo}) async {
     dio.Response<dynamic> response = await airRePrintingServices
         .airRePrintingApi(clientReferneNo: "", refrenceNo: refernceNo);
 
     if (response.statusCode == 200) {
       AirReprintModel airReprintModel = AirReprintModel.fromJson(response.data);
-       
-  dio.Response<dynamic> cancelresponse = await airCancelApiServices.airCancelApiServices(
-    Airlinepnr: airReprintModel.airPnrDetails.first.airlinePnr, 
-    Refno: refernceNo, 
-    Cancelcode: airReprintModel.airPnrDetails.first.crsCode,
-     ReqRemarks: airReprintModel.remark, 
-     CancellationType: airReprintModel.airPnrDetails.first.crsPnr, 
-     Imeinumber: '64654546546546');
-    if(cancelresponse.statusCode==200){
-         Get.rawSnackbar(
-          message: "Cancellation sucessfully ", 
-          backgroundColor: Colors.green);
-    }
+
+      dio.Response<dynamic> cancelresponse =
+          await airCancelApiServices.airCancelApiServices(
+              Airlinepnr: airReprintModel.airPnrDetails.first.airlinePnr,
+              Refno: refernceNo,
+              Cancelcode: airReprintModel.airPnrDetails.first.crsCode,
+              ReqRemarks: airReprintModel.remark,
+              CancellationType: airReprintModel.airPnrDetails.first.crsPnr,
+              Imeinumber: '64654546546546');
+      if (cancelresponse.statusCode == 200) {
+        Get.rawSnackbar(
+            message: "Cancellation sucessfully ",
+            backgroundColor: Colors.green);
+      }
     } else {}
   }
-
-
-
 
   static MethodChannel _channel = MethodChannel('easebuzz');
   EaseBuzzTokenApiService easeBuzzApi = EaseBuzzTokenApiService();
@@ -365,9 +369,58 @@ class FlightsController extends GetxController {
     }
   }
 
+  InitiatePaymentApiServices initiatePaymentApiServices =
+      InitiatePaymentApiServices();
+
+  PaymentResponseApiServices paymentResponseApiServices =
+      PaymentResponseApiServices();
+
+  initiatePayment(
+      {required double amount, required BookingModel bookingModel}) async {
+    dio.Response<dynamic> response =
+        await initiatePaymentApiServices.initiatePayment(
+            userId: Get.find<ProfileController>().profileData.first.id,
+            totalAmount: amount.toStringAsFixed(2),
+            status: "flight");
+
+    if (response.statusCode == 200) {
+      IninitiatePaymentModel ininitiatePaymentModel =
+          IninitiatePaymentModel.fromJson(response.data);
+
+      Get.to(() => PaymentWebViewFlight(
+            amount: amount,
+            bookingModel: bookingModel,
+            url:
+                ininitiatePaymentModel.data.instrumentResponse.redirectInfo.url,
+            referenceId: ininitiatePaymentModel.data.merchantTransactionId,
+          ));
+    }
+  }
+
+  checkPhonePeStatus(
+      {required String refernceID,
+      required double amount,
+      required BookingModel bookingModel}) async {
+    dio.Response<dynamic> response = await paymentResponseApiServices
+        .paymentResponseApi(merchantId: refernceID);
+
+    if (response.data["code"] == "PAYMENT_SUCCESS") {
+      print("<<<<<<<<payment is Success>>>>>>>>");
+      //need to give id
+      String transactionId = "";
+      Get.to(() => const FlightLoadingPage());
+
+      bookAirTicket(bookingModel: bookingModel, transactionId: transactionId);
+    } else {
+      print("<<<<<<<<payment is Failed>>>>>>>>");
+
+      Get.to(() => PaymentFailedScreen());
+    }
+  }
+
   Map<String, String> getArguments(var amount) {
     var randomStr = DateTime.now().microsecondsSinceEpoch.toString();
-      Map<String, String> map = {
+    Map<String, String> map = {
       "version": "1",
       "txnRefNo": "ORD$randomStr", // Should change on every request
       "amount": "$amount",
@@ -1083,7 +1136,7 @@ class FlightsController extends GetxController {
     return flightKey;
   }
 
-  List<SsrDetail> ssrDetailsList = []; 
+  List<SsrDetail> ssrDetailsList = [];
 
   getFightSSRDetails({
     required String flightKey,

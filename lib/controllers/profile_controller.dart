@@ -4,11 +4,16 @@ import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/models/get_coupons_model.dart';
+import 'package:bci/models/initiate_payment_model.dart';
 import 'package:bci/models/member_profile_model.dart';
 import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
+import 'package:bci/screens/members/manual_payment_options/phone_pe_bus_booking_model.dart';
+import 'package:bci/screens/members/manual_payment_options/phone_pe_service_booking.dart';
 import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
+import 'package:bci/services/network/payment_api_services/intiate_payment_api_services.dart';
+import 'package:bci/services/network/payment_api_services/payment_status_api_services.dart';
 import 'package:bci/services/network/profile_api_services/our_coupons_api_service.dart';
 import 'package:bci/services/network/profile_api_services/profile_api_services.dart';
 import 'package:bci/services/network/profile_api_services/profile_pic_update_api_services.dart';
@@ -29,6 +34,7 @@ import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../screens/members/otcpayment/payment_failed_screen.dart';
 import '../services/network/profile_api_services/update_residencial_address_api_services.dart';
 
 class ProfileController extends GetxController {
@@ -405,6 +411,83 @@ class ProfileController extends GetxController {
           colorText: Colors.white,
           backgroundColor: Colors.red,
           snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+
+  InitiatePaymentApiServices initiatePaymentApiServices =
+      InitiatePaymentApiServices();
+
+  PaymentResponseApiServices paymentResponseApiServices =
+      PaymentResponseApiServices();
+
+  initiatePayment({required double amount}) async {
+    dio.Response<dynamic> response =
+        await initiatePaymentApiServices.initiatePayment(
+            userId: Get.find<ProfileController>().profileData.first.id,
+            totalAmount: amount.toStringAsFixed(2),
+            status: "Services");
+
+    if (response.statusCode == 200) {
+      IninitiatePaymentModel ininitiatePaymentModel =
+          IninitiatePaymentModel.fromJson(response.data);
+
+      Get.to(() => PaymentWebViewServices(
+            amount: amount,
+            url:
+                ininitiatePaymentModel.data.instrumentResponse.redirectInfo.url,
+            referenceId: ininitiatePaymentModel.data.merchantTransactionId,
+          ));
+    }
+  }
+
+  checkPhonePeStatus(
+      {required String refernceID,
+      required double amount,}) async {
+    dio.Response<dynamic> response = await paymentResponseApiServices
+        .paymentResponseApi(merchantId: refernceID);
+
+    if (response.data["code"] == "PAYMENT_SUCCESS") {
+      final homeController = Get.find<HomeController>();
+      print(">>-------------->>---------->>");
+      for (int i = 0; i < homeController.cartListData.length; i++) {
+        homeController.addBooking(
+            serviceid: homeController.cartListData[i].serviceId.toString(),
+            cartid: homeController.cartListData[i].id.toString(),
+            qty: homeController.cartListData[i].quantity.toString(),
+            offerOrCoupon: "",
+            couponcode: "",
+            amount: homeController.cartListData[i].price,
+            bookDateTime: homeController.cartListData[i].bookDateTime);
+      }
+
+      Get.offAll(
+        () => LoadingWidgets(),
+      );
+
+      // Get.find<HomeController>().addSubscription(
+      //     planId: id,
+      //     customerId: Get.find<ProfileController>().profileData.first.id);
+
+      //need to give id
+      Get.snackbar(
+        "Payment Successfully Paid",
+        "",
+        icon: const Icon(Icons.check_circle_outline_outlined,
+            color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+    } else {
+      print("<<<<<<<<payment is Failed>>>>>>>>");
+
+      Get.to(() => PaymentFailedScreen());
     }
   }
 

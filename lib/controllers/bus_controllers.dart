@@ -1,17 +1,23 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:bci/constands/app_fonts.dart';
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/bus_booking_models/bus_booking_history_model.dart';
 import 'package:bci/models/bus_booking_models/bus_cityList_model.dart';
 import 'package:bci/models/bus_booking_models/bus_requery_model.dart';
 import 'package:bci/models/bus_booking_models/bus_seat_map_model.dart';
 import 'package:bci/models/bus_booking_models/pax_list_model.dart';
 import 'package:bci/models/bus_booking_models/search_bus_model.dart';
+import 'package:bci/models/flight_booking_models/booking_model.dart';
+import 'package:bci/models/initiate_payment_model.dart';
 
 import 'package:bci/screens/members/bus/bus_booking_success.dart';
 import 'package:bci/screens/members/bus/bus_details.dart';
 
 import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
+import 'package:bci/screens/members/manual_payment_options/phone_pe_bus_booking_model.dart';
+import 'package:bci/screens/members/manual_payment_options/phone_pe_payment_flight.dart';
+import 'package:bci/screens/members/otcpayment/payment_failed_screen.dart';
 import 'package:bci/services/network/bus_api_services/add_bus_booking_history.dart';
 import 'package:bci/services/network/bus_api_services/bus_booking_add_payment_api_services.dart';
 import 'package:bci/services/network/bus_api_services/bus_cityList_api_service.dart';
@@ -21,6 +27,8 @@ import 'package:bci/services/network/bus_api_services/bus_temp_booking.dart';
 import 'package:bci/services/network/bus_api_services/bus_ticketing_api_services.dart';
 import 'package:bci/services/network/bus_api_services/get_bus_booking_history_api_services.dart';
 import 'package:bci/services/network/bus_api_services/search_bus_api_service.dart';
+import 'package:bci/services/network/payment_api_services/intiate_payment_api_services.dart';
+import 'package:bci/services/network/payment_api_services/payment_status_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/ease_buzz_payment_api_services.dart';
 
 import 'package:dio/dio.dart' as dio;
@@ -221,7 +229,7 @@ class BusController extends GetxController {
       if (response.data["Response_Header"]["Error_Desc"] == "SUCCESS") {
         var bookingRefernceNo = response.data["Booking_RefNo"];
 
-        payForBusBooking(
+        initiatePayment(
             amount: double.parse(amount), bookingRef: bookingRefernceNo);
 
         // payUseingEaseBuzzSubs(
@@ -312,6 +320,53 @@ class BusController extends GetxController {
           colorText: Colors.white,
           backgroundColor: Colors.red,
           snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+
+  InitiatePaymentApiServices initiatePaymentApiServices =
+      InitiatePaymentApiServices();
+
+  PaymentResponseApiServices paymentResponseApiServices =
+      PaymentResponseApiServices();
+
+  initiatePayment({required double amount, required String bookingRef}) async {
+    dio.Response<dynamic> response =
+        await initiatePaymentApiServices.initiatePayment(
+            userId: Get.find<ProfileController>().profileData.first.id,
+            totalAmount: amount.toStringAsFixed(2),
+            status: "Bus");
+
+    if (response.statusCode == 200) {
+      IninitiatePaymentModel ininitiatePaymentModel =
+          IninitiatePaymentModel.fromJson(response.data);
+
+      Get.to(() => PaymentWebViewBus(
+            amount: amount,
+            bookingRef: bookingRef,
+            url:
+                ininitiatePaymentModel.data.instrumentResponse.redirectInfo.url,
+            referenceId: ininitiatePaymentModel.data.merchantTransactionId,
+          ));
+    }
+  }
+
+  checkPhonePeStatus(
+      {required String refernceID,
+      required double amount,
+      required String bookingRef}) async {
+    dio.Response<dynamic> response = await paymentResponseApiServices
+        .paymentResponseApi(merchantId: refernceID);
+
+    if (response.data["code"] == "PAYMENT_SUCCESS") {
+      print("<<<<<<<<payment is Success>>>>>>>>");
+      //
+      //need to give id
+      Get.to(() => FlightLoadingPage());
+      busAddPayment(refernceNo: bookingRef, price: amount.toStringAsFixed(2));
+    } else {
+      print("<<<<<<<<payment is Failed>>>>>>>>");
+
+      Get.to(() => PaymentFailedScreen());
     }
   }
 
@@ -505,8 +560,8 @@ class BusController extends GetxController {
                                 const pw.EdgeInsets.only(left: 20, right: 20),
                             child: pw.Container(
                               height: 100,
-                              decoration:
-                                  const pw.BoxDecoration(color: PdfColors.grey100),
+                              decoration: const pw.BoxDecoration(
+                                  color: PdfColors.grey100),
                               child: pw.Padding(
                                 padding: const pw.EdgeInsets.only(
                                     left: 12, right: 12, top: 5, bottom: 5),
@@ -529,7 +584,8 @@ class BusController extends GetxController {
                                                 fontWeight: pw.FontWeight.bold),
                                           ),
                                           pw.Padding(
-                                            padding: const pw.EdgeInsets.only(top: 2),
+                                            padding: const pw.EdgeInsets.only(
+                                                top: 2),
                                             child: pw.Text(
                                               busRequeryModel
                                                   .paxDetails.first.paxName,
@@ -546,7 +602,8 @@ class BusController extends GetxController {
                                                 fontWeight: pw.FontWeight.bold),
                                           ),
                                           pw.Padding(
-                                            padding: const pw.EdgeInsets.only(top: 2),
+                                            padding: const pw.EdgeInsets.only(
+                                                top: 2),
                                             child: pw.Text(
                                               busRequeryModel.bookingRefNo,
                                               style: const pw.TextStyle(
@@ -622,7 +679,7 @@ class BusController extends GetxController {
                             ),
                           ),
                           pw.Padding(
-                            padding: const  pw.EdgeInsets.only(
+                            padding: const pw.EdgeInsets.only(
                                 left: 30, right: 30, top: 10),
                             child: pw.Column(
                               crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -644,11 +701,11 @@ class BusController extends GetxController {
                                                 fontWeight: pw.FontWeight.bold),
                                           ),
                                           pw.Padding(
-                                            padding:
-                                                pw.EdgeInsets.only(top: 5.5),
+                                            padding: const pw.EdgeInsets.only(
+                                                top: 5.5),
                                             child: pw.Text(
                                               busRequeryModel.busDetail.busType,
-                                              style: pw.TextStyle(
+                                              style: const pw.TextStyle(
                                                 fontSize: 13,
                                                 //fontWeight: pw.FontWeight.bold
                                               ),
@@ -666,12 +723,12 @@ class BusController extends GetxController {
                                                 fontWeight: pw.FontWeight.bold),
                                           ),
                                           pw.Padding(
-                                            padding:
-                                                pw.EdgeInsets.only(top: 5.5),
+                                            padding: const pw.EdgeInsets.only(
+                                                top: 5.5),
                                             child: pw.Text(
                                               busRequeryModel
                                                   .busDetail.departureTime,
-                                              style: pw.TextStyle(
+                                              style: const pw.TextStyle(
                                                 fontSize: 13,
                                                 //fontWeight: pw.FontWeight.bold
                                               ),

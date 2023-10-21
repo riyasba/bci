@@ -1,12 +1,18 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/models/upi_apps_model.dart';
 import 'package:bci/screens/members/manual_payment_options/payment_waiting_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:phonepe_payment_sdk/phonepe_payment_sdk.dart';
 
 class PaymentScreenView extends StatefulWidget {
   double amount;
@@ -29,6 +35,66 @@ class PaymentScreenView extends StatefulWidget {
 class _PaymentScreenViewState extends State<PaymentScreenView> {
   final planController = Get.find<PlanController>();
   var utrTextController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    getInstalledUpiAppsForAndroid();
+  }
+
+  var otherUpiApps = UPIApp("others", "others", "0.0.0");
+
+  List<UPIApp> upiAppsList = [];
+
+  void getInstalledUpiAppsForAndroid() {
+    if (Platform.isAndroid) {
+      PhonePePaymentSdk.getInstalledUpiAppsForAndroid()
+          .then((apps) => {
+                setState(() {
+                  if (apps != null) {
+                    Iterable l = json.decode(apps);
+                    print("<---from apps--->");
+                    print(apps);
+
+                    List<UPIApp> upiApps = List<UPIApp>.from(
+                        l.map((model) => UPIApp.fromJson(model)));
+
+                    upiApps.add(otherUpiApps);
+
+                    upiAppsList = upiApps;
+                    String appString = '';
+                    for (var element in upiApps) {
+                      appString +=
+                          "${element.applicationName} ${element.version} ${element.packageName}";
+                    }
+                    // result = 'Installed Upi Apps - $appString';
+                    print('Installed Upi Apps - $appString');
+                  } else {
+                    print("'Installed Upi Apps - 0'");
+                    // result = 'Installed Upi Apps - 0';
+                  }
+                })
+              })
+          .catchError((error) {
+        return <dynamic>{};
+      });
+    }
+  }
+
+  getImages(String packageName) {
+    String imageLink = "assets/icons/upi (1).png";
+    if (packageName == "GPay") {
+      imageLink = "assets/icons/gpay.jpg";
+    } else if (packageName == "MobiKwik") {
+      imageLink = "assets/icons/mobiqwicks.png";
+    } else if (packageName == "PhonePe") {
+      imageLink = "assets/icons/phonePe.png";
+    } else if (packageName == "Paytm") {
+      imageLink = "assets/icons/Paytm.png";
+    }
+
+    return imageLink;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -370,7 +436,7 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Net Banking",
+                                "Net Banking / UPI",
                                 style: primaryFont.copyWith(
                                     color: Colors.black,
                                     fontSize: 16,
@@ -399,7 +465,104 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
                                 ),
                               )
                             ],
-                          )
+                          ),
+                          if (planController.paymentIndex.value == 3 &&
+                              widget.amount < 100000 &&
+                              upiAppsList.isNotEmpty)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                const Text("Select any UPI Apps"),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                GridView.builder(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                            mainAxisSpacing: 10,
+                                            crossAxisCount: 4),
+                                    itemCount: upiAppsList.length,
+                                    itemBuilder: (context, index) {
+                                      return InkWell(
+                                        onTap: () {
+                                          if (upiAppsList[index].packageName! ==
+                                              "others") {
+                                            planController.initiatePayment(
+                                                id: widget.id,
+                                                amount: widget.amount,
+                                                gstPercentage:
+                                                    widget.gstPercentage,
+                                                percentageAmount:
+                                                    widget.percentageAmount,
+                                                planId: widget.id,
+                                                totalAmount:
+                                                    widget.totalAmount);
+                                          } else {
+                                            planController.phonePePayment(
+                                                id: widget.id,
+                                                amount: widget.amount,
+                                                gstPercentage:
+                                                    widget.gstPercentage,
+                                                percentageAmount:
+                                                    widget.percentageAmount,
+                                                planId: widget.id,
+                                                totalAmount: widget.totalAmount,
+                                                packageName: upiAppsList[index]
+                                                    .packageName!);
+                                          }
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 55,
+                                              width: 55,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                        blurRadius: 2,
+                                                        color: Colors.grey
+                                                            .withOpacity(0.5))
+                                                  ]),
+                                              child: upiAppsList[index]
+                                                          .packageName! ==
+                                                      "others"
+                                                  ? const Icon(
+                                                      Icons.more_horiz_outlined)
+                                                  : Container(
+                                                    height: 40,
+                                                    width: 40,
+                                                    child: Image.asset(getImages(
+                                                        upiAppsList[index]
+                                                            .applicationName!)),
+                                                  ),
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              upiAppsList[index]
+                                                  .applicationName!,
+                                              style: primaryFont.copyWith(
+                                                  fontSize: 12,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                              ],
+                            ),
                         ],
                       ),
                     ),

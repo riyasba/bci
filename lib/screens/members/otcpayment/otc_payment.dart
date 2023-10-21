@@ -35,11 +35,18 @@ class _OtcPaymentState extends State<OtcPayment> {
 
   static MethodChannel _channel = MethodChannel('easebuzz');
 
+  //app id
+  // ------------------//
+  // debug
+  // 00b93714fc7e4918828632a8a3edf3f1
+  //live
+  //40030eccbf164b3f9255ff456971ad9f
+
   @override
   void initState() {
     super.initState();
-    // planController.init(
-    //     "PRODUCTION", "00b93714fc7e4918828632a8a3edf3f1", "M1FTWHQF8C06", true);
+    planController.init(
+        "PRODUCTION", "40030eccbf164b3f9255ff456971ad9f", "M1FTWHQF8C06", true);
   }
 
   @override
@@ -110,7 +117,7 @@ class _OtcPaymentState extends State<OtcPayment> {
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Text(
-                "₹${widget.plansData.saleAmount}",
+                "₹${widget.plansData.totalAmount}" + " (Inc. GST)",
                 style: TextStyle(fontSize: 20.sp),
               ),
             ),
@@ -173,7 +180,9 @@ class _OtcPaymentState extends State<OtcPayment> {
                     ),
                     child: InkWell(
                       onTap: () async {
-                        String tempSaleAmount = widget.plansData.saleAmount;
+                        String tempSaleAmount =
+                            widget.plansData.totalAmount.toString();
+
                         String amount =
                             await profileController.redeemSubscriptionCoupon(
                                 couponcode: redeemCouponController.text);
@@ -186,8 +195,7 @@ class _OtcPaymentState extends State<OtcPayment> {
                               tempSaleAmounz - tAmount;
 
                           setState(() {
-                            widget.plansData.saleAmount =
-                                totalAmountTobeAdded.toStringAsFixed(0);
+                            widget.plansData.totalAmount = totalAmountTobeAdded;
                           });
                         } else {
                           Get.rawSnackbar(
@@ -256,6 +264,9 @@ class _OtcPaymentState extends State<OtcPayment> {
                 //    };
                 //  final payment_response = await _channel.invokeMethod("payWithEasebuzz", parameters);
                 //  }
+
+
+                
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),

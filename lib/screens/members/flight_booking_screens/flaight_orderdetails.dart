@@ -565,7 +565,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                           bookingSsrDetails: [],
                           searchKey: widget.searchKey);
 
-                      flightsController.payForFlight(
+                      flightsController.initiatePayment(
                           amount: widget
                               .flight.fares.first.fareDetails.first.totalAmount
                               .toDouble(),

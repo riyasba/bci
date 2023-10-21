@@ -26,29 +26,31 @@ class _FlightWidgetState extends State<FlightWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: kwhite,
+    return Scaffold(
+      backgroundColor: kwhite,
       body: GetBuilder<FlightsController>(builder: (_) {
         return flightController.flightBookingHistoyrList.isEmpty
-            ?  Center(
+            ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset('assets/images/flightnotavailableimage.png'),
                     ksizedbox20,
-                    Text('Not Booking In Flight Tickets',
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      color: kblue,
-                      fontWeight: FontWeight.bold
-                    ),)
+                    Text(
+                      'Not Booking In Flight Tickets',
+                      style: TextStyle(
+                          fontSize: 20.sp,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    )
                   ],
                 ),
               )
             : ListView.builder(
-          itemCount: flightController.flightBookingHistoyrList.length,
-          itemBuilder: (context, index) {
-            return Padding(
+                itemCount: flightController.flightBookingHistoyrList.length,
+                itemBuilder: (context, index) {
+                  return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: InkWell(
                       onTap: () {
@@ -127,8 +129,8 @@ class _FlightWidgetState extends State<FlightWidget> {
                       ),
                     ),
                   );
-          },
-        );
+                },
+              );
       }),
     );
   }
@@ -344,37 +346,45 @@ class _FlightWidgetState extends State<FlightWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         print(flightBookedData.remark);
-                        showDialog(context: context, 
-                        builder: (BuildContext context){
-                          return AlertDialog(
-    backgroundColor: Colors.white,
-    title: Text("Cancel Booking", style: boldTextStyle(color: Colors.black)),
-    content: Text(
-      "Are you sure you want to Cancel?",
-      style: secondaryTextStyle(color: Colors.black),
-    ),
-    actions: [
-      TextButton(
-        child: Text(
-          "Yes",
-          style: primaryTextStyle(color: kblue),
-        ),
-        onPressed: () {
-         Get.find<FlightsController>().airCancelTicket(refernceNo:flightBookedData.bookingRefNo );
-          //Get.find<AuthController>().logout();
-        },
-      ),
-      TextButton(
-        child: Text("No", style: primaryTextStyle(color: kblue)),
-        onPressed: () {
-          Get.back();
-        },
-      ),
-    ],
-  );
-                        });
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: Colors.white,
+                                title: Text("Cancel Booking",
+                                    style: boldTextStyle(color: Colors.black)),
+                                content: Text(
+                                  "Are you sure you want to Cancel?",
+                                  style:
+                                      secondaryTextStyle(color: Colors.black),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: Text(
+                                      "Yes",
+                                      style: primaryTextStyle(color: kblue),
+                                    ),
+                                    onPressed: () {
+                                      Get.find<FlightsController>()
+                                          .airCancelTicket(
+                                              refernceNo: flightBookedData
+                                                  .bookingRefNo);
+                                      Get.back();
+                                      //Get.find<AuthController>().logout();
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: Text("No",
+                                        style: primaryTextStyle(color: kblue)),
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
                       },
                       child: const Text(
                         'Cancel',
