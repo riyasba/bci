@@ -1,7 +1,8 @@
 import 'package:bci/models/hotel_booking_models/hotel_booking_list_model.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/hotel_booking_models/hotel_booking_store_data_model.dart';
-import 'package:bci/models/hotel_booking_models/hotel_detials_model.dart' as htDetails;
+import 'package:bci/models/hotel_booking_models/hotel_detials_model.dart'
+    as htDetails;
 import 'package:bci/models/hotel_booking_models/hotel_info_model.dart';
 import 'package:bci/models/hotel_booking_models/search_hotel_list_model.dart';
 import 'package:bci/models/hotel_booking_models/store_temp_search_data.dart';
@@ -47,6 +48,7 @@ class HotelBookingController extends GetxController {
   RxString hotelSearchKey = "".obs;
   RxString hotelSearchKeyCode = "".obs;
   List<SearchHotelData> searchHotelData = [];
+  List<SearchHotelData> tempSearchHotelData = [];
 
   searchHotel({
     required String destination,
@@ -77,6 +79,7 @@ class HotelBookingController extends GetxController {
       SearchHotelModel searchHotelModel =
           SearchHotelModel.fromJson(response.data);
       searchHotelData = searchHotelModel.result;
+      tempSearchHotelData = searchHotelModel.result;
       Get.to(HotelListScreen());
 
       // if (response.data["Error_Code"] == "0001") {
@@ -341,16 +344,18 @@ class HotelBookingController extends GetxController {
     if (response.statusCode == 200) {}
   }
 
-GetHotelRoomDetailsApiServices getHotelRoomDetailsApiServices = GetHotelRoomDetailsApiServices();
-  getHotelDetails(String bookingId) async{
-     htDetails.Result? result;
-    dio.Response<dynamic> response = await getHotelRoomDetailsApiServices.getHotelRoomDetailsApiServices(userIp: "", bookingId: bookingId);
+  GetHotelRoomDetailsApiServices getHotelRoomDetailsApiServices =
+      GetHotelRoomDetailsApiServices();
+  getHotelDetails(String bookingId) async {
+    htDetails.Result? result;
+    dio.Response<dynamic> response = await getHotelRoomDetailsApiServices
+        .getHotelRoomDetailsApiServices(userIp: "", bookingId: bookingId);
 
-
-    if(response.statusCode == 200){
-      htDetails.HotelBookingDetailModel hotelBookingDetailModel = htDetails.HotelBookingDetailModel.fromJson(response.data);
+    if (response.statusCode == 200) {
+      htDetails.HotelBookingDetailModel hotelBookingDetailModel =
+          htDetails.HotelBookingDetailModel.fromJson(response.data);
       result = hotelBookingDetailModel.result;
     }
-   return result;
+    return result;
   }
 }

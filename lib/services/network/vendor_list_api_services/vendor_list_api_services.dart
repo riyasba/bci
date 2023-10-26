@@ -31,7 +31,7 @@ class VendorListApiServices extends BaseApiService {
       print("no internet");
     }
     return responseJson;
-  }
+  }    
 
   dynamic returnResponse(Response<dynamic> response) {
     switch (response.statusCode) {
