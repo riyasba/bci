@@ -518,7 +518,8 @@ class Fare {
   factory Fare.fromJson(Map<String, dynamic> json) => Fare(
         basicAmount: json["Basic_Amount"],
         cancellationCharges: json["Cancellation_Charges"],
-        fareDetails: List<dynamic>.from(json["FareDetails"].map((x) => x)),
+        fareDetails: json["FareDetails"] == null ? [] :
+            List<dynamic>.from(json["FareDetails"].map((x) => x)),
         gst: json["GST"],
         grossCommission: json["Gross_Commission"],
         netCommission: json["Net_Commission"],

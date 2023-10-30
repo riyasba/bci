@@ -203,10 +203,20 @@ class FlightsController extends GetxController {
     dio.Response<dynamic> response = await airTicketBookingApiServices
         .airTicketBookingApiServices(bookingModel: bookingModel);
 
+    print(
+        "<<<..........------------ Booking response ----------.........>>>> ");
+
+    print(response.statusCode);
+    print(response.data);
+
     if (response.statusCode == 200) {
-      airAddPayment(
-          refernceNo: response.data["Booking_RefNo"],
-          transactionId: transactionId);
+      print(
+          "<<<..........------------Air ticket booked ----------.........>>>> ");
+
+      print(response.data["Booking_RefNo"]);
+      // airAddPayment(
+      //     refernceNo: response.data["Booking_RefNo"],
+      //     transactionId: transactionId);
     }
   }
 
@@ -416,6 +426,18 @@ class FlightsController extends GetxController {
 
       Get.to(() => PaymentFailedScreen());
     }
+  }
+
+  createBooking(
+      {required String refernceID,
+      required double amount,
+      required BookingModel bookingModel}) {
+    print("<<<<<<<<payment is Success>>>>>>>>");
+    //need to give id
+    String transactionId = "";
+    Get.to(() => const FlightLoadingPage());
+
+    bookAirTicket(bookingModel: bookingModel, transactionId: transactionId);
   }
 
   Map<String, String> getArguments(var amount) {

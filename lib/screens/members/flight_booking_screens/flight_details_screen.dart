@@ -68,7 +68,7 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                         child: Container(
                           height: 650.h,
                           width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Padding(
                             padding: const EdgeInsets.only(top: 10, bottom: 10),
                             child: Container(
@@ -441,6 +441,10 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                       searchKey: widget.searchKey,
                                       mobileNumber: profileController
                                           .profileData.first.mobile);
+
+                              print("%%%%%%%%%%==Flight Key==%%%%%%%%%%");
+                              print(flightKey);
+
                               bool isSeatMapvailable = await flightController
                                   .getSeatMapApiServises(
                                       searchKey: widget.searchKey,

@@ -152,8 +152,7 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
                                 Container(
                                   width: 200,
                                   child: Text(
-                                    busController.busData[index].boardingDetails
-                                        .first.boardingLandmark,
+                                    busController.busData[index].operatorName,
                                     maxLines: 2,
                                   ),
                                 ),

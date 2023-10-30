@@ -1,3 +1,4 @@
+import 'package:bci/authentications/generate_otp/privacy_policy_web_view_screen.dart';
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
@@ -243,6 +244,31 @@ class _MemberLoginScreenState extends State<MemberLoginScreen> {
                           fontWeight: FontWeight.w600,
                           decoration: TextDecoration.underline,
                           color: kOrange),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 30,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "By continuing, you agree to BCI ",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16, color: kblue),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.to(PrivacyPolicyWebView());
+                    },
+                    child: Text(
+                      'Privacy Policy',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline,
+                          color: kblue),
                     ),
                   ),
                 ],

@@ -18,12 +18,12 @@ class FlaightOrderDetailsScreen extends StatefulWidget {
   FlightSearchDataModel flightSearchDataModel;
   String searchKey;
   String flightKey;
-  
+
   FlaightOrderDetailsScreen(
       {super.key,
       required this.flight,
       required this.flightSearchDataModel,
-       required this.flightKey,
+      required this.flightKey,
       required this.searchKey});
 
   @override
@@ -50,7 +50,10 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
     lastNameController.clear();
     ageController.clear();
     flightsController.isMaleOrFemale(2);
-    flightsController.getFightSSRDetails(flightKey: widget.flightKey, searchKey: widget.searchKey, fairId: widget.flight.fares.first.fareId);
+    flightsController.getFightSSRDetails(
+        flightKey: widget.flightKey,
+        searchKey: widget.searchKey,
+        fairId: widget.flight.fares.first.fareId);
   }
 
   @override
@@ -350,8 +353,7 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
               return Column(
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsets.only(left: 15, right: 15),
+                    padding: const EdgeInsets.only(left: 15, right: 15),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
@@ -416,21 +418,23 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                       ),
                     ),
                   ),
-                   const SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Row(
-                      children: [
-                        TextButton(
-                            onPressed: () {
-                              _addNewAdult(context);
-                            },
-                            child: Text("+ Add passenger".toUpperCase())),
-                      ],
+                  if (flightsController.passengersDetailsList.length !=
+                      flightsController.adultsCount.value)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: Row(
+                        children: [
+                          TextButton(
+                              onPressed: () {
+                                _addNewAdult(context);
+                              },
+                              child: Text("+ Add passenger".toUpperCase())),
+                        ],
+                      ),
                     ),
-                  ),
                   for (int i = 0;
                       i < flightsController.passengersDetailsList.length;
                       i++)
@@ -475,17 +479,20 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                                     ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                                  child: InkWell(
-                                    onTap: (){              
-                                        addSsrDetails(context, index,size);
-                                    },
-                                    child: Text("+ Add Special Services",style: primaryFont.copyWith(
-                                      color: kOrange
-                                    ),),
-                                  ),
-                                ),
+                                // Padding(
+                                //   padding: const EdgeInsets.symmetric(
+                                //       horizontal: 15),
+                                //   child: InkWell(
+                                //     onTap: () {
+                                //       addSsrDetails(context, index, size);
+                                //     },
+                                //     child: Text(
+                                //       "+ Add Special Services",
+                                //       style:
+                                //           primaryFont.copyWith(color: kOrange),
+                                //     ),
+                                //   ),
+                                // ),
                                 const SizedBox(
                                   height: 10,
                                 )
@@ -510,7 +517,6 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                         ],
                       ),
                     ),
-                 
                   ksizedbox20,
                   InkWell(
                     onTap: () async {
@@ -541,35 +547,57 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
                         listOfPaxDetailsList.add(paxDetails);
                       }
 
-                      String flightKey =
-                          await flightsController.getFlightRepricing(
-                              flightSearchModel: widget.flightSearchDataModel,
-                              flight: widget.flight,
-                              searchKey: widget.searchKey,
-                              mobileNumber:
-                                  profileController.profileData.first.mobile);
-                      print("<--> <-----------> Flight key <-----------> <-->");
-                      print(flightKey);
+                      // String flightKey =
+                      //     await flightsController.getFlightRepricing(
+                      //         flightSearchModel: widget.flightSearchDataModel,
+                      //         flight: widget.flight,
+                      //         searchKey: widget.searchKey,
+                      //         mobileNumber:
+                      //             profileController.profileData.first.mobile);
+                      print(
+                          "%%%%%%%%%%%<--> <-----------> Flight key <-----------> <-->%%%%%%%%%%%%%%%");
+                      print(widget.flightKey);
 
-                      BookingModel bookingModel = BookingModel(
-                          bookingRemark:
-                              "${widget.flightSearchDataModel.fromIata} - ${widget.flightSearchDataModel.toIata}",
-                          customerMobile:
-                              profileController.profileData.first.mobile,
-                          flightKey: flightKey,
-                          passengerEmail:
-                              profileController.profileData.first.email,
-                          passengerMobile:
-                              profileController.profileData.first.mobile,
-                          paxDetails: listOfPaxDetailsList,
-                          bookingSsrDetails: [],
-                          searchKey: widget.searchKey);
+                      if (listOfPaxDetailsList.length ==
+                          flightsController.adultsCount.value) {
+                        BookingModel bookingModel = BookingModel(
+                            bookingRemark:
+                                "${widget.flightSearchDataModel.fromIata} - ${widget.flightSearchDataModel.toIata}",
+                            customerMobile:
+                                profileController.profileData.first.mobile,
+                            flightKey: widget.flightKey,
+                            passengerEmail:
+                                profileController.profileData.first.email,
+                            passengerMobile:
+                                profileController.profileData.first.mobile,
+                            paxDetails: listOfPaxDetailsList,
+                            bookingSsrDetails: [],
+                            searchKey: widget.searchKey);
 
-                      flightsController.initiatePayment(
-                          amount: widget
-                              .flight.fares.first.fareDetails.first.totalAmount
-                              .toDouble(),
-                          bookingModel: bookingModel);
+                        // flightsController.createBooking(
+                        //     amount: widget.flight.fares.first.fareDetails.first
+                        //         .totalAmount
+                        //         .toDouble(),
+                        //     bookingModel: bookingModel,
+                        //     refernceID: "5656");
+
+                        flightsController.initiatePayment(
+                            amount: widget.flight.fares.first.fareDetails.first
+                                    .totalAmount
+                                    .toDouble() *
+                                listOfPaxDetailsList.length,
+                            bookingModel: bookingModel);
+                      } else {
+                        Get.rawSnackbar(
+                            message: "Add passanger to Continue booking",
+                            backgroundColor: Colors.red);
+                      }
+
+                      // flightsController.initiatePayment(
+                      //     amount: widget
+                      //         .flight.fares.first.fareDetails.first.totalAmount
+                      //         .toDouble(),
+                      //     bookingModel: bookingModel);
                       // flightsController.payUseingEaseBuzzSubs(
                       //     id: 0,
                       //     amount: widget
@@ -876,6 +904,9 @@ class _FlaightOrderDetailsScreenState extends State<FlaightOrderDetailsScreen> {
   }
 
   Future<void> _addNewAdult(BuildContext context) {
+    firstNameController.clear();
+    lastNameController.clear();
+    ageController.clear();
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {

@@ -168,8 +168,8 @@ class AirPnrDetail {
         crsCode: json["CRS_Code"],
         crsPnr: json["CRS_PNR"],
         failureRemark: json["FailureRemark"],
-        flights:
-            List<AirFlight>.from(json["Flights"].map((x) => AirFlight.fromJson(x))),
+        flights: List<AirFlight>.from(
+            json["Flights"].map((x) => AirFlight.fromJson(x))),
         grossAmount: json["Gross_Amount"],
         paxTicketDetails: List<PaxTicketDetail>.from(
             json["PAXTicketDetails"].map((x) => PaxTicketDetail.fromJson(x))),
@@ -386,14 +386,20 @@ class FareDetail {
 
   factory FareDetail.fromJson(Map<String, dynamic> json) => FareDetail(
         airportTaxAmount: json["AirportTax_Amount"],
-        airportTaxes: List<AirportTax>.from(
-            json["AirportTaxes"].map((x) => AirportTax.fromJson(x))),
+        airportTaxes: json["AirportTaxes"] == null
+            ? []
+            : List<AirportTax>.from(
+                json["AirportTaxes"].map((x) => AirportTax.fromJson(x))),
         basicAmount: json["Basic_Amount"],
-        cancellationCharges: List<Charge>.from(
-            json["CancellationCharges"].map((x) => Charge.fromJson(x))),
-        currencyCode: json["Currency_Code"],
-        fareClasses: List<FareClass>.from(
-            json["FareClasses"].map((x) => FareClass.fromJson(x))),
+        cancellationCharges: json["CancellationCharges"] == null
+            ? []
+            : List<Charge>.from(
+                json["CancellationCharges"].map((x) => Charge.fromJson(x))),
+        currencyCode: json["Currency_Code"] ?? "",
+        fareClasses: json["FareClasses"] == null
+            ? []
+            : List<FareClass>.from(
+                json["FareClasses"].map((x) => FareClass.fromJson(x))),
         freeBaggage: FreeBaggage.fromJson(json["Free_Baggage"]),
         gst: json["GST"],
         grossCommission: json["Gross_Commission"],
@@ -446,8 +452,8 @@ class AirportTax {
 
   factory AirportTax.fromJson(Map<String, dynamic> json) => AirportTax(
         taxAmount: json["Tax_Amount"],
-        taxCode: json["Tax_Code"],
-        taxDesc: json["Tax_Desc"],
+        taxCode: json["Tax_Code"] ?? "",
+        taxDesc: json["Tax_Desc"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -487,18 +493,18 @@ class Charge {
   });
 
   factory Charge.fromJson(Map<String, dynamic> json) => Charge(
-        applicablility: json["Applicablility"],
-        durationFrom: json["DurationFrom"],
-        durationTo: json["DurationTo"],
-        durationTypeFrom: json["DurationTypeFrom"],
-        durationTypeTo: json["DurationTypeTo"],
-        offlineServiceFee: json["OfflineServiceFee"],
-        onlineServiceFee: json["OnlineServiceFee"],
-        passengerType: json["PassengerType"],
-        remarks: json["Remarks"],
-        returnFlight: json["Return_Flight"],
-        value: json["Value"],
-        valueType: json["ValueType"],
+        applicablility: json["Applicablility"] ?? 0,
+        durationFrom: json["DurationFrom"] ?? 0,
+        durationTo: json["DurationTo"] ?? 0,
+        durationTypeFrom: json["DurationTypeFrom"] ?? 0,
+        durationTypeTo: json["DurationTypeTo"] ?? 0,
+        offlineServiceFee: json["OfflineServiceFee"] ?? 0,
+        onlineServiceFee: json["OnlineServiceFee"] ?? 0,
+        passengerType: json["PassengerType"] ?? 0,
+        remarks: json["Remarks"] ?? "",
+        returnFlight: json["Return_Flight"] ?? false,
+        value: json["Value"] ?? "",
+        valueType: json["ValueType"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -533,11 +539,11 @@ class FareClass {
   });
 
   factory FareClass.fromJson(Map<String, dynamic> json) => FareClass(
-        classCode: json["Class_Code"],
-        classDesc: json["Class_Desc"],
-        fareBasis: json["FareBasis"],
+        classCode: json["Class_Code"] ?? "",
+        classDesc: json["Class_Desc"] ?? "",
+        fareBasis: json["FareBasis"] ?? "",
         privileges: json["Privileges"],
-        segmentId: json["Segment_Id"],
+        segmentId: json["Segment_Id"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -559,8 +565,8 @@ class FreeBaggage {
   });
 
   factory FreeBaggage.fromJson(Map<String, dynamic> json) => FreeBaggage(
-        checkInBaggage: json["Check_In_Baggage"],
-        handBaggage: json["Hand_Baggage"],
+        checkInBaggage: json["Check_In_Baggage"] ?? "",
+        handBaggage: json["Hand_Baggage"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -609,22 +615,22 @@ class Segment {
   });
 
   factory Segment.fromJson(Map<String, dynamic> json) => Segment(
-        aircraftType: json["Aircraft_Type"],
-        airlineCode: json["Airline_Code"],
-        airlineName: json["Airline_Name"],
-        arrivalDateTime: json["Arrival_DateTime"],
-        departureDateTime: json["Departure_DateTime"],
-        destination: json["Destination"],
+        aircraftType: json["Aircraft_Type"] ?? "",
+        airlineCode: json["Airline_Code"] ?? "",
+        airlineName: json["Airline_Name"] ?? "",
+        arrivalDateTime: json["Arrival_DateTime"] ?? "",
+        departureDateTime: json["Departure_DateTime"] ?? "",
+        destination: json["Destination"] ?? "",
         destinationCity: json["Destination_City"],
-        destinationTerminal: json["Destination_Terminal"],
-        duration: json["Duration"],
-        flightNumber: json["Flight_Number"],
-        legIndex: json["Leg_Index"],
-        origin: json["Origin"],
+        destinationTerminal: json["Destination_Terminal"] ?? "",
+        duration: json["Duration"] ?? "",
+        flightNumber: json["Flight_Number"] ?? "",
+        legIndex: json["Leg_Index"] ?? 0,
+        origin: json["Origin"] ?? "",
         originCity: json["Origin_City"],
-        originTerminal: json["Origin_Terminal"],
-        returnFlight: json["Return_Flight"],
-        segmentId: json["Segment_Id"],
+        originTerminal: json["Origin_Terminal"] ?? "",
+        returnFlight: json["Return_Flight"] ?? false,
+        segmentId: json["Segment_Id"] ?? 0,
         stopOver: json["Stop_Over"],
       );
 
@@ -690,24 +696,30 @@ class PaxTicketDetail {
 
   factory PaxTicketDetail.fromJson(Map<String, dynamic> json) =>
       PaxTicketDetail(
-        age: json["Age"],
-        dob: json["DOB"],
-        fares: List<Fare>.from(json["Fares"].map((x) => Fare.fromJson(x))),
-        firstName: json["First_Name"],
+        age: json["Age"] ?? "",
+        dob: json["DOB"] ?? "",
+        fares: json["Fares"] == null
+            ? []
+            : List<Fare>.from(json["Fares"].map((x) => Fare.fromJson(x))),
+        firstName: json["First_Name"] ?? "",
         frequentFlyerDetails: json["FrequentFlyerDetails"],
         gender: json["Gender"],
-        lastName: json["Last_Name"],
-        nationality: json["Nationality"],
-        passportExpiry: json["Passport_Expiry"],
-        passportIssuingCountry: json["Passport_Issuing_Country"],
-        passportNumber: json["Passport_Number"],
-        paxId: json["Pax_Id"],
-        paxType: json["Pax_type"],
-        ssrDetails: List<dynamic>.from(json["SSRDetails"].map((x) => x)),
-        ticketDetails: List<TicketDetail>.from(
-            json["TicketDetails"].map((x) => TicketDetail.fromJson(x))),
-        ticketStatus: json["TicketStatus"],
-        title: json["Title"],
+        lastName: json["Last_Name"] ?? "",
+        nationality: json["Nationality"] ?? "",
+        passportExpiry: json["Passport_Expiry"] ?? "",
+        passportIssuingCountry: json["Passport_Issuing_Country"] ?? "",
+        passportNumber: json["Passport_Number"] ?? "",
+        paxId: json["Pax_Id"] ?? 0,
+        paxType: json["Pax_type"] ?? 0,
+        ssrDetails: json["SSRDetails"] == null
+            ? []
+            : List<dynamic>.from(json["SSRDetails"].map((x) => x)),
+        ticketDetails: json["TicketDetails"] == null
+            ? []
+            : List<TicketDetail>.from(
+                json["TicketDetails"].map((x) => TicketDetail.fromJson(x))),
+        ticketStatus: json["TicketStatus"] ?? "",
+        title: json["Title"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -742,8 +754,8 @@ class TicketDetail {
   });
 
   factory TicketDetail.fromJson(Map<String, dynamic> json) => TicketDetail(
-        flightId: json["Flight_Id"],
-        ticketNumber: json["Ticket_Number"],
+        flightId: json["Flight_Id"] ?? "",
+        ticketNumber: json["Ticket_Number"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -769,9 +781,9 @@ class BookingPaymentDetail {
 
   factory BookingPaymentDetail.fromJson(Map<String, dynamic> json) =>
       BookingPaymentDetail(
-        currencyCode: json["Currency_Code"],
+        currencyCode: json["Currency_Code"] ?? "",
         gatewayCharges: json["Gateway_Charges"],
-        paymentConfirmationNumber: json["PaymentConfirmation_Number"],
+        paymentConfirmationNumber: json["PaymentConfirmation_Number"] ?? "",
         paymentAmount: json["Payment_Amount"],
         paymentMode: json["Payment_Mode"],
       );
@@ -823,22 +835,22 @@ class CompanyDetail {
   });
 
   factory CompanyDetail.fromJson(Map<String, dynamic> json) => CompanyDetail(
-        address: json["Address"],
-        city: json["City"],
-        companyName: json["CompanyName"],
-        contactPerson: json["ContactPerson"],
-        country: json["Country"],
-        email: json["Email"],
-        fax: json["Fax"],
-        gstNo: json["GSTNo"],
-        logo: json["Logo"],
-        mobileNo: json["MobileNo"],
-        panNo: json["PANNo"],
-        phoneNo: json["PhoneNo"],
-        pincode: json["Pincode"],
-        sacCode: json["SACCode"],
-        state: json["State"],
-        website: json["Website"],
+        address: json["Address"] ?? "",
+        city: json["City"] ?? "",
+        companyName: json["CompanyName"] ?? "",
+        contactPerson: json["ContactPerson"] ?? "",
+        country: json["Country"] ?? "",
+        email: json["Email"] ?? "",
+        fax: json["Fax"] ?? "",
+        gstNo: json["GSTNo"] ?? "",
+        logo: json["Logo"] ?? "",
+        mobileNo: json["MobileNo"] ?? "",
+        panNo: json["PANNo"] ?? "",
+        phoneNo: json["PhoneNo"] ?? "",
+        pincode: json["Pincode"] ?? "",
+        sacCode: json["SACCode"] ?? "",
+        state: json["State"] ?? "",
+        website: json["Website"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

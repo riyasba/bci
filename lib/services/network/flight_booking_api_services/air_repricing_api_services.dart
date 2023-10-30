@@ -33,7 +33,7 @@ class AirRepriceApiServices extends BaseApiService {
             "imei_number": "64654546546546",
             "search_key": searchKey,
             "flight_key": flight.flightKey,
-            "fare_id": flight.fares.last.fareId,
+            "fare_id": flight.fares.first.fareId,
             "customer_mobile": mobileNumber
           });
       print("::::::::<--Air Repricing-->::::::::status code::::::::::");
