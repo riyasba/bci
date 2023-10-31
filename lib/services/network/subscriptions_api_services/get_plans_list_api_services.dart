@@ -22,7 +22,6 @@ class GetPlansApiServices extends BaseApiService {
           validateStatus: (status) {
             return status! <= 500;
           },
-         
         ),
       );
       print("::::::::<Plans Api>::::::::status code::::::::::");

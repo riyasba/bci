@@ -68,7 +68,7 @@ class SearchHotelListApiService extends BaseApiService {
     "UserIp": "122.160.83.78"
 };
    
-       developer.log(
+      developer.log(
           "----------------------------------------------------->>Search Data");
       developer.log(data2.toString(), name: "hotel Search request");
 

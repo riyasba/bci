@@ -2,6 +2,7 @@ import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
+import 'package:bci/screens/members/manual_payment_options/phone_pe_service_booking.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -127,9 +128,9 @@ paymentBottomSheet(BuildContext context, double amount) {
                                   .isWalletOrNot
                                   .value ==
                               0) {
-                            Get.find<ProfileController>().payFromCart(amount);
+                            Get.find<ProfileController>()
+                                .initiatePayment(amount: amount);
                           } else {
-                           
                             Get.find<ProfileController>().payFromWallet(
                                 amount: amount.toStringAsFixed(2));
                           }
