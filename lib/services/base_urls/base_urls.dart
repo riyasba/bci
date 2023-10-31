@@ -92,28 +92,28 @@ abstract class BaseApiService {
   // ----------- Flight bookings  ----------- //
 
   final String airSearchUrl =
-      "https://www.portal.bcipvtltd.com/api/auth/flight_search";
+      "http://uat.etrav.in/airlinehost/AirAPIService.svc/JSONService/Air_Search";
 
   final String airRepricingUrl =
-      "https://www.portal.bcipvtltd.com/api/auth/air_reprice";
+      "http://uat.etrav.in/airlinehost/AirAPIService.svc/JSONService/Air_Reprice";
 
   final String airTicketBookingUrl =
-      "https://www.portal.bcipvtltd.com/api/auth/air_temp_booking";
+      "http://uat.etrav.in/airlinehost/AirAPIService.svc/JSONService/Air_TempBooking";
 
   final String airRePrinting =
-      "https://www.portal.bcipvtltd.com/api/auth/air_reprint";
+      "http://uat.etrav.in/airlinehost/AirAPIService.svc/JSONService/Air_Reprint";
 
   final String airGetSsrURL =
-      "https://www.portal.bcipvtltd.com/api/auth/air_get_ssr";
+      "http://uat.etrav.in/airlinehost/AirAPIService.svc/JSONService/Air_GetSSR";
 
   final String airCancelApiURL =
-      "https://www.portal.bcipvtltd.com/api/auth/air_ticket_cancellation";
+      "http://uat.etrav.in/AirlineHost/AirAPIService.svc/JSONService/Air_TicketCancellation";
 
   final String airAddPayment =
-      "https://www.portal.bcipvtltd.com/api/auth/add_payment";
+      "http://uat.etrav.in/tradehost/TradeAPIService.svc/JSONService/AddPayment";
 
   final String airGetSeatMap =
-      "https://www.portal.bcipvtltd.com/api/auth/air_get_seat_map";
+      "http://uat.etrav.in/airlinehost/AirAPIService.svc/JSONService/Air_GetSeatMap";
 
   final String airportSearch = "https://openflights.org/php/apsearch.php";
 

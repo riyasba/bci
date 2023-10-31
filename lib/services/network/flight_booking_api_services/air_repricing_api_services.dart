@@ -14,6 +14,13 @@ class AirRepriceApiServices extends BaseApiService {
     required String mobileNumber,
   }) async {
     dynamic responseJson;
+
+   var data2 = {
+
+
+   };
+
+
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
