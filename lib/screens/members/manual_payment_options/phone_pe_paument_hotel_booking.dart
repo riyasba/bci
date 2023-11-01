@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:bci/controllers/flights_controller.dart';
+import 'package:bci/controllers/hotel_booking_controller.dart';
 import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/models/flight_booking_models/booking_model.dart';
+import 'package:bci/models/hotel_booking_models/hotel_info_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,24 +12,38 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 // import 'package:havyou/src/controllers/Instant_top_up_controller.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:bci/models/hotel_booking_models/get_hotel_room_model.dart'
+    as ht;
 
-class PaymentWebViewFlight extends StatefulWidget {
+class PaymentWebViewHotel extends StatefulWidget {
   double amount;
-  BookingModel bookingModel;
+  String userIp;
+  String resultIndex;
+  String hotelCode;
+  String hotelName;
+  String searchToken;
+  HotelInfoData hotelInfoData;
+  ht.HotelRoomsDetail hotelRoomsDetail;
   String url;
   String referenceId;
 
-  PaymentWebViewFlight(
+  PaymentWebViewHotel(
       {required this.amount,
-      required this.bookingModel,
+      required this.userIp,
+      required this.resultIndex,
+      required this.hotelCode,
+      required this.hotelName,
+      required this.searchToken,
+      required this.hotelInfoData,
+      required this.hotelRoomsDetail,
       required this.referenceId,
       required this.url});
 
   @override
-  State<PaymentWebViewFlight> createState() => _PaymentWebViewState();
+  State<PaymentWebViewHotel> createState() => _PaymentWebViewState();
 }
 
-class _PaymentWebViewState extends State<PaymentWebViewFlight> {
+class _PaymentWebViewState extends State<PaymentWebViewHotel> {
   // final paymentController = Get.find<InstantTopUpController>();
 
   Timer? tempTimer;
@@ -75,10 +91,16 @@ class _PaymentWebViewState extends State<PaymentWebViewFlight> {
                 "https://www.portal.bcipvtltd.com/api/response_phonepay") {
               // Check Status here
 
-              Get.find<FlightsController>().checkPhonePeStatus(
+              Get.find<HotelBookingController>().checkPhonePeStatus(
                   refernceID: widget.referenceId,
                   amount: widget.amount,
-                  bookingModel: widget.bookingModel);
+                  hotelCode: widget.hotelCode,
+                  hotelInfoData: widget.hotelInfoData,
+                  hotelName: widget.hotelName,
+                  hotelRoomsDetail: widget.hotelRoomsDetail,
+                  resultIndex: widget.resultIndex,
+                  searchToken: widget.searchToken,
+                  userIp: widget.userIp);
             }
 
             // paymentController.getPaymantResponse(widget.orderId);

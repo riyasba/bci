@@ -349,82 +349,93 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
       bottomNavigationBar: GetBuilder<HotelBookingController>(builder: (_) {
         return hotelController.isPageLoading.isTrue
             ? Container(
-              height: 5,
-            ): Padding(
-          padding: const EdgeInsets.only(right: 10, top: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              // Image.asset('assets/images/Group 5822(1).png'),
-              Obx(
-                () => SizedBox(
-                  height: 58,
-                  width: 200,
-                  child: hotelController.isLoading.isTrue
-                      ? ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: kblue,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          onPressed: () {
-                            // hotelController.blockroomapi(
-                            //     userIp: widget.userIp,
-                            //     resultIndex: widget.resultIndex,
-                            //     hotelCode: widget.hotelCode,
-                            //     hotelName: hotelController
-                            //         .hotelInfoData.first.hotelName,
-                            //     searchToken: widget.searchToken,
-                            //     hotelRoomsDetail: hotelController
-                            //         .hotelRoomsData
-                            //         .first
-                            //         .hotelRoomsDetails
-                            //         .first);
-                            // Get.to(Sucssesspage());
-                            // Get.to(BusinessGenerate_otp
-                            // ());
-                          },
-                          child: const CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
-                        )
-                      : ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: kblue,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          onPressed: () {
-                            hotelController.blockroomapi(
-                                userIp: widget.userIp,
-                                hotelInfoData:
-                                    hotelController.hotelInfoData.first,
-                                resultIndex: widget.resultIndex,
-                                hotelCode: widget.hotelCode,
-                                hotelName: hotelController
-                                    .hotelInfoData.first.hotelName,
-                                searchToken: widget.searchToken,
-                                hotelRoomsDetail: hotelController.hotelRoomsData
-                                    .first.hotelRoomsDetails.first);
-                            // Get.to(Sucssesspage());
-                            // Get.to(BusinessGenerate_otp
-                            // ());
-                          },
-                          child: const Text(
-                            'Book Now',
-                            style: TextStyle(
-                                fontSize: 22,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                height: 5,
+              )
+            : Padding(
+                padding: const EdgeInsets.only(right: 10, top: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    // Image.asset('assets/images/Group 5822(1).png'),
+                    Obx(
+                      () => SizedBox(
+                        height: 58,
+                        width: 200,
+                        child: hotelController.isLoading.isTrue
+                            ? ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: kblue,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  // hotelController.blockroomapi(
+                                  //     userIp: widget.userIp,
+                                  //     resultIndex: widget.resultIndex,
+                                  //     hotelCode: widget.hotelCode,
+                                  //     hotelName: hotelController
+                                  //         .hotelInfoData.first.hotelName,
+                                  //     searchToken: widget.searchToken,
+                                  //     hotelRoomsDetail: hotelController
+                                  //         .hotelRoomsData
+                                  //         .first
+                                  //         .hotelRoomsDetails
+                                  //         .first);
+                                  // Get.to(Sucssesspage());
+                                  // Get.to(BusinessGenerate_otp
+                                  // ());
+                                },
+                                child: const CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              )
+                            : ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: kblue,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  hotelController.initiatePayment(
+                                      amount: hotelController
+                                          .hotelRoomsData
+                                          .first
+                                          .hotelRoomsDetails
+                                          .first
+                                          .price
+                                          .roomPrice,
+                                      userIp: widget.userIp,
+                                      hotelInfoData:
+                                          hotelController.hotelInfoData.first,
+                                      resultIndex: widget.resultIndex,
+                                      hotelCode: widget.hotelCode,
+                                      hotelName: hotelController
+                                          .hotelInfoData.first.hotelName,
+                                      searchToken: widget.searchToken,
+                                      hotelRoomsDetail: hotelController
+                                          .hotelRoomsData
+                                          .first
+                                          .hotelRoomsDetails
+                                          .first);
+                                  // Get.to(Sucssesspage());
+                                  // Get.to(BusinessGenerate_otp
+                                  // ());
+                                },
+                                child: const Text(
+                                  'Book Now',
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        );
+              );
       }),
     );
   }

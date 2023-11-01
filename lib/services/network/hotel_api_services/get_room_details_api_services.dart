@@ -7,6 +7,7 @@ class GetHotelRoomDetailsApiServices extends BaseApiService {
   Future getHotelRoomDetailsApiServices({
     required String userIp,
     required String bookingId,
+    required String seearchToken,
   }) async {
     dynamic responseJson;
     try {
@@ -24,7 +25,8 @@ class GetHotelRoomDetailsApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"UserIp": "122.160.83.78", "BookingId": bookingId});
+          data: {"UserIp": "122.160.83.78", "BookingId": bookingId,"search_token": seearchToken
+          });
       print("::::::::<get hotel room details Api>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);

@@ -47,8 +47,7 @@ class AirSearchApiServices extends BaseApiService {
             "imei_number": "64654546546546",
             "origin": flightSearchModel.fromIata,
             "destination": flightSearchModel.toIata,
-            "travel_date": formatDate(
-                flightSearchModel.depatureDate, [mm, "/", dd, "/", yyyy]),
+            "travel_date": formatDate(flightSearchModel.depatureDate, [mm, "/", dd, "/", yyyy]),
             "travel_type": flightSearchModel.isDomOrINTL,
             "booking_type": flightSearchModel.isOneWayOrRoundTrip,
             "adult_count": "${flightSearchModel.adultsCount}",

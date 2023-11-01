@@ -31,12 +31,12 @@ class SearchCityListModel {
     });
 
     factory SearchCityListModel.fromJson(Map<String, dynamic> json) => SearchCityListModel(
-        cityid: json["cityid"]?? "",
-        destination: json["Destination"]?? "",
-        stateprovince: json["stateprovince"]?? "",
-        stateProvinceCode: json["StateProvinceCode"]?? "",
-        country: json["country"]?? "",
-        countrycode: json["countrycode"]?? "",
+        cityid: json["city_code"]?? "",
+        destination: json["city_name"]?? "",
+        stateprovince: json["value"]?? "",
+        stateProvinceCode: json["id"].toString()?? "",
+        country: json["country_name"]?? "",
+        countrycode: json["country_code"]?? "",
     );
 
     Map<String, dynamic> toJson() => {

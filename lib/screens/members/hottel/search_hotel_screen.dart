@@ -21,8 +21,7 @@ class SerchHotelScreen extends StatefulWidget {
 
 class _SerchHotelScreenState extends State<SerchHotelScreen> {
   DateTimeRange daterange = DateTimeRange(
-      start: DateTime.now(),
-      end: DateTime.now().add(Duration(days: 1)));
+      start: DateTime.now(), end: DateTime.now().add(Duration(days: 1)));
 
   final hotelController = Get.find<HotelBookingController>();
   final destinationcontrolr = TextEditingController();
@@ -35,114 +34,129 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
     final diffrence = daterange.duration;
     return Scaffold(
       backgroundColor: const Color(0xFFF9F8FD),
-        appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(280),
-            child: Column(children: [
-              Stack(
-                children:[ 
-                Container(
-                  height: size.height*0.35,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 30),
-                    child: Container(
-                      height: size.height*0.34,
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(280),
+          child: Column(children: [
+            Stack(children: [
+              Container(
+                height: size.height * 0.35,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  child: Container(
+                      height: size.height * 0.34,
                       width: size.width,
-                      child: Image.asset('assets/icons/hotelbanner.png',
-                      height: size.height*0.34,
-                      width: size.width,
-                      fit: BoxFit.fill,)),
-                  ),
+                      child: Image.asset(
+                        'assets/icons/hotelbanner.png',
+                        height: size.height * 0.34,
+                        width: size.width,
+                        fit: BoxFit.fill,
+                      )),
                 ),
-                  InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 25,
-                      width: 25,
-                      decoration: BoxDecoration(
-                        color: kOrange,
-                        borderRadius: BorderRadius.circular(7)
-                      ),
-                      child: Center(
-                        child: Icon(Icons.arrow_back_ios_new,color: kwhite,size: 16,))),
+              ),
+              InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: SafeArea(
+                      child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Row(
+                      children: [
+                        Container(
+                            height: 25,
+                            width: 25,
+                            decoration: BoxDecoration(
+                                color: kOrange,
+                                borderRadius: BorderRadius.circular(7)),
+                            child: Center(
+                                child: Icon(
+                              Icons.arrow_back_ios_new,
+                              color: kwhite,
+                              size: 16,
+                            ))),
                         kwidth10,
                         Text(
-                  'Find your hotel',
-                  style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w700,color: kwhite),
-                ),
-                  ],
-                ),
-              ))),
+                          'Find your hotel',
+                          style: TextStyle(
+                              fontSize: 17.sp,
+                              fontWeight: FontWeight.w700,
+                              color: kwhite),
+                        ),
+                      ],
+                    ),
+                  ))),
               Positioned(
                 bottom: 0,
                 left: 0,
                 right: 0,
                 child: Padding(
-                 padding: const EdgeInsets.only(top: 10,left: 10,right: 10,),
-                 child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              height: size.height * 0.06,
-              width: size.width * 0.2,
-              child: TypeAheadField<SearchCityListModel>(
-                getImmediateSuggestions: true,
-                textFieldConfiguration: TextFieldConfiguration(
-                  onChanged: (value) async {
-                    if (value.length > 1) {
-                      await Future.delayed(const Duration(milliseconds: 200));
-                      Get.find<HotelBookingController>()
-                          .hotelCityList(searchCity: value.trim());
-                    }
-                  },
-                  controller: destinationcontrolr,
-                  decoration:const InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    left: 10,
+                    right: 10,
+                  ),
+                  child: GetBuilder<HotelBookingController>(builder: (_) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      hintText: 'Search for hotels'),
+                      height: size.height * 0.06,
+                      width: size.width * 0.2,
+                      child: TypeAheadField<SearchCityListModel>(
+                        getImmediateSuggestions: true,
+                        textFieldConfiguration: TextFieldConfiguration(
+                          onChanged: (value) async {
+                            if (value.length > 1) {
+                              await Future.delayed(
+                                  const Duration(milliseconds: 200));
+                              Get.find<HotelBookingController>()
+                                  .hotelCityList(searchCity: value.trim());
+                            }
+                          },
+                          controller: destinationcontrolr,
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              hintText: 'Search for hotels'),
+                        ),
+                        suggestionsCallback: (String pattern) async {
+                          return hotelController.getHotelCityList
+                              .where((item) => item.destination
+                                  .toLowerCase()
+                                  .startsWith(pattern.toLowerCase()))
+                              .toList();
+                        },
+                        itemBuilder: (context, SearchCityListModel citymodel) {
+                          return  ListTile(
+                                  title: Text(citymodel.destination),
+                                );
+                        },
+                        itemSeparatorBuilder: (context, index) {
+                          return Divider();
+                        },
+                        onSuggestionSelected: (SearchCityListModel citymodel) {
+                          print("destination selected");
+                          destinationcontrolr.text = citymodel.destination;
+                          //    hotelController.toCity(citymodel.cityName);
+                          hotelController.hotelSearchKey(citymodel.cityid);
+                          hotelController
+                              .hotelSearchKeyCode(citymodel.countrycode);
+                          print(citymodel.cityid);
+                          print(citymodel.country);
+                          print(citymodel.countrycode);
+                          print(citymodel.destination);
+                        },
+                      ),
+                    );
+                  }),
                 ),
-                suggestionsCallback: (String pattern) async {
-                  return hotelController.getHotelCityList
-                      .where((item) => item.destination
-                          .toLowerCase()
-                          .startsWith(pattern.toLowerCase()))
-                      .toList();
-                },
-                itemBuilder: (context, SearchCityListModel citymodel) {
-                  return ListTile(
-                    title: Text(citymodel.destination),
-                  );
-                },
-                itemSeparatorBuilder: (context, index) {
-                  return Divider();
-                },
-                onSuggestionSelected: (SearchCityListModel citymodel) {
-                  print("destination selected");
-                  destinationcontrolr.text = citymodel.destination;
-                  //    hotelController.toCity(citymodel.cityName);
-                  hotelController.hotelSearchKey(citymodel.cityid);
-                  hotelController.hotelSearchKeyCode(citymodel.countrycode);
-                  print(citymodel.cityid);
-                  print(citymodel.country);
-                  print(citymodel.countrycode);
-                  print(citymodel.destination);
-                },
               ),
-            ),
-                           ),
-              ),
-              ]),
-            ])),
+            ]),
+          ])),
       body: ListView(
-        physics:const BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         children: [
           ksizedbox10,
           GestureDetector(
@@ -154,31 +168,38 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                   height: 50,
                   width: 120,
                   decoration: BoxDecoration(
-                    border: Border.all(color: kblue),
-                      color: kwhite, borderRadius: BorderRadius.circular(16)),
+                      border: Border.all(color: kblue),
+                      color: kwhite,
+                      borderRadius: BorderRadius.circular(16)),
                   child: Center(
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
                           DateFormat('dd/MM/yyyy').format(start),
                           style: TextStyle(color: kblue, fontSize: 14.sp),
                         ),
-                      Icon(
+                        Icon(
                           Icons.calendar_month_outlined,
                           color: kblue,
-                        )  ],
+                        )
+                      ],
                     ),
                   ),
                 ),
-                Icon(Icons.arrow_forward, color: kblue,),
+                Icon(
+                  Icons.arrow_forward,
+                  color: kblue,
+                ),
                 Column(
                   children: [
                     Container(
                       height: 50,
                       width: 120,
                       decoration: BoxDecoration(
-                       border: Border.all(color: kblue),
-                      color: kwhite, borderRadius: BorderRadius.circular(16)),
+                          border: Border.all(color: kblue),
+                          color: kwhite,
+                          borderRadius: BorderRadius.circular(16)),
                       child: Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -341,21 +362,19 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
             () => InkWell(
               onTap: () {
                 hotelController.tempBookingModel = TempBookingModel(
-                  bookingDate: DateFormat('dd/MM/yyyy').format(start),
-                  noOfDays: diffrence.inDays.toString(),
-                  noOfPeople: hotelController.adult.value.toString(),
-                  place: destinationcontrolr.text
-                );
+                    bookingDate: DateFormat('dd/MM/yyyy').format(start),
+                    noOfDays: diffrence.inDays.toString(),
+                    noOfPeople: hotelController.adult.value.toString(),
+                    place: destinationcontrolr.text);
                 hotelController.searchHotel(
-                  child: hotelController.child.value,
-                  adult: hotelController.adult.value,
-                  checkindate: DateFormat('dd/MM/yyyy').format(start),
-                  checkoutdate: DateFormat('dd/MM/yyyy').format(end),
-                  destination: hotelController.hotelSearchKey.value,
-                  //  childage: hotelController.roomno.value,
-                  roomsno: hotelController.roomno.string,
-                  countryCode: hotelController.hotelSearchKeyCode.value
-                );
+                    child: hotelController.child.value,
+                    adult: hotelController.adult.value,
+                    checkindate: DateFormat('dd/MM/yyyy').format(start),
+                    checkoutdate: DateFormat('dd/MM/yyyy').format(end),
+                    destination: hotelController.hotelSearchKey.value,
+                    //  childage: hotelController.roomno.value,
+                    roomsno: hotelController.roomno.string,
+                    countryCode: hotelController.hotelSearchKeyCode.value);
                 //Get.to(Sucessful_screen_hotel());
               },
               child: Padding(
@@ -399,7 +418,7 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                             ],
                           ),
                         ),
-                        child:const Text(
+                        child: const Text(
                           'Search',
                           style: TextStyle(
                               fontSize: 17,

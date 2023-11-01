@@ -2,6 +2,7 @@ import 'package:bci/controllers/hotel_booking_controller.dart';
 import 'package:bci/models/hotel_booking_models/search_city_list_model.dart';
 import 'package:bci/models/hotel_booking_models/search_hotel_list_model.dart';
 import 'package:bci/screens/members/hottel/wigets/search.dart';
+import 'package:bci/widgets/hotel_widgets/hotel_filter_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -105,27 +106,44 @@ class _HotelListScreenState extends State<HotelListScreen> {
                       child: Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                            height: 25,
-                            width: 25,
-                            decoration: BoxDecoration(
-                                color: kOrange,
-                                borderRadius: BorderRadius.circular(7)),
-                            child: Center(
-                                child: Icon(
-                              Icons.arrow_back_ios_new,
-                              color: kwhite,
-                              size: 16,
-                            ))),
-                        kwidth10,
-                        Text(
-                          'Find your hotel',
-                          style: TextStyle(
-                              fontSize: 17.sp,
-                              fontWeight: FontWeight.w700,
-                              color: kwhite),
+                        Row(
+                          children: [
+                            Container(
+                                height: 25,
+                                width: 25,
+                                decoration: BoxDecoration(
+                                    color: kOrange,
+                                    borderRadius: BorderRadius.circular(7)),
+                                child: Center(
+                                    child: Icon(
+                                  Icons.arrow_back_ios_new,
+                                  color: kwhite,
+                                  size: 16,
+                                ))),
+                            kwidth10,
+                            Text(
+                              'Find your hotel',
+                              style: TextStyle(
+                                  fontSize: 17.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: kwhite),
+                            ),
+                          ],
                         ),
+                        InkWell(
+                          onTap: () {
+                            filterHotelBooking(context);
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.only(right: 15),
+                            child: Icon(
+                              Icons.filter_alt,
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ))),
@@ -195,6 +213,8 @@ class _HotelListScreenState extends State<HotelListScreen> {
                                 child: Text(
                                   hotelBookingController
                                       .searchHotelData[index].hotelName,
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w700),
@@ -205,7 +225,8 @@ class _HotelListScreenState extends State<HotelListScreen> {
                                 child: Text(
                                   hotelBookingController
                                       .searchHotelData[index].hotelAddress,
-                                  maxLines: 3,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     color: Colors.grey,
                                   ),

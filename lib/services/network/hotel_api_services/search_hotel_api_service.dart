@@ -12,7 +12,7 @@ class SearchHotelListApiService extends BaseApiService {
     required String checkoutdate,
     required int adult,
     required int child,
-  //  required int childage,
+    //  required int childage,
     required String roomsno,
   }) async {
     dynamic responseJson;
@@ -44,30 +44,30 @@ class SearchHotelListApiService extends BaseApiService {
       //   "UserIp": "122.160.83.78"
       // };
 
-      var data2={
-    "BookingMode": "5",
-    "CheckInDate": checkindate,
-    "CheckOutDate": checkoutdate,
-    "NoOfNights": "1",
-    "CountryCode": "IN",
-    "DestinationCityId": destination,
-    "ResultCount": null,
-    "Currency": "INR",
-    "GuestNationality": "IN",
-    "NoOfRooms": roomsno,
-    "RoomGuests": [
-        {
+      var data2 = {
+        "BookingMode": "5",
+        "CheckInDate": checkindate,
+        "CheckOutDate": checkoutdate,
+        "NoOfNights": "1",
+        "CountryCode": "IN",
+        "DestinationCityId": destination,
+        "ResultCount": null,
+        "Currency": "INR",
+        "GuestNationality": "IN",
+        "NoOfRooms": roomsno,
+        "RoomGuests": [
+          {
             "Adult": adult.toString(),
             "Child": child.toString(),
-            "ChildAge":null,
+            "ChildAge": null,
             // child < 0 ? 2 : null,
-        }
-    ],
-    "MaxRating": "5",
-    "MinRating": "0",
-    "UserIp": "122.160.83.78"
-};
-   
+          }
+        ],
+        "MaxRating": "5",
+        "MinRating": "0",
+        "UserIp": "122.160.83.78"
+      };
+
       developer.log(
           "----------------------------------------------------->>Search Data");
       developer.log(data2.toString(), name: "hotel Search request");
@@ -85,11 +85,11 @@ class SearchHotelListApiService extends BaseApiService {
           ),
           data: data2);
       print("::::::::<search HOTEL - list Api>::::::::status code::::::::::");
-        print(response.statusCode);
-        developer.log(
+      print(response.statusCode);
+      developer.log(
           "----------------------------------------------------->>Search Data Response");
       developer.log(response.data.toString(), name: "hotel Search response");
-     
+
       // print(response.data);
       responseJson = response;
     } on SocketException {

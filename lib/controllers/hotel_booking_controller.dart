@@ -6,11 +6,17 @@ import 'package:bci/models/hotel_booking_models/hotel_detials_model.dart'
 import 'package:bci/models/hotel_booking_models/hotel_info_model.dart';
 import 'package:bci/models/hotel_booking_models/search_hotel_list_model.dart';
 import 'package:bci/models/hotel_booking_models/store_temp_search_data.dart';
+import 'package:bci/models/initiate_payment_model.dart';
+import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
 import 'package:bci/screens/members/hottel/wigets/sucsessful.dart';
+import 'package:bci/screens/members/manual_payment_options/phone_pe_paument_hotel_booking.dart';
+import 'package:bci/screens/members/otcpayment/payment_failed_screen.dart';
 import 'package:bci/services/network/hotel_api_services/get_room_details_api_services.dart';
 import 'package:bci/services/network/hotel_api_services/hotel_booking_list_api_service.dart';
 import 'package:bci/services/network/hotel_api_services/hotel_info_api_service.dart';
 import 'package:bci/services/network/hotel_api_services/store_hotel_booking_data_api.dart';
+import 'package:bci/services/network/payment_api_services/intiate_payment_api_services.dart';
+import 'package:bci/services/network/payment_api_services/payment_status_api_services.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,6 +39,7 @@ class HotelBookingController extends GetxController {
   RxInt child = 0.obs;
   RxInt adult = 1.obs;
   RxInt roomno = 1.obs;
+  RxInt filteringIndex = 5.obs;
   RxBool isLoading = false.obs;
   List<SearchCityListModel> getHotelCityList = [];
 
@@ -98,6 +105,22 @@ class HotelBookingController extends GetxController {
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }
+    update();
+  }
+
+  //filter hotel data
+
+  filterHotelDataLowToHigh() {
+    searchHotelData
+        .sort((a, b) => a.price.roomPrice.compareTo(b.price.roomPrice));
+
+    update();
+  }
+
+  filterHotelDataHightoLow() {
+    searchHotelData
+        .sort((a, b) => b.price.roomPrice.compareTo(a.price.roomPrice));
+
     update();
   }
 
@@ -173,13 +196,20 @@ class HotelBookingController extends GetxController {
   GetHotelCityListApiService getBusCityListApiService =
       GetHotelCityListApiService();
 
+  RxBool isHotelSearch = false.obs;
+
   hotelCityList({required String searchCity}) async {
+    isHotelSearch(true);
+    update();
     dio.Response<dynamic> response = await getBusCityListApiService
         .getHotelCityListApiService(searchCity: searchCity.trim());
-
+    isHotelSearch(false);
+    update();
     if (response.statusCode == 200) {
       getHotelCityList = List<SearchCityListModel>.from(
           response.data.map((x) => SearchCityListModel.fromJson(x)));
+      print("---------------->>${getHotelCityList.length}");
+      update();
     } else {
       Get.rawSnackbar(
         backgroundColor: Colors.red,
@@ -292,7 +322,7 @@ class HotelBookingController extends GetxController {
             hotelName: hotelInfoData.hotelName,
             price: hotelRoomsDetail.dayRates.first.amount.toString(),
             userName: profileController.profileData.first.name.toString());
-        storeHotlBookingData(hotelBookingStoreData: hotelBookingStroreData);
+        storeHotlBookingData(hotelBookingStoreData: hotelBookingStroreData,searchToken: searchToken);
         Get.to(() => const Sucessful_screen_hotel());
       } else {
         Get.rawSnackbar(
@@ -337,19 +367,21 @@ class HotelBookingController extends GetxController {
   }
 
   storeHotlBookingData(
-      {required HotelBookingStroreData hotelBookingStoreData}) async {
+      {required HotelBookingStroreData hotelBookingStoreData,required String searchToken}) async {
     dio.Response<dynamic> response = await storeHotelBookingApiServices
-        .storeHotelBooking(hotelBookingStoreData: hotelBookingStoreData);
+        .storeHotelBooking(hotelBookingStoreData: hotelBookingStoreData,searchToken: searchToken);
 
     if (response.statusCode == 200) {}
   }
 
   GetHotelRoomDetailsApiServices getHotelRoomDetailsApiServices =
       GetHotelRoomDetailsApiServices();
-  getHotelDetails(String bookingId) async {
+  getHotelDetails(String bookingId,String searchToken) async {
     htDetails.Result? result;
     dio.Response<dynamic> response = await getHotelRoomDetailsApiServices
-        .getHotelRoomDetailsApiServices(userIp: "", bookingId: bookingId);
+        .getHotelRoomDetailsApiServices(userIp: "", bookingId: bookingId,seearchToken: searchToken);
+
+    print(bookingId);
 
     if (response.statusCode == 200) {
       htDetails.HotelBookingDetailModel hotelBookingDetailModel =
@@ -357,5 +389,80 @@ class HotelBookingController extends GetxController {
       result = hotelBookingDetailModel.result;
     }
     return result;
+  }
+
+  InitiatePaymentApiServices initiatePaymentApiServices =
+      InitiatePaymentApiServices();
+
+  PaymentResponseApiServices paymentResponseApiServices =
+      PaymentResponseApiServices();
+
+  initiatePayment(
+      {required double amount,
+      required String userIp,
+      required String resultIndex,
+      required String hotelCode,
+      required String hotelName,
+      required String searchToken,
+      required HotelInfoData hotelInfoData,
+      required ht.HotelRoomsDetail hotelRoomsDetail}) async {
+    dio.Response<dynamic> response =
+        await initiatePaymentApiServices.initiatePayment(
+            userId: Get.find<ProfileController>().profileData.first.id,
+            totalAmount: amount.toStringAsFixed(2),
+            status: "Hotel");
+
+    if (response.statusCode == 200) {
+      IninitiatePaymentModel ininitiatePaymentModel =
+          IninitiatePaymentModel.fromJson(response.data);
+
+      Get.to(() => PaymentWebViewHotel(
+            amount: amount,
+            hotelCode: hotelCode,
+            hotelInfoData: hotelInfoData,
+            hotelName: hotelName,
+            hotelRoomsDetail: hotelRoomsDetail,
+            resultIndex: resultIndex,
+            searchToken: searchToken,
+            userIp: userIp,
+            url:
+                ininitiatePaymentModel.data.instrumentResponse.redirectInfo.url,
+            referenceId: ininitiatePaymentModel.data.merchantTransactionId,
+          ));
+    }
+  }
+
+  checkPhonePeStatus(
+      {required String refernceID,
+      required double amount,
+      required String userIp,
+      required String resultIndex,
+      required String hotelCode,
+      required String hotelName,
+      required String searchToken,
+      required HotelInfoData hotelInfoData,
+      required ht.HotelRoomsDetail hotelRoomsDetail}) async {
+    dio.Response<dynamic> response = await paymentResponseApiServices
+        .paymentResponseApi(merchantId: refernceID);
+
+    if (response.data["code"] == "PAYMENT_SUCCESS") {
+      print("<<<<<<<<payment is Success>>>>>>>>");
+      //need to give id
+      String transactionId = "";
+      Get.to(() => const FlightLoadingPage());
+
+      blockroomapi(
+          userIp: userIp,
+          hotelInfoData: hotelInfoData,
+          resultIndex: resultIndex,
+          hotelCode: hotelCode,
+          hotelName: hotelName,
+          searchToken: searchToken,
+          hotelRoomsDetail: hotelRoomsDetail);
+    } else {
+      print("<<<<<<<<payment is Failed>>>>>>>>");
+
+      Get.to(() => PaymentFailedScreen());
+    }
   }
 }

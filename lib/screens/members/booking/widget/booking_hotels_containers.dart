@@ -82,7 +82,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                               });
                               Result result = await hotelBookingController
                                   .getHotelDetails(hotelBookingController
-                                      .bookingList[index].bookingId);
+                                      .bookingList[index].bookingId,);
                               setState(() {
                                 isLoading = false;
                               });
@@ -117,14 +117,18 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                                   width: 100,
                                                   fit: BoxFit.cover,
                                                 )
-                                              : Image.network(
-                                                  hotelBookingController
-                                                      .bookingList[index]
-                                                      .hotelImage,
-                                                  height: 100,
+                                              : Container(
+                                                 height: 100,
                                                   width: 100,
-                                                  fit: BoxFit.cover,
-                                                )),
+                                                child: Image.network(
+                                                    hotelBookingController
+                                                        .bookingList[index]
+                                                        .hotelImage,
+                                                    height: 100,
+                                                    width: 100,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                              )),
                                     ),
                                     kwidth10,
                                     Column(
