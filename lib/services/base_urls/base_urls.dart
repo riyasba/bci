@@ -218,7 +218,7 @@ abstract class BaseApiService {
 
   //hotel search
   final String searchHotelApiUrl =
-      "https://www.portal.bcipvtltd.com/api/auth/search_hotels";
+      "https://staging.travelxmlapi.com/V3/hotelservice/Hotelrest/search";
 
   //hotel search city
   final String searchHotelcityApiUrl =
