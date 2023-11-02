@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'dart:math' as math;
 import '../../../constands/constands.dart';
 import '../../../controllers/home_page_controller.dart';
@@ -132,16 +133,24 @@ class _HotelListScreenState extends State<HotelListScreen> {
                             ),
                           ],
                         ),
-                        InkWell(
-                          onTap: () {
-                            filterHotelBooking(context);
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.only(right: 15),
-                            child: Icon(
-                              Icons.filter_alt,
-                              color: Colors.white,
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 15),
+                          child: InkWell(
+                            onTap: () {
+                              filterHotelBooking(context);
+                            },
+                            child: Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                    color: kblue,
+                                    borderRadius: BorderRadius.circular(7)),
+                                child: Center(
+                                    child: Icon(
+                                  Icons.filter_alt_outlined,
+                                  color: kwhite,
+                                  size: 18,
+                                ))),
                           ),
                         )
                       ],
@@ -272,7 +281,6 @@ class _HotelListScreenState extends State<HotelListScreen> {
                                   .toString(),
                               searchToken: searchtocken ?? "",
                               userIp: '122.160.83.78',
-
                               // hotelBookingController.blockroomdata[index].hotelRoomsDetails.toString(),
                             ));
                             hotelBookingController.update();

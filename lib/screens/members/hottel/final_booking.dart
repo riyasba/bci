@@ -6,6 +6,7 @@ import 'package:flutter_super_html_viewer/flutter_super_html_viewer.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../controllers/hotel_booking_controller.dart';
 
 class HotelInfobooking extends StatefulWidget {
@@ -44,6 +45,18 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
         resultIndex: widget.resultIndex,
         hotelCode: widget.hotelCode,
         searchToken: widget.searchToken);
+  }
+
+  void launchGoogleMaps(String latitude, String longitude, String name) async {
+    final url = 'https://www.google.com/maps/search/?api=1&query=$name';
+
+    // "google.navigation:q=$latitude,$longitude&mode=d";
+
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw 'Could not launch Google Maps';
+    }
   }
 
   @override
@@ -215,9 +228,7 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
                             hotelController.hotelRoomsData.isEmpty
                                 ? const Text('')
                                 : Text(
-                                    hotelController.hotelRoomsData.first
-                                        .hotelRoomsDetails.first.price.roomPrice
-                                        .toString(),
+                                    "₹${hotelController.hotelRoomsData.first.hotelRoomsDetails.first.price.roomPrice.toString()}",
                                     style: TextStyle(
                                         fontWeight: FontWeight.w700,
                                         color: kgrey),
@@ -265,6 +276,52 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
                                         fontWeight: FontWeight.w700,
                                         color: kgrey),
                                   ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            if (hotelController.hotelRoomsData.isNotEmpty)
+                              // InkWell(
+                              //   onTap: () {
+                              //     launchGoogleMaps(
+                              //         hotelController
+                              //             .hotelInfoData.first.latitude,
+                              //         hotelController
+                              //             .hotelInfoData.first.longitude);
+                              //   },
+                              //   child:
+                              // )
+
+                              IconButton(
+                                onPressed: () {
+                                  launchGoogleMaps(
+                                      hotelController
+                                          .hotelInfoData.first.latitude,
+                                      hotelController
+                                          .hotelInfoData.first.longitude,
+                                      hotelController
+                                          .hotelInfoData.first.hotelName + ","+hotelController
+                                          .hotelInfoData.first.pinCode );
+                                },
+                                icon: const Icon(
+                                  Icons.location_on,
+                                  color: Colors.blue,
+                                ),
+                              )
+                            // ksizedbox10,
+                            // hotelController.hotelRoomsData.isEmpty
+                            //     ? Text('')
+                            //     : Text(
+                            //         hotelController
+                            //             .hotelRoomsData
+                            //             .first
+                            //             .hotelRoomsDetails
+                            //             .first
+                            //             .availabilityType,
+                            //         style: TextStyle(
+                            //             fontWeight: FontWeight.w700,
+                            //             color: kgrey),
+                            //       ),
                           ],
                         )
                       ],

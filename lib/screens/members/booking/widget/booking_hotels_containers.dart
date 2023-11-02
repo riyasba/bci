@@ -82,7 +82,8 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                               });
                               Result result = await hotelBookingController
                                   .getHotelDetails(hotelBookingController
-                                      .bookingList[index].bookingId,);
+                                      .bookingList[index].bookingId,hotelBookingController
+                                      .bookingList[index].searchKey);
                               setState(() {
                                 isLoading = false;
                               });
