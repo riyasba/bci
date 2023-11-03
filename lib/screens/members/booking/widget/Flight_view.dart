@@ -38,7 +38,7 @@ class _FlightWidgetState extends State<FlightWidget> {
                     Image.asset('assets/images/flightnotavailableimage.png'),
                     ksizedbox20,
                     Text(
-                      'Not Booking In Flight Tickets',
+                      'No Bookings',
                       style: TextStyle(
                           fontSize: 20.sp,
                           color: kblue,

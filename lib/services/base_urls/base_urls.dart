@@ -288,7 +288,15 @@ abstract class BaseApiService {
   final String paymentStatusURL =
       "https://www.portal.bcipvtltd.com/api/checkPaymentStatus";
 
- //
-  final String busBookingCancelationURL = "http://uat.etrav.in/BusHost/BusAPIService.svc/JSONService/Bus_Cancellation";
-  
+  //
+  // final String busBookingCancelationURL = "http://uat.etrav.in/BusHost/BusAPIService.svc/JSONService/Bus_Cancellation";
+
+  final String busBookingCancelationURL =
+      "http://api.etrav.in/BusHost/BusAPIService.svc/JSONService/Bus_Cancellation";
+
+  final String busBookingCancelationChargeURL =
+      "http://api.etrav.in/BusHost/BusAPIService.svc/JSONService/Bus_CancellationCharge";
+
+  final String hotelBookingCancelationURL =
+      "https://www.portal.bcipvtltd.com/api/auth/cancel_request";
 }

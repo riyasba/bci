@@ -43,7 +43,7 @@ class _HoliaysContainorsState extends State<HoliaysContainors> {
                       child: Image.asset('assets/images/holidaytripnotavailable.png'),
                     ),
                     ksizedbox20,
-                    Text('Not Booking In Holidays Trip',
+                    Text('No Bookings',
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,

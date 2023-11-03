@@ -238,7 +238,7 @@ class Fare {
 class FareDetail {
   double airportTaxAmount;
   List<AirportTax> airportTaxes;
-  int basicAmount;
+  dynamic basicAmount;
   List<Charge>? cancellationCharges;
   String currencyCode;
   List<FareClass> fareClasses;

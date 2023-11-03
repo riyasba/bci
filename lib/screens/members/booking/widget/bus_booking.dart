@@ -35,21 +35,23 @@ class _BusContainersState extends State<BusContainers> {
       return Padding(
         padding: const EdgeInsets.only(top: 10),
         child: busController.bookingHistoryList.isEmpty
-            ?  Center(
+            ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                     Padding(
-                       padding: const EdgeInsets.only(left: 20,right: 20),
-                       child: Image.asset('assets/images/busbookingnotavailableimage.png'),
-                     ),
-                     ksizedbox20,
-                     Text('Not Booking In Bus Tickets',
-                     style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color: kblue
-                     ),)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Image.asset(
+                          'assets/images/busbookingnotavailableimage.png'),
+                    ),
+                    ksizedbox20,
+                    Text(
+                      'No Bookings',
+                      style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                          color: kblue),
+                    )
                   ],
                 ),
               )
@@ -332,11 +334,42 @@ class _BusContainersState extends State<BusContainers> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: (){
-                      showDialog(context: context, 
-                      builder: (BuildContext context){
-                        return mAlertItem2;
-                      });
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: Colors.white,
+                                title: Text("Cancel Booking",
+                                    style: boldTextStyle(color: Colors.black)),
+                                content: Text(
+                                  "Are you sure you want to Cancel?",
+                                  style:
+                                      secondaryTextStyle(color: Colors.black),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: Text(
+                                      "Yes",
+                                      style: primaryTextStyle(color: kblue),
+                                    ),
+                                    onPressed: () {
+                                      Get.back();
+                                      Get.find<BusController>().cancelMyBus(
+                                          refernceNo:
+                                              busBookingData.bookingRefno);
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: Text("No",
+                                        style: primaryTextStyle(color: kblue)),
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
                       },
                       child: const Text(
                         'Cancel',
@@ -372,30 +405,4 @@ class _BusContainersState extends State<BusContainers> {
       },
     );
   }
-    AlertDialog mAlertItem2 = AlertDialog(
-    backgroundColor: Colors.white,
-    title: Text("Cancel Booking", style: boldTextStyle(color: Colors.black)),
-    content: Text(
-      "Are you sure you want to Cancel?",
-      style: secondaryTextStyle(color: Colors.black),
-    ),
-    actions: [
-      TextButton(
-        child: Text(
-          "Yes",
-          style: primaryTextStyle(color: kblue),
-        ),
-        onPressed: () {
-          Get.back();
-          //Get.find<AuthController>().logout();
-        },
-      ),
-      TextButton(
-        child: Text("No", style: primaryTextStyle(color: kblue)),
-        onPressed: () {
-          Get.back();
-        },
-      ),
-    ],
-  );
 }

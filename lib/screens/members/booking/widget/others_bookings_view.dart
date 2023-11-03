@@ -39,7 +39,7 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                       child: Image.asset('assets/images/othersbookingnotavailableimage.png'),
                     ),
                     ksizedbox20,
-                    Text('Not Booking In Other Plans',
+                    Text('No Bookings',
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,

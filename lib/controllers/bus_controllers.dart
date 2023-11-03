@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/bus_booking_models/bus_booking_history_model.dart';
+import 'package:bci/models/bus_booking_models/bus_cancel_seats_details_model.dart';
 import 'package:bci/models/bus_booking_models/bus_cityList_model.dart';
 import 'package:bci/models/bus_booking_models/bus_requery_model.dart';
 import 'package:bci/models/bus_booking_models/bus_seat_map_model.dart';
@@ -20,6 +21,8 @@ import 'package:bci/screens/members/manual_payment_options/phone_pe_payment_flig
 import 'package:bci/screens/members/otcpayment/payment_failed_screen.dart';
 import 'package:bci/services/network/bus_api_services/add_bus_booking_history.dart';
 import 'package:bci/services/network/bus_api_services/bus_booking_add_payment_api_services.dart';
+import 'package:bci/services/network/bus_api_services/bus_cancelation_api_services.dart';
+import 'package:bci/services/network/bus_api_services/bus_cancelation_charge_api_services.dart';
 import 'package:bci/services/network/bus_api_services/bus_cityList_api_service.dart';
 import 'package:bci/services/network/bus_api_services/bus_requiry_api_services.dart';
 import 'package:bci/services/network/bus_api_services/bus_seatMap_api_service.dart';
@@ -423,9 +426,17 @@ class BusController extends GetxController {
       PaymentResponseApiServices();
 
   initiatePayment({required double amount, required String bookingRef}) async {
+    var userId = 0;
+    print(Get.find<ProfileController>().profileData);
+    if (Get.find<ProfileController>().profileData.isNotEmpty) {
+      userId = Get.find<ProfileController>().profileData.first.id;
+    } else {
+      await Get.find<ProfileController>().getProfile();
+      userId = Get.find<ProfileController>().profileData.first.id;
+    }
     dio.Response<dynamic> response =
         await initiatePaymentApiServices.initiatePayment(
-            userId: Get.find<ProfileController>().profileData.first.id,
+            userId: userId,
             totalAmount: amount.toStringAsFixed(2),
             status: "Bus");
 
@@ -831,7 +842,7 @@ class BusController extends GetxController {
                                   ],
                                 ),
                                 pw.Padding(
-                                    padding: pw.EdgeInsets.only(top: 15),
+                                    padding: const pw.EdgeInsets.only(top: 15),
                                     child: pw.Row(
                                       mainAxisAlignment:
                                           pw.MainAxisAlignment.spaceBetween,
@@ -908,38 +919,38 @@ class BusController extends GetxController {
                                             ],
                                           ),
                                         ),
-                                        pw.Padding(
-                                            padding: pw.EdgeInsets.only(
-                                              top: 8,
-                                            ),
-                                            child: pw.Container(
-                                              width: 82,
-                                              child: pw.Column(
-                                                crossAxisAlignment:
-                                                    pw.CrossAxisAlignment.start,
-                                                children: [
-                                                  pw.Text(
-                                                    'Total fare',
-                                                    style: pw.TextStyle(
-                                                        color: PdfColors
-                                                            .blueAccent,
-                                                        fontWeight:
-                                                            pw.FontWeight.bold),
-                                                  ),
-                                                  pw.Padding(
-                                                    padding: pw.EdgeInsets.only(
-                                                        top: 8),
-                                                    child: pw.Text(
-                                                      'Rs. ${getTotalAmount(busRequeryModel.paxDetails)}',
-                                                      style: pw.TextStyle(
-                                                        fontSize: 13,
-                                                        //fontWeight: pw.FontWeight.bold
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            )),
+                                        // pw.Padding(
+                                        //     padding: pw.EdgeInsets.only(
+                                        //       top: 8,
+                                        //     ),
+                                        //     child: pw.Container(
+                                        //       width: 82,
+                                        //       child: pw.Column(
+                                        //         crossAxisAlignment:
+                                        //             pw.CrossAxisAlignment.start,
+                                        //         children: [
+                                        //           pw.Text(
+                                        //             'Total fare',
+                                        //             style: pw.TextStyle(
+                                        //                 color: PdfColors
+                                        //                     .blueAccent,
+                                        //                 fontWeight:
+                                        //                     pw.FontWeight.bold),
+                                        //           ),
+                                        //           pw.Padding(
+                                        //             padding: pw.EdgeInsets.only(
+                                        //                 top: 8),
+                                        //             child: pw.Text(
+                                        //               'Rs. ${getTotalAmount(busRequeryModel.paxDetails)}',
+                                        //               style: pw.TextStyle(
+                                        //                 fontSize: 13,
+                                        //                 //fontWeight: pw.FontWeight.bold
+                                        //               ),
+                                        //             ),
+                                        //           )
+                                        //         ],
+                                        //       ),
+                                        //     )),
                                       ],
                                     ))
                               ],
@@ -977,7 +988,7 @@ class BusController extends GetxController {
                           pw.Padding(
                             padding: const pw.EdgeInsets.only(left: 10),
                             child: pw.Text(
-                              'redBus* is ONLY a bus ticket agent. It does not operate bus services of its \nown. In order to provide a comprehensive choice of bus operators, departure \ntimes and prices to customers, it has tied up with many bus operators. redBus" \nadvice to customers is to choose bus operators they are aware of and whose \nservice they are comfortable with.',
+                              'BCI* is ONLY a bus ticket agent. It does not operate bus services of its \nown. In order to provide a comprehensive choice of bus operators, departure \ntimes and prices to customers, it has tied up with many bus operators. redBus" \nadvice to customers is to choose bus operators they are aware of and whose \nservice they are comfortable with.',
                               style: const pw.TextStyle(height: 3),
                             ),
                           ),
@@ -988,7 +999,7 @@ class BusController extends GetxController {
                         crossAxisAlignment: pw.CrossAxisAlignment.start,
                         children: [
                           pw.Text(
-                            'redBus" responsibilities include: ',
+                            ' responsibilities include: ',
                             style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
                           ),
                           pw.Padding(
@@ -1097,7 +1108,7 @@ class BusController extends GetxController {
     ));
 
     Directory root = await getTemporaryDirectory();
-    final file = File(root.path + '/example.pdf');
+    final file = File(root.path + '/ticket.pdf');
     await file.writeAsBytes(await pdf.save());
     print("------------------------>>>");
     print(file.path);
@@ -1153,5 +1164,73 @@ class BusController extends GetxController {
       update();
     }
     update();
+  }
+
+  cancelMyBus({required String refernceNo}) async {
+    dio.Response<dynamic> response =
+        await busRequieyApiServices.busRequiryApi(refrenceNo: refernceNo);
+
+    if (response.statusCode == 200) {
+      BusRequeryModel busRequeryModel = BusRequeryModel.fromJson(response.data);
+
+      List<BusCancelSeatDetailsModel> busBookingdetails = [];
+
+      for (var details in busRequeryModel.paxDetails) {
+        BusCancelSeatDetailsModel busCancelSeatDetailsModel =
+            BusCancelSeatDetailsModel(
+                pnrNumber: busRequeryModel.transportPnr,
+                seatNumber: details.seatNumber,
+                ticketNumber: details.ticketNumber);
+        busBookingdetails.add(busCancelSeatDetailsModel);
+      }
+
+      buscancelationCharge(
+          bookingNumber: refernceNo, busBookingdetails: busBookingdetails);
+    }
+  }
+
+  BusCancelationChargeApiServices busCancelationChargeApiServices =
+      BusCancelationChargeApiServices();
+  BusCancelationApiServices busCancelationApiServices =
+      BusCancelationApiServices();
+
+  buscancelationCharge(
+      {required String bookingNumber,
+      required List<BusCancelSeatDetailsModel> busBookingdetails}) async {
+    dio.Response<dynamic> response =
+        await busCancelationChargeApiServices.busCancelCharges(
+            bookingNumber: bookingNumber, busBookingdetails: busBookingdetails);
+
+    if (response.data["Cancellable"] == true) {
+      String cancelationChargeKey = response.data["CancellationCharge_Key"];
+      buscancelRequest(
+          bookingNumber: bookingNumber,
+          busBookingdetails: busBookingdetails,
+          cancelationChargeString: cancelationChargeKey);
+    } else {
+      Get.rawSnackbar(
+          message: "Sorry, Bus can't be cancel now. Contact admin",
+          backgroundColor: Colors.red);
+    }
+  }
+
+  buscancelRequest({
+    required String bookingNumber,
+    required String cancelationChargeString,
+    required List<BusCancelSeatDetailsModel> busBookingdetails,
+  }) async {
+    dio.Response<dynamic> response = await busCancelationApiServices.busCancel(
+        bookingNumber: bookingNumber,
+        busBookingdetails: busBookingdetails,
+        cancelationChargeString: cancelationChargeString);
+
+    if (response.data["Response_Header"]["Error_Desc"] == "SUCCESS") {
+      Get.rawSnackbar(
+          message: "Booking Cancelled", backgroundColor: Colors.green);
+    } else {
+      Get.rawSnackbar(
+          message: response.data["Response_Header"]["Error_InnerException"],
+          backgroundColor: Colors.red);
+    }
   }
 }

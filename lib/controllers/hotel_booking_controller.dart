@@ -323,7 +323,7 @@ class HotelBookingController extends GetxController {
             price: hotelRoomsDetail.dayRates.first.amount.toString(),
             userName: profileController.profileData.first.name.toString());
         storeHotlBookingData(hotelBookingStoreData: hotelBookingStroreData,searchToken: searchToken);
-        Get.to(() => const Sucessful_screen_hotel());
+        Get.offAll(() => const Sucessful_screen_hotel());
       } else {
         Get.rawSnackbar(
             backgroundColor: Colors.red,

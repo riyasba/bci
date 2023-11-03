@@ -59,7 +59,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                       child: Image.asset('assets/images/hotelbookingnotavailableimage.png'),
                     ),
                     ksizedbox20,
-                    Text('Not Booking In Hotel Rooms',
+                    Text('No Bookings',
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,

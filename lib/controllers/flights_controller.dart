@@ -214,9 +214,9 @@ class FlightsController extends GetxController {
           "<<<..........------------Air ticket booked ----------.........>>>> ");
 
       print(response.data["Booking_RefNo"]);
-      // airAddPayment(
-      //     refernceNo: response.data["Booking_RefNo"],
-      //     transactionId: transactionId);
+      airAddPayment(
+          refernceNo: response.data["Booking_RefNo"],
+          transactionId: transactionId);
     }
   }
 
