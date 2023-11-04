@@ -52,6 +52,9 @@ class BusController extends GetxController {
   RxString date = "Select Date".obs;
   RxString day = "".obs;
   RxInt bookSeat = 0.obs;
+
+  RxBool isBusLoading = false.obs;
+
   var travelDatess = DateTime.now();
   BusTempTicketBookingApiService busTempTicketBookingApiService =
       BusTempTicketBookingApiService();
@@ -443,7 +446,7 @@ class BusController extends GetxController {
     if (response.statusCode == 200) {
       IninitiatePaymentModel ininitiatePaymentModel =
           IninitiatePaymentModel.fromJson(response.data);
-
+      isBusLoading(false);
       Get.to(() => PaymentWebViewBus(
             amount: amount,
             bookingRef: bookingRef,

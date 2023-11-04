@@ -152,7 +152,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                                         MainAxisAlignment.spaceAround,
                                     children: [
                                       Text(
-                                        "View Cart",
+                                        "View Bookings",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500),
@@ -263,7 +263,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                                                   BorderRadius.circular(16)),
                                           child: const Center(
                                               child: Text(
-                                            "Add To Cart",
+                                            "Add To Booking",
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w700),

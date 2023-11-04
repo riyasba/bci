@@ -305,7 +305,7 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
                             child: Container(
                               child: Center(
                                   child: Text(
-                                'Add To Cart',
+                                'Add To Booking',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w700),
                               )),

@@ -16,7 +16,7 @@ class HotelCancelApiServices extends BaseApiService {
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(searchHotelcityApiUrl,
+      var response = await dio.post(hotelBookingCancelationURL,
           options: Options(
               headers: {'Authorization': 'Bearer $authtoken'},
               followRedirects: false,
@@ -29,7 +29,7 @@ class HotelCancelApiServices extends BaseApiService {
             "BookingId": bookingId,
             "BookingMode": "5",
             "RequestType": "4",
-            "Remarks": "",
+            "Remarks": "Canceling the hotel",
           });
 
       print("::::::::<get HOTEL city-list Api>::::::::status code::::::::::");

@@ -64,17 +64,20 @@ class Coupon {
     int totalCouponCodes;
     int thisMonthUsed;
     int todayUsed;
+  int notUsed;
 
     Coupon({
         required this.totalCouponCodes,
         required this.thisMonthUsed,
         required this.todayUsed,
+    required this.notUsed,
     });
 
     factory Coupon.fromJson(Map<String, dynamic> json) => Coupon(
         totalCouponCodes: json["total_coupon_codes"],
         thisMonthUsed: json["this_month_used"],
         todayUsed: json["today_used"],
+        notUsed: json["total_not_used"],
     );
 
     Map<String, dynamic> toJson() => {

@@ -170,7 +170,8 @@ class _YourReferralScreenState extends State<YourReferralScreen> {
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: InkWell(
                 onTap: () {
-                  String referralmsg = "Use my referral code ${settingsController.referralCode.value} when you sign up, and we'll both receive fantastic rewards. Don't forget to click on the link below to download the app and start enjoying the perks right away!\n\n";
+                  // String referralmsg = "Use my referral code ${settingsController.referralCode.value} when you sign up, and we'll both receive fantastic rewards. Don't forget to click on the link below to download the app and start enjoying the perks right away!\n\n";
+                  String referralmsg = "I’m inviting you to use BCI App - Premimum Club House App. Here’s my code \"${settingsController.referralCode.value}\" just enter it and get unlimited offers on purchases\n\nDownload BCI App Now: ${"https://play.google.com/store/apps/details?id=com.memberapp.bci"}";
                   Share.share('$referralmsg');
                 },
                 child: Container(

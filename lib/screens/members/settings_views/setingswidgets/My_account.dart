@@ -1020,6 +1020,38 @@ class _MyAccountState extends State<MyAccount> {
                                 ),
                               ),
                               if (isMarried == true)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Container(
+                                    height: 37,
+                                    width: size.width,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(2),
+                                        border: Border.all(
+                                            color: const Color(0xff707070)),
+                                        color: const Color(0xffF9F8FD)),
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 15, right: 10),
+                                      child: TextField(
+                                        textCapitalization:
+                                            TextCapitalization.words,
+                                        controller: spouseController,
+                                        decoration: InputDecoration(
+                                            isCollapsed: true,
+                                            isDense: true,
+                                            border: InputBorder.none,
+                                            hintText: "Spouse",
+                                            hintStyle: TextStyle(
+                                              color: kblue,
+                                              fontWeight: FontWeight.w400,
+                                            )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              if (isMarried == true)
                                 TextFieldTags(
                                   textfieldTagsController: _controller,
                                   initialTags: const [],
@@ -1634,7 +1666,7 @@ class _MyAccountState extends State<MyAccount> {
                                           isCollapsed: true,
                                           isDense: true,
                                           border: InputBorder.none,
-                                          hintText: "Branch",
+                                          hintText: "State",
                                           hintStyle: TextStyle(
                                             color: kblue,
                                             fontWeight: FontWeight.w400,
@@ -1643,37 +1675,7 @@ class _MyAccountState extends State<MyAccount> {
                                   ),
                                 ),
                               ),
-                              if (isMarried == true)
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Container(
-                                    height: 37,
-                                    width: size.width,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(2),
-                                        border: Border.all(
-                                            color: const Color(0xff707070)),
-                                        color: const Color(0xffF9F8FD)),
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 15, right: 10),
-                                      child: TextField(
-                                        textCapitalization: TextCapitalization.words,
-                                        controller: spouseController,
-                                        decoration: InputDecoration(
-                                            isCollapsed: true,
-                                            isDense: true,
-                                            border: InputBorder.none,
-                                            hintText: "Spouse",
-                                            hintStyle: TextStyle(
-                                              color: kblue,
-                                              fontWeight: FontWeight.w400,
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                              
                               Obx(
                                 () => Padding(
                                   padding: const EdgeInsets.only(top: 20),

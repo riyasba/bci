@@ -369,7 +369,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                             BorderRadius.circular(16)),
                                     child: const Center(
                                         child: Text(
-                                      "Add To Cart",
+                                      "Add To Booking",
                                       style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.w700),

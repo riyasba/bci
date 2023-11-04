@@ -29,16 +29,14 @@ class BusContactDetails extends StatefulWidget {
       required this.amount,
       required this.seatIds,
       required this.busContactmodel,
-      required this.cusName
-      });
+      required this.cusName});
 
   @override
   State<BusContactDetails> createState() => _BusContactDetailsState();
 }
 
 class _BusContactDetailsState extends State<BusContactDetails> {
-
- final busController = Get.find<BusController>();
+  final busController = Get.find<BusController>();
 
   var phoneNumberController = TextEditingController();
   var nameController = TextEditingController();
@@ -69,7 +67,6 @@ class _BusContactDetailsState extends State<BusContactDetails> {
   var emailController5 = TextEditingController();
   var ageController5 = TextEditingController();
   String selectedGender5 = '';
-  
 
   @override
   Widget build(BuildContext context) {
@@ -88,27 +85,29 @@ class _BusContactDetailsState extends State<BusContactDetails> {
               ksizedbox10,
               const Text('EMAIL ID').text.bold.gray500.make(),
               ksizedbox10,
-               TextField(
+              TextField(
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.emailAddress,
                 controller: emailController,
-                decoration: const InputDecoration.collapsed(hintText: "Enter your email"),
+                decoration: const InputDecoration.collapsed(
+                    hintText: "Enter your email"),
               ),
               ksizedbox10,
               Divider(color: kgrey, height: 0.5),
               ksizedbox20,
               const Text('PHONE').text.bold.gray500.make(),
               ksizedbox10,
-               TextField(
+              TextField(
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.phone,
                 inputFormatters: [
-                       LengthLimitingTextInputFormatter(10),
-                       FilteringTextInputFormatter.digitsOnly,
-                    FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                  ],
+                  LengthLimitingTextInputFormatter(10),
+                  FilteringTextInputFormatter.digitsOnly,
+                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                ],
                 controller: phoneNumberController,
-                decoration: const InputDecoration.collapsed(hintText: "Enter your phone"),
+                decoration: const InputDecoration.collapsed(
+                    hintText: "Enter your phone"),
               ),
               ksizedbox10,
               Divider(color: kgrey, height: 0.5),
@@ -147,25 +146,25 @@ class _BusContactDetailsState extends State<BusContactDetails> {
                       ],
                     ),
                     RadioListTile(
-            title:const Text('Male'),
-            value: 'Male',
-            groupValue: widget.busContactmodel[i].gender,
-            onChanged: (value) {
-              setState(() {
-                widget.busContactmodel[i].gender = value!;
-              });
-            },
-          ),
-          RadioListTile(
-            title:const Text('Female'),
-            value: 'Female',
-            groupValue: widget.busContactmodel[i].gender,
-            onChanged: (value) {
-              setState(() {
-                widget.busContactmodel[i].gender = value!;
-              });
-            },
-          ),
+                      title: const Text('Male'),
+                      value: 'Male',
+                      groupValue: widget.busContactmodel[i].gender,
+                      onChanged: (value) {
+                        setState(() {
+                          widget.busContactmodel[i].gender = value!;
+                        });
+                      },
+                    ),
+                    RadioListTile(
+                      title: const Text('Female'),
+                      value: 'Female',
+                      groupValue: widget.busContactmodel[i].gender,
+                      onChanged: (value) {
+                        setState(() {
+                          widget.busContactmodel[i].gender = value!;
+                        });
+                      },
+                    ),
                     ksizedbox10,
                     const Text('AGE').text.bold.gray500.make(),
                     ksizedbox10,
@@ -173,7 +172,8 @@ class _BusContactDetailsState extends State<BusContactDetails> {
                       textInputAction: TextInputAction.done,
                       keyboardType: TextInputType.number,
                       controller: widget.busContactmodel[i].ageController,
-                      decoration: const InputDecoration.collapsed(hintText: "Enter your age"),
+                      decoration: const InputDecoration.collapsed(
+                          hintText: "Enter your age"),
                     ),
                     ksizedbox10,
                     Divider(color: kgrey, height: 0.5),
@@ -193,52 +193,68 @@ class _BusContactDetailsState extends State<BusContactDetails> {
                 Get.back();
               },
               child: Container(
-                child: Center(child: Text('Cancel',style: TextStyle(color: Colors.white))),
+                child: Center(
+                    child:
+                        Text('Cancel', style: TextStyle(color: Colors.white))),
                 //   width: double.infinity,
                 height: 55,
                 color: kgrey,
               ),
             ),
           ),
-          Expanded(
-            child: InkWell(
-              onTap: () {
-
-                List<PaxDetailslist> paxDetailslists = [];
-
-                for(int a = 0; a < widget.busContactmodel.length; a++){
-                 
-                 PaxDetailslist paxDetailslistdata = PaxDetailslist(
-                  age: widget.busContactmodel[a].ageController.text,
-                  gender:widget.busContactmodel[a].gender == "Male" ? 0 : 1, 
-                  isLadies: false, 
-                  paxName: widget.busContactmodel[a].nameController.text, 
-                  seatNumber: widget.busContactmodel[a].seats
-                  ); 
-
-                  paxDetailslists.add(paxDetailslistdata);
-
-                }
-
-
-                busController.tempBookBusTicket(
-                    boardingId: widget.boardingId,
-                    droppingId: widget.dropingId,
-                    busData: widget.busData,
-                    searcKey: widget.searchkey,
-                    mobileNumber: phoneNumberController.text,
-                    customerEmail: emailController.text,
-                    paxDetailslist: paxDetailslists,
-                    amount: widget.amount,
-                    customerName: widget.cusName,
-                    seatMapKey: busController.seatMapKey.value);
-              },
-              child: Container(
-                child: Center(child: Text('Continue Booking',style: TextStyle(color: Colors.white),)),
-                //      width: double.infinity,
-                height: 55,
-                color: korange,
-              ),
+          Obx(()=> Expanded(
+              child: busController.isBusLoading.isTrue
+                  ? Container(
+                      child:  Center(
+                          child: CircularProgressIndicator(
+                        color: Colors.white,
+                      )),
+                      //      width: double.infinity,
+                      height: 55,
+                      color: korange,
+                    )
+                  : InkWell(
+                      onTap: () {
+                        busController.isBusLoading(true);
+                        List<PaxDetailslist> paxDetailslists = [];
+          
+                        for (int a = 0; a < widget.busContactmodel.length; a++) {
+                          PaxDetailslist paxDetailslistdata = PaxDetailslist(
+                              age: widget.busContactmodel[a].ageController.text,
+                              gender: widget.busContactmodel[a].gender == "Male"
+                                  ? 0
+                                  : 1,
+                              isLadies: false,
+                              paxName:
+                                  widget.busContactmodel[a].nameController.text,
+                              seatNumber: widget.busContactmodel[a].seats);
+          
+                          paxDetailslists.add(paxDetailslistdata);
+                        }
+          
+                        busController.tempBookBusTicket(
+                            boardingId: widget.boardingId,
+                            droppingId: widget.dropingId,
+                            busData: widget.busData,
+                            searcKey: widget.searchkey,
+                            mobileNumber: phoneNumberController.text,
+                            customerEmail: emailController.text,
+                            paxDetailslist: paxDetailslists,
+                            amount: widget.amount,
+                            customerName: widget.cusName,
+                            seatMapKey: busController.seatMapKey.value);
+                      },
+                      child: Container(
+                        child: Center(
+                            child: Text(
+                          'Continue Booking',
+                          style: TextStyle(color: Colors.white),
+                        )),
+                        //      width: double.infinity,
+                        height: 55,
+                        color: korange,
+                      ),
+                    ),
             ),
           ),
         ],

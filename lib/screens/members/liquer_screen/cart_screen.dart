@@ -63,7 +63,7 @@ class _CartScreenState extends State<CartScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 0),
                       child: Text(
-                        'View Cart',
+                        'View Bookings',
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
@@ -96,7 +96,7 @@ class _CartScreenState extends State<CartScreen> {
                       Image.asset('assets/images/cartnotavailableimage.png'),
                       ksizedbox20,
                       Text(
-                        'Cart Is Empty',
+                        'Booking is Empty',
                         style: TextStyle(
                             fontSize: 22.sp,
                             color: kblue,
@@ -335,7 +335,7 @@ class _CartScreenState extends State<CartScreen> {
                                     paymentBottomSheet(context, tempAmount);
                                   } else {
                                     Get.rawSnackbar(
-                                        message: "No Cart item found",
+                                        message: "No Booking found",
                                         backgroundColor: Colors.red);
                                   }
                                 },

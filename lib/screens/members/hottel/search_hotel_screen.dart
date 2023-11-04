@@ -1,4 +1,5 @@
 import 'package:bci/models/hotel_booking_models/store_temp_search_data.dart';
+import 'package:bci/screens/members/hottel/hotel_city_name_search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,20 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
       start: DateTime.now(), end: DateTime.now().add(Duration(days: 1)));
 
   final hotelController = Get.find<HotelBookingController>();
-  final destinationcontrolr = TextEditingController();
+  // final destinationcontrolr = TextEditingController();
+
+  setDefaults() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      hotelController.destinationcontrolr.clear();
+      hotelController.update();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setDefaults();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,56 +113,71 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
                     return Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
+                        border: Border.all(color: Colors.black),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       height: size.height * 0.06,
                       width: size.width * 0.2,
-                      child: TypeAheadField<SearchCityListModel>(
-                        getImmediateSuggestions: true,
-                        textFieldConfiguration: TextFieldConfiguration(
-                          onChanged: (value) async {
-                            if (value.length > 1) {
-                              await Future.delayed(
-                                  const Duration(milliseconds: 200));
-                              Get.find<HotelBookingController>()
-                                  .hotelCityList(searchCity: value.trim());
-                            }
-                          },
-                          controller: destinationcontrolr,
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                              hintText: 'Search for hotels'),
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: TextField(
+                            controller: hotelController.destinationcontrolr,
+                            readOnly: true,
+                            onTap: () {
+                              Get.to(() => HotelCityNameSearchView());
+                            },
+                            decoration: const InputDecoration.collapsed(
+                                hintText: "Search Places"),
+                          ),
                         ),
-                        suggestionsCallback: (String pattern) async {
-                          return hotelController.getHotelCityList
-                              .where((item) => item.destination
-                                  .toLowerCase()
-                                  .startsWith(pattern.toLowerCase()))
-                              .toList();
-                        },
-                        itemBuilder: (context, SearchCityListModel citymodel) {
-                          return  ListTile(
-                                  title: Text(citymodel.destination),
-                                );
-                        },
-                        itemSeparatorBuilder: (context, index) {
-                          return Divider();
-                        },
-                        onSuggestionSelected: (SearchCityListModel citymodel) {
-                          print("destination selected");
-                          destinationcontrolr.text = citymodel.destination;
-                          //    hotelController.toCity(citymodel.cityName);
-                          hotelController.hotelSearchKey(citymodel.cityid);
-                          hotelController
-                              .hotelSearchKeyCode(citymodel.countrycode);
-                          print(citymodel.cityid);
-                          print(citymodel.country);
-                          print(citymodel.countrycode);
-                          print(citymodel.destination);
-                        },
                       ),
+                      // TypeAheadField<SearchCityListModel>(
+                      //   getImmediateSuggestions: true,
+                      //   textFieldConfiguration: TextFieldConfiguration(
+                      //     onChanged: (value) async {
+                      //       if (value.length > 1) {
+                      //         await Future.delayed(
+                      //             const Duration(milliseconds: 200));
+                      //         Get.find<HotelBookingController>()
+                      //             .hotelCityList(searchCity: value.trim());
+                      //       }
+                      //     },
+                      //     controller: hotelController.destinationcontrolr,
+                      //     decoration: const InputDecoration(
+                      //         border: OutlineInputBorder(
+                      //             borderRadius:
+                      //                 BorderRadius.all(Radius.circular(10))),
+                      //         hintText: 'Search for hotels'),
+                      //   ),
+                      //   suggestionsCallback: (String pattern) async {
+                      //     return hotelController.getHotelCityList
+                      //         .where((item) => item.destination
+                      //             .toLowerCase()
+                      //             .startsWith(pattern.toLowerCase()))
+                      //         .toList();
+                      //   },
+                      //   itemBuilder: (context, SearchCityListModel citymodel) {
+                      //     return ListTile(
+                      //       title: Text(citymodel.destination),
+                      //     );
+                      //   },
+                      //   itemSeparatorBuilder: (context, index) {
+                      //     return Divider();
+                      //   },
+                      //   onSuggestionSelected: (SearchCityListModel citymodel) {
+                      //     print("destination selected");
+                      //     // destinationcontrolr.text = citymodel.destination;
+                      //     //    hotelController.toCity(citymodel.cityName);
+                      //     hotelController.hotelSearchKey(citymodel.cityid);
+                      //     hotelController
+                      //         .hotelSearchKeyCode(citymodel.countrycode);
+                      //     print(citymodel.cityid);
+                      //     print(citymodel.country);
+                      //     print(citymodel.countrycode);
+                      //     print(citymodel.destination);
+                      //   },
+                      // ),
                     );
                   }),
                 ),
@@ -361,20 +390,26 @@ class _SerchHotelScreenState extends State<SerchHotelScreen> {
           Obx(
             () => InkWell(
               onTap: () {
-                hotelController.tempBookingModel = TempBookingModel(
-                    bookingDate: DateFormat('dd/MM/yyyy').format(start),
-                    noOfDays: diffrence.inDays.toString(),
-                    noOfPeople: hotelController.adult.value.toString(),
-                    place: destinationcontrolr.text);
-                hotelController.searchHotel(
-                    child: hotelController.child.value,
-                    adult: hotelController.adult.value,
-                    checkindate: DateFormat('dd/MM/yyyy').format(start),
-                    checkoutdate: DateFormat('dd/MM/yyyy').format(end),
-                    destination: hotelController.hotelSearchKey.value,
-                    //  childage: hotelController.roomno.value,
-                    roomsno: hotelController.roomno.string,
-                    countryCode: hotelController.hotelSearchKeyCode.value);
+                if (hotelController.destinationcontrolr.text.isNotEmpty) {
+                  hotelController.tempBookingModel = TempBookingModel(
+                      bookingDate: DateFormat('dd/MM/yyyy').format(start),
+                      noOfDays: diffrence.inDays.toString(),
+                      noOfPeople: hotelController.adult.value.toString(),
+                      place: hotelController.destinationcontrolr.text);
+                  hotelController.searchHotel(
+                      child: hotelController.child.value,
+                      adult: hotelController.adult.value,
+                      checkindate: DateFormat('dd/MM/yyyy').format(start),
+                      checkoutdate: DateFormat('dd/MM/yyyy').format(end),
+                      destination: hotelController.hotelSearchKey.value,
+                      //  childage: hotelController.roomno.value,
+                      roomsno: hotelController.roomno.string,
+                      countryCode: hotelController.hotelSearchKeyCode.value);
+                } else {
+                  Get.rawSnackbar(
+                      message: "Please select any place",
+                      backgroundColor: Colors.black);
+                }
                 //Get.to(Sucessful_screen_hotel());
               },
               child: Padding(

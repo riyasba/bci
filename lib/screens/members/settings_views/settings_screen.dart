@@ -228,7 +228,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Text(
-                      "View Cart",
+                      "View Bookings",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,

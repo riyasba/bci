@@ -13,6 +13,7 @@ import 'package:bci/screens/members/manual_payment_options/phone_pe_paument_hote
 import 'package:bci/screens/members/otcpayment/payment_failed_screen.dart';
 import 'package:bci/services/network/hotel_api_services/get_room_details_api_services.dart';
 import 'package:bci/services/network/hotel_api_services/hotel_booking_list_api_service.dart';
+import 'package:bci/services/network/hotel_api_services/hotel_cancelation_api_services.dart';
 import 'package:bci/services/network/hotel_api_services/hotel_info_api_service.dart';
 import 'package:bci/services/network/hotel_api_services/store_hotel_booking_data_api.dart';
 import 'package:bci/services/network/payment_api_services/intiate_payment_api_services.dart';
@@ -44,6 +45,8 @@ class HotelBookingController extends GetxController {
   List<SearchCityListModel> getHotelCityList = [];
 
   TempBookingModel? tempBookingModel;
+
+    final destinationcontrolr = TextEditingController();
 
   //search hotel
   SearchHotelListApiService searchBusListApiService =
@@ -322,7 +325,9 @@ class HotelBookingController extends GetxController {
             hotelName: hotelInfoData.hotelName,
             price: hotelRoomsDetail.dayRates.first.amount.toString(),
             userName: profileController.profileData.first.name.toString());
-        storeHotlBookingData(hotelBookingStoreData: hotelBookingStroreData,searchToken: searchToken);
+        storeHotlBookingData(
+            hotelBookingStoreData: hotelBookingStroreData,
+            searchToken: searchToken);
         Get.offAll(() => const Sucessful_screen_hotel());
       } else {
         Get.rawSnackbar(
@@ -367,19 +372,23 @@ class HotelBookingController extends GetxController {
   }
 
   storeHotlBookingData(
-      {required HotelBookingStroreData hotelBookingStoreData,required String searchToken}) async {
-    dio.Response<dynamic> response = await storeHotelBookingApiServices
-        .storeHotelBooking(hotelBookingStoreData: hotelBookingStoreData,searchToken: searchToken);
+      {required HotelBookingStroreData hotelBookingStoreData,
+      required String searchToken}) async {
+    dio.Response<dynamic> response =
+        await storeHotelBookingApiServices.storeHotelBooking(
+            hotelBookingStoreData: hotelBookingStoreData,
+            searchToken: searchToken);
 
     if (response.statusCode == 200) {}
   }
 
   GetHotelRoomDetailsApiServices getHotelRoomDetailsApiServices =
       GetHotelRoomDetailsApiServices();
-  getHotelDetails(String bookingId,String searchToken) async {
+  getHotelDetails(String bookingId, String searchToken) async {
     htDetails.Result? result;
-    dio.Response<dynamic> response = await getHotelRoomDetailsApiServices
-        .getHotelRoomDetailsApiServices(userIp: "", bookingId: bookingId,seearchToken: searchToken);
+    dio.Response<dynamic> response =
+        await getHotelRoomDetailsApiServices.getHotelRoomDetailsApiServices(
+            userIp: "", bookingId: bookingId, seearchToken: searchToken);
 
     print(bookingId);
 
@@ -463,6 +472,22 @@ class HotelBookingController extends GetxController {
       print("<<<<<<<<payment is Failed>>>>>>>>");
 
       Get.to(() => PaymentFailedScreen());
+    }
+  }
+
+  HotelCancelApiServices hotelCancelApiServices = HotelCancelApiServices();
+
+  cancelMyHotelBooking(
+      {required String searchToken, required String bookingId}) async {
+    dio.Response<dynamic> response = await hotelCancelApiServices.cancelHotel(
+        searchToken: searchToken, bookingId: bookingId);
+
+    if (response.statusCode == 200) {
+      Get.rawSnackbar(
+          message: "Hotel Booking cancelled", backgroundColor: Colors.green);
+    } else {
+      Get.rawSnackbar(
+          message: "Hotel Can't be cancelled", backgroundColor: Colors.green);
     }
   }
 }

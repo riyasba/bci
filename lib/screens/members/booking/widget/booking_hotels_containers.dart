@@ -50,21 +50,23 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       return Padding(
         padding: const EdgeInsets.only(top: 20),
         child: hotelBookingController.bookingList.isEmpty
-            ?  Center(
+            ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20,right: 20),
-                      child: Image.asset('assets/images/hotelbookingnotavailableimage.png'),
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Image.asset(
+                          'assets/images/hotelbookingnotavailableimage.png'),
                     ),
                     ksizedbox20,
-                    Text('No Bookings',
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color: kblue
-                    ),)
+                    Text(
+                      'No Bookings',
+                      style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                          color: kblue),
+                    )
                   ],
                 ),
               )
@@ -80,10 +82,12 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                               setState(() {
                                 isLoading = true;
                               });
-                              Result result = await hotelBookingController
-                                  .getHotelDetails(hotelBookingController
-                                      .bookingList[index].bookingId,hotelBookingController
-                                      .bookingList[index].searchKey);
+                              Result result =
+                                  await hotelBookingController.getHotelDetails(
+                                      hotelBookingController
+                                          .bookingList[index].bookingId,
+                                      hotelBookingController
+                                          .bookingList[index].searchKey);
                               setState(() {
                                 isLoading = false;
                               });
@@ -119,9 +123,9 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                                   fit: BoxFit.cover,
                                                 )
                                               : Container(
-                                                 height: 100,
+                                                  height: 100,
                                                   width: 100,
-                                                child: Image.network(
+                                                  child: Image.network(
                                                     hotelBookingController
                                                         .bookingList[index]
                                                         .hotelImage,
@@ -129,7 +133,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                                     width: 100,
                                                     fit: BoxFit.cover,
                                                   ),
-                                              )),
+                                                )),
                                     ),
                                     kwidth10,
                                     Column(
@@ -185,16 +189,17 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                           ),
                         );
                       }),
-                if(isLoading)  Container(
-                    height: size.height,
-                    width: size.width,
-                    decoration:
-                        const BoxDecoration(color: Color.fromARGB(22, 0, 0, 0)),
-                    child: Center(
-                        child: CircularProgressIndicator(
-                      color: kOrange,
-                    )),
-                  )
+                  if (isLoading)
+                    Container(
+                      height: size.height,
+                      width: size.width,
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(22, 0, 0, 0)),
+                      child: Center(
+                          child: CircularProgressIndicator(
+                        color: kOrange,
+                      )),
+                    )
                 ],
               ),
       );
@@ -495,6 +500,67 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                     ),
                   ],
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: Colors.white,
+                                title: Text("Cancel Booking",
+                                    style: boldTextStyle(color: Colors.black)),
+                                content: Text(
+                                  "Are you sure you want to Cancel?",
+                                  style:
+                                      secondaryTextStyle(color: Colors.black),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: Text(
+                                      "Yes",
+                                      style: primaryTextStyle(color: kblue),
+                                    ),
+                                    onPressed: () {
+                                      Get.back();
+                                      Get.find<HotelBookingController>()
+                                          .cancelMyHotelBooking(
+                                              bookingId:
+                                                  bookingData.bookingRefNo,
+                                              searchToken:
+                                                  bookingData.searchKey);
+                                      Get.back();
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: Text("No",
+                                        style: primaryTextStyle(color: kblue)),
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 70,
+                        alignment: Alignment.center,
+                        child: const Text("Cancel"),
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
           ),
@@ -502,7 +568,8 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       },
     );
   }
-    AlertDialog mAlertItem2 = AlertDialog(
+
+  AlertDialog mAlertItem2 = AlertDialog(
     backgroundColor: Colors.white,
     title: Text("Cancel Booking", style: boldTextStyle(color: Colors.black)),
     content: Text(
