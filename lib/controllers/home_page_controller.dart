@@ -8,6 +8,7 @@ import 'package:bci/models/get_plans_model.dart';
 import 'package:bci/models/get_service_list_model.dart';
 import 'package:bci/models/get_today_offers_list_model.dart';
 import 'package:bci/models/liquor_vendor_list_models/liquor_vendor_list_model.dart';
+import 'package:bci/models/merchant_model.dart';
 import 'package:bci/models/notification_models/notification_count_model.dart';
 import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/models/slider_model.dart';
@@ -33,6 +34,7 @@ import 'package:bci/services/network/slider_api_services/slider_product_api_serv
 import 'package:bci/services/network/subscriptions_api_services/add_subscription_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plan_details_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plans_list_api_services.dart';
+import 'package:bci/services/network/vendor_list_api_services/vendor_category_list_api_services.dart';
 import 'package:bci/services/network/vendor_list_api_services/vendor_list_api_services.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:bci/services/network/slider_api_services/slider_api_services.dart';
@@ -229,6 +231,20 @@ class HomeController extends GetxController {
             response.data["message"],
             style: primaryFont.copyWith(color: Colors.white),
           ));
+    }
+    update();
+  }
+
+  VendorCategoryListAPIServices vendorCategoryListAPIServices =
+      VendorCategoryListAPIServices();
+  List<MerchatCategoryData> merchatCategoryList = [];
+
+  getVendorCategory(String vendorId) async {
+    dio.Response<dynamic> response = await vendorCategoryListAPIServices.vendorCategory(vendorId: vendorId);
+
+    if (response.statusCode == 200) {
+      MerhantCategory merhantCategory = MerhantCategory.fromJson(response.data);
+      merchatCategoryList = merhantCategory.data;
     }
     update();
   }
@@ -579,6 +595,7 @@ class HomeController extends GetxController {
 
   VendorListApiServices vendorListApiServices = VendorListApiServices();
   List<VendorListModelData> vendorList = [];
+  List<VendorListModelData> tempVendorList = [];
   getVendorsList() async {
     dio.Response<dynamic> response =
         await vendorListApiServices.vendorListApiServices();
@@ -586,6 +603,7 @@ class HomeController extends GetxController {
     if (response.statusCode == 200) {
       VendorListModel vendorListModel = VendorListModel.fromJson(response.data);
       vendorList = vendorListModel.data;
+      tempVendorList = vendorListModel.data;
     }
     update();
   }

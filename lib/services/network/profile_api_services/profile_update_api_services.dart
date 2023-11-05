@@ -22,6 +22,7 @@ class ProfileUpdateApiServices extends BaseApiService {
         "mother_name": memberProfileUpdateModel.motherName,
         "is_married": memberProfileUpdateModel.isMarried,
         "dob": memberProfileUpdateModel.dateOfBirth,
+        "wife_dob": memberProfileUpdateModel.spousedateOfBirth,
         "qualification": memberProfileUpdateModel.qualification,
         "alternate_mobile": memberProfileUpdateModel.alternateMob,
         "pan_no": memberProfileUpdateModel.panNo,
@@ -30,10 +31,17 @@ class ProfileUpdateApiServices extends BaseApiService {
         "gender": memberProfileUpdateModel.gender,
         "branch": memberProfileUpdateModel.branch,
         "spouse": memberProfileUpdateModel.spouse,
-        "child_name": memberProfileUpdateModel.children,
+        for (var i = 0; i < memberProfileUpdateModel.children!.length; i++)
+          "child_name[$i]": memberProfileUpdateModel.children![i],
         "wedding_date": memberProfileUpdateModel.weddingDate,
-       if(memberProfileUpdateModel.adharproofimg != "null") "adhar_proof": await MultipartFile.fromFile(memberProfileUpdateModel.adharproofimg, filename: "adhar_proof"),
-       if(memberProfileUpdateModel.panproofimg != "null") "pan_proof": await MultipartFile.fromFile(memberProfileUpdateModel.panproofimg, filename: "pan_proof"),
+        if (memberProfileUpdateModel.adharproofimg != "null")
+          "adhar_proof": await MultipartFile.fromFile(
+              memberProfileUpdateModel.adharproofimg,
+              filename: "adhar_proof"),
+        if (memberProfileUpdateModel.panproofimg != "null")
+          "pan_proof": await MultipartFile.fromFile(
+              memberProfileUpdateModel.panproofimg,
+              filename: "pan_proof"),
       });
 
       final prefs = await SharedPreferences.getInstance();
@@ -50,7 +58,8 @@ class ProfileUpdateApiServices extends BaseApiService {
                 return status! <= 500;
               }),
           data: formData);
-      print("::::::::<profile update URL>::::::::status code:::::::::${memberProfileUpdateModel.gender}:");
+      print(
+          "::::::::<profile update URL>::::::::status code:::::::::${memberProfileUpdateModel.gender}:");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

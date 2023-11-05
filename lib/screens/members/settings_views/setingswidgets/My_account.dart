@@ -33,6 +33,7 @@ class _MyAccountState extends State<MyAccount> {
   var fatherNameController = TextEditingController();
   var motherNameController = TextEditingController();
   var dateOfBirthController = TextEditingController();
+  var wifedateOfBirthController = TextEditingController();
   var weddingDateController = TextEditingController();
   var gstNoController = TextEditingController();
   var panNoController = TextEditingController();
@@ -66,17 +67,17 @@ class _MyAccountState extends State<MyAccount> {
   final plansController = Get.find<PlanController>();
   final profileController = Get.find<ProfileController>();
 
+  List<String>? initialChildName = [];
+
   @override
   void initState() {
     super.initState();
-
+    _controller = TextfieldTagsController();
     setDefault();
 
     profileController.getProfile();
 
     plan();
-
-    _controller = TextfieldTagsController();
   }
 
   double? _distanceToField;
@@ -134,6 +135,42 @@ class _MyAccountState extends State<MyAccount> {
       setState(() {
         date = picked;
         dateOfBirthController.text = formatDate(date, [dd, "/", mm, "/", yyyy]);
+      });
+  }
+
+  _selectWifeDOB(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: date,
+      initialDatePickerMode: DatePickerMode.day,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      firstDate: DateTime(1910),
+      locale: const Locale('en', 'IN'),
+      lastDate: DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: kblue, // <-- SEE HERE
+              onPrimary: Colors.white, // <-- SEE HERE
+              onSurface: Colors.blueAccent, // <-- SEE HERE
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: kblue, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null)
+      setState(() {
+        date = picked;
+        wifedateOfBirthController.text =
+            formatDate(date, [dd, "/", mm, "/", yyyy]);
       });
   }
 
@@ -202,6 +239,8 @@ class _MyAccountState extends State<MyAccount> {
       branchController.text = profileController.profileData.first.branch;
       spouseController.text = profileController.profileData.first.spouse;
       dateOfBirthController.text = profileController.profileData.first.dob;
+      wifedateOfBirthController.text =
+          profileController.profileData.first.spouseDob;
 
       oDoorNumberCN.text =
           profileController.profileData.first.officialAddress.doorNo;
@@ -238,17 +277,25 @@ class _MyAccountState extends State<MyAccount> {
           profileController.profileData.first.residentialAddress.pincode;
 
       setState(() {
-        selectedGender =  profileController
-                .profileData.first.gender;
-        print("--------------------------->>Gender is ---------------->>$selectedGender");
-        print("---------------------------->>Married status = ${profileController.profileData.first.isMarried}");
+        selectedGender = profileController.profileData.first.gender;
+        print(
+            "--------------------------->>Gender is ---------------->>$selectedGender");
+        print(
+            "---------------------------->>Married status = ${profileController.profileData.first.isMarried}");
         if (profileController.profileData.first.isMarried != null) {
-      isMarried = profileController.profileData.first.isMarried == "0" ? false : true;
-      }else{
-       isMarried = false;
-      }
+          isMarried = profileController.profileData.first.isMarried == "0"
+              ? false
+              : true;
+        } else {
+          isMarried = false;
+        }
       });
-      // _controller?.addTag = profileController.profileData.first.childName;
+      for (var names in profileController.profileData.first.childName) {
+        print("------------------->> $names");
+        // print("------------------->> $_controller");
+
+        initialChildName!.add(names);
+      }
     }
   }
 
@@ -287,7 +334,6 @@ class _MyAccountState extends State<MyAccount> {
       if (croppedImage == null) return;
 
       final croppedFile = File(croppedImage.path);
-
 
       profileController.updateProfilePic(croppedFile);
       setState(() {
@@ -328,7 +374,8 @@ class _MyAccountState extends State<MyAccount> {
 
       final croppedFile = File(croppedImage.path);
 
-      print("----------------------->> size of the image----------------->>${croppedFile.length()}");
+      print(
+          "----------------------->> size of the image----------------->>${croppedFile.length()}");
 
       setState(() {
         this.image = croppedFile;
@@ -343,7 +390,7 @@ class _MyAccountState extends State<MyAccount> {
       final image = await ImagePicker().pickImage(source: ImageSource.camera);
       if (image == null) return;
       final imagetemp = File(image.path);
-      
+
       final croppedImage = await ImageCropper().cropImage(
         sourcePath: imagetemp.path,
         cropStyle: CropStyle.rectangle,
@@ -382,7 +429,6 @@ class _MyAccountState extends State<MyAccount> {
       if (image2 == null) return;
       final imagetemp2 = File(image2.path);
 
-         
       final croppedImage = await ImageCropper().cropImage(
         sourcePath: imagetemp2.path,
         cropStyle: CropStyle.rectangle,
@@ -407,7 +453,6 @@ class _MyAccountState extends State<MyAccount> {
 
       final croppedFile = File(croppedImage.path);
 
-
       setState(() {
         this.image2 = croppedFile;
       });
@@ -422,7 +467,7 @@ class _MyAccountState extends State<MyAccount> {
       if (image2 == null) return;
       final imagetemp2 = File(image2.path);
 
-        final croppedImage = await ImageCropper().cropImage(
+      final croppedImage = await ImageCropper().cropImage(
         sourcePath: imagetemp2.path,
         cropStyle: CropStyle.rectangle,
         aspectRatioPresets: [CropAspectRatioPreset.ratio5x4],
@@ -446,7 +491,6 @@ class _MyAccountState extends State<MyAccount> {
 
       final croppedFile = File(croppedImage.path);
 
-
       setState(() {
         this.image2 = croppedFile;
       });
@@ -459,11 +503,7 @@ class _MyAccountState extends State<MyAccount> {
     Get.offAll(MemberBottomNavBar());
   }
 
-
-
-  getChildName(){
-       
-  }
+  getChildName() {}
 
   @override
   Widget build(BuildContext context) {
@@ -679,7 +719,8 @@ class _MyAccountState extends State<MyAccount> {
                                       padding: const EdgeInsets.only(
                                           left: 15, right: 10),
                                       child: TextField(
-                                        textCapitalization: TextCapitalization.words,
+                                        textCapitalization:
+                                            TextCapitalization.words,
                                         controller: nameController,
                                         decoration: InputDecoration(
                                             isCollapsed: true,
@@ -710,7 +751,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: emailController,
                                       readOnly: true,
                                       decoration: InputDecoration(
@@ -718,6 +760,7 @@ class _MyAccountState extends State<MyAccount> {
                                           isDense: true,
                                           border: InputBorder.none,
                                           hintText: "Email",
+                                          // labelText: "email",
                                           hintStyle: TextStyle(
                                             color: kblue,
                                             fontWeight: FontWeight.w400,
@@ -731,7 +774,6 @@ class _MyAccountState extends State<MyAccount> {
                                 child: Container(
                                   height: 37,
                                   width: size.width,
-                                  
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(2),
                                       border: Border.all(
@@ -743,7 +785,7 @@ class _MyAccountState extends State<MyAccount> {
                                         left: 15, right: 10),
                                     child: TextField(
                                       controller: phoneController,
-                                       readOnly: true,
+                                      readOnly: true,
                                       keyboardType: TextInputType.phone,
                                       inputFormatters: [
                                         LengthLimitingTextInputFormatter(10),
@@ -815,7 +857,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: occupationController,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -845,7 +888,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: qualificationController,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -875,7 +919,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: fatherNameController,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -905,7 +950,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: motherNameController,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -1052,9 +1098,43 @@ class _MyAccountState extends State<MyAccount> {
                                   ),
                                 ),
                               if (isMarried == true)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Container(
+                                    height: 37,
+                                    width: size.width,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(2),
+                                        border: Border.all(
+                                            color: const Color(0xff707070)),
+                                        color: const Color(0xffF9F8FD)),
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 15, right: 10),
+                                      child: TextField(
+                                        controller: wifedateOfBirthController,
+                                        readOnly: true,
+                                        onTap: () {
+                                          _selectWifeDOB(context);
+                                        },
+                                        decoration: InputDecoration(
+                                            isCollapsed: true,
+                                            isDense: true,
+                                            border: InputBorder.none,
+                                            hintText: "Spouse DOB",
+                                            hintStyle: TextStyle(
+                                              color: kblue,
+                                              fontWeight: FontWeight.w400,
+                                            )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              if (isMarried == true)
                                 TextFieldTags(
                                   textfieldTagsController: _controller,
-                                  initialTags: const [],
+                                  initialTags: initialChildName,
                                   textSeparators: const [','],
                                   letterCase: LetterCase.normal,
                                   validator: (String tag) {
@@ -1069,7 +1149,6 @@ class _MyAccountState extends State<MyAccount> {
                                   inputfieldBuilder: (context, tec, fn, error,
                                       onChanged, onSubmitted) {
                                     return ((context, sc, tags, onTagDelete) {
-
                                       return Padding(
                                         padding:
                                             const EdgeInsets.only(top: 10.0),
@@ -1422,21 +1501,21 @@ class _MyAccountState extends State<MyAccount> {
                                                       );
                                                     });
                                               },
-                                            child: Container(
-                                                height: 100,
-                                                width: 100,
-                                                child: profileController
-                                                        .profileData
-                                                        .first
-                                                        .adharProof
-                                                        .isEmpty
-                                                    ? Image.file(image!)
-                                                    : Image.network(
-                                                        profileController
-                                                            .profileData
-                                                            .first
-                                                            .adharProof)),
-                                          )
+                                              child: Container(
+                                                  height: 100,
+                                                  width: 100,
+                                                  child: profileController
+                                                          .profileData
+                                                          .first
+                                                          .adharProof
+                                                          .isEmpty
+                                                      ? Image.file(image!)
+                                                      : Image.network(
+                                                          profileController
+                                                              .profileData
+                                                              .first
+                                                              .adharProof)),
+                                            )
                                       : InkWell(
                                           onTap: () {
                                             showModalBottomSheet(
@@ -1508,60 +1587,64 @@ class _MyAccountState extends State<MyAccount> {
                                               width: 5,
                                             )
                                           : InkWell(
-                                             onTap: () {
-                                            showModalBottomSheet(
-                                                context: context,
-                                                builder: (context) {
-                                                  return Container(
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
-                                                      children: [
-                                                        TextButton(
-                                                            onPressed: () {
-                                                              Get.back();
-                                                              pickerimage2();
-                                                            },
-                                                            child: const Text(
-                                                              'Choose Gallery',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize: 16),
-                                                            )),
-                                                        TextButton(
-                                                            onPressed: () {
-                                                              Get.back();
-                                                              imagepic2();
-                                                            },
-                                                            child: const Text(
-                                                              'Choose Camera',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize: 16),
-                                                            ))
-                                                      ],
-                                                    ),
-                                                  );
-                                                });
-                                          },
-                                            child: Container(
-                                                height: 100,
-                                                width: 100,
-                                                child: profileController
-                                                        .profileData
-                                                        .first
-                                                        .panProof
-                                                        .isEmpty
-                                                    ? Image.file(image2!)
-                                                    : Image.network(
-                                                        profileController
-                                                            .profileData
-                                                            .first
-                                                            .panProof)),
-                                          )
+                                              onTap: () {
+                                                showModalBottomSheet(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Container(
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            TextButton(
+                                                                onPressed: () {
+                                                                  Get.back();
+                                                                  pickerimage2();
+                                                                },
+                                                                child:
+                                                                    const Text(
+                                                                  'Choose Gallery',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          16),
+                                                                )),
+                                                            TextButton(
+                                                                onPressed: () {
+                                                                  Get.back();
+                                                                  imagepic2();
+                                                                },
+                                                                child:
+                                                                    const Text(
+                                                                  'Choose Camera',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          16),
+                                                                ))
+                                                          ],
+                                                        ),
+                                                      );
+                                                    });
+                                              },
+                                              child: Container(
+                                                  height: 100,
+                                                  width: 100,
+                                                  child: profileController
+                                                          .profileData
+                                                          .first
+                                                          .panProof
+                                                          .isEmpty
+                                                      ? Image.file(image2!)
+                                                      : Image.network(
+                                                          profileController
+                                                              .profileData
+                                                              .first
+                                                              .panProof)),
+                                            )
                                       : InkWell(
                                           onTap: () {
                                             showModalBottomSheet(
@@ -1660,7 +1743,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: branchController,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -1675,7 +1759,7 @@ class _MyAccountState extends State<MyAccount> {
                                   ),
                                 ),
                               ),
-                              
+
                               Obx(
                                 () => Padding(
                                   padding: const EdgeInsets.only(top: 20),
@@ -1710,6 +1794,9 @@ class _MyAccountState extends State<MyAccount> {
                                               email: emailController.text,
                                               dateOfBirth:
                                                   dateOfBirthController.text,
+                                              spousedateOfBirth:
+                                                  wifedateOfBirthController
+                                                      .text,
                                               fatherName:
                                                   fatherNameController.text,
                                               isMarried: isMarried,
@@ -1738,7 +1825,9 @@ class _MyAccountState extends State<MyAccount> {
                                               panproofimg: image2 == null
                                                   ? "null"
                                                   : image2!.path,
-                                              children: isMarried ? _controller!.getTags : [],
+                                              children: isMarried
+                                                  ? _controller!.getTags
+                                                  : [],
                                             );
 
                                             profileController.updateProfile(
@@ -1881,7 +1970,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: oBuildingNumberCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -1911,7 +2001,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: oAddressCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -1941,7 +2032,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: oCityCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -1971,7 +2063,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: oStateCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -2231,7 +2324,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: rBuildingNumberCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -2261,7 +2355,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: rAddressCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -2291,7 +2386,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: rCityCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,
@@ -2321,7 +2417,8 @@ class _MyAccountState extends State<MyAccount> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 10),
                                     child: TextField(
-                                      textCapitalization: TextCapitalization.words,
+                                      textCapitalization:
+                                          TextCapitalization.words,
                                       controller: rStateCN,
                                       decoration: InputDecoration(
                                           isCollapsed: true,

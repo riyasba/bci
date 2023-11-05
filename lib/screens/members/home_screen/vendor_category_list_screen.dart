@@ -12,14 +12,14 @@ import 'package:get/get.dart';
 
 import '../../../controllers/profile_controller.dart';
 
-class VendorsListView extends StatefulWidget {
-  const VendorsListView({super.key});
+class VendorsCategoryListView extends StatefulWidget {
+  const VendorsCategoryListView({super.key});
 
   @override
-  State<VendorsListView> createState() => _VendorsListViewState();
+  State<VendorsCategoryListView> createState() => _VendorsListViewState();
 }
 
-class _VendorsListViewState extends State<VendorsListView> {
+class _VendorsListViewState extends State<VendorsCategoryListView> {
   final homeController = Get.find<HomeController>();
   final profileController = Get.find<ProfileController>();
 
@@ -123,7 +123,7 @@ class _VendorsListViewState extends State<VendorsListView> {
             ],
           )),
       body: GetBuilder<HomeController>(builder: (_) {
-        return homeController.vendorList.isEmpty
+        return homeController.merchatCategoryList.isEmpty
             ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
