@@ -19,7 +19,8 @@ class VendorListModel {
 
   factory VendorListModel.fromJson(Map<String, dynamic> json) =>
       VendorListModel(
-        data: List<VendorListModelData>.from(json["data"].map((x) => VendorListModelData.fromJson(x))),
+        data: List<VendorListModelData>.from(
+            json["data"].map((x) => VendorListModelData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -87,6 +88,7 @@ class VendorListModelData {
   dynamic bankAccountNumber;
   dynamic ifscCode;
   dynamic shopImage;
+  dynamic details;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -152,19 +154,21 @@ class VendorListModelData {
     required this.shopImage,
     required this.createdAt,
     required this.updatedAt,
+    required this.details,
   });
 
-  factory VendorListModelData.fromJson(Map<String, dynamic> json) => VendorListModelData(
+  factory VendorListModelData.fromJson(Map<String, dynamic> json) =>
+      VendorListModelData(
         id: json["id"],
         roleId: json["role_id"],
         userId: json["user_id"] ?? "",
-        name: json["name"]??"",
-        email: json["email"]??"",
-        fcmToken: json["fcm_token"]??"",
+        name: json["name"] ?? "",
+        email: json["email"] ?? "",
+        fcmToken: json["fcm_token"] ?? "",
         mobile: json["mobile"],
-        isVerrifiedMobile: json["is_verrified_mobile"]??"",
-        otp: json["otp"]??"",
-        referralCode: json["referral_code"]??"",
+        isVerrifiedMobile: json["is_verrified_mobile"] ?? "",
+        otp: json["otp"] ?? "",
+        referralCode: json["referral_code"] ?? "",
         referredBy: json["referred_by"],
         walletAmount: json["wallet_amount"],
         category: json["category"],
@@ -174,30 +178,31 @@ class VendorListModelData {
         logitude: json["logitude"],
         locationAddress: json["location_address"],
         gstNo: json["gst_no"],
-        adharProof: json["adhar_proof"]??"",
-        panProof: json["pan_proof"]??"",
+        adharProof: json["adhar_proof"] ?? "",
+        panProof: json["pan_proof"] ?? "",
         profilePicture: json["profile_picture"],
         clientSecret: json["client_secret"],
         clientId: json["client_id"],
         keyName: json["Key_name"],
-        keyStatus: json["Key_status"]??"",
+        keyStatus: json["Key_status"] ?? "",
         emailVerifiedAt: json["email_verified_at"],
         address: json["address"],
         dob: json["dob"],
+        details: json["details"],
         occupation: json["occupation"],
         fatherName: json["father_name"],
         motherName: json["mother_name"],
         isMarried: json["is_married"],
         residentialAddress: json["residential_address"],
         officialAddress: json["official_address"],
-        panNo: json["pan_no"]??"",
-        aadharNo: json["aadhar_no"]??"",
+        panNo: json["pan_no"] ?? "",
+        aadharNo: json["aadhar_no"] ?? "",
         bio: json["bio"],
-        pincode: json["pincode"]??"",
-        city: json["city"]??"",
-        state: json["state"]??"",
-        status: json["status"]??"",
-        gender: json["gender"]??"",
+        pincode: json["pincode"] ?? "",
+        city: json["city"] ?? "",
+        state: json["state"] ?? "",
+        status: json["status"] ?? "",
+        gender: json["gender"] ?? "",
         spouse: json["spouse"],
         noOfChild: json["no_of_child"],
         childName: json["child_name"],
@@ -205,9 +210,9 @@ class VendorListModelData {
         memberType: json["member_type"],
         branch: json["branch"],
         qualification: json["qualification"],
-        doorNo: json["door_no"]??"",
-        bciShareType: json["bci_share_type"]??"",
-        bciShareAmount: json["bci_share_amount"]??"",
+        doorNo: json["door_no"] ?? "",
+        bciShareType: json["bci_share_type"] ?? "",
+        bciShareAmount: json["bci_share_amount"] ?? "",
         bankName: json["bank_name"],
         bankAccountName: json["bank_account_name"],
         accountType: json["account_type"],

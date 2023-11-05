@@ -14,8 +14,9 @@ import '../../../models/get_today_offers_list_model.dart';
 
 class VendorViewServicesList extends StatefulWidget {
   String vendorId;
-
-  VendorViewServicesList({super.key, required this.vendorId});
+  String categoryName;
+  VendorViewServicesList(
+      {super.key, required this.vendorId, required this.categoryName});
 
   @override
   State<VendorViewServicesList> createState() => _VendorViewOffersState();
@@ -71,7 +72,8 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
 
   @override
   void initState() {
-    homeController.vendorServiceList(widget.vendorId);
+    homeController.vendorServiceListbyCategory(
+        widget.vendorId, widget.categoryName);
     _dateController.text = formatDate(selectedDate, [MM, '-', dd]);
 
     _timeController.text = formatDate(
@@ -85,7 +87,7 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(150),
+          preferredSize: const Size.fromHeight(150),
           child: Column(
             children: [
               ClipPath(
@@ -99,18 +101,18 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                       Padding(
-            padding: const EdgeInsets.only(left: 17),
-            child: InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: kwhite,
-              ),
-            ),
-          ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 17),
+                          child: InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: kwhite,
+                            ),
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(right: 0),
                           child: Text(
@@ -121,7 +123,9 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                                 color: kwhite),
                           ),
                         ),
-                        Container(width: 20,)
+                        Container(
+                          width: 20,
+                        )
                         // IconButton(
                         //     onPressed: () {
                         //       Get.to(NotificationScreen());

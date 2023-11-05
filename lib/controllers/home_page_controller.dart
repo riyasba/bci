@@ -235,12 +235,35 @@ class HomeController extends GetxController {
     update();
   }
 
+  vendorServiceListbyCategory(String vendorId, String category) async {
+    dio.Response<dynamic> response = await vendorServiceListApiServices
+        .vendorServiceListApiServices(vendorId: vendorId);
+
+    if (response.statusCode == 200) {
+      GetServiceList getServiceList = GetServiceList.fromJson(response.data);
+      vendorServiceListData = getServiceList.data
+          .where((element) => element.categoryId == category)
+          .toList();
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            response.data["message"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+    update();
+  }
+
   VendorCategoryListAPIServices vendorCategoryListAPIServices =
       VendorCategoryListAPIServices();
   List<MerchatCategoryData> merchatCategoryList = [];
 
   getVendorCategory(String vendorId) async {
-    dio.Response<dynamic> response = await vendorCategoryListAPIServices.vendorCategory(vendorId: vendorId);
+    merchatCategoryList.clear();
+    update();
+    dio.Response<dynamic> response =
+        await vendorCategoryListAPIServices.vendorCategory(vendorId: vendorId);
 
     if (response.statusCode == 200) {
       MerhantCategory merhantCategory = MerhantCategory.fromJson(response.data);

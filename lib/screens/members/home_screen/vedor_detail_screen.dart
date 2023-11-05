@@ -3,6 +3,7 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/vendor_list_model.dart';
+import 'package:bci/screens/members/home_screen/vendor_category_list_screen.dart';
 import 'package:bci/screens/members/offer%20screen/view_vendor_services_list.dart';
 
 import 'package:flutter/material.dart';
@@ -149,6 +150,13 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                   const SizedBox(
                     height: 20,
                   ),
+                  Text(
+                    "${widget.vendorListModelData.details ?? ""}",
+                    style: TextStyle(fontSize: 15.sp, color: kblue),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   ksizedbox10,
                   Text(
                     'Address',
@@ -157,15 +165,16 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                         fontWeight: FontWeight.w500,
                         color: kblue),
                   ),
-                  ksizedbox20,
+                  ksizedbox10,
                   if (widget.vendorListModelData.address != null)
-                    Row(
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           "${widget.vendorListModelData.address ?? ""}",
                           style: TextStyle(fontSize: 15.sp, color: kblue),
                         ),
-                        Text(","),
+                        // Text(","),
                         if (widget.vendorListModelData.address != null)
                           Text(
                             "${widget.vendorListModelData.city}",
@@ -174,7 +183,7 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                                 fontWeight: FontWeight.normal,
                                 color: kblue),
                           ),
-                        Text(","),
+                        // Text(","),
                         if (widget.vendorListModelData.address != null)
                           Text(
                             "${widget.vendorListModelData.state}",
@@ -182,10 +191,16 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                           ),
                       ],
                     ),
-                  Text(
-                    "Mobile : ${widget.vendorListModelData.mobile}",
-                    style:
-                        TextStyle(fontSize: 15.sp, height: 1.5, color: kblue),
+                  InkWell(
+                    onTap: () {
+                      launchUrl(Uri.parse(
+                          "tel:${widget.vendorListModelData.mobile}"));
+                    },
+                    child: Text(
+                      "Mobile : ${widget.vendorListModelData.mobile}",
+                      style:
+                          TextStyle(fontSize: 15.sp, height: 1.5, color: kblue),
+                    ),
                   ),
                   Text(
                     "Email  : ${widget.vendorListModelData.email}",
@@ -193,14 +208,16 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                         TextStyle(fontSize: 15.sp, height: 1.5, color: kblue),
                   ),
                   ksizedbox20,
-                 if (widget.vendorListModelData.locationAddress != null)  Text(
-                    'Location',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: kblue,
-                        fontSize: 18.sp),
-                  ),
-                 if (widget.vendorListModelData.locationAddress != null)  ksizedbox20,
+                  if (widget.vendorListModelData.locationAddress != null)
+                    Text(
+                      'Location',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: kblue,
+                          fontSize: 18.sp),
+                    ),
+                  if (widget.vendorListModelData.locationAddress != null)
+                    ksizedbox20,
                   if (widget.vendorListModelData.locationAddress != null)
                     Row(
                       children: [
@@ -257,7 +274,11 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
           padding: const EdgeInsets.all(10.0),
           child: InkWell(
             onTap: () {
-              Get.to(() => VendorViewServicesList(
+              // Get.to(() => VendorViewServicesList(
+              //       vendorId: widget.vendorListModelData.id.toString(),
+              //     ));
+              print("======================>> to category list");
+              Get.to(() => VendorsCategoryListView(
                     vendorId: widget.vendorListModelData.id.toString(),
                   ));
             },
@@ -269,7 +290,10 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
               alignment: Alignment.center,
               child: Text(
                 "View Services",
-                style: primaryFont.copyWith(fontSize: 17, color: Colors.white,fontWeight: FontWeight.w700),
+                style: primaryFont.copyWith(
+                    fontSize: 17,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700),
               ),
             ),
           ),

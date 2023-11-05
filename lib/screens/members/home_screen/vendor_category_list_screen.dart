@@ -4,6 +4,7 @@ import 'package:bci/models/search_service_list_model.dart';
 import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
 import 'package:bci/screens/members/home_screen/vedor_detail_screen.dart';
 import 'package:bci/screens/members/members_search_screen/member_service_details_screen.dart';
+import 'package:bci/screens/members/offer%20screen/view_vendor_services_list.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,8 @@ import 'package:get/get.dart';
 import '../../../controllers/profile_controller.dart';
 
 class VendorsCategoryListView extends StatefulWidget {
-  const VendorsCategoryListView({super.key});
+  String vendorId;
+  VendorsCategoryListView({super.key, required this.vendorId});
 
   @override
   State<VendorsCategoryListView> createState() => _VendorsListViewState();
@@ -25,29 +27,17 @@ class _VendorsListViewState extends State<VendorsCategoryListView> {
 
   var searchTextEditingController = TextEditingController();
 
-  _getFilteredList() {
-    print("searching .........${searchTextEditingController.text}");
-    homeController.vendorList = homeController.vendorList
-        .where((value) => value.name
-            .toLowerCase()
-            .contains(searchTextEditingController.text.toLowerCase()))
-        .toList();
-
-    if (searchTextEditingController.text.isEmpty) {
-      homeController.vendorList = homeController.tempVendorList;
-    }
-
-    homeController.update();
-  }
-
   @override
   void initState() {
     // TODO: implement initState
-
+    getdatas();
     super.initState();
+  }
 
-    homeController.getVendorsList();
-    searchTextEditingController.addListener(_getFilteredList);
+  getdatas() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      homeController.getVendorCategory(widget.vendorId);
+    });
   }
 
   @override
@@ -83,7 +73,7 @@ class _VendorsListViewState extends State<VendorsCategoryListView> {
                         Padding(
                           padding: const EdgeInsets.only(right: 0),
                           child: Text(
-                            'BCI Associate',
+                            'Services',
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700,
@@ -106,20 +96,20 @@ class _VendorsListViewState extends State<VendorsCategoryListView> {
                   ),
                 ),
               ),
-              Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  height: size.height * 0.06,
-                  width: size.width * 0.9,
-                  child: TextFormField(
-                    controller: searchTextEditingController,
-                    decoration: InputDecoration(
-                        hintText: "Search",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                  )),
+              // Container(
+              //     decoration: BoxDecoration(
+              //       color: Colors.white,
+              //       borderRadius: BorderRadius.circular(10),
+              //     ),
+              //     height: size.height * 0.06,
+              //     width: size.width * 0.9,
+              //     child: TextFormField(
+              //       controller: searchTextEditingController,
+              //       decoration: InputDecoration(
+              //           hintText: "Search",
+              //           border: OutlineInputBorder(
+              //               borderRadius: BorderRadius.circular(10))),
+              //     )),
             ],
           )),
       body: GetBuilder<HomeController>(builder: (_) {
@@ -132,7 +122,7 @@ class _VendorsListViewState extends State<VendorsCategoryListView> {
                         image: AssetImage("assets/icons/Group 8861.png")),
                     ksizedbox20,
                     Text(
-                      "No Assoiates found",
+                      "No Services found",
                       style: TextStyle(
                           fontSize: 22.sp,
                           color: kblue,
@@ -143,7 +133,7 @@ class _VendorsListViewState extends State<VendorsCategoryListView> {
               )
             : GridView.builder(
                 physics: const BouncingScrollPhysics(),
-                itemCount: homeController.vendorList.length,
+                itemCount: homeController.merchatCategoryList.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 10,
@@ -154,14 +144,19 @@ class _VendorsListViewState extends State<VendorsCategoryListView> {
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
                       onTap: () {
-                        Get.to(
-                          VendorDetailScreen(
-                            vendorListModelData:
-                                homeController.vendorList[index],
-                            userid:
-                                homeController.vendorList[index].id.toString(),
-                          ),
-                        );
+                        // Get.to(
+                        //   VendorDetailScreen(
+                        //     vendorListModelData:
+                        //         homeController.vendorList[index],
+                        //     userid:
+                        //         homeController.vendorList[index].id.toString(),
+                        //   ),
+                        // );
+                        Get.to(() => VendorViewServicesList(
+                              vendorId: widget.vendorId,
+                              categoryName: homeController
+                                  .merchatCategoryList[index].title,
+                            ));
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -176,11 +171,11 @@ class _VendorsListViewState extends State<VendorsCategoryListView> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(15),
                               child: homeController
-                                          .vendorList[index].profilePicture !=
+                                          .merchatCategoryList[index].image !=
                                       null
                                   ? Image.network(
                                       homeController
-                                          .vendorList[index].profilePicture!,
+                                          .merchatCategoryList[index].image!,
                                       height: 125.h,
                                       width: size.width,
                                       fit: BoxFit.cover,
@@ -204,7 +199,8 @@ class _VendorsListViewState extends State<VendorsCategoryListView> {
                                 child: FittedBox(
                                   fit: BoxFit.scaleDown,
                                   child: Text(
-                                    homeController.vendorList[index].name,
+                                    homeController
+                                        .merchatCategoryList[index].title,
                                     style: TextStyle(
                                         fontSize: 19.sp,
                                         fontWeight: FontWeight.bold,
