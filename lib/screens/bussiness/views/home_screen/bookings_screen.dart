@@ -92,7 +92,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
               ),
               textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
-                  primary: Color.fromARGB(255, 42, 59, 158),
+                  primary: const Color.fromARGB(255, 42, 59, 158),
                 ),
               ),
             ),
@@ -369,6 +369,18 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                                             serviceController
                                                 .bookingListData[index]
                                                 .description,
+                                            maxLines: 5,
+                                            style: TextStyle(
+                                                fontSize: 12, color: kgrey),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 6),
+                                        child: Container(
+                                          width: 210.w,
+                                          child: Text(
+                                            "₹${serviceController.bookingListData[index].purchasePrice} x ${serviceController.bookingListData[index].quantity}",
                                             maxLines: 5,
                                             style: TextStyle(
                                                 fontSize: 12, color: kgrey),

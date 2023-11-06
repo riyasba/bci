@@ -215,7 +215,7 @@ class AuthController extends GetxController {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
-            "something went wrong",
+            response.data["error"],
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }

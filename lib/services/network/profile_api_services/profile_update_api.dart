@@ -26,6 +26,7 @@ class ProfileUpdateApiServices extends BaseApiService {
         "bank_account_number": merchantUpdateModel.bankAccountNumber,
         "location_address": merchantUpdateModel.locationAddress,
         "ifsc_code": merchantUpdateModel.ifscCode,
+        "video_link": merchantUpdateModel.videoLink,
         if (merchantUpdateModel.shopImage != "null")
           "shop_image": await MultipartFile.fromFile(
               merchantUpdateModel.shopImage,

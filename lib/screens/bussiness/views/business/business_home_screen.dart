@@ -32,9 +32,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
     profileController.getProfile();
     vendorController.getvendorbanner();
     profileController.notifyCount();
-  
   }
-
 
   final vendorController = Get.find<VendorBannerController>();
   @override
@@ -76,7 +74,10 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            Get.offAll(HomeBottomnavigationBar(index: 1,),
+                            Get.offAll(
+                              HomeBottomnavigationBar(
+                                index: 1,
+                              ),
                             );
                           },
                           icon: Icon(
@@ -96,18 +97,17 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                                       color: Colors.red,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Center(
-                                    child:
-                                        profileController
-                                                .countData!.totalCount > 9
-                                            ? const Text("9+")
-                                            : Text(
-                                                profileController
-                                                    .countData!.totalCount
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: 10,
-                                                    color: kwhite),
-                                              ),
+                                    child: profileController
+                                                .countData!.totalCount >
+                                            9
+                                        ? const Text("9+")
+                                        : Text(
+                                            profileController
+                                                .countData!.totalCount
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: 10, color: kwhite),
+                                          ),
                                   ),
                                 )
                               : Container(),
@@ -169,9 +169,9 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
               height: 10,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               child: InkWell(
-                onTap: (){
+                onTap: () {
                   profileController.downloadBroucher();
                 },
                 child: Container(
@@ -184,23 +184,28 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                             blurRadius: 2, color: Colors.grey.withOpacity(0.5))
                       ],
                       borderRadius: BorderRadius.circular(30)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 25,right: 25),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/images/pdf.png",height: 25,),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                          const  Text("Download Brochure",style: TextStyle(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 25, right: 25),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/pdf.png",
+                          height: 25,
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        const Text(
+                          "Download Brochure",
+                          style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
-                              fontSize: 18
-                            ),)
-                          ],
-                        ),
-                      ),
+                              fontSize: 18),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -212,7 +217,7 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 right: 158,
               ),
               child: Text(
-                'Available Service',
+                'Business Hub',
                 style: TextStyle(
                     fontSize: 23, color: kblue, fontWeight: FontWeight.bold),
               ),
@@ -226,10 +231,10 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                 //
                 InkWell(
                   onTap: () {
-                    Get.to( AvailabilityScreen());
+                    Get.to(AvailabilityScreen());
                   },
                   child: Container(
-                     height: 115,
+                    height: 115,
                     child: Column(
                       children: [
                         Image.asset('assets/images/availability.png'),
@@ -238,25 +243,26 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Get.offAll(HomeBottomnavigationBar(
-                      index: 2,
-                    ));
-                  },
-                  child: Container(
-                    height: 115,
-                    child: Column(
-                      children: [
-                        Image.asset('assets/images/wallet.png'),
-                        const Text(
-                          'Wallet',
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                // InkWell(
+                //   onTap: () {
+                //     Get.offAll(HomeBottomnavigationBar(
+                //       index: 2,
+                //     ));
+                //   },
+                //   child: Container(
+                //     height: 115,
+                //     child: Column(
+                //       children: [
+                //         Image.asset('assets/images/wallet.png'),
+                //         const Text(
+                //           'Wallet',
+                //           textAlign: TextAlign.center,
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
+
                 InkWell(
                   onTap: () {
                     Get.offAll(HomeBottomnavigationBar(
@@ -277,6 +283,23 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                     ),
                   ),
                 ),
+                InkWell(
+                  onTap: () {
+                    Get.to(const OffersScreen());
+                  },
+                  child: Container(
+                    height: 115,
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/offers.png'),
+                        const Text(
+                          'Offers',
+                          textAlign: TextAlign.center,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
             // const SizedBox(
@@ -285,23 +308,6 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                InkWell(
-                  onTap: () {
-                    Get.to(const OffersScreen());
-                  },
-                  child: Container(
-                    height: 140,
-                    child: Column(
-                      children: [
-                        Image.asset('assets/images/offers.png'),
-                        const Text(
-                          'Offers\n\n',
-                          textAlign: TextAlign.center,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
                 InkWell(
                   onTap: () {
                     Get.to(const CouponScreen());
@@ -352,6 +358,25 @@ class _BusinessHomeScreenState extends State<BusinessHomeScreen> {
                           )
                         ],
                       )),
+                ),
+                InkWell(
+                  onTap: () {
+                    Get.offAll(HomeBottomnavigationBar(
+                      index: 2,
+                    ));
+                  },
+                  child: Container(
+                    height: 140,
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/wallet.png'),
+                        const Text(
+                          'Wallet\n',
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),

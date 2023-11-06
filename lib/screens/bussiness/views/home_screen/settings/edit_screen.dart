@@ -36,6 +36,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
   var bankAccountNumberController = TextEditingController();
   var accountTypeController = TextEditingController();
   var ifscCodeController = TextEditingController();
+  var videoURLController = TextEditingController();
 
   File? image;
   File? image2;
@@ -93,7 +94,9 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
       panCardImage = profileController.profileData.first.panProof;
       shopImage = profileController.profileData.first.shopImage;
       mapUrlController.text =
-          profileController.profileData.first.locationAddress;
+          profileController.profileData.first.locationAddress ?? "";
+      videoURLController.text =
+          profileController.profileData.first.videoURL ?? "";
       setState(() {});
       getCategorybyID();
     }
@@ -217,7 +220,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(150),
+          preferredSize: const Size.fromHeight(150),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -229,25 +232,28 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: InkWell(
-                      onTap: (){
+                      onTap: () {
                         Get.back();
                       },
                       child: Icon(
                         Icons.arrow_back_ios,
-                      color: kwhite,),
+                        color: kwhite,
+                      ),
                     ),
                   ),
                   const Padding(
                     padding: EdgeInsets.only(right: 0),
                     child: Text(
                       'Edit Account',
-                      style: TextStyle(fontSize: 20, 
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700
-                      ),
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
-                  Container(width: 20,)
+                  Container(
+                    width: 20,
+                  )
                 ],
               ),
             ),
@@ -270,7 +276,10 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                               width: 135,
                               child: ClipRRect(
                                   borderRadius: BorderRadius.circular(60),
-                                  child: Image.file(imageprofile!,fit: BoxFit.cover,))),
+                                  child: Image.file(
+                                    imageprofile!,
+                                    fit: BoxFit.cover,
+                                  ))),
                           Positioned(
                             bottom: 5,
                             right: 5,
@@ -418,6 +427,19 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                 controller: mapUrlController,
                 decoration: InputDecoration(
                     labelText: 'Map Url',
+                    hintStyle: TextStyle(fontSize: 20, color: kblue),
+                    border: const OutlineInputBorder()),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: Container(
+              height: 60,
+              child: TextField(
+                controller: videoURLController,
+                decoration: InputDecoration(
+                    labelText: 'Video Url',
                     hintStyle: TextStyle(fontSize: 20, color: kblue),
                     border: const OutlineInputBorder()),
               ),
@@ -870,6 +892,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                       simage == null ? "null" : simage!.path,
                                   locationAddress: mapUrlController.text,
                                   aadharProof: image,
+                                  videoLink: videoURLController.text,
                                   panProof: image2);
                           profileController.updateProfile(
                               merchantUpdateModel: merchantUpdateModel);

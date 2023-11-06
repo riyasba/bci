@@ -17,6 +17,7 @@ class MerchantUpdateModel {
   dynamic aadharProof;
   dynamic panProof;
   dynamic locationAddress;
+  dynamic videoLink;
   
 
   MerchantUpdateModel({
@@ -36,5 +37,6 @@ class MerchantUpdateModel {
      this.aadharProof,
      this.panProof,
      this.locationAddress,
+    this.videoLink,
   });
 }
