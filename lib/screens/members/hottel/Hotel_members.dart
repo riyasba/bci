@@ -81,7 +81,7 @@ class _HotelListScreenState extends State<HotelListScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF9F8FD),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(280),
+          preferredSize: const Size.fromHeight(260),
           child: Column(children: [
             Stack(children: [
               Container(

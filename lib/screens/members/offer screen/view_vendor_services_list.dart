@@ -301,7 +301,7 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                               child: Text(
                                 homeController
                                     .vendorServiceListData[index].description,
-                                maxLines: 2,
+                                maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: 13.sp,

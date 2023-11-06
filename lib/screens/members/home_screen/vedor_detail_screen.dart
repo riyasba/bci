@@ -173,7 +173,7 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${widget.vendorListModelData.address ?? ""}",
+                          "${widget.vendorListModelData.address  ?? ""}",
                           style: TextStyle(fontSize: 15.sp, color: kblue),
                         ),
                         // Text(","),

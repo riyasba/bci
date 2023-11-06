@@ -409,7 +409,7 @@ class _HotelInfobookingState extends State<HotelInfobooking> {
                 height: 5,
               )
             : Padding(
-                padding: const EdgeInsets.only(right: 10, top: 20),
+                padding: const EdgeInsets.only(right: 10, top: 5,bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

@@ -2,6 +2,7 @@ import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/screens/bussiness/views/home_screen/settings/my_account_screen.dart';
 import 'package:bci/screens/members/coupen/coupons_screen.dart';
+import 'package:bci/screens/members/settings_views/aditional_coupons.dart';
 import 'package:bci/screens/members/settings_views/your_refferal_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
@@ -186,7 +187,7 @@ class _DashBoardScreenMenbersState extends State<DashBoardScreenMenbers> {
                         ),
                         InkWell(
                           onTap: () {
-                            Get.to(const CoupensMembers());
+                            Get.to(const MemberCouponScreen());
                           },
                           child: Text(
                             'view',
