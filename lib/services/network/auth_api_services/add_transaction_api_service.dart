@@ -4,13 +4,13 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddTransactionApiServices extends BaseApiService {
-  Future addTransactionApi({required String amount}) async {
+  Future addTransactionApi({required String amount, required String userId}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
-      String? userid = prefs.getString("id");
+      // String? userid = prefs.getString("id");
 
       var response = await dio.post(addTransactionApiUrl,
           options: Options(
@@ -22,7 +22,7 @@ class AddTransactionApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"user_id": userid, "amount": amount,"type": "deposit_to_wallet"});
+          data: {"user_id": userId, "amount": amount,"type": "deposit_to_wallet"});
       print(
           "::::::::<add transaction Api>::::::::status code::::::::::");
       print(response.statusCode);

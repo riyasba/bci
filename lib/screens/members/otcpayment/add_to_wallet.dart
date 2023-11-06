@@ -200,7 +200,7 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
           ksizedbox40,
           InkWell(
             onTap: () {
-              profileController.payforWallet(
+              profileController.initiatePaymentAddtoWallet(
                   amount: double.parse(amountController.text));
               // profileController.payUseingEaseBuzzWallet(
               //   id: 0,

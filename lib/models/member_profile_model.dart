@@ -50,6 +50,7 @@ class MemberProfileModel {
 class MemberUser {
   int id;
   String roleId;
+  String userId;
   String name;
   String email;
   String mobile;
@@ -109,6 +110,7 @@ class MemberUser {
   MemberUser({
     required this.id,
     required this.roleId,
+    required this.userId,
     required this.name,
     required this.email,
     required this.mobile,
@@ -169,6 +171,7 @@ class MemberUser {
   factory MemberUser.fromJson(Map<String, dynamic> json) => MemberUser(
         id: json["id"] ?? 0,
         roleId: json["role_id"] ?? "",
+        userId: json["user_id"] ?? "",
         name: json["name"] ?? "",
         email: json["email"] ?? "",
         mobile: json["mobile"] ?? "",

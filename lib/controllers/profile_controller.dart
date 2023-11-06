@@ -10,6 +10,7 @@ import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/userredeemcoupon/redeemed_coupons_model.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
+import 'package:bci/screens/members/manual_payment_options/phone_pe_add_to_wallet.dart';
 import 'package:bci/screens/members/manual_payment_options/phone_pe_bus_booking_model.dart';
 import 'package:bci/screens/members/manual_payment_options/phone_pe_service_booking.dart';
 import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
@@ -740,7 +741,7 @@ class ProfileController extends GetxController {
     print(payment_response);
     isLoading(false);
     if (payment_response["result"] == "payment_successfull") {
-      Get.find<AuthController>().addTransaction(amount: amount);
+      // Get.find<AuthController>().addTransaction(amount: amount);
 
       Get.to(const SucessfulScreenOtc());
 
@@ -792,8 +793,8 @@ class ProfileController extends GetxController {
     print("<<----response-data---->>${data.runtimeType}");
     print(data);
     if (data["ResponseCode"] == "00") {
-      Get.find<AuthController>()
-          .addTransaction(amount: amount.toStringAsFixed(2));
+      // Get.find<AuthController>()
+      //     .addTransaction(amount: amount.toStringAsFixed(2));
 
       Get.to(const SucessfulScreenOtc());
 
@@ -820,6 +821,59 @@ class ProfileController extends GetxController {
           colorText: Colors.white,
           backgroundColor: Colors.red,
           snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+
+  initiatePaymentAddtoWallet({required double amount}) async {
+    var userId = 0;
+    print(Get.find<ProfileController>().profileData);
+    if (Get.find<ProfileController>().profileData.isNotEmpty) {
+      userId = Get.find<ProfileController>().profileData.first.id;
+    } else {
+      await Get.find<ProfileController>().getProfile();
+      userId = Get.find<ProfileController>().profileData.first.id;
+    }
+    dio.Response<dynamic> response =
+        await initiatePaymentApiServices.initiatePayment(
+            userId: userId,
+            totalAmount: amount.toStringAsFixed(2),
+            status: "Wallet");
+
+    if (response.statusCode == 200) {
+      IninitiatePaymentModel ininitiatePaymentModel =
+          IninitiatePaymentModel.fromJson(response.data);
+
+      Get.to(() => PaymentWebViewAddToWallet(
+            amount: amount,
+            referenceId: ininitiatePaymentModel.data.merchantTransactionId,
+            url:
+                ininitiatePaymentModel.data.instrumentResponse.redirectInfo.url,
+            userId: Get.find<ProfileController>()
+                .profileData
+                .first
+                .userId
+                .toString(),
+          ));
+    }
+  }
+
+  checkPhonePeStatusAddToWallet(
+      {required String refernceID,
+      required double amount,
+      required String userId}) async {
+    dio.Response<dynamic> response = await paymentResponseApiServices
+        .paymentResponseApi(merchantId: refernceID);
+
+    if (response.data["code"] == "PAYMENT_SUCCESS") {
+      print("<<<<<<<<payment is Success>>>>>>>>");
+      Get.find<AuthController>()
+          .addTransaction(amount: amount.toStringAsFixed(2), userId: userId);
+
+      Get.to(const SucessfulScreenOtc());
+    } else {
+      print("<<<<<<<<payment is Failed>>>>>>>>");
+
+      Get.to(() => PaymentFailedScreen());
     }
   }
 

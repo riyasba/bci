@@ -357,9 +357,9 @@ class AuthController extends GetxController {
   AddTransactionApiServices addTransactionApiServices =
       AddTransactionApiServices();
 
-  addTransaction({required String amount}) async {
+  addTransaction({required String amount,required String userId,}) async {
     dio.Response<dynamic> response =
-        await addTransactionApiServices.addTransactionApi(amount: amount);
+        await addTransactionApiServices.addTransactionApi(amount: amount, userId: userId);
     if (response.statusCode == 200) {
     } else {
       Get.rawSnackbar(

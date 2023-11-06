@@ -1,5 +1,7 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
+import 'package:bci/models/get_today_offers_list_model.dart';
+import 'package:bci/screens/members/offer%20screen/view_vendors_offers_screen.dart';
 import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
@@ -301,98 +303,122 @@ class _OfferScreenState extends State<OfferScreen> {
                           return settingcontroller.offerslistdata.isNotEmpty
                               ? Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    height: 140,
-                                    width: size.width,
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xff594A99),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 15,
+                                  child: InkWell(
+                                    onTap: (){
+                                      OffersListModel offersListModel = OffersListModel(id: settingcontroller
+                                                .offerslistdata[index].id, vendorId: settingcontroller
+                                                .offerslistdata[index].vendorId, categoryId: settingcontroller
+                                                .offerslistdata[index].categoryId, title: settingcontroller
+                                                .offerslistdata[index].title, startsAt: settingcontroller
+                                                .offerslistdata[index].startsAt, endsAt: settingcontroller
+                                                .offerslistdata[index].endsAt, businessValue: settingcontroller
+                                                .offerslistdata[index].businessValue, discountValue: settingcontroller
+                                                .offerslistdata[index].discountValue, noOfClaimUser: settingcontroller
+                                                .offerslistdata[index].noOfClaimUser, status: settingcontroller
+                                                .offerslistdata[index].status, image: settingcontroller
+                                                .offerslistdata[index].image, description: settingcontroller
+                                                .offerslistdata[index].description, createdAt: settingcontroller
+                                                .offerslistdata[index].createdAt, updatedAt: settingcontroller
+                                                .offerslistdata[index].updatedAt);
+                                       Get.to(() => VendorViewOffers(
+                                            vendorId:settingcontroller.offerslistdata[index]
+                                                .vendorId,
+                                            offersListModel: offersListModel,
+                                          ));
+                                    },
+                                    child: Container(
+                                      height: 140,
+                                      width: size.width,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xff594A99),
+                                        borderRadius: BorderRadius.circular(15),
                                       ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: Container(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Text(
-                                                    settingcontroller
-                                                        .offerslistdata[index]
-                                                        .title,
-                                                    style: const TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        height: 1.4,
-                                                        color:
-                                                            Color(0xffFAE7E3)),
-                                                  ),
-                                                  Text(
-                                                    "₹${settingcontroller.offerslistdata[index].discountValue} Off",
-                                                    style: const TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        height: 1.4,
-                                                        color:
-                                                            Color(0xffFAE7E3)),
-                                                  ),
-                                                  Text(
-                                                    "Ends on\n${formatDate(settingcontroller.offerslistdata[index].endsAt, [
-                                                          dd,
-                                                          "-",
-                                                          mm,
-                                                          "-",
-                                                          yyyy
-                                                        ])}",
-                                                    textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color:
-                                                            Color(0xffFAE7E3)),
-                                                  ),
-                                                ],
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 15,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    Text(
+                                                      settingcontroller
+                                                          .offerslistdata[index]
+                                                          .title,
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          height: 1.4,
+                                                          color:
+                                                              Color(0xffFAE7E3)),
+                                                    ),
+                                                    Text(
+                                                      "₹${settingcontroller.offerslistdata[index].discountValue} Off",
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          height: 1.4,
+                                                          color:
+                                                              Color(0xffFAE7E3)),
+                                                    ),
+                                                    Text(
+                                                      "Ends on\n${formatDate(settingcontroller.offerslistdata[index].endsAt, [
+                                                            dd,
+                                                            "-",
+                                                            mm,
+                                                            "-",
+                                                            yyyy
+                                                          ])}",
+                                                      textAlign: TextAlign.center,
+                                                      style: const TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color:
+                                                              Color(0xffFAE7E3)),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            child: Container(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 10,
-                                                    right: 10,
-                                                    bottom: 10),
-                                                child: Container(
-                                                    height: 150,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10)),
-                                                    child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        child: Image(
-                                                            image: NetworkImage(
-                                                                settingcontroller
-                                                                    .offerslistdata[
-                                                                        index]
-                                                                    .image),
-                                                            fit: BoxFit.fill))),
+                                            Expanded(
+                                              child: Container(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      top: 10,
+                                                      right: 10,
+                                                      bottom: 10),
+                                                  child: Container(
+                                                      height: 150,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10)),
+                                                      child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          child: Image(
+                                                              image: NetworkImage(
+                                                                  settingcontroller
+                                                                      .offerslistdata[
+                                                                          index]
+                                                                      .image),
+                                                              fit: BoxFit.fill))),
+                                                ),
                                               ),
-                                            ),
-                                          )
-                                        ],
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
