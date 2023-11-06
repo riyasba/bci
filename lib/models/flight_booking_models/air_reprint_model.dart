@@ -31,8 +31,8 @@ class AirReprintModel {
   String paxEmailId;
   String paxMobile;
   String remark;
-  ResponseHeader responseHeader;
-  RetailerDetail retailerDetail;
+  // ResponseHeader responseHeader;
+  // RetailerDetail retailerDetail;
   int travelType;
 
   AirReprintModel({
@@ -56,39 +56,42 @@ class AirReprintModel {
     required this.paxEmailId,
     required this.paxMobile,
     required this.remark,
-    required this.responseHeader,
-    required this.retailerDetail,
+    // required this.responseHeader,
+    // required this.retailerDetail,
     required this.travelType,
   });
 
   factory AirReprintModel.fromJson(Map<String, dynamic> json) =>
       AirReprintModel(
-        adultCount: json["Adult_Count"],
-        airPnrDetails: List<AirPnrDetail>.from(
-            json["AirPNRDetails"].map((x) => AirPnrDetail.fromJson(x))),
-        airRequeryResponseKey: json["AirRequeryResponse_Key"],
-        billerId: json["Biller_Id"],
-        bookingPaymentDetail: List<BookingPaymentDetail>.from(
-            json["BookingPaymentDetail"]
+        adultCount: json["Adult_Count"] ?? 0,
+        airPnrDetails: json["AirPNRDetails"] == null
+            ? []
+            : List<AirPnrDetail>.from(
+                json["AirPNRDetails"].map((x) => AirPnrDetail.fromJson(x))),
+        airRequeryResponseKey: json["AirRequeryResponse_Key"] ?? "",
+        billerId: json["Biller_Id"] ?? 0,
+        bookingPaymentDetail: json["BookingPaymentDetail"] == null
+            ? []
+            : List<BookingPaymentDetail>.from(json["BookingPaymentDetail"]
                 .map((x) => BookingPaymentDetail.fromJson(x))),
         bookingDateTime: json["Booking_DateTime"] ?? "",
         bookingRefNo: json["Booking_RefNo"] ?? "",
-        bookingType: json["Booking_Type"],
-        childCount: json["Child_Count"],
-        classOfTravel: json["Class_of_Travel"],
+        bookingType: json["Booking_Type"] ?? 0,
+        childCount: json["Child_Count"] ?? 0,
+        classOfTravel: json["Class_of_Travel"] ?? 0,
         companyDetail: CompanyDetail.fromJson(json["CompanyDetail"]),
-        corporatePaymentMode: json["CorporatePaymentMode"],
+        corporatePaymentMode: json["CorporatePaymentMode"] ?? 0,
         customerDetail: CustomerDetail.fromJson(json["CustomerDetail"]),
         gst: json["GST"] ?? false,
-        gstin: json["GSTIN"] ??  "",
-        infantCount: json["Infant_Count"],
-        invoiceNumber: json["Invoice_Number"],
+        gstin: json["GSTIN"] ?? "",
+        infantCount: json["Infant_Count"] ?? 0,
+        invoiceNumber: json["Invoice_Number"] ?? "",
         paxEmailId: json["PAX_EmailId"] ?? "",
         paxMobile: json["PAX_Mobile"] ?? "",
         remark: json["Remark"] ?? "",
-        responseHeader: ResponseHeader.fromJson(json["Response_Header"]),
-        retailerDetail: RetailerDetail.fromJson(json["RetailerDetail"]),
-        travelType: json["Travel_Type"],
+        // responseHeader: ResponseHeader.fromJson(json["Response_Header"]),
+        // retailerDetail: RetailerDetail.fromJson(json["RetailerDetail"]),
+        travelType: json["Travel_Type"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -114,8 +117,8 @@ class AirReprintModel {
         "PAX_EmailId": paxEmailId,
         "PAX_Mobile": paxMobile,
         "Remark": remark,
-        "Response_Header": responseHeader.toJson(),
-        "RetailerDetail": retailerDetail.toJson(),
+        // "Response_Header": responseHeader.toJson(),
+        // "RetailerDetail": retailerDetail.toJson(),
         "Travel_Type": travelType,
       };
 }
@@ -129,11 +132,11 @@ class AirPnrDetail {
   String crsPnr;
   dynamic failureRemark;
   List<AirFlight> flights;
-  int grossAmount;
+  dynamic grossAmount;
   List<PaxTicketDetail> paxTicketDetails;
-  int postMarkup;
+  dynamic postMarkup;
   String recordLocator;
-  int retailerPostMarkup;
+  dynamic retailerPostMarkup;
   String supplierRefNo;
   String ticketStatusDesc;
   String ticketStatusId;
@@ -160,26 +163,31 @@ class AirPnrDetail {
   });
 
   factory AirPnrDetail.fromJson(Map<String, dynamic> json) => AirPnrDetail(
-        airlineCode: json["Airline_Code"],
-        airlineName: json["Airline_Name"],
-        airlinePnr: json["Airline_PNR"],
-        bookingChangeRequests:
-            List<dynamic>.from(json["BookingChangeRequests"].map((x) => x)),
-        crsCode: json["CRS_Code"],
-        crsPnr: json["CRS_PNR"],
-        failureRemark: json["FailureRemark"],
-        flights: List<AirFlight>.from(
-            json["Flights"].map((x) => AirFlight.fromJson(x))),
-        grossAmount: json["Gross_Amount"],
-        paxTicketDetails: List<PaxTicketDetail>.from(
-            json["PAXTicketDetails"].map((x) => PaxTicketDetail.fromJson(x))),
-        postMarkup: json["Post_Markup"],
-        recordLocator: json["Record_Locator"],
-        retailerPostMarkup: json["RetailerPostMarkup"],
-        supplierRefNo: json["Supplier_RefNo"],
-        ticketStatusDesc: json["Ticket_Status_Desc"],
-        ticketStatusId: json["Ticket_Status_Id"],
-        ticketingDate: json["TicketingDate"],
+        airlineCode: json["Airline_Code"] ?? "",
+        airlineName: json["Airline_Name"] ?? "",
+        airlinePnr: json["Airline_PNR"] ?? "",
+        bookingChangeRequests: json["BookingChangeRequests"] == null
+            ? []
+            : List<dynamic>.from(json["BookingChangeRequests"].map((x) => x)),
+        crsCode: json["CRS_Code"] ?? "",
+        crsPnr: json["CRS_PNR"] ?? "",
+        failureRemark: json["FailureRemark"] ?? "",
+        flights: json["Flights"] == null
+            ? []
+            : List<AirFlight>.from(
+                json["Flights"].map((x) => AirFlight.fromJson(x))),
+        grossAmount: json["Gross_Amount"] ?? 0,
+        paxTicketDetails: json["PAXTicketDetails"] == null
+            ? []
+            : List<PaxTicketDetail>.from(json["PAXTicketDetails"]
+                .map((x) => PaxTicketDetail.fromJson(x))),
+        postMarkup: json["Post_Markup"] ?? 0,
+        recordLocator: json["Record_Locator"] ?? "",
+        retailerPostMarkup: json["RetailerPostMarkup"] ?? 0,
+        supplierRefNo: json["Supplier_RefNo"] ?? "",
+        ticketStatusDesc: json["Ticket_Status_Desc"] ?? "",
+        ticketStatusId: json["Ticket_Status_Id"] ?? "",
+        ticketingDate: json["TicketingDate"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -243,10 +251,10 @@ class AirFlight {
   });
 
   factory AirFlight.fromJson(Map<String, dynamic> json) => AirFlight(
-        airlineCode: json["Airline_Code"],
-        blockTicketAllowed: json["Block_Ticket_Allowed"],
-        cached: json["Cached"],
-        destination: json["Destination"],
+        airlineCode: json["Airline_Code"] ?? "",
+        blockTicketAllowed: json["Block_Ticket_Allowed"] ?? false,
+        cached: json["Cached"] ?? false,
+        destination: json["Destination"] ?? "",
         fares: List<Fare>.from(json["Fares"].map((x) => Fare.fromJson(x))),
         flightId: json["Flight_Id"],
         flightKey: json["Flight_Key"],
@@ -284,7 +292,7 @@ class AirFlight {
 
 class Fare {
   List<FareDetail> fareDetails;
-  int fareType;
+  dynamic fareType;
   dynamic fareId;
   dynamic fareKey;
   String foodOnboard;
@@ -312,19 +320,21 @@ class Fare {
   });
 
   factory Fare.fromJson(Map<String, dynamic> json) => Fare(
-        fareDetails: List<FareDetail>.from(
-            json["FareDetails"].map((x) => FareDetail.fromJson(x))),
-        fareType: json["FareType"],
-        fareId: json["Fare_Id"],
-        fareKey: json["Fare_Key"],
-        foodOnboard: json["Food_onboard"],
-        gstMandatory: json["GSTMandatory"],
-        lastFewSeats: json["LastFewSeats"],
-        productClass: json["ProductClass"],
-        promptMessage: json["PromptMessage"],
-        refundable: json["Refundable"],
-        seatsAvailable: json["Seats_Available"],
-        warning: json["Warning"],
+        fareDetails: json["FareDetails"] == null
+            ? []
+            : List<FareDetail>.from(
+                json["FareDetails"].map((x) => FareDetail.fromJson(x))),
+        fareType: json["FareType"] ?? 0,
+        fareId: json["Fare_Id"] ?? "",
+        fareKey: json["Fare_Key"] ?? "",
+        foodOnboard: json["Food_onboard"] ?? "",
+        gstMandatory: json["GSTMandatory"] ?? false,
+        lastFewSeats: json["LastFewSeats"] ?? "",
+        productClass: json["ProductClass"] ?? "",
+        promptMessage: json["PromptMessage"] ?? "",
+        refundable: json["Refundable"] ?? false,
+        seatsAvailable: json["Seats_Available"] ?? "",
+        warning: json["Warning"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -390,7 +400,7 @@ class FareDetail {
             ? []
             : List<AirportTax>.from(
                 json["AirportTaxes"].map((x) => AirportTax.fromJson(x))),
-        basicAmount: json["Basic_Amount"],
+        basicAmount: json["Basic_Amount"] ?? "",
         cancellationCharges: json["CancellationCharges"] == null
             ? []
             : List<Charge>.from(
@@ -401,18 +411,20 @@ class FareDetail {
             : List<FareClass>.from(
                 json["FareClasses"].map((x) => FareClass.fromJson(x))),
         freeBaggage: FreeBaggage.fromJson(json["Free_Baggage"]),
-        gst: json["GST"],
-        grossCommission: json["Gross_Commission"],
-        netCommission: json["Net_Commission"],
-        paxType: json["PAX_Type"],
-        promoDiscount: json["Promo_Discount"],
-        rescheduleCharges: List<Charge>.from(
-            json["RescheduleCharges"].map((x) => Charge.fromJson(x))),
-        serviceFeeAmount: json["Service_Fee_Amount"],
-        tds: json["TDS"],
-        totalAmount: json["Total_Amount"],
-        tradeMarkupAmount: json["Trade_Markup_Amount"],
-        yqAmount: json["YQ_Amount"],
+        gst: json["GST"] ?? "",
+        grossCommission: json["Gross_Commission"] ?? "",
+        netCommission: json["Net_Commission"] ?? "",
+        paxType: json["PAX_Type"] ?? "",
+        promoDiscount: json["Promo_Discount"] ?? "",
+        rescheduleCharges: json["RescheduleCharges"] == null
+            ? []
+            : List<Charge>.from(
+                json["RescheduleCharges"].map((x) => Charge.fromJson(x))),
+        serviceFeeAmount: json["Service_Fee_Amount"] ?? "",
+        tds: json["TDS"] ?? "",
+        totalAmount: json["Total_Amount"] ?? "",
+        tradeMarkupAmount: json["Trade_Markup_Amount"] ?? "",
+        yqAmount: json["YQ_Amount"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -464,18 +476,18 @@ class AirportTax {
 }
 
 class Charge {
-  int applicablility;
-  int durationFrom;
-  int durationTo;
-  int durationTypeFrom;
-  int durationTypeTo;
-  int offlineServiceFee;
-  int onlineServiceFee;
-  int passengerType;
+  dynamic applicablility;
+  dynamic durationFrom;
+  dynamic durationTo;
+  dynamic durationTypeFrom;
+  dynamic durationTypeTo;
+  dynamic offlineServiceFee;
+  dynamic onlineServiceFee;
+  dynamic passengerType;
   String remarks;
   bool returnFlight;
   String value;
-  int valueType;
+  dynamic valueType;
 
   Charge({
     required this.applicablility,
@@ -528,7 +540,7 @@ class FareClass {
   String classDesc;
   String fareBasis;
   dynamic privileges;
-  int segmentId;
+  dynamic segmentId;
 
   FareClass({
     required this.classCode,
@@ -586,12 +598,12 @@ class Segment {
   String destinationTerminal;
   String duration;
   String flightNumber;
-  int legIndex;
+  dynamic legIndex;
   String origin;
   dynamic originCity;
   String originTerminal;
   bool returnFlight;
-  int segmentId;
+  dynamic segmentId;
   dynamic stopOver;
 
   Segment({

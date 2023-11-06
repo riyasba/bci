@@ -8,6 +8,7 @@ import 'package:bci/models/initiate_payment_model.dart';
 import 'package:bci/models/member_profile_model.dart';
 import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
+import 'package:bci/models/userredeemcoupon/redeemed_coupons_model.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
 import 'package:bci/screens/members/manual_payment_options/phone_pe_bus_booking_model.dart';
 import 'package:bci/screens/members/manual_payment_options/phone_pe_service_booking.dart';
@@ -167,7 +168,7 @@ class ProfileController extends GetxController {
   OurCouponsApiServices ourCouponsApiServices = OurCouponsApiServices();
   // RedeemCouponApiServices redeemCouponApiServices = RedeemCouponApiServices();
   List<CouponsData> couponsData = [];
-  List<CouponsData> redeemcouponsData = [];
+  List<CouponsRedeemedData> redeemcouponsData = [];
 
   getCoupons() async {
     dio.Response<dynamic> response =
@@ -191,11 +192,14 @@ class ProfileController extends GetxController {
   RedeemedCouponsCouponApiServices redeemedCouponsCouponApiServices =
       RedeemedCouponsCouponApiServices();
 
+  //  List<CouponsRedeemedData> redee;
+
   redeemgetCoupons() async {
     dio.Response<dynamic> response =
         await redeemedCouponsCouponApiServices.redeemedCouponApiServices();
     if (response.statusCode == 200) {
-      GetCouponsList getCouponsList = GetCouponsList.fromJson(response.data);
+      RedeemedCouponsModel getCouponsList =
+          RedeemedCouponsModel.fromJson(response.data);
       redeemcouponsData = getCouponsList.data;
     } else {
       Get.rawSnackbar(
@@ -440,9 +444,10 @@ class ProfileController extends GetxController {
     }
   }
 
-  checkPhonePeStatus(
-      {required String refernceID,
-      required double amount,}) async {
+  checkPhonePeStatus({
+    required String refernceID,
+    required double amount,
+  }) async {
     dio.Response<dynamic> response = await paymentResponseApiServices
         .paymentResponseApi(merchantId: refernceID);
 

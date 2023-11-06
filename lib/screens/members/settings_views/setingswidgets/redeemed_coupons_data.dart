@@ -102,8 +102,9 @@ class _CouponsState extends State<RedeemedCoupons> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: Text(
-                                  profileController
-                                      .redeemcouponsData[index].name ?? "",
+                                  profileController.redeemcouponsData[index]
+                                          .coupon.name ??
+                                      "",
                                   style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
@@ -116,8 +117,8 @@ class _CouponsState extends State<RedeemedCoupons> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: Text(
-                                  profileController
-                                      .redeemcouponsData[index].description,
+                                  profileController.redeemcouponsData[index]
+                                      .coupon.description,
                                   style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
@@ -198,5 +199,3 @@ class _CouponsState extends State<RedeemedCoupons> {
     );
   }
 }
-
-

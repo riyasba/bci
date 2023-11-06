@@ -88,7 +88,7 @@ class _CouponsState extends State<VendorCoupons> {
                                 MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                profileController.redeemcouponsData[index].name ??
+                                profileController.redeemcouponsData[index].coupon.name ??
                                     "Coupon Code:",
                                 textAlign: TextAlign.start,
                                 style: const TextStyle(
