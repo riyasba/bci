@@ -8,7 +8,8 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GetServicesByCategoryApiServices extends BaseApiService {
-  Future getServicesByCategory({required String categoryId,required String vendorId}) async {
+  Future getServicesByCategory(
+      {required String categoryId, required String vendorId}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
@@ -23,9 +24,9 @@ class GetServicesByCategoryApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"category": categoryId,"vendor_id": vendorId});
+          data: {"category": categoryId, "vendor_id": vendorId});
       print(
-          "::::::::<get services by category URL>::::::::status code::::::::::");
+          "::::::::<get services by category URL>::::::::status code:::::$categoryId::::$vendorId:");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

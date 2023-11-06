@@ -70,14 +70,21 @@ class ServicesController extends GetxController {
   }
 
   getServicesByCategory({required String categoryId}) async {
-    dio.Response<dynamic> response = await getServicesByCategoryApiServices
-        .getServicesByCategory(categoryId: categoryId,vendorId: Get.find<ProfileController>().profileData.first.id.toString());
+    dio.Response<dynamic> response =
+        await getServicesByCategoryApiServices.getServicesByCategory(
+            categoryId: categoryId,
+            vendorId:
+                Get.find<ProfileController>().profileData.first.id.toString());
 
     if (response.statusCode == 200) {
       ServiceListModel serviceListModel =
           ServiceListModel.fromJson(response.data);
 
-      serviceDataList = serviceListModel.data;
+      serviceDataList = serviceListModel.data
+          .where((element) =>
+              element.vendorId ==
+              Get.find<ProfileController>().profileData.first.id.toString())
+          .toList();
     }
     update();
   }
@@ -121,18 +128,18 @@ class ServicesController extends GetxController {
   }
 
   //get booking list api
-  GetBookingListApiServices getBookingListApiServices = GetBookingListApiServices();
+  GetBookingListApiServices getBookingListApiServices =
+      GetBookingListApiServices();
   List<BookingListData> bookingListData = [];
 
   getBooking() async {
-    dio.Response<dynamic> response = await getBookingListApiServices.getBookingListApiServices();
-    if(response.statusCode == 200){
-
+    dio.Response<dynamic> response =
+        await getBookingListApiServices.getBookingListApiServices();
+    if (response.statusCode == 200) {
       GetBookingList getBookingList = GetBookingList.fromJson(response.data);
       bookingListData = getBookingList.data;
-
     } else {
-        Get.rawSnackbar(
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             "Something went wrong",
@@ -143,26 +150,21 @@ class ServicesController extends GetxController {
   }
 
   //get date filter booking list
-  GetDateFilterBookingListApiServices 
-  getDateFilterBookingListApiServices = GetDateFilterBookingListApiServices();
+  GetDateFilterBookingListApiServices getDateFilterBookingListApiServices =
+      GetDateFilterBookingListApiServices();
 
   List<BookingListData> dateFilterBookingListData = [];
 
-  dateFilterBooking({
-    required String fromdate,
-    required String todate
-  }) async {
-
-    dio.Response<dynamic> response = await 
-    getDateFilterBookingListApiServices.getDateFilterBookingListApiServices(
-      fromdate: fromdate, todate: todate);
-      if(response.statusCode == 200){
-
-        GetBookingList getDateFBookingList = GetBookingList.fromJson(response.data);
-        bookingListData = getDateFBookingList.data;
-
-      } else {
-        Get.rawSnackbar(
+  dateFilterBooking({required String fromdate, required String todate}) async {
+    dio.Response<dynamic> response = await getDateFilterBookingListApiServices
+        .getDateFilterBookingListApiServices(
+            fromdate: fromdate, todate: todate);
+    if (response.statusCode == 200) {
+      GetBookingList getDateFBookingList =
+          GetBookingList.fromJson(response.data);
+      bookingListData = getDateFBookingList.data;
+    } else {
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             "Something went wrong",
@@ -173,8 +175,9 @@ class ServicesController extends GetxController {
   }
 
   //add today offers
-  AddTodayOffersApiServices addTodayOffersApiServices = AddTodayOffersApiServices();
-AddCouponsApiServices addCouponsApiServices = AddCouponsApiServices();
+  AddTodayOffersApiServices addTodayOffersApiServices =
+      AddTodayOffersApiServices();
+  AddCouponsApiServices addCouponsApiServices = AddCouponsApiServices();
   addTodayOffers({
     required String image,
     required String title,
@@ -184,37 +187,35 @@ AddCouponsApiServices addCouponsApiServices = AddCouponsApiServices();
     required String discountValue,
     required String claimUser,
   }) async {
-    dio.Response<dynamic> response = await addTodayOffersApiServices.addTodayOffersApiServices(
-      image: image, 
-      title: title, 
-      category: category, 
-      startsat: startsat, 
-      endsat: endsat, 
-      discountValue: discountValue, 
-      claimUser: claimUser,);
-      if(response.statusCode == 200){
-         Get.back();
-         Get.rawSnackbar(
+    dio.Response<dynamic> response =
+        await addTodayOffersApiServices.addTodayOffersApiServices(
+      image: image,
+      title: title,
+      category: category,
+      startsat: startsat,
+      endsat: endsat,
+      discountValue: discountValue,
+      claimUser: claimUser,
+    );
+    if (response.statusCode == 200) {
+      Get.back();
+      Get.rawSnackbar(
           backgroundColor: Colors.green,
           messageText: Text(
             "Offer created successfully",
             style: primaryFont.copyWith(color: Colors.white),
           ));
-      } else {
-         Get.rawSnackbar(
+    } else {
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             "Something went wrong",
             style: primaryFont.copyWith(color: Colors.white),
           ));
-      }
-
+    }
   }
 
-
-
-
-    addCoupons({
+  addCoupons({
     required String image,
     required String title,
     required String category,
@@ -223,46 +224,47 @@ AddCouponsApiServices addCouponsApiServices = AddCouponsApiServices();
     required String discountValue,
     required String claimUser,
   }) async {
-    dio.Response<dynamic> response = await addCouponsApiServices.addCouponsApiServices(
-      image: image, 
-      title: title, 
-      category: category, 
-      startsat: startsat, 
-      endsat: endsat, 
-      discountValue: discountValue, 
+    dio.Response<dynamic> response =
+        await addCouponsApiServices.addCouponsApiServices(
+      image: image,
+      title: title,
+      category: category,
+      startsat: startsat,
+      endsat: endsat,
+      discountValue: discountValue,
       merchantId: Get.find<ProfileController>().profileData.first.id.toString(),
-      description: claimUser,);
-      if(response.statusCode == 201){
-         Get.back();
-         Get.rawSnackbar(
+      description: claimUser,
+    );
+    if (response.statusCode == 201) {
+      Get.back();
+      Get.rawSnackbar(
           backgroundColor: Colors.green,
           messageText: Text(
             "Coupon created successfully",
             style: primaryFont.copyWith(color: Colors.white),
           ));
-      } else {
-         Get.rawSnackbar(
+    } else {
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             "Something went wrong",
             style: primaryFont.copyWith(color: Colors.white),
           ));
-      }
-
+    }
   }
 
   //vendor offer list
-  GetVendorOfferListApiServices getVendorOfferListApiServices = GetVendorOfferListApiServices();
+  GetVendorOfferListApiServices getVendorOfferListApiServices =
+      GetVendorOfferListApiServices();
   List<VendorOfferList> offerListData = [];
 
   offerList() async {
-    dio.Response<dynamic> response = await getVendorOfferListApiServices.getVendorOfferListApiServices();
-    if(response.statusCode == 200){
-        offerListData = List<VendorOfferList>.from(
+    dio.Response<dynamic> response =
+        await getVendorOfferListApiServices.getVendorOfferListApiServices();
+    if (response.statusCode == 200) {
+      offerListData = List<VendorOfferList>.from(
           response.data.map((x) => VendorOfferList.fromJson(x)));
-    } 
+    }
     update();
   }
-
-
 }
