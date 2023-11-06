@@ -1,4 +1,6 @@
+import 'package:bci/screens/members/settings_views/setingswidgets/coupons_list_screen.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/others_containors.dart';
+import 'package:bci/screens/members/settings_views/setingswidgets/redeemed_coupons_data.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/your_coupons.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
@@ -99,7 +101,7 @@ class _MemberCouponScreenState extends State<MemberCouponScreen> {
                 // )
               ],
             )),
-        body: const TabBarView(children: [Coupons(), VendorCoupons()]),
+        body: TabBarView(children: [CouponsListScreen(), RedeemedCoupons()]),
       ),
     );
   }

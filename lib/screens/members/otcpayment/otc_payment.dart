@@ -227,8 +227,8 @@ class _OtcPaymentState extends State<OtcPayment> {
                 print(
                     ">>>>>>>>>>>>>>>>>..............payment start..........>>>>>>>>>>${widget.plansData.id}");
 
-                bool isValid = await planController.checkUserPlan();
-                // bool isValid = true;
+                // bool isValid = await planController.checkUserPlan();
+                bool isValid = true;
 
                 if (isValid) {
                   Get.to(() => PaymentScreenView(

@@ -25,7 +25,8 @@ class MerhantCategory {
       MerhantCategory(
         status: json["status"],
         message: json["message"],
-        data: List<MerchatCategoryData>.from(json["data"].map((x) => MerchatCategoryData.fromJson(x))),
+        data: List<MerchatCategoryData>.from(
+            json["data"].map((x) => MerchatCategoryData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,15 +39,19 @@ class MerhantCategory {
 class MerchatCategoryData {
   String title;
   String image;
+  int id;
 
   MerchatCategoryData({
     required this.title,
     required this.image,
+    required this.id,
   });
 
-  factory MerchatCategoryData.fromJson(Map<String, dynamic> json) => MerchatCategoryData(
+  factory MerchatCategoryData.fromJson(Map<String, dynamic> json) =>
+      MerchatCategoryData(
         title: json["title"],
         image: json["image"],
+        id: json["id"],
       );
 
   Map<String, dynamic> toJson() => {

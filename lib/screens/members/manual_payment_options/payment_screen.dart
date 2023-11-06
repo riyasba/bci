@@ -127,28 +127,28 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
               const SizedBox(
                 height: 30,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 200,
-                    width: 200,
-                    child: Image.asset("assets/images/qr_code.jpeg"),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.find<ProfileController>().downloadPaymentQrCode();
-                    },
-                    child: Text(
-                      "Download Qr code",
-                      style: primaryFont.copyWith(color: Colors.blue),
-                    ),
-                  ),
-                ],
-              ),
+              // Column(
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   children: [
+              //     Container(
+              //       height: 200,
+              //       width: 200,
+              //       child: Image.asset("assets/images/qr_code.jpeg"),
+              //     ),
+              //     const SizedBox(
+              //       height: 10,
+              //     ),
+              //     InkWell(
+              //       onTap: () {
+              //         Get.find<ProfileController>().downloadPaymentQrCode();
+              //       },
+              //       child: Text(
+              //         "Download Qr code",
+              //         style: primaryFont.copyWith(color: Colors.blue),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               const SizedBox(
                 height: 50,
               ),
@@ -173,113 +173,113 @@ class _PaymentScreenViewState extends State<PaymentScreenView> {
               const SizedBox(
                 height: 20,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: GestureDetector(
-                  onTap: () {
-                    planController.paymentIndex(0);
-                  },
-                  child: Container(
-                    width: size.width,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 2,
-                              color: Colors.grey.withOpacity(0.6))
-                        ]),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Google Pay",
-                                style: primaryFont.copyWith(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  planController.paymentIndex(0);
-                                },
-                                child: Container(
-                                  height: 20,
-                                  width: 20,
-                                  decoration: BoxDecoration(
-                                      color:
-                                          planController.paymentIndex.value == 0
-                                              ? Colors.green
-                                              : Colors.white,
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(color: Colors.black)),
-                                  alignment: Alignment.center,
-                                  child: const Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                    size: 15,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          if (planController.paymentIndex.value == 0)
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const Text(
-                                    "UPI Transaction ID or UTR from the receipt"),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Container(
-                                  height: 55,
-                                  child: TextField(
-                                    controller: utrTextController,
-                                    keyboardType: TextInputType.number,
-                                    inputFormatters: [
-                                      LengthLimitingTextInputFormatter(12),
-                                      FilteringTextInputFormatter.digitsOnly,
-                                      FilteringTextInputFormatter.deny(
-                                          RegExp(r'\s 1-9')),
-                                    ],
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter UTR Number',
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 7,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Required",
-                                      style: primaryFont.copyWith(
-                                          fontSize: 11, color: Colors.black45),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                              ],
-                            ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 5),
+              //   child: GestureDetector(
+              //     onTap: () {
+              //       planController.paymentIndex(0);
+              //     },
+              //     child: Container(
+              //       width: size.width,
+              //       decoration: BoxDecoration(
+              //           color: Colors.white,
+              //           borderRadius: BorderRadius.circular(15),
+              //           boxShadow: [
+              //             BoxShadow(
+              //                 blurRadius: 2,
+              //                 color: Colors.grey.withOpacity(0.6))
+              //           ]),
+              //       child: Padding(
+              //         padding: const EdgeInsets.all(20.0),
+              //         child: Column(
+              //           crossAxisAlignment: CrossAxisAlignment.start,
+              //           children: [
+              //             Row(
+              //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //               children: [
+              //                 Text(
+              //                   "Google Pay",
+              //                   style: primaryFont.copyWith(
+              //                       color: Colors.black,
+              //                       fontSize: 16,
+              //                       fontWeight: FontWeight.bold),
+              //                 ),
+              //                 GestureDetector(
+              //                   onTap: () {
+              //                     planController.paymentIndex(0);
+              //                   },
+              //                   child: Container(
+              //                     height: 20,
+              //                     width: 20,
+              //                     decoration: BoxDecoration(
+              //                         color:
+              //                             planController.paymentIndex.value == 0
+              //                                 ? Colors.green
+              //                                 : Colors.white,
+              //                         borderRadius: BorderRadius.circular(20),
+              //                         border: Border.all(color: Colors.black)),
+              //                     alignment: Alignment.center,
+              //                     child: const Icon(
+              //                       Icons.check,
+              //                       color: Colors.white,
+              //                       size: 15,
+              //                     ),
+              //                   ),
+              //                 )
+              //               ],
+              //             ),
+              //             if (planController.paymentIndex.value == 0)
+              //               Column(
+              //                 crossAxisAlignment: CrossAxisAlignment.start,
+              //                 children: [
+              //                   const SizedBox(
+              //                     height: 10,
+              //                   ),
+              //                   const Text(
+              //                       "UPI Transaction ID or UTR from the receipt"),
+              //                   const SizedBox(
+              //                     height: 15,
+              //                   ),
+              //                   Container(
+              //                     height: 55,
+              //                     child: TextField(
+              //                       controller: utrTextController,
+              //                       keyboardType: TextInputType.number,
+              //                       inputFormatters: [
+              //                         LengthLimitingTextInputFormatter(12),
+              //                         FilteringTextInputFormatter.digitsOnly,
+              //                         FilteringTextInputFormatter.deny(
+              //                             RegExp(r'\s 1-9')),
+              //                       ],
+              //                       decoration: const InputDecoration(
+              //                         border: OutlineInputBorder(),
+              //                         hintText: 'Enter UTR Number',
+              //                       ),
+              //                     ),
+              //                   ),
+              //                   const SizedBox(
+              //                     height: 7,
+              //                   ),
+              //                   Row(
+              //                     children: [
+              //                       Text(
+              //                         "Required",
+              //                         style: primaryFont.copyWith(
+              //                             fontSize: 11, color: Colors.black45),
+              //                       ),
+              //                     ],
+              //                   ),
+              //                   const SizedBox(
+              //                     height: 20,
+              //                   ),
+              //                 ],
+              //               ),
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(
                 height: 20,
               ),

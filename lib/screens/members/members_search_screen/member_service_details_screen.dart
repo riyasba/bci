@@ -17,10 +17,9 @@ class ServiceDetailsScreen extends StatefulWidget {
 }
 
 class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
-  
-   String ?_setTime, _setDate;
+  String? _setTime, _setDate;
 
-   String ?_hour, _minute, _time;
+  String? _hour, _minute, _time;
 
   String? dateTime;
 
@@ -41,9 +40,9 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
     if (picked != null)
       setState(() {
         selectedDate = picked;
-        _dateController.text = formatDate(selectedDate, [MM,'-',dd]);
+        _dateController.text = formatDate(selectedDate, [MM, '-', dd]);
       });
-      _selectTime(context);
+    _selectTime(context);
   }
 
   Future<Null> _selectTime(BuildContext context) async {
@@ -66,14 +65,14 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
 
   @override
   void initState() {
-    
-    _dateController.text = formatDate(selectedDate, [M,',',dd,',',yyyy]);
+    _dateController.text = formatDate(selectedDate, [M, ',', dd, ',', yyyy]);
 
     _timeController.text = formatDate(
         DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
         [hh, ':', nn, " ", am]).toString();
     super.initState();
   }
+
   final homeController = Get.find<HomeController>();
 
   final redeemCouponcontroller = TextEditingController();
@@ -108,9 +107,9 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 10,right: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: ClipRRect(
-              borderRadius:const BorderRadius.all(Radius.circular(10)),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
               child: Image.network(
                 widget.searchServicelist.image,
                 height: 350,
@@ -121,7 +120,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
           ),
           ksizedbox10,
           Padding(
-            padding: const EdgeInsets.only(left: 15,right: 15),
+            padding: const EdgeInsets.only(left: 15, right: 15),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -129,21 +128,36 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                 Container(
                   width: 200,
                   child: Text(
-                          widget.searchServicelist.title,
-                          maxLines: 2,
-                          style: TextStyle(
-                              fontSize: 22.sp,
-                              fontWeight: FontWeight.bold,
-                              color: kblue),
-                        ),
+                    widget.searchServicelist.title,
+                    maxLines: 2,
+                    style: TextStyle(
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.bold,
+                        color: kblue),
+                  ),
                 ),
-                      Text(
-                       "₹${widget.searchServicelist.saleAmount}",
-                        style: TextStyle(
-                            fontSize: 22.sp,
-                            fontWeight: FontWeight.bold,
-                            color: kblue),
-                      ),
+                Row(
+                  children: [
+                    Text(
+                      "₹${widget.searchServicelist.actualAmount}",
+                      style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.lineThrough,
+                          color: Colors.grey),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "₹${widget.searchServicelist.saleAmount}",
+                      style: TextStyle(
+                          fontSize: 22.sp,
+                          fontWeight: FontWeight.bold,
+                          color: kblue),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -171,88 +185,93 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                       color: kblue),
                 ),
                 ksizedbox10,
-                Text(
-                  'Services',
-                  style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color:kblue),
-                ),
-                ksizedbox20,
-                Text('Time Slot',
-                         style: TextStyle(
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                                color: kblue
-                                ),
-                        ), ksizedbox20, 
+                if (widget.searchServicelist.amenties.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Amenities',
+                        style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold,
+                            color: kblue),
+                      ),
+                      ksizedbox20,
+                      for (int i = 0;
+                          i < widget.searchServicelist.amenties.length;
+                          i++)
                         Row(
                           children: [
-                          InkWell(
-                            onTap: (){
-                              _selectDate(context);
-                            },
-                            child:const Icon(Icons.date_range)),
-                             Padding(
-                               padding: const EdgeInsets.only(left: 4,),
-                               child: Text(_dateController.text),
-                             ),
-                             const Padding(
-                               padding: EdgeInsets.only(left: 2,right: 2),
-                               child: Text('-'),
-                             ),
-                               Text(_timeController.text),
-                            
-                           
-                           
+                            Container(
+                              height: 10,
+                              width: 10,
+                              decoration: BoxDecoration(
+                                color: kgrey,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              widget.searchServicelist.amenties![i].value,
+                              style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: kgrey),
+                            ),
                           ],
                         ),
-                       
-                ksizedbox10,
-                // for (int i = 0;
-                //     i < widget.searchServicelist.amenties!.length;
-                //     i++)
-                  // Row(
-                  //   children: [
-                  //     Container(
-                  //       height: 10,
-                  //       width: 10,
-                  //       decoration: BoxDecoration(
-                  //         color: kgrey,
-                  //         borderRadius: BorderRadius.circular(5),
-                  //       ),
-                  //     ),
-                      // const SizedBox(
-                      //   width: 10,
-                      // ),
-                      // Text(
-                      //   widget.searchServicelist.amenties![i].value,
-                      //   style: TextStyle(
-                      //       fontSize: 16.sp,
-                      //       fontWeight: FontWeight.bold,
-                      //       color: kgrey),
-                      // ),
-                  //   ],
-                  // ),
-                  ksizedbox10,
-                  Text('Promo Code',
+                      ksizedbox10,
+                    ],
+                  ),
+                Text(
+                  'Time Slot',
                   style: TextStyle(
-                    fontSize: 16.5,
-                    color: kblue,
-                    fontWeight: FontWeight.w500
-                  ),),
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
+                      color: kblue),
+                ),
+                ksizedbox10,
+                Row(
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          _selectDate(context);
+                        },
+                        child: const Icon(Icons.date_range)),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 4,
+                      ),
+                      child: Text(_dateController.text),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 2, right: 2),
+                      child: Text('-'),
+                    ),
+                    Text(_timeController.text),
+                  ],
+                ),
+                ksizedbox10,
+                ksizedbox10,
+                Text(
+                  'Promo Code',
+                  style: TextStyle(
+                      fontSize: 16.5,
+                      color: kblue,
+                      fontWeight: FontWeight.w500),
+                ),
                 ksizedbox10,
                 TextField(
                   controller: redeemCouponcontroller,
                   decoration: InputDecoration(
                     disabledBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                        bottomRight: Radius.circular(10)
-                      )
-                    ),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                            bottomRight: Radius.circular(10))),
                     hintText: 'Enter Your Coupon code',
                     fillColor: kwhite,
                     focusColor: kwhite,
@@ -315,7 +334,6 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                     ),
                   ),
                 ),
-                  
                 ksizedbox20,
                 Container(
                   height: 60,
@@ -356,7 +374,8 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                     homeController.addToCart(
                                         amount:
                                             widget.searchServicelist.saleAmount,
-                                            startTime: "${selectedDate.day}-${selectedDate.month}-${selectedDate.year} ${_timeController.text}",
+                                        startTime:
+                                            "${selectedDate.day}-${selectedDate.month}-${selectedDate.year} ${_timeController.text}",
                                         serviceid: widget.searchServicelist.id
                                             .toString());
                                   },

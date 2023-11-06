@@ -155,7 +155,10 @@ class _VendorsListViewState extends State<VendorsCategoryListView> {
                         Get.to(() => VendorViewServicesList(
                               vendorId: widget.vendorId,
                               categoryName: homeController
-                                  .merchatCategoryList[index].title,
+                                  .merchatCategoryList[index].image,
+                              categoryId: homeController
+                                  .merchatCategoryList[index].id
+                                  .toString(),
                             ));
                       },
                       child: Container(
@@ -175,7 +178,7 @@ class _VendorsListViewState extends State<VendorsCategoryListView> {
                                       null
                                   ? Image.network(
                                       homeController
-                                          .merchatCategoryList[index].image!,
+                                          .merchatCategoryList[index].image,
                                       height: 125.h,
                                       width: size.width,
                                       fit: BoxFit.cover,

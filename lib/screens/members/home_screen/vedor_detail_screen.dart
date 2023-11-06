@@ -147,13 +147,15 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                         fontWeight: FontWeight.bold,
                         color: kblue),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "${widget.vendorListModelData.details ?? ""}",
-                    style: TextStyle(fontSize: 15.sp, color: kblue),
-                  ),
+                  if (widget.vendorListModelData.details != null)
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  if (widget.vendorListModelData.details != null)
+                    Text(
+                      "${widget.vendorListModelData.details ?? ""}",
+                      style: TextStyle(fontSize: 15.sp, color: kblue),
+                    ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -216,11 +218,14 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                           color: kblue,
                           fontSize: 18.sp),
                     ),
-                  if (widget.vendorListModelData.locationAddress != null)
+                  if (widget.vendorListModelData.locationAddress != null ||
+                      widget.vendorListModelData.videoLink != null)
                     ksizedbox20,
-                  if (widget.vendorListModelData.locationAddress != null)
-                    Row(
-                      children: [
+
+                  // if (widget.vendorListModelData.locationAddress != null)
+                  Row(
+                    children: [
+                      if (widget.vendorListModelData.locationAddress != null)
                         InkWell(
                           onTap: () {
                             launchUrl(
@@ -262,8 +267,49 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      if (widget.vendorListModelData.videoLink != null)
+                        InkWell(
+                          onTap: () {
+                            launchUrl(
+                                Uri.parse(widget.vendorListModelData.videoLink),
+                                mode: LaunchMode.externalApplication);
+                          },
+                          child: Container(
+                            height: 35,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 2,
+                                      color: Colors.grey.withOpacity(0.5))
+                                ],
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 7, right: 7),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  const Icon(
+                                    Icons.video_library_outlined,
+                                    color: Colors.red,
+                                    size: 20,
+                                  ),
+                                  Text(
+                                    "Video",
+                                    style: primaryFont.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black,
+                                        fontSize: 14),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                   ksizedbox20,
                 ],
               ),

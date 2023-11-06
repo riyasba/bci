@@ -235,6 +235,8 @@ class HomeController extends GetxController {
     update();
   }
 
+
+List<GetServiceListData> tempVendorServiceListData = [];
   vendorServiceListbyCategory(String vendorId, String category) async {
     dio.Response<dynamic> response = await vendorServiceListApiServices
         .vendorServiceListApiServices(vendorId: vendorId);
@@ -242,8 +244,13 @@ class HomeController extends GetxController {
     if (response.statusCode == 200) {
       GetServiceList getServiceList = GetServiceList.fromJson(response.data);
       vendorServiceListData = getServiceList.data
-          .where((element) => element.categoryId == category)
+          .where((element) => element.categoryId.toString() == category)
           .toList();
+
+       tempVendorServiceListData = getServiceList.data
+          .where((element) => element.categoryId.toString() == category)
+          .toList();
+      
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
