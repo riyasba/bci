@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../constands/constands.dart';
 import '../../screens/members/members widgets/member_bottumbavigation.dart';
@@ -29,6 +30,8 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
   // }
 
   final profileController = Get.find<ProfileController>();
+
+  final InAppReview inAppReview = InAppReview.instance;
 
   @override
   void initState() {
@@ -124,7 +127,7 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
                         //   ],
                         // ),
                         GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               setState(() {
                                 isPageViewEnabled = true;
                               });
@@ -133,6 +136,14 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
                                     .profileData.first.occupation.isEmpty) {
                                   Get.to(const MyAccount());
                                 } else {
+                                  print(
+                                      "-------------------*****************************ON Review***************************--------------------");
+                                  if (await inAppReview.isAvailable()) {
+                                    inAppReview.requestReview();
+                                  } else {
+                                    print(
+                                        ">>-<<---------------***no review availabl***--------------->>-<<");
+                                  }
                                   Get.offAll(MemberBottomNavBar());
                                 }
                               } else {
@@ -157,6 +168,14 @@ class _MemberOnbordingScreenState extends State<MemberOnbordingScreen> {
                             .profileData.first.occupation.isEmpty) {
                           Get.to(const MyAccount());
                         } else {
+                          print(
+                              "-------------------*****************************ON Review***************************--------------------");
+                          if (await inAppReview.isAvailable()) {
+                            inAppReview.requestReview();
+                          } else {
+                            print(
+                                ">>-<<---------------***no review availabl***--------------->>-<<");
+                          }
                           Get.offAll(MemberBottomNavBar());
                         }
                       },

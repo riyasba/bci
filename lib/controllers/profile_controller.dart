@@ -169,6 +169,8 @@ class ProfileController extends GetxController {
   OurCouponsApiServices ourCouponsApiServices = OurCouponsApiServices();
   // RedeemCouponApiServices redeemCouponApiServices = RedeemCouponApiServices();
   List<CouponsData> couponsData = [];
+  List<CouponsData> tempcouponsData = [];
+  List<CouponsData> categorycouponsData = [];
   List<CouponsRedeemedData> redeemcouponsData = [];
 
   getCoupons() async {
@@ -177,6 +179,16 @@ class ProfileController extends GetxController {
     if (response.statusCode == 200) {
       GetCouponsList getCouponsList = GetCouponsList.fromJson(response.data);
       couponsData = getCouponsList.data;
+      tempcouponsData = getCouponsList.data;
+      List<String> categoyNames = [];
+      categorycouponsData = [];
+      getCouponsList.data.forEach((element) {
+        if (categoyNames.contains(element.name) == false) {
+          categorycouponsData.add(element);
+          categoyNames.add(element.name);
+        }
+      });
+
       couponsData.shuffle();
       update();
     } else {
@@ -187,6 +199,13 @@ class ProfileController extends GetxController {
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }
+    update();
+  }
+
+  getCouponsByCategory(String category) {
+    couponsData =
+        tempcouponsData.where((element) => element.name == category).toList();
+
     update();
   }
 

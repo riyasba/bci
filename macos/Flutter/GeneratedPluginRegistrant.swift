@@ -12,6 +12,7 @@ import file_selector_macos
 import firebase_core
 import firebase_messaging
 import flutter_inappwebview
+import in_app_review
 import nb_utils
 import package_info_plus
 import path_provider_foundation
@@ -27,6 +28,7 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FLTFirebaseCorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseCorePlugin"))
   FLTFirebaseMessagingPlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseMessagingPlugin"))
   InAppWebViewFlutterPlugin.register(with: registry.registrar(forPlugin: "InAppWebViewFlutterPlugin"))
+  InAppReviewPlugin.register(with: registry.registrar(forPlugin: "InAppReviewPlugin"))
   NbUtilsPlugin.register(with: registry.registrar(forPlugin: "NbUtilsPlugin"))
   FLTPackageInfoPlusPlugin.register(with: registry.registrar(forPlugin: "FLTPackageInfoPlusPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))

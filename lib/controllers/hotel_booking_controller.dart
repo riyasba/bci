@@ -390,7 +390,7 @@ class HotelBookingController extends GetxController {
         await getHotelRoomDetailsApiServices.getHotelRoomDetailsApiServices(
             userIp: "", bookingId: bookingId, seearchToken: searchToken);
 
-    print(bookingId);
+    // print(bookingId);
 
     if (response.statusCode == 200) {
       htDetails.HotelBookingDetailModel hotelBookingDetailModel =

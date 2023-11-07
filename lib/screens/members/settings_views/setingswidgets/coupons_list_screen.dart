@@ -5,6 +5,7 @@ import 'package:bci/controllers/profile_controller.dart';
 import 'package:clipboard/clipboard.dart';
 
 import 'package:coupon_uikit/coupon_uikit.dart';
+import 'package:custom_clippers/custom_clippers.dart';
 
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,8 @@ import 'dart:math' as math;
 import '../../../../constands/constands.dart';
 
 class CouponsListScreen extends StatefulWidget {
-  const CouponsListScreen({super.key});
+  String category;
+  CouponsListScreen({super.key, required this.category});
 
   @override
   State<CouponsListScreen> createState() => _CouponsState();
@@ -31,13 +33,64 @@ class _CouponsState extends State<CouponsListScreen> {
   @override
   void initState() {
     super.initState();
-    profileController.getCoupons();
+    getData();
+  }
+
+  getData() async {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      profileController.getCouponsByCategory(widget.category);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(150),
+          child: ClipPath(
+            clipper: SinCosineWaveClipper(),
+            child: Container(
+              height: 150,
+              color: kblue,
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 7),
+                      child: InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: kwhite,
+                          )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Text(
+                        'Coupons',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: kwhite),
+                      ),
+                    ),
+                    Container()
+                    // InkWell(
+                    //     onTap: () {
+                    //       Get.to(const ContactAdmin());
+                    //     },
+                    //     child: Image.asset(
+                    //         'assets/images/3669173_help_ic_icon.png'))
+                  ],
+                ),
+              ),
+            ),
+          )),
       body: GetBuilder<ProfileController>(builder: (_) {
         return Container(
           // height: size.height * 0.55,
@@ -74,9 +127,9 @@ class _CouponsState extends State<CouponsListScreen> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                    blurRadius: 3,
-                                    color: kgrey.withOpacity(0.6),
-                                    ),
+                                  blurRadius: 3,
+                                  color: kgrey.withOpacity(0.6),
+                                ),
                               ]),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

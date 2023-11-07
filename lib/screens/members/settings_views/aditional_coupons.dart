@@ -1,3 +1,4 @@
+import 'package:bci/screens/members/settings_views/setingswidgets/coupons_category_list.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/coupons_list_screen.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/others_containors.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/redeemed_coupons_data.dart';
@@ -101,7 +102,8 @@ class _MemberCouponScreenState extends State<MemberCouponScreen> {
                 // )
               ],
             )),
-        body: TabBarView(children: [CouponsListScreen(), RedeemedCoupons()]),
+        body: TabBarView(
+            children: [CategoryCouponsListScreen(), RedeemedCoupons()]),
       ),
     );
   }
