@@ -14,6 +14,7 @@ import 'package:bci/screens/members/manual_payment_options/phone_pe_add_to_walle
 import 'package:bci/screens/members/manual_payment_options/phone_pe_bus_booking_model.dart';
 import 'package:bci/screens/members/manual_payment_options/phone_pe_service_booking.dart';
 import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
+import 'package:bci/services/network/booking_cancel_refund_api_services/booking_cancel_refund_api_services.dart';
 import 'package:bci/services/network/payment_api_services/intiate_payment_api_services.dart';
 import 'package:bci/services/network/payment_api_services/payment_status_api_services.dart';
 import 'package:bci/services/network/profile_api_services/our_coupons_api_service.dart';
@@ -46,6 +47,9 @@ class ProfileController extends GetxController {
       UpdateResidencialAddressApiServices();
   UpdateOfficialApiServices updateOfficialApiServices =
       UpdateOfficialApiServices();
+
+  BookingCancelRefundAPIServices bookingCancelRefundAPIServices =
+      BookingCancelRefundAPIServices();
 
   ProfilePIcUpdateApiServices profilePIcUpdateApiServices =
       ProfilePIcUpdateApiServices();
@@ -934,5 +938,26 @@ class ProfileController extends GetxController {
     print(file.path);
 
     OpenFile.open(file.path);
+  }
+
+  cancelRefundApi({
+    required String userId,
+    required String amount,
+    required String type,
+    required String bookingId,
+  }) async {
+    dio.Response<dynamic> response =
+        await bookingCancelRefundAPIServices.bookingCancelRefundApiServices(
+            userId: userId,
+            amount: amount,
+            type: type,
+            bookingId: bookingId,);
+
+    if (response.statusCode == 200) {
+      if (type == "booking") {
+        Get.rawSnackbar(
+            message: "Booking Cancelled", backgroundColor: Colors.green);
+      }
+    }
   }
 }

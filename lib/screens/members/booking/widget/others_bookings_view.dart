@@ -1,5 +1,6 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_booking_list_model.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
@@ -30,21 +31,23 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
       return Padding(
         padding: const EdgeInsets.only(top: 20),
         child: homeController.bookingListData.isEmpty
-            ?  Center(
+            ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20,right: 20),
-                      child: Image.asset('assets/images/othersbookingnotavailableimage.png'),
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Image.asset(
+                          'assets/images/othersbookingnotavailableimage.png'),
                     ),
                     ksizedbox20,
-                    Text('No Bookings',
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color: kblue
-                    ),)
+                    Text(
+                      'No Bookings',
+                      style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                          color: kblue),
+                    )
                   ],
                 ),
               )
@@ -61,14 +64,14 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Container(
-                        //  height: 125,
+                          //  height: 125,
                           width: size.width,
                           decoration: BoxDecoration(
                             color: kwhite,
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -98,13 +101,15 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                                     child: Text(
                                       '₹${homeController.bookingListData[index].purchasePrice}',
                                       maxLines: 4,
-                                      style:const TextStyle(color: Colors.black),
+                                      style:
+                                          const TextStyle(color: Colors.black),
                                     ),
                                   ),
                                   Container(
                                     width: 200,
                                     child: Text(
-                                      homeController.bookingListData[index].description,
+                                      homeController
+                                          .bookingListData[index].description,
                                       maxLines: 4,
                                       style: TextStyle(color: kblue),
                                     ),
@@ -335,6 +340,37 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                     ),
                     Text(
                       "₹ ${bookingData.purchasePrice}",
+                      style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.green,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Get.find<ProfileController>().cancelRefundApi(
+                            userId: Get.find<ProfileController>().profileData.first.id.toString(),
+                            amount: bookingData.purchasePrice,
+                            type: "booking",
+                            bookingId: bookingData.id.toString(),);
+                      },
+                      child: const Text(
+                        'Cancel',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Text(
+                      "",
                       style: const TextStyle(
                           fontSize: 15,
                           color: Colors.green,

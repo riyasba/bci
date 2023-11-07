@@ -300,6 +300,9 @@ abstract class BaseApiService {
   final String hotelBookingCancelationURL =
       "https://www.portal.bcipvtltd.com/api/auth/cancel_request";
 
+    final String bookingCancelrefundApi =
+      "https://www.portal.bcipvtltd.com/api/auth/booking_cancelation";
+
   // ----- //
   final String getMerchantCaregoryURL = "https://www.portal.bcipvtltd.com/api/auth/merchant_service_category";
   
