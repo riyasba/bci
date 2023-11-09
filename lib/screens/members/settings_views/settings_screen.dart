@@ -1,5 +1,7 @@
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
+import 'package:bci/screens/members/credit_screens/credit_overview_screen.dart';
+import 'package:bci/screens/members/credit_screens/partial_overview_screen.dart';
 import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
 import 'package:bci/screens/members/settings_views/my_subcriptions_screen.dart';
 import 'package:bci/screens/members/settings_views/offers_screen.dart';
@@ -39,7 +41,7 @@ class _SettingScreenState extends State<SettingScreen> {
             child: Container(
               height: 150,
               color: kblue,
-              child:const Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
@@ -57,8 +59,7 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
           )),
       body: Padding(
-        padding:
-            const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 0),
+        padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 0),
         child: ListView(
           children: [
             InkWell(
@@ -153,6 +154,66 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             InkWell(
               onTap: () {
+                Get.to(() => const CreditOverviewScreen());
+              },
+              child: const Row(
+                children: [
+                  Image(
+                    image: AssetImage("assets/icons/dashboard.png"),
+                    width: 20,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Credit",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff003366)),
+                  )
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 5, bottom: 10),
+              child: Divider(
+                thickness: 1,
+                color: Colors.grey,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Get.to(() => const PartialCollectScreen());
+              },
+              child: const Row(
+                children: [
+                  Image(
+                    image: AssetImage("assets/icons/dashboard.png"),
+                    width: 20,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Partial Overview",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff003366)),
+                  )
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 5, bottom: 10),
+              child: Divider(
+                thickness: 1,
+                color: Colors.grey,
+              ),
+            ),
+            InkWell(
+              onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -220,11 +281,10 @@ class _SettingScreenState extends State<SettingScreen> {
               },
               child: const Row(
                 children: [
-                   Image(
+                  Image(
                     image: AssetImage("assets/icons/cart.png"),
                     width: 20,
                   ),
-                  
                   Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Text(
@@ -425,7 +485,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                     color: Colors.black)),
                           ],
                         ),
-                        content:const Text(
+                        content: const Text(
                           "Are you sure want to logout?",
                           textAlign: TextAlign.center,
                           style: TextStyle(

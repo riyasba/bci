@@ -15,6 +15,8 @@ import 'package:bci/screens/members/manual_payment_options/phone_pe_bus_booking_
 import 'package:bci/screens/members/manual_payment_options/phone_pe_service_booking.dart';
 import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
 import 'package:bci/services/network/booking_cancel_refund_api_services/booking_cancel_refund_api_services.dart';
+import 'package:bci/services/network/credit_api_services/get_credit_profile_api_services.dart';
+import 'package:bci/services/network/credit_api_services/pay_credit_api_services.dart';
 import 'package:bci/services/network/payment_api_services/intiate_payment_api_services.dart';
 import 'package:bci/services/network/payment_api_services/payment_status_api_services.dart';
 import 'package:bci/services/network/profile_api_services/our_coupons_api_service.dart';
@@ -960,4 +962,39 @@ class ProfileController extends GetxController {
       }
     }
   }
+
+
+
+//credit api functions
+GetCreditProfileApiServices getCreditProfileApiServices = GetCreditProfileApiServices();
+PayCreditApiServices payCreditApiServices = PayCreditApiServices();
+
+  
+
+  getCreditProfile() async{
+
+  }
+
+
+  useCredit() async{
+
+  }
+
+
+  payCreditBill(){
+
+  }
+
+
+  getCreditStatement() async{
+
+  }
+
+
+
+
+
+
+
+
 }

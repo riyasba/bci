@@ -300,10 +300,23 @@ abstract class BaseApiService {
   final String hotelBookingCancelationURL =
       "https://www.portal.bcipvtltd.com/api/auth/cancel_request";
 
-    final String bookingCancelrefundApi =
+  final String bookingCancelrefundApi =
       "https://www.portal.bcipvtltd.com/api/auth/booking_cancelation";
 
   // ----- //
-  final String getMerchantCaregoryURL = "https://www.portal.bcipvtltd.com/api/auth/merchant_service_category";
-  
+  final String getMerchantCaregoryURL =
+      "https://www.portal.bcipvtltd.com/api/auth/merchant_service_category";
+
+//-- Credit Api --//
+  final String getCreditProfileURL =
+      "https://www.portal.bcipvtltd.com/api/auth/credit_profile";
+
+  final String useCreditPointsURL =
+      "https://www.portal.bcipvtltd.com/api/auth/use_credit";
+
+  final String payCreditPointsURL =
+      "https://www.portal.bcipvtltd.com/api/auth/pay_credit";
+
+  final String viewCreditStatementURL =
+      "https://www.portal.bcipvtltd.com/api/auth/view_statement";
 }
