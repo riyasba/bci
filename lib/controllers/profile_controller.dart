@@ -35,7 +35,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:isgpayui_plugin/isgpayui_plugin.dart';
+// import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -374,75 +374,75 @@ class ProfileController extends GetxController {
 
 //payment gateway isgPay
 
-  // String responseData = "Nothing";
-  final _isgpayuiPlugin = IsgpayuiPlugin();
+  // // String responseData = "Nothing";
+  // final _isgpayuiPlugin = IsgpayuiPlugin();
 
-  void payFromCart(double amount) async {
-    int tempAmount = amount.toInt();
-    String? result;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      result = await _isgpayuiPlugin
-              .initiateISGPayUI(getArguments(tempAmount * 100)) ??
-          'Unknown platform version';
-    } on PlatformException catch (e) {
-      result = e.message;
-    }
-    debugPrint('Result :::--> $result');
+  // void payFromCart(double amount) async {
+  //   int tempAmount = amount.toInt();
+  //   String? result;
+  //   // Platform messages may fail, so we use a try/catch PlatformException.
+  //   try {
+  //     result = await _isgpayuiPlugin
+  //             .initiateISGPayUI(getArguments(tempAmount * 100)) ??
+  //         'Unknown platform version';
+  //   } on PlatformException catch (e) {
+  //     result = e.message;
+  //   }
+  //   debugPrint('Result :::--> $result');
 
-    var responseData = jsonDecode(result!);
-    var data = jsonDecode(responseData);
-    print("<<----response-data---->>${data.runtimeType}");
-    print(data);
-    if (data["ResponseCode"] == "00") {
-      final homeController = Get.find<HomeController>();
-      print(">>-------------->>---------->>");
-      for (int i = 0; i < homeController.cartListData.length; i++) {
-        homeController.addBooking(
-            serviceid: homeController.cartListData[i].serviceId.toString(),
-            cartid: homeController.cartListData[i].id.toString(),
-            qty: homeController.cartListData[i].quantity.toString(),
-            offerOrCoupon: "",
-            couponcode: "",
-            amount: homeController.cartListData[i].price,
-            bookDateTime: homeController.cartListData[i].bookDateTime);
-      }
+  //   var responseData = jsonDecode(result!);
+  //   var data = jsonDecode(responseData);
+  //   print("<<----response-data---->>${data.runtimeType}");
+  //   print(data);
+  //   if (data["ResponseCode"] == "00") {
+  //     final homeController = Get.find<HomeController>();
+  //     print(">>-------------->>---------->>");
+  //     for (int i = 0; i < homeController.cartListData.length; i++) {
+  //       homeController.addBooking(
+  //           serviceid: homeController.cartListData[i].serviceId.toString(),
+  //           cartid: homeController.cartListData[i].id.toString(),
+  //           qty: homeController.cartListData[i].quantity.toString(),
+  //           offerOrCoupon: "",
+  //           couponcode: "",
+  //           amount: homeController.cartListData[i].price,
+  //           bookDateTime: homeController.cartListData[i].bookDateTime);
+  //     }
 
-      Get.offAll(
-        () => LoadingWidgets(),
-      );
+  //     Get.offAll(
+  //       () => LoadingWidgets(),
+  //     );
 
-      // Get.find<HomeController>().addSubscription(
-      //     planId: id,
-      //     customerId: Get.find<ProfileController>().profileData.first.id);
+  //     // Get.find<HomeController>().addSubscription(
+  //     //     planId: id,
+  //     //     customerId: Get.find<ProfileController>().profileData.first.id);
 
-      //need to give id
-      Get.snackbar(
-        "Payment Successfully Paid",
-        "",
-        icon: const Icon(Icons.check_circle_outline_outlined,
-            color: Colors.white),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        borderRadius: 20,
-        margin: const EdgeInsets.all(15),
-        colorText: Colors.white,
-        duration: const Duration(seconds: 3),
-        isDismissible: true,
-        dismissDirection: DismissDirection.horizontal,
-        forwardAnimationCurve: Curves.easeOutBack,
-      );
+  //     //need to give id
+  //     Get.snackbar(
+  //       "Payment Successfully Paid",
+  //       "",
+  //       icon: const Icon(Icons.check_circle_outline_outlined,
+  //           color: Colors.white),
+  //       snackPosition: SnackPosition.BOTTOM,
+  //       backgroundColor: Colors.green,
+  //       borderRadius: 20,
+  //       margin: const EdgeInsets.all(15),
+  //       colorText: Colors.white,
+  //       duration: const Duration(seconds: 3),
+  //       isDismissible: true,
+  //       dismissDirection: DismissDirection.horizontal,
+  //       forwardAnimationCurve: Curves.easeOutBack,
+  //     );
 
-      // print(response);
-    } else {
-      Get.closeAllSnackbars();
-      Get.snackbar(
-          "The last transaction has been cancelled!", "Please try again!",
-          colorText: Colors.white,
-          backgroundColor: Colors.red,
-          snackPosition: SnackPosition.BOTTOM);
-    }
-  }
+  //     // print(response);
+  //   } else {
+  //     Get.closeAllSnackbars();
+  //     Get.snackbar(
+  //         "The last transaction has been cancelled!", "Please try again!",
+  //         colorText: Colors.white,
+  //         backgroundColor: Colors.red,
+  //         snackPosition: SnackPosition.BOTTOM);
+  //   }
+  // }
 
   InitiatePaymentApiServices initiatePaymentApiServices =
       InitiatePaymentApiServices();
@@ -675,67 +675,67 @@ class ProfileController extends GetxController {
     }
   }
 
-  void payfoSubscription({
-    required double amount,
-    required int id,
-    required String gstPercentage,
-    required String percentageAmount,
-    required String totalAmount,
-  }) async {
-    int tempAmount = amount.toInt();
-    String? result;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      result = await _isgpayuiPlugin
-              .initiateISGPayUI(getArguments(tempAmount * 100)) ??
-          'Unknown platform version';
-    } on PlatformException catch (e) {
-      result = e.message;
-    }
-    debugPrint('Result ::: $result');
+  // void payfoSubscription({
+  //   required double amount,
+  //   required int id,
+  //   required String gstPercentage,
+  //   required String percentageAmount,
+  //   required String totalAmount,
+  // }) async {
+  //   int tempAmount = amount.toInt();
+  //   String? result;
+  //   // Platform messages may fail, so we use a try/catch PlatformException.
+  //   try {
+  //     result = await _isgpayuiPlugin
+  //             .initiateISGPayUI(getArguments(tempAmount * 100)) ??
+  //         'Unknown platform version';
+  //   } on PlatformException catch (e) {
+  //     result = e.message;
+  //   }
+  //   debugPrint('Result ::: $result');
 
-    var responseData = jsonDecode(result!);
-    var data = jsonDecode(responseData);
-    print("<<----response-data---->>${data.runtimeType}");
-    print(data);
-    if (data["ResponseCode"] == "00") {
-      final homeController = Get.find<HomeController>();
+  //   var responseData = jsonDecode(result!);
+  //   var data = jsonDecode(responseData);
+  //   print("<<----response-data---->>${data.runtimeType}");
+  //   print(data);
+  //   if (data["ResponseCode"] == "00") {
+  //     final homeController = Get.find<HomeController>();
 
-      Get.find<HomeController>().addSubscription(
-          planId: id,
-          customerId: Get.find<ProfileController>().profileData.first.id,
-          paymentMenthod: "5",
-          gstPercentage: gstPercentage,
-          percentageAmount: percentageAmount,
-          totalAmount: totalAmount,
-          amount: amount.toStringAsFixed(2),
-          utrNumber: "");
+  //     Get.find<HomeController>().addSubscription(
+  //         planId: id,
+  //         customerId: Get.find<ProfileController>().profileData.first.id,
+  //         paymentMenthod: "5",
+  //         gstPercentage: gstPercentage,
+  //         percentageAmount: percentageAmount,
+  //         totalAmount: totalAmount,
+  //         amount: amount.toStringAsFixed(2),
+  //         utrNumber: "");
 
-      //need to give id
-      Get.snackbar(
-        "Payment Successfully Paid",
-        "",
-        icon: const Icon(Icons.check_circle_outline_outlined,
-            color: Colors.white),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        borderRadius: 20,
-        margin: const EdgeInsets.all(15),
-        colorText: Colors.white,
-        duration: const Duration(seconds: 3),
-        isDismissible: true,
-        dismissDirection: DismissDirection.horizontal,
-        forwardAnimationCurve: Curves.easeOutBack,
-      );
-    } else {
-      Get.closeAllSnackbars();
-      Get.snackbar(
-          "The last transaction has been cancelled!", "Please try again!",
-          colorText: Colors.white,
-          backgroundColor: Colors.red,
-          snackPosition: SnackPosition.BOTTOM);
-    }
-  }
+  //     //need to give id
+  //     Get.snackbar(
+  //       "Payment Successfully Paid",
+  //       "",
+  //       icon: const Icon(Icons.check_circle_outline_outlined,
+  //           color: Colors.white),
+  //       snackPosition: SnackPosition.BOTTOM,
+  //       backgroundColor: Colors.green,
+  //       borderRadius: 20,
+  //       margin: const EdgeInsets.all(15),
+  //       colorText: Colors.white,
+  //       duration: const Duration(seconds: 3),
+  //       isDismissible: true,
+  //       dismissDirection: DismissDirection.horizontal,
+  //       forwardAnimationCurve: Curves.easeOutBack,
+  //     );
+  //   } else {
+  //     Get.closeAllSnackbars();
+  //     Get.snackbar(
+  //         "The last transaction has been cancelled!", "Please try again!",
+  //         colorText: Colors.white,
+  //         backgroundColor: Colors.red,
+  //         snackPosition: SnackPosition.BOTTOM);
+  //   }
+  // }
 
   //add wallet amount
   payUseingEaseBuzzWallet({
@@ -800,54 +800,54 @@ class ProfileController extends GetxController {
 
   // String responseData = "Nothing";
 
-  void payforWallet({required double amount}) async {
-    int tempAmount = amount.toInt();
-    String? result;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      result = await _isgpayuiPlugin
-              .initiateISGPayUI(getArguments(tempAmount * 100)) ??
-          'Unknown platform version';
-    } on PlatformException catch (e) {
-      result = e.message;
-    }
-    debugPrint('Result ::: $result');
+  // void payforWallet({required double amount}) async {
+  //   int tempAmount = amount.toInt();
+  //   String? result;
+  //   // Platform messages may fail, so we use a try/catch PlatformException.
+  //   try {
+  //     result = await _isgpayuiPlugin
+  //             .initiateISGPayUI(getArguments(tempAmount * 100)) ??
+  //         'Unknown platform version';
+  //   } on PlatformException catch (e) {
+  //     result = e.message;
+  //   }
+  //   debugPrint('Result ::: $result');
 
-    var responseData = jsonDecode(result!);
-    var data = jsonDecode(responseData);
-    print("<<----response-data---->>${data.runtimeType}");
-    print(data);
-    if (data["ResponseCode"] == "00") {
-      // Get.find<AuthController>()
-      //     .addTransaction(amount: amount.toStringAsFixed(2));
+  //   var responseData = jsonDecode(result!);
+  //   var data = jsonDecode(responseData);
+  //   print("<<----response-data---->>${data.runtimeType}");
+  //   print(data);
+  //   if (data["ResponseCode"] == "00") {
+  //     // Get.find<AuthController>()
+  //     //     .addTransaction(amount: amount.toStringAsFixed(2));
 
-      Get.to(const SucessfulScreenOtc());
+  //     Get.to(const SucessfulScreenOtc());
 
-      //need to give id
-      Get.snackbar(
-        "Payment Successfully Paid",
-        "",
-        icon: const Icon(Icons.check_circle_outline_outlined,
-            color: Colors.white),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        borderRadius: 20,
-        margin: const EdgeInsets.all(15),
-        colorText: Colors.white,
-        duration: const Duration(seconds: 3),
-        isDismissible: true,
-        dismissDirection: DismissDirection.horizontal,
-        forwardAnimationCurve: Curves.easeOutBack,
-      );
-    } else {
-      Get.closeAllSnackbars();
-      Get.snackbar(
-          "The last transaction has been cancelled!", "Please try again!",
-          colorText: Colors.white,
-          backgroundColor: Colors.red,
-          snackPosition: SnackPosition.BOTTOM);
-    }
-  }
+  //     //need to give id
+  //     Get.snackbar(
+  //       "Payment Successfully Paid",
+  //       "",
+  //       icon: const Icon(Icons.check_circle_outline_outlined,
+  //           color: Colors.white),
+  //       snackPosition: SnackPosition.BOTTOM,
+  //       backgroundColor: Colors.green,
+  //       borderRadius: 20,
+  //       margin: const EdgeInsets.all(15),
+  //       colorText: Colors.white,
+  //       duration: const Duration(seconds: 3),
+  //       isDismissible: true,
+  //       dismissDirection: DismissDirection.horizontal,
+  //       forwardAnimationCurve: Curves.easeOutBack,
+  //     );
+  //   } else {
+  //     Get.closeAllSnackbars();
+  //     Get.snackbar(
+  //         "The last transaction has been cancelled!", "Please try again!",
+  //         colorText: Colors.white,
+  //         backgroundColor: Colors.red,
+  //         snackPosition: SnackPosition.BOTTOM);
+  //   }
+  // }
 
   initiatePaymentAddtoWallet({required double amount}) async {
     var userId = 0;

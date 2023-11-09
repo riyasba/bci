@@ -42,7 +42,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:isgpayui_plugin/isgpayui_plugin.dart';
+// import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import '../models/banner_model.dart';
 import '../models/get_gallery_model.dart';
 import '../services/network/get_gallery_apiservice.dart';
@@ -579,49 +579,49 @@ List<GetServiceListData> tempVendorServiceListData = [];
     update();
   }
 
-  // String responseData = "Nothing";
-  final _isgpayuiPlugin = IsgpayuiPlugin();
+  // // String responseData = "Nothing";
+  // final _isgpayuiPlugin = IsgpayuiPlugin();
 
-  void startPlugin() async {
-    String? result;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      result = await _isgpayuiPlugin.initiateISGPayUI(getArguments(100)) ??
-          'Unknown platform version';
-    } on PlatformException catch (e) {
-      result = e.message;
-    }
-    debugPrint('Result ::: $result');
+  // void startPlugin() async {
+  //   String? result;
+  //   // Platform messages may fail, so we use a try/catch PlatformException.
+  //   try {
+  //     result = await _isgpayuiPlugin.initiateISGPayUI(getArguments(100)) ??
+  //         'Unknown platform version';
+  //   } on PlatformException catch (e) {
+  //     result = e.message;
+  //   }
+  //   debugPrint('Result ::: $result');
 
-    var responseData = jsonDecode(result!);
-    print("<<----response-data---->>");
-    print(responseData);
-  }
+  //   var responseData = jsonDecode(result!);
+  //   print("<<----response-data---->>");
+  //   print(responseData);
+  // }
 
-  Map<String, String> getArguments(var amount) {
-    var randomStr = DateTime.now().microsecondsSinceEpoch.toString();
-    Map<String, String> map = {
-      'version': "1",
-      'txnRefNo': "ORD00011", // Should change on every request
-      'amount': "$amount",
-      'passCode': 'SVPL4257',
-      'bankId': '000004',
-      'terminalId': '10100781',
-      'merchantId': '101000000000781',
-      'mcc': "4112",
-      'paymentType': 'Pay',
-      'currency': "356",
-      'email': 'manu@gmail.com',
-      'phone': '+917907886767',
-      'hashKey': 'E59CD2BF6F4D86B5FB3897A680E0DD3E',
-      'aesKey': '5EC4A697141C8CE45509EF485EE7D4B1',
-      'payOpt': 'cc',
-      'orderInfo': 'NARUTO00001',
-      'env': 'UAT', //UAT PROD
-      'url': 'https://sandbox.isgpay.com/ISGPay-Genius/request.action',
-    };
-    return map;
-  }
+  // Map<String, String> getArguments(var amount) {
+  //   var randomStr = DateTime.now().microsecondsSinceEpoch.toString();
+  //   Map<String, String> map = {
+  //     'version': "1",
+  //     'txnRefNo': "ORD00011", // Should change on every request
+  //     'amount': "$amount",
+  //     'passCode': 'SVPL4257',
+  //     'bankId': '000004',
+  //     'terminalId': '10100781',
+  //     'merchantId': '101000000000781',
+  //     'mcc': "4112",
+  //     'paymentType': 'Pay',
+  //     'currency': "356",
+  //     'email': 'manu@gmail.com',
+  //     'phone': '+917907886767',
+  //     'hashKey': 'E59CD2BF6F4D86B5FB3897A680E0DD3E',
+  //     'aesKey': '5EC4A697141C8CE45509EF485EE7D4B1',
+  //     'payOpt': 'cc',
+  //     'orderInfo': 'NARUTO00001',
+  //     'env': 'UAT', //UAT PROD
+  //     'url': 'https://sandbox.isgpay.com/ISGPay-Genius/request.action',
+  //   };
+  //   return map;
+  // }
 
   VendorListApiServices vendorListApiServices = VendorListApiServices();
   List<VendorListModelData> vendorList = [];

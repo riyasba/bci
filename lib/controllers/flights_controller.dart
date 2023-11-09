@@ -36,7 +36,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:isgpayui_plugin/isgpayui_plugin.dart';
+// import 'package:isgpayui_plugin/isgpayui_plugin.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
@@ -343,41 +343,41 @@ class FlightsController extends GetxController {
     }
   }
 
-  // String responseData = "Nothing";
-  final _isgpayuiPlugin = IsgpayuiPlugin();
+  // // String responseData = "Nothing";
+  // final _isgpayuiPlugin = IsgpayuiPlugin();
 
-  void payForFlight(
-      {required double amount, required BookingModel bookingModel}) async {
-    String? result;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      result =
-          await _isgpayuiPlugin.initiateISGPayUI(getArguments(amount * 100)) ??
-              'Unknown platform version';
-    } on PlatformException catch (e) {
-      result = e.message;
-    }
-    debugPrint('Result ::: $result');
+  // void payForFlight(
+  //     {required double amount, required BookingModel bookingModel}) async {
+  //   String? result;
+  //   // Platform messages may fail, so we use a try/catch PlatformException.
+  //   try {
+  //     result =
+  //         await _isgpayuiPlugin.initiateISGPayUI(getArguments(amount * 100)) ??
+  //             'Unknown platform version';
+  //   } on PlatformException catch (e) {
+  //     result = e.message;
+  //   }
+  //   debugPrint('Result ::: $result');
 
-    var responseData = jsonDecode(result!);
-    var data = jsonDecode(responseData);
-    print("<<----response-data---->>$data");
-    print(data);
-    if (data["ResponseCode"] == "00") {
-      //need to give id
-      String transactionId = "";
-      Get.to(() => const FlightLoadingPage());
+  //   var responseData = jsonDecode(result!);
+  //   var data = jsonDecode(responseData);
+  //   print("<<----response-data---->>$data");
+  //   print(data);
+  //   if (data["ResponseCode"] == "00") {
+  //     //need to give id
+  //     String transactionId = "";
+  //     Get.to(() => const FlightLoadingPage());
 
-      bookAirTicket(bookingModel: bookingModel, transactionId: transactionId);
-    } else {
-      Get.closeAllSnackbars();
-      Get.snackbar(
-          "The last transaction has been cancelled!", "Please try again!",
-          colorText: Colors.white,
-          backgroundColor: Colors.red,
-          snackPosition: SnackPosition.BOTTOM);
-    }
-  }
+  //     bookAirTicket(bookingModel: bookingModel, transactionId: transactionId);
+  //   } else {
+  //     Get.closeAllSnackbars();
+  //     Get.snackbar(
+  //         "The last transaction has been cancelled!", "Please try again!",
+  //         colorText: Colors.white,
+  //         backgroundColor: Colors.red,
+  //         snackPosition: SnackPosition.BOTTOM);
+  //   }
+  // }
 
   InitiatePaymentApiServices initiatePaymentApiServices =
       InitiatePaymentApiServices();
