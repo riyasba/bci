@@ -3,7 +3,7 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/search_service_list_model.dart';
-import 'package:bci/screens/bussiness/views/business/notification_screen.dart';
+import 'package:bci/screens/members/home_screen/notification_list_api_services.dart';
 import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';

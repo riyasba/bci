@@ -1,3 +1,5 @@
+import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/screens/members/credit_screens/transcationdetails_overview_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +11,15 @@ class CreditOverviewScreen extends StatefulWidget {
 }
 
 class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
+  final profileController = Get.find<ProfileController>();
+
+  @override
+  void initState() {
+    super.initState();
+    profileController.getCreditProfile();
+    profileController.getCreditStatement();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,85 +64,87 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16)),
-                child: const Padding(
-                  padding:
-                      EdgeInsets.only(top: 15, left: 15, bottom: 20, right: 30),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Total Credit Limit",
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.amber,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            "₹ 15,000",
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.amber,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Current Outstanding",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                "₹ 10,000",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Available Credit Limit",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                "₹ 10,700",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      top: 15, left: 15, bottom: 20, right: 30),
+                  child: Obx(
+                    () => Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Total Credit Limit",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.amber,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              "₹ ${profileController.creditLimit.value}",
+                              style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.amber,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Current Outstanding",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  "₹ ${profileController.usedLimit.value}",
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Available Credit Limit",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  "₹ ${profileController.pendingLimit.value}",
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -430,18 +443,23 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                         ],
                       ),
                     ),
-                    Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF05406E),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Center(
-                        child: Text("Last 30 Days",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500)),
+                    InkWell(
+                      onTap: () {
+                        Get.to(TransationDetailsOverviewScreen());
+                      },
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF05406E),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Center(
+                          child: Text("Last 30 Days",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500)),
+                        ),
                       ),
                     ),
                   ],

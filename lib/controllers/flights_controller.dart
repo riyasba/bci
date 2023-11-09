@@ -72,6 +72,7 @@ class FlightsController extends GetxController {
   RxBool indiGo = false.obs;
 
   List<Flight> flightCodelist = [];
+  
   AirCancelApiServices airCancelApiServices = AirCancelApiServices();
   AirRepriceApiServices airRepriceApiServices = AirRepriceApiServices();
 

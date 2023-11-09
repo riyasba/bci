@@ -1,13 +1,13 @@
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/search_service_list_model.dart';
+import 'package:bci/screens/members/home_screen/notification_list_api_services.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../constands/constands.dart';
-import '../../bussiness/views/business/notification_screen.dart';
 
 class LiquorDetailScreen extends StatefulWidget {
   SearchServiceListData searchServicelist;

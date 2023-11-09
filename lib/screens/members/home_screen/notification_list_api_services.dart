@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../../../../constands/constands.dart';
-import '../home_screen/contact_admin.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -63,7 +62,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(250),
+          preferredSize: const Size.fromHeight(250),
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
@@ -93,7 +92,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           color: Colors.white),
                     ),
                   ),
-                  Container(width: 20,)
+                  Container(
+                    width: 20,
+                  )
                   // InkWell(
                   //   onTap: () {
                   //     Get.to(const SupportScreen());
@@ -138,9 +139,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   height: 40,
                                   width: 40,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(40)
-                                  ),
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(40)),
                                   child: Image.asset("assets/images/logo.png"),
                                 ),
                               ),

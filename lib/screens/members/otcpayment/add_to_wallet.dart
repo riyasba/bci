@@ -1,6 +1,6 @@
 import 'package:bci/controllers/profile_controller.dart';
-import 'package:bci/screens/bussiness/views/home_screen/contact_admin.dart';
 import 'package:bci/screens/members/members%20widgets/member_bottumbavigation.dart';
+import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -57,7 +57,7 @@ class _AddWaletScreenState extends State<AddWaletScreen> {
                     ),
                     InkWell(
                         onTap: () {
-                          Get.to(const ContactAdmin());
+                          Get.to(const SupportScreen());
                         },
                         child: Image.asset(
                             'assets/images/3669173_help_ic_icon.png'))

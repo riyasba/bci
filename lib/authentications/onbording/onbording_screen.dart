@@ -1,3 +1,4 @@
+import 'package:bci/screens/members/members%20widgets/member_bottumbavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,7 +6,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../constands/constands.dart';
-import '../../screens/bussiness/views/busines_widget/bottumnavigation.dart';
 
 class Onbording extends StatefulWidget {
   const Onbording({super.key});
@@ -110,7 +110,7 @@ class _OnbordingState extends State<Onbording> {
                               });
 
                               if (_pageController.page!.toInt() == 4) {
-                                Get.to(HomeBottomnavigationBar());
+                                Get.to(MemberBottomNavBar());
                               } else {
                                 _pageController.nextPage(
                                   duration: Duration(milliseconds: 300),
@@ -130,7 +130,7 @@ class _OnbordingState extends State<Onbording> {
                   top: 7.sp,
                   child: GestureDetector(
                       onTap: () {
-                        Get.to(HomeBottomnavigationBar());
+                        Get.to(MemberBottomNavBar());
                       },
                       child: Text(
                         "Skip",

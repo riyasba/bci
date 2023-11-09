@@ -2,6 +2,7 @@ import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/models/get_today_offers_list_model.dart';
 import 'package:bci/screens/members/offer%20screen/view_vendors_offers_screen.dart';
 import 'package:bci/screens/members/offer%20screen/widgets/offer_containers.dart';
+import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -10,8 +11,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../../../constands/constands.dart';
-import '../../bussiness/views/business/notification_screen.dart';
-import '../../bussiness/views/home_screen/contact_admin.dart';
 
 class OffersDetail extends StatelessWidget {
   OffersListModel todayOfferListData;
@@ -54,7 +53,7 @@ class OffersDetail extends StatelessWidget {
                     ),
                     InkWell(
                         onTap: () {
-                          Get.to(const ContactAdmin());
+                          Get.to(const SupportScreen());
                         },
                         child: Image.asset(
                             'assets/images/3669173_help_ic_icon.png'))

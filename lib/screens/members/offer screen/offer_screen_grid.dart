@@ -1,4 +1,5 @@
 import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -6,8 +7,6 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../../../constands/constands.dart';
-import '../../bussiness/views/business/notification_screen.dart';
-import '../../bussiness/views/home_screen/contact_admin.dart';
 import '../members widgets/gridciew.dart';
 import 'offer_details.dart';
 
@@ -65,7 +64,7 @@ class _TodayOfferScreenState extends State<TodayOfferScreen> {
                     ),
                     InkWell(
                         onTap: () {
-                          Get.to(const ContactAdmin());
+                          Get.to(const SupportScreen());
                         },
                         child: Image.asset(
                             'assets/images/3669173_help_ic_icon.png'))

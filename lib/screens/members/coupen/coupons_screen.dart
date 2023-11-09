@@ -1,6 +1,7 @@
 import 'package:bci/constands/app_fonts.dart';
 
 import 'package:bci/controllers/profile_controller.dart';
+import 'package:bci/screens/members/home_screen/notification_list_api_services.dart';
 
 import 'package:clipboard/clipboard.dart';
 
@@ -20,7 +21,6 @@ import 'dart:math' as math;
 
 import '../../../constands/constands.dart';
 
-import '../../bussiness/views/business/notification_screen.dart';
 
 class CoupensMembers extends StatefulWidget {
   const CoupensMembers({super.key});

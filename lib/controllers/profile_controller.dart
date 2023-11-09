@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/models/credit_profile_model.dart';
+import 'package:bci/models/credit_statement_model.dart';
 import 'package:bci/models/get_coupons_model.dart';
 import 'package:bci/models/initiate_payment_model.dart';
 import 'package:bci/models/member_profile_model.dart';
@@ -17,6 +19,8 @@ import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
 import 'package:bci/services/network/booking_cancel_refund_api_services/booking_cancel_refund_api_services.dart';
 import 'package:bci/services/network/credit_api_services/get_credit_profile_api_services.dart';
 import 'package:bci/services/network/credit_api_services/pay_credit_api_services.dart';
+import 'package:bci/services/network/credit_api_services/user_credit_points_api_dart.dart';
+import 'package:bci/services/network/credit_api_services/view_credit_statement.dart';
 import 'package:bci/services/network/payment_api_services/intiate_payment_api_services.dart';
 import 'package:bci/services/network/payment_api_services/payment_status_api_services.dart';
 import 'package:bci/services/network/profile_api_services/our_coupons_api_service.dart';
@@ -950,10 +954,11 @@ class ProfileController extends GetxController {
   }) async {
     dio.Response<dynamic> response =
         await bookingCancelRefundAPIServices.bookingCancelRefundApiServices(
-            userId: userId,
-            amount: amount,
-            type: type,
-            bookingId: bookingId,);
+      userId: userId,
+      amount: amount,
+      type: type,
+      bookingId: bookingId,
+    );
 
     if (response.statusCode == 200) {
       if (type == "booking") {
@@ -963,38 +968,83 @@ class ProfileController extends GetxController {
     }
   }
 
-
-
 //credit api functions
-GetCreditProfileApiServices getCreditProfileApiServices = GetCreditProfileApiServices();
-PayCreditApiServices payCreditApiServices = PayCreditApiServices();
+  GetCreditProfileApiServices getCreditProfileApiServices =
+      GetCreditProfileApiServices();
+
+  PayCreditApiServices payCreditApiServices = PayCreditApiServices();
+
+  UseCreditPointsApiServices useCreditPointsApiServices =
+      UseCreditPointsApiServices();
+
+  ViewCreditStatementApiServices viewCreditStatementApiServices =
+      ViewCreditStatementApiServices();
+
+  RxString creditLimit = "0.00".obs;
+  RxString usedLimit = "0.00".obs;
+  RxString pendingLimit = "0.00".obs;
+  RxString totalPaidAmountCurrentMonth = "0.00".obs;
+  RxString totalUnpaidAmountCurrentMonth = "0.00".obs;
+
+  getCreditProfile() async {
+    dio.Response<dynamic> response =
+        await getCreditProfileApiServices.getCreditProfile();
+
+    if (response.statusCode == 200) {
+      CreditProfileModel creditProfileModel =
+          CreditProfileModel.fromJson(response.data);
+
+      creditLimit(creditProfileModel.creditLimit);
+      usedLimit(creditProfileModel.usedLimit);
+      pendingLimit(creditProfileModel.pendingLimit);
+      totalPaidAmountCurrentMonth(
+          creditProfileModel.totalPaidAmountCurrentMonth);
+      totalUnpaidAmountCurrentMonth(
+          creditProfileModel.totalUnpaidAmountCurrentMonth);
+    }
+  }
+
+  useCredit({
+    required String creditAmount,
+    required String creditFor,
+    required String creditForId,
+  }) async {
+    dio.Response<dynamic> response =
+        await useCreditPointsApiServices.useCreditPointsApi(
+            creditAmount: creditAmount,
+            creditFor: creditFor,
+            creditForId: creditForId);
+
+    if (response.statusCode == 200) {}
+  }
+
+  payCreditBill({required String creditAmount}) async {
+    dio.Response<dynamic> response = await payCreditApiServices.payCreditApi(
+      creditAmount: creditAmount,
+    );
+
+    if (response.statusCode == 200) {
+      Get.rawSnackbar(
+          message: response.data["message"], backgroundColor: Colors.green);
+    } else {
+      Get.rawSnackbar(
+          message: response.data["message"], backgroundColor: Colors.red);
+    }
+  }
+
+  List<CreditTransaction> creditTransactionsList = [];
+  getCreditStatement() async {
+    dio.Response<dynamic> response =
+        await viewCreditStatementApiServices.viewCreditStatement();
+
+    if (response.statusCode == 200) {
+      CreditStatementModel creditStatementModel =
+          CreditStatementModel.fromJson(response.data);
+
+      creditTransactionsList = creditStatementModel.creditTransactions;
+      update();
+    }
+  }
 
   
-
-  getCreditProfile() async{
-
-  }
-
-
-  useCredit() async{
-
-  }
-
-
-  payCreditBill(){
-
-  }
-
-
-  getCreditStatement() async{
-
-  }
-
-
-
-
-
-
-
-
 }
