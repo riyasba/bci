@@ -116,7 +116,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                   ),
                   ksizedbox20,
                   Text(
-                    "₹ ${widget.searchServicelist.actualAmount}",
+                    "₹ ${widget.searchServicelist.saleAmount}",
                     style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
@@ -221,7 +221,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                             Padding(
                               padding: const EdgeInsets.only(left: 15),
                               child: Text(
-                                "₹${widget.searchServicelist.actualAmount}",
+                                "₹${widget.searchServicelist.saleAmount}",
                                 style: primaryFont.copyWith(
                                     color: Colors.white,
                                     fontSize: 17,
@@ -247,9 +247,9 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                                     : InkWell(
                                         onTap: () {
                                           homeController.addToCart(
-                                              amount: widget.searchServicelist
-                                                  .actualAmount,
-                                                  startTime: "",
+                                              amount: widget
+                                                  .searchServicelist.saleAmount,
+                                              startTime: "",
                                               serviceid: widget
                                                   .searchServicelist.id
                                                   .toString());
@@ -321,6 +321,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                         if (redeemCouponcontroller.text.isNotEmpty) {
                           print(">>>>>>>>>>>11111111111111111111");
                           profileController.redeemCoupon(
+                              amount: widget.searchServicelist.saleAmount,
                               couponcode: redeemCouponcontroller.text,
                               serviceId: widget.searchServicelist.id.toString(),
                               vendorId: widget.searchServicelist.vendorId);
@@ -331,7 +332,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                               offerOrCoupon: "",
                               bookDateTime: "",
                               couponcode: redeemCouponcontroller.text,
-                              amount: widget.searchServicelist.actualAmount);
+                              amount: widget.searchServicelist.saleAmount);
                         } else {
                           print(">>>>>>>>>>>>>>>222222222222222222");
                           homeController.addBooking(
@@ -340,9 +341,8 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                               qty: "1",
                               offerOrCoupon: "",
                               couponcode: redeemCouponcontroller.text,
-                              amount: widget.searchServicelist.actualAmount,
-                              bookDateTime:""
-                              );
+                              amount: widget.searchServicelist.saleAmount,
+                              bookDateTime: "");
                         }
                       },
                       child: Text(

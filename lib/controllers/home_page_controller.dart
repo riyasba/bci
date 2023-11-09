@@ -236,8 +236,7 @@ class HomeController extends GetxController {
     update();
   }
 
-
-List<GetServiceListData> tempVendorServiceListData = [];
+  List<GetServiceListData> tempVendorServiceListData = [];
   vendorServiceListbyCategory(String vendorId, String category) async {
     dio.Response<dynamic> response = await vendorServiceListApiServices
         .vendorServiceListApiServices(vendorId: vendorId);
@@ -248,10 +247,9 @@ List<GetServiceListData> tempVendorServiceListData = [];
           .where((element) => element.categoryId.toString() == category)
           .toList();
 
-       tempVendorServiceListData = getServiceList.data
+      tempVendorServiceListData = getServiceList.data
           .where((element) => element.categoryId.toString() == category)
           .toList();
-      
     } else {
       Get.rawSnackbar(
           backgroundColor: Colors.red,
@@ -361,20 +359,20 @@ List<GetServiceListData> tempVendorServiceListData = [];
   }
 
   //update quantity
-  UpdateQuantityAPIServices updateQuantityAPIServices = UpdateQuantityAPIServices();
+  UpdateQuantityAPIServices updateQuantityAPIServices =
+      UpdateQuantityAPIServices();
 
-  updateQuantity({required String cartid,required String quantity}) async {
-     dio.Response<dynamic> response = await updateQuantityAPIServices.updateQuantityData(
-      cartid: cartid, quantity: quantity);
-      if(response.statusCode == 200){
-
-      }
-      update();
+  updateQuantity({required String cartid, required String quantity}) async {
+    dio.Response<dynamic> response = await updateQuantityAPIServices
+        .updateQuantityData(cartid: cartid, quantity: quantity);
+    if (response.statusCode == 200) {}
+    update();
   }
 
   //get cart list
   GetCartListApiServices getCartListApiServices = GetCartListApiServices();
   List<CartListData> cartListData = [];
+  // List<CartListData> temPcartListData = [];
 
   getCartdetails() async {
     dio.Response<dynamic> response =
@@ -407,11 +405,13 @@ List<GetServiceListData> tempVendorServiceListData = [];
     double grandTotal = 0.0;
 
     for (var i = 0; i < cartListData.length; i++) {
-      double amount = double.parse(cartListData[i].amount);
-      int qty = int.parse(cartListData[i].quantity.toString());
-      double tempTotalAmount = amount * qty;
-
-      grandTotal = grandTotal + tempTotalAmount;
+      if (cartListData[i].isSelected) {
+  double amount = double.parse(cartListData[i].amount);
+  int qty = int.parse(cartListData[i].quantity.toString());
+  double tempTotalAmount = amount * qty;
+  
+  grandTotal = grandTotal + tempTotalAmount;
+}
     }
 
     return grandTotal;

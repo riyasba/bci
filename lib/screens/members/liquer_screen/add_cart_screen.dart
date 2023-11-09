@@ -237,6 +237,7 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
                                   widget.searchServicelist.saleAmount;
                               String amount =
                                   await profileController.redeemCoupon(
+                                    amount: tempSaleAmount,
                                       couponcode: redeemCouponcontroller.text,
                                       serviceId:
                                           widget.searchServicelist.id.toString(),

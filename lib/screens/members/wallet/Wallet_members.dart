@@ -225,7 +225,7 @@ class _WalletScreenMembersState extends State<WalletScreenMembers> {
                             const SizedBox(
                               width: 4,
                             ),
-                            Text(
+                           if(profileController.profileData.isNotEmpty) Text(
                               profileController.profileData.first.rewardPoints,
                               style: primaryFont.copyWith(
                                   color: Colors.white,

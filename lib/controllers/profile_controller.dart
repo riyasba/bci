@@ -158,10 +158,14 @@ class ProfileController extends GetxController {
   getuserCoupones(
       {required String couponcode,
       required String serviceId,
+      required String amount,
       required String vendorId}) async {
     dio.Response<dynamic> response =
         await redeemCouponApiServices.redeemCouponApiServices(
-            couponcode: couponcode, serviceId: serviceId, vendorId: vendorId);
+            couponcode: couponcode,
+            serviceId: serviceId,
+            vendorId: vendorId,
+            requestAmount: amount);
     if (response.statusCode == 200) {
       GetCouponsList getCouponsList = GetCouponsList.fromJson(response.data);
       couponsData = getCouponsList.data;
@@ -222,17 +226,19 @@ class ProfileController extends GetxController {
   }
 
   //merchant coupon list
-  MerchantCouponListAPIServices merchantCouponListAPIServices = MerchantCouponListAPIServices();
+  MerchantCouponListAPIServices merchantCouponListAPIServices =
+      MerchantCouponListAPIServices();
   List<MerchantCouponData> merchantCouponData = [];
 
   merchantCoupon() async {
-
-    dio.Response<dynamic> response = await merchantCouponListAPIServices.merchantCouponList();
-    if(response.statusCode == 200){
-      MerchantCouponList merchantCouponList = MerchantCouponList.fromJson(response.data);
+    dio.Response<dynamic> response =
+        await merchantCouponListAPIServices.merchantCouponList();
+    if (response.statusCode == 200) {
+      MerchantCouponList merchantCouponList =
+          MerchantCouponList.fromJson(response.data);
       merchantCouponData = merchantCouponList.data;
     }
-    update(); 
+    update();
   }
 
   RedeemedCouponsCouponApiServices redeemedCouponsCouponApiServices =
@@ -267,11 +273,15 @@ class ProfileController extends GetxController {
   redeemCoupon(
       {required String couponcode,
       required String serviceId,
+      required String amount,
       required String vendorId}) async {
     String tempAmount = "0";
     dio.Response<dynamic> response =
         await redeemCouponApiServices.redeemCouponApiServices(
-            couponcode: couponcode, serviceId: serviceId, vendorId: vendorId);
+            couponcode: couponcode,
+            serviceId: serviceId,
+            vendorId: vendorId,
+            requestAmount: amount);
     if (response.statusCode == 200) {
       tempAmount = response.data["amount"].toString();
       Get.rawSnackbar(
@@ -501,14 +511,16 @@ class ProfileController extends GetxController {
       final homeController = Get.find<HomeController>();
       print(">>-------------->>---------->>");
       for (int i = 0; i < homeController.cartListData.length; i++) {
-        homeController.addBooking(
-            serviceid: homeController.cartListData[i].serviceId.toString(),
-            cartid: homeController.cartListData[i].id.toString(),
-            qty: homeController.cartListData[i].quantity.toString(),
-            offerOrCoupon: "",
-            couponcode: "",
-            amount: homeController.cartListData[i].price,
-            bookDateTime: homeController.cartListData[i].bookDateTime);
+        if (homeController.cartListData[i].isSelected) {
+          homeController.addBooking(
+              serviceid: homeController.cartListData[i].serviceId.toString(),
+              cartid: homeController.cartListData[i].id.toString(),
+              qty: homeController.cartListData[i].quantity.toString(),
+              offerOrCoupon: "",
+              couponcode: "",
+              amount: homeController.cartListData[i].price,
+              bookDateTime: homeController.cartListData[i].bookDateTime);
+        }
       }
 
       Get.offAll(
@@ -555,14 +567,16 @@ class ProfileController extends GetxController {
       Get.to(() => const FlightLoadingPage());
       print(">>-------------->>---------->>");
       for (int i = 0; i < homeController.cartListData.length; i++) {
-        homeController.addBooking(
-            serviceid: homeController.cartListData[i].serviceId.toString(),
-            cartid: homeController.cartListData[i].id.toString(),
-            qty: homeController.cartListData[i].quantity.toString(),
-            offerOrCoupon: "",
-            couponcode: "",
-            amount: homeController.cartListData[i].price,
-            bookDateTime: homeController.cartListData[i].bookDateTime);
+        if (homeController.cartListData[i].isSelected) {
+          homeController.addBooking(
+              serviceid: homeController.cartListData[i].serviceId.toString(),
+              cartid: homeController.cartListData[i].id.toString(),
+              qty: homeController.cartListData[i].quantity.toString(),
+              offerOrCoupon: "",
+              couponcode: "",
+              amount: homeController.cartListData[i].price,
+              bookDateTime: homeController.cartListData[i].bookDateTime);
+        }
       }
 
       Get.offAll(

@@ -7,6 +7,7 @@ class RedeemCouponApiServices extends BaseApiService {
   Future redeemCouponApiServices(
       {required String couponcode,
       required String serviceId,
+      required String requestAmount,
       required String vendorId}) async {
     dynamic responseJson;
     try {
@@ -27,7 +28,8 @@ class RedeemCouponApiServices extends BaseApiService {
           data: {
             "coupon_code": couponcode,
             "service_id": serviceId,
-           "vendor_id": vendorId,
+            "vendor_id": vendorId,
+            "request_amount": requestAmount
           });
       print(
           "::::::::<redeem coupon Api Services Api>::::::::status code::::::::::");

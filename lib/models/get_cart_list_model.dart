@@ -43,6 +43,7 @@ class CartListData {
   String amount;
   String description;
   String bookDateTime;
+  bool isSelected;
 
   CartListData({
     required this.id,
@@ -57,22 +58,23 @@ class CartListData {
     required this.amount,
     required this.description,
     required this.bookDateTime,
+    required this.isSelected,
   });
 
   factory CartListData.fromJson(Map<String, dynamic> json) => CartListData(
-        id: json["id"] ?? 0,
-        userId: json["user_id"] ?? "",
-        serviceId: json["service_id"] ?? "",
-        quantity: json["quantity"]?? "",
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        serviceName: json["service_name"]?? "",
-        image: json["image"] ?? "",
-        price: json["price"] ?? "",
-        amount: json["amount"] ?? "",
-        description: json["description"] ?? "",
-        bookDateTime: json["book_date_time"] ?? ""
-      );
+      id: json["id"] ?? 0,
+      userId: json["user_id"] ?? "",
+      serviceId: json["service_id"] ?? "",
+      quantity: json["quantity"] ?? "",
+      createdAt: DateTime.parse(json["created_at"]),
+      updatedAt: DateTime.parse(json["updated_at"]),
+      serviceName: json["service_name"] ?? "",
+      image: json["image"] ?? "",
+      price: json["price"] ?? "",
+      amount: json["amount"] ?? "",
+      description: json["description"] ?? "",
+      bookDateTime: json["book_date_time"] ?? "",
+      isSelected: true);
 
   Map<String, dynamic> toJson() => {
         "id": id,

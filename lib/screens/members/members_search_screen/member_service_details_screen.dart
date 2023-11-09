@@ -292,6 +292,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                 widget.searchServicelist.saleAmount;
                             String amount =
                                 await profileController.redeemCoupon(
+                                    amount: tempSaleAmount,
                                     couponcode: redeemCouponcontroller.text,
                                     serviceId:
                                         widget.searchServicelist.id.toString(),
