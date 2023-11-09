@@ -12,14 +12,14 @@ String creditProfileModelToJson(CreditProfileModel data) =>
 
 class CreditProfileModel {
   String creditLimit;
-  String usedLimit;
+  String availableLimit;
   String pendingLimit;
   String totalPaidAmountCurrentMonth;
   String totalUnpaidAmountCurrentMonth;
 
   CreditProfileModel({
     required this.creditLimit,
-    required this.usedLimit,
+    required this.availableLimit,
     required this.pendingLimit,
     required this.totalPaidAmountCurrentMonth,
     required this.totalUnpaidAmountCurrentMonth,
@@ -27,17 +27,18 @@ class CreditProfileModel {
 
   factory CreditProfileModel.fromJson(Map<String, dynamic> json) =>
       CreditProfileModel(
-        creditLimit: json["credit_limit"],
-        usedLimit: json["used_limit"],
-        pendingLimit: json["pending_limit"],
-        totalPaidAmountCurrentMonth: json["total_paid_amount_current_month"],
+        creditLimit: json["credit_limit"].toString(),
+        availableLimit: json["available_limit"].toString(),
+        pendingLimit: json["pending_limit"].toString(),
+        totalPaidAmountCurrentMonth:
+            json["total_paid_amount_current_month"].toString(),
         totalUnpaidAmountCurrentMonth:
-            json["total_unpaid_amount_current_month"],
+            json["total_unpaid_amount_current_month"].toString(),
       );
 
   Map<String, dynamic> toJson() => {
         "credit_limit": creditLimit,
-        "used_limit": usedLimit,
+        "used_limit": availableLimit,
         "pending_limit": pendingLimit,
         "total_paid_amount_current_month": totalPaidAmountCurrentMonth,
         "total_unpaid_amount_current_month": totalUnpaidAmountCurrentMonth,

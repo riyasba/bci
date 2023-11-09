@@ -198,10 +198,46 @@ class _WalletScreenMembersState extends State<WalletScreenMembers> {
               const SizedBox(
                 height: 15,
               ),
-              Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10), color: kblue),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10), color: kblue),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Reward points",
+                          style: primaryFont.copyWith(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Row(
+                          children: [
+                            Image.asset(
+                              "assets/icons/reward_coin.png",
+                              height: 17,
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Text(
+                              profileController.profileData.first.rewardPoints,
+                              style: primaryFont.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 10,

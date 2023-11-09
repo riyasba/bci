@@ -112,7 +112,7 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                                   height: 8,
                                 ),
                                 Text(
-                                  "₹ ${profileController.usedLimit.value}",
+                                  "₹ ${profileController.pendingLimit.value}",
                                   style: const TextStyle(
                                       fontSize: 18,
                                       color: Colors.red,
@@ -134,7 +134,7 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                                   height: 8,
                                 ),
                                 Text(
-                                  "₹ ${profileController.pendingLimit.value}",
+                                  "₹ ${profileController.availableLimit.value}",
                                   style: const TextStyle(
                                       fontSize: 18,
                                       color: Colors.green,
@@ -168,7 +168,7 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                     Padding(
+                    Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
                         children: [
@@ -191,7 +191,7 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                               ),
                             ],
                           ),
-                         const SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           Row(
@@ -213,10 +213,10 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                               ),
                             ],
                           ),
-                        const  SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                         const Text(
+                          const Text(
                             "The Indian rupee sign ⟨₹⟩ is the currency symbol for the Indian rupee, the official currency of India. Designed by D. Udaya Kumar.",
                             style: TextStyle(
                                 fontSize: 13,
@@ -237,8 +237,10 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                         children: [
                           Expanded(
                             child: InkWell(
-                              onTap: (){
-                                profileController.initiatePaymentPayBill(amount:  double.parse(profileController.totalUnpaidAmountCurrentMonth.value));
+                              onTap: () {
+                                profileController.initiatePaymentPayBill(
+                                    amount: double.parse(profileController
+                                        .totalUnpaidAmountCurrentMonth.value));
                               },
                               child: Container(
                                 child: const Text("Pay Bill",

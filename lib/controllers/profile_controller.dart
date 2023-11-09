@@ -997,7 +997,7 @@ class ProfileController extends GetxController {
       ViewCreditStatementApiServices();
 
   RxString creditLimit = "0.00".obs;
-  RxString usedLimit = "0.00".obs;
+  RxString availableLimit = "0.00".obs;
   RxString pendingLimit = "0.00".obs;
   RxString totalPaidAmountCurrentMonth = "0.00".obs;
   RxString totalUnpaidAmountCurrentMonth = "0.00".obs;
@@ -1011,7 +1011,7 @@ class ProfileController extends GetxController {
           CreditProfileModel.fromJson(response.data);
 
       creditLimit(creditProfileModel.creditLimit);
-      usedLimit(creditProfileModel.usedLimit);
+      availableLimit(creditProfileModel.availableLimit);
       pendingLimit(creditProfileModel.pendingLimit);
       totalPaidAmountCurrentMonth(
           creditProfileModel.totalPaidAmountCurrentMonth);
