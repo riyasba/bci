@@ -1,5 +1,6 @@
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/screens/members/credit_screens/transcationdetails_overview_screen.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -167,8 +168,8 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.all(10.0),
+                     Padding(
+                      padding: const EdgeInsets.all(10.0),
                       child: Column(
                         children: [
                           Row(
@@ -190,13 +191,13 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(
+                         const SizedBox(
                             height: 20,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              const Text(
                                 "Bill Due",
                                 style: TextStyle(
                                     fontSize: 15,
@@ -204,18 +205,18 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                                     fontWeight: FontWeight.w500),
                               ),
                               Text(
-                                "₹ 5000",
-                                style: TextStyle(
+                                "₹ ${profileController.totalUnpaidAmountCurrentMonth.value}",
+                                style: const TextStyle(
                                     fontSize: 16,
                                     color: Color(0xFF05406E),
                                     fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
-                          SizedBox(
+                        const  SizedBox(
                             height: 20,
                           ),
-                          Text(
+                         const Text(
                             "The Indian rupee sign ⟨₹⟩ is the currency symbol for the Indian rupee, the official currency of India. Designed by D. Udaya Kumar.",
                             style: TextStyle(
                                 fontSize: 13,
@@ -232,30 +233,42 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            width: 150,
-                            child: const Text("Pay Bill",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500)),
+                          Expanded(
+                            child: InkWell(
+                              onTap: (){
+                                profileController.initiatePaymentPayBill(amount:  double.parse(profileController.totalUnpaidAmountCurrentMonth.value));
+                              },
+                              child: Container(
+                                child: const Text("Pay Bill",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500)),
+                              ),
+                            ),
                           ),
                           Container(
                             height: 30,
                             width: 2,
                             color: Colors.white,
                           ),
-                          Container(
-                            width: 150,
-                            child: const Text("View Statement",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500)),
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {
+                                Get.to(() => TransationDetailsOverviewScreen());
+                              },
+                              child: Container(
+                                child: const Text("View Statement",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500)),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -273,198 +286,131 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15, bottom: 15),
-              child: Container(
-                height: 200,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Column(
-                                children: [
-                                  const Image(
-                                    image: AssetImage("assets/images/tick.png"),
-                                    height: 20,
-                                    width: 20,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 5, bottom: 5),
-                                    child: Container(
-                                      height: 20,
-                                      width: 2,
-                                      color: Colors.grey[300],
-                                    ),
-                                  ),
-                                  const Image(
-                                    image: AssetImage("assets/images/tick.png"),
-                                    height: 20,
-                                    width: 20,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 5, bottom: 5),
-                                    child: Container(
-                                      height: 20,
-                                      width: 2,
-                                      color: Colors.grey[300],
-                                    ),
-                                  ),
-                                  const Image(
-                                    image: AssetImage("assets/images/tick.png"),
-                                    height: 20,
-                                    width: 20,
-                                  ),
-                                ],
-                              ),
-                              const Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Column(
+              child: GetBuilder<ProfileController>(builder: (_) {
+                return Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount:
+                          profileController.creditTransactionsList.length > 3
+                              ? 3
+                              : profileController.creditTransactionsList.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          "Hotel Booking",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color(0xFF05406E),
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        Text(
-                                          "Paid on 30 Dec 2023",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: Color(0xFF05406E),
-                                              fontWeight: FontWeight.w400),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                const Icon(
+                                                  Icons.check_circle_rounded,
+                                                  size: 20,
+                                                  color: Colors.green,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5, bottom: 5),
+                                                  child: Container(
+                                                    height: 22,
+                                                    width: 2,
+                                                    color: Colors.grey[300],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    profileController
+                                                        .creditTransactionsList[
+                                                            index]
+                                                        .creditFor,
+                                                    style: const TextStyle(
+                                                        fontSize: 15,
+                                                        color:
+                                                            Color(0xFF05406E),
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                  Text(
+                                                    "Paid on ${formatDate(profileController.creditTransactionsList[index].createdAt, [
+                                                          dd,
+                                                          " ",
+                                                          M,
+                                                          " ",
+                                                          yyyy
+                                                        ])}",
+                                                    style: const TextStyle(
+                                                        fontSize: 14,
+                                                        color:
+                                                            Color(0xFF05406E),
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                  // Text(
+                                                  //   "TXNID: ${profileController.creditTransactionsList[index].}",
+                                                  //   style: const TextStyle(
+                                                  //       fontSize: 12,
+                                                  //       color: Color(0xFF05406E),
+                                                  //       fontWeight: FontWeight.w400),
+                                                  // ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Flight Booking",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color(0xFF05406E),
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        Text(
-                                          "Paid on 30 Dec 2023",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: Color(0xFF05406E),
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ],
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      "₹ ${profileController.creditTransactionsList[index].amount}",
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.pink,
+                                          fontWeight: FontWeight.w600),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Bus Ticket",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color(0xFF05406E),
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        Text(
-                                          "Paid on 30 Dec 2023",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: Color(0xFF05406E),
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ],
+                                    const SizedBox(
+                                      height: 30,
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                          const Column(
-                            children: [
-                              Text(
-                                "₹ 34,000",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.pink,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Text(
-                                "₹ 24,700",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.pink,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Text(
-                                "₹ 17,000",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.pink,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(TransationDetailsOverviewScreen());
+                        );
                       },
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF05406E),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const Center(
-                          child: Text("Last 30 Days",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500)),
-                        ),
-                      ),
                     ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              }),
             ),
           ],
         ),

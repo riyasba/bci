@@ -1024,6 +1024,8 @@ class ProfileController extends GetxController {
     );
 
     if (response.statusCode == 200) {
+      getCreditStatement();
+      getCreditProfile();
       Get.rawSnackbar(
           message: response.data["message"], backgroundColor: Colors.green);
     } else {
@@ -1046,5 +1048,55 @@ class ProfileController extends GetxController {
     }
   }
 
-  
+  initiatePaymentPayBill({required double amount}) async {
+    var userId = 0;
+    print(Get.find<ProfileController>().profileData);
+    if (Get.find<ProfileController>().profileData.isNotEmpty) {
+      userId = Get.find<ProfileController>().profileData.first.id;
+    } else {
+      await Get.find<ProfileController>().getProfile();
+      userId = Get.find<ProfileController>().profileData.first.id;
+    }
+    dio.Response<dynamic> response =
+        await initiatePaymentApiServices.initiatePayment(
+            userId: userId,
+            totalAmount: amount.toStringAsFixed(2),
+            status: "Pay bill");
+
+    if (response.statusCode == 200) {
+      IninitiatePaymentModel ininitiatePaymentModel =
+          IninitiatePaymentModel.fromJson(response.data);
+
+      Get.to(() => PaymentWebViewAddToWallet(
+            amount: amount,
+            referenceId: ininitiatePaymentModel.data.merchantTransactionId,
+            url:
+                ininitiatePaymentModel.data.instrumentResponse.redirectInfo.url,
+            userId: Get.find<ProfileController>()
+                .profileData
+                .first
+                .userId
+                .toString(),
+          ));
+    }
+  }
+
+  checkPhonePeStatusPayBills(
+      {required String refernceID,
+      required double amount,
+      required String userId}) async {
+    dio.Response<dynamic> response = await paymentResponseApiServices
+        .paymentResponseApi(merchantId: refernceID);
+
+    if (response.data["code"] == "PAYMENT_SUCCESS") {
+      print("<<<<<<<<payment is Success>>>>>>>>");
+      payCreditBill(creditAmount: amount.toStringAsFixed(2));
+
+      Get.to(const SucessfulScreenOtc());
+    } else {
+      print("<<<<<<<<payment is Failed>>>>>>>>");
+
+      Get.to(() => PaymentFailedScreen());
+    }
+  }
 }

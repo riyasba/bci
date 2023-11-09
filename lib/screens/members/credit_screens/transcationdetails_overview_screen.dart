@@ -43,65 +43,100 @@ class TransationDetailsOverviewScreen extends StatelessWidget {
             child: ListView.builder(
               itemCount: profileController.creditTransactionsList.length,
               itemBuilder: (context, index) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                return Container(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           children: [
-                            const Image(
-                              image: AssetImage("assets/images/tick.png"),
-                              height: 20,
-                              width: 20,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: Container(
-                                height: 20,
-                                width: 2,
-                                color: Colors.grey[300],
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        const Icon(
+                                          Icons.check_circle_rounded,
+                                          size: 20,
+                                          color: Colors.green,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 5, bottom: 5),
+                                          child: Container(
+                                            height: 22,
+                                            width: 2,
+                                            color: Colors.grey[300],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            profileController
+                                                .creditTransactionsList[index]
+                                                .creditFor,
+                                            style: const TextStyle(
+                                                fontSize: 15,
+                                                color: Color(0xFF05406E),
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          Text(
+                                            "Paid on ${formatDate(profileController.creditTransactionsList[index].createdAt, [
+                                                  dd,
+                                                  " ",
+                                                  M,
+                                                  " ",
+                                                  yyyy
+                                                ])}",
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                color: Color(0xFF05406E),
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          // Text(
+                                          //   "TXNID: ${profileController.creditTransactionsList[index].}",
+                                          //   style: const TextStyle(
+                                          //       fontSize: 12,
+                                          //       color: Color(0xFF05406E),
+                                          //       fontWeight: FontWeight.w400),
+                                          // ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Hotel Booking",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color: Color(0xFF05406E),
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              Text(
-                                "Paid on 30 Dec 2023",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xFF05406E),
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
+                        Column(
+                          children: [
+                            Text(
+                              "₹ ${profileController.creditTransactionsList[index].amount}",
+                              style: const TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.pink,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                    Text(
-                      "₹ 34,000",
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.pink,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                  ],
+                  ),
                 );
               },
             ),
