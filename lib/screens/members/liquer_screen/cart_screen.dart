@@ -175,8 +175,120 @@ class _CartScreenState extends State<CartScreen> {
                                         const SizedBox(
                                           height: 5,
                                         ),
-                                        Text(
-                                            "Qty: ${homeController.cartListData[index].quantity}"),
+                                           Row(
+                                            children: [
+                                              const Text("Qty:"),
+                                              const SizedBox(width: 5,),    
+                                              Container(
+                                                  height: 25,
+                                                  width: 75,
+                                                  decoration: BoxDecoration(
+                                                     border: Border.all(color: Colors.black54),
+                                                   ),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                    InkWell(
+                                                      onTap: () {
+                                                        if(homeController.cartListData[index].quantity == 1){
+                                                          showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      title: Text("Remove Item",
+                                                          style: boldTextStyle(
+                                                              color: Colors
+                                                                  .black)),
+                                                      content: Text(
+                                                        "Are you sure you want to remove this item?",
+                                                        style:
+                                                            secondaryTextStyle(
+                                                                color: Colors
+                                                                    .black),
+                                                      ),
+                                                      actions: [
+                                                        TextButton(
+                                                          child: Text(
+                                                            "cancel",
+                                                            style:
+                                                                primaryTextStyle(
+                                                                    color: Colors
+                                                                        .grey),
+                                                          ),
+                                                          onPressed: () {
+                                                            Get.back();
+                                                            //Get.find<AuthController>().logout();
+                                                          },
+                                                        ),
+                                                        TextButton(
+                                                          child: Text("Remove",
+                                                              style: primaryTextStyle(
+                                                                  color: Colors
+                                                                      .grey)),
+                                                          onPressed: () {
+                                                            Get.back();
+                                                            homeController.deleteToCart(
+                                                                serviceid: homeController
+                                                                    .cartListData[
+                                                                        index]
+                                                                    .serviceId
+                                                                    .toString());
+                                                          },
+                                                        ),
+                                                      ],
+                                                    );
+                                                  });
+                                                 } else {
+                                                    var quantity = homeController.cartListData[index].quantity.toString();
+                                                        int tempQty = int.parse(quantity);
+                                                        homeController.cartListData[index].quantity = tempQty - 1;
+                                                        homeController.updateQuantity(
+                                                          cartid: homeController.cartListData[index].id.toString(), 
+                                                          quantity: homeController.cartListData[index].quantity.toString()
+                                                        );
+                                                        homeController.update();
+                                                 }
+                                                        
+                                                      },
+                                                     child: const Icon(
+                                                    Icons.remove,
+                                                      size: 20,
+                                                     )),
+                                                     Container(
+                                                       height: 25,
+                                                       width: 25,
+                                                       color: Colors.orange,
+                                                       child: Center(
+                                                       child: Text(homeController.cartListData[index].quantity.toString(),
+                                                          //homeController.adult.value.toString(),
+                                                       style: const TextStyle(color: Colors.white),
+                                                         ),
+                                                       ),
+                                                     ),
+                                                     InkWell(
+                                                       onTap: () {
+                                                          //homeController.adult++;
+                                                        var quantity = homeController.cartListData[index].quantity.toString();
+                                                        int tempQty = int.parse(quantity);
+                                                        homeController.cartListData[index].quantity = tempQty+1;
+                                                        homeController.updateQuantity(
+                                                          cartid: homeController.cartListData[index].id.toString(), 
+                                                          quantity: homeController.cartListData[index].quantity.toString()
+                                                        );
+                                                        homeController.update();
+                                                       },
+                                                       child: const Icon(
+                                                         Icons.add,
+                                                          size: 20,
+                                                        )),
+                                                      ],
+                                                    ),
+                                                 ),
+                                            ],
+                                          ),
                                       ],
                                     ),
                                   ),

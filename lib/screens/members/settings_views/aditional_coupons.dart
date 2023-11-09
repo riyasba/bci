@@ -1,5 +1,6 @@
 import 'package:bci/screens/members/settings_views/setingswidgets/coupons_category_list.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/coupons_list_screen.dart';
+import 'package:bci/screens/members/settings_views/setingswidgets/merchant_coupons.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/others_containors.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/redeemed_coupons_data.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/your_coupons.dart';
@@ -23,7 +24,7 @@ class _MemberCouponScreenState extends State<MemberCouponScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(200),
@@ -89,10 +90,13 @@ class _MemberCouponScreenState extends State<MemberCouponScreen> {
                       },
                       tabs: const [
                         Tab(
-                          text: "Your Coupons",
+                          text: "    Your\nCoupons",
                         ),
                         Tab(
-                          text: "Redeemed Coupons",
+                          text: "Merchant\nCoupons",
+                        ),
+                        Tab(
+                          text: "Redeemed\n Coupons",
                         ),
                       ]),
                 ),
@@ -101,8 +105,12 @@ class _MemberCouponScreenState extends State<MemberCouponScreen> {
                 // )
               ],
             )),
-        body: TabBarView(
-            children: [CategoryCouponsListScreen(), RedeemedCoupons()]),
+        body:const TabBarView(
+            children: [
+              CategoryCouponsListScreen(), 
+              MerchantCoupons(),
+              RedeemedCoupons(),
+              ]),
       ),
     );
   }

@@ -10,6 +10,7 @@ import 'package:bci/models/initiate_payment_model.dart';
 import 'package:bci/models/member_profile_model.dart';
 import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
+import 'package:bci/models/merchant_coupon_list_model.dart';
 import 'package:bci/models/userredeemcoupon/redeemed_coupons_model.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
 import 'package:bci/screens/members/manual_payment_options/phone_pe_add_to_wallet.dart';
@@ -32,6 +33,7 @@ import 'package:bci/services/network/profile_api_services/sub_coupons_redeem_api
 import 'package:bci/services/network/profile_api_services/update_official_address_api.dart';
 import 'package:bci/services/network/profile_api_services/user_redeem_coupon_api_service.dart';
 import 'package:bci/services/network/subscriptions_api_services/ease_buzz_payment_api_services.dart';
+import 'package:bci/services/network/vendor_list_api_services/merchant_coupon_list_api_service.dart';
 import 'package:bci/services/network/wallet_api_services/withdraw_from_api_services.dart';
 import 'package:bci/widgets/home_widgets/loading_widgets.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -217,6 +219,20 @@ class ProfileController extends GetxController {
         tempcouponsData.where((element) => element.name == category).toList();
 
     update();
+  }
+
+  //merchant coupon list
+  MerchantCouponListAPIServices merchantCouponListAPIServices = MerchantCouponListAPIServices();
+  List<MerchantCouponData> merchantCouponData = [];
+
+  merchantCoupon() async {
+
+    dio.Response<dynamic> response = await merchantCouponListAPIServices.merchantCouponList();
+    if(response.statusCode == 200){
+      MerchantCouponList merchantCouponList = MerchantCouponList.fromJson(response.data);
+      merchantCouponData = merchantCouponList.data;
+    }
+    update(); 
   }
 
   RedeemedCouponsCouponApiServices redeemedCouponsCouponApiServices =

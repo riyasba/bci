@@ -197,7 +197,7 @@ class _SupportScreenState extends State<SupportScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
               child: Container(
-                height: 150,
+                height: 80,
                 width: size.width,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
@@ -255,7 +255,7 @@ class _SupportScreenState extends State<SupportScreen> {
                             const Column(
                               children: [
                                 Text(
-                                  'Contact Admin :',
+                                  'Contact Admin  :',
                                   style: TextStyle(
                                       fontSize: 16, color: Color(0xff443C3C)),
                                 ),
@@ -288,7 +288,7 @@ class _SupportScreenState extends State<SupportScreen> {
                             const Row(
                               children: [
                                 Text(
-                                  'Admin Email :',
+                                  'Admin Email      :',
                                   style: TextStyle(
                                       fontSize: 16, color: Color(0xff443C3C)),
                                 ),
@@ -297,15 +297,14 @@ class _SupportScreenState extends State<SupportScreen> {
                             Row(
                               children: [
                                 const SizedBox(
-                                  width: 29,
+                                  width: 10,
                                 ),
                                 homePageController
                                         .contactDetailsData!.appEmail.isEmpty
                                     ? const Text("")
                                     : Container(
                                         child: Text(
-                                            homePageController
-                                                .contactDetailsData!.appEmail,
+                                            homePageController.contactDetailsData!.appEmail,
                                             maxLines: 2,
                                             style: TextStyle(
                                                 fontSize: 15.sp, color: kblue)),
@@ -319,6 +318,7 @@ class _SupportScreenState extends State<SupportScreen> {
                         padding:
                             const EdgeInsets.only(left: 20, right: 20, top: 10),
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Row(
                               children: [
@@ -336,7 +336,7 @@ class _SupportScreenState extends State<SupportScreen> {
                                   width: 10,
                                 ),
                                 homePageController
-                                        .contactDetailsData!.appEmail.isEmpty
+                                        .contactDetailsData!.appAddress.isEmpty
                                     ? const Text("")
                                     : Container(
                                         width: 200,
@@ -355,6 +355,37 @@ class _SupportScreenState extends State<SupportScreen> {
                     ],
                   )
                 : Container(),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15,bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: (){
+                            launchUrl(Uri.parse("https://www.facebook.com/benzclubinternational"));
+                        },
+                        child:const Image(image: AssetImage("assets/icons/fb.png"),
+                        height: 35,width: 35,)
+                      ),
+                      const SizedBox(width: 20,),
+                      InkWell(
+                        onTap: (){
+                            launchUrl(Uri.parse("https://www.instagram.com/benzclubinternational/"));
+                        },
+                        child:const Image(image: AssetImage("assets/icons/insta.jpg"),
+                        height: 40,width: 40,)
+                      ),
+                      const SizedBox(width: 20,),
+                      InkWell(
+                        onTap: (){
+                           launchUrl(Uri.parse("https://twitter.com/happybcigroup"));
+                        },
+                        child:const Image(image: AssetImage("assets/icons/twitter.png"),
+                        height: 35,width: 35,)
+                      ),
+                    ],
+                  ),
+                ),
           ],
         );
       }),

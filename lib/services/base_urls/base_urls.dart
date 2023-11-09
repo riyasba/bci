@@ -319,4 +319,10 @@ abstract class BaseApiService {
 
   final String viewCreditStatementURL =
       "https://www.portal.bcipvtltd.com/api/auth/view_statement";
+
+   //merchant coupon list 
+   final String merchantCouponApiUrl = "https://www.portal.bcipvtltd.com/api/auth/merchant_coupons_list"; 
+
+   //update quantity
+   final String updateQuantityApiUrl = "https://www.portal.bcipvtltd.com/api/auth/updateCart";  
 }

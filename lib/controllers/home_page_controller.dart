@@ -34,6 +34,7 @@ import 'package:bci/services/network/slider_api_services/slider_product_api_serv
 import 'package:bci/services/network/subscriptions_api_services/add_subscription_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plan_details_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plans_list_api_services.dart';
+import 'package:bci/services/network/update_quantity_api_service.dart';
 import 'package:bci/services/network/vendor_list_api_services/vendor_category_list_api_services.dart';
 import 'package:bci/services/network/vendor_list_api_services/vendor_list_api_services.dart';
 import 'package:dio/dio.dart' as dio;
@@ -63,7 +64,7 @@ class HomeController extends GetxController {
   List<SliderPost> adsSliderList = [];
   List<PlansData> plansdataList = [];
   List<PlansDetailsModel> planDetailsList = [];
-
+  RxInt adult = 1.obs;
   GetAdSliderApiServices getAdSliderApiServices = GetAdSliderApiServices();
 
   getAdsSlider() async {
@@ -357,6 +358,18 @@ List<GetServiceListData> tempVendorServiceListData = [];
             style: primaryFont.copyWith(color: Colors.white),
           ));
     }
+  }
+
+  //update quantity
+  UpdateQuantityAPIServices updateQuantityAPIServices = UpdateQuantityAPIServices();
+
+  updateQuantity({required String cartid,required String quantity}) async {
+     dio.Response<dynamic> response = await updateQuantityAPIServices.updateQuantityData(
+      cartid: cartid, quantity: quantity);
+      if(response.statusCode == 200){
+
+      }
+      update();
   }
 
   //get cart list
