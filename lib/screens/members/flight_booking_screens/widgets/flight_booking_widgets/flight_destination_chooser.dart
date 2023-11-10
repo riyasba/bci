@@ -1,6 +1,8 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/flights_controller.dart';
+import 'package:bci/screens/members/flight_booking_screens/airport_from_search_view.dart';
+import 'package:bci/screens/members/flight_booking_screens/airports_to_search_screen_view.dart';
 import 'package:bci/screens/members/flight_booking_screens/flaight_screen_choose.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,7 +49,7 @@ class _FlightDestinationChooserState extends State<FlightDestinationChooser> {
                 ksizedbox20,
                 InkWell(
                   onTap: () {
-                    Get.to(const flightScreenChoose(),
+                    Get.to(const AirportSearchScreenChoose(),
                         transition: Transition.cupertino,
                         curve: Curves.easeIn,
                         duration: const Duration(milliseconds: 800));
@@ -107,7 +109,7 @@ class _FlightDestinationChooserState extends State<FlightDestinationChooser> {
                 ksizedbox20,
                 InkWell(
                   onTap: () {
-                    Get.to(const flightScreenChoose2(),
+                    Get.to(const AirportSearchScreenChoose2(),
                         transition: Transition.cupertino,
                         curve: Curves.easeIn,
                         duration: const Duration(milliseconds: 800));

@@ -113,7 +113,7 @@ class _WalletScreenMembersState extends State<WalletScreenMembers> {
                     child: Container(
                       height: 110.h,
                       width: 245.w,
-                      child: Padding(
+                      child:  Padding(
                         padding: EdgeInsets.only(top: 20, right: 40, left: 20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

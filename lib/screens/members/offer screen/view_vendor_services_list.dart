@@ -267,7 +267,7 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(15),
                                 topRight: Radius.circular(15),
                               ),
@@ -352,7 +352,6 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                                       Text(
                                         "₹${homeController.vendorServiceListData[index].saleAmount}",
                                         style: primaryFont.copyWith(
-                                            
                                             color: kblue,
                                             fontSize: 12,
                                             fontWeight: FontWeight.bold),

@@ -320,9 +320,25 @@ abstract class BaseApiService {
   final String viewCreditStatementURL =
       "https://www.portal.bcipvtltd.com/api/auth/view_statement";
 
-   //merchant coupon list 
-   final String merchantCouponApiUrl = "https://www.portal.bcipvtltd.com/api/auth/merchant_coupons_list"; 
+  //merchant coupon list
+  final String merchantCouponApiUrl =
+      "https://www.portal.bcipvtltd.com/api/auth/merchant_coupons_list";
 
-   //update quantity
-   final String updateQuantityApiUrl = "https://www.portal.bcipvtltd.com/api/auth/updateCart";  
+  //update quantity
+  final String updateQuantityApiUrl =
+      "https://www.portal.bcipvtltd.com/api/auth/updateCart";
+
+  //saerch flightsearch api
+  final String searchflightURL =
+      "https://www.portal.bcipvtltd.com/api/auth/flight_city_search_get";
+
+  //partial booking
+  final String partialBookingURL =
+      "https://www.portal.bcipvtltd.com/api/auth/partial_booking";
+
+  final String partialBookingHistoryURL =
+      "https://www.portal.bcipvtltd.com/api/auth/partial_booking_history";
+
+  final String collectPartialAmountURL =
+      "https://www.portal.bcipvtltd.com/api/auth/store_partialAmount";
 }

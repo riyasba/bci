@@ -50,11 +50,11 @@ class ResponseHeader {
   });
 
   factory ResponseHeader.fromJson(Map<String, dynamic> json) => ResponseHeader(
-        errorCode: json["Error_Code"],
-        errorDesc: json["Error_Desc"],
-        errorInnerException: json["Error_InnerException"],
-        requestId: json["Request_Id"],
-        statusId: json["Status_Id"],
+        errorCode: json["Error_Code"] ?? "",
+        errorDesc: json["Error_Desc"] ?? "",
+        errorInnerException: json["Error_InnerException"] ?? "",
+        requestId: json["Request_Id"] ?? "",
+        statusId: json["Status_Id"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -125,10 +125,10 @@ class Flight {
   });
 
   factory Flight.fromJson(Map<String, dynamic> json) => Flight(
-        airlineCode: json["Airline_Code"],
-        blockTicketAllowed: json["Block_Ticket_Allowed"],
-        cached: json["Cached"],
-        destination: json["Destination"],
+        airlineCode: json["Airline_Code"] ?? "",
+        blockTicketAllowed: json["Block_Ticket_Allowed"] ?? false,
+        cached: json["Cached"] ?? false,
+        destination: json["Destination"] ?? "",
         fares: List<Fare>.from(json["Fares"].map((x) => Fare.fromJson(x))),
         flightId: json["Flight_Id"],
         flightKey: json["Flight_Key"],
@@ -278,20 +278,22 @@ class FareDetail {
 
   factory FareDetail.fromJson(Map<String, dynamic> json) => FareDetail(
         airportTaxAmount: json["AirportTax_Amount"]?.toDouble(),
-        airportTaxes: json["AirportTaxes"] == null ? []: List<AirportTax>.from(
-            json["AirportTaxes"].map((x) => AirportTax.fromJson(x))),
-        basicAmount: json["Basic_Amount"],
+        airportTaxes: json["AirportTaxes"] == null
+            ? []
+            : List<AirportTax>.from(
+                json["AirportTaxes"].map((x) => AirportTax.fromJson(x))),
+        basicAmount: json["Basic_Amount"] ?? "",
         cancellationCharges: json["CancellationCharges"] == null
             ? []
             : List<Charge>.from(
                 json["CancellationCharges"]!.map((x) => Charge.fromJson(x))),
-        currencyCode: json["Currency_Code"],
-        fareClasses: json["FareClasses"] == null ? [] : List<FareClass>.from(
-            json["FareClasses"].map((x) => FareClass.fromJson(x))),
-        freeBaggage:json["Free_Baggage"] == null ? FreeBaggage(
-          checkInBaggage: "-",
-          handBaggage: "-"
-        )
+        currencyCode: json["Currency_Code"] ?? "",
+        fareClasses: json["FareClasses"] == null
+            ? []
+            : List<FareClass>.from(
+                json["FareClasses"].map((x) => FareClass.fromJson(x))),
+        freeBaggage: json["Free_Baggage"] == null
+            ? FreeBaggage(checkInBaggage: "-", handBaggage: "-")
             : FreeBaggage.fromJson(json["Free_Baggage"]),
         gst: json["GST"],
         grossCommission: json["Gross_Commission"],
@@ -348,8 +350,8 @@ class AirportTax {
 
   factory AirportTax.fromJson(Map<String, dynamic> json) => AirportTax(
         taxAmount: json["Tax_Amount"]?.toDouble(),
-        taxCode: json["Tax_Code"],
-        taxDesc: json["Tax_Desc"],
+        taxCode: json["Tax_Code"] ?? "",
+        taxDesc: json["Tax_Desc"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -361,12 +363,12 @@ class AirportTax {
 
 class Charge {
   int applicablility;
-  int durationFrom;
-  int durationTo;
-  int durationTypeFrom;
-  int durationTypeTo;
-  int offlineServiceFee;
-  int onlineServiceFee;
+  dynamic durationFrom;
+  dynamic durationTo;
+  dynamic durationTypeFrom;
+  dynamic durationTypeTo;
+  dynamic offlineServiceFee;
+  dynamic onlineServiceFee;
   int passengerType;
   String remarks;
   bool returnFlight;
@@ -389,18 +391,18 @@ class Charge {
   });
 
   factory Charge.fromJson(Map<String, dynamic> json) => Charge(
-        applicablility: json["Applicablility"],
-        durationFrom: json["DurationFrom"],
-        durationTo: json["DurationTo"],
-        durationTypeFrom: json["DurationTypeFrom"],
-        durationTypeTo: json["DurationTypeTo"],
-        offlineServiceFee: json["OfflineServiceFee"],
-        onlineServiceFee: json["OnlineServiceFee"],
-        passengerType: json["PassengerType"],
-        remarks: json["Remarks"],
-        returnFlight: json["Return_Flight"],
-        value: json["Value"],
-        valueType: json["ValueType"],
+        applicablility: json["Applicablility"] ?? 0,
+        durationFrom: json["DurationFrom"] ?? 0,
+        durationTo: json["DurationTo"] ?? 0,
+        durationTypeFrom: json["DurationTypeFrom"] ?? 0,
+        durationTypeTo: json["DurationTypeTo"] ?? 0,
+        offlineServiceFee: json["OfflineServiceFee"] ?? 0,
+        onlineServiceFee: json["OnlineServiceFee"] ?? 0,
+        passengerType: json["PassengerType"] ?? 0,
+        remarks: json["Remarks"] ?? "",
+        returnFlight: json["Return_Flight"] ?? false,
+        value: json["Value"] ?? "",
+        valueType: json["ValueType"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -435,11 +437,11 @@ class FareClass {
   });
 
   factory FareClass.fromJson(Map<String, dynamic> json) => FareClass(
-        classCode: json["Class_Code"],
-        classDesc: json["Class_Desc"],
-        fareBasis: json["FareBasis"],
+        classCode: json["Class_Code"] ?? "",
+        classDesc: json["Class_Desc"] ?? "",
+        fareBasis: json["FareBasis"] ?? "",
         privileges: json["Privileges"],
-        segmentId: json["Segment_Id"],
+        segmentId: json["Segment_Id"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -462,7 +464,7 @@ class FreeBaggage {
 
   factory FreeBaggage.fromJson(Map<String, dynamic> json) => FreeBaggage(
         checkInBaggage: json["Check_In_Baggage"] ?? "",
-        handBaggage: json["Hand_Baggage"]?? "",
+        handBaggage: json["Hand_Baggage"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -517,11 +519,11 @@ class Segment {
         airlineCode: json["Airline_Code"] ?? "",
         airlineName: json["Airline_Name"] ?? "",
         arrivalDateTime: json["Arrival_DateTime"] ?? "",
-      departureDateTime: json["Departure_DateTime"] ?? "",
+        departureDateTime: json["Departure_DateTime"] ?? "",
         destination: json["Destination"] ?? "",
         destinationCity: json["Destination_City"] ?? "",
         destinationTerminal: json["Destination_Terminal"] ?? "",
-        duration: json["Duration"] ??"",
+        duration: json["Duration"] ?? "",
         flightNumber: json["Flight_Number"] ?? "",
         legIndex: json["Leg_Index"] ?? "",
         operatedBy: json["OperatedBy"] ?? "",

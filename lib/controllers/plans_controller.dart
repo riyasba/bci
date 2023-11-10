@@ -8,9 +8,16 @@ import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/get_plan_details_model.dart';
 import 'package:bci/models/get_plans_model.dart';
 import 'package:bci/models/initiate_payment_model.dart';
+import 'package:bci/models/partial_booking_data_model.dart';
+import 'package:bci/models/partial_payment_history_model.dart';
 import 'package:bci/models/slider_model.dart';
+import 'package:bci/screens/members/manual_payment_options/phone_pe_partial_payment_view.dart';
 import 'package:bci/screens/members/manual_payment_options/phone_pe_web_view_screen.dart';
+import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
 import 'package:bci/screens/members/otcpayment/payment_failed_screen.dart';
+import 'package:bci/services/network/partial_payment_api_services/collect_partial_payment.dart';
+import 'package:bci/services/network/partial_payment_api_services/partial_payment_api_services.dart';
+import 'package:bci/services/network/partial_payment_api_services/partial_payment_history_api_services.dart';
 import 'package:bci/services/network/payment_api_services/intiate_payment_api_services.dart';
 import 'package:bci/services/network/payment_api_services/payment_status_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/add_subscription_api_services.dart';
@@ -374,6 +381,145 @@ class PlanController extends GetxController {
           percentageAmount: percentageAmount,
           amount: amount.toStringAsFixed(2),
           totalAmount: totalAmount);
+    } else {
+      print("<<<<<<<<payment is Failed>>>>>>>>");
+
+      Get.to(() => PaymentFailedScreen());
+    }
+  }
+
+//partial Payment functions
+
+  PartialPaymentHistoryApiServices partialPaymentHistoryApiServices =
+      PartialPaymentHistoryApiServices();
+
+  PartialPaymentApiServices partialPaymentApiServices =
+      PartialPaymentApiServices();
+
+  CollectPartialPaymentyApiServices collectPartialPaymentyApiServices =
+      CollectPartialPaymentyApiServices();
+
+  List<PartialAmount> partialAmountdataList = [];
+  List<PartialPaymentHistoryData> partialAmountHistoryList = [];
+
+  getPartialPaymentDatas() async {
+    dio.Response<dynamic> response =
+        await partialPaymentApiServices.partialPayment();
+
+    if (response.statusCode == 200) {
+      PartialAmountModel partialAmountModel =
+          PartialAmountModel.fromJson(response.data);
+
+      partialAmountdataList = partialAmountModel.partialAmount
+          .where((element) => element.status == "Pending")
+          .toList();
+      getPartialPaymentDataHistory(
+          partialID: partialAmountdataList.first.id.toString());
+      update();
+    }
+  }
+
+  getPartialPaymentDataHistory({required String partialID}) async {
+    dio.Response<dynamic> response = await partialPaymentHistoryApiServices
+        .partialPaymentHistory(partialID: partialID);
+
+    if (response.statusCode == 200) {
+      PartialPaymentHistoryModel partialPaymentHistoryModel =
+          PartialPaymentHistoryModel.fromJson(response.data);
+      partialAmountHistoryList = partialPaymentHistoryModel.data;
+      update();
+    }
+  }
+
+  collectPartialAmount({
+    required int customerId,
+    required String saleAmount,
+    required String planId,
+    required String collectedDate,
+    required String collectedAmount,
+    required String status,
+  }) async {
+    dio.Response<dynamic> response =
+        await collectPartialPaymentyApiServices.collectPartialPayment(
+            collectedAmount: collectedAmount,
+            collectedDate: collectedDate,
+            customerId: customerId,
+            planId: planId,
+            saleAmount: saleAmount,
+            status: "Pending");
+
+    if (response.statusCode == 200) {
+      Get.rawSnackbar(
+          message: response.data["message"], backgroundColor: Colors.green);
+    }
+  }
+
+  initiatePaymentPartialPayment({
+    required double amount,
+    required int customerId,
+    required String saleAmount,
+    required String planId,
+    required String collectedDate,
+    required String collectedAmount,
+    required String status,
+  }) async {
+    var userId = 0;
+    // print(Get.find<ProfileController>().profileData);
+    if (Get.find<ProfileController>().profileData.isNotEmpty) {
+      userId = Get.find<ProfileController>().profileData.first.id;
+    } else {
+      await Get.find<ProfileController>().getProfile();
+      userId = Get.find<ProfileController>().profileData.first.id;
+    }
+    dio.Response<dynamic> response =
+        await initiatePaymentApiServices.initiatePayment(
+            userId: userId,
+            totalAmount: amount.toStringAsFixed(2),
+            status: "Wallet");
+
+    if (response.statusCode == 200) {
+      IninitiatePaymentModel ininitiatePaymentModel =
+          IninitiatePaymentModel.fromJson(response.data);
+
+      Get.to(() => PaymentWebViewPartialPayment(
+            amount: amount,
+            referenceId: ininitiatePaymentModel.data.merchantTransactionId,
+            url:
+                ininitiatePaymentModel.data.instrumentResponse.redirectInfo.url,
+            userId: Get.find<ProfileController>()
+                .profileData
+                .first
+                .userId
+                .toString(),
+          ));
+    }
+  }
+
+  checkPhonePeStatusAddToWallet({
+    required String refernceID,
+    required double amount,
+    required String userId,
+    required int customerId,
+    required String saleAmount,
+    required String planId,
+    required String collectedDate,
+    required String collectedAmount,
+    required String status,
+  }) async {
+    dio.Response<dynamic> response = await paymentResponseApiServices
+        .paymentResponseApi(merchantId: refernceID);
+
+    if (response.data["code"] == "PAYMENT_SUCCESS") {
+      print("<<<<<<<<payment is Success>>>>>>>>");
+      collectPartialAmount(
+          customerId: customerId,
+          saleAmount: saleAmount,
+          planId: planId,
+          collectedDate: collectedDate,
+          collectedAmount: collectedAmount,
+          status: status);
+
+      Get.to(const SucessfulScreenOtc());
     } else {
       print("<<<<<<<<payment is Failed>>>>>>>>");
 

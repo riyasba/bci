@@ -8,6 +8,7 @@ import 'package:bci/models/flight_booking_models/air_repricing_model.dart';
 import 'package:bci/models/flight_booking_models/air_reprint_model.dart';
 import 'package:bci/models/flight_booking_models/air_search_model.dart';
 import 'package:bci/models/flight_booking_models/air_seat_map_model.dart';
+import 'package:bci/models/flight_booking_models/airport_search_model.dart';
 import 'package:bci/models/flight_booking_models/booking_model.dart';
 import 'package:bci/models/flight_booking_models/flight_search_data_model.dart';
 import 'package:bci/models/flight_booking_models/get_flight_booking_history.dart';
@@ -44,6 +45,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:permission_handler/permission_handler.dart';
 
 import '../services/network/flight_booking_api_services/air_cancel_api_services.dart';
+import '../services/network/flight_booking_api_services/airport_search_api.dart';
 
 class FlightsController extends GetxController {
   RxInt wayIndex = 0.obs;
@@ -72,7 +74,7 @@ class FlightsController extends GetxController {
   RxBool indiGo = false.obs;
 
   List<Flight> flightCodelist = [];
-  
+
   AirCancelApiServices airCancelApiServices = AirCancelApiServices();
   AirRepriceApiServices airRepriceApiServices = AirRepriceApiServices();
 
@@ -102,6 +104,7 @@ class FlightsController extends GetxController {
   List<Airport> airports = [];
 
   RxBool airPortFound = false.obs;
+  String isDomestic = "0";
   RxString origin = "Choose".obs;
   RxString originCountry = "Choose".obs;
   RxString originFullName = "Choose".obs;
@@ -1199,5 +1202,20 @@ class FlightsController extends GetxController {
     }
 
     return isSeatMapAvailable;
+  }
+
+  SearchFlightApiServices searchFlightApiServices = SearchFlightApiServices();
+
+  List<FlightSearchModel> searchlistsearchList = [];
+  Future flighsearch({required String city}) async {
+    dio.Response<dynamic> response =
+        await searchFlightApiServices.searchflightapi(city: city);
+    if (response.statusCode == 200) {
+      List<FlightSearchModel> flightSearchModel = List<FlightSearchModel>.from(
+          response.data.map((x) => FlightSearchModel.fromJson(x)));
+      await searchFlightApiServices.searchflightapi(city: city);
+      searchlistsearchList = flightSearchModel;
+      update();
+    }
   }
 }
