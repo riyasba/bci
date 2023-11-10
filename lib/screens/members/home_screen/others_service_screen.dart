@@ -114,6 +114,8 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                                 id: homeController.serviceListData[index].id,
                                 image:
                                     homeController.serviceListData[index].image,
+                                images: homeController
+                                    .serviceListData[index].images,
                                 // isBooking: homeController
                                 //     .serviceListData[index].isBooking,
                                 saleAmount: homeController

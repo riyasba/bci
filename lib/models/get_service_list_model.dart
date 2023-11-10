@@ -46,6 +46,7 @@ class GetServiceListData {
   dynamic status;
   List<Amenty> amenties;
   String image;
+  List<String> images;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -63,6 +64,7 @@ class GetServiceListData {
     required this.status,
     required this.amenties,
     required this.image,
+    required this.images,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -85,6 +87,9 @@ class GetServiceListData {
             : List<Amenty>.from(
                 json["amenties"]!.map((x) => Amenty.fromJson(x))),
         image: json["image"] ?? "",
+        images: json["images"] == null
+            ? []
+            : List<String>.from(json["images"].map((x) => x)),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
@@ -107,5 +112,3 @@ class GetServiceListData {
         "updated_at": updatedAt.toIso8601String(),
       };
 }
-
-

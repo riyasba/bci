@@ -350,7 +350,7 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                 const Divider(
                   thickness: 1,
                 ),
-                Row(
+               if(bookingData.status == "completed") Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(

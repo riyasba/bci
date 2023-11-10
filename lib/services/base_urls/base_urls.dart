@@ -344,5 +344,5 @@ abstract class BaseApiService {
 
   //changes
   final String serviceDetailsURL =
-      "https://www.portal.bcipvtltd.com/api/auth/service_details";
+      "https://www.portal.bcipvtltd.com/api/auth/service_details";               
 }

@@ -226,6 +226,8 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                                     .vendorServiceListData[index].id,
                                 image: homeController
                                     .vendorServiceListData[index].image,
+                                images: homeController
+                                    .vendorServiceListData[index].images,
                                 // isBooking: homeController
                                 //     .vendorServiceListData[index].isBooking,
                                 saleAmount: homeController
@@ -266,19 +268,35 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                topRight: Radius.circular(15),
-                              ),
-                              child: Image.network(
-                                homeController
-                                    .vendorServiceListData[index].image,
-                                height: 125,
-                                width: size.width,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                            homeController
+                                    .vendorServiceListData[index].images.isEmpty
+                                ? ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15),
+                                    ),
+                                    child: Image.asset(
+                                      "assets/images/Group 9407.png",
+                                      height: 125,
+                                      width: size.width,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15),
+                                    ),
+                                    child: Image.network(
+                                      homeController
+                                          .vendorServiceListData[index]
+                                          .images
+                                          .first,
+                                      height: 125,
+                                      width: size.width,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                             ksizedbox10,
                             Padding(
                               padding:

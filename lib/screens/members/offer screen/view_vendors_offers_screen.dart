@@ -102,17 +102,17 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-            padding: const EdgeInsets.only(left: 12),
-            child: InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: kwhite,
-              ),
-            ),
-          ),
+                          padding: const EdgeInsets.only(left: 12),
+                          child: InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: kwhite,
+                            ),
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(right: 20),
                           child: Text(
@@ -141,18 +141,19 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
           )),
       body: GetBuilder<HomeController>(builder: (_) {
         return homeController.vendorServiceListData.isEmpty
-            ?  Center(
+            ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Image(image: AssetImage("assets/icons/product (1).png")),
+                    const Image(
+                        image: AssetImage("assets/icons/product (1).png")),
                     ksizedbox20,
-                    Text("No Offers Found",
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      color: kblue,
-                      fontWeight: FontWeight.bold
-                    ),
+                    Text(
+                      "No Offers Found",
+                      style: TextStyle(
+                          fontSize: 20.sp,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -175,6 +176,8 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
                             onTap: () {
                               SearchServiceListData searchServiceListData =
                                   SearchServiceListData(
+                                      images: homeController
+                                          .vendorServiceListData[index].images,
                                       actualAmount: homeController
                                           .vendorServiceListData[index]
                                           .actualAmount,

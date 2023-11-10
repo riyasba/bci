@@ -30,7 +30,7 @@ class BookingCancelRefundAPIServices extends BaseApiService {
             "userId": userId,
             "amount": amount,
             "type": type,
-            "bookingId": bookingId,
+            "booking_id": bookingId,
           });
       print("::::::::<--cancel refund-->::::::::status code:::::::::");
       print(response.statusCode);
