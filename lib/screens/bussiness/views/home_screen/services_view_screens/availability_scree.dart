@@ -331,10 +331,10 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                                                     bottom: 10),
                                                 child: ClipRRect(
                                                   borderRadius: BorderRadius.circular(4),
-                                                  child: Image.network(
-                                                    servicesController
-                                                        .serviceDataList[index]
-                                                        .image,
+                                                  child:servicesController.serviceDataList[index].images.isEmpty ? 
+                                                   const Image(image: AssetImage("assets/icons/imgess.jpeg")) :
+                                                   Image.network(
+                                                    servicesController.serviceDataList[index].images.first,
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),

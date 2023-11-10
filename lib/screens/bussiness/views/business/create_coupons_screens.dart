@@ -34,6 +34,7 @@ class _CreateCouponsScreenState extends State<CreateCouponsScreen> {
   var bsValueController = TextEditingController();
   var claimUserController = TextEditingController();
   var discountValueController = TextEditingController();
+  var couponlimitController = TextEditingController();
   final startatController = TextEditingController();
   final endatController = TextEditingController();
 
@@ -370,7 +371,41 @@ class _CreateCouponsScreenState extends State<CreateCouponsScreen> {
                     )),
               ),
             ),
-
+            Padding(
+              padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+              child: TextFormField(
+                controller: couponlimitController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                 keyboardType: TextInputType.phone,
+                // validator: (value) {
+                //   if (value!.isEmpty) {
+                //     return "Title Can't be Empty";
+                //   }
+                //   return null;
+                // },
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(color: Color(0xff707070))),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(color: Color(0xff707070))),
+                    isCollapsed: false,
+                    isDense: true,
+                    contentPadding:
+                        const EdgeInsets.only(top: 18, bottom: 18, left: 15),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(color: Color(0xff707070))),
+                    hintText: "Coupon Limit",
+                    hintStyle: TextStyle(
+                      color: kblue,
+                      fontWeight: FontWeight.w400,
+                    )),
+              ),
+            ),
             ksizedbox10,
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
@@ -567,7 +602,7 @@ class _CreateCouponsScreenState extends State<CreateCouponsScreen> {
                         category: merchantCategory.id.toString(),
                         startsat: selectdt,
                         endsat: selectdt1,
-                        discountValue: discountValueController.text,
+                        discountValue: couponlimitController.text,
                         claimUser: descriptionController.text,
                       );
                     } else {

@@ -284,130 +284,133 @@ class _WalletScreenState extends State<WalletScreen> {
                 return Container(
                   height: _mediaQuery.height*0.50,
                   child: authController.transactionHistorydata.isNotEmpty
-                      ? ListView.builder(
-                          itemCount:
-                              authController.transactionHistorydata.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Container(
-                                height: 65,
-                                width: _mediaQuery.width,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        blurRadius: 2,
-                                        color: Colors.grey.withOpacity(0.5))
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15, vertical: 7),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          authController
-                                                      .transactionHistorydata[
-                                                          index]
-                                                      .status ==
-                                                  "credit"
-                                              ? Text(
-                                                  "Credited",
-                                                  style: primaryFont.copyWith(
-                                                      color: Colors.black,
-                                                      fontSize: 17,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                )
-                                              : Text(
-                                                  "Debited",
-                                                  style: primaryFont.copyWith(
-                                                      color: Colors.black,
-                                                      fontSize: 17,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                ),
-                                          const SizedBox(
-                                            height: 7,
-                                          ),
-                                          authController
-                                                      .transactionHistorydata[
-                                                          index]
-                                                      .status ==
-                                                  "credit"
-                                              ? Text(
-                                                  "Credited on ${formatDate(authController.transactionHistorydata[index].createdAt, [
-                                                        dd,
-                                                        "-",
-                                                        mm,
-                                                        "-",
-                                                        yyyy,
-                                                        " ",
-                                                        hh,
-                                                        ":",
-                                                        nn,
-                                                        " ",
-                                                        am
-                                                      ])}",
-                                                  style: primaryFont.copyWith(
-                                                      color: Colors.black45,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                )
-                                              : Text(
-                                                  "Debited on ${formatDate(authController.transactionHistorydata[index].createdAt, [
-                                                        dd,
-                                                        "-",
-                                                        mm,
-                                                        "-",
-                                                        yyyy,
-                                                        " ",
-                                                        hh,
-                                                        ":",
-                                                        nn,
-                                                        " ",
-                                                        am
-                                                      ])}",
-                                                  style: primaryFont.copyWith(
-                                                      color: Colors.black45,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                )
-                                        ],
-                                      ),
-                                      authController
-                                                  .transactionHistorydata[index]
-                                                  .status ==
-                                              "credit"
-                                          ? Text(
-                                              "+ ₹${authController.transactionHistorydata[index].amount}",
-                                              style: primaryFont.copyWith(
-                                                  fontSize: 16,
-                                                  color: Colors.green),
-                                            )
-                                          : Text(
-                                              "- ₹${authController.transactionHistorydata[index].amount}",
-                                              style: primaryFont.copyWith(
-                                                  fontSize: 16,
-                                                  color: Colors.red),
-                                            )
+                      ? Padding(
+                        padding: const EdgeInsets.only(bottom: 40,left: 8,right: 8,top: 8),
+                        child: ListView.builder(
+                            itemCount:
+                                authController.transactionHistorydata.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  height: 65,
+                                  width: _mediaQuery.width,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          blurRadius: 2,
+                                          color: Colors.grey.withOpacity(0.5))
                                     ],
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 7),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            authController
+                                                        .transactionHistorydata[
+                                                            index]
+                                                        .status ==
+                                                    "credit"
+                                                ? Text(
+                                                    "Credited",
+                                                    style: primaryFont.copyWith(
+                                                        color: Colors.black,
+                                                        fontSize: 17,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  )
+                                                : Text(
+                                                    "Debited",
+                                                    style: primaryFont.copyWith(
+                                                        color: Colors.black,
+                                                        fontSize: 17,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                            const SizedBox(
+                                              height: 7,
+                                            ),
+                                            authController
+                                                        .transactionHistorydata[
+                                                            index]
+                                                        .status ==
+                                                    "credit"
+                                                ? Text(
+                                                    "Credited on ${formatDate(authController.transactionHistorydata[index].createdAt, [
+                                                          dd,
+                                                          "-",
+                                                          mm,
+                                                          "-",
+                                                          yyyy,
+                                                          " ",
+                                                          hh,
+                                                          ":",
+                                                          nn,
+                                                          " ",
+                                                          am
+                                                        ])}",
+                                                    style: primaryFont.copyWith(
+                                                        color: Colors.black45,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  )
+                                                : Text(
+                                                    "Debited on ${formatDate(authController.transactionHistorydata[index].createdAt, [
+                                                          dd,
+                                                          "-",
+                                                          mm,
+                                                          "-",
+                                                          yyyy,
+                                                          " ",
+                                                          hh,
+                                                          ":",
+                                                          nn,
+                                                          " ",
+                                                          am
+                                                        ])}",
+                                                    style: primaryFont.copyWith(
+                                                        color: Colors.black45,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  )
+                                          ],
+                                        ),
+                                        authController
+                                                    .transactionHistorydata[index]
+                                                    .status ==
+                                                "credit"
+                                            ? Text(
+                                                "+ ₹${authController.transactionHistorydata[index].amount}",
+                                                style: primaryFont.copyWith(
+                                                    fontSize: 16,
+                                                    color: Colors.green),
+                                              )
+                                            : Text(
+                                                "- ₹${authController.transactionHistorydata[index].amount}",
+                                                style: primaryFont.copyWith(
+                                                    fontSize: 16,
+                                                    color: Colors.red),
+                                              )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          })
+                              );
+                            }),
+                      )
                       : Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,

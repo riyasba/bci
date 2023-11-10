@@ -19,8 +19,9 @@ class AddServicesApiServices extends BaseApiService {
           createServiceModel.amenities.map((element) => element.toJson()));
       print(createServiceModel.image);
       FormData formData = FormData.fromMap({
-        "image": await MultipartFile.fromFile(createServiceModel.image,
-            filename: createServiceModel.image.split("/").last),
+        for(int i = 0; i < createServiceModel.image.length; i++)
+        "image[$i]": await MultipartFile.fromFile(createServiceModel.image[i].path,
+            filename: createServiceModel.image[i].path.split("/").last),
         "title": createServiceModel.title,
         "category": createServiceModel.category.toString(),
         "sale_amount": createServiceModel.saleAmount,
@@ -38,6 +39,20 @@ class AddServicesApiServices extends BaseApiService {
         "sgst": createServiceModel.sgst,
         "start_time": createServiceModel.startTime,
         "end_time": createServiceModel.endTime,
+        // "weekdays[0]":"Monday",
+        // "from.Monday[0]":"00:00:00",
+        // "to.Monday[0]":"23:59:00",
+          "weekdays": ["Monday", "Tuesday", "Wednesday"],
+    "from": {
+        "Monday": ["09:00", "11:00", "14:00"],
+        "Tuesday": ["09:30", "11:30", "14:30"],
+        "Wednesday": ["10:00", "12:00", "15:00"]
+    },
+    "to": {
+        "Monday": ["10:00", "12:00", "15:00"],
+        "Tuesday": ["10:30", "12:30", "15:30"],
+        "Wednesday": ["11:00", "13:00", "16:00"]
+    }
         // if (createServiceModel.offerPercentage != null)
         //   "offerPercentage": "${createServiceModel.offerPercentage}%",
         // if (createServiceModel.offerAmount != null)
@@ -45,6 +60,49 @@ class AddServicesApiServices extends BaseApiService {
         // if (createServiceModel.couponAmount != null)
         //   "coupon_amount": createServiceModel.couponAmount
       });
+
+      var data = {
+        // for(int i = 0; i < createServiceModel.image.length; i++)
+        // "image[$i]": await MultipartFile.fromFile(createServiceModel.image[i].path,
+        //     filename: createServiceModel.image[i].path.split("/").last),
+        "title": createServiceModel.title,
+        "category": createServiceModel.category.toString(),
+        "sale_amount": createServiceModel.saleAmount,
+        "actual_amount": createServiceModel.actualAmount,
+        // "share": createServiceModel.share,
+        // "bvc_amount": createServiceModel.bvcAmount,
+        //"booking": createServiceModel.booking,
+        "amenties": ameneity.toString(),
+        "unit": createServiceModel.unit,
+        "quantity": createServiceModel.quantity,
+        "editor-value": createServiceModel.description,
+        "isOffer": createServiceModel.isOfferAvailable,
+        "isCoupon": createServiceModel.isCouponsAvailable,
+        "cgst": createServiceModel.cgst,
+        "sgst": createServiceModel.sgst,
+        "start_time": createServiceModel.startTime,
+        "end_time": createServiceModel.endTime,
+        // "weekdays[0]":"Monday",
+        // "from.Monday[0]":"00:00:00",
+        // "to.Monday[0]":"23:59:00",
+          "weekdays": ["Monday", "Tuesday", "Wednesday"],
+    "from": {
+        "Monday": ["09:00", "11:00", "14:00"],
+        "Tuesday": ["09:30", "11:30", "14:30"],
+        "Wednesday": ["10:00", "12:00", "15:00"]
+    },
+    "to": {
+        "Monday": ["10:00", "12:00", "15:00"],
+        "Tuesday": ["10:30", "12:30", "15:30"],
+        "Wednesday": ["11:00", "13:00", "16:00"]
+    }
+        // if (createServiceModel.offerPercentage != null)
+        //   "offerPercentage": "${createServiceModel.offerPercentage}%",
+        // if (createServiceModel.offerAmount != null)
+        //   "offerUpto_amount": createServiceModel.offerAmount,
+        // if (createServiceModel.couponAmount != null)
+        //   "coupon_amount": createServiceModel.couponAmount
+      };
 
       print(formData.fields);
 
@@ -58,8 +116,8 @@ class AddServicesApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: formData);
-      print("::::::::<Add services URL>::::::::status code::::::::::");
+          data: data);
+      print("::::::::<Add services URL>::::::::status code::::::::::[change1]");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

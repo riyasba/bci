@@ -10,6 +10,7 @@ import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/av
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -113,7 +114,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     //   sgstPercentage = widget.serviceData.sgst != null
     //       ? int.parse(widget.serviceData.sgst)
     //       : null;
-          productImage = widget.serviceData.image;
+          productImage = widget.serviceData.images;
     // });
   }
 
@@ -130,6 +131,18 @@ class _AddServicesViewState extends State<UpdateServicesView> {
   var gstPercentage;
 
   var productNetworkImage;
+
+  final ImagePicker imagePicker = ImagePicker();
+  List<XFile> imageFileList = [];
+  void selectImage() async {
+      final List<XFile>? selectedImage = await imagePicker.pickMultiImage();
+      if(selectedImage!.isNotEmpty){
+        imageFileList.addAll(selectedImage);
+      } 
+      setState(() {
+        
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +179,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                     const Padding(
                       padding: EdgeInsets.only(left: 0, right: 20),
                       child: Text(
-                        'Add Services',
+                        'Update Services',
                         style:
                             TextStyle(fontSize: 22, color: Color(0xffF8F9FD)),
                       ),
@@ -750,24 +763,72 @@ class _AddServicesViewState extends State<UpdateServicesView> {
             padding: const EdgeInsets.only(left: 15, right: 15),
             child: InkWell(
               onTap: () async {
-                final ImagePicker _picker = ImagePicker();
-                // Pick an image
-                final XFile? tempimage =
-                    await _picker.pickImage(source: ImageSource.gallery);
+                selectImage();
+                // final ImagePicker _picker = ImagePicker();
+                // // Pick an image
+                // final XFile? tempimage =
+                //     await _picker.pickImage(source: ImageSource.gallery);
 
-                setState(() {
-                  serviceImage = File(tempimage!.path);
-                  productImage = null;
-                });
+                // setState(() {
+                //   serviceImage = File(tempimage!.path);
+                //   productImage = null;
+                // });
               },
               child: Container(
                 height: 130,
                 width: size.width,
                 decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 215, 215, 213),
+                    color: Colors.grey[300],
                     borderRadius: BorderRadius.circular(3)),
-                child: productImage != null
-                    ? Image.network(productImage!)
+                child: imageFileList != null
+                    ? GridView.builder(
+                        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                        itemCount: imageFileList!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: StreamBuilder<Object>(
+                                    stream: null,
+                                    builder: (context, snapshot) {
+                                      return Stack(
+                                        children: [
+                                          Image.file(File(imageFileList[index].path),
+                                          height: 100,width: 100,
+                                          fit: BoxFit.cover,),
+                                        ],
+                                      );
+                                    }
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 70,
+                                  child: InkWell(
+                                    onTap: (){
+                                       setState(() {
+                                         imageFileList.removeAt(index);
+                                       });
+                                    },
+                                    child:Container(
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        color: kwhite,
+                                        borderRadius:const BorderRadius.only(
+                                          topRight: Radius.circular(8),
+                                         bottomLeft: Radius.circular(8)),
+                                      ),
+                                      child: const Icon(CupertinoIcons.delete,
+                                      color: Colors.grey,),
+                                    ))),
+                              ],
+                            ),
+                          );
+                        }
+                      )
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -1177,9 +1238,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                                     ? widget.serviceData.categoryId.toString()
                                     : categoryModel.id.toString(),
                                 description: descriptionController.text,
-                                image: serviceImage == null
-                                    ? "null"
-                                    : serviceImage.path,
+                                image: imageFileList,
                                 isCouponsAvailable:
                                     isCouponEligible ? "1" : "0",
                                 isOfferAvailable: isOfferEligible ? "1" : "0",

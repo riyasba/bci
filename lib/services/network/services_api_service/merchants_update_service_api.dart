@@ -19,8 +19,9 @@ class UpdateServicesApiServices extends BaseApiService {
       print(createServiceModel.image);
       FormData formData = FormData.fromMap({
         if (createServiceModel.image != "null")
-          "image": await MultipartFile.fromFile(createServiceModel.image,
-              filename: createServiceModel.image.split("/").last),
+        for(int i = 0; i < createServiceModel.image.length; i++)
+        "image[$i]": await MultipartFile.fromFile(createServiceModel.image[i].path,
+            filename: createServiceModel.image[i].path.split("/").last),
         "title": createServiceModel.title,
         if (createServiceModel.category != "null")
           "category": createServiceModel.category.toString(),

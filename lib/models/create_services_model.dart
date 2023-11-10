@@ -1,3 +1,5 @@
+import 'package:image_picker/image_picker.dart';
+
 class CreateServiceModel {
   String title;
   String category;
@@ -7,7 +9,7 @@ class CreateServiceModel {
   // String bvcAmount;
   String booking;
   List<Amenty> amenities;
-  String image;
+  List<XFile> image;
   String description;
   String isOfferAvailable;
   String isCouponsAvailable;

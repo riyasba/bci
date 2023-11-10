@@ -7,9 +7,11 @@ import 'package:bci/controllers/services_controller.dart';
 import 'package:bci/models/category_model.dart';
 import 'package:bci/models/create_services_model.dart';
 import 'package:bci/models/sub_category_model.dart';
+import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/time_slot_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -130,6 +132,7 @@ class _AddServicesViewState extends State<AddServicesView> {
 
   bool isOfferEligible = false;
   bool isCouponEligible = false;
+  bool available = false;
 
   // List share = ["fixed","percentage"];
 
@@ -140,6 +143,18 @@ class _AddServicesViewState extends State<AddServicesView> {
   var gstPercentage;
   var cgstPercentage;
   var sgstPercentage;
+
+  final ImagePicker imagePicker = ImagePicker();
+  List<XFile> imageFileList = [];
+  void selectImage() async {
+      final List<XFile>? selectedImage = await imagePicker.pickMultiImage();
+      if(selectedImage!.isNotEmpty){
+        imageFileList.addAll(selectedImage);
+      } 
+      setState(() {
+        
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -400,84 +415,134 @@ class _AddServicesViewState extends State<AddServicesView> {
                   )),
             ),
           ),
-          ksizedbox10,
-          GetBuilder<AuthController>(builder: (_) {
-            return Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Starts At",
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: InkWell(
+              onTap: (){
+                Get.to(const TimeSlotScreen());
+              },
+              child: Container(
+                height: 45,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: kOrange,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Add Time Slots",
                         style: TextStyle(
-                            color: kblue,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400),
+                         color: kwhite,
+                         fontSize: 16,
+                         fontWeight: FontWeight.w500),
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      ksizedbox10,
-                      InkWell(
-                        onTap: () {
-                          _startTime(context);
-                        },
-                        child: Container(
-                            height: 32,
-                            width: 120,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border:
-                                  Border.all(color: const Color(0xff707070)),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text(_startTimeController.text),
-                            )),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Ends At",
-                        style: TextStyle(
-                            color: kblue,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      ksizedbox10,
-                      InkWell(
-                        onTap: () {
-                          _endtime(context);
-                        },
-                        child: Container(
-                            height: 32,
-                            width: 120,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border:
-                                  Border.all(color: const Color(0xff707070)),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text(_endtimeController.text),
-                            )),
-                      ),
-                    ],
-                  ),
-                ],
+                      const SizedBox(width: 15,),
+                      Icon(Icons.add,color: kwhite,)
+                  ],
+                ),
               ),
-            );
-          }),
-          ksizedbox10,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 15,right: 15),
+            child: Row(
+              children: [
+                Text("Service Available",
+                          style: TextStyle(
+                           color: kblue,
+                           fontSize: 16,
+                           fontWeight: FontWeight.w500),
+                 ),
+                 Switch(
+                  activeColor: kOrange,
+                  activeTrackColor: kblue,
+                      value: available,
+                      onChanged: (bool value) {
+                        setState(() {
+                          available = value;
+                        });
+                      },
+                    ),
+              ],
+            ),
+          ),
+          // GetBuilder<AuthController>(builder: (_) {
+          //   return Padding(
+          //     padding: const EdgeInsets.only(left: 15, right: 15),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         Column(
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             Text(
+          //               "Starts At",
+          //               style: TextStyle(
+          //                   color: kblue,
+          //                   fontSize: 16,
+          //                   fontWeight: FontWeight.w400),
+          //             ),
+          //             const SizedBox(
+          //               height: 5,
+          //             ),
+          //             ksizedbox10,
+          //             InkWell(
+          //               onTap: () {
+          //                 _startTime(context);
+          //               },
+          //               child: Container(
+          //                   height: 32,
+          //                   width: 120,
+          //                   decoration: BoxDecoration(
+          //                     color: Colors.white,
+          //                     border:
+          //                         Border.all(color: const Color(0xff707070)),
+          //                     borderRadius: BorderRadius.circular(10),
+          //                   ),
+          //                   child: Center(
+          //                     child: Text(_startTimeController.text),
+          //                   )),
+          //             ),
+          //           ],
+          //         ),
+          //         Column(
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             Text(
+          //               "Ends At",
+          //               style: TextStyle(
+          //                   color: kblue,
+          //                   fontSize: 16,
+          //                   fontWeight: FontWeight.w400),
+          //             ),
+          //             const SizedBox(
+          //               height: 5,
+          //             ),
+          //             ksizedbox10,
+          //             InkWell(
+          //               onTap: () {
+          //                 _endtime(context);
+          //               },
+          //               child: Container(
+          //                   height: 32,
+          //                   width: 120,
+          //                   decoration: BoxDecoration(
+          //                     color: Colors.white,
+          //                     border:
+          //                         Border.all(color: const Color(0xff707070)),
+          //                     borderRadius: BorderRadius.circular(10),
+          //                   ),
+          //                   child: Center(
+          //                     child: Text(_endtimeController.text),
+          //                   )),
+          //             ),
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   );
+          // }),
           GetBuilder<AuthController>(builder: (_) {
             return Padding(
               padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -881,44 +946,76 @@ class _AddServicesViewState extends State<AddServicesView> {
             padding: const EdgeInsets.only(left: 15, right: 15),
             child: InkWell(
               onTap: () async {
-                final ImagePicker _picker = ImagePicker();
-                // Pick an image
-                final XFile? tempimage =
-                    await _picker.pickImage(source: ImageSource.gallery);
+                
+                selectImage();
 
-                setState(() {
-                  serviceImage = File(tempimage!.path);
-                });
+                // final ImagePicker _picker = ImagePicker();
+                // // Pick an image
+                // final XFile? tempimage =
+                //     await _picker.pickImage(source: ImageSource.gallery);
+
+                // setState(() {
+                //   serviceImage = File(tempimage!.path);
+                // });
               },
-              child: Container(
-                height: 130,
-                width: size.width,
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 215, 215, 213),
-                    borderRadius: BorderRadius.circular(3)),
-                child: serviceImage != null
-                    ? Image.file(serviceImage!)
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Center(
-                            child: Icon(
-                              Icons.cloud_upload,
-                              color: Colors.grey,
-                              size: 45,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 130,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(8)
+                  ),
+                  child: GridView.builder(
+                        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                        itemCount: imageFileList!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: StreamBuilder<Object>(
+                                    stream: null,
+                                    builder: (context, snapshot) {
+                                      return Stack(
+                                        children: [
+                                          Image.file(File(imageFileList[index].path),
+                                          height: 100,width: 100,
+                                          fit: BoxFit.cover,),
+                                        ],
+                                      );
+                                    }
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 70,
+                                  child: InkWell(
+                                    onTap: (){
+                                       setState(() {
+                                         imageFileList.removeAt(index);
+                                       });
+                                    },
+                                    child:Container(
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        color: kwhite,
+                                        borderRadius:const BorderRadius.only(
+                                          topRight: Radius.circular(8),
+                                         bottomLeft: Radius.circular(8)),
+                                      ),
+                                      child: const Icon(CupertinoIcons.delete,
+                                      color: Colors.grey,),
+                                    ))),
+                              ],
                             ),
-                          ),
-                          ksizedbox10,
-                          Text(
-                            "Product Image",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: kblue),
-                          ),
-                        ],
+                          );
+                        }
                       ),
+                ),
               ),
             ),
           ),
@@ -1299,7 +1396,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                                 // bvcAmount: bvcAmountController.text,
                                 category: categoryModel.id.toString(),
                                 description: descriptionController.text,
-                                image: serviceImage.path,
+                                image: imageFileList,
                                 isCouponsAvailable:
                                     isCouponEligible ? "1" : "0",
                                 isOfferAvailable: isOfferEligible ? "1" : "0",

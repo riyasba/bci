@@ -46,7 +46,7 @@ class ServiceData {
     dynamic isRecomended;
     dynamic status;
     List<Amenty> amenties;
-    dynamic image;
+    List<String> images;
     DateTime createdAt;
     DateTime updatedAt;
     dynamic shareOption;
@@ -72,7 +72,7 @@ class ServiceData {
         required this.isRecomended,
         required this.status,
         required this.amenties,
-         this.image,
+        required this.images,
         required this.createdAt,
         required this.updatedAt,
         this.shareOption,
@@ -99,7 +99,7 @@ class ServiceData {
         isRecomended: json["is_recomended"]?? "",
         status: json["status"]?? "",
         amenties:json["amenties"] == null ? [] : List<Amenty>.from(json["amenties"].map((x) => Amenty.fromJson(x))),
-        image: json["image"]?? "",
+        images:json["images"] == null ? [] : List<String>.from(json["images"].map((x) => x)),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         shareOption: json["share_option"]?? "",
@@ -126,7 +126,7 @@ class ServiceData {
         "is_recomended": isRecomended,
         "status": status,
         "amenties": List<dynamic>.from(amenties.map((x) => x.toJson())),
-        "image": image,
+        "images": List<dynamic>.from(images.map((x) => x)),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "share_option": shareOption,

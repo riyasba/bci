@@ -56,6 +56,7 @@ class AuthController extends GetxController {
   RxBool isGstAvailable = true.obs;
   RxBool isLoading = false.obs;
   RxBool isOTPLoading = false.obs;
+  RxInt isExpand = 0.obs;
 
 //api callings
   registerMerchants(
