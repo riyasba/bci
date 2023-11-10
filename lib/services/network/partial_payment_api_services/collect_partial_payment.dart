@@ -18,7 +18,7 @@ class CollectPartialPaymentyApiServices extends BaseApiService {
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(partialBookingHistoryURL,
+      var response = await dio.post(collectPartialAmountURL,
           options: Options(
               headers: {
                 'Accept': 'application/json',

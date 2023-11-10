@@ -54,7 +54,7 @@ class _AddWaletScreenState extends State<PartialAddPAymentView> {
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: Text(
-                        'Add to Wallet',
+                        'Advance booking',
                         style: TextStyle(
                             fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
@@ -88,7 +88,7 @@ class _AddWaletScreenState extends State<PartialAddPAymentView> {
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Text(
-              'Add To Wallet Amounts or Default Amount Choose Payment Methods...',
+              'Pay some advance amount for your membership',
               textAlign: TextAlign.center,
               style: TextStyle(color: kblue, fontSize: 22.sp),
             ),

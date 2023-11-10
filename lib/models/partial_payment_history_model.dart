@@ -33,7 +33,7 @@ class PartialPaymentHistoryData {
   String planName;
   String planAmount;
   String collectedAmount;
-  DateTime collectedDate;
+  dynamic collectedDate;
   String partialId;
   String status;
   DateTime createdAt;
@@ -59,7 +59,7 @@ class PartialPaymentHistoryData {
         planName: json["plan_name"],
         planAmount: json["plan_amount"],
         collectedAmount: json["collected_amount"],
-        collectedDate: DateTime.parse(json["collected_date"]),
+        collectedDate: json["collected_date"],
         partialId: json["partial_id"],
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),

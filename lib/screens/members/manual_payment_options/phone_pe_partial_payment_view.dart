@@ -18,12 +18,24 @@ class PaymentWebViewPartialPayment extends StatefulWidget {
   String url;
   String referenceId;
   String userId;
+  int customerId;
+  String saleAmount;
+  String planId;
+  String collectedDate;
+  String collectedAmount;
+  String status;
 
   PaymentWebViewPartialPayment({
     required this.amount,
     required this.url,
     required this.referenceId,
     required this.userId,
+    required this.collectedAmount,
+    required this.collectedDate,
+    required this.customerId,
+    required this.planId,
+    required this.saleAmount,
+    required this.status,
   });
 
   @override
@@ -80,7 +92,13 @@ class _PaymentWebViewAddToWalletState
                 "https://www.portal.bcipvtltd.com/api/response_phonepay") {
               // Check Status here
 
-              Get.find<ProfileController>().checkPhonePeStatusAddToWallet(
+              Get.find<PlanController>().checkPhonePeStatusPartialPayment(
+                  collectedAmount: widget.collectedAmount,
+                  collectedDate: widget.collectedAmount,
+                  customerId: widget.customerId,
+                  planId: widget.planId,
+                  saleAmount: widget.saleAmount,
+                  status: widget.status,
                   refernceID: widget.referenceId,
                   amount: widget.amount,
                   userId: widget.userId);

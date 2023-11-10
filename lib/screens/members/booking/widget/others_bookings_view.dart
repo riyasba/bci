@@ -355,11 +355,17 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                   children: [
                     InkWell(
                       onTap: () {
+                        print(bookingData.id);
                         Get.find<ProfileController>().cancelRefundApi(
-                            userId: Get.find<ProfileController>().profileData.first.id.toString(),
-                            amount: bookingData.purchasePrice,
-                            type: "booking",
-                            bookingId: bookingData.id.toString(),);
+                          userId: Get.find<ProfileController>()
+                              .profileData
+                              .first
+                              .id
+                              .toString(),
+                          amount: bookingData.purchasePrice,
+                          type: "booking",
+                          bookingId: bookingData.id.toString(),
+                        );
                       },
                       child: const Text(
                         'Cancel',
@@ -369,9 +375,9 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Text(
+                    const Text(
                       "",
-                      style: const TextStyle(
+                      style:  TextStyle(
                           fontSize: 15,
                           color: Colors.green,
                           fontWeight: FontWeight.w500),

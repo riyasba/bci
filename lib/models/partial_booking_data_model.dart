@@ -35,7 +35,7 @@ class PartialAmount {
   String planName;
   String planAmount;
   String collectedAmount;
-  DateTime collectedDate;
+  dynamic collectedDate;
   String status;
   DateTime createdAt;
   DateTime updatedAt;
@@ -60,7 +60,7 @@ class PartialAmount {
         planName: json["plan_name"],
         planAmount: json["plan_amount"],
         collectedAmount: json["collected_amount"],
-        collectedDate: DateTime.parse(json["collected_date"]),
+        collectedDate: json["collected_date"],
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),

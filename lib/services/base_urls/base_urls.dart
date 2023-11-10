@@ -341,4 +341,8 @@ abstract class BaseApiService {
 
   final String collectPartialAmountURL =
       "https://www.portal.bcipvtltd.com/api/auth/store_partialAmount";
+
+  //changes
+  final String serviceDetailsURL =
+      "https://www.portal.bcipvtltd.com/api/auth/service_details";
 }

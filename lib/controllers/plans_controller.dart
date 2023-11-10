@@ -411,8 +411,9 @@ class PlanController extends GetxController {
           PartialAmountModel.fromJson(response.data);
 
       partialAmountdataList = partialAmountModel.partialAmount
-          .where((element) => element.status == "Pending")
+          .where((element) => element.status == "pending")
           .toList();
+
       getPartialPaymentDataHistory(
           partialID: partialAmountdataList.first.id.toString());
       update();
@@ -449,8 +450,8 @@ class PlanController extends GetxController {
             status: "Pending");
 
     if (response.statusCode == 200) {
-      Get.rawSnackbar(
-          message: response.data["message"], backgroundColor: Colors.green);
+      // Get.rawSnackbar(
+      //     message: response.data["message"], backgroundColor: Colors.green);
     }
   }
 
@@ -483,6 +484,12 @@ class PlanController extends GetxController {
 
       Get.to(() => PaymentWebViewPartialPayment(
             amount: amount,
+            collectedAmount: collectedAmount,
+            collectedDate: collectedDate,
+            customerId: customerId,
+            planId: planId,
+            saleAmount: saleAmount,
+            status: status,
             referenceId: ininitiatePaymentModel.data.merchantTransactionId,
             url:
                 ininitiatePaymentModel.data.instrumentResponse.redirectInfo.url,
@@ -495,7 +502,7 @@ class PlanController extends GetxController {
     }
   }
 
-  checkPhonePeStatusAddToWallet({
+  checkPhonePeStatusPartialPayment({
     required String refernceID,
     required double amount,
     required String userId,
@@ -525,6 +532,12 @@ class PlanController extends GetxController {
 
       Get.to(() => PaymentFailedScreen());
     }
+  }
+
+  calculateUnPaid(double planAmount, double paidAmount) {
+    double remainingAmount = planAmount - paidAmount;
+
+    return remainingAmount.toStringAsFixed(0);
   }
 }
 
