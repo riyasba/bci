@@ -77,12 +77,16 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(5),
-                                    child: Image.network(
-                                      homeController
-                                          .bookingListData[index].image,
+                                    child: Container(
                                       height: 100,
                                       width: 100,
-                                      fit: BoxFit.cover,
+                                      child: Image.network(
+                                        homeController
+                                            .bookingListData[index].image,
+                                        height: 100,
+                                        width: 100,
+                                        fit: BoxFit.cover,
+                                      ),
                                     )),
                               ),
                               kwidth10,
@@ -167,11 +171,15 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                 ),
                 Row(
                   children: [
-                    Image.network(
-                      bookingData.image,
+                    Container(
                       height: 50,
                       width: 60,
-                      fit: BoxFit.cover,
+                      child: Image.network(
+                        bookingData.image,
+                        height: 50,
+                        width: 60,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     const SizedBox(
                       width: 10,
@@ -350,40 +358,41 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                 const Divider(
                   thickness: 1,
                 ),
-               if(bookingData.status == "completed") Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        print(bookingData.id);
-                        Get.find<ProfileController>().cancelRefundApi(
-                          userId: Get.find<ProfileController>()
-                              .profileData
-                              .first
-                              .id
-                              .toString(),
-                          amount: bookingData.purchasePrice,
-                          type: "booking",
-                          bookingId: bookingData.id.toString(),
-                        );
-                      },
-                      child: const Text(
-                        'Cancel',
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold),
+                if (bookingData.status == "completed")
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          print(bookingData.id);
+                          Get.find<ProfileController>().cancelRefundApi(
+                            userId: Get.find<ProfileController>()
+                                .profileData
+                                .first
+                                .id
+                                .toString(),
+                            amount: bookingData.purchasePrice,
+                            type: "booking",
+                            bookingId: bookingData.id.toString(),
+                          );
+                        },
+                        child: const Text(
+                          'Cancel',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
-                    ),
-                    const Text(
-                      "",
-                      style:  TextStyle(
-                          fontSize: 15,
-                          color: Colors.green,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                ),
+                      const Text(
+                        "",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.green,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),

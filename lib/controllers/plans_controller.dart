@@ -15,6 +15,7 @@ import 'package:bci/screens/members/manual_payment_options/phone_pe_partial_paym
 import 'package:bci/screens/members/manual_payment_options/phone_pe_web_view_screen.dart';
 import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
 import 'package:bci/screens/members/otcpayment/payment_failed_screen.dart';
+import 'package:bci/screens/members/settings_views/setings_quick_payment_screen.dart';
 import 'package:bci/services/network/partial_payment_api_services/collect_partial_payment.dart';
 import 'package:bci/services/network/partial_payment_api_services/partial_payment_api_services.dart';
 import 'package:bci/services/network/partial_payment_api_services/partial_payment_history_api_services.dart';
@@ -401,22 +402,24 @@ class PlanController extends GetxController {
 
   List<PartialAmount> partialAmountdataList = [];
   List<PartialPaymentHistoryData> partialAmountHistoryList = [];
-
+  // RxBool isLoading = false.obs;
   getPartialPaymentDatas() async {
+    isLoading(true);
     dio.Response<dynamic> response =
         await partialPaymentApiServices.partialPayment();
-
+    isLoading(false);
     if (response.statusCode == 200) {
-      PartialAmountModel partialAmountModel =
-          PartialAmountModel.fromJson(response.data);
-
-      partialAmountdataList = partialAmountModel.partialAmount
-          .where((element) => element.status == "pending")
-          .toList();
-
-      getPartialPaymentDataHistory(
-          partialID: partialAmountdataList.first.id.toString());
-      update();
+      if (response.data["message"] == "No records found for the user") {
+        Get.off(() => QucikPaymentScreen());
+      } else {
+        PartialAmountModel partialAmountModel =
+            PartialAmountModel.fromJson(response.data);
+        partialAmountdataList.clear();
+        partialAmountdataList.add(partialAmountModel.partialAmount);
+        getPartialPaymentDataHistory(
+            partialID: partialAmountModel.partialAmount.id.toString());
+        update();
+      }
     }
   }
 

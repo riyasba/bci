@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
+import 'package:bci/models/child_dob_model.dart';
 import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/screens/members/members%20widgets/member_bottumbavigation.dart';
@@ -134,6 +135,43 @@ class _MyAccountState extends State<MyAccount> {
       setState(() {
         date = picked;
         dateOfBirthController.text = formatDate(date, [dd, "/", mm, "/", yyyy]);
+      });
+  }
+
+  _selectChildDateofBrth(BuildContext context, int index) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: date,
+      initialDatePickerMode: DatePickerMode.day,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      firstDate: DateTime(1910),
+      locale: const Locale('en', 'IN'),
+      lastDate: DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: kblue, // <-- SEE HERE
+              onPrimary: Colors.white, // <-- SEE HERE
+              onSurface: Colors.blueAccent, // <-- SEE HERE
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: kblue, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null)
+      setState(() {
+        date = picked;
+        profileController.childDetailsList[index].dateOfBirthController.text =
+            formatDate(date, [dd, "/", mm, "/", yyyy]);
+        profileController.update();
       });
   }
 
@@ -289,11 +327,31 @@ class _MyAccountState extends State<MyAccount> {
           isMarried = false;
         }
       });
-      for (var names in profileController.profileData.first.childName) {
-        print("------------------->> $names");
-        // print("------------------->> $_controller");
+       profileController.childDetailsList.clear();
+      for (var names in profileController.profileData.first.children) {
+        ChildDetailsModel childDetailsModel = ChildDetailsModel(
+            dateOfBirthController: TextEditingController(
+              text: names.dob,
+              
+            ),
+            nameController: TextEditingController(
+              text: names.childName,
+            ),
+            dob: names.dob,
+            isNew: false,
+            name: names.childName);
 
-        initialChildName!.add(names);
+        profileController.childDetailsList.add(childDetailsModel);
+        profileController.update();
+      }
+
+      if (profileController.childDetailsList.isEmpty) {
+        ChildDetailsModel childDetailsModel = ChildDetailsModel(
+          dateOfBirthController: TextEditingController(),
+          nameController: TextEditingController(),
+        );
+        profileController.childDetailsList.add(childDetailsModel);
+        profileController.update();
       }
     }
   }
@@ -1080,6 +1138,40 @@ class _MyAccountState extends State<MyAccount> {
                                       padding: const EdgeInsets.only(
                                           left: 15, right: 10),
                                       child: TextField(
+                                        controller: weddingDateController,
+                                        readOnly: true,
+                                        onTap: () {
+                                          _wselectDate(context);
+                                        },
+                                        decoration: InputDecoration(
+                                            isCollapsed: true,
+                                            isDense: true,
+                                            border: InputBorder.none,
+                                            hintText: "Wedding Date",
+                                            hintStyle: TextStyle(
+                                              color: kblue,
+                                              fontWeight: FontWeight.w400,
+                                            )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              if (isMarried == true)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Container(
+                                    height: 37,
+                                    width: size.width,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(2),
+                                        border: Border.all(
+                                            color: const Color(0xff707070)),
+                                        color: const Color(0xffF9F8FD)),
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 15, right: 10),
+                                      child: TextField(
                                         textCapitalization:
                                             TextCapitalization.words,
                                         controller: spouseController,
@@ -1260,40 +1352,189 @@ class _MyAccountState extends State<MyAccount> {
                                   },
                                 ),
 
-                              if (isMarried == true)
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Container(
-                                    height: 37,
-                                    width: size.width,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(2),
-                                        border: Border.all(
-                                            color: const Color(0xff707070)),
-                                        color: const Color(0xffF9F8FD)),
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 15, right: 10),
-                                      child: TextField(
-                                        controller: weddingDateController,
-                                        readOnly: true,
-                                        onTap: () {
-                                          _wselectDate(context);
-                                        },
-                                        decoration: InputDecoration(
-                                            isCollapsed: true,
-                                            isDense: true,
-                                            border: InputBorder.none,
-                                            hintText: "Wedding Date",
-                                            hintStyle: TextStyle(
-                                              color: kblue,
-                                              fontWeight: FontWeight.w400,
-                                            )),
+                              GetBuilder<ProfileController>(builder: (_) {
+                                return Column(
+                                  children: [
+                                    for (int i = 0;
+                                        i <
+                                            profileController
+                                                .childDetailsList.length;
+                                        i++)
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 10),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child: Container(
+                                                height: 37,
+                                                width: size.width,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            2),
+                                                    border: Border.all(
+                                                        color: const Color(
+                                                            0xff707070)),
+                                                    color: const Color(
+                                                        0xffF9F8FD)),
+                                                alignment: Alignment.center,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15, right: 10),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 5),
+                                                    child: TextField(
+                                                      controller:
+                                                          profileController
+                                                              .childDetailsList[
+                                                                  i]
+                                                              .nameController,
+                                                      readOnly:
+                                                          !profileController
+                                                              .childDetailsList[
+                                                                  i]
+                                                              .isNew,
+                                                      decoration:
+                                                          InputDecoration(
+                                                              isCollapsed: true,
+                                                              isDense: true,
+                                                              border:
+                                                                  InputBorder
+                                                                      .none,
+                                                              hintText:
+                                                                  "Child Name",
+                                                              hintStyle:
+                                                                  TextStyle(
+                                                                color: kblue,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              )),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 2,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10),
+                                                child: Container(
+                                                  height: 37,
+                                                  width: size.width,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              2),
+                                                      border: Border.all(
+                                                          color: const Color(
+                                                              0xff707070)),
+                                                      color: const Color(
+                                                          0xffF9F8FD)),
+                                                  alignment: Alignment.center,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 15,
+                                                            right: 10),
+                                                    child: TextField(
+                                                      controller: profileController
+                                                          .childDetailsList[i]
+                                                          .dateOfBirthController,
+                                                      readOnly: true,
+                                                      onTap: () {
+                                                        if (profileController
+                                                            .childDetailsList[i]
+                                                            .isNew) {
+                                                          _selectChildDateofBrth(context,i);
+                                                        }
+                                                      },
+                                                      decoration:
+                                                          InputDecoration(
+                                                              isCollapsed: true,
+                                                              isDense: true,
+                                                              border:
+                                                                  InputBorder
+                                                                      .none,
+                                                              hintText:
+                                                                  "Date Of Birth",
+                                                              hintStyle:
+                                                                  TextStyle(
+                                                                color: kblue,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              )),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Container(
+                                                height: 40,
+                                                child: i == 0
+                                                    ? IconButton(
+                                                        onPressed: () {
+                                                          ChildDetailsModel
+                                                              childDetailsModel =
+                                                              ChildDetailsModel(
+                                                            dateOfBirthController:
+                                                                TextEditingController(),
+                                                            nameController:
+                                                                TextEditingController(),
+                                                          );
+                                                          profileController
+                                                              .childDetailsList
+                                                              .add(
+                                                                  childDetailsModel);
+                                                          profileController
+                                                              .update();
+                                                        },
+                                                        icon: Icon(
+                                                          Icons.add_box_rounded,
+                                                          color: kblue,
+                                                        ))
+                                                    : profileController
+                                                            .childDetailsList[i]
+                                                            .isNew
+                                                        ? IconButton(
+                                                            onPressed: () {
+                                                              // ChildDetailsModel
+                                                              //     childDetailsModel =
+                                                              //     ChildDetailsModel(
+                                                              //   dateOfBirthController:
+                                                              //       TextEditingController(),
+                                                              //   nameController:
+                                                              //       TextEditingController(),
+                                                              // );
+                                                              profileController
+                                                                  .childDetailsList
+                                                                  .removeAt(i);
+
+                                                              profileController
+                                                                  .update();
+                                                            },
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .remove_circle_outline_rounded,
+                                                              color: kblue,
+                                                            ))
+                                                        : Container(),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                ),
+                                  ],
+                                );
+                              }),
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: Container(

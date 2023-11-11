@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:velocity_x/velocity_x.dart';
 import '../../../constands/constands.dart';
 
 class CartScreen extends StatefulWidget {
@@ -143,12 +144,16 @@ class _CartScreenState extends State<CartScreen> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(5),
-                                        child: Image.network(
-                                          homeController
-                                              .cartListData[index].image,
+                                        child: Container(
                                           height: 100,
                                           width: 70,
-                                          fit: BoxFit.cover,
+                                          child: Image.network(
+                                            homeController
+                                                .cartListData[index].image,
+                                            height: 100,
+                                            width: 70,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -565,7 +570,11 @@ class _CartScreenState extends State<CartScreen> {
                                       var tempAmount =
                                           homeController.getGrandTotal();
                                       // profileController.payFromCart(tempAmount);
-                                      paymentBottomSheet(context, tempAmount);
+                                      paymentBottomSheet(
+                                          context,
+                                          tempAmount,
+                                          homeController.cartListData.first.id
+                                              .toString());
                                     } else {
                                       Get.rawSnackbar(
                                           message:

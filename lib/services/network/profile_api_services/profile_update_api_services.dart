@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bci/models/child_dob_model.dart';
 import 'package:bci/models/member_profile_update_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/merchants_register_model.dart';
@@ -9,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ProfileUpdateApiServices extends BaseApiService {
   Future profileUpdate({
     required MemberProfileUpdateModel memberProfileUpdateModel,
+    required List<ChildDetailsModel> childDetailsList,
   }) async {
     dynamic responseJson;
     try {
@@ -42,6 +44,12 @@ class ProfileUpdateApiServices extends BaseApiService {
           "pan_proof": await MultipartFile.fromFile(
               memberProfileUpdateModel.panproofimg,
               filename: "pan_proof"),
+        for (int i = 0; i < childDetailsList.where((element) => element.isNew).toList().length; i++)
+          "child_name[$i]": childDetailsList[i].nameController.text,
+        for (int i = 0; i < childDetailsList.where((element) => element.isNew)
+                    .toList()
+                    .length; i++)
+          "dob[$i]": childDetailsList[i].dateOfBirthController.text,
       });
 
       final prefs = await SharedPreferences.getInstance();

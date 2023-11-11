@@ -6,6 +6,7 @@ import 'package:bci/screens/members/liquer_screen/cart_screen.dart';
 import 'package:bci/screens/members/settings_views/my_subcriptions_screen.dart';
 import 'package:bci/screens/members/settings_views/offers_screen.dart';
 import 'package:bci/screens/members/settings_views/our_partner_screen.dart';
+import 'package:bci/screens/members/settings_views/setings_quick_payment_screen.dart';
 import 'package:bci/screens/members/settings_views/setingswidgets/My_account.dart';
 import 'package:bci/screens/members/settings_views/support_screen.dart';
 import 'package:bci/screens/members/settings_views/upgrade_screen.dart';
@@ -159,7 +160,7 @@ class _SettingScreenState extends State<SettingScreen> {
               child: const Row(
                 children: [
                   Image(
-                    image: AssetImage("assets/icons/dashboard.png"),
+                    image: AssetImage("assets/images/credit.png"),
                     width: 20,
                   ),
                   SizedBox(
@@ -189,14 +190,14 @@ class _SettingScreenState extends State<SettingScreen> {
               child: const Row(
                 children: [
                   Image(
-                    image: AssetImage("assets/icons/dashboard.png"),
+                    image: AssetImage("assets/images/partial_view.png"),
                     width: 20,
                   ),
                   SizedBox(
                     width: 10,
                   ),
                   Text(
-                    "Partial Overview",
+                    "Partial payment",
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
@@ -427,6 +428,39 @@ class _SettingScreenState extends State<SettingScreen> {
                 ],
               ),
             ),
+            // const Padding(
+            //   padding: EdgeInsets.only(top: 5, bottom: 10),
+            //   child: Divider(
+            //     thickness: 1,
+            //     color: Colors.grey,
+            //   ),
+            // ),
+            // InkWell(
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => const QucikPaymentScreen()));
+            //   },
+            //   child: const Row(
+            //     children: [
+            //       Image(
+            //         image: AssetImage("assets/icons/upgradicon.png"),
+            //         width: 20,
+            //       ),
+            //       SizedBox(
+            //         width: 10,
+            //       ),
+            //       Text(
+            //         "Quick Payment",
+            //         style: TextStyle(
+            //             fontSize: 20,
+            //             fontWeight: FontWeight.w500,
+            //             color: Color(0xff003366)),
+            //       )
+            //     ],
+            //   ),
+            // ),
             const Padding(
               padding: EdgeInsets.only(top: 5, bottom: 10),
               child: Divider(

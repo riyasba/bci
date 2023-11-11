@@ -6,7 +6,7 @@ import 'package:bci/screens/members/manual_payment_options/phone_pe_service_book
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-paymentBottomSheet(BuildContext context, double amount) {
+paymentBottomSheet(BuildContext context, double amount,String servicesId) {
   showModalBottomSheet(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadiusDirectional.only(
@@ -14,7 +14,7 @@ paymentBottomSheet(BuildContext context, double amount) {
       context: context,
       builder: (context) {
         return Container(
-            height: 250,
+            height: 350,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Obx(
@@ -118,6 +118,52 @@ paymentBottomSheet(BuildContext context, double amount) {
                             )
                           ],
                         ),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                final profileCn = Get.find<ProfileController>();
+
+                                profileCn.isWalletOrNot(2);
+                              },
+                              child: Text("Payment from Credit",
+                                  style: primaryFont.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16)),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                final profileCn = Get.find<ProfileController>();
+
+                                profileCn.isWalletOrNot(2);
+                              },
+                              child: Container(
+                                height: 25,
+                                width: 25,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                    border: Border.all(color: Colors.black)),
+                                alignment: Alignment.center,
+                                child: Container(
+                                  height: 18,
+                                  width: 18,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25),
+                                      color: Get.find<ProfileController>()
+                                                  .isWalletOrNot
+                                                  .value ==
+                                              2
+                                          ? kblue
+                                          : Colors.white),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                     Padding(
@@ -130,9 +176,21 @@ paymentBottomSheet(BuildContext context, double amount) {
                               0) {
                             Get.find<ProfileController>()
                                 .initiatePayment(amount: amount);
-                          } else {
+                          } else if (Get.find<ProfileController>()
+                                  .isWalletOrNot
+                                  .value ==
+                              1) {
                             Get.find<ProfileController>().payFromWallet(
                                 amount: amount.toStringAsFixed(2));
+                          } else if (Get.find<ProfileController>()
+                                  .isWalletOrNot
+                                  .value ==
+                              2) {
+                            Get.find<ProfileController>().useCredit(
+                              creditAmount: amount.toStringAsFixed(2),
+                               creditFor: "booking",
+                               creditForId: servicesId
+                               );
                           }
                           Get.back();
                         },

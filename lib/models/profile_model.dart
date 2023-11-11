@@ -66,6 +66,7 @@ class User {
   dynamic status;
   DateTime createdAt;
   DateTime updatedAt;
+  List<Child> children;
 
   User({
     required this.id,
@@ -104,6 +105,7 @@ class User {
     required this.status,
     required this.createdAt,
     required this.updatedAt,
+    required this.children,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -143,6 +145,8 @@ class User {
         status: json["status"] ?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        children:
+            List<Child>.from(json["children"].map((x) => Child.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -180,6 +184,44 @@ class User {
         "city": city,
         "state": state,
         "status": status,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
+}
+
+
+
+class Child {
+  int id;
+  String userId;
+  String childName;
+  String dob;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  Child({
+    required this.id,
+    required this.userId,
+    required this.childName,
+    required this.dob,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory Child.fromJson(Map<String, dynamic> json) => Child(
+        id: json["id"],
+        userId: json["user_id"],
+        childName: json["child_name"],
+        dob: json["dob"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "user_id": userId,
+        "child_name": childName,
+        "dob": dob,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };

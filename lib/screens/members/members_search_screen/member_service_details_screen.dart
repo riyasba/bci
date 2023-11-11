@@ -3,7 +3,9 @@ import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/home_page_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/search_service_list_model.dart';
+import 'package:bci/models/services_details_list_model.dart';
 import 'package:date_format/date_format.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -29,6 +31,8 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
 
   TextEditingController _dateController = TextEditingController();
   TextEditingController _timeController = TextEditingController();
+
+  var selectedValue;
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -121,43 +125,46 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
           ksizedbox10,
           Container(
             height: 80,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: widget.searchServicelist.images.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: InkWell(
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                  backgroundColor: Colors.white,
-                                  title: Column(
-                                    children: [
-                                      Image.network(widget
-                                          .searchServicelist.images[index]),
-                                    ],
-                                  ),
-                                );
-                              });
-                        },
-                        child: Image.network(
-                          widget.searchServicelist.images[index],
-                          height: 50,
-                          width: 80,
-                          fit: BoxFit.cover,
+            child: GetBuilder<HomeController>(builder: (_) {
+              return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount: widget.searchServicelist.images.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: InkWell(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    backgroundColor: Colors.white,
+                                    title: Column(
+                                      children: [
+                                        Image.network(widget
+                                            .searchServicelist.images[index]),
+                                      ],
+                                    ),
+                                  );
+                                });
+                          },
+                          child: Image.network(
+                            widget.searchServicelist.images[index],
+                            height: 50,
+                            width: 80,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                }),
+                    );
+                  });
+            }),
           ),
           ksizedbox20,
           Padding(
@@ -266,14 +273,79 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                       ksizedbox10,
                     ],
                   ),
-                Text(
-                  'Time Slot',
-                  style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: kblue),
-                ),
+                if (homeController.slotDetailList.isNotEmpty)
+                  Text(
+                    'Time Slot',
+                    style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                        color: kblue),
+                  ),
                 ksizedbox10,
+                if (homeController.slotDetailList.isNotEmpty)
+                  DropdownButtonFormField2<SlotDetail>(
+                    isExpanded: true,
+                    decoration: InputDecoration(
+                      // Add Horizontal padding using menuItemStyleData.padding so it matches
+                      // the menu padding when button's width is not specified.
+                      contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      // Add more decoration..
+                    ),
+                    hint: const Text(
+                      'Select Your Time slot',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    items: homeController.slotDetailList
+                        .map((item) => DropdownMenuItem<SlotDetail>(
+                              value: item,
+                              child: Text(
+                                "${item.weekday} ${item.startTime}-${item.endTime}",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please select Time slot.';
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      //Do something when selected item is changed.
+                      setState(() {
+                        selectedValue = value;
+                      });
+                    },
+                    onSaved: (value) {
+                      setState(() {
+                        selectedValue = value;
+                      });
+                    },
+                    buttonStyleData: const ButtonStyleData(
+                      padding: EdgeInsets.only(right: 8),
+                    ),
+                    iconStyleData: const IconStyleData(
+                      icon: Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.black45,
+                      ),
+                      iconSize: 24,
+                    ),
+                    dropdownStyleData: DropdownStyleData(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    menuItemStyleData: const MenuItemStyleData(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                    ),
+                  ),
+                const SizedBox(height: 30),
                 Row(
                   children: [
                     InkWell(
@@ -416,8 +488,9 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                     homeController.addToCart(
                                         amount:
                                             widget.searchServicelist.saleAmount,
-                                        startTime:
-                                            "${selectedDate.day}-${selectedDate.month}-${selectedDate.year} ${_timeController.text}",
+                                        startTime: selectedValue != null
+                                            ? "${selectedValue.weekday} ${selectedValue.startTime}-${selectedValue.endTime}"
+                                            : "",
                                         serviceid: widget.searchServicelist.id
                                             .toString());
                                   },

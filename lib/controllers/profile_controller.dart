@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/home_page_controller.dart';
+import 'package:bci/models/child_dob_model.dart';
 import 'package:bci/models/credit_profile_model.dart';
 import 'package:bci/models/credit_statement_model.dart';
 import 'package:bci/models/get_coupons_model.dart';
@@ -13,6 +14,7 @@ import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/merchant_coupon_list_model.dart';
 import 'package:bci/models/userredeemcoupon/redeemed_coupons_model.dart';
 import 'package:bci/screens/members/flight_booking_screens/flight_loading_page.dart';
+import 'package:bci/screens/members/home_screen/cancel_booking_confirmation_screen.dart';
 import 'package:bci/screens/members/manual_payment_options/phone_pe_add_to_wallet.dart';
 import 'package:bci/screens/members/manual_payment_options/phone_pe_bus_booking_model.dart';
 import 'package:bci/screens/members/manual_payment_options/phone_pe_service_booking.dart';
@@ -72,6 +74,9 @@ class ProfileController extends GetxController {
 
   RxInt isWalletOrNot = 0.obs;
 
+  List<ChildDetailsModel> childDetailsList = [];
+  List<ChildDetailsModel> previchildDetailsList = [];
+
   getProfile() async {
     profileData.clear();
     isLoading(true);
@@ -100,6 +105,7 @@ class ProfileController extends GetxController {
       {required MemberProfileUpdateModel memberProfileUpdateModel}) async {
     isLoading(true);
     dio.Response<dynamic> response = await profileUpdateApi.profileUpdate(
+        childDetailsList: childDetailsList,
         memberProfileUpdateModel: memberProfileUpdateModel);
     isLoading(false);
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -995,6 +1001,8 @@ class ProfileController extends GetxController {
         Get.rawSnackbar(
             message: "Booking Cancelled", backgroundColor: Colors.green);
       }
+
+      Get.off(() => const BookingCancelled());
     }
   }
 
@@ -1039,13 +1047,33 @@ class ProfileController extends GetxController {
     required String creditFor,
     required String creditForId,
   }) async {
+    final homeController = Get.find<HomeController>();
     dio.Response<dynamic> response =
         await useCreditPointsApiServices.useCreditPointsApi(
             creditAmount: creditAmount,
             creditFor: creditFor,
             creditForId: creditForId);
 
-    if (response.statusCode == 200) {}
+    if (response.statusCode == 200) {
+      Get.to(() => const FlightLoadingPage());
+      print(">>-------------->>---------->>");
+      for (int i = 0; i < homeController.cartListData.length; i++) {
+        if (homeController.cartListData[i].isSelected) {
+          homeController.addBooking(
+              serviceid: homeController.cartListData[i].serviceId.toString(),
+              cartid: homeController.cartListData[i].id.toString(),
+              qty: homeController.cartListData[i].quantity.toString(),
+              offerOrCoupon: "",
+              couponcode: "",
+              amount: homeController.cartListData[i].price,
+              bookDateTime: homeController.cartListData[i].bookDateTime);
+        }
+
+        Get.offAll(
+          () => LoadingWidgets(),
+        );
+      }
+    }
   }
 
   payCreditBill({required String creditAmount}) async {

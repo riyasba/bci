@@ -3,36 +3,26 @@ import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UseCreditPointsApiServices extends BaseApiService {
-  Future useCreditPointsApi({
-    required String creditAmount,
-    required String creditFor,
-    required String creditForId,
-  }) async {
+class GetServicesDetailsServices extends BaseApiService {
+  Future getServiceDetails({required int serviceId}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(useCreditPointsURL,
+      var response = await dio.post(serviceDetailsURL,
           options: Options(
               headers: {
-                'Accept': 'application/json',
+                'Content-Type': 'application/json',
                 'Authorization': 'Bearer $authtoken'
               },
               followRedirects: false,
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {
-            "amount": creditAmount,
-            "credit_for": creditFor,
-            "credit_for_id": creditForId
-          });
-      print(
-          "::::::::<Use Credit Api Services Api>::::::::status code::::::::::");
-
+          data: {"id": serviceId});
+      print("::::::::<get service details screen Api>::::::::status code::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

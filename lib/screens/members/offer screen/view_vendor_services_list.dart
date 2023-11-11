@@ -252,135 +252,163 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                                 offerPercentage: "",
                                 offerUptoAmount: "",
                                 shareOption: "");
-                        Get.to(
-                          ServiceDetailsScreen(
-                            searchServicelist: searchServiceListData,
-                          ),
-                        );
+                        homeController.getServicesDetails(
+                            servicesId: searchServiceListData.id);
+
+                        if (homeController
+                                .vendorServiceListData[index].status ==
+                            "1") {
+                          Get.to(
+                            ServiceDetailsScreen(
+                              searchServicelist: searchServiceListData,
+                            ),
+                          );
+                        }
                       },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(color: kgrey, blurRadius: 0.5),
-                            ],
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            homeController
-                                    .vendorServiceListData[index].images.isEmpty
-                                ? ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(15),
-                                      topRight: Radius.circular(15),
-                                    ),
-                                    child: Image.asset(
-                                      "assets/images/Group 9407.png",
-                                      height: 125,
-                                      width: size.width,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(15),
-                                      topRight: Radius.circular(15),
-                                    ),
-                                    child: Image.network(
-                                      homeController
-                                          .vendorServiceListData[index]
-                                          .images
-                                          .first,
-                                      height: 125,
-                                      width: size.width,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                            ksizedbox10,
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Text(
-                                homeController
-                                    .vendorServiceListData[index].title,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: kblue),
-                              ),
-                            ),
-                            ksizedbox5,
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Text(
-                                homeController
-                                    .vendorServiceListData[index].description,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.w400,
-                                    color: kblue),
-                              ),
-                            ),
-                            ksizedbox5,
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Actual price",
-                                        style: primaryFont.copyWith(
-                                            color: kOrange,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        "₹${homeController.vendorServiceListData[index].actualAmount}",
-                                        style: primaryFont.copyWith(
-                                            decoration:
-                                                TextDecoration.lineThrough,
-                                            color: Colors.grey,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "BCI price",
-                                        style: primaryFont.copyWith(
-                                            color: kOrange,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        "₹${homeController.vendorServiceListData[index].saleAmount}",
-                                        style: primaryFont.copyWith(
-                                            color: kblue,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
+                      child: Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(color: kgrey, blurRadius: 0.5),
                                 ],
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                homeController.vendorServiceListData[index]
+                                        .images.isEmpty
+                                    ? ClipRRect(
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(15),
+                                          topRight: Radius.circular(15),
+                                        ),
+                                        child: Image.asset(
+                                          "assets/images/Group 9407.png",
+                                          height: 125,
+                                          width: size.width,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    : ClipRRect(
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(15),
+                                          topRight: Radius.circular(15),
+                                        ),
+                                        child: Image.network(
+                                          homeController
+                                              .vendorServiceListData[index]
+                                              .images
+                                              .first,
+                                          height: 125,
+                                          width: size.width,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                ksizedbox10,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Text(
+                                    homeController
+                                        .vendorServiceListData[index].title,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: kblue),
+                                  ),
+                                ),
+                                ksizedbox5,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Text(
+                                    homeController.vendorServiceListData[index]
+                                        .description,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: kblue),
+                                  ),
+                                ),
+                                ksizedbox5,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Actual price",
+                                            style: primaryFont.copyWith(
+                                                color: kOrange,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            "₹${homeController.vendorServiceListData[index].actualAmount}",
+                                            style: primaryFont.copyWith(
+                                                decoration:
+                                                    TextDecoration.lineThrough,
+                                                color: Colors.grey,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "BCI price",
+                                            style: primaryFont.copyWith(
+                                                color: kOrange,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            "₹${homeController.vendorServiceListData[index].saleAmount}",
+                                            style: primaryFont.copyWith(
+                                                color: kblue,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          if (homeController
+                                  .vendorServiceListData[index].status ==
+                              "0")
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.grey.withOpacity(0.4),
+                                ),
+                                child: Center(
+                                    child: Text(
+                                  "Not Available",
+                                  style:
+                                      primaryFont.copyWith(color: Colors.red),
+                                )),
                               ),
                             )
-                          ],
-                        ),
+                        ],
                       ),
                     ),
                   );

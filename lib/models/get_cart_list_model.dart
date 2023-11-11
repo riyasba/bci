@@ -39,6 +39,7 @@ class CartListData {
   DateTime updatedAt;
   String serviceName;
   String image;
+  List<String> images;
   String price;
   String amount;
   String description;
@@ -54,6 +55,7 @@ class CartListData {
     required this.updatedAt,
     required this.serviceName,
     required this.image,
+    required this.images,
     required this.price,
     required this.amount,
     required this.description,
@@ -70,6 +72,9 @@ class CartListData {
       updatedAt: DateTime.parse(json["updated_at"]),
       serviceName: json["service_name"] ?? "",
       image: json["image"] ?? "",
+      images: json["images"] == null
+          ? []
+          : List<String>.from(json["images"].map((x) => x)),
       price: json["price"] ?? "",
       amount: json["amount"] ?? "",
       description: json["description"] ?? "",

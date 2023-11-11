@@ -11,6 +11,7 @@ import 'package:bci/models/liquor_vendor_list_models/liquor_vendor_list_model.da
 import 'package:bci/models/merchant_model.dart';
 import 'package:bci/models/notification_models/notification_count_model.dart';
 import 'package:bci/models/search_service_list_model.dart';
+import 'package:bci/models/services_details_list_model.dart';
 import 'package:bci/models/slider_model.dart';
 import 'package:bci/models/slider_product_model.dart';
 import 'package:bci/models/support_admin_details_model.dart';
@@ -35,6 +36,7 @@ import 'package:bci/services/network/subscriptions_api_services/add_subscription
 import 'package:bci/services/network/subscriptions_api_services/get_plan_details_api_services.dart';
 import 'package:bci/services/network/subscriptions_api_services/get_plans_list_api_services.dart';
 import 'package:bci/services/network/update_quantity_api_service.dart';
+import 'package:bci/services/network/vendor_list_api_services/get_services_details_list.dart';
 import 'package:bci/services/network/vendor_list_api_services/vendor_category_list_api_services.dart';
 import 'package:bci/services/network/vendor_list_api_services/vendor_list_api_services.dart';
 import 'package:dio/dio.dart' as dio;
@@ -406,12 +408,12 @@ class HomeController extends GetxController {
 
     for (var i = 0; i < cartListData.length; i++) {
       if (cartListData[i].isSelected) {
-  double amount = double.parse(cartListData[i].amount);
-  int qty = int.parse(cartListData[i].quantity.toString());
-  double tempTotalAmount = amount * qty;
-  
-  grandTotal = grandTotal + tempTotalAmount;
-}
+        double amount = double.parse(cartListData[i].amount);
+        int qty = int.parse(cartListData[i].quantity.toString());
+        double tempTotalAmount = amount * qty;
+
+        grandTotal = grandTotal + tempTotalAmount;
+      }
     }
 
     return grandTotal;
@@ -647,6 +649,23 @@ class HomeController extends GetxController {
       VendorListModel vendorListModel = VendorListModel.fromJson(response.data);
       vendorList = vendorListModel.data;
       tempVendorList = vendorListModel.data;
+    }
+    update();
+  }
+
+  GetServicesDetailsServices getServicesDetailsServices =
+      GetServicesDetailsServices();
+
+  List<SlotDetail> slotDetailList = [];
+
+  getServicesDetails({required int servicesId}) async {
+    dio.Response<dynamic> response = await getServicesDetailsServices
+        .getServiceDetails(serviceId: servicesId);
+
+    if (response.statusCode == 200) {
+      ServiceDetailsModel vendorListModel =
+          ServiceDetailsModel.fromJson(response.data);
+      slotDetailList = vendorListModel.slotDetail;
     }
     update();
   }
