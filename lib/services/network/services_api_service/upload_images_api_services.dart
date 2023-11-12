@@ -1,35 +1,31 @@
 import 'dart:io';
+import 'package:bci/controllers/services_controller.dart';
+import 'package:bci/models/create_services_model.dart';
+import 'package:bci/models/members_register_model.dart';
+import 'package:bci/models/merchant_update_profile.dart';
+import 'package:bci/models/merchants_register_model.dart';
 import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart' as gtx;
 
-class AddCouponsApiServices extends BaseApiService {
-  Future addCouponsApiServices({
-    required String image,
-    required String title,
-    required String category,
-    required String startsat,
-    required String endsat,
-    required String discountValue,
-    required String buyAmt,
-    required String description,
-    required String merchantId,
-  }) async {
+class UploadImagesServicesApiServices extends BaseApiService {
+  Future uploadImagesServices(
+      {required List<XFile> images, required int id,required String cid}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
 
       FormData formData = FormData.fromMap({
-        "image": await MultipartFile.fromFile(image,
-            filename: image.split("/").last),
-        "title": title,
-        "category": category.toString(),
-        "starts_at": startsat,
-        "ends_at": endsat,
-        "coupon_amount": discountValue,
-        "description": description,
-        "merchant": merchantId,
-        "buy_amount": buyAmt
+        for (int i = 0; i < images.length; i++)
+          "image[$i]": await MultipartFile.fromFile(images[i].path,
+              filename: images[i].path.split("/").last),
+        // if (images.isNotEmpty)
+        //   "image": await MultipartFile.fromFile(images.first.path,
+        //       filename: images.first.path.split("/").last),
+        "id": id,
+        // "category_id":cid
       });
 
       print(formData.fields);
@@ -37,7 +33,7 @@ class AddCouponsApiServices extends BaseApiService {
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(addCouponsURL,
+      var response = await dio.post(addServicesURL,
           options: Options(
               headers: {'Authorization': 'Bearer $authtoken'},
               followRedirects: false,
@@ -45,7 +41,7 @@ class AddCouponsApiServices extends BaseApiService {
                 return status! <= 500;
               }),
           data: formData);
-      print("::::::::<Add Coupons api services>::::::::status code::::::::::");
+      print("::::::::<update services URL>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

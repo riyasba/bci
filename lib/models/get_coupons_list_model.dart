@@ -22,7 +22,8 @@ class GetCouponListModel {
   factory GetCouponListModel.fromJson(Map<String, dynamic> json) =>
       GetCouponListModel(
         message: json["message"],
-        posts: List<CouponsListData>.from(json["posts"].map((x) => CouponsListData.fromJson(x))),
+        posts: List<CouponsListData>.from(
+            json["posts"].map((x) => CouponsListData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -62,7 +63,8 @@ class CouponsListData {
     required this.updatedAt,
   });
 
-  factory CouponsListData.fromJson(Map<String, dynamic> json) => CouponsListData(
+  factory CouponsListData.fromJson(Map<String, dynamic> json) =>
+      CouponsListData(
         id: json["id"],
         vendorId: json["vendor_id"],
         categoryId: json["category_id"],
@@ -70,7 +72,7 @@ class CouponsListData {
         startsAt: DateTime.parse(json["starts_at"]),
         endsAt: DateTime.parse(json["ends_at"]),
         couponAmount: json["coupon_amount"],
-        buyAmount: json["buy_amount"],
+        buyAmount: json["buy_amount"] ?? "",
         status: json["status"],
         image: json["image"],
         description: json["description"],

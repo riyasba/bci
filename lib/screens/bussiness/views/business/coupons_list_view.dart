@@ -1,5 +1,6 @@
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/auth_controllers.dart';
+import 'package:bci/screens/bussiness/views/home_screen/coupons/coupons_filter_widget.dart';
 import 'package:bci/screens/bussiness/views/home_screen/coupons/view_history.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:coupon_uikit/coupon_uikit.dart';
@@ -68,7 +69,19 @@ class _CouponsListViewState extends State<CouponsListView> {
                             color: Colors.white),
                       ),
                     ),
-                    Container(width: 20,)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 15),
+                      child: Container(
+                        child: IconButton(
+                            onPressed: () {
+                              couponFilter(context);
+                            },
+                            icon: const Icon(
+                              Icons.filter_alt_outlined,
+                              color: Colors.white,
+                            )),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -115,10 +128,9 @@ class _CouponsListViewState extends State<CouponsListView> {
                                   //  .withOpacity(1.0)
                                   ),
                               child: Image.network(
-                                      authController
-                                          .addedCouponList[index].image,
-                                      fit: BoxFit.cover,
-                                    ),
+                                authController.addedCouponList[index].image,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                             secondChild: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -126,9 +138,8 @@ class _CouponsListViewState extends State<CouponsListView> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                   Text(
-                                    authController
-                                        .addedCouponList[index].title,
+                                  Text(
+                                    authController.addedCouponList[index].title,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: Colors.black,
@@ -156,12 +167,18 @@ class _CouponsListViewState extends State<CouponsListView> {
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: Colors.black,
-                                    fontSize: 14,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                   Text(
-                                    "End At : ${formatDate(authController.addedCouponList[index].endsAt,[dd,"-",mm,"-",yyyy])}",
+                                    "End At : ${formatDate(authController.addedCouponList[index].endsAt, [
+                                          dd,
+                                          "-",
+                                          mm,
+                                          "-",
+                                          yyyy
+                                        ])}",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: Colors.black,

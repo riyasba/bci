@@ -3,6 +3,7 @@ import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/create_services_model.dart';
 import 'package:bci/models/get_booking_list_model.dart';
 import 'package:bci/models/service_list_model.dart';
+import 'package:bci/models/time_slot_models.dart';
 import 'package:bci/models/vendor_offer_list_model.dart';
 import 'package:bci/services/network/categorys_api_services/get_booking_api_services.dart';
 import 'package:bci/services/network/categorys_api_services/get_booking_date_filter.dart';
@@ -13,6 +14,7 @@ import 'package:bci/services/network/services_api_service/get_services_api_servi
 import 'package:bci/services/network/services_api_service/get_vendor_offer_list_api.services.dart';
 import 'package:bci/services/network/services_api_service/merchant_add_services.dart';
 import 'package:bci/services/network/services_api_service/merchants_update_service_api.dart';
+import 'package:bci/services/network/services_api_service/upload_images_api_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +23,8 @@ import 'package:dio/dio.dart' as dio;
 class ServicesController extends GetxController {
   AddServicesApiServices addServicesApiServices = AddServicesApiServices();
   GetServicesApiServices getServicesApiServices = GetServicesApiServices();
+  UploadImagesServicesApiServices uploadImagesServicesApiServices =
+      UploadImagesServicesApiServices();
   GetServicesByCategoryApiServices getServicesByCategoryApiServices =
       GetServicesByCategoryApiServices();
   UpdateServicesApiServices updateServicesApiServices =
@@ -30,12 +34,56 @@ class ServicesController extends GetxController {
   //service data list
   List<ServiceData> serviceDataList = [];
 
+  RxInt isExpand = 999.obs;
+
+  //time slots
+  // List<String> sundayFrom = [];
+  // List<String> mondayFrom = [];
+  // List<String> tuesDayFrom = [];
+  // List<String> wednesdayFrom = [];
+  // List<String> thuesdayFrom = [];
+  // List<String> fridayFrom = [];
+  // List<String> saturdayFrom = [];
+
+  // List<String> sundayTo = [];
+  // List<String> mondayTo = [];
+  // List<String> tuesDayTo = [];
+  // List<String> wednesdayTo = [];
+  // List<String> thuesdayTo = [];
+  // List<String> fridayTo = [];
+  // List<String> saturdayTo = [];
+
+  List<TimeSlotModels> sunTimeSlot = [];
+  List<TimeSlotModels> monTimeSlot = [];
+  List<TimeSlotModels> tueTimeSlot = [];
+  List<TimeSlotModels> wedTimeSlot = [];
+  List<TimeSlotModels> thuTimeSlot = [];
+  List<TimeSlotModels> friTimeSlot = [];
+  List<TimeSlotModels> satTimeSlot = [];
+
+  setDefaultSlots() {
+    isExpand(999);
+    sunTimeSlot.clear();
+    monTimeSlot.clear();
+    tueTimeSlot.clear();
+    wedTimeSlot.clear();
+    thuTimeSlot.clear();
+    friTimeSlot.clear();
+    satTimeSlot.clear();
+    update();
+  }
+
   addServices({required CreateServiceModel createServiceModel}) async {
     isLoading(true);
     dio.Response<dynamic> response = await addServicesApiServices.addServices(
         createServiceModel: createServiceModel);
     isLoading(false);
     if (response.statusCode == 200) {
+      dio.Response<dynamic> response2 =
+          await uploadImagesServicesApiServices.uploadImagesServices(
+              images: createServiceModel.image,
+              id: response.data["data"]["id"],
+              cid: response.data["data"]["category_id"].toString());
       getServicesByVendor();
       Get.back();
       Get.rawSnackbar(
@@ -222,6 +270,7 @@ class ServicesController extends GetxController {
     required String startsat,
     required String endsat,
     required String discountValue,
+    required String buyAmt,
     required String claimUser,
   }) async {
     dio.Response<dynamic> response =
@@ -231,6 +280,7 @@ class ServicesController extends GetxController {
       category: category,
       startsat: startsat,
       endsat: endsat,
+      buyAmt: buyAmt,
       discountValue: discountValue,
       merchantId: Get.find<ProfileController>().profileData.first.id.toString(),
       description: claimUser,

@@ -1,4 +1,3 @@
-
 import 'package:bci/authentications/otp_verification/otp_verification.dart';
 import 'package:bci/authentications/verified_screen/verified_screen.dart';
 import 'package:bci/constands/app_fonts.dart';
@@ -57,6 +56,7 @@ class AuthController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isOTPLoading = false.obs;
   RxInt isExpand = 0.obs;
+  RxInt filteringIndex = 99.obs;
 
 //api callings
   registerMerchants(
@@ -360,6 +360,7 @@ class AuthController extends GetxController {
       CouponsRedeemptionApiService();
   List<CouponRedeemptionData> couponRedeemptionData = [];
   List<CouponsListData> addedCouponList = [];
+  List<CouponsListData> tempaddedCouponList = [];
 
   AdeedCouponListApiService addedCouponsServices = AdeedCouponListApiService();
 
@@ -379,8 +380,6 @@ class AuthController extends GetxController {
     update();
   }
 
-
-
   addedCouponsList() async {
     dio.Response<dynamic> response =
         await addedCouponsServices.addedCouponListApiservices();
@@ -388,6 +387,7 @@ class AuthController extends GetxController {
       GetCouponListModel redeemtioncouponsListModel =
           GetCouponListModel.fromJson(response.data);
       addedCouponList = redeemtioncouponsListModel.posts;
+      tempaddedCouponList = redeemtioncouponsListModel.posts;
     }
     update();
   }
@@ -409,15 +409,16 @@ class AuthController extends GetxController {
       //   ));
     }
   }
-DeleteUserAccountApi deleteUserAccountApi = DeleteUserAccountApi();
 
-deleteUser() async {
+  DeleteUserAccountApi deleteUserAccountApi = DeleteUserAccountApi();
+
+  deleteUser() async {
     isLoading(true);
-    dio.Response<dynamic> response = await deleteUserAccountApi
-        .deleteUserAccountApi();
+    dio.Response<dynamic> response =
+        await deleteUserAccountApi.deleteUserAccountApi();
     isLoading(false);
     if (response.statusCode == 200) {
-     Get.rawSnackbar(
+      Get.rawSnackbar(
           backgroundColor: Colors.red,
           messageText: Text(
             response.data["message"],
@@ -432,6 +433,4 @@ deleteUser() async {
           ));
     }
   }
-
-
 }

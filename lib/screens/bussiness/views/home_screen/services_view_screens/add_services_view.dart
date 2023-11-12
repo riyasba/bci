@@ -39,9 +39,7 @@ class _AddServicesViewState extends State<AddServicesView> {
   TextEditingController _endtimeController = TextEditingController();
   TextEditingController _startTimeController = TextEditingController();
 
-
-  dynamic startTime,endTime;
-
+  dynamic startTime, endTime;
 
   Future<Null> _startTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
@@ -58,8 +56,8 @@ class _AddServicesViewState extends State<AddServicesView> {
         _startTimeController.text = formatDate(
             DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
             [hh, ':', nn, " ", am]).toString();
-          print(_hour);
-          startTime = "${_hour}:${_minute}";
+        print(_hour);
+        startTime = "${_hour}:${_minute}";
       });
   }
 
@@ -78,7 +76,7 @@ class _AddServicesViewState extends State<AddServicesView> {
         _endtimeController.text = formatDate(
             DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
             [hh, ':', nn, " ", am]).toString();
-             endTime = "${_hour}:${_minute}";
+        endTime = "${_hour}:${_minute}";
       });
   }
 
@@ -132,7 +130,7 @@ class _AddServicesViewState extends State<AddServicesView> {
 
   bool isOfferEligible = false;
   bool isCouponEligible = false;
-  bool available = false;
+  bool available = true;
 
   // List share = ["fixed","percentage"];
 
@@ -147,13 +145,11 @@ class _AddServicesViewState extends State<AddServicesView> {
   final ImagePicker imagePicker = ImagePicker();
   List<XFile> imageFileList = [];
   void selectImage() async {
-      final List<XFile>? selectedImage = await imagePicker.pickMultiImage();
-      if(selectedImage!.isNotEmpty){
-        imageFileList.addAll(selectedImage);
-      } 
-      setState(() {
-        
-      });
+    final List<XFile>? selectedImage = await imagePicker.pickMultiImage();
+    if (selectedImage!.isNotEmpty) {
+      imageFileList.addAll(selectedImage);
+    }
+    setState(() {});
   }
 
   @override
@@ -188,14 +184,15 @@ class _AddServicesViewState extends State<AddServicesView> {
                       padding: EdgeInsets.only(left: 0, right: 20),
                       child: Text(
                         'Add Products',
-                        style:
-                            TextStyle(fontSize: 20, 
+                        style: TextStyle(
+                            fontSize: 20,
                             color: Color(0xffF8F9FD),
-                            fontWeight: FontWeight.w700
-                            ),
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
-                    Container(width: 20,)
+                    Container(
+                      width: 20,
+                    )
                   ],
                 ),
               ),
@@ -238,9 +235,9 @@ class _AddServicesViewState extends State<AddServicesView> {
             ),
           ),
           ksizedbox10,
-        const SizedBox(
-          height: 15,
-         ),
+          const SizedBox(
+            height: 15,
+          ),
           // GetBuilder<AuthController>(builder: (_) {
           //   return Padding(
           //     padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -287,52 +284,52 @@ class _AddServicesViewState extends State<AddServicesView> {
           // }),
 
           GetBuilder<AuthController>(builder: (_) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Container(
-                  height: 55,
-                  width: size.width,
-                  child: DropdownSearch<CategoryList>(
-                    itemAsString: (CategoryList u) => u.title,
-                    selectedItem: merchantCategory,
-                    popupProps: PopupProps.menu(
-                      showSelectedItems: false,
-                      showSearchBox: true,
-                      menuProps: MenuProps(borderRadius: BorderRadius.circular(15)),
-                      searchFieldProps: const TextFieldProps(),
-                    ),
-                    items: authController.categoryList,
-                    dropdownDecoratorProps: DropDownDecoratorProps(
-                      dropdownSearchDecoration: InputDecoration(
-                          // labelText: "Department *",
-                          hintText: "Product Category Name *",
-                          enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Color(0xff707070)),
-                              borderRadius: BorderRadius.circular(5)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Color(0xff707070)),
-                              borderRadius: BorderRadius.circular(5)),
-                          border: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Color(0xff707070)),
-                              borderRadius: BorderRadius.circular(5))),
-                    ),
-                    onChanged: (value) {
-                      setState(() {
-                        // authController
-                        //     .isDesignationSelected(false);
-                        merchantCategory = value!;
-                        // requiremtsSelected = null;
-                      });
-                    },
-                    // selectedItem: selectedState,
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Container(
+                height: 55,
+                width: size.width,
+                child: DropdownSearch<CategoryList>(
+                  itemAsString: (CategoryList u) => u.title,
+                  selectedItem: merchantCategory,
+                  popupProps: PopupProps.menu(
+                    showSelectedItems: false,
+                    showSearchBox: true,
+                    menuProps:
+                        MenuProps(borderRadius: BorderRadius.circular(15)),
+                    searchFieldProps: const TextFieldProps(),
                   ),
+                  items: authController.categoryList,
+                  dropdownDecoratorProps: DropDownDecoratorProps(
+                    dropdownSearchDecoration: InputDecoration(
+                        // labelText: "Department *",
+                        hintText: "Product Category Name *",
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Color(0xff707070)),
+                            borderRadius: BorderRadius.circular(5)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Color(0xff707070)),
+                            borderRadius: BorderRadius.circular(5)),
+                        border: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Color(0xff707070)),
+                            borderRadius: BorderRadius.circular(5))),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      // authController
+                      //     .isDesignationSelected(false);
+                      merchantCategory = value!;
+                      // requiremtsSelected = null;
+                    });
+                  },
+                  // selectedItem: selectedState,
                 ),
-              );
-            }
-          ),
+              ),
+            );
+          }),
           ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -418,7 +415,7 @@ class _AddServicesViewState extends State<AddServicesView> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: InkWell(
-              onTap: (){
+              onTap: () {
                 Get.to(const TimeSlotScreen());
               },
               child: Container(
@@ -431,39 +428,44 @@ class _AddServicesViewState extends State<AddServicesView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Add Time Slots",
-                        style: TextStyle(
-                         color: kwhite,
-                         fontSize: 16,
-                         fontWeight: FontWeight.w500),
-                      ),
-                      const SizedBox(width: 15,),
-                      Icon(Icons.add,color: kwhite,)
+                    Text(
+                      "Add Time Slots",
+                      style: TextStyle(
+                          color: kwhite,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Icon(
+                      Icons.add,
+                      color: kwhite,
+                    )
                   ],
                 ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 15,right: 15),
+            padding: const EdgeInsets.only(left: 15, right: 15),
             child: Row(
               children: [
-                Text("Service Available",
-                          style: TextStyle(
-                           color: kblue,
-                           fontSize: 16,
-                           fontWeight: FontWeight.w500),
-                 ),
-                 Switch(
+                Text(
+                  "Service Available",
+                  style: TextStyle(
+                      color: kblue, fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Switch(
                   activeColor: kOrange,
                   activeTrackColor: kblue,
-                      value: available,
-                      onChanged: (bool value) {
-                        setState(() {
-                          available = value;
-                        });
-                      },
-                    ),
+                  value: available,
+                  onChanged: (bool value) {
+                    setState(() {
+                      available = value;
+                    });
+                  },
+                ),
               ],
             ),
           ),
@@ -572,8 +574,8 @@ class _AddServicesViewState extends State<AddServicesView> {
                     onChanged: (int? value) {
                       setState(() {
                         gstPercentage = value!;
-                        cgstPercentage = gstPercentage/2;
-                        sgstPercentage = gstPercentage/2;
+                        cgstPercentage = gstPercentage / 2;
+                        sgstPercentage = gstPercentage / 2;
                         cgstController.text = cgstPercentage.toString();
                         sgstController.text = cgstPercentage.toString();
                       });
@@ -634,7 +636,7 @@ class _AddServicesViewState extends State<AddServicesView> {
           //     ),
           //   );
           // }),
-           // ksizedbox10,
+          // ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
@@ -671,7 +673,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                   )),
             ),
           ),
-           ksizedbox10,
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
@@ -946,7 +948,6 @@ class _AddServicesViewState extends State<AddServicesView> {
             padding: const EdgeInsets.only(left: 15, right: 15),
             child: InkWell(
               onTap: () async {
-                
                 selectImage();
 
                 // final ImagePicker _picker = ImagePicker();
@@ -964,57 +965,61 @@ class _AddServicesViewState extends State<AddServicesView> {
                   height: 130,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(8)
-                  ),
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(8)),
                   child: GridView.builder(
-                        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-                        itemCount: imageFileList!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: StreamBuilder<Object>(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3),
+                      itemCount: imageFileList!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: StreamBuilder<Object>(
                                     stream: null,
                                     builder: (context, snapshot) {
                                       return Stack(
                                         children: [
-                                          Image.file(File(imageFileList[index].path),
-                                          height: 100,width: 100,
-                                          fit: BoxFit.cover,),
+                                          Image.file(
+                                            File(imageFileList[index].path),
+                                            height: 100,
+                                            width: 100,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ],
                                       );
-                                    }
-                                  ),
-                                ),
-                                Positioned(
+                                    }),
+                              ),
+                              Positioned(
                                   left: 70,
                                   child: InkWell(
-                                    onTap: (){
-                                       setState(() {
-                                         imageFileList.removeAt(index);
-                                       });
-                                    },
-                                    child:Container(
-                                      height: 30,
-                                      width: 30,
-                                      decoration: BoxDecoration(
-                                        color: kwhite,
-                                        borderRadius:const BorderRadius.only(
-                                          topRight: Radius.circular(8),
-                                         bottomLeft: Radius.circular(8)),
-                                      ),
-                                      child: const Icon(CupertinoIcons.delete,
-                                      color: Colors.grey,),
-                                    ))),
-                              ],
-                            ),
-                          );
-                        }
-                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          imageFileList.removeAt(index);
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 30,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                          color: kwhite,
+                                          borderRadius: const BorderRadius.only(
+                                              topRight: Radius.circular(8),
+                                              bottomLeft: Radius.circular(8)),
+                                        ),
+                                        child: const Icon(
+                                          CupertinoIcons.delete,
+                                          color: Colors.grey,
+                                        ),
+                                      ))),
+                            ],
+                          ),
+                        );
+                      }),
                 ),
               ),
             ),
@@ -1063,7 +1068,8 @@ class _AddServicesViewState extends State<AddServicesView> {
                         helperStyle: TextStyle(
                           color: kblue,
                         ),
-                        hintText: _controller!.hasTags ? '' : "Enter Amenties...",
+                        hintText:
+                            _controller!.hasTags ? '' : "Enter Amenties...",
                         errorText: error,
                         prefixIconConstraints:
                             BoxConstraints(maxWidth: _distanceToField! * 0.74),
@@ -1393,6 +1399,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                                 booking: authController.isGstAvailable.isTrue
                                     ? "1"
                                     : "0",
+                                available: available ? "0" : "1",
                                 // bvcAmount: bvcAmountController.text,
                                 category: categoryModel.id.toString(),
                                 description: descriptionController.text,

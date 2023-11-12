@@ -7,6 +7,7 @@ import 'package:bci/controllers/services_controller.dart';
 import 'package:bci/models/category_model.dart';
 import 'package:bci/models/service_list_model.dart' as ss;
 import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/availability_scree.dart';
+import 'package:bci/screens/bussiness/views/home_screen/services_view_screens/time_slot_screen.dart';
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -48,19 +49,22 @@ class _AddServicesViewState extends State<UpdateServicesView> {
   var cGstController = TextEditingController();
   var sGstController = TextEditingController();
 
+  bool available = true;
+
   @override
   void initState() {
     super.initState();
     _controller = TextfieldTagsController();
-    checkIfCategory() ;
+    checkIfCategory();
     // authController.getSubCategoryList();
     setDefault();
   }
 
-  checkIfCategory() async{
+  checkIfCategory() async {
     await authController.getCategoryList();
-    for(int i =0;i< authController.categoryList.length;i++){
-      if(widget.serviceData.categoryId.toString() == authController.categoryList[i].id.toString()){
+    for (int i = 0; i < authController.categoryList.length; i++) {
+      if (widget.serviceData.categoryId.toString() ==
+          authController.categoryList[i].id.toString()) {
         print("----->> available");
         print(authController.categoryList[i].title);
         setState(() {
@@ -114,7 +118,14 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     //   sgstPercentage = widget.serviceData.sgst != null
     //       ? int.parse(widget.serviceData.sgst)
     //       : null;
-          productImage = widget.serviceData.images;
+    productImage = widget.serviceData.images;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      print("------------------>> is recomended = ${widget.serviceData.isRecomended}");
+      setState(() {
+        available = widget.serviceData.isRecomended == "0" ? true : false;
+      });
+    });
     // });
   }
 
@@ -135,13 +146,11 @@ class _AddServicesViewState extends State<UpdateServicesView> {
   final ImagePicker imagePicker = ImagePicker();
   List<XFile> imageFileList = [];
   void selectImage() async {
-      final List<XFile>? selectedImage = await imagePicker.pickMultiImage();
-      if(selectedImage!.isNotEmpty){
-        imageFileList.addAll(selectedImage);
-      } 
-      setState(() {
-        
-      });
+    final List<XFile>? selectedImage = await imagePicker.pickMultiImage();
+    if (selectedImage!.isNotEmpty) {
+      imageFileList.addAll(selectedImage);
+    }
+    setState(() {});
   }
 
   @override
@@ -405,6 +414,64 @@ class _AddServicesViewState extends State<UpdateServicesView> {
             ),
           ),
           ksizedbox10,
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: InkWell(
+              onTap: () {
+                Get.to(const TimeSlotScreen());
+              },
+              child: Container(
+                height: 45,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: kOrange,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Add Time Slots",
+                      style: TextStyle(
+                          color: kwhite,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Icon(
+                      Icons.add,
+                      color: kwhite,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: Row(
+              children: [
+                Text(
+                  "Service Available",
+                  style: TextStyle(
+                      color: kblue, fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Switch(
+                  activeColor: kOrange,
+                  activeTrackColor: kblue,
+                  value: available,
+                  onChanged: (bool value) {
+                    setState(() {
+                      available = value;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+          ksizedbox10,
           GetBuilder<AuthController>(builder: (_) {
             return Padding(
               padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -417,8 +484,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                         color: const Color.fromARGB(255, 5, 5, 5)
                             .withOpacity(0.8))),
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10, right: 10, top: 10),
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
                   child: DropdownButton<int>(
                     value: gstPercentage,
                     isExpanded: true,
@@ -490,7 +556,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
             ),
           ),
           ksizedbox10,
-         Padding(
+          Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
               controller: sGstController,
@@ -782,7 +848,9 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                     borderRadius: BorderRadius.circular(3)),
                 child: imageFileList != null
                     ? GridView.builder(
-                        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3),
                         itemCount: imageFileList!.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
@@ -792,43 +860,49 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: StreamBuilder<Object>(
-                                    stream: null,
-                                    builder: (context, snapshot) {
-                                      return Stack(
-                                        children: [
-                                          Image.file(File(imageFileList[index].path),
-                                          height: 100,width: 100,
-                                          fit: BoxFit.cover,),
-                                        ],
-                                      );
-                                    }
-                                  ),
+                                      stream: null,
+                                      builder: (context, snapshot) {
+                                        return Stack(
+                                          children: [
+                                            Image.file(
+                                              File(imageFileList[index].path),
+                                              height: 100,
+                                              width: 100,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ],
+                                        );
+                                      }),
                                 ),
                                 Positioned(
-                                  left: 70,
-                                  child: InkWell(
-                                    onTap: (){
-                                       setState(() {
-                                         imageFileList.removeAt(index);
-                                       });
-                                    },
-                                    child:Container(
-                                      height: 30,
-                                      width: 30,
-                                      decoration: BoxDecoration(
-                                        color: kwhite,
-                                        borderRadius:const BorderRadius.only(
-                                          topRight: Radius.circular(8),
-                                         bottomLeft: Radius.circular(8)),
-                                      ),
-                                      child: const Icon(CupertinoIcons.delete,
-                                      color: Colors.grey,),
-                                    ))),
+                                    left: 70,
+                                    child: InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            imageFileList.removeAt(index);
+                                          });
+                                        },
+                                        child: Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                            color: kwhite,
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(8),
+                                                    bottomLeft:
+                                                        Radius.circular(8)),
+                                          ),
+                                          child: const Icon(
+                                            CupertinoIcons.delete,
+                                            color: Colors.grey,
+                                          ),
+                                        ))),
                               ],
                             ),
                           );
-                        }
-                      )
+                        })
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -872,11 +946,11 @@ class _AddServicesViewState extends State<UpdateServicesView> {
             inputfieldBuilder:
                 (context, tec, fn, error, onChanged, onSubmitted) {
               return ((context, sc, tags, onTagDelete) {
-                 if (tags.isEmpty) {
-  widget.serviceData.amenties.forEach((element) {
-    tags.add(element.value);
-  });
-}
+                if (tags.isEmpty) {
+                  widget.serviceData.amenties.forEach((element) {
+                    tags.add(element.value);
+                  });
+                }
                 return Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextField(
@@ -1214,8 +1288,6 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                           listTags.add(Amenty(value: tagsList[i]));
                         }
 
-                      
-
                         CategoryList? categoryModel;
                         if (merchantCategory != null) {
                           categoryModel = merchantCategory as CategoryList;
@@ -1234,6 +1306,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                                     ? "1"
                                     : "0",
                                 // bvcAmount: bvcAmountController.text,
+                                available: available ? "0": "1",
                                 category: categoryModel == null
                                     ? widget.serviceData.categoryId.toString()
                                     : categoryModel.id.toString(),
@@ -1251,9 +1324,8 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                                 offerAmount: offerAmountController.text.isEmpty
                                     ? null
                                     : offerAmountController.text,
-                                    cgst: cgstPercentage,
-                                    sgst: sgstPercentage
-                                    );
+                                cgst: cgstPercentage,
+                                sgst: sgstPercentage);
 
                         serviceController.updateServices(
                             createServiceModel: createServiceModel,

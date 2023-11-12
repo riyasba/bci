@@ -33,7 +33,7 @@ class BookingListData {
     String paymentId;
     String quantity;
     String purchasePrice;
-    Status status;
+    String status;
     dynamic service;
     dynamic image;
     dynamic description;
@@ -56,7 +56,7 @@ class BookingListData {
         paymentId: json["payment_id"]?? "",
         quantity: json["quantity"]?? "",
         purchasePrice: json["purchase_price"]?? "",
-        status: statusValues.map[json["status"]]!,
+        status: json["status"],
         service: json["service"]?? "",
         image: json["image"]?? "",
         description: json["description"]?? "",
@@ -68,7 +68,7 @@ class BookingListData {
         "payment_id": paymentId,
         "quantity": quantity,
         "purchase_price": purchasePrice,
-        "status": statusValues.reverse[status],
+        "status": status,
         "service": service,
         "image": image,
         "description": description,
@@ -76,13 +76,8 @@ class BookingListData {
     };
 }
 
-enum Status {
-    COMPLETED
-}
 
-final statusValues = EnumValues({
-    "completed": Status.COMPLETED
-});
+
 
 class User {
     int id;

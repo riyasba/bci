@@ -22,6 +22,8 @@ class CreateServiceModel {
   dynamic sgst;
   dynamic startTime;
   dynamic endTime;
+  dynamic available;
+
 
   CreateServiceModel(
       {required this.title,
@@ -44,6 +46,7 @@ class CreateServiceModel {
       this.sgst,
       this.startTime,
       this.endTime,
+      this.available,
       required this.image});
 }
 

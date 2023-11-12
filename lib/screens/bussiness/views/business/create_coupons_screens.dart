@@ -37,6 +37,7 @@ class _CreateCouponsScreenState extends State<CreateCouponsScreen> {
   var couponlimitController = TextEditingController();
   final startatController = TextEditingController();
   final endatController = TextEditingController();
+  final buyAmtCntrlr =  TextEditingController();
 
   File? image;
 
@@ -595,12 +596,14 @@ class _CreateCouponsScreenState extends State<CreateCouponsScreen> {
                         merchantCategory != null &&
                         discountValueController.text.isNotEmpty &&
                         descriptionController.text.isNotEmpty &&
+                        couponlimitController.text.isNotEmpty &&
                         image != null) {
                       servicesController.addCoupons(
                         image: image!.path,
                         title: titleController.text,
                         category: merchantCategory.id.toString(),
                         startsat: selectdt,
+                        buyAmt: couponlimitController.text,
                         endsat: selectdt1,
                         discountValue: couponlimitController.text,
                         claimUser: descriptionController.text,
