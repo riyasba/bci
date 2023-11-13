@@ -270,6 +270,7 @@ class HomeController extends GetxController {
   getVendorCategory(String vendorId) async {
     merchatCategoryList.clear();
     update();
+    print("-------------->> ${vendorId}");
     dio.Response<dynamic> response =
         await vendorCategoryListAPIServices.vendorCategory(vendorId: vendorId);
 

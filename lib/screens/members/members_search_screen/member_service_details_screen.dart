@@ -274,78 +274,98 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                       ksizedbox10,
                     ],
                   ),
-                if (homeController.slotDetailList.isNotEmpty)
-                  Text(
-                    'Time Slot',
-                    style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                        color: kblue),
-                  ),
-                ksizedbox10,
-                if (homeController.slotDetailList.isNotEmpty)
-                  DropdownButtonFormField2<SlotDetail>(
-                    isExpanded: true,
-                    decoration: InputDecoration(
-                      // Add Horizontal padding using menuItemStyleData.padding so it matches
-                      // the menu padding when button's width is not specified.
-                      contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      // Add more decoration..
-                    ),
-                    hint: const Text(
-                      'Select Your Time slot',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    items: homeController.slotDetailList
-                        .map((item) => DropdownMenuItem<SlotDetail>(
-                              value: item,
-                              child: Text(
-                                "${item.weekday} ${item.startTime}-${item.endTime}",
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ))
-                        .toList(),
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Please select Time slot.';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      //Do something when selected item is changed.
-                      setState(() {
-                        selectedValue = value;
-                      });
-                    },
-                    onSaved: (value) {
-                      setState(() {
-                        selectedValue = value;
-                      });
-                    },
-                    buttonStyleData: const ButtonStyleData(
-                      padding: EdgeInsets.only(right: 8),
-                    ),
-                    iconStyleData: const IconStyleData(
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        color: Colors.black45,
-                      ),
-                      iconSize: 24,
-                    ),
-                    dropdownStyleData: DropdownStyleData(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                    menuItemStyleData: const MenuItemStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                    ),
-                  ),
+                GetBuilder<HomeController>(builder: (_) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (homeController.slotDetailList.isNotEmpty)
+                        Text(
+                          'Time Slot',
+                          style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.bold,
+                              color: kblue),
+                        ),
+                      ksizedbox10,
+                      if (homeController.slotDetailList.isNotEmpty)
+                        DropdownButtonFormField2<SlotDetail>(
+                          isExpanded: true,
+                          decoration: InputDecoration(
+                            // Add Horizontal padding using menuItemStyleData.padding so it matches
+                            // the menu padding when button's width is not specified.
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 16),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            // Add more decoration..
+                          ),
+                          hint: const Text(
+                            'Select Your Time slot',
+                            style: TextStyle(fontSize: 14),
+                          ),
+                          items: homeController.slotDetailList
+                              .map((item) => DropdownMenuItem<SlotDetail>(
+                                    value: item,
+                                    child: Text(
+                                      "${item.weekday} ${formatDate(DateTime(2023, 1, 1, int.parse(item.endTime.split(":").first)), [
+                                            hh,
+                                            ":",
+                                            nn,
+                                            " ",
+                                            am
+                                          ])}-${formatDate(DateTime(2023, 1, 1, int.parse(item.startTime.split(":").first)), [
+                                            hh,
+                                            ":",
+                                            nn,
+                                            " ",
+                                            am
+                                          ])}",
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Please select Time slot.';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            //Do something when selected item is changed.
+                            setState(() {
+                              selectedValue = value;
+                            });
+                          },
+                          onSaved: (value) {
+                            setState(() {
+                              selectedValue = value;
+                            });
+                          },
+                          buttonStyleData: const ButtonStyleData(
+                            padding: EdgeInsets.only(right: 8),
+                          ),
+                          iconStyleData: const IconStyleData(
+                            icon: Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black45,
+                            ),
+                            iconSize: 24,
+                          ),
+                          dropdownStyleData: DropdownStyleData(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          menuItemStyleData: const MenuItemStyleData(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                          ),
+                        ),
+                    ],
+                  );
+                }),
                 const SizedBox(height: 30),
                 Row(
                   children: [

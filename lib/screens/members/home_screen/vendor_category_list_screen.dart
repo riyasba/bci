@@ -44,7 +44,7 @@ class _VendorsListViewState extends State<VendorsCategoryListView> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(190),
+          preferredSize: const Size.fromHeight(130),
           child: Column(
             children: [
               ClipPath(

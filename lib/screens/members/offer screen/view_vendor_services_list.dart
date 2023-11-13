@@ -394,18 +394,17 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                           if (homeController
                                   .vendorServiceListData[index].isRecomended ==
                               "1")
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.grey.withOpacity(0.4),
-                                ),
-                                child: Center(
-                                    child: Text(
-                                  "Not Available",
-                                  style:
-                                      primaryFont.copyWith(color: Colors.red),
-                                )),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.grey.withOpacity(0.4),
+                              ),
+                              child: Center(
+                                  child: Text(
+                                "Not Available",
+                                style:
+                                    primaryFont.copyWith(color: Colors.red),
+                              )
                               ),
                             )
                         ],
