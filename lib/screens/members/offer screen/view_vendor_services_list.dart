@@ -256,8 +256,8 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                             servicesId: searchServiceListData.id);
 
                         if (homeController
-                                .vendorServiceListData[index].status ==
-                            "1") {
+                                .vendorServiceListData[index].isRecomended ==
+                            "0") {
                           Get.to(
                             ServiceDetailsScreen(
                               searchServicelist: searchServiceListData,
@@ -392,8 +392,8 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                             ),
                           ),
                           if (homeController
-                                  .vendorServiceListData[index].status ==
-                              "0")
+                                  .vendorServiceListData[index].isRecomended ==
+                              "1")
                             Expanded(
                               child: Container(
                                 decoration: BoxDecoration(

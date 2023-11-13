@@ -43,6 +43,7 @@ class GetServiceListData {
   String saleAmount;
   String description;
   String isBooking;
+  String isRecomended;
   dynamic status;
   List<Amenty> amenties;
   String image;
@@ -67,6 +68,7 @@ class GetServiceListData {
     required this.images,
     required this.createdAt,
     required this.updatedAt,
+    required this.isRecomended,
   });
 
   factory GetServiceListData.fromJson(Map<String, dynamic> json) =>
@@ -75,6 +77,7 @@ class GetServiceListData {
         categoryId: json["category_id"] ?? "",
         vendorId: json["vendor_id"] ?? "",
         title: json["title"] ?? "",
+        isRecomended: json["is_recomended"] ?? "0",
         quantity: json["quantity"] ?? "",
         actualAmount: json["actual_amount"] ?? "",
         bvcAmount: json["bvc_amount"] ?? "",

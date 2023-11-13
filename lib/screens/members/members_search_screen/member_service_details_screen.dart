@@ -110,18 +110,19 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
       ),
       body: ListView(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              child: Image.network(
-                widget.searchServicelist.image,
-                height: 350,
-                width: size.width,
-                fit: BoxFit.cover,
+          if (widget.searchServicelist.images.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                child: Image.network(
+                  widget.searchServicelist.images.first,
+                  height: 350,
+                  width: size.width,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
           ksizedbox10,
           Container(
             height: 80,
@@ -262,7 +263,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                               width: 10,
                             ),
                             Text(
-                              widget.searchServicelist.amenties![i].value,
+                              widget.searchServicelist.amenties[i].value,
                               style: TextStyle(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.bold,
