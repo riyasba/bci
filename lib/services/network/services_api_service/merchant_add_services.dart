@@ -17,57 +17,9 @@ class AddServicesApiServices extends BaseApiService {
     try {
       var dio = Dio();
 
-      var ameneity = List<dynamic>.from(
-          createServiceModel.amenities.map((element) => element.toJson()));
-      print(createServiceModel.image);
-      FormData formData = FormData.fromMap({
-        for (int i = 0; i < createServiceModel.image.length; i++)
-          "image[$i]": await MultipartFile.fromFile(
-              createServiceModel.image[i].path,
-              filename: createServiceModel.image[i].path.split("/").last),
-        "title": createServiceModel.title,
-        "category": createServiceModel.category.toString(),
-        "sale_amount": createServiceModel.saleAmount,
-        "actual_amount": createServiceModel.actualAmount,
-        // "share": createServiceModel.share,
-        // "bvc_amount": createServiceModel.bvcAmount,
-        //"booking": createServiceModel.booking,
-        "amenties": ameneity.toString(),
-        "unit": createServiceModel.unit,
-        "quantity": createServiceModel.quantity,
-        "editor-value": createServiceModel.description,
-        "isOffer": createServiceModel.isOfferAvailable,
-        "isCoupon": createServiceModel.isCouponsAvailable,
-        "cgst": createServiceModel.cgst,
-        "sgst": createServiceModel.sgst,
-        "start_time": createServiceModel.startTime,
-        "end_time": createServiceModel.endTime,
-        // "weekdays[0]":"Monday",
-        // "from.Monday[0]":"00:00:00",
-        // "to.Monday[0]":"23:59:00",
-        "weekdays": ["Monday", "Tuesday", "Wednesday"],
-        "from": {
-          "Monday": ["09:00", "11:00", "14:00"],
-          "Tuesday": ["09:30", "11:30", "14:30"],
-          "Wednesday": ["10:00", "12:00", "15:00"]
-        },
-        "to": {
-          "Monday": ["10:00", "12:00", "15:00"],
-          "Tuesday": ["10:30", "12:30", "15:30"],
-          "Wednesday": ["11:00", "13:00", "16:00"]
-        }
-        // if (createServiceModel.offerPercentage != null)
-        //   "offerPercentage": "${createServiceModel.offerPercentage}%",
-        // if (createServiceModel.offerAmount != null)
-        //   "offerUpto_amount": createServiceModel.offerAmount,
-        // if (createServiceModel.couponAmount != null)
-        //   "coupon_amount": createServiceModel.couponAmount
-      });
-
       final servicesController = gtx.Get.find<ServicesController>();
 
       List<String> tempWeekList = [];
-
       List<String> sundayFrom = [];
       List<String> mondayFrom = [];
       List<String> tuesDayFrom = [];
@@ -75,7 +27,6 @@ class AddServicesApiServices extends BaseApiService {
       List<String> thuesdayFrom = [];
       List<String> fridayFrom = [];
       List<String> saturdayFrom = [];
-
       List<String> sundayTo = [];
       List<String> mondayTo = [];
       List<String> tuesDayTo = [];
@@ -127,6 +78,94 @@ class AddServicesApiServices extends BaseApiService {
           saturdayTo.add(element.tempToTime);
         });
       }
+
+      var ameneity = List<dynamic>.from(
+          createServiceModel.amenities.map((element) => element.toJson()));
+      print(createServiceModel.image);
+      FormData formData = FormData.fromMap({
+        for (int i = 0; i < createServiceModel.image.length; i++)
+          "image[$i]": await MultipartFile.fromFile(
+              createServiceModel.image[i].path,
+              filename: createServiceModel.image[i].path.split("/").last),
+        "title": createServiceModel.title,
+        "category": createServiceModel.category.toString(),
+        "sale_amount": createServiceModel.saleAmount,
+        "actual_amount": createServiceModel.actualAmount,
+        // "share": createServiceModel.share,
+        // "bvc_amount": createServiceModel.bvcAmount,
+        //"booking": createServiceModel.booking,
+        "amenties": ameneity.toString(),
+        "unit": createServiceModel.unit,
+        "quantity": createServiceModel.quantity,
+        "editor-value": createServiceModel.description,
+        "isOffer": createServiceModel.isOfferAvailable,
+        "isCoupon": createServiceModel.isCouponsAvailable,
+        "cgst": createServiceModel.cgst,
+        "sgst": createServiceModel.sgst,
+        "start_time": createServiceModel.startTime,
+        "end_time": createServiceModel.endTime,
+        // "weekdays[0]":"Monday",
+        // "from.Monday[0]":"00:00:00",
+        // "to.Monday[0]":"23:59:00",
+        "is_recomended": createServiceModel.available,
+        for (int i = 0; i < servicesController.sunTimeSlot.length; i++)
+          "weekdays[$i]": "Sunday",
+        for (int i = 0; i < servicesController.sunTimeSlot.length; i++)
+          "fromTime[$i]": servicesController.sunTimeSlot[i].tempFromTime,
+        for (int i = 0; i < servicesController.sunTimeSlot.length; i++)
+          "toTime[$i]": servicesController.sunTimeSlot[i].tempToTime,
+
+        for (int i = 0; i < servicesController.monTimeSlot.length; i++)
+          "weekdays[$i]": "Monday",
+        for (int i = 0; i < servicesController.monTimeSlot.length; i++)
+          "fromTime[$i]": servicesController.monTimeSlot[i].tempFromTime,
+        for (int i = 0; i < servicesController.monTimeSlot.length; i++)
+          "toTime[$i]": servicesController.monTimeSlot[i].tempToTime,
+
+        for (int i = 0; i < servicesController.tueTimeSlot.length; i++)
+          "weekdays[$i]": "Tuesday",
+        for (int i = 0; i < servicesController.tueTimeSlot.length; i++)
+          "fromTime[$i]": servicesController.tueTimeSlot[i].tempFromTime,
+        for (int i = 0; i < servicesController.tueTimeSlot.length; i++)
+          "toTime[$i]": servicesController.tueTimeSlot[i].tempToTime,
+
+        for (int i = 0; i < servicesController.wedTimeSlot.length; i++)
+          "weekdays[$i]": "Wednesday",
+        for (int i = 0; i < servicesController.wedTimeSlot.length; i++)
+          "fromTime[$i]": servicesController.wedTimeSlot[i].tempFromTime,
+        for (int i = 0; i < servicesController.wedTimeSlot.length; i++)
+          "toTime[$i]": servicesController.wedTimeSlot[i].tempToTime,
+
+        for (int i = 0; i < servicesController.thuTimeSlot.length; i++)
+          "weekdays[$i]": "Tursday",
+        for (int i = 0; i < servicesController.thuTimeSlot.length; i++)
+          "fromTime[$i]": servicesController.thuTimeSlot[i].tempFromTime,
+        for (int i = 0; i < servicesController.thuTimeSlot.length; i++)
+          "toTime[$i]": servicesController.thuTimeSlot[i].tempToTime,
+
+          for (int i = 0; i < servicesController.friTimeSlot.length; i++)
+          "weekdays[$i]": "Friday",
+        for (int i = 0; i < servicesController.friTimeSlot.length; i++)
+          "fromTime[$i]": servicesController.friTimeSlot[i].tempFromTime,
+        for (int i = 0; i < servicesController.friTimeSlot.length; i++)
+          "toTime[$i]": servicesController.friTimeSlot[i].tempToTime,
+
+
+          for (int i = 0; i < servicesController.satTimeSlot.length; i++)
+          "weekdays[$i]": "Saturday",
+        for (int i = 0; i < servicesController.satTimeSlot.length; i++)
+          "fromTime[$i]": servicesController.satTimeSlot[i].tempFromTime,
+        for (int i = 0; i < servicesController.satTimeSlot.length; i++)
+          "toTime[$i]": servicesController.satTimeSlot[i].tempToTime,
+
+
+        // if (createServiceModel.offerPercentage != null)
+        //   "offerPercentage": "${createServiceModel.offerPercentage}%",
+        // if (createServiceModel.offerAmount != null)
+        //   "offerUpto_amount": createServiceModel.offerAmount,
+        // if (createServiceModel.couponAmount != null)
+        //   "coupon_amount": createServiceModel.couponAmount
+      });
 
       var data = {
         // for (int i = 0; i < createServiceModel.image.length; i++)
@@ -197,7 +236,7 @@ class AddServicesApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: data);
+          data: formData);
       print("::::::::<Add services URL>::::::::status code::::::::::[change1]");
       print(response.statusCode);
       print(response.data);

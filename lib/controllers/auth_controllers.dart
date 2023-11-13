@@ -386,8 +386,8 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       GetCouponListModel redeemtioncouponsListModel =
           GetCouponListModel.fromJson(response.data);
-      addedCouponList = redeemtioncouponsListModel.posts;
-      tempaddedCouponList = redeemtioncouponsListModel.posts;
+      addedCouponList = redeemtioncouponsListModel.posts.reversed.toList();
+      tempaddedCouponList = redeemtioncouponsListModel.posts.reversed.toList();
     }
     update();
   }

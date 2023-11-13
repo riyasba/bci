@@ -967,59 +967,75 @@ class _AddServicesViewState extends State<AddServicesView> {
                   decoration: BoxDecoration(
                       color: Colors.grey[300],
                       borderRadius: BorderRadius.circular(8)),
-                  child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3),
-                      itemCount: imageFileList!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Stack(
+                  child: imageFileList!.isEmpty
+                      ? Center(
+                          child: Column(
                             children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: StreamBuilder<Object>(
-                                    stream: null,
-                                    builder: (context, snapshot) {
-                                      return Stack(
-                                        children: [
-                                          Image.file(
-                                            File(imageFileList[index].path),
-                                            height: 100,
-                                            width: 100,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ],
-                                      );
-                                    }),
+                              const SizedBox(
+                                height: 20,
                               ),
-                              Positioned(
-                                  left: 70,
-                                  child: InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          imageFileList.removeAt(index);
-                                        });
-                                      },
-                                      child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                          color: kwhite,
-                                          borderRadius: const BorderRadius.only(
-                                              topRight: Radius.circular(8),
-                                              bottomLeft: Radius.circular(8)),
-                                        ),
-                                        child: const Icon(
-                                          CupertinoIcons.delete,
-                                          color: Colors.grey,
-                                        ),
-                                      ))),
+                              Image.asset("assets/images/avaiimageupload.png",height: 70,),
+                              ksizedbox10,
+                              const Text("Upload images")
                             ],
                           ),
-                        );
-                      }),
+                        )
+                      : GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3),
+                          itemCount: imageFileList!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: StreamBuilder<Object>(
+                                        stream: null,
+                                        builder: (context, snapshot) {
+                                          return Stack(
+                                            children: [
+                                              Image.file(
+                                                File(imageFileList[index].path),
+                                                height: 100,
+                                                width: 100,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ],
+                                          );
+                                        }),
+                                  ),
+                                  Positioned(
+                                      left: 70,
+                                      child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              imageFileList.removeAt(index);
+                                            });
+                                          },
+                                          child: Container(
+                                            height: 30,
+                                            width: 30,
+                                            decoration: BoxDecoration(
+                                              color: kwhite,
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                      topRight:
+                                                          Radius.circular(8),
+                                                      bottomLeft:
+                                                          Radius.circular(8)),
+                                            ),
+                                            child: const Icon(
+                                              CupertinoIcons.delete,
+                                              color: Colors.grey,
+                                            ),
+                                          ))),
+                                ],
+                              ),
+                            );
+                          }),
                 ),
               ),
             ),

@@ -12,10 +12,14 @@ import 'package:get/get.dart' as gtx;
 
 class UploadImagesServicesApiServices extends BaseApiService {
   Future uploadImagesServices(
-      {required List<XFile> images, required int id,required String cid}) async {
+      {required List<XFile> images,
+      required int id,
+      required String cid}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
+
+      print("image length ------->> ${images.length}");
 
       FormData formData = FormData.fromMap({
         for (int i = 0; i < images.length; i++)
@@ -25,7 +29,7 @@ class UploadImagesServicesApiServices extends BaseApiService {
         //   "image": await MultipartFile.fromFile(images.first.path,
         //       filename: images.first.path.split("/").last),
         "id": id,
-        // "category_id":cid
+        "category_id": cid
       });
 
       print(formData.fields);

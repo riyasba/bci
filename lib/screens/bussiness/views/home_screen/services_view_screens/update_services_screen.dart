@@ -107,8 +107,8 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     offerPercentageController.text = widget.serviceData.offerPercentage ?? "";
     unitController.text = widget.serviceData.unit ?? "";
     quantityController.text = widget.serviceData.quantity ?? "";
-    cGstController.text = widget.serviceData.cgst.toString();
-    sGstController.text = widget.serviceData.sgst.toString();
+    cGstController.text = widget.serviceData.cgst ?? "";
+    sGstController.text = widget.serviceData.sgst ?? "";
     // productCategoryHint =  widget.serviceData.categoryId;
     //  _controller!. = "updated";
     // setState(() {
@@ -121,7 +121,8 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     productImage = widget.serviceData.images;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      print("------------------>> is recomended = ${widget.serviceData.isRecomended}");
+      print(
+          "------------------>> is recomended = ${widget.serviceData.isRecomended}");
       setState(() {
         available = widget.serviceData.isRecomended == "0" ? true : false;
       });
@@ -825,6 +826,27 @@ class _AddServicesViewState extends State<UpdateServicesView> {
           //   ),
           // ),
           ksizedbox20,
+          GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3),
+              itemCount: widget.serviceData.images.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.network(
+                      widget.serviceData.images[index],
+                      height: 50,
+                      width: 50,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              }),
+          ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 15),
             child: InkWell(
@@ -846,12 +868,12 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                 decoration: BoxDecoration(
                     color: Colors.grey[300],
                     borderRadius: BorderRadius.circular(3)),
-                child: imageFileList != null
+                child: imageFileList.isNotEmpty
                     ? GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3),
-                        itemCount: imageFileList!.length,
+                        itemCount: imageFileList.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -1306,7 +1328,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                                     ? "1"
                                     : "0",
                                 // bvcAmount: bvcAmountController.text,
-                                available: available ? "0": "1",
+                                available: available ? "0" : "1",
                                 category: categoryModel == null
                                     ? widget.serviceData.categoryId.toString()
                                     : categoryModel.id.toString(),

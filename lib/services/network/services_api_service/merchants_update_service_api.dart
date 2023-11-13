@@ -20,14 +20,14 @@ class UpdateServicesApiServices extends BaseApiService {
           createServiceModel.amenities.map((element) => element.toJson()));
       print(createServiceModel.image);
       FormData formData = FormData.fromMap({
-        if (createServiceModel.image != "null")
+        if (createServiceModel.image.isNotEmpty)
           for (int i = 0; i < createServiceModel.image.length; i++)
-            "image[$i]": await MultipartFile.fromFile(
+       "image[$i]": await MultipartFile.fromFile(
                 createServiceModel.image[i].path,
                 filename: createServiceModel.image[i].path.split("/").last),
         "title": createServiceModel.title,
         if (createServiceModel.category != "null")
-          "category": createServiceModel.category.toString(),
+        "category": createServiceModel.category.toString(),
         "sale_amount": createServiceModel.saleAmount,
         "actual_amount": createServiceModel.actualAmount,
         // "share": createServiceModel.share,
@@ -38,12 +38,12 @@ class UpdateServicesApiServices extends BaseApiService {
         "isOffer": createServiceModel.isOfferAvailable,
         "isCoupon": createServiceModel.isCouponsAvailable,
         "is_recomended": createServiceModel.available,
-        if (createServiceModel.offerPercentage != null)
-          "offerPercentage": "${createServiceModel.offerPercentage}%",
-        if (createServiceModel.offerAmount != null)
-          "offerUpto_amount": createServiceModel.offerAmount,
-        if (createServiceModel.couponAmount != null)
-          "coupon_amount": createServiceModel.couponAmount,
+        // if (createServiceModel.offerPercentage != null)
+        //   "offerPercentage": "${createServiceModel.offerPercentage}%",
+        // if (createServiceModel.offerAmount != null)
+        //   "offerUpto_amount": createServiceModel.offerAmount,
+        // if (createServiceModel.couponAmount != null)
+        //   "coupon_amount": createServiceModel.couponAmount,
         "id": id,
         "cgst": createServiceModel.cgst,
         "sgst": createServiceModel.sgst,

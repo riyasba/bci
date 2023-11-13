@@ -79,11 +79,11 @@ class ServicesController extends GetxController {
         createServiceModel: createServiceModel);
     isLoading(false);
     if (response.statusCode == 200) {
-      dio.Response<dynamic> response2 =
-          await uploadImagesServicesApiServices.uploadImagesServices(
-              images: createServiceModel.image,
-              id: response.data["data"]["id"],
-              cid: response.data["data"]["category_id"].toString());
+      // dio.Response<dynamic> response2 =
+      //     await uploadImagesServicesApiServices.uploadImagesServices(
+      //         images: createServiceModel.image,
+      //         id: response.data["data"]["id"],
+      //         cid: response.data["data"]["category_id"].toString());
       getServicesByVendor();
       Get.back();
       Get.rawSnackbar(
