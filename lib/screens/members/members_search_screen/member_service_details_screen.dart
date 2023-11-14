@@ -366,27 +366,27 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                     ],
                   );
                 }),
-                const SizedBox(height: 30),
-                Row(
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          _selectDate(context);
-                        },
-                        child: const Icon(Icons.date_range)),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 4,
-                      ),
-                      child: Text(_dateController.text),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 2, right: 2),
-                      child: Text('-'),
-                    ),
-                    Text(_timeController.text),
-                  ],
-                ),
+                // const SizedBox(height: 30),
+                // Row(
+                //   children: [
+                //     InkWell(
+                //         onTap: () {
+                //           _selectDate(context);
+                //         },
+                //         child: const Icon(Icons.date_range)),
+                //     Padding(
+                //       padding: const EdgeInsets.only(
+                //         left: 4,
+                //       ),
+                //       child: Text(_dateController.text),
+                //     ),
+                //     const Padding(
+                //       padding: EdgeInsets.only(left: 2, right: 2),
+                //       child: Text('-'),
+                //     ),
+                //     Text(_timeController.text),
+                //   ],
+                // ),
                 ksizedbox10,
                 ksizedbox10,
                 Text(

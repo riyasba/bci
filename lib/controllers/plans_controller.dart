@@ -409,7 +409,8 @@ class PlanController extends GetxController {
         await partialPaymentApiServices.partialPayment();
     isLoading(false);
     if (response.statusCode == 200) {
-      if (response.data["message"] == "No records found for the user") {
+      if (response.data["message"] == "No records found for the user" ||
+          response.data["message"] == "No pending records found") {
         Get.off(() => QucikPaymentScreen());
       } else {
         PartialAmountModel partialAmountModel =
@@ -420,6 +421,8 @@ class PlanController extends GetxController {
             partialID: partialAmountModel.partialAmount.id.toString());
         update();
       }
+    } else {
+      Get.off(() => QucikPaymentScreen());
     }
   }
 

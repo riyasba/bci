@@ -170,6 +170,54 @@ class _DashBoardScreenMenbersState extends State<DashBoardScreenMenbers> {
                       ),
                     ),
                   ),
+                  ksizedbox10,
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20, right: 20, top: 10),
+                    child: Container(
+                      height: 56,
+                      decoration: BoxDecoration(
+                          color: kwhite,
+                          border: Border.all(
+                            color: kblue,
+                          ),
+                          borderRadius: BorderRadius.circular(5)),
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(right: 0),
+                            child: Image(
+                              image: AssetImage(
+                                'assets/images/settingreferal.png',
+                              ),
+                              fit: BoxFit.fitHeight,
+                              height: 30,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 50),
+                            child: Text(
+                              'Referral Amount ',
+                              style: TextStyle(fontSize: 18, color: kblue),
+                            ),
+                          ),
+                          profileController.profileData.isEmpty
+                              ? const Text("")
+                              : Text(
+                                  // '₹ ${profileController.profileData.first.}',
+                                  '₹ 0.00',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: kblue,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                          Image.asset('assets/images/dashboardforward.png'),
+                        ],
+                      ),
+                    ),
+                  ),
                   ksizedbox40,
                   Padding(
                     padding:
