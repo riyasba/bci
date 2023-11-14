@@ -6,6 +6,7 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class OthersBookingsView extends StatefulWidget {
   const OthersBookingsView({super.key});
@@ -364,17 +365,52 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                     children: [
                       InkWell(
                         onTap: () {
-                          print(bookingData.id);
-                          Get.find<ProfileController>().cancelRefundApi(
-                            userId: Get.find<ProfileController>()
-                                .profileData
-                                .first
-                                .id
-                                .toString(),
-                            amount: bookingData.purchasePrice,
-                            type: "booking",
-                            bookingId: bookingData.id.toString(),
-                          );
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  backgroundColor: Colors.white,
+                                  title: Text("Cancel Booking",
+                                      style:
+                                          boldTextStyle(color: Colors.black)),
+                                  content: Text(
+                                    "Are you sure you want to Cancel?",
+                                    style:
+                                        secondaryTextStyle(color: Colors.black),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      child: Text(
+                                        "Yes",
+                                        style: primaryTextStyle(color: kblue),
+                                      ),
+                                      onPressed: () {
+                                        Get.back();
+                                        print(bookingData.id);
+                                        Get.find<ProfileController>()
+                                            .cancelRefundApi(
+                                          userId: Get.find<ProfileController>()
+                                              .profileData
+                                              .first
+                                              .id
+                                              .toString(),
+                                          amount: bookingData.purchasePrice,
+                                          type: "booking",
+                                          bookingId: bookingData.id.toString(),
+                                        );
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text("No",
+                                          style:
+                                              primaryTextStyle(color: kblue)),
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              });
                         },
                         child: const Text(
                           'Cancel',

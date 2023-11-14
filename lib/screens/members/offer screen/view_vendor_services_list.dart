@@ -401,7 +401,7 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                               ),
                               child: Center(
                                   child: Text(
-                                "Not Available",
+                                "All slots are filled",
                                 style:
                                     primaryFont.copyWith(color: Colors.red),
                               )

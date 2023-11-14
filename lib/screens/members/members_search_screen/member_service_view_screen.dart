@@ -286,81 +286,81 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
     );
   }
 
-  Future<void> dialogBuilder(BuildContext context) {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          //  title: const Text('Basic dialog title'),
-          content: const Text('Are you sure book this services'),
-          actions: <Widget>[
-            InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: Text(
-                "No",
-                style: primaryFont.copyWith(
-                  color: kblue,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-            Obx(
-              () => homeController.isLoading.isTrue
-                  ? CircularProgressIndicator(
-                      color: Colors.blue[800],
-                    )
-                  : InkWell(
-                      onTap: () {
-                        Get.back();
-                        if (redeemCouponcontroller.text.isNotEmpty) {
-                          print(">>>>>>>>>>>11111111111111111111");
-                          profileController.redeemCoupon(
-                              amount: widget.searchServicelist.saleAmount,
-                              couponcode: redeemCouponcontroller.text,
-                              serviceId: widget.searchServicelist.id.toString(),
-                              vendorId: widget.searchServicelist.vendorId);
-                          homeController.addBooking(
-                              cartid: widget.searchServicelist.id.toString(),
-                              serviceid: widget.searchServicelist.id.toString(),
-                              qty: "1",
-                              offerOrCoupon: "",
-                              bookDateTime: "",
-                              couponcode: redeemCouponcontroller.text,
-                              amount: widget.searchServicelist.saleAmount);
-                        } else {
-                          print(">>>>>>>>>>>>>>>222222222222222222");
-                          homeController.addBooking(
-                              cartid: widget.searchServicelist.id.toString(),
-                              serviceid: widget.searchServicelist.id.toString(),
-                              qty: "1",
-                              offerOrCoupon: "",
-                              couponcode: redeemCouponcontroller.text,
-                              amount: widget.searchServicelist.saleAmount,
-                              bookDateTime: "");
-                        }
-                      },
-                      child: Text(
-                        "Yes",
-                        style: primaryFont.copyWith(
-                          color: kblue,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-          ],
-        );
-      },
-    );
-  }
+  // Future<void> dialogBuilder(BuildContext context) {
+  //   return showDialog<void>(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         //  title: const Text('Basic dialog title'),
+  //         content: const Text('Are you sure book this services'),
+  //         actions: <Widget>[
+  //           InkWell(
+  //             onTap: () {
+  //               Get.back();
+  //             },
+  //             child: Text(
+  //               "No",
+  //               style: primaryFont.copyWith(
+  //                 color: kblue,
+  //                 fontSize: 16,
+  //                 fontWeight: FontWeight.w500,
+  //               ),
+  //             ),
+  //           ),
+  //           const SizedBox(
+  //             width: 20,
+  //           ),
+  //           Obx(
+  //             () => homeController.isLoading.isTrue
+  //                 ? CircularProgressIndicator(
+  //                     color: Colors.blue[800],
+  //                   )
+  //                 : InkWell(
+  //                     onTap: () {
+  //                       Get.back();
+  //                       if (redeemCouponcontroller.text.isNotEmpty) {
+  //                         print(">>>>>>>>>>>11111111111111111111");
+  //                         profileController.redeemCoupon(
+  //                             amount: widget.searchServicelist.saleAmount,
+  //                             couponcode: redeemCouponcontroller.text,
+  //                             serviceId: widget.searchServicelist.id.toString(),
+  //                             vendorId: widget.searchServicelist.vendorId);
+  //                         homeController.addBooking(
+  //                             cartid: widget.searchServicelist.id.toString(),
+  //                             serviceid: widget.searchServicelist.id.toString(),
+  //                             qty: "1",
+  //                             offerOrCoupon: "",
+  //                             bookDateTime: "",
+  //                             couponcode: redeemCouponcontroller.text,
+  //                             amount: widget.searchServicelist.saleAmount);
+  //                       } else {
+  //                         print(">>>>>>>>>>>>>>>222222222222222222");
+  //                         homeController.addBooking(
+  //                             cartid: widget.searchServicelist.id.toString(),
+  //                             serviceid: widget.searchServicelist.id.toString(),
+  //                             qty: "1",
+  //                             offerOrCoupon: "",
+  //                             couponcode: redeemCouponcontroller.text,
+  //                             amount: widget.searchServicelist.saleAmount,
+  //                             bookDateTime: "");
+  //                       }
+  //                     },
+  //                     child: Text(
+  //                       "Yes",
+  //                       style: primaryFont.copyWith(
+  //                         color: kblue,
+  //                         fontSize: 16,
+  //                         fontWeight: FontWeight.w500,
+  //                       ),
+  //                     ),
+  //                   ),
+  //           ),
+  //           const SizedBox(
+  //             width: 20,
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 }

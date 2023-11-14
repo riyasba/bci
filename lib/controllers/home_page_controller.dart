@@ -423,14 +423,17 @@ class HomeController extends GetxController {
   //add booking api
   AddBookingApiServices addBookingApiServices = AddBookingApiServices();
 
-  addBooking(
-      {required String serviceid,
-      required String cartid,
-      required String qty,
-      required String offerOrCoupon,
-      required String couponcode,
-      required String amount,
-      required String bookDateTime}) async {
+  addBooking({
+    required String serviceid,
+    required String cartid,
+    required String qty,
+    required String offerOrCoupon,
+    required String couponcode,
+    required String amount,
+    required String bookDateTime,
+    required String debitFrom,
+    required String referenceId,
+  }) async {
     isLoading(true);
     dio.Response<dynamic> response =
         await addBookingApiServices.addBookingApiServices(
@@ -440,6 +443,8 @@ class HomeController extends GetxController {
             offerOrCoupon: offerOrCoupon,
             couponcode: couponcode,
             amount: amount,
+            debitFrom: debitFrom,
+            referenceId: referenceId,
             bookDateTime: bookDateTime);
     isLoading(false);
     if (response.statusCode == 200) {

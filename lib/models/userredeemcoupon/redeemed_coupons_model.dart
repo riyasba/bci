@@ -74,13 +74,30 @@ class CouponsRedeemedData {
         serviceId: json["service_id"],
         vendorId: json["vendor_id"],
         couponcode: json["couponcode"],
-        image: json["image"],
+        image: json["image"] ?? "",
         amount: json["amount"],
         isRedeemed: json["is_redeemed"],
         expiryAt: DateTime.parse(json["expiry_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        coupon: RedeemedCoupon.fromJson(json["coupon"]),
+        coupon: json["coupon"] == null
+            ? RedeemedCoupon(
+                amount: "",
+                category: "",
+                couponImage: "",
+                createdAt: DateTime.now(),
+                description: "",
+                id: json["id"],
+                image: json["image"] ?? "",
+                name: json["name"] ?? "",
+                noOfCoupons: "",
+                offerPercentage: "",
+                planId: '',
+                validTo: DateTime.now(),
+                status: "",
+                updatedAt: DateTime.now(),
+                validFrom: DateTime.now())
+            : RedeemedCoupon.fromJson(json["coupon"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -143,7 +160,7 @@ class RedeemedCoupon {
         noOfCoupons: json["no_of_coupons"],
         category: json["category"],
         amount: json["amount"],
-        couponImage: json["coupon_image"],
+        couponImage: json["coupon_image"] ?? "",
         status: json["status"],
         validFrom: DateTime.parse(json["valid_from"]),
         validTo: DateTime.parse(json["valid_to"]),
@@ -151,7 +168,7 @@ class RedeemedCoupon {
         updatedAt: DateTime.parse(json["updated_at"]),
         name: json["name"],
         description: json["description"],
-        image: json["image"],
+        image: json["image"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

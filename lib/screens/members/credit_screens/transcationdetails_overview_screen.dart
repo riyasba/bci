@@ -91,19 +91,39 @@ class TransationDetailsOverviewScreen extends StatelessWidget {
                                                 color: Color(0xFF05406E),
                                                 fontWeight: FontWeight.w600),
                                           ),
-                                          Text(
-                                            "Paid on ${formatDate(profileController.creditTransactionsList[index].createdAt, [
-                                                  dd,
-                                                  " ",
-                                                  M,
-                                                  " ",
-                                                  yyyy
-                                                ])}",
-                                            style: const TextStyle(
-                                                fontSize: 14,
-                                                color: Color(0xFF05406E),
-                                                fontWeight: FontWeight.w400),
-                                          ),
+                                          profileController
+                                                      .creditTransactionsList[
+                                                          index]
+                                                      .isPaid ==
+                                                  "2"
+                                              ? Text(
+                                                  "Credit on ${formatDate(profileController.creditTransactionsList[index].createdAt, [
+                                                        dd,
+                                                        " ",
+                                                        M,
+                                                        " ",
+                                                        yyyy
+                                                      ])}",
+                                                  style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: Color(0xFF05406E),
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                )
+                                              : Text(
+                                                  "Paid on ${formatDate(profileController.creditTransactionsList[index].createdAt, [
+                                                        dd,
+                                                        " ",
+                                                        M,
+                                                        " ",
+                                                        yyyy
+                                                      ])}",
+                                                  style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: Color(0xFF05406E),
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
                                           // Text(
                                           //   "TXNID: ${profileController.creditTransactionsList[index].}",
                                           //   style: const TextStyle(
@@ -124,9 +144,14 @@ class TransationDetailsOverviewScreen extends StatelessWidget {
                           children: [
                             Text(
                               "₹ ${profileController.creditTransactionsList[index].amount}",
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontSize: 15,
-                                  color: Colors.pink,
+                                  color: profileController
+                                              .creditTransactionsList[index]
+                                              .isPaid ==
+                                          "2"
+                                      ? Colors.green
+                                      : Colors.pink,
                                   fontWeight: FontWeight.w600),
                             ),
                             const SizedBox(

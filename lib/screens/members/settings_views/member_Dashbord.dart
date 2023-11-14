@@ -203,16 +203,16 @@ class _DashBoardScreenMenbersState extends State<DashBoardScreenMenbers> {
                               style: TextStyle(fontSize: 18, color: kblue),
                             ),
                           ),
-                          profileController.profileData.isEmpty
-                              ? const Text("")
-                              : Text(
-                                  // '₹ ${profileController.profileData.first.}',
-                                  '₹ 0.00',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: kblue,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                          Obx(
+                            () => Text(
+                              '₹ ${profileController.refferalAmount.value}',
+                              // '₹ 0.00',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: kblue,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
                           Image.asset('assets/images/dashboardforward.png'),
                         ],
                       ),

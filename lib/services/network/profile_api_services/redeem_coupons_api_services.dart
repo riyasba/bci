@@ -8,13 +8,14 @@ class RedeemCouponApiServices extends BaseApiService {
       {required String couponcode,
       required String serviceId,
       required String requestAmount,
+      required int planId,
       required String vendorId}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
-
+print("--------------->> $planId");
       var response = await dio.post(redeemCouponsApiUrl,
           options: Options(
               headers: {
@@ -29,10 +30,11 @@ class RedeemCouponApiServices extends BaseApiService {
             "coupon_code": couponcode,
             "service_id": serviceId,
             "vendor_id": vendorId,
+            "plan_id": planId,
             "request_amount": requestAmount
           });
       print(
-          "::::::::<redeem coupon Api Services Api>::::::::status code::::::::::");
+          "::::::::<redeem coupon Api Services Api>::::::::status code::::::::::plan id = <$planId>");
       print(vendorId);
       print(serviceId);
       print(couponcode);

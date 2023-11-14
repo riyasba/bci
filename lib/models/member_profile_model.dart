@@ -16,6 +16,7 @@ class MemberProfileModel {
   dynamic remainingDays;
   dynamic percentage;
   String planId;
+  String refferalAmount;
   MemberUser user;
 
   MemberProfileModel({
@@ -24,6 +25,7 @@ class MemberProfileModel {
     required this.remainingDays,
     required this.percentage,
     required this.planId,
+    required this.refferalAmount,
     required this.user,
   });
 
@@ -34,6 +36,7 @@ class MemberProfileModel {
         remainingDays: json["remaining_days"],
         percentage: json["percentage"],
         planId: json["plan_id"] ?? "",
+        refferalAmount: json["reffral_amount"].toString(),
         user: MemberUser.fromJson(json["user"]),
       );
 
@@ -398,9 +401,6 @@ class ResidentialAddress {
         "pincode": pincode,
       };
 }
-
-
-
 
 class Child {
   int id;

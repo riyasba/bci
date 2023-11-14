@@ -6,7 +6,7 @@ import 'package:bci/screens/members/manual_payment_options/phone_pe_service_book
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-paymentBottomSheet(BuildContext context, double amount,String servicesId) {
+paymentBottomSheet(BuildContext context, double amount, String servicesId) {
   showModalBottomSheet(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadiusDirectional.only(
@@ -130,7 +130,7 @@ paymentBottomSheet(BuildContext context, double amount,String servicesId) {
 
                                 profileCn.isWalletOrNot(2);
                               },
-                              child: Text("Payment from Credit",
+                              child: Text("Payment from BCI Credit",
                                   style: primaryFont.copyWith(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16)),
@@ -187,10 +187,9 @@ paymentBottomSheet(BuildContext context, double amount,String servicesId) {
                                   .value ==
                               2) {
                             Get.find<ProfileController>().useCredit(
-                              creditAmount: amount.toStringAsFixed(2),
-                               creditFor: "booking",
-                               creditForId: servicesId
-                               );
+                                creditAmount: amount.toStringAsFixed(2),
+                                creditFor: "booking",
+                                creditForId: servicesId);
                           }
                           Get.back();
                         },

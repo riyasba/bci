@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/controllers/home_page_controller.dart';
@@ -71,6 +72,7 @@ class ProfileController extends GetxController {
   RxBool isLoading = false.obs;
 
   RxString planid = "".obs;
+  RxString refferalAmount = "0.00".obs;
 
   RxInt isWalletOrNot = 0.obs;
 
@@ -88,6 +90,7 @@ class ProfileController extends GetxController {
       isSubscribed(profileModel.subscription);
       planid(profileModel.planId.toString());
       profileData.add(profileModel.user);
+      refferalAmount(profileModel.refferalAmount);
       update();
       var token = await FirebaseMessaging.instance.getToken();
       Get.find<AuthController>().fcmtoken(
@@ -171,6 +174,7 @@ class ProfileController extends GetxController {
             couponcode: couponcode,
             serviceId: serviceId,
             vendorId: vendorId,
+            planId: int.parse(planid.value),
             requestAmount: amount);
     if (response.statusCode == 200) {
       GetCouponsList getCouponsList = GetCouponsList.fromJson(response.data);
@@ -287,6 +291,7 @@ class ProfileController extends GetxController {
             couponcode: couponcode,
             serviceId: serviceId,
             vendorId: vendorId,
+            planId: int.parse(planid.value),
             requestAmount: amount);
     if (response.statusCode == 200) {
       tempAmount = response.data["amount"].toString();
@@ -368,6 +373,8 @@ class ProfileController extends GetxController {
             qty: homeController.cartListData[i].quantity.toString(),
             offerOrCoupon: "",
             couponcode: "",
+            debitFrom: "",
+            referenceId: "",
             amount: homeController.cartListData[i].price,
             bookDateTime: homeController.cartListData[i].bookDateTime);
       }
@@ -506,6 +513,15 @@ class ProfileController extends GetxController {
     }
   }
 
+  String generateRandomString() {
+    var random = Random();
+
+    // Generate a random 5-digit string
+    String randomString = random.nextInt(90000).toString();
+
+    return randomString;
+  }
+
   checkPhonePeStatus({
     required String refernceID,
     required double amount,
@@ -524,6 +540,8 @@ class ProfileController extends GetxController {
               qty: homeController.cartListData[i].quantity.toString(),
               offerOrCoupon: "",
               couponcode: "",
+              debitFrom: "wallet",
+              referenceId: generateRandomString(),
               amount: homeController.cartListData[i].price,
               bookDateTime: homeController.cartListData[i].bookDateTime);
         }
@@ -580,6 +598,8 @@ class ProfileController extends GetxController {
               qty: homeController.cartListData[i].quantity.toString(),
               offerOrCoupon: "",
               couponcode: "",
+              debitFrom: "wallet",
+              referenceId: respone.data["data"]["transaction_id"],
               amount: homeController.cartListData[i].price,
               bookDateTime: homeController.cartListData[i].bookDateTime);
         }
@@ -1065,6 +1085,8 @@ class ProfileController extends GetxController {
               qty: homeController.cartListData[i].quantity.toString(),
               offerOrCoupon: "",
               couponcode: "",
+              debitFrom: "credit",
+              referenceId: response.data["data"]["refrence_id"],
               amount: homeController.cartListData[i].price,
               bookDateTime: homeController.cartListData[i].bookDateTime);
         }
@@ -1104,6 +1126,12 @@ class ProfileController extends GetxController {
       creditTransactionsList = creditStatementModel.creditTransactions;
       update();
     }
+  }
+
+  String covertAmountToInt(String amount) {
+    int intValue = int.parse(amount.replaceAll(',', '').split('.')[0]);
+
+    return intValue.toString();
   }
 
   initiatePaymentPayBill({required double amount}) async {

@@ -175,7 +175,7 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              const Text(
                                 "Payment Due Date",
                                 style: TextStyle(
                                     fontSize: 15,
@@ -183,8 +183,8 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                                     fontWeight: FontWeight.w500),
                               ),
                               Text(
-                                "29 Oct 2023",
-                                style: TextStyle(
+                                "${Get.find<ProfileController>().profileData.first.creditPayDate}'th",
+                                style: const TextStyle(
                                     fontSize: 16,
                                     color: Color(0xFF05406E),
                                     fontWeight: FontWeight.w600),
@@ -204,12 +204,14 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                                     color: Color(0xFF05406E),
                                     fontWeight: FontWeight.w500),
                               ),
-                              Text(
-                                "₹ ${profileController.totalUnpaidAmountCurrentMonth.value}",
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xFF05406E),
-                                    fontWeight: FontWeight.w600),
+                              Obx(
+                                () => Text(
+                                  "₹ ${profileController.totalUnpaidAmountCurrentMonth.value}",
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      color: Color(0xFF05406E),
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ),
                             ],
                           ),
@@ -217,7 +219,7 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                             height: 20,
                           ),
                           const Text(
-                            "The Indian rupee sign ⟨₹⟩ is the currency symbol for the Indian rupee, the official currency of India. Designed by D. Udaya Kumar.",
+                            "Manage your finances responsibly with timely credit payments. Consistent payments contribute to a positive credit history and improve your overall financial health.",
                             style: TextStyle(
                                 fontSize: 13,
                                 color: Color(0xFF05406E),
@@ -240,7 +242,9 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                               onTap: () {
                                 profileController.initiatePaymentPayBill(
                                     amount: double.parse(profileController
-                                        .totalUnpaidAmountCurrentMonth.value));
+                                        .covertAmountToInt(profileController
+                                            .totalUnpaidAmountCurrentMonth
+                                            .value)));
                               },
                               child: Container(
                                 child: const Text("Pay Bill",
@@ -359,21 +363,43 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                                                         fontWeight:
                                                             FontWeight.w600),
                                                   ),
-                                                  Text(
-                                                    "Paid on ${formatDate(profileController.creditTransactionsList[index].createdAt, [
-                                                          dd,
-                                                          " ",
-                                                          M,
-                                                          " ",
-                                                          yyyy
-                                                        ])}",
-                                                    style: const TextStyle(
-                                                        fontSize: 14,
-                                                        color:
-                                                            Color(0xFF05406E),
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                                  ),
+                                                  profileController
+                                                              .creditTransactionsList[
+                                                                  index]
+                                                              .isPaid ==
+                                                          "2"
+                                                      ? Text(
+                                                          "Credited on ${formatDate(profileController.creditTransactionsList[index].createdAt, [
+                                                                dd,
+                                                                " ",
+                                                                M,
+                                                                " ",
+                                                                yyyy
+                                                              ])}",
+                                                          style: const TextStyle(
+                                                              fontSize: 14,
+                                                              color: Color(
+                                                                  0xFF05406E),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                        )
+                                                      : Text(
+                                                          "Paid on ${formatDate(profileController.creditTransactionsList[index].createdAt, [
+                                                                dd,
+                                                                " ",
+                                                                M,
+                                                                " ",
+                                                                yyyy
+                                                              ])}",
+                                                          style: const TextStyle(
+                                                              fontSize: 14,
+                                                              color: Color(
+                                                                  0xFF05406E),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                        ),
                                                   // Text(
                                                   //   "TXNID: ${profileController.creditTransactionsList[index].}",
                                                   //   style: const TextStyle(
@@ -394,9 +420,15 @@ class _CreditOverviewScreenState extends State<CreditOverviewScreen> {
                                   children: [
                                     Text(
                                       "₹ ${profileController.creditTransactionsList[index].amount}",
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                           fontSize: 15,
-                                          color: Colors.pink,
+                                          color: profileController
+                                                      .creditTransactionsList[
+                                                          index]
+                                                      .isPaid ==
+                                                  "2"
+                                              ? Colors.green
+                                              : Colors.pink,
                                           fontWeight: FontWeight.w600),
                                     ),
                                     const SizedBox(
