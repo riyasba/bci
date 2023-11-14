@@ -4,6 +4,7 @@ import 'package:bci/models/create_services_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/merchant_update_profile.dart';
 import 'package:bci/models/merchants_register_model.dart';
+import 'package:bci/models/time_slot_models.dart';
 import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,18 +17,123 @@ class UpdateServicesApiServices extends BaseApiService {
     try {
       var dio = Dio();
 
+      final servicesController = gtx.Get.find<ServicesController>();
+
+      List<String> tempWeekList = [];
+      List<String> sundayFrom = [];
+      List<String> mondayFrom = [];
+      List<String> tuesDayFrom = [];
+      List<String> wednesdayFrom = [];
+      List<String> thuesdayFrom = [];
+      List<String> fridayFrom = [];
+      List<String> saturdayFrom = [];
+      List<String> sundayTo = [];
+      List<String> mondayTo = [];
+      List<String> tuesDayTo = [];
+      List<String> wednesdayTo = [];
+      List<String> thuesdayTo = [];
+      List<String> fridayTo = [];
+      List<String> saturdayTo = [];
+
+      List<TimeSlotAddModels> tempTimeSlotsList = [];
+
+      if (servicesController.sunTimeSlot.isNotEmpty) {
+        tempWeekList.add("Sunday");
+        servicesController.sunTimeSlot.forEach((element) {
+          sundayFrom.add(element.tempFromTime);
+          sundayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Sunday");
+          tempTimeSlotsList.add(timeSlotAddModels);
+        });
+      }
+      if (servicesController.monTimeSlot.isNotEmpty) {
+        tempWeekList.add("Monday");
+        servicesController.monTimeSlot.forEach((element) {
+          mondayFrom.add(element.tempFromTime);
+          mondayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Monday");
+          tempTimeSlotsList.add(timeSlotAddModels);
+        });
+      }
+      if (servicesController.tueTimeSlot.isNotEmpty) {
+        tempWeekList.add("Tuesday");
+        servicesController.tueTimeSlot.forEach((element) {
+          tuesDayFrom.add(element.tempFromTime);
+          tuesDayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Tuesday");
+          tempTimeSlotsList.add(timeSlotAddModels);
+        });
+      }
+      if (servicesController.wedTimeSlot.isNotEmpty) {
+        tempWeekList.add("Wednesday");
+        servicesController.wedTimeSlot.forEach((element) {
+          wednesdayFrom.add(element.tempFromTime);
+          wednesdayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Wednesday");
+          tempTimeSlotsList.add(timeSlotAddModels);
+        });
+      }
+      if (servicesController.thuTimeSlot.isNotEmpty) {
+        tempWeekList.add("Tursday");
+        servicesController.tueTimeSlot.forEach((element) {
+          thuesdayFrom.add(element.tempFromTime);
+          thuesdayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Tursday");
+          tempTimeSlotsList.add(timeSlotAddModels);
+        });
+      }
+      if (servicesController.friTimeSlot.isNotEmpty) {
+        tempWeekList.add("Friday");
+        servicesController.friTimeSlot.forEach((element) {
+          fridayFrom.add(element.tempFromTime);
+          fridayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Friday");
+          tempTimeSlotsList.add(timeSlotAddModels);
+        });
+      }
+      if (servicesController.satTimeSlot.isNotEmpty) {
+        tempWeekList.add("Saturday");
+        servicesController.satTimeSlot.forEach((element) {
+          saturdayFrom.add(element.tempFromTime);
+          saturdayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Saturday");
+          tempTimeSlotsList.add(timeSlotAddModels);
+        });
+      }
+
       var ameneity = List<dynamic>.from(
           createServiceModel.amenities.map((element) => element.toJson()));
       print(createServiceModel.image);
       FormData formData = FormData.fromMap({
         if (createServiceModel.image.isNotEmpty)
           for (int i = 0; i < createServiceModel.image.length; i++)
-       "image[$i]": await MultipartFile.fromFile(
+            "image[$i]": await MultipartFile.fromFile(
                 createServiceModel.image[i].path,
                 filename: createServiceModel.image[i].path.split("/").last),
         "title": createServiceModel.title,
         if (createServiceModel.category != "null")
-        "category": createServiceModel.category.toString(),
+          "category": createServiceModel.category.toString(),
         "sale_amount": createServiceModel.saleAmount,
         "actual_amount": createServiceModel.actualAmount,
         // "share": createServiceModel.share,
@@ -44,74 +150,16 @@ class UpdateServicesApiServices extends BaseApiService {
         //   "offerUpto_amount": createServiceModel.offerAmount,
         // if (createServiceModel.couponAmount != null)
         //   "coupon_amount": createServiceModel.couponAmount,
+        for (int i = 0; i < tempTimeSlotsList.length; i++)
+          "weekdays[$i]": tempTimeSlotsList[i].weedDay,
+        for (int i = 0; i < tempTimeSlotsList.length; i++)
+          "fromTime[$i]": tempTimeSlotsList[i].tempFromTime,
+        for (int i = 0; i < tempTimeSlotsList.length; i++)
+          "toTime[$i]": tempTimeSlotsList[i].tempToTime,
         "id": id,
         "cgst": createServiceModel.cgst,
         "sgst": createServiceModel.sgst,
       });
-
-      final servicesController = gtx.Get.find<ServicesController>();
-
-      List<String> tempWeekList = [];
-
-      List<String> sundayFrom = [];
-      List<String> mondayFrom = [];
-      List<String> tuesDayFrom = [];
-      List<String> wednesdayFrom = [];
-      List<String> thuesdayFrom = [];
-      List<String> fridayFrom = [];
-      List<String> saturdayFrom = [];
-
-      List<String> sundayTo = [];
-      List<String> mondayTo = [];
-      List<String> tuesDayTo = [];
-      List<String> wednesdayTo = [];
-      List<String> thuesdayTo = [];
-      List<String> fridayTo = [];
-      List<String> saturdayTo = [];
-
-      if (servicesController.sunTimeSlot.isNotEmpty) {
-        tempWeekList.add("Sunday");
-        servicesController.sunTimeSlot.forEach((element) {
-          sundayFrom.add(element.fromTime);
-          sundayTo.add(element.toTime);
-        });
-      } else if (servicesController.monTimeSlot.isNotEmpty) {
-        tempWeekList.add("Monday");
-        servicesController.monTimeSlot.forEach((element) {
-          mondayFrom.add(element.fromTime);
-          mondayTo.add(element.toTime);
-        });
-      } else if (servicesController.tueTimeSlot.isNotEmpty) {
-        tempWeekList.add("Tuesday");
-        servicesController.tueTimeSlot.forEach((element) {
-          tuesDayFrom.add(element.fromTime);
-          tuesDayTo.add(element.toTime);
-        });
-      } else if (servicesController.wedTimeSlot.isNotEmpty) {
-        tempWeekList.add("Wednesday");
-        servicesController.wedTimeSlot.forEach((element) {
-          wednesdayFrom.add(element.fromTime);
-          wednesdayTo.add(element.toTime);
-        });
-      } else if (servicesController.thuTimeSlot.isNotEmpty) {
-        tempWeekList.add("Tursday");
-        servicesController.tueTimeSlot.forEach((element) {
-          thuesdayFrom.add(element.fromTime);
-          thuesdayTo.add(element.toTime);
-        });
-      } else if (servicesController.friTimeSlot.isNotEmpty) {
-        tempWeekList.add("Friday");
-        servicesController.friTimeSlot.forEach((element) {
-          fridayFrom.add(element.fromTime);
-          fridayTo.add(element.toTime);
-        });
-      } else if (servicesController.satTimeSlot.isNotEmpty) {
-        tempWeekList.add("Saturday");
-        servicesController.satTimeSlot.forEach((element) {
-          saturdayFrom.add(element.fromTime);
-          saturdayTo.add(element.toTime);
-        });
-      }
 
       var data = {
         for (int i = 0; i < createServiceModel.image.length; i++)

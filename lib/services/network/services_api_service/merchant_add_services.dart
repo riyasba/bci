@@ -4,6 +4,7 @@ import 'package:bci/models/create_services_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/merchant_update_profile.dart';
 import 'package:bci/models/merchants_register_model.dart';
+import 'package:bci/models/time_slot_models.dart';
 import 'package:bci/services/base_urls/base_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as gtx;
@@ -35,47 +36,90 @@ class AddServicesApiServices extends BaseApiService {
       List<String> fridayTo = [];
       List<String> saturdayTo = [];
 
+      List<TimeSlotAddModels> tempTimeSlotsList = [];
+
       if (servicesController.sunTimeSlot.isNotEmpty) {
         tempWeekList.add("Sunday");
         servicesController.sunTimeSlot.forEach((element) {
           sundayFrom.add(element.tempFromTime);
           sundayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Sunday");
+          tempTimeSlotsList.add(timeSlotAddModels);
         });
-      } else if (servicesController.monTimeSlot.isNotEmpty) {
+      }
+      if (servicesController.monTimeSlot.isNotEmpty) {
         tempWeekList.add("Monday");
         servicesController.monTimeSlot.forEach((element) {
           mondayFrom.add(element.tempFromTime);
           mondayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Monday");
+          tempTimeSlotsList.add(timeSlotAddModels);
         });
-      } else if (servicesController.tueTimeSlot.isNotEmpty) {
+      }
+      if (servicesController.tueTimeSlot.isNotEmpty) {
         tempWeekList.add("Tuesday");
         servicesController.tueTimeSlot.forEach((element) {
           tuesDayFrom.add(element.tempFromTime);
           tuesDayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Tuesday");
+          tempTimeSlotsList.add(timeSlotAddModels);
         });
-      } else if (servicesController.wedTimeSlot.isNotEmpty) {
+      }
+      if (servicesController.wedTimeSlot.isNotEmpty) {
         tempWeekList.add("Wednesday");
         servicesController.wedTimeSlot.forEach((element) {
           wednesdayFrom.add(element.tempFromTime);
           wednesdayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Wednesday");
+          tempTimeSlotsList.add(timeSlotAddModels);
         });
-      } else if (servicesController.thuTimeSlot.isNotEmpty) {
+      }
+      if (servicesController.thuTimeSlot.isNotEmpty) {
         tempWeekList.add("Tursday");
         servicesController.tueTimeSlot.forEach((element) {
           thuesdayFrom.add(element.tempFromTime);
           thuesdayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Tursday");
+          tempTimeSlotsList.add(timeSlotAddModels);
         });
-      } else if (servicesController.friTimeSlot.isNotEmpty) {
+      }
+      if (servicesController.friTimeSlot.isNotEmpty) {
         tempWeekList.add("Friday");
         servicesController.friTimeSlot.forEach((element) {
           fridayFrom.add(element.tempFromTime);
           fridayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Friday");
+          tempTimeSlotsList.add(timeSlotAddModels);
         });
-      } else if (servicesController.satTimeSlot.isNotEmpty) {
+      }
+      if (servicesController.satTimeSlot.isNotEmpty) {
         tempWeekList.add("Saturday");
         servicesController.satTimeSlot.forEach((element) {
           saturdayFrom.add(element.tempFromTime);
           saturdayTo.add(element.tempToTime);
+          TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
+              tempFromTime: element.tempFromTime,
+              tempToTime: element.tempToTime,
+              weedDay: "Saturday");
+          tempTimeSlotsList.add(timeSlotAddModels);
         });
       }
 
@@ -108,56 +152,12 @@ class AddServicesApiServices extends BaseApiService {
         // "from.Monday[0]":"00:00:00",
         // "to.Monday[0]":"23:59:00",
         "is_recomended": createServiceModel.available,
-        for (int i = 0; i < servicesController.sunTimeSlot.length; i++)
-          "weekdays[$i]": "Sunday",
-        for (int i = 0; i < servicesController.sunTimeSlot.length; i++)
-          "fromTime[$i]": servicesController.sunTimeSlot[i].tempFromTime,
-        for (int i = 0; i < servicesController.sunTimeSlot.length; i++)
-          "toTime[$i]": servicesController.sunTimeSlot[i].tempToTime,
-
-        for (int i = 0; i < servicesController.monTimeSlot.length; i++)
-          "weekdays[$i]": "Monday",
-        for (int i = 0; i < servicesController.monTimeSlot.length; i++)
-          "fromTime[$i]": servicesController.monTimeSlot[i].tempFromTime,
-        for (int i = 0; i < servicesController.monTimeSlot.length; i++)
-          "toTime[$i]": servicesController.monTimeSlot[i].tempToTime,
-
-        for (int i = 0; i < servicesController.tueTimeSlot.length; i++)
-          "weekdays[$i]": "Tuesday",
-        for (int i = 0; i < servicesController.tueTimeSlot.length; i++)
-          "fromTime[$i]": servicesController.tueTimeSlot[i].tempFromTime,
-        for (int i = 0; i < servicesController.tueTimeSlot.length; i++)
-          "toTime[$i]": servicesController.tueTimeSlot[i].tempToTime,
-
-        for (int i = 0; i < servicesController.wedTimeSlot.length; i++)
-          "weekdays[$i]": "Wednesday",
-        for (int i = 0; i < servicesController.wedTimeSlot.length; i++)
-          "fromTime[$i]": servicesController.wedTimeSlot[i].tempFromTime,
-        for (int i = 0; i < servicesController.wedTimeSlot.length; i++)
-          "toTime[$i]": servicesController.wedTimeSlot[i].tempToTime,
-
-        for (int i = 0; i < servicesController.thuTimeSlot.length; i++)
-          "weekdays[$i]": "Tursday",
-        for (int i = 0; i < servicesController.thuTimeSlot.length; i++)
-          "fromTime[$i]": servicesController.thuTimeSlot[i].tempFromTime,
-        for (int i = 0; i < servicesController.thuTimeSlot.length; i++)
-          "toTime[$i]": servicesController.thuTimeSlot[i].tempToTime,
-
-          for (int i = 0; i < servicesController.friTimeSlot.length; i++)
-          "weekdays[$i]": "Friday",
-        for (int i = 0; i < servicesController.friTimeSlot.length; i++)
-          "fromTime[$i]": servicesController.friTimeSlot[i].tempFromTime,
-        for (int i = 0; i < servicesController.friTimeSlot.length; i++)
-          "toTime[$i]": servicesController.friTimeSlot[i].tempToTime,
-
-
-          for (int i = 0; i < servicesController.satTimeSlot.length; i++)
-          "weekdays[$i]": "Saturday",
-        for (int i = 0; i < servicesController.satTimeSlot.length; i++)
-          "fromTime[$i]": servicesController.satTimeSlot[i].tempFromTime,
-        for (int i = 0; i < servicesController.satTimeSlot.length; i++)
-          "toTime[$i]": servicesController.satTimeSlot[i].tempToTime,
-
+        for (int i = 0; i < tempTimeSlotsList.length; i++)
+          "weekdays[$i]": tempTimeSlotsList[i].weedDay,
+        for (int i = 0; i < tempTimeSlotsList.length; i++)
+          "fromTime[$i]": tempTimeSlotsList[i].tempFromTime,
+        for (int i = 0; i < tempTimeSlotsList.length; i++)
+          "toTime[$i]": tempTimeSlotsList[i].tempToTime,
 
         // if (createServiceModel.offerPercentage != null)
         //   "offerPercentage": "${createServiceModel.offerPercentage}%",
