@@ -44,6 +44,7 @@ class CouponsListData {
   String status;
   String image;
   String description;
+  String couponCode;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -61,6 +62,7 @@ class CouponsListData {
     required this.description,
     required this.createdAt,
     required this.updatedAt,
+    required this.couponCode,
   });
 
   factory CouponsListData.fromJson(Map<String, dynamic> json) =>
@@ -72,6 +74,7 @@ class CouponsListData {
         startsAt: DateTime.parse(json["starts_at"]),
         endsAt: DateTime.parse(json["ends_at"]),
         couponAmount: json["coupon_amount"],
+        couponCode: json["coupon_code"] ?? "",
         buyAmount: json["buy_amount"] ?? "",
         status: json["status"],
         image: json["image"],

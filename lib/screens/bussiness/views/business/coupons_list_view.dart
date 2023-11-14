@@ -157,6 +157,15 @@ class _CouponsListViewState extends State<CouponsListView> {
                                     ),
                                   ),
                                   Text(
+                                    "Coupon Code : ${authController.addedCouponList[index].couponCode}",
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
                                     "Start At : ${formatDate(authController.addedCouponList[index].startsAt, [
                                           dd,
                                           "-",
