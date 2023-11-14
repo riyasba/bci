@@ -1,4 +1,5 @@
 import 'package:bci/authentications/generate_otp/member_login_screen.dart';
+import 'package:bci/constands/app_fonts.dart';
 import 'package:bci/constands/constands.dart';
 import 'package:bci/controllers/auth_controllers.dart';
 import 'package:bci/models/members_register_model.dart';
@@ -7,11 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-
-
 class MemberSignUpScreen extends StatefulWidget {
-   String phoneNumber;
-   MemberSignUpScreen({super.key,this.phoneNumber = ""});
+  String phoneNumber;
+  MemberSignUpScreen({super.key, this.phoneNumber = ""});
 
   @override
   State<MemberSignUpScreen> createState() => _MemberSignUpScreenState();
@@ -75,16 +74,20 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
   FocusNode emailFocusNode = FocusNode();
   FocusNode mobileNumberFocusNode = FocusNode();
 
-
-  setDefault(){
+  setDefault() {
     mobileController.text = widget.phoneNumber;
   }
-
 
   @override
   void initState() {
     super.initState();
-     setDefault();
+    setDefault();
+    referralController.addListener(getRefferalName);
+  }
+
+  getRefferalName() async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    authController.getRefferalName(referralController.text);
   }
 
   @override
@@ -114,8 +117,9 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                 ),
                 ksizedbox30,
                 const Image(
-                    height: 200,
-                    image: AssetImage("assets/images/Group 6011.png"),),
+                  height: 200,
+                  image: AssetImage("assets/images/Group 6011.png"),
+                ),
                 ksizedbox30,
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
@@ -136,20 +140,20 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                         filled: true,
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
-                            borderSide:
-                                const BorderSide(color: const Color(0xff707070))),
+                            borderSide: const BorderSide(
+                                color: const Color(0xff707070))),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
-                            borderSide:
-                                const BorderSide(color: const Color(0xff707070))),
+                            borderSide: const BorderSide(
+                                color: const Color(0xff707070))),
                         isCollapsed: false,
                         isDense: true,
-                        contentPadding:
-                            const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                        contentPadding: const EdgeInsets.only(
+                            top: 12, bottom: 12, left: 15),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
-                            borderSide:
-                                const BorderSide(color: const Color(0xff707070))),
+                            borderSide: const BorderSide(
+                                color: const Color(0xff707070))),
                         hintText: "User Name",
                         hintStyle: TextStyle(
                           color: kblue,
@@ -217,20 +221,20 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                         filled: true,
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
-                            borderSide:
-                                const BorderSide(color: const Color(0xff707070))),
+                            borderSide: const BorderSide(
+                                color: const Color(0xff707070))),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
-                            borderSide:
-                                const BorderSide(color: const Color(0xff707070))),
+                            borderSide: const BorderSide(
+                                color: const Color(0xff707070))),
                         isCollapsed: false,
                         isDense: true,
-                        contentPadding:
-                            const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                        contentPadding: const EdgeInsets.only(
+                            top: 12, bottom: 12, left: 15),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
-                            borderSide:
-                                const BorderSide(color: const Color(0xff707070))),
+                            borderSide: const BorderSide(
+                                color: const Color(0xff707070))),
                         hintText: "Email",
                         hintStyle: TextStyle(
                           color: kblue,
@@ -261,20 +265,20 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                         filled: true,
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
-                            borderSide:
-                                const BorderSide(color: const Color(0xff707070))),
+                            borderSide: const BorderSide(
+                                color: const Color(0xff707070))),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
-                            borderSide:
-                                const BorderSide(color: const Color(0xff707070))),
+                            borderSide: const BorderSide(
+                                color: const Color(0xff707070))),
                         isCollapsed: false,
                         isDense: true,
-                        contentPadding:
-                            const EdgeInsets.only(top: 12, bottom: 12, left: 15),
+                        contentPadding: const EdgeInsets.only(
+                            top: 12, bottom: 12, left: 15),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
-                            borderSide:
-                                const BorderSide(color: const Color(0xff707070))),
+                            borderSide: const BorderSide(
+                                color: const Color(0xff707070))),
                         hintText: "Mobile Number",
                         hintStyle: TextStyle(
                           color: kblue,
@@ -282,58 +286,89 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                         )),
                   ),
                 ),
-                if(isReferral == true)
-                Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: TextFormField(
-                    textInputAction: TextInputAction.next,
-                    controller: referralController,
-                    //autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide:
-                                const BorderSide(color:  Color(0xff707070))),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide:
-                                const BorderSide(color:  Color(0xff707070))),
-                        isCollapsed: false,
-                        isDense: true,
-                        contentPadding:
-                            const EdgeInsets.only(top: 12, bottom: 12, left: 15),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide:
-                                const BorderSide(color:  Color(0xff707070))),
-                        hintText: "Referral Code",
-                        hintStyle: TextStyle(
-                          color: kblue,
-                          fontWeight: FontWeight.w400,
-                        )),
+                if (isReferral == true)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          textInputAction: TextInputAction.next,
+                          controller: referralController,
+                          //autovalidateMode: AutovalidateMode.onUserInteraction,
+                          decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              filled: true,
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xff707070))),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xff707070))),
+                              isCollapsed: false,
+                              isDense: true,
+                              contentPadding: const EdgeInsets.only(
+                                  top: 12, bottom: 12, left: 15),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xff707070))),
+                              hintText: "Referral Code",
+                              hintStyle: TextStyle(
+                                color: kblue,
+                                fontWeight: FontWeight.w400,
+                              )),
+                        ),
+                        ksizedbox10,
+                        Obx(
+                          () => authController.refferalName.value.isNotEmpty
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Referred by: ",
+                                        style: primaryFont.copyWith(
+                                            color: Colors.black, fontSize: 16),
+                                      ),
+                                      Text(
+                                        authController.refferalName.value,
+                                        style: primaryFont.copyWith(
+                                            color: Colors.green, fontSize: 16),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : Container(
+                                  height: 5,
+                                ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
                 Row(
                   children: [
                     Checkbox(
-                          checkColor: Colors.white,
-                           fillColor:
-                           MaterialStateProperty.all(kblue),
-                            value: isReferral,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isReferral = value!;
-                              });
-                             },
-                     ),
-                     Text(
-                  "Referral Code",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w400, color: kblue),
-                ),
+                      checkColor: Colors.white,
+                      fillColor: MaterialStateProperty.all(kblue),
+                      value: isReferral,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isReferral = value!;
+                        });
+                      },
+                    ),
+                    Text(
+                      "Referral Code",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: kblue),
+                    ),
                   ],
                 ),
 
@@ -518,37 +553,36 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                 //     ),
                 //   ),
                 // ),
-                
+
                 Obx(
                   () => authController.isLoading.isTrue
                       ? Container(
-                        height: 50,
-                        width: size.width,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          border:
-                              Border.all(color: const Color(0xffFFBF7E)),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color(0xFFFF5C29),
-                              blurRadius: 3.0,
-                            )
-                          ],
-                          gradient: const LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [
-                              Color(0xFFFF5C29),
-                              Color.fromARGB(255, 255, 123, 34),
+                          height: 50,
+                          width: size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: const Color(0xffFFBF7E)),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0xFFFF5C29),
+                                blurRadius: 3.0,
+                              )
                             ],
+                            gradient: const LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                Color(0xFFFF5C29),
+                                Color.fromARGB(255, 255, 123, 34),
+                              ],
+                            ),
                           ),
-                        ),
-                        child: const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      )
+                        )
                       : InkWell(
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
@@ -560,15 +594,16 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                               //     state: stateController.text,
                               //     personalId: "",
                               //     aadhrId: "");
-                              MemberRegisterModel memberRegisterModel = MemberRegisterModel(
-                                email: emailController.text,
-                                name: usernamecontroller.text,
-                                mobile: mobileController.text,
-                                roleId: "3"
-                                );
+                              MemberRegisterModel memberRegisterModel =
+                                  MemberRegisterModel(
+                                      email: emailController.text,
+                                      name: usernamecontroller.text,
+                                      mobile: mobileController.text,
+                                      roleId: "3");
                               authController.registerMember(
-                                  referralCode: referralController.text,
-                                  memberRegisterModel: memberRegisterModel,);
+                                referralCode: referralController.text,
+                                memberRegisterModel: memberRegisterModel,
+                              );
                             }
                           },
                           child: Container(
@@ -576,8 +611,8 @@ class _MemberSignUpScreenState extends State<MemberSignUpScreen> {
                             width: size.width,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(6),
-                              border: Border.all(
-                                  color: const Color(0xffFFBF7E)),
+                              border:
+                                  Border.all(color: const Color(0xffFFBF7E)),
                               boxShadow: const [
                                 BoxShadow(
                                   color: Color(0xFFFF5C29),

@@ -6,12 +6,14 @@ import 'package:bci/models/category_model.dart';
 import 'package:bci/models/members_register_model.dart';
 import 'package:bci/models/merchants_register_model.dart';
 import 'package:bci/models/notification_list_model.dart';
+import 'package:bci/models/refferal_name_model.dart';
 import 'package:bci/models/sub_category_model.dart';
 import 'package:bci/models/transaction_history_model.dart';
 import 'package:bci/screens/members/sign_up_view/member_sign_up_screen.dart';
 import 'package:bci/services/network/auth_api_services/add_transaction_api_service.dart';
 import 'package:bci/services/network/auth_api_services/fcm_token_store_api_service.dart';
 import 'package:bci/services/network/auth_api_services/get_otp_api_services.dart';
+import 'package:bci/services/network/auth_api_services/get_refferal_names.dart';
 import 'package:bci/services/network/auth_api_services/login_api_services.dart';
 import 'package:bci/services/network/auth_api_services/merchant_api_services.dart';
 import 'package:bci/services/network/auth_api_services/notification_list_api_service.dart';
@@ -56,7 +58,6 @@ class AuthController extends GetxController {
   RxBool isOTPLoading = false.obs;
 
 //api callings
- 
 
   registerMember(
       {required MemberRegisterModel memberRegisterModel,
@@ -72,7 +73,8 @@ class AuthController extends GetxController {
     if (response.statusCode == 201) {
       print("User id ------>>${response.data["user"]["id"]}");
       memReferralRegister(
-          referralCode: referralCode, userId: response.data["user"]["id"].toString());
+          referralCode: referralCode,
+          userId: response.data["user"]["id"].toString());
       Get.to(OtpVerificationView(
         phoneNumber: memberRegisterModel.mobile,
         otp: response.data["user"]["otp"].toString(),
@@ -119,9 +121,9 @@ class AuthController extends GetxController {
         otp: response.data["otp"].toString(),
       ));
     } else if (response.statusCode == 404) {
-      Get.to(()=> MemberSignUpScreen(
-        phoneNumber: mobileNumber,
-      ));
+      Get.to(() => MemberSignUpScreen(
+            phoneNumber: mobileNumber,
+          ));
       // Get.rawSnackbar(
       //     backgroundColor: Colors.red,
       //     messageText: Text(
@@ -151,8 +153,6 @@ class AuthController extends GetxController {
     }
     return otpCode;
   }
-
-
 
   loginUsers({required String mobile, required String otp}) async {
     isLoading(true);
@@ -205,8 +205,6 @@ class AuthController extends GetxController {
       //     ));
     }
   }
-
- 
 
   getCategoryList() async {
     dio.Response<dynamic> response = await getCategoryApiServices.getCategory();
@@ -285,9 +283,12 @@ class AuthController extends GetxController {
   AddTransactionApiServices addTransactionApiServices =
       AddTransactionApiServices();
 
-  addTransaction({required String amount,required String userId,}) async {
-    dio.Response<dynamic> response =
-        await addTransactionApiServices.addTransactionApi(amount: amount, userId: userId);
+  addTransaction({
+    required String amount,
+    required String userId,
+  }) async {
+    dio.Response<dynamic> response = await addTransactionApiServices
+        .addTransactionApi(amount: amount, userId: userId);
     if (response.statusCode == 200) {
     } else {
       Get.rawSnackbar(
@@ -344,5 +345,22 @@ class AuthController extends GetxController {
           ));
     }
     update();
+  }
+
+  RefferalNameAPIServices refferalNameAPIServices = RefferalNameAPIServices();
+
+  RxString refferalName = "".obs;
+
+  getRefferalName(String refferalId) async {
+    refferalName("");
+    dio.Response<dynamic> response = await refferalNameAPIServices
+        .refferalNameApiServices(reffrealId: refferalId.trim());
+
+    if (response.statusCode == 200) {
+      RefferalDataModel refferalDataModel =
+          RefferalDataModel.fromJson(response.data);
+
+      refferalName(refferalDataModel.departments.name);
+    }
   }
 }

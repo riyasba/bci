@@ -344,5 +344,10 @@ abstract class BaseApiService {
 
   //changes
   final String serviceDetailsURL =
-      "https://www.portal.bcipvtltd.com/api/auth/service_details";               
+      "https://www.portal.bcipvtltd.com/api/auth/service_details";   
+
+
+  //reffreal name
+  final String refferedNameURL =
+      "https://www.portal.bcipvtltd.com/api/get_refferal_name";              
 }
