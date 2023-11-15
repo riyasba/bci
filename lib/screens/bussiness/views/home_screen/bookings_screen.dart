@@ -132,7 +132,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(280),
+          preferredSize: const Size.fromHeight(280),
           child: Stack(children: [
             Container(
               height: 250,
@@ -144,16 +144,17 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
               child: Container(
                 height: 150,
                 color: kblue,
-                child:const Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                     Padding(
+                    Padding(
                       padding: EdgeInsets.only(left: 20),
                       child: Text(
                         'Bookings',
-                        style: TextStyle(fontSize: 20, 
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white),
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white),
                       ),
                     ),
                   ],
@@ -274,20 +275,24 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
           ])),
       body: GetBuilder<ServicesController>(builder: (_) {
         return serviceController.bookingListData.isEmpty
-            ?  Center(
+            ? Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children:[
-                   Image.asset("assets/icons/noBooking.png",
-                   height: 250,fit: BoxFit.fitHeight,
-                   ),
-                   ksizedbox20,
-                   Text('No Booking History',
-                   style: TextStyle(
-                    fontSize: 16,
-                    color: kblue,
-                    fontWeight: FontWeight.w700
-                   ),)]),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/icons/noBooking.png",
+                        height: 250,
+                        fit: BoxFit.fitHeight,
+                      ),
+                      ksizedbox20,
+                      Text(
+                        'No Booking History',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: kblue,
+                            fontWeight: FontWeight.w700),
+                      )
+                    ]),
               )
             : ListView.builder(
                 itemCount: serviceController.bookingListData.length,
@@ -387,6 +392,23 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                                           ),
                                         ),
                                       ),
+                                      if (serviceController
+                                              .bookingListData[index].status ==
+                                          "pending")
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 6),
+                                          child: Container(
+                                            width: 210.w,
+                                            child: const Text(
+                                              "Cancelled",
+                                              maxLines: 5,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.red),
+                                            ),
+                                          ),
+                                        ),
                                     ],
                                   ),
                                 )
@@ -410,7 +432,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
       String amt,
       String qty,
       String cusName,
-      String mobile, 
+      String mobile,
       String email) {
     return showDialog<void>(
       context: context,
