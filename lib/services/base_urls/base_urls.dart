@@ -349,5 +349,8 @@ abstract class BaseApiService {
 
   //reffreal name
   final String refferedNameURL =
-      "https://www.portal.bcipvtltd.com/api/get_refferal_name";              
+      "https://www.portal.bcipvtltd.com/api/get_refferal_name";     
+
+   //delete user Details
+  final String deleteUserURL = "https://portal.bcipvtltd.com/api/auth/delete_user";             
 }

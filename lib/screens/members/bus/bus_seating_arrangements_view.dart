@@ -62,7 +62,7 @@ class _BusSeatsScreenState extends State<BusDynamicSeatsScreen2> {
                   clipper: SinCosineWaveClipper(),
                   child: Container(
                       height: 200,
-                      width: 400,
+                      width: size.width,
                       color: kblue,
                       child: Column(
                         children: [
@@ -172,7 +172,7 @@ class _BusSeatsScreenState extends State<BusDynamicSeatsScreen2> {
                                                       for (var seat in seats)
                                                         InkWell(
                                                           onTap: () {
-                                                            if (seat.bookable) {
+                                                            if (seat.bookable ) {
                                                               if (seat.isSelect ==
                                                                   true) {
                                                                 seat.isSelect =
@@ -211,7 +211,8 @@ class _BusSeatsScreenState extends State<BusDynamicSeatsScreen2> {
                                                                 busController
                                                                     .update();
                                                               } else {
-                                                                seat.isSelect =
+                                                                if(seat.bookable && seatIds.length <6 ){
+                                                                  seat.isSelect =
                                                                     true;
                                                                 setState(() {
                                                                   seatIds.add(seat
@@ -244,8 +245,14 @@ class _BusSeatsScreenState extends State<BusDynamicSeatsScreen2> {
 
                                                                 busController
                                                                     .update();
+  
+                                                                } else {
+                                                                   Get.rawSnackbar(
+                                                                      message: "Maximum 6 seats allowed per passenger",
+                                                                      backgroundColor: const Color.fromARGB(255, 141, 168, 181));
+                                                                  }
                                                               }
-                                                            }
+                                                            } 
                                                           },
                                                           child: Padding(
                                                             padding:
@@ -406,7 +413,8 @@ class _BusSeatsScreenState extends State<BusDynamicSeatsScreen2> {
                                                             busController
                                                                 .update();
                                                           } else {
-                                                            seat.isSelect =
+                                                            if(seat.bookable && seatIds.length <6){
+                                                              seat.isSelect =
                                                                 true;
                                                             setState(() {
                                                               seatIds.add(seat
@@ -442,8 +450,15 @@ class _BusSeatsScreenState extends State<BusDynamicSeatsScreen2> {
 
                                                             busController
                                                                 .update();
+                            
+                                                            } else {
+                                                              Get.rawSnackbar(
+                                                               message: "Maximum 6 seats allowed per passenger",
+                                                               backgroundColor: const Color.fromARGB(255, 141, 168, 181));
+                                                            }
+                                                            
                                                           }
-                                                        }
+                                                        } 
                                                       },
                                                       child: Padding(
                                                         padding:

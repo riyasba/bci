@@ -35,7 +35,7 @@ class _FlightWidgetState extends State<FlightWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/flightnotavailableimage.png'),
+                    Image.asset('assets/images/Group 6764.png'),
                     ksizedbox20,
                     Text(
                       'No Bookings',

@@ -57,7 +57,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       child: Image.asset(
-                          'assets/images/hotelbookingnotavailableimage.png'),
+                          'assets/icons/hotel_no.png'),
                     ),
                     ksizedbox20,
                     Text(

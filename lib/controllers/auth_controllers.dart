@@ -25,6 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import '../models/offerslist_model.dart';
+import '../services/network/auth_api_services/delete_user_act_api_service.dart';
 import '../services/network/auth_api_services/member_register_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -363,4 +364,31 @@ class AuthController extends GetxController {
       refferalName(refferalDataModel.departments.name);
     }
   }
+
+  //delete user account
+
+  DeleteUserAccountApi deleteUserAccountApi = DeleteUserAccountApi();
+
+   deleteUser() async {
+    isLoading(true);
+    dio.Response<dynamic> response = await deleteUserAccountApi
+        .deleteUserAccountApi();
+    isLoading(false);
+    if (response.statusCode == 200) {
+     Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            response.data["message"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    } else {
+      Get.rawSnackbar(
+          backgroundColor: Colors.red,
+          messageText: Text(
+            response.data["message"],
+            style: primaryFont.copyWith(color: Colors.white),
+          ));
+    }
+  }
+
 }
