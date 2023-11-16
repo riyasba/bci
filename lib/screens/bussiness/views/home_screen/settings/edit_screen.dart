@@ -40,6 +40,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
 
   File? image;
   File? image2;
+  File? panProofImg;
   File? imageprofile;
 
   final profileController = Get.find<ProfileController>();
@@ -167,6 +168,8 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
       final imagetemp2 = File(image2.path);
       setState(() {
         this.image2 = imagetemp2;
+        panProofImg = imagetemp2;
+        panCardImage = null;
       });
     } catch (e) {
       print('Failed to pick image:$e');
@@ -180,6 +183,8 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
       final imagetemp2 = File(image2.path);
       setState(() {
         this.image2 = imagetemp2;
+        panProofImg = imagetemp2;
+        panCardImage = null;
       });
     } catch (e) {
       print('Failed to pick image:$e');
@@ -638,13 +643,91 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 aadharCardImage != null
-                    ? Container(
-                        height: 100,
-                        width: 100,
-                        child: Image.network(aadharCardImage))
+                    ? InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return Container(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Get.back();
+                                            pickerimage();
+                                          },
+                                          child: const Text(
+                                            'Choose Gallery',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16),
+                                          )),
+                                      TextButton(
+                                          onPressed: () {
+                                            Get.back();
+                                            imagepic();
+                                          },
+                                          child: const Text(
+                                            'Choose Camera',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16),
+                                          ))
+                                    ],
+                                  ),
+                                );
+                              });
+                        },
+                        child: Container(
+                            height: 100,
+                            width: 100,
+                            child: Image.network(aadharCardImage)),
+                      )
                     : image != null
-                        ? Container(
-                            height: 100, width: 100, child: Image.file(image!))
+                        ? InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) {
+                                    return Container(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Get.back();
+                                                pickerimage();
+                                              },
+                                              child: const Text(
+                                                'Choose Gallery',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16),
+                                              )),
+                                          TextButton(
+                                              onPressed: () {
+                                                Get.back();
+                                                imagepic();
+                                              },
+                                              child: const Text(
+                                                'Choose Camera',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16),
+                                              ))
+                                        ],
+                                      ),
+                                    );
+                                  });
+                            },
+                            child: Container(
+                                height: 100,
+                                width: 100,
+                                child: Image.file(image!)),
+                          )
                         : InkWell(
                             onTap: () {
                               showModalBottomSheet(
@@ -690,13 +773,91 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                     'assets/images/imageupload.png')),
                           ),
                 panCardImage != null
-                    ? Container(
-                        height: 100,
-                        width: 100,
-                        child: Image.network(panCardImage))
+                    ? InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return Container(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Get.back();
+                                            pickerimage2();
+                                          },
+                                          child: const Text(
+                                            'Choose gallery',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16),
+                                          )),
+                                      TextButton(
+                                          onPressed: () {
+                                            Get.back();
+                                            imagepic2();
+                                          },
+                                          child: const Text(
+                                            'Choose Camera',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16),
+                                          ))
+                                    ],
+                                  ),
+                                );
+                              });
+                        },
+                        child: Container(
+                            height: 100,
+                            width: 100,
+                            child: Image.network(panCardImage)),
+                      )
                     : image2 != null
-                        ? Container(
-                            height: 100, width: 100, child: Image.file(image2!))
+                        ? InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) {
+                                    return Container(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Get.back();
+                                                pickerimage2();
+                                              },
+                                              child: const Text(
+                                                'Choose gallery',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16),
+                                              )),
+                                          TextButton(
+                                              onPressed: () {
+                                                Get.back();
+                                                imagepic2();
+                                              },
+                                              child: const Text(
+                                                'Choose Camera',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16),
+                                              ))
+                                        ],
+                                      ),
+                                    );
+                                  });
+                            },
+                            child: Container(
+                                height: 100,
+                                width: 100,
+                                child: Image.file(image2!)),
+                          )
                         : InkWell(
                             onTap: () {
                               showModalBottomSheet(
@@ -893,7 +1054,7 @@ class _SettingEditScreenState extends State<SettingEditScreen> {
                                   locationAddress: mapUrlController.text,
                                   aadharProof: image,
                                   videoLink: videoURLController.text,
-                                  panProof: image2);
+                                  panProof: panProofImg);
                           profileController.updateProfile(
                               merchantUpdateModel: merchantUpdateModel);
                         },

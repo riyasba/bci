@@ -37,7 +37,7 @@ class _CreateCouponsScreenState extends State<CreateCouponsScreen> {
   var couponlimitController = TextEditingController();
   final startatController = TextEditingController();
   final endatController = TextEditingController();
-  final buyAmtCntrlr =  TextEditingController();
+  final buyAmtCntrlr = TextEditingController();
 
   File? image;
 
@@ -180,15 +180,18 @@ class _CreateCouponsScreenState extends State<CreateCouponsScreen> {
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                     InkWell(
-                      onTap: (){
-                          Get.to(() => const CouponsListView());
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => const CouponsListView());
                       },
-                       child: Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Image.asset('assets/icons/coupans.png',color: kwhite,),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Image.asset(
+                          'assets/icons/coupans.png',
+                          color: kwhite,
                         ),
-                     )
+                      ),
+                    )
                     // Padding(
                     //   padding: const EdgeInsets.only(right: 20),
                     //   child: Image.asset('assets/images/helps.png'),
@@ -342,7 +345,7 @@ class _CreateCouponsScreenState extends State<CreateCouponsScreen> {
               child: TextFormField(
                 controller: discountValueController,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                 keyboardType: TextInputType.phone,
+                keyboardType: TextInputType.phone,
                 // validator: (value) {
                 //   if (value!.isEmpty) {
                 //     return "Title Can't be Empty";
@@ -377,7 +380,7 @@ class _CreateCouponsScreenState extends State<CreateCouponsScreen> {
               child: TextFormField(
                 controller: couponlimitController,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                 keyboardType: TextInputType.phone,
+                keyboardType: TextInputType.phone,
                 // validator: (value) {
                 //   if (value!.isEmpty) {
                 //     return "Title Can't be Empty";
@@ -605,7 +608,7 @@ class _CreateCouponsScreenState extends State<CreateCouponsScreen> {
                         startsat: selectdt,
                         buyAmt: couponlimitController.text,
                         endsat: selectdt1,
-                        discountValue: couponlimitController.text,
+                        discountValue: discountValueController.text,
                         claimUser: descriptionController.text,
                       );
                     } else {
@@ -659,7 +662,8 @@ class _CreateCouponsScreenState extends State<CreateCouponsScreen> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             boxShadow: <BoxShadow>[
-              BoxShadow(offset: const Offset(0.0, 0.75), blurRadius: 5, color: kgrey)
+              BoxShadow(
+                  offset: const Offset(0.0, 0.75), blurRadius: 5, color: kgrey)
             ],
             color: kwhite,
             border: Border.all(color: kgrey)),
