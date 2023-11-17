@@ -15,6 +15,10 @@ class ProfileUpdateApiServices extends BaseApiService {
     dynamic responseJson;
     try {
       var dio = Dio();
+
+      List<ChildDetailsModel> tempChildDetailsList =
+          childDetailsList.where((element) => element.isNew == true).toList();
+
       FormData formData = FormData.fromMap({
         "name": memberProfileUpdateModel.name,
         "mobile": memberProfileUpdateModel.mobile,
@@ -33,8 +37,6 @@ class ProfileUpdateApiServices extends BaseApiService {
         "gender": memberProfileUpdateModel.gender,
         "branch": memberProfileUpdateModel.branch,
         "spouse": memberProfileUpdateModel.spouse,
-        for (var i = 0; i < memberProfileUpdateModel.children!.length; i++)
-          "child_name[$i]": memberProfileUpdateModel.children![i],
         "wedding_date": memberProfileUpdateModel.weddingDate,
         if (memberProfileUpdateModel.adharproofimg != "null")
           "adhar_proof": await MultipartFile.fromFile(
@@ -44,13 +46,13 @@ class ProfileUpdateApiServices extends BaseApiService {
           "pan_proof": await MultipartFile.fromFile(
               memberProfileUpdateModel.panproofimg,
               filename: "pan_proof"),
-        for (int i = 0; i < childDetailsList.where((element) => element.isNew).toList().length; i++)
-          "child_name[$i]": childDetailsList[i].nameController.text,
-        for (int i = 0; i < childDetailsList.where((element) => element.isNew)
-                    .toList()
-                    .length; i++)
-          "dob[$i]": childDetailsList[i].dateOfBirthController.text,
+        for (int i = 0; i < tempChildDetailsList.length; i++)
+          "child_name[$i]": tempChildDetailsList[i].nameController.text,
+        for (int i = 0; i < tempChildDetailsList.length; i++)
+          "child_dob[$i]": tempChildDetailsList[i].dateOfBirthController.text,
       });
+
+      print(formData.fields);
 
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");

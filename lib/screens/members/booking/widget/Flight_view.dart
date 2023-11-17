@@ -394,21 +394,21 @@ class _FlightWidgetState extends State<FlightWidget> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Text('Download ')
-                    // InkWell(
-                    //   onTap: () {
-                    //     Get.find<FlightsController>().downloadTicketHistory(
-                    //         refernceNo: flightBookedData.bookingRefNo);
-                    //   },
-                    //   child: Container(
-                    //     height: 35,
-                    //     width: 100,
-                    //     decoration: BoxDecoration(
-                    //         color: Colors.green,
-                    //         borderRadius: BorderRadius.circular(10)),
-                    //     child: const Icon(Icons.download,color: Colors.white,),
-                    //   ),
-                    // )
+                    Text('Download '),
+                    InkWell(
+                      onTap: () {
+                        Get.find<FlightsController>().downloadTicketHistory(
+                            refernceNo: flightBookedData.bookingRefNo);
+                      },
+                      child: Container(
+                        height: 35,
+                        width: 100,
+                        decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: const Icon(Icons.download,color: Colors.white,),
+                      ),
+                    )
                   ],
                 ),
               ],

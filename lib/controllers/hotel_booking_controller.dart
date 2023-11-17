@@ -46,7 +46,7 @@ class HotelBookingController extends GetxController {
 
   TempBookingModel? tempBookingModel;
 
-    final destinationcontrolr = TextEditingController();
+  final destinationcontrolr = TextEditingController();
 
   //search hotel
   SearchHotelListApiService searchBusListApiService =
@@ -478,16 +478,23 @@ class HotelBookingController extends GetxController {
   HotelCancelApiServices hotelCancelApiServices = HotelCancelApiServices();
 
   cancelMyHotelBooking(
-      {required String searchToken, required String bookingId}) async {
+      {required String searchToken,
+      required String bookingId,
+      required String amount}) async {
     dio.Response<dynamic> response = await hotelCancelApiServices.cancelHotel(
         searchToken: searchToken, bookingId: bookingId);
 
     if (response.statusCode == 200) {
       Get.rawSnackbar(
           message: "Hotel Booking cancelled", backgroundColor: Colors.green);
+      Get.find<ProfileController>().cancelRefundApi(
+          userId: Get.find<ProfileController>().profileData.first.id.toString(),
+          amount: amount,
+          type: "hotel",
+          bookingId: bookingId);
     } else {
       Get.rawSnackbar(
-          message: "Hotel Can't be cancelled", backgroundColor: Colors.green);
+          message: "Hotel Can't be cancelled", backgroundColor: Colors.black);
     }
   }
 }

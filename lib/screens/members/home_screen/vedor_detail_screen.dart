@@ -323,7 +323,7 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
               // Get.to(() => VendorViewServicesList(
               //       vendorId: widget.vendorListModelData.id.toString(),
               //     ));
-              print("======================>> to category list");
+              print(" >>======================>> to category list");
               Get.to(() => VendorsCategoryListView(
                     vendorId: widget.vendorListModelData.id.toString(),
                   ));

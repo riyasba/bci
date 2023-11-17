@@ -300,6 +300,13 @@ class FlightsController extends GetxController {
         Get.rawSnackbar(
             message: "Cancellation sucessfully ",
             backgroundColor: Colors.green);
+        Get.find<ProfileController>().cancelRefundApi(
+            userId:
+                Get.find<ProfileController>().profileData.first.id.toString(),
+            amount: airReprintModel.bookingPaymentDetail.first.paymentAmount
+                .toString(),
+            type: "flight",
+            bookingId: airReprintModel.bookingRefNo);
       }
     } else {}
   }

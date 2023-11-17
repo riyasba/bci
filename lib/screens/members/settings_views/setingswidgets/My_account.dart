@@ -330,18 +330,17 @@ class _MyAccountState extends State<MyAccount> {
           isMarried = false;
         }
       });
-       profileController.childDetailsList.clear();
+      profileController.childDetailsList.clear();
       for (var names in profileController.profileData.first.children) {
         ChildDetailsModel childDetailsModel = ChildDetailsModel(
             dateOfBirthController: TextEditingController(
               text: names.dob,
-              
             ),
             nameController: TextEditingController(
               text: names.childName,
             ),
             dob: names.dob,
-            isNew: false,
+            isNew: true,
             name: names.childName);
 
         profileController.childDetailsList.add(childDetailsModel);
@@ -1454,7 +1453,8 @@ class _MyAccountState extends State<MyAccount> {
                                                         if (profileController
                                                             .childDetailsList[i]
                                                             .isNew) {
-                                                          _selectChildDateofBrth(context,i);
+                                                          _selectChildDateofBrth(
+                                                              context, i);
                                                         }
                                                       },
                                                       decoration:
@@ -1488,11 +1488,11 @@ class _MyAccountState extends State<MyAccount> {
                                                           ChildDetailsModel
                                                               childDetailsModel =
                                                               ChildDetailsModel(
-                                                            dateOfBirthController:
-                                                                TextEditingController(),
-                                                            nameController:
-                                                                TextEditingController(),
-                                                          );
+                                                                  dateOfBirthController:
+                                                                      TextEditingController(),
+                                                                  nameController:
+                                                                      TextEditingController(),
+                                                                  isNew: true);
                                                           profileController
                                                               .childDetailsList
                                                               .add(
@@ -2068,7 +2068,7 @@ class _MyAccountState extends State<MyAccount> {
                                               panproofimg: image2 == null
                                                   ? "null"
                                                   : image2!.path,
-                                              children:  [],
+                                              children: [],
                                             );
 
                                             profileController.updateProfile(

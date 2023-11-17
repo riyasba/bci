@@ -536,6 +536,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                           .cancelMyHotelBooking(
                                               bookingId:
                                                   bookingData.bookingRefNo,
+                                              amount: bookingData.price,
                                               searchToken:
                                                   bookingData.searchKey);
                                       Get.back();

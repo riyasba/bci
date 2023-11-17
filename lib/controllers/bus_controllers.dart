@@ -1183,6 +1183,10 @@ class BusController extends GetxController {
             BusCancelSeatDetailsModel(
                 pnrNumber: busRequeryModel.transportPnr,
                 seatNumber: details.seatNumber,
+                fare: (double.parse(details.fare.totalAmount.toString()) -
+                        double.parse(
+                            details.fare.cancellationCharges.toString()))
+                    .toStringAsFixed(2),
                 ticketNumber: details.ticketNumber);
         busBookingdetails.add(busCancelSeatDetailsModel);
       }
@@ -1230,6 +1234,17 @@ class BusController extends GetxController {
     if (response.data["Response_Header"]["Error_Desc"] == "SUCCESS") {
       Get.rawSnackbar(
           message: "Booking Cancelled", backgroundColor: Colors.green);
+
+      double tempAmount = 0.00;
+      for (var i = 0; i < busBookingdetails.length; i++) {
+        tempAmount = tempAmount + double.parse(busBookingdetails[i].fare);
+      }
+
+      Get.find<ProfileController>().cancelRefundApi(
+          userId: Get.find<ProfileController>().profileData.first.id.toString(),
+          amount: tempAmount.toStringAsFixed(2),
+          type: "bus",
+          bookingId: bookingNumber);
     } else {
       Get.rawSnackbar(
           message: response.data["Response_Header"]["Error_InnerException"],
