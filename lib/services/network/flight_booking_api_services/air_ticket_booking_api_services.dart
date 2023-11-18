@@ -20,10 +20,10 @@ class AirTicketBookingApiServices extends BaseApiService {
 
       var data = {
         "Auth_Header": {
-          "UserId": "benze",
-          "Password": "9B1AD178625CE0BCA5BC8E5FD616B06E0BE760FD",
+          "UserId": "benzclub",
+          "Password": "B39F285E37EDCE355386E79CFD8A979ACE740A1E",
           "IP_Address": "101.188.67.134",
-          "Request_Id": "5500g887959052",
+          "Request_Id": "56456456456464",
           "IMEI_Number": "2232323232323"
         },
         "Customer_Mobile": bookingModel.customerMobile,

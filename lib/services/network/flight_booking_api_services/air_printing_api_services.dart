@@ -28,9 +28,15 @@ class AirRePrintingServices extends BaseApiService {
                 return status! <= 500;
               }),
           data: {
-            "IMEI_Number": "64654546546546",
+            "Auth_Header": {
+              "UserId": "benzclub",
+              "Password": "B39F285E37EDCE355386E79CFD8A979ACE740A1E",
+              "IP_Address": "101.188.67.134",
+              "Request_Id": "56456456456464",
+              "IMEI_Number": "2232323232323"
+            },
             "Booking_RefNo": refrenceNo,
-            "Airline_PNR": clientReferneNo,
+            "Airline_PNR": ""
           }
           );
       print("::::::::<-- Air Ticket printing -->::::::::status code::::::::::");

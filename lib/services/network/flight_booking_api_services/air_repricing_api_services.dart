@@ -15,11 +15,22 @@ class AirRepriceApiServices extends BaseApiService {
   }) async {
     dynamic responseJson;
 
-   var data2 = {
-
-
-   };
-
+    var data2 = {
+      "Auth_Header": {
+          "UserId": "benzclub",
+        "Password": "B39F285E37EDCE355386E79CFD8A979ACE740A1E",
+        "IP_Address": "101.188.67.134",
+        "Request_Id": "56456456456464",
+        "IMEI_Number": "2232323232323"
+      },
+      "Search_Key": searchKey,
+      "AirRepriceRequests": [
+        {"Flight_Key": flight.flightKey, "Fare_Id": flight.fares.first.fareId}
+      ],
+      "Customer_Mobile": "8157868869",
+      "GST_Input": false,
+      "SinglePricing": false
+    };
 
     try {
       var dio = Dio();
@@ -36,13 +47,7 @@ class AirRepriceApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {
-            "imei_number": "64654546546546",
-            "search_key": searchKey,
-            "flight_key": flight.flightKey,
-            "fare_id": flight.fares.first.fareId,
-            "customer_mobile": mobileNumber
-          });
+          data: data2);
       print("::::::::<--Air Repricing-->::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);

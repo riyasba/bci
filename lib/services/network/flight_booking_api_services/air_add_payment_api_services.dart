@@ -28,13 +28,20 @@ class AirAddPaymentApiServices extends BaseApiService {
                 return status! <= 500;
               }),
           data: {
-            "IMEI_Number": "64654546546546",
-            "RefNo": refrenceNo,
+            "Auth_Header": {
+              "UserId": "benzclub",
+              "Password": "B39F285E37EDCE355386E79CFD8A979ACE740A1E",
+              "IP_Address": "101.188.67.134",
+              "Request_Id": "56456456456464",
+              "IMEI_Number": "2232323232323"
+            },
             "ClientRefNo": clientReferneNo,
+            "RefNo": refrenceNo,
             "TransactionType": 0,
-            "ProductId": "1",
+            "ProductId": "1"
           });
-      print("::::::::<--Air add payment-->::::::::status code::::::$refrenceNo::::");
+      print(
+          "::::::::<--Air add payment-->::::::::status code::::::$refrenceNo::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

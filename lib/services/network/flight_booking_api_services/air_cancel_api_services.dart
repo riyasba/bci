@@ -7,10 +7,9 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AirCancelApiServices extends BaseApiService {
-
   Future airCancelApiServices({
-    required String  Airlinepnr,
-    required String  Refno,
+    required String Airlinepnr,
+    required String Refno,
     required String Cancelcode,
     required String ReqRemarks,
     required String CancellationType,
@@ -33,13 +32,25 @@ class AirCancelApiServices extends BaseApiService {
                 return status! <= 500;
               }),
           data: {
-            "IMEI_Number": "64654546546546",
-            "CancellationType": '',
-            "ReqRemarks": '',
-            "Cancelcode":"",
-            "Refno":"",
-            "Airline_PNR":""
-
+            "Auth_Header": {
+              "UserId": "benze",
+              "Password": "9B1AD178625CE0BCA5BC8E5FD616B06E0BE760FD",
+              "IP_Address": "101.188.67.134",
+              "Request_Id": "5500g887959052",
+              "IMEI_Number": "2232323232323"
+            },
+            "AirTicketCancelDetails": [
+              {
+                "FlightId": "4796069964091194484",
+                "PassengerId": "1",
+                "SegmentId": "0"
+              }
+            ],
+            "Airline_PNR": "",
+            "RefNo": "FBB7PPD9",
+            "CancelCode": "005",
+            "ReqRemarks": "I cancelled the ticket directly with Airline",
+            "CancellationType": 0
           });
       print(
           "::::::::<-- Air cancellation api -->::::::::status code::::::::::");

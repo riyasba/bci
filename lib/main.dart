@@ -9,7 +9,7 @@ import 'package:bci/controllers/plans_controller.dart';
 import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/controllers/settings_controllers.dart';
 import 'package:bci/screens/members/holiday/controllers/holidaycontroller.dart';
-import 'package:bci/screens/members/manual_payment_options/google_pay_screen.dart';
+
 import 'package:bci/screens/members/members%20widgets/member_bottumbavigation.dart';
 import 'package:bci/screens/members/otcpayment/member_sub_successful.dart';
 import 'package:bci/screens/members/otcpayment/payment_failed_screen.dart';
