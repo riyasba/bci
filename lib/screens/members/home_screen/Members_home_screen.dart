@@ -16,19 +16,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:isgpayui_plugin/isgpayui_plugin.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../constands/constands.dart';
 import '../../bussiness/views/business/notification_screen.dart';
 import '../bus/bus_screen.dart';
-import '../coupen/coupons_screen.dart';
 import '../holiday/holiday_home.dart';
 
-import '../hottel/Hotel_members.dart';
 import '../hottel/search_hotel_screen.dart';
 import '../liquer_screen/liquer_screen.dart';
-import '../offer screen/offer_screen_grid.dart';
 import '../settings_views/upgrade_screen.dart';
 
 class Home_screen1 extends StatefulWidget {
