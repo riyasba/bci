@@ -308,13 +308,13 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                               .map((item) => DropdownMenuItem<SlotDetail>(
                                     value: item,
                                     child: Text(
-                                      "${item.weekday} ${formatDate(DateTime(2023, 1, 1, int.parse(item.endTime.split(":").first)), [
+                                      "${item.weekday} ${formatDate(DateTime(2023, 1, 1, int.parse(item.startTime.split(":").first), int.parse(item.startTime.split(":")[1])), [
                                             hh,
                                             ":",
                                             nn,
                                             " ",
                                             am
-                                          ])}-${formatDate(DateTime(2023, 1, 1, int.parse(item.startTime.split(":").first)), [
+                                          ])}-${formatDate(DateTime(2023, 1, 1, int.parse(item.endTime.split(":").first),int.parse(item.endTime.split(":")[1])), [
                                             hh,
                                             ":",
                                             nn,

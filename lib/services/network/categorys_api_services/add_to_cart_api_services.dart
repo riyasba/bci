@@ -30,7 +30,7 @@ class AddToCartApiServices extends BaseApiService {
             "book_date_time": startTime 
           });
       print(
-          "::::::::<Add To Cart Api Services Api>::::::::status code::::$serviceid:::$amount:::");
+          "::::::::<Add To Cart Api Services Api>::::::::status code:$startTime :::$serviceid:::$amount:::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

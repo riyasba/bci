@@ -42,7 +42,7 @@ class AddBookingApiServices extends BaseApiService {
             "refrence_id": referenceId
           });
       print(
-          "::::::::<Add booking Api Services Api>::::::::status code::::::::::");
+          "::::::::<Add booking Api Services Api>::::::::status code:::$bookDateTime:::::::");
       print(
           "....<$serviceid>...<$cartid>...<$qty>...<$amount>...<$couponcode>..<$bookDateTime>.***");
       print(response.statusCode);
