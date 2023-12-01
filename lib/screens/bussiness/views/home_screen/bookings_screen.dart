@@ -315,10 +315,13 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                                     .bookingListData[index].purchasePrice,
                                 serviceController
                                     .bookingListData[index].quantity,
+                                    serviceController
+                                    .bookingListData[index].user.timeSlots,
                                 serviceController
                                     .bookingListData[index].user.name,
                                 serviceController
                                     .bookingListData[index].user.mobile,
+                              
                                 serviceController
                                     .bookingListData[index].user.email);
                           },
@@ -431,6 +434,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
       String des,
       String amt,
       String qty,
+      String timeSlots,
       String cusName,
       String mobile,
       String email) {
@@ -495,7 +499,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                           fontWeight: FontWeight.bold),
                     ),
                     Container(
-                      width: 90,
+                      width: 110,
                       child: Text(
                         tit,
                         style: TextStyle(
@@ -538,7 +542,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                           fontWeight: FontWeight.bold),
                     ),
                     Container(
-                      width: 90,
+                      width: 110,
                       child: Text(
                         cusName,
                         style: TextStyle(
@@ -580,9 +584,34 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                           fontWeight: FontWeight.bold),
                     ),
                     Container(
-                      width: 90,
+                      width: 110,
                       child: Text(
                         qty,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: kgrey,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Time Slot',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      width: 110,
+                      child: Text(
+                        timeSlots,
                         style: TextStyle(
                             fontSize: 15,
                             color: kgrey,
@@ -605,7 +634,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                           fontWeight: FontWeight.bold),
                     ),
                     Container(
-                      width: 90,
+                      width: 110,
                       child: Text(
                         "₹ ${amt}",
                         style: const TextStyle(
@@ -630,7 +659,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                           fontWeight: FontWeight.bold),
                     ),
                     Container(
-                      width: 90,
+                      width: 110,
                       child: Text(
                         mobile,
                         style: TextStyle(
@@ -655,7 +684,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                           fontWeight: FontWeight.bold),
                     ),
                     Container(
-                      width: 96,
+                      width: 110,
                       child: Text(
                         email,
                         style: TextStyle(
