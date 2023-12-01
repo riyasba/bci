@@ -250,6 +250,7 @@ class _MemberSearchViewScreenState extends State<MemberSearchViewScreen> {
                                               amount: widget
                                                   .searchServicelist.saleAmount,
                                               startTime: "",
+                                              slotId: "",
                                               serviceid: widget
                                                   .searchServicelist.id
                                                   .toString());

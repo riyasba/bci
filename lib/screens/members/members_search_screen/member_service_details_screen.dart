@@ -512,6 +512,8 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                         startTime: selectedValue != null
                                             ? "${selectedValue.weekday} ${selectedValue.startTime}-${selectedValue.endTime}"
                                             : "",
+                                            slotId: selectedValue != null
+                                            ?selectedValue.id.toString():"" ,
                                         serviceid: widget.searchServicelist.id
                                             .toString());
                                   },

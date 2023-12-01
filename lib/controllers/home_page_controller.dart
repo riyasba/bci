@@ -314,12 +314,13 @@ class HomeController extends GetxController {
   addToCart(
       {required String serviceid,
       required String amount,
+      required String slotId,
       required String startTime}) async {
     isLoading(true);
 
     dio.Response<dynamic> response =
         await addToCartApiServices.addToCartApiServices(
-            serviceid: serviceid, amount: amount, startTime: startTime);
+            serviceid: serviceid, amount: amount, startTime: startTime,slotId: slotId);
     isLoading(false);
 
     if (response.statusCode == 201) {

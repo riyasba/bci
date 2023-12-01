@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class VendorDetailScreen extends StatefulWidget {
-  VendorListModelData vendorListModelData;
+   VendorListModelData vendorListModelData;
   final String userid;
   VendorDetailScreen(
       {super.key, required this.vendorListModelData, required this.userid});
@@ -268,42 +268,45 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
                           ),
                         ),
                       if (widget.vendorListModelData.videoLink != null)
-                        InkWell(
-                          onTap: () {
-                            launchUrl(
-                                Uri.parse(widget.vendorListModelData.videoLink),
-                                mode: LaunchMode.externalApplication);
-                          },
-                          child: Container(
-                            height: 35,
-                            width: 120,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                      blurRadius: 2,
-                                      color: Colors.grey.withOpacity(0.5))
-                                ],
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 7, right: 7),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  const Icon(
-                                    Icons.video_library_outlined,
-                                    color: Colors.red,
-                                    size: 20,
-                                  ),
-                                  Text(
-                                    "Video",
-                                    style: primaryFont.copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black,
-                                        fontSize: 14),
-                                  ),
-                                ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: InkWell(
+                            onTap: () {
+                              launchUrl(
+                                  Uri.parse(widget.vendorListModelData.videoLink),
+                                  mode: LaunchMode.externalApplication);
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        blurRadius: 2,
+                                        color: Colors.grey.withOpacity(0.5))
+                                  ],
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 7, right: 7),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    const Icon(
+                                      Icons.video_library_outlined,
+                                      color: Colors.red,
+                                      size: 20,
+                                    ),
+                                    Text(
+                                      "Video",
+                                      style: primaryFont.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                          fontSize: 14),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

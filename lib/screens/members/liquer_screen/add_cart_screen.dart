@@ -290,6 +290,7 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
                       homeController.addToCart(
                           amount: widget.searchServicelist.saleAmount,
                           startTime: "",
+                          slotId: "",
                           serviceid: widget.searchServicelist.id.toString());
                     },
                     child: Container(
