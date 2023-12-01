@@ -37,6 +37,7 @@ class BookingListData {
     String service;
     String image;
     String description;
+    String timeSlot;
 
     BookingListData({
         required this.id,
@@ -47,6 +48,7 @@ class BookingListData {
         required this.service,
         required this.image,
         required this.description,
+        required this.timeSlot,
     });
 
     factory BookingListData.fromJson(Map<String, dynamic> json) => BookingListData(
@@ -58,6 +60,7 @@ class BookingListData {
         service: json["service"]?? "",
         image: json["image"]?? "",
         description: json["description"]?? "",
+        timeSlot: json["book_date_time"]?? "",
     );
 
     Map<String, dynamic> toJson() => {

@@ -290,6 +290,28 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                     ),
                   ],
                 ),
+                 const Divider(
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Time Slot',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      bookingData.timeSlot,
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: kgrey,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
                 const Divider(
                   thickness: 1,
                 ),
