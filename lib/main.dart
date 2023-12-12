@@ -11,6 +11,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'authentications/splash_screen/Splash_screen.dart';
 import 'controllers/notification_controller.dart';
 import 'controllers/vendorbanner_controller.dart';
@@ -108,6 +109,7 @@ AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
   Get.put(ServicesController());
   Get.put(VendorBannerController());
   Get.put(NotificationController());
+   checkForUpdate();
   runApp( MyApp());
 }
 
@@ -130,6 +132,28 @@ NotificationSettings settings = await messaging.requestPermission(
 
 print('User granted permission: ${settings.authorizationStatus}');
 print(settings);
+}
+
+Future<void> checkForUpdate() async {
+  print(
+      "******-__-***-__-***-__-***_-***-_****************---On update---*******************************************");
+  InAppUpdate.checkForUpdate().then((info) {
+    print(
+        "%%%%%%%%%%%%%%% ------- ${info.availableVersionCode} -------- %%%%%%%%%%%%%%%");
+    print(
+        "%%%%%%%%%%%%%%% ------- ${info.updateAvailability} -------- %%%%%%%%%%%%%%%");
+    print(
+        "%%%%%%%%%%%%%%% ------- ${info.packageName} -------- %%%%%%%%%%%%%%%");
+
+    if (info.updateAvailability == UpdateAvailability.updateAvailable) {
+      InAppUpdate.performImmediateUpdate().catchError((e) {
+        // showSnack(e.toString());
+        return AppUpdateResult.inAppUpdateFailed;
+      });
+    }
+  }).catchError((e) {
+    // showSnack(e.toString());
+  });
 }
 
 class MyApp extends StatefulWidget {

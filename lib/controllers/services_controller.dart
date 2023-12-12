@@ -3,6 +3,7 @@ import 'package:bci/controllers/profile_controller.dart';
 import 'package:bci/models/create_services_model.dart';
 import 'package:bci/models/get_booking_list_model.dart';
 import 'package:bci/models/service_list_model.dart';
+import 'package:bci/models/services_details_list_model.dart';
 import 'package:bci/models/time_slot_models.dart';
 import 'package:bci/models/vendor_offer_list_model.dart';
 import 'package:bci/services/network/categorys_api_services/get_booking_api_services.dart';
@@ -11,10 +12,12 @@ import 'package:bci/services/network/services_api_service/add_coupons_api_servic
 import 'package:bci/services/network/services_api_service/add_today_offers_api_services.dart';
 import 'package:bci/services/network/services_api_service/get_service_by_category.dart';
 import 'package:bci/services/network/services_api_service/get_services_api_services.dart';
+import 'package:bci/services/network/services_api_service/get_services_details_list.dart';
 import 'package:bci/services/network/services_api_service/get_vendor_offer_list_api.services.dart';
 import 'package:bci/services/network/services_api_service/merchant_add_services.dart';
 import 'package:bci/services/network/services_api_service/merchants_update_service_api.dart';
 import 'package:bci/services/network/services_api_service/upload_images_api_services.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -317,4 +320,67 @@ class ServicesController extends GetxController {
     }
     update();
   }
+
+
+   GetServicesDetailsServices getServicesDetailsServices =
+      GetServicesDetailsServices();
+
+  List<SlotDetail> slotDetailList = [];
+
+  getServicesDetails({required int servicesId}) async {
+    dio.Response<dynamic> response = await getServicesDetailsServices
+        .getServiceDetails(serviceId: servicesId);
+
+    if (response.statusCode == 200) {
+      ServiceDetailsModel vendorListModel =
+          ServiceDetailsModel.fromJson(response.data);
+      slotDetailList = vendorListModel.slotDetail;
+      assignTimeSlots(slotDetailList);
+    }
+    update();
+  }
+
+
+
+  assignTimeSlots(List<SlotDetail> slotDetailList) async{
+   sunTimeSlot = [];
+   monTimeSlot = [];
+   tueTimeSlot = [];
+   wedTimeSlot = [];
+   thuTimeSlot = [];
+   friTimeSlot = [];
+   satTimeSlot = [];
+
+  for(var timeSlot in slotDetailList){
+    int tempFromHours = int.parse(timeSlot.startTime.split(":")[0]);
+    int temptoHours = int.parse(timeSlot.endTime.split(":")[0]);
+    int tempFromMinutes = int.parse(timeSlot.startTime.split(":")[1]);
+    int tempToMinutes = int.parse(timeSlot.endTime.split(":")[1]);
+     DateTime tempdateFromTime = DateTime(2023,2,1,tempFromHours,tempFromMinutes);
+     DateTime tempdateToTime = DateTime(2023,2,1,temptoHours,tempToMinutes);
+     TimeSlotModels timeSlotModels = TimeSlotModels(
+      fromTime: formatDate(tempdateFromTime, [hh,":",nn," ",am]),
+      tempFromTime: timeSlot.startTime,
+      tempToTime: timeSlot.endTime,
+      toTime: formatDate(tempdateToTime, [hh,":",nn," ",am]),
+     );
+     if(timeSlot.weekday == "Sunday"){
+      sunTimeSlot.add(timeSlotModels);
+     }else if(timeSlot.weekday == "Monday"){
+      monTimeSlot.add(timeSlotModels);
+     }else if(timeSlot.weekday == "Tuesday"){
+      tueTimeSlot.add(timeSlotModels);
+     }else if(timeSlot.weekday == "Wednesday"){
+      wedTimeSlot.add(timeSlotModels);
+     }else if(timeSlot.weekday == "Thursday"){
+      thuTimeSlot.add(timeSlotModels);
+     }else if(timeSlot.weekday == "Friday"){
+      friTimeSlot.add(timeSlotModels);
+     }else if(timeSlot.weekday == "Saturday"){
+      satTimeSlot.add(timeSlotModels);
+     }
+  }
+  update();
+  }
+
 }

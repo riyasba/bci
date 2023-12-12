@@ -56,9 +56,13 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     super.initState();
     _controller = TextfieldTagsController();
     checkIfCategory();
+    serviceController.getServicesDetails(servicesId: widget.serviceData.id);
     // authController.getSubCategoryList();
     setDefault();
+    
   }
+
+
 
   checkIfCategory() async {
     await authController.getCategoryList();
@@ -114,10 +118,10 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     // setState(() {
     //   cgstPercentage = widget.serviceData.cgst != null
     //       ? int.parse(widget.serviceData.cgst)
-    //       : null;
-    //   sgstPercentage = widget.serviceData.sgst != null
-    //       ? int.parse(widget.serviceData.sgst)
-    //       : null;
+    //-/      : null;
+    //-/   sgstPercentage = widget.serviceData.sgst != null
+    //-/       ? int.parse(widget.serviceData.sgst)
+    //-/       : null;
     productImage = widget.serviceData.images;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -432,7 +436,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Add Time Slots",
+                      "Update Time Slots",
                       style: TextStyle(
                           color: kwhite,
                           fontSize: 16,

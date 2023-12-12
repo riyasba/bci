@@ -122,4 +122,9 @@ abstract class BaseApiService {
       "https://portal.bcipvtltd.com/api/auth/notification/count";
 
       final String deleteUserURL = "https://portal.bcipvtltd.com/api/auth/delete_user";
+
+
+  //changes
+  final String serviceDetailsURL =
+      "https://www.portal.bcipvtltd.com/api/auth/service_details"; 
 }

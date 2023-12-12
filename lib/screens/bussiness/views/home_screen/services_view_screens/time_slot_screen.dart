@@ -145,95 +145,35 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 20, right: 20, top: 10, bottom: 10),
-                child: Container(
-                  height: 90,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: kwhite,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(blurRadius: 5.2, color: kgrey),
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 90,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: kwhite,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(blurRadius: 5.2, color: kgrey),
+                          ]),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "From",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                final TimeOfDay? timeOfDay =
-                                    await showTimePicker(
-                                        context: context,
-                                        initialTime: selectedTime,
-                                        initialEntryMode:
-                                            TimePickerEntryMode.dial);
-                                if (timeOfDay != null) {
-                                  setState(() {
-                                    selectedTime = timeOfDay;
-                                  });
-                                  serviceController.sunTimeSlot[0].fromTime =
-                                      timeOfDay.format(context).toString();
-                                  serviceController
-                                          .sunTimeSlot[0].tempFromTime =
-                                      "${timeOfDay.hour}:${timeOfDay.minute}";
-                                  serviceController.update();
-                                }
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 5, right: 10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(serviceController
-                                          .sunTimeSlot[0].fromTime),
-                                      // Text("${selectedTime.hour}:${selectedTime.minute}"),
-                                      Icon(
-                                        Icons.history,
-                                        color: kblue,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "To",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text(
+                                  "From",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: kblue,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
                                 InkWell(
                                   onTap: () async {
                                     final TimeOfDay? timeOfDay =
@@ -246,10 +186,10 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                       setState(() {
                                         selectedTime = timeOfDay;
                                       });
-                                      serviceController.sunTimeSlot[0].toTime =
+                                      serviceController.sunTimeSlot[0].fromTime =
                                           timeOfDay.format(context).toString();
                                       serviceController
-                                              .sunTimeSlot[0].tempToTime =
+                                              .sunTimeSlot[0].tempFromTime =
                                           "${timeOfDay.hour}:${timeOfDay.minute}";
                                       serviceController.update();
                                     }
@@ -261,14 +201,15 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                         color: Colors.grey[100],
                                         borderRadius: BorderRadius.circular(5)),
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 5, right: 10),
+                                      padding:
+                                          const EdgeInsets.only(left: 5, right: 10),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(serviceController
-                                              .sunTimeSlot[0].toTime),
+                                              .sunTimeSlot[0].fromTime),
+                                          // Text("${selectedTime.hour}:${selectedTime.minute}"),
                                           Icon(
                                             Icons.history,
                                             color: kblue,
@@ -278,41 +219,121 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 5),
-                                InkWell(
-                                  onTap: () {
-                                    TimeSlotModels timeSlotModels =
-                                        TimeSlotModels(
-                                            fromTime: "--:--",
-                                            toTime: "--:--",
-                                            tempFromTime: "",
-                                            tempToTime: "");
-                                    serviceController.sunTimeSlot
-                                        .add(timeSlotModels);
-                                    serviceController.update();
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    width: 35,
-                                    decoration: BoxDecoration(
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "To",
+                                  style: TextStyle(
+                                      fontSize: 18,
                                       color: kblue,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.add_circle_outline,
-                                        color: kwhite,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        final TimeOfDay? timeOfDay =
+                                            await showTimePicker(
+                                                context: context,
+                                                initialTime: selectedTime,
+                                                initialEntryMode:
+                                                    TimePickerEntryMode.dial);
+                                        if (timeOfDay != null) {
+                                          setState(() {
+                                            selectedTime = timeOfDay;
+                                          });
+                                          serviceController.sunTimeSlot[0].toTime =
+                                              timeOfDay.format(context).toString();
+                                          serviceController
+                                                  .sunTimeSlot[0].tempToTime =
+                                              "${timeOfDay.hour}:${timeOfDay.minute}";
+                                          serviceController.update();
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 130,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[100],
+                                            borderRadius: BorderRadius.circular(5)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5, right: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(serviceController
+                                                  .sunTimeSlot[0].toTime),
+                                              Icon(
+                                                Icons.history,
+                                                color: kblue,
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    const SizedBox(width: 5),
+                                    InkWell(
+                                      onTap: () {
+                                        TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.sunTimeSlot
+                                            .add(timeSlotModels);
+                                        serviceController.update();
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 35,
+                                        decoration: BoxDecoration(
+                                          color: kblue,
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.add_circle_outline,
+                                            color: kwhite,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      right: 2,
+                      top: 2,
+                      child: InkWell(
+                        onTap: (){
+                               serviceController.sunTimeSlot.clear();
+                                   TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.sunTimeSlot.add(timeSlotModels);
+                                        serviceController.update();
+                        },
+                        child: const Icon(Icons.delete,color: Colors.red,),
+                      )  )
+                  ],
                 ),
               ),
             if (serviceController.sunTimeSlot.isNotEmpty &&
@@ -554,94 +575,35 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 20, right: 20, top: 10, bottom: 10),
-                child: Container(
-                  height: 90,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: kwhite,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(blurRadius: 5.2, color: kgrey),
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 90,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: kwhite,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(blurRadius: 5.2, color: kgrey),
+                          ]),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "From",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                final TimeOfDay? timeOfDay =
-                                    await showTimePicker(
-                                        context: context,
-                                        initialTime: selectedTime,
-                                        initialEntryMode:
-                                            TimePickerEntryMode.dial);
-                                if (timeOfDay != null) {
-                                  setState(() {
-                                    selectedTime = timeOfDay;
-                                  });
-                                  serviceController.monTimeSlot[0].fromTime =
-                                      timeOfDay.format(context).toString();
-                                  serviceController
-                                          .monTimeSlot[0].tempFromTime =
-                                      "${timeOfDay.hour}:${timeOfDay.minute}";
-                                  serviceController.update();
-                                }
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 5, right: 10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(serviceController
-                                          .monTimeSlot[0].fromTime),
-                                      Icon(
-                                        Icons.history,
-                                        color: kblue,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "To",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text(
+                                  "From",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: kblue,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
                                 InkWell(
                                   onTap: () async {
                                     final TimeOfDay? timeOfDay =
@@ -654,10 +616,10 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                       setState(() {
                                         selectedTime = timeOfDay;
                                       });
-                                      serviceController.monTimeSlot[0].toTime =
+                                      serviceController.monTimeSlot[0].fromTime =
                                           timeOfDay.format(context).toString();
                                       serviceController
-                                              .monTimeSlot[0].tempToTime =
+                                              .monTimeSlot[0].tempFromTime =
                                           "${timeOfDay.hour}:${timeOfDay.minute}";
                                       serviceController.update();
                                     }
@@ -669,14 +631,14 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                         color: Colors.grey[100],
                                         borderRadius: BorderRadius.circular(5)),
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 5, right: 10),
+                                      padding:
+                                          const EdgeInsets.only(left: 5, right: 10),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(serviceController
-                                              .monTimeSlot[0].toTime),
+                                              .monTimeSlot[0].fromTime),
                                           Icon(
                                             Icons.history,
                                             color: kblue,
@@ -686,41 +648,121 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 5),
-                                InkWell(
-                                  onTap: () {
-                                    TimeSlotModels timeSlotModels =
-                                        TimeSlotModels(
-                                            fromTime: "--:--",
-                                            toTime: "--:--",
-                                            tempFromTime: "",
-                                            tempToTime: "");
-                                    serviceController.monTimeSlot
-                                        .add(timeSlotModels);
-                                    serviceController.update();
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    width: 35,
-                                    decoration: BoxDecoration(
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "To",
+                                  style: TextStyle(
+                                      fontSize: 18,
                                       color: kblue,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.add_circle_outline,
-                                        color: kwhite,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        final TimeOfDay? timeOfDay =
+                                            await showTimePicker(
+                                                context: context,
+                                                initialTime: selectedTime,
+                                                initialEntryMode:
+                                                    TimePickerEntryMode.dial);
+                                        if (timeOfDay != null) {
+                                          setState(() {
+                                            selectedTime = timeOfDay;
+                                          });
+                                          serviceController.monTimeSlot[0].toTime =
+                                              timeOfDay.format(context).toString();
+                                          serviceController
+                                                  .monTimeSlot[0].tempToTime =
+                                              "${timeOfDay.hour}:${timeOfDay.minute}";
+                                          serviceController.update();
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 130,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[100],
+                                            borderRadius: BorderRadius.circular(5)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5, right: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(serviceController
+                                                  .monTimeSlot[0].toTime),
+                                              Icon(
+                                                Icons.history,
+                                                color: kblue,
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    const SizedBox(width: 5),
+                                    InkWell(
+                                      onTap: () {
+                                        TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.monTimeSlot
+                                            .add(timeSlotModels);
+                                        serviceController.update();
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 35,
+                                        decoration: BoxDecoration(
+                                          color: kblue,
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.add_circle_outline,
+                                            color: kwhite,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                     Positioned(
+                      right: 2,
+                      top: 2,
+                      child: InkWell(
+                        onTap: (){
+                               serviceController.monTimeSlot.clear();
+                                   TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.monTimeSlot.add(timeSlotModels);
+                                        serviceController.update();
+                        },
+                        child: const Icon(Icons.delete,color: Colors.red,),
+                      )  )
+                  ],
                 ),
               ),
             if (serviceController.monTimeSlot.isNotEmpty &&
@@ -964,95 +1006,35 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 20, right: 20, top: 10, bottom: 10),
-                child: Container(
-                  height: 90,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: kwhite,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(blurRadius: 5.2, color: kgrey),
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 90,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: kwhite,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(blurRadius: 5.2, color: kgrey),
+                          ]),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "From",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                final TimeOfDay? timeOfDay =
-                                    await showTimePicker(
-                                        context: context,
-                                        initialTime: selectedTime,
-                                        initialEntryMode:
-                                            TimePickerEntryMode.dial);
-                                if (timeOfDay != null) {
-                                  setState(() {
-                                    selectedTime = timeOfDay;
-                                  });
-                                  serviceController.tueTimeSlot[0].fromTime =
-                                      timeOfDay.format(context).toString();
-
-                                  serviceController
-                                          .tueTimeSlot[0].tempFromTime =
-                                      "${timeOfDay.hour}:${timeOfDay.minute}";
-                                  serviceController.update();
-                                }
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 5, right: 10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(serviceController
-                                          .tueTimeSlot[0].fromTime),
-                                      Icon(
-                                        Icons.history,
-                                        color: kblue,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "To",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text(
+                                  "From",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: kblue,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
                                 InkWell(
                                   onTap: () async {
                                     final TimeOfDay? timeOfDay =
@@ -1065,10 +1047,11 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                       setState(() {
                                         selectedTime = timeOfDay;
                                       });
-                                      serviceController.tueTimeSlot[0].toTime =
+                                      serviceController.tueTimeSlot[0].fromTime =
                                           timeOfDay.format(context).toString();
+
                                       serviceController
-                                              .tueTimeSlot[0].tempToTime =
+                                              .tueTimeSlot[0].tempFromTime =
                                           "${timeOfDay.hour}:${timeOfDay.minute}";
                                       serviceController.update();
                                     }
@@ -1080,14 +1063,14 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                         color: Colors.grey[100],
                                         borderRadius: BorderRadius.circular(5)),
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 5, right: 10),
+                                      padding:
+                                          const EdgeInsets.only(left: 5, right: 10),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(serviceController
-                                              .tueTimeSlot[0].toTime),
+                                              .tueTimeSlot[0].fromTime),
                                           Icon(
                                             Icons.history,
                                             color: kblue,
@@ -1097,41 +1080,121 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 5),
-                                InkWell(
-                                  onTap: () {
-                                    TimeSlotModels timeSlotModels =
-                                        TimeSlotModels(
-                                            fromTime: "--:--",
-                                            toTime: "--:--",
-                                            tempFromTime: "",
-                                            tempToTime: "");
-                                    serviceController.tueTimeSlot
-                                        .add(timeSlotModels);
-                                    serviceController.update();
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    width: 35,
-                                    decoration: BoxDecoration(
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "To",
+                                  style: TextStyle(
+                                      fontSize: 18,
                                       color: kblue,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.add_circle_outline,
-                                        color: kwhite,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        final TimeOfDay? timeOfDay =
+                                            await showTimePicker(
+                                                context: context,
+                                                initialTime: selectedTime,
+                                                initialEntryMode:
+                                                    TimePickerEntryMode.dial);
+                                        if (timeOfDay != null) {
+                                          setState(() {
+                                            selectedTime = timeOfDay;
+                                          });
+                                          serviceController.tueTimeSlot[0].toTime =
+                                              timeOfDay.format(context).toString();
+                                          serviceController
+                                                  .tueTimeSlot[0].tempToTime =
+                                              "${timeOfDay.hour}:${timeOfDay.minute}";
+                                          serviceController.update();
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 130,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[100],
+                                            borderRadius: BorderRadius.circular(5)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5, right: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(serviceController
+                                                  .tueTimeSlot[0].toTime),
+                                              Icon(
+                                                Icons.history,
+                                                color: kblue,
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    const SizedBox(width: 5),
+                                    InkWell(
+                                      onTap: () {
+                                        TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.tueTimeSlot
+                                            .add(timeSlotModels);
+                                        serviceController.update();
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 35,
+                                        decoration: BoxDecoration(
+                                          color: kblue,
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.add_circle_outline,
+                                            color: kwhite,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      right: 2,
+                      top: 2,
+                      child: InkWell(
+                        onTap: (){
+                               serviceController.tueTimeSlot.clear();
+                                   TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.tueTimeSlot.add(timeSlotModels);
+                                        serviceController.update();
+                        },
+                        child: const Icon(Icons.delete,color: Colors.red,),
+                      )  )
+                  ],
                 ),
               ),
             if (serviceController.tueTimeSlot.isNotEmpty &&
@@ -1374,95 +1437,35 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 20, right: 20, top: 10, bottom: 10),
-                child: Container(
-                  height: 90,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: kwhite,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(blurRadius: 5.2, color: kgrey),
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 90,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: kwhite,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(blurRadius: 5.2, color: kgrey),
+                          ]),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "From",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                final TimeOfDay? timeOfDay =
-                                    await showTimePicker(
-                                        context: context,
-                                        initialTime: selectedTime,
-                                        initialEntryMode:
-                                            TimePickerEntryMode.dial);
-                                if (timeOfDay != null) {
-                                  setState(() {
-                                    selectedTime = timeOfDay;
-                                  });
-                                  serviceController.wedTimeSlot[0].fromTime =
-                                      timeOfDay.format(context).toString();
-
-                                  serviceController
-                                          .wedTimeSlot[0].tempFromTime =
-                                      "${timeOfDay.hour}:${timeOfDay.minute}";
-                                  serviceController.update();
-                                }
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 5, right: 10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(serviceController
-                                          .wedTimeSlot[0].fromTime),
-                                      Icon(
-                                        Icons.history,
-                                        color: kblue,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "To",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text(
+                                  "From",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: kblue,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
                                 InkWell(
                                   onTap: () async {
                                     final TimeOfDay? timeOfDay =
@@ -1475,10 +1478,11 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                       setState(() {
                                         selectedTime = timeOfDay;
                                       });
-                                      serviceController.wedTimeSlot[0].toTime =
+                                      serviceController.wedTimeSlot[0].fromTime =
                                           timeOfDay.format(context).toString();
+
                                       serviceController
-                                              .wedTimeSlot[0].tempToTime =
+                                              .wedTimeSlot[0].tempFromTime =
                                           "${timeOfDay.hour}:${timeOfDay.minute}";
                                       serviceController.update();
                                     }
@@ -1490,14 +1494,14 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                         color: Colors.grey[100],
                                         borderRadius: BorderRadius.circular(5)),
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 5, right: 10),
+                                      padding:
+                                          const EdgeInsets.only(left: 5, right: 10),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(serviceController
-                                              .wedTimeSlot[0].toTime),
+                                              .wedTimeSlot[0].fromTime),
                                           Icon(
                                             Icons.history,
                                             color: kblue,
@@ -1507,41 +1511,121 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 5),
-                                InkWell(
-                                  onTap: () {
-                                    TimeSlotModels timeSlotModels =
-                                        TimeSlotModels(
-                                            fromTime: "--:--",
-                                            toTime: "--:--",
-                                            tempFromTime: "",
-                                            tempToTime: "");
-                                    serviceController.wedTimeSlot
-                                        .add(timeSlotModels);
-                                    serviceController.update();
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    width: 35,
-                                    decoration: BoxDecoration(
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "To",
+                                  style: TextStyle(
+                                      fontSize: 18,
                                       color: kblue,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.add_circle_outline,
-                                        color: kwhite,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        final TimeOfDay? timeOfDay =
+                                            await showTimePicker(
+                                                context: context,
+                                                initialTime: selectedTime,
+                                                initialEntryMode:
+                                                    TimePickerEntryMode.dial);
+                                        if (timeOfDay != null) {
+                                          setState(() {
+                                            selectedTime = timeOfDay;
+                                          });
+                                          serviceController.wedTimeSlot[0].toTime =
+                                              timeOfDay.format(context).toString();
+                                          serviceController
+                                                  .wedTimeSlot[0].tempToTime =
+                                              "${timeOfDay.hour}:${timeOfDay.minute}";
+                                          serviceController.update();
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 130,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[100],
+                                            borderRadius: BorderRadius.circular(5)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5, right: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(serviceController
+                                                  .wedTimeSlot[0].toTime),
+                                              Icon(
+                                                Icons.history,
+                                                color: kblue,
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    const SizedBox(width: 5),
+                                    InkWell(
+                                      onTap: () {
+                                        TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.wedTimeSlot
+                                            .add(timeSlotModels);
+                                        serviceController.update();
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 35,
+                                        decoration: BoxDecoration(
+                                          color: kblue,
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.add_circle_outline,
+                                            color: kwhite,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                     Positioned(
+                      right: 2,
+                      top: 2,
+                      child: InkWell(
+                        onTap: (){
+                               serviceController.wedTimeSlot.clear();
+                                   TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.wedTimeSlot.add(timeSlotModels);
+                                        serviceController.update();
+                        },
+                        child: const Icon(Icons.delete,color: Colors.red,),
+                      )  )
+                  ],
                 ),
               ),
             if (serviceController.wedTimeSlot.isNotEmpty &&
@@ -1784,94 +1868,35 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 20, right: 20, top: 10, bottom: 10),
-                child: Container(
-                  height: 90,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: kwhite,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(blurRadius: 5.2, color: kgrey),
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 90,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: kwhite,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(blurRadius: 5.2, color: kgrey),
+                          ]),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "From",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                final TimeOfDay? timeOfDay =
-                                    await showTimePicker(
-                                        context: context,
-                                        initialTime: selectedTime,
-                                        initialEntryMode:
-                                            TimePickerEntryMode.dial);
-                                if (timeOfDay != null) {
-                                  setState(() {
-                                    selectedTime = timeOfDay;
-                                  });
-                                  serviceController.thuTimeSlot[0].fromTime =
-                                      timeOfDay.format(context).toString();
-                                  serviceController
-                                          .thuTimeSlot[0].tempFromTime =
-                                      "${timeOfDay.hour}:${timeOfDay.minute}";
-                                  serviceController.update();
-                                }
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 5, right: 10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(serviceController
-                                          .thuTimeSlot[0].fromTime),
-                                      Icon(
-                                        Icons.history,
-                                        color: kblue,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "To",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text(
+                                  "From",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: kblue,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
                                 InkWell(
                                   onTap: () async {
                                     final TimeOfDay? timeOfDay =
@@ -1884,10 +1909,10 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                       setState(() {
                                         selectedTime = timeOfDay;
                                       });
-                                      serviceController.thuTimeSlot[0].toTime =
+                                      serviceController.thuTimeSlot[0].fromTime =
                                           timeOfDay.format(context).toString();
                                       serviceController
-                                              .thuTimeSlot[0].tempToTime =
+                                              .thuTimeSlot[0].tempFromTime =
                                           "${timeOfDay.hour}:${timeOfDay.minute}";
                                       serviceController.update();
                                     }
@@ -1899,14 +1924,14 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                         color: Colors.grey[100],
                                         borderRadius: BorderRadius.circular(5)),
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 5, right: 10),
+                                      padding:
+                                          const EdgeInsets.only(left: 5, right: 10),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(serviceController
-                                              .thuTimeSlot[0].toTime),
+                                              .thuTimeSlot[0].fromTime),
                                           Icon(
                                             Icons.history,
                                             color: kblue,
@@ -1916,41 +1941,121 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 5),
-                                InkWell(
-                                  onTap: () {
-                                    TimeSlotModels timeSlotModels =
-                                        TimeSlotModels(
-                                            fromTime: "--:--",
-                                            toTime: "--:--",
-                                            tempFromTime: "",
-                                            tempToTime: "");
-                                    serviceController.thuTimeSlot
-                                        .add(timeSlotModels);
-                                    serviceController.update();
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    width: 35,
-                                    decoration: BoxDecoration(
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "To",
+                                  style: TextStyle(
+                                      fontSize: 18,
                                       color: kblue,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.add_circle_outline,
-                                        color: kwhite,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        final TimeOfDay? timeOfDay =
+                                            await showTimePicker(
+                                                context: context,
+                                                initialTime: selectedTime,
+                                                initialEntryMode:
+                                                    TimePickerEntryMode.dial);
+                                        if (timeOfDay != null) {
+                                          setState(() {
+                                            selectedTime = timeOfDay;
+                                          });
+                                          serviceController.thuTimeSlot[0].toTime =
+                                              timeOfDay.format(context).toString();
+                                          serviceController
+                                                  .thuTimeSlot[0].tempToTime =
+                                              "${timeOfDay.hour}:${timeOfDay.minute}";
+                                          serviceController.update();
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 130,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[100],
+                                            borderRadius: BorderRadius.circular(5)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5, right: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(serviceController
+                                                  .thuTimeSlot[0].toTime),
+                                              Icon(
+                                                Icons.history,
+                                                color: kblue,
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    const SizedBox(width: 5),
+                                    InkWell(
+                                      onTap: () {
+                                        TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.thuTimeSlot
+                                            .add(timeSlotModels);
+                                        serviceController.update();
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 35,
+                                        decoration: BoxDecoration(
+                                          color: kblue,
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.add_circle_outline,
+                                            color: kwhite,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                     Positioned(
+                      right: 2,
+                      top: 2,
+                      child: InkWell(
+                        onTap: (){
+                               serviceController.thuTimeSlot.clear();
+                                   TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.thuTimeSlot.add(timeSlotModels);
+                                        serviceController.update();
+                        },
+                        child: const Icon(Icons.delete,color: Colors.red,),
+                      )  )
+                  ],
                 ),
               ),
             if (serviceController.thuTimeSlot.isNotEmpty &&
@@ -2192,94 +2297,35 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 20, right: 20, top: 10, bottom: 10),
-                child: Container(
-                  height: 90,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: kwhite,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(blurRadius: 5.2, color: kgrey),
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 90,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: kwhite,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(blurRadius: 5.2, color: kgrey),
+                          ]),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "From",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                final TimeOfDay? timeOfDay =
-                                    await showTimePicker(
-                                        context: context,
-                                        initialTime: selectedTime,
-                                        initialEntryMode:
-                                            TimePickerEntryMode.dial);
-                                if (timeOfDay != null) {
-                                  setState(() {
-                                    selectedTime = timeOfDay;
-                                  });
-                                  serviceController.friTimeSlot[0].fromTime =
-                                      timeOfDay.format(context).toString();
-                                  serviceController
-                                          .friTimeSlot[0].tempFromTime =
-                                      "${timeOfDay.hour}:${timeOfDay.minute}";
-                                  serviceController.update();
-                                }
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 5, right: 10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(serviceController
-                                          .friTimeSlot[0].fromTime),
-                                      Icon(
-                                        Icons.history,
-                                        color: kblue,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "To",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text(
+                                  "From",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: kblue,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
                                 InkWell(
                                   onTap: () async {
                                     final TimeOfDay? timeOfDay =
@@ -2292,10 +2338,10 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                       setState(() {
                                         selectedTime = timeOfDay;
                                       });
-                                      serviceController.friTimeSlot[0].toTime =
+                                      serviceController.friTimeSlot[0].fromTime =
                                           timeOfDay.format(context).toString();
                                       serviceController
-                                              .friTimeSlot[0].tempToTime =
+                                              .friTimeSlot[0].tempFromTime =
                                           "${timeOfDay.hour}:${timeOfDay.minute}";
                                       serviceController.update();
                                     }
@@ -2307,14 +2353,14 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                         color: Colors.grey[100],
                                         borderRadius: BorderRadius.circular(5)),
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 5, right: 10),
+                                      padding:
+                                          const EdgeInsets.only(left: 5, right: 10),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(serviceController
-                                              .friTimeSlot[0].toTime),
+                                              .friTimeSlot[0].fromTime),
                                           Icon(
                                             Icons.history,
                                             color: kblue,
@@ -2324,41 +2370,121 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 5),
-                                InkWell(
-                                  onTap: () {
-                                    TimeSlotModels timeSlotModels =
-                                        TimeSlotModels(
-                                            fromTime: "--:--",
-                                            toTime: "--:--",
-                                            tempFromTime: "",
-                                            tempToTime: "");
-                                    serviceController.friTimeSlot
-                                        .add(timeSlotModels);
-                                    serviceController.update();
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    width: 35,
-                                    decoration: BoxDecoration(
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "To",
+                                  style: TextStyle(
+                                      fontSize: 18,
                                       color: kblue,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.add_circle_outline,
-                                        color: kwhite,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        final TimeOfDay? timeOfDay =
+                                            await showTimePicker(
+                                                context: context,
+                                                initialTime: selectedTime,
+                                                initialEntryMode:
+                                                    TimePickerEntryMode.dial);
+                                        if (timeOfDay != null) {
+                                          setState(() {
+                                            selectedTime = timeOfDay;
+                                          });
+                                          serviceController.friTimeSlot[0].toTime =
+                                              timeOfDay.format(context).toString();
+                                          serviceController
+                                                  .friTimeSlot[0].tempToTime =
+                                              "${timeOfDay.hour}:${timeOfDay.minute}";
+                                          serviceController.update();
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 130,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[100],
+                                            borderRadius: BorderRadius.circular(5)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5, right: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(serviceController
+                                                  .friTimeSlot[0].toTime),
+                                              Icon(
+                                                Icons.history,
+                                                color: kblue,
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    const SizedBox(width: 5),
+                                    InkWell(
+                                      onTap: () {
+                                        TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.friTimeSlot
+                                            .add(timeSlotModels);
+                                        serviceController.update();
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 35,
+                                        decoration: BoxDecoration(
+                                          color: kblue,
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.add_circle_outline,
+                                            color: kwhite,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                     Positioned(
+                      right: 2,
+                      top: 2,
+                      child: InkWell(
+                        onTap: (){
+                               serviceController.friTimeSlot.clear();
+                                   TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.friTimeSlot.add(timeSlotModels);
+                                        serviceController.update();
+                        },
+                        child: const Icon(Icons.delete,color: Colors.red,),
+                      )  )
+                  ],
                 ),
               ),
             if (serviceController.friTimeSlot.isNotEmpty &&
@@ -2600,94 +2726,35 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 20, right: 20, top: 10, bottom: 10),
-                child: Container(
-                  height: 90,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: kwhite,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(blurRadius: 5.2, color: kgrey),
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 90,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: kwhite,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(blurRadius: 5.2, color: kgrey),
+                          ]),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "From",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                final TimeOfDay? timeOfDay =
-                                    await showTimePicker(
-                                        context: context,
-                                        initialTime: selectedTime,
-                                        initialEntryMode:
-                                            TimePickerEntryMode.dial);
-                                if (timeOfDay != null) {
-                                  setState(() {
-                                    selectedTime = timeOfDay;
-                                  });
-                                  serviceController.satTimeSlot[0].fromTime =
-                                      timeOfDay.format(context).toString();
-                                  serviceController
-                                          .satTimeSlot[0].tempFromTime =
-                                      "${timeOfDay.hour}:${timeOfDay.minute}";
-                                  serviceController.update();
-                                }
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 5, right: 10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(serviceController
-                                          .satTimeSlot[0].fromTime),
-                                      Icon(
-                                        Icons.history,
-                                        color: kblue,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "To",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: kblue,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text(
+                                  "From",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: kblue,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
                                 InkWell(
                                   onTap: () async {
                                     final TimeOfDay? timeOfDay =
@@ -2700,10 +2767,10 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                       setState(() {
                                         selectedTime = timeOfDay;
                                       });
-                                      serviceController.satTimeSlot[0].toTime =
+                                      serviceController.satTimeSlot[0].fromTime =
                                           timeOfDay.format(context).toString();
                                       serviceController
-                                              .satTimeSlot[0].tempToTime =
+                                              .satTimeSlot[0].tempFromTime =
                                           "${timeOfDay.hour}:${timeOfDay.minute}";
                                       serviceController.update();
                                     }
@@ -2715,14 +2782,14 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                         color: Colors.grey[100],
                                         borderRadius: BorderRadius.circular(5)),
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 5, right: 10),
+                                      padding:
+                                          const EdgeInsets.only(left: 5, right: 10),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(serviceController
-                                              .satTimeSlot[0].toTime),
+                                              .satTimeSlot[0].fromTime),
                                           Icon(
                                             Icons.history,
                                             color: kblue,
@@ -2732,41 +2799,121 @@ class _TimeSlotScreenState extends State<TimeSlotScreen> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 5),
-                                InkWell(
-                                  onTap: () {
-                                    TimeSlotModels timeSlotModels =
-                                        TimeSlotModels(
-                                            fromTime: "--:--",
-                                            toTime: "--:--",
-                                            tempFromTime: "",
-                                            tempToTime: "");
-                                    serviceController.satTimeSlot
-                                        .add(timeSlotModels);
-                                    serviceController.update();
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    width: 35,
-                                    decoration: BoxDecoration(
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "To",
+                                  style: TextStyle(
+                                      fontSize: 18,
                                       color: kblue,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.add_circle_outline,
-                                        color: kwhite,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        final TimeOfDay? timeOfDay =
+                                            await showTimePicker(
+                                                context: context,
+                                                initialTime: selectedTime,
+                                                initialEntryMode:
+                                                    TimePickerEntryMode.dial);
+                                        if (timeOfDay != null) {
+                                          setState(() {
+                                            selectedTime = timeOfDay;
+                                          });
+                                          serviceController.satTimeSlot[0].toTime =
+                                              timeOfDay.format(context).toString();
+                                          serviceController
+                                                  .satTimeSlot[0].tempToTime =
+                                              "${timeOfDay.hour}:${timeOfDay.minute}";
+                                          serviceController.update();
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 130,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[100],
+                                            borderRadius: BorderRadius.circular(5)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5, right: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(serviceController
+                                                  .satTimeSlot[0].toTime),
+                                              Icon(
+                                                Icons.history,
+                                                color: kblue,
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    const SizedBox(width: 5),
+                                    InkWell(
+                                      onTap: () {
+                                        TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.satTimeSlot
+                                            .add(timeSlotModels);
+                                        serviceController.update();
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 35,
+                                        decoration: BoxDecoration(
+                                          color: kblue,
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.add_circle_outline,
+                                            color: kwhite,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      right: 2,
+                      top: 2,
+                      child: InkWell(
+                        onTap: (){
+                               serviceController.satTimeSlot.clear();
+                                   TimeSlotModels timeSlotModels =
+                                            TimeSlotModels(
+                                                fromTime: "--:--",
+                                                toTime: "--:--",
+                                                tempFromTime: "",
+                                                tempToTime: "");
+                                        serviceController.satTimeSlot.add(timeSlotModels);
+                                        serviceController.update();
+                        },
+                        child: const Icon(Icons.delete,color: Colors.red,),
+                      )  )
+                  ],
                 ),
               ),
             if (serviceController.satTimeSlot.isNotEmpty &&
