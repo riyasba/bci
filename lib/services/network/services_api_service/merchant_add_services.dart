@@ -87,14 +87,14 @@ class AddServicesApiServices extends BaseApiService {
         });
       }
       if (servicesController.thuTimeSlot.isNotEmpty) {
-        tempWeekList.add("Tursday");
+        tempWeekList.add("Thursday");
         servicesController.tueTimeSlot.forEach((element) {
           thuesdayFrom.add(element.tempFromTime);
           thuesdayTo.add(element.tempToTime);
           TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
               tempFromTime: element.tempFromTime,
               tempToTime: element.tempToTime,
-              weedDay: "Tursday");
+              weedDay: "Thursday");
           tempTimeSlotsList.add(timeSlotAddModels);
         });
       }
@@ -203,7 +203,7 @@ class AddServicesApiServices extends BaseApiService {
           if (mondayFrom.isNotEmpty) "Monday": mondayFrom,
           if (tuesDayFrom.isNotEmpty) "Tuesday": tuesDayFrom,
           if (wednesdayFrom.isNotEmpty) "Wednesday": wednesdayFrom,
-          if (tuesDayFrom.isNotEmpty) "Tursday": tuesDayFrom,
+          if (tuesDayFrom.isNotEmpty) "Thursday": tuesDayFrom,
           if (fridayFrom.isNotEmpty) "Friday": fridayFrom,
           if (saturdayFrom.isNotEmpty) "Saturday": saturdayFrom
         },
@@ -212,7 +212,7 @@ class AddServicesApiServices extends BaseApiService {
           if (mondayTo.isNotEmpty) "Monday": mondayTo,
           if (tuesDayTo.isNotEmpty) "Tuesday": tuesDayTo,
           if (wednesdayTo.isNotEmpty) "Wednesday": wednesdayTo,
-          if (thuesdayTo.isNotEmpty) "Tursday": thuesdayTo,
+          if (thuesdayTo.isNotEmpty) "Thursday": thuesdayTo,
           if (fridayTo.isNotEmpty) "Friday": fridayTo,
           if (saturdayTo.isNotEmpty) "Saturday": saturdayTo
         }

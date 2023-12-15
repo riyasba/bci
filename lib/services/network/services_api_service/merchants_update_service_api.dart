@@ -86,14 +86,14 @@ class UpdateServicesApiServices extends BaseApiService {
         });
       }
       if (servicesController.thuTimeSlot.isNotEmpty) {
-        tempWeekList.add("Tursday");
+        tempWeekList.add("Thursday");
         servicesController.tueTimeSlot.forEach((element) {
           thuesdayFrom.add(element.tempFromTime);
           thuesdayTo.add(element.tempToTime);
           TimeSlotAddModels timeSlotAddModels = TimeSlotAddModels(
               tempFromTime: element.tempFromTime,
               tempToTime: element.tempToTime,
-              weedDay: "Tursday");
+              weedDay: "Thursday");
           tempTimeSlotsList.add(timeSlotAddModels);
         });
       }
@@ -195,7 +195,7 @@ class UpdateServicesApiServices extends BaseApiService {
           "Monday": mondayFrom,
           "Tuesday": tuesDayFrom,
           "Wednesday": wednesdayFrom,
-          "Tursday": tuesDayFrom,
+          "Thursday": tuesDayFrom,
           "Friday": fridayFrom,
           "Saturday": saturdayFrom
         },
@@ -204,7 +204,7 @@ class UpdateServicesApiServices extends BaseApiService {
           "Monday": mondayTo,
           "Tuesday": tuesDayTo,
           "Wednesday": wednesdayTo,
-          "Tursday": thuesdayTo,
+          "Thursday": thuesdayTo,
           "Friday": fridayTo,
           "Saturday": saturdayTo
         }

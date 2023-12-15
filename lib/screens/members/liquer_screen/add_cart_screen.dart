@@ -196,7 +196,7 @@ class _Add_cartState extends State<Add_cart> {
                   InkWell(
                       onTap: Get.back,
                       child: Image.asset('assets/images/chevron-left (2).png')),
-                  Padding(
+                 const Padding(
                     padding: const EdgeInsets.only(right: 20),
                     child: Text(
                       'Wine',

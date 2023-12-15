@@ -86,6 +86,7 @@ class User {
     dynamic profile;
     dynamic mobile;
     String timeSlots;
+    String slotDate;
 
     User({
         required this.id,
@@ -94,6 +95,7 @@ class User {
         required this.profile,
         required this.mobile,
         required this.timeSlots,
+        required this.slotDate,
     });
 
     factory User.fromJson(Map<String, dynamic> json) => User(
@@ -103,6 +105,7 @@ class User {
         profile: json["profile"]?? "",
         mobile: json["mobile"]?? "",
         timeSlots: json["book_date_time"]?? "",
+        slotDate: json["booked_date"]?? "",
     );
 
     Map<String, dynamic> toJson() => {

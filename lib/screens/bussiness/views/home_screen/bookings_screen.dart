@@ -33,7 +33,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
   ]);
 
   String selectdt1 = formatDate(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+      DateTime.now().add(const Duration(days: 1)),
       [yyyy, "-", mm, "-", dd]);
 
   _showDatePicker(BuildContext context) async {
@@ -321,6 +321,9 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                                     .bookingListData[index].user.name,
                                 serviceController
                                     .bookingListData[index].user.mobile,
+        serviceController
+                                    .bookingListData[index].user.slotDate,
+
                               
                                 serviceController
                                     .bookingListData[index].user.email);
@@ -437,6 +440,7 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
       String timeSlots,
       String cusName,
       String mobile,
+      String slotDate,
       String email) {
     return showDialog<void>(
       context: context,
@@ -587,6 +591,31 @@ class _BusinessBookingScreenState extends State<BusinessBookingScreen> {
                       width: 110,
                       child: Text(
                         qty,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: kgrey,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 1,
+                ),
+                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Booking Date',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      width: 110,
+                      child: Text(
+                     slotDate != ""? formatDate(DateTime.parse(slotDate), [dd,"-",mm,"-",yyyy])   : "",
                         style: TextStyle(
                             fontSize: 15,
                             color: kgrey,
