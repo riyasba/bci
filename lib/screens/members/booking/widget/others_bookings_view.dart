@@ -221,29 +221,7 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                 const Divider(
                   thickness: 1,
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Text(
-                //       'Date',
-                //       style: TextStyle(
-                //           fontSize: 16,
-                //           color: kblue,
-                //           fontWeight: FontWeight.bold),
-                //     ),
-                //     Text(
-                //       formatDate(bookingData.,
-                //                    [dd ,'-',mm,'-',yyyy]),
-                //       style: TextStyle(
-                //           fontSize: 15,
-                //           color: kblue,
-                //           fontWeight: FontWeight.w500),
-                //     ),
-                //   ],
-                // ),
-                // const Divider(
-                //   thickness: 1,
-                // ),
+              
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -293,6 +271,30 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                  const Divider(
                   thickness: 1,
                 ),
+                  Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Date',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: kblue,
+                          fontWeight: FontWeight.bold),
+                    ),
+                   bookingData.bookingdate != ""? Text(
+                      formatDate(DateTime.parse(bookingData.bookingdate),
+                                   [dd ,'-',mm,'-',yyyy]),
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: kblue,
+                          fontWeight: FontWeight.w500),
+                    ): Text(""),
+                  ],
+                ),
+               
+                 const Divider(
+                  thickness: 1,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -315,6 +317,8 @@ class _OthersBookingsViewState extends State<OthersBookingsView> {
                 const Divider(
                   thickness: 1,
                 ),
+
+
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 //   children: [

@@ -8,6 +8,7 @@ class AddToCartApiServices extends BaseApiService {
       {required String serviceid,
       required String amount,
       required String slotId,
+      required String bookingDate,
       required String startTime}) async {
     dynamic responseJson;
     try {
@@ -29,7 +30,8 @@ class AddToCartApiServices extends BaseApiService {
             "service_id": serviceid,
             "amount": amount,
             "book_date_time": startTime ,
-            "slot_id": slotId
+            "slot_id": slotId,
+            "date": bookingDate
           });
       print(
           "::::::::<Add To Cart Api Services Api>::::::::status code:$startTime :::$serviceid:::$amount::$slotId:");

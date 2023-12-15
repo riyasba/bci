@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GetServicesDetailsServices extends BaseApiService {
-  Future getServiceDetails({required int serviceId}) async {
+  Future getServiceDetails({required int serviceId,required String slotdate}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
@@ -21,7 +21,7 @@ class GetServicesDetailsServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {"id": serviceId});
+          data: {"id": serviceId,"date":slotdate});
       print("::::::::<get service details screen Api>::::::::status code::::");
       print(response.statusCode);
       print(response.data);

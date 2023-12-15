@@ -291,6 +291,7 @@ class _LiquorDetailScreenState extends State<LiquorDetailScreen> {
                           amount: widget.searchServicelist.saleAmount,
                           startTime: "",
                           slotId: "",
+                          bookingDate: DateTime.now().toIso8601String(),
                           serviceid: widget.searchServicelist.id.toString());
                     },
                     child: Container(

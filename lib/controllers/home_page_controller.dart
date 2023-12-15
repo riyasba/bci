@@ -315,12 +315,13 @@ class HomeController extends GetxController {
       {required String serviceid,
       required String amount,
       required String slotId,
+      required String bookingDate,
       required String startTime}) async {
     isLoading(true);
 
     dio.Response<dynamic> response =
         await addToCartApiServices.addToCartApiServices(
-            serviceid: serviceid, amount: amount, startTime: startTime,slotId: slotId);
+            serviceid: serviceid, amount: amount, startTime: startTime,slotId: slotId,bookingDate: bookingDate);
     isLoading(false);
 
     if (response.statusCode == 201) {
@@ -369,8 +370,18 @@ class HomeController extends GetxController {
   updateQuantity({required String cartid, required String quantity}) async {
     dio.Response<dynamic> response = await updateQuantityAPIServices
         .updateQuantityData(cartid: cartid, quantity: quantity);
-    if (response.statusCode == 200) {}
+    bool isValid = true;
+    if (response.statusCode == 200) {
+       isValid = true;
+    }else{
+       isValid = false;
+       Get.rawSnackbar(
+        message: response.data["error"],
+        backgroundColor: Colors.red
+       );
+    }
     update();
+    return isValid;
   }
 
   //get cart list
@@ -665,9 +676,9 @@ class HomeController extends GetxController {
 
   List<SlotDetail> slotDetailList = [];
 
-  getServicesDetails({required int servicesId}) async {
+  getServicesDetails({required int servicesId, required DateTime datetime}) async {
     dio.Response<dynamic> response = await getServicesDetailsServices
-        .getServiceDetails(serviceId: servicesId);
+        .getServiceDetails(serviceId: servicesId, slotdate: datetime.toIso8601String());
 
     if (response.statusCode == 200) {
       ServiceDetailsModel vendorListModel =

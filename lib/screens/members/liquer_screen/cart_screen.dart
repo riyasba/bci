@@ -324,7 +324,7 @@ class _CartScreenState extends State<CartScreen> {
                                                       ),
                                                     ),
                                                     InkWell(
-                                                        onTap: () {
+                                                        onTap: () async{
                                                           //homeController.adult++;
                                                           var quantity =
                                                               homeController
@@ -340,7 +340,8 @@ class _CartScreenState extends State<CartScreen> {
                                                                       index]
                                                                   .quantity =
                                                               tempQty + 1;
-                                                          homeController.updateQuantity(
+                                                           
+                                                        bool isValid = await  homeController.updateQuantity(
                                                               cartid: homeController
                                                                   .cartListData[
                                                                       index]
@@ -351,6 +352,13 @@ class _CartScreenState extends State<CartScreen> {
                                                                       index]
                                                                   .quantity
                                                                   .toString());
+                                                              if(!isValid){
+                                                                 homeController
+                                                                  .cartListData[
+                                                                      index]
+                                                                  .quantity =  tempQty;
+                                                              }
+                                                          
                                                           homeController
                                                               .update();
                                                         },

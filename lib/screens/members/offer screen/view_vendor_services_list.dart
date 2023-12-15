@@ -253,7 +253,9 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                                 offerUptoAmount: "",
                                 shareOption: "");
                         homeController.getServicesDetails(
-                            servicesId: searchServiceListData.id);
+                            servicesId: searchServiceListData.id,
+                            datetime: DateTime.now()
+                            );
 
                         if (homeController
                                 .vendorServiceListData[index].isRecomended ==

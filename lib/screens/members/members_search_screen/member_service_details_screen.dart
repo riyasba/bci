@@ -39,14 +39,19 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
         context: context,
         initialDate: selectedDate,
         initialDatePickerMode: DatePickerMode.day,
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2101));
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2050));
     if (picked != null)
       setState(() {
         selectedDate = picked;
-        _dateController.text = formatDate(selectedDate, [MM, '-', dd]);
+        selectedValue = null;
+        _dateController.text = formatDate(selectedDate, [M, ' ', dd, ', ', yyyy]);
       });
-    _selectTime(context);
+       homeController.getServicesDetails(
+       servicesId: widget.searchServicelist.id,
+       datetime: selectedDate
+     );
+    // _selectTime(context);
   }
 
   Future<Null> _selectTime(BuildContext context) async {
@@ -69,7 +74,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
 
   @override
   void initState() {
-    _dateController.text = formatDate(selectedDate, [M, ',', dd, ',', yyyy]);
+    _dateController.text = formatDate(selectedDate, [M, ' ', dd, ', ', yyyy]);
 
     _timeController.text = formatDate(
         DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
@@ -274,10 +279,44 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                       ksizedbox10,
                     ],
                   ),
+                const SizedBox(height: 30),
                 GetBuilder<HomeController>(builder: (_) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 7),
+                          child: Text(
+                            'Booking date',
+                            style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.bold,
+                                color: kblue),
+                          ),
+                        ),
+             InkWell(
+                  onTap: (){
+                       _selectDate(context);
+                  },
+                  child: Container(
+                    height: 55,
+                    width: size.width,
+                     decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.withOpacity(0.8)),
+                      borderRadius: BorderRadius.circular(20)
+                     ),
+                     alignment: Alignment.centerLeft,
+                     child: Padding(
+                       padding: const EdgeInsets.symmetric(horizontal: 15),
+                       child: Text(_dateController.text,style: primaryFont.copyWith(
+                        fontWeight: FontWeight.w500
+                       ),),
+                     )
+                  ),
+                ),
+               const SizedBox(
+                  height: 15,
+                ),
                       if (homeController.slotDetailList.isNotEmpty)
                         Text(
                           'Time Slot',
@@ -344,6 +383,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                               selectedValue = value;
                             });
                           },
+                          value: selectedValue,
                           buttonStyleData: const ButtonStyleData(
                             padding: EdgeInsets.only(right: 8),
                           ),
@@ -366,27 +406,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                     ],
                   );
                 }),
-                // const SizedBox(height: 30),
-                // Row(
-                //   children: [
-                //     InkWell(
-                //         onTap: () {
-                //           _selectDate(context);
-                //         },
-                //         child: const Icon(Icons.date_range)),
-                //     Padding(
-                //       padding: const EdgeInsets.only(
-                //         left: 4,
-                //       ),
-                //       child: Text(_dateController.text),
-                //     ),
-                //     const Padding(
-                //       padding: EdgeInsets.only(left: 2, right: 2),
-                //       child: Text('-'),
-                //     ),
-                //     Text(_timeController.text),
-                //   ],
-                // ),
+               
                 ksizedbox10,
                 ksizedbox10,
                 Text(
@@ -422,35 +442,43 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                         ),
                         child: InkWell(
                           onTap: () async {
-                            String tempSaleAmount =
-                                widget.searchServicelist.saleAmount;
-                            String amount =
-                                await profileController.redeemCoupon(
-                                    amount: tempSaleAmount,
-                                    couponcode: redeemCouponcontroller.text,
-                                    serviceId:
-                                        widget.searchServicelist.id.toString(),
-                                    vendorId:
-                                        widget.searchServicelist.vendorId);
+                            if (redeemCouponcontroller.text.isNotEmpty) {
+  String tempSaleAmount =
+      widget.searchServicelist.saleAmount;
+  String amount =
+      await profileController.redeemCoupon(
+          amount: tempSaleAmount,
+          couponcode: redeemCouponcontroller.text,
+          serviceId:
+              widget.searchServicelist.id.toString(),
+          vendorId:
+              widget.searchServicelist.vendorId);
+  
+  double tAmount = double.parse(amount);
+  double tempSaleAmounz =
+      double.parse(tempSaleAmount);
+  
+  if (tAmount < tempSaleAmounz) {
+    double totalAmountTobeAdded =
+        tempSaleAmounz - tAmount;
+  
+    setState(() {
+      widget.searchServicelist.saleAmount =
+          totalAmountTobeAdded.toStringAsFixed(2);
+    });
+  } else {
+    Get.rawSnackbar(
+        message:
+            "Coupon is not applicable for this service",
+        backgroundColor: Colors.red);
+  }
+}else{
+   Get.rawSnackbar(
+        message:
+            "Please enter coupon code",
+        backgroundColor: Colors.red);
 
-                            double tAmount = double.parse(amount);
-                            double tempSaleAmounz =
-                                double.parse(tempSaleAmount);
-
-                            if (tAmount < tempSaleAmounz) {
-                              double totalAmountTobeAdded =
-                                  tempSaleAmounz - tAmount;
-
-                              setState(() {
-                                widget.searchServicelist.saleAmount =
-                                    totalAmountTobeAdded.toStringAsFixed(2);
-                              });
-                            } else {
-                              Get.rawSnackbar(
-                                  message:
-                                      "Coupon is not applicable for this service",
-                                  backgroundColor: Colors.red);
-                            }
+}
                           },
                           child: Center(
                             child: Text(
@@ -506,7 +534,9 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                 )
                               : InkWell(
                                   onTap: () {
-                                    homeController.addToCart(
+                                    if(homeController.slotDetailList.isNotEmpty){
+                                    if (selectedValue != null) {
+                                       homeController.addToCart(
                                         amount:
                                             widget.searchServicelist.saleAmount,
                                         startTime: selectedValue != null
@@ -514,8 +544,34 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                             : "",
                                             slotId: selectedValue != null
                                             ?selectedValue.id.toString():"" ,
+                                             bookingDate: selectedDate.toIso8601String(),
                                         serviceid: widget.searchServicelist.id
                                             .toString());
+}else{
+   Get.rawSnackbar(
+        message:
+            "Select a time slot",
+        backgroundColor: Colors.red);
+}
+
+  }else{
+                                       homeController.addToCart(
+      amount:
+          widget.searchServicelist.saleAmount,
+      startTime: selectedValue != null
+          ? "${selectedValue.weekday} ${selectedValue.startTime}-${selectedValue.endTime}"
+          : "",
+          slotId: selectedValue != null
+          ?selectedValue.id.toString():"" ,
+          bookingDate: selectedDate.toIso8601String(),
+      serviceid: widget.searchServicelist.id
+          .toString());
+                                    }
+
+
+
+
+
                                   },
                                   child: Container(
                                     height: 65,
