@@ -139,7 +139,6 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                 InkWell(
                   onTap: () {
                     Get.to(() => const AddServicesView());
-                    
                   },
                   child: Container(
                       height: 40,

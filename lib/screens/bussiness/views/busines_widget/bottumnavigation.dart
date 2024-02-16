@@ -19,7 +19,6 @@ import 'package:nb_utils/nb_utils.dart';
 
 class HomeBottomnavigationBar extends StatefulWidget {
   int index;
-
   HomeBottomnavigationBar({super.key,this.index = 0});
 
   @override
@@ -27,7 +26,7 @@ class HomeBottomnavigationBar extends StatefulWidget {
 }
 
 class _HomeBottomnavigationBarState extends State<HomeBottomnavigationBar> {
-  late CircularBottomNavigationController _navigationController;
+ late CircularBottomNavigationController _navigationController;
 
   @override
   void initState() {

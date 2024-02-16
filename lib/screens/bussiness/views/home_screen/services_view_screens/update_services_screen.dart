@@ -61,7 +61,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
     setDefault();
     
   }
-
+  bool isCoastApplicable = true;
 
 
   checkIfCategory() async {
@@ -129,6 +129,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
           "------------------>> is recomended = ${widget.serviceData.isRecomended}");
       setState(() {
         available = widget.serviceData.isRecomended == "0" ? true : false;
+        isCoastApplicable = widget.serviceData.isCoastApplicable == "1" ? true : false;
       });
     });
     // });
@@ -336,8 +337,30 @@ class _AddServicesViewState extends State<UpdateServicesView> {
             );
           }),
 
-          ksizedbox10,
-          Padding(
+           ksizedbox10,
+           Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: Row(
+              children: [
+                Text(
+                  "Is Cost Applicable",
+                  style: TextStyle(
+                      color: kblue, fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Switch(
+                  activeColor: kOrange,
+                  activeTrackColor: kblue,
+                  value: isCoastApplicable,
+                  onChanged: (bool value) {
+                    setState(() {
+                      isCoastApplicable = value;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+        if(isCoastApplicable)   Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
               controller: actualAmountController,
@@ -377,8 +400,8 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                   )),
             ),
           ),
-          ksizedbox10,
-          Padding(
+         if(isCoastApplicable)  ksizedbox10,
+         if(isCoastApplicable)  Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
               controller: saleAmountController,
@@ -476,8 +499,8 @@ class _AddServicesViewState extends State<UpdateServicesView> {
               ],
             ),
           ),
-          ksizedbox10,
-          GetBuilder<AuthController>(builder: (_) {
+         if(isCoastApplicable)  ksizedbox10,
+         if(isCoastApplicable)  GetBuilder<AuthController>(builder: (_) {
             return Padding(
               padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
               child: Container(
@@ -524,8 +547,8 @@ class _AddServicesViewState extends State<UpdateServicesView> {
               ),
             );
           }),
-          ksizedbox10,
-          Padding(
+         if(isCoastApplicable)  ksizedbox10,
+         if(isCoastApplicable)  Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
               controller: cGstController,
@@ -560,8 +583,8 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                   )),
             ),
           ),
-          ksizedbox10,
-          Padding(
+        if(isCoastApplicable)   ksizedbox10,
+        if(isCoastApplicable)   Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
               controller: sGstController,
@@ -1344,6 +1367,7 @@ class _AddServicesViewState extends State<UpdateServicesView> {
                                 isCouponsAvailable:
                                     isCouponEligible ? "1" : "0",
                                 isOfferAvailable: isOfferEligible ? "1" : "0",
+                                isCoastAvailable: isCoastApplicable ? "1": "0",
                                 saleAmount: saleAmountController.text,
                                 title: serviceTitleController.text,
                                 couponAmount:

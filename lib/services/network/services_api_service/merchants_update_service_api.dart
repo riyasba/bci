@@ -146,6 +146,7 @@ class UpdateServicesApiServices extends BaseApiService {
         "is_recomended": createServiceModel.available,
         "unit": createServiceModel.unit,
         "quantity": createServiceModel.quantity,
+        "is_cost_applicable": createServiceModel.isCoastAvailable,
         // if (createServiceModel.offerPercentage != null)
         //   "offerPercentage": "${createServiceModel.offerPercentage}%",
         // if (createServiceModel.offerAmount != null)

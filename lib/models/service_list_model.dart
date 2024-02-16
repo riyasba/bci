@@ -43,6 +43,7 @@ class ServiceData {
     String description;
     String quantity;
     String unit;
+    String isCoastApplicable;
     dynamic isRecomended;
     dynamic status;
     List<Amenty> amenties;
@@ -75,6 +76,7 @@ class ServiceData {
         required this.images,
         required this.createdAt,
         required this.updatedAt,
+        required this.isCoastApplicable,
         this.shareOption,
         // this.bvcAmount,
         this.sgst,
@@ -97,6 +99,7 @@ class ServiceData {
         quantity: json["quantity"]?? "",
         unit: json["unit"]?? "",
         isRecomended: json["is_recomended"]?? "",
+        isCoastApplicable: json["is_cost_applicable"]?? "1",
         status: json["status"]?? "",
         amenties:json["amenties"] == null ? [] : List<Amenty>.from(json["amenties"].map((x) => Amenty.fromJson(x))),
         images:json["images"] == null ? [] : List<String>.from(json["images"].map((x) => x)),

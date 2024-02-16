@@ -148,6 +148,7 @@ class AddServicesApiServices extends BaseApiService {
         "sgst": createServiceModel.sgst,
         "start_time": createServiceModel.startTime,
         "end_time": createServiceModel.endTime,
+        "is_cost_applicable": createServiceModel.isCoastAvailable,
         // "weekdays[0]":"Monday",
         // "from.Monday[0]":"00:00:00",
         // "to.Monday[0]":"23:59:00",

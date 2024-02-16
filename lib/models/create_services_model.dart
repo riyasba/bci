@@ -23,6 +23,7 @@ class CreateServiceModel {
   dynamic startTime;
   dynamic endTime;
   dynamic available;
+  dynamic isCoastAvailable;
 
 
   CreateServiceModel(
@@ -47,6 +48,7 @@ class CreateServiceModel {
       this.startTime,
       this.endTime,
       this.available,
+      this.isCoastAvailable,
       required this.image});
 }
 

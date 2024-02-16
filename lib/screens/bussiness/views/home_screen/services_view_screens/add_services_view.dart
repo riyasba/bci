@@ -131,6 +131,7 @@ class _AddServicesViewState extends State<AddServicesView> {
   bool isOfferEligible = false;
   bool isCouponEligible = false;
   bool available = true;
+  bool isCoastApplicable = true;
 
   // List share = ["fixed","percentage"];
 
@@ -331,7 +332,29 @@ class _AddServicesViewState extends State<AddServicesView> {
             );
           }),
           ksizedbox10,
-          Padding(
+           Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: Row(
+              children: [
+                Text(
+                  "Is Cost Applicable",
+                  style: TextStyle(
+                      color: kblue, fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Switch(
+                  activeColor: kOrange,
+                  activeTrackColor: kblue,
+                  value: isCoastApplicable,
+                  onChanged: (bool value) {
+                    setState(() {
+                      isCoastApplicable = value;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+       if(isCoastApplicable)   Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
               controller: actualAmountController,
@@ -371,8 +394,8 @@ class _AddServicesViewState extends State<AddServicesView> {
                   )),
             ),
           ),
-          ksizedbox10,
-          Padding(
+        if(isCoastApplicable)  ksizedbox10,
+        if(isCoastApplicable)  Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
               controller: saleAmountController,
@@ -545,7 +568,7 @@ class _AddServicesViewState extends State<AddServicesView> {
           //     ),
           //   );
           // }),
-          GetBuilder<AuthController>(builder: (_) {
+         if(isCoastApplicable) GetBuilder<AuthController>(builder: (_) {
             return Padding(
               padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
               child: Container(
@@ -592,7 +615,7 @@ class _AddServicesViewState extends State<AddServicesView> {
               ),
             );
           }),
-          ksizedbox10,
+         if(isCoastApplicable) ksizedbox10,
           // GetBuilder<AuthController>(builder: (_) {
           //   return Padding(
           //     padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -637,7 +660,7 @@ class _AddServicesViewState extends State<AddServicesView> {
           //   );
           // }),
           // ksizedbox10,
-          Padding(
+        if(isCoastApplicable)  Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
               controller: cgstController,
@@ -673,8 +696,8 @@ class _AddServicesViewState extends State<AddServicesView> {
                   )),
             ),
           ),
-          ksizedbox10,
-          Padding(
+        if(isCoastApplicable)  ksizedbox10,
+        if(isCoastApplicable)  Padding(
             padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
             child: TextFormField(
               controller: sgstController,
@@ -1158,6 +1181,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                 }
                 return null;
               },
+
               maxLines: 5,
               decoration: InputDecoration(
                   fillColor: Colors.white,
@@ -1409,7 +1433,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                                     offerPercentageController.text.isEmpty
                                         ? null
                                         : offerPercentageController.text,
-                                actualAmount: actualAmountController.text,
+                                actualAmount: actualAmountController.text.isEmpty ? "0":actualAmountController.text,
                                 amenities: listTags,
                                 // share: shareValue,
                                 booking: authController.isGstAvailable.isTrue
@@ -1423,7 +1447,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                                 isCouponsAvailable:
                                     isCouponEligible ? "1" : "0",
                                 isOfferAvailable: isOfferEligible ? "1" : "0",
-                                saleAmount: saleAmountController.text,
+                                saleAmount: saleAmountController.text.isEmpty ? "0": saleAmountController.text,
                                 title: serviceTitleController.text,
                                 couponAmount:
                                     couponAmountController.text.isEmpty
@@ -1437,6 +1461,7 @@ class _AddServicesViewState extends State<AddServicesView> {
                                 sgst: sgstPercentage,
                                 endTime: endTime,
                                 startTime: startTime,
+                                isCoastAvailable: isCoastApplicable ? "1" : "0",
                                 quantity: quantityController.text);
 
                         serviceController.addServices(
