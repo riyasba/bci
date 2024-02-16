@@ -510,7 +510,7 @@ class _CartScreenState extends State<CartScreen> {
                                               //         )
                                               //       ],
                                               //     )),
-                                              Text(
+                                            if(homeController.cartListData[index].isCoastApplicable == "1")  Text(
                                                 '₹ ${double.parse(homeController.cartListData[index].amount).toStringAsFixed(2)}',
                                                 style: TextStyle(
                                                     fontSize: 17.sp,
@@ -544,9 +544,9 @@ class _CartScreenState extends State<CartScreen> {
                   decoration: BoxDecoration(
                       color: kyellow, borderRadius: BorderRadius.circular(15)),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment:homeController.getGrandTotal() > 0 ?  MainAxisAlignment.spaceAround : MainAxisAlignment.center,
                     children: [
-                      Text(
+                     if(homeController.getGrandTotal() > 0) Text(
                         "₹ ${homeController.getGrandTotal().toStringAsFixed(2)}",
                         style: primaryFont.copyWith(
                             color: kwhite,
@@ -574,21 +574,25 @@ class _CartScreenState extends State<CartScreen> {
                             : InkWell(
                                 onTap: () {
                                   if (homeController.cartListData.isNotEmpty) {
-                                    if (homeController.getGrandTotal() > 0) {
-                                      var tempAmount =
-                                          homeController.getGrandTotal();
-                                      // profileController.payFromCart(tempAmount);
-                                      paymentBottomSheet(
-                                          context,
-                                          tempAmount,
-                                          homeController.cartListData.first.id
-                                              .toString());
-                                    } else {
-                                      Get.rawSnackbar(
-                                          message:
-                                              "Please select any service to continue",
-                                          backgroundColor: Colors.black);
-                                    }
+                                    if (homeController.checkForPaymentAvailable()) {
+  if (homeController.getGrandTotal() > 0) {
+    var tempAmount =
+        homeController.getGrandTotal();
+    // profileController.payFromCart(tempAmount);
+    paymentBottomSheet(
+        context,
+        tempAmount,
+        homeController.cartListData.first.id
+            .toString());
+  } else {
+    Get.rawSnackbar(
+        message:
+            "Please select any service to continue",
+        backgroundColor: Colors.black);
+  }
+}else{
+  Get.find<ProfileController>().bookServiceWithoutPayment();
+}
                                   } else {
                                     Get.rawSnackbar(
                                         message: "No Booking found",
@@ -599,7 +603,7 @@ class _CartScreenState extends State<CartScreen> {
                                   height: 50,
                                   width: 150,
                                   decoration: BoxDecoration(
-                                    color: kblue,
+                                    color: homeController.getGrandTotal() > 0 ? kblue : kyellow,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: const Center(

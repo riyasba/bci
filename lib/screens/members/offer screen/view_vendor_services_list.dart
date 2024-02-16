@@ -242,6 +242,8 @@ class _VendorViewOffersState extends State<VendorViewServicesList> {
                                     .vendorServiceListData[index].amenties,
                                 vendorId: homeController
                                     .vendorServiceListData[index].vendorId,
+                                    isCoastApplicable: homeController
+                                    .vendorServiceListData[index].isCoastApplicable,
                                 isCoupon: "",
                                 isOffer: "",
                                 isRecomended: "",

@@ -197,6 +197,8 @@ class _VendorViewOffersState extends State<VendorViewOffers> {
                                           .vendorServiceListData[index].id,
                                       image: homeController
                                           .vendorServiceListData[index].image,
+                                        isCoastApplicable:  homeController
+                                          .vendorServiceListData[index].isCoastApplicable,
                                       // isBooking: homeController
                                       //     .vendorServiceListData[index].isBooking,
                                       saleAmount: (int.parse(homeController

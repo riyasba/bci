@@ -45,12 +45,11 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
       setState(() {
         selectedDate = picked;
         selectedValue = null;
-        _dateController.text = formatDate(selectedDate, [M, ' ', dd, ', ', yyyy]);
+        _dateController.text =
+            formatDate(selectedDate, [M, ' ', dd, ', ', yyyy]);
       });
-       homeController.getServicesDetails(
-       servicesId: widget.searchServicelist.id,
-       datetime: selectedDate
-     );
+    homeController.getServicesDetails(
+        servicesId: widget.searchServicelist.id, datetime: selectedDate);
     // _selectTime(context);
   }
 
@@ -190,28 +189,32 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                         color: kblue),
                   ),
                 ),
-                Row(
-                  children: [
-                    Text(
-                      "₹${widget.searchServicelist.actualAmount}",
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.lineThrough,
-                          color: Colors.grey),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      "₹${widget.searchServicelist.saleAmount}",
-                      style: TextStyle(
-                          fontSize: 22.sp,
-                          fontWeight: FontWeight.bold,
-                          color: kblue),
-                    ),
-                  ],
-                ),
+                widget.searchServicelist.isCoastApplicable == "0"
+                    ? Container(
+                        width: 10,
+                      )
+                    : Row(
+                        children: [
+                          Text(
+                            "₹${widget.searchServicelist.actualAmount}",
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w500,
+                                decoration: TextDecoration.lineThrough,
+                                color: Colors.grey),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            "₹${widget.searchServicelist.saleAmount}",
+                            style: TextStyle(
+                                fontSize: 22.sp,
+                                fontWeight: FontWeight.bold,
+                                color: kblue),
+                          ),
+                        ],
+                      ),
               ],
             ),
           ),
@@ -284,39 +287,41 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 7),
-                          child: Text(
-                            'Booking date',
-                            style: TextStyle(
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                                color: kblue),
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 7),
+                        child: Text(
+                          'Booking date',
+                          style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.bold,
+                              color: kblue),
                         ),
-             InkWell(
-                  onTap: (){
-                       _selectDate(context);
-                  },
-                  child: Container(
-                    height: 55,
-                    width: size.width,
-                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.withOpacity(0.8)),
-                      borderRadius: BorderRadius.circular(20)
-                     ),
-                     alignment: Alignment.centerLeft,
-                     child: Padding(
-                       padding: const EdgeInsets.symmetric(horizontal: 15),
-                       child: Text(_dateController.text,style: primaryFont.copyWith(
-                        fontWeight: FontWeight.w500
-                       ),),
-                     )
-                  ),
-                ),
-               const SizedBox(
-                  height: 15,
-                ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _selectDate(context);
+                        },
+                        child: Container(
+                            height: 55,
+                            width: size.width,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.grey.withOpacity(0.8)),
+                                borderRadius: BorderRadius.circular(20)),
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Text(
+                                _dateController.text,
+                                style: primaryFont.copyWith(
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            )),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
                       if (homeController.slotDetailList.isNotEmpty)
                         Text(
                           'Time Slot',
@@ -353,7 +358,7 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                             nn,
                                             " ",
                                             am
-                                          ])}-${formatDate(DateTime(2023, 1, 1, int.parse(item.endTime.split(":").first),int.parse(item.endTime.split(":")[1])), [
+                                          ])}-${formatDate(DateTime(2023, 1, 1, int.parse(item.endTime.split(":").first), int.parse(item.endTime.split(":")[1])), [
                                             hh,
                                             ":",
                                             nn,
@@ -406,7 +411,6 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                     ],
                   );
                 }),
-               
                 ksizedbox10,
                 ksizedbox10,
                 Text(
@@ -443,42 +447,40 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                         child: InkWell(
                           onTap: () async {
                             if (redeemCouponcontroller.text.isNotEmpty) {
-  String tempSaleAmount =
-      widget.searchServicelist.saleAmount;
-  String amount =
-      await profileController.redeemCoupon(
-          amount: tempSaleAmount,
-          couponcode: redeemCouponcontroller.text,
-          serviceId:
-              widget.searchServicelist.id.toString(),
-          vendorId:
-              widget.searchServicelist.vendorId);
-  
-  double tAmount = double.parse(amount);
-  double tempSaleAmounz =
-      double.parse(tempSaleAmount);
-  
-  if (tAmount < tempSaleAmounz) {
-    double totalAmountTobeAdded =
-        tempSaleAmounz - tAmount;
-  
-    setState(() {
-      widget.searchServicelist.saleAmount =
-          totalAmountTobeAdded.toStringAsFixed(2);
-    });
-  } else {
-    Get.rawSnackbar(
-        message:
-            "Coupon is not applicable for this service",
-        backgroundColor: Colors.red);
-  }
-}else{
-   Get.rawSnackbar(
-        message:
-            "Please enter coupon code",
-        backgroundColor: Colors.red);
+                              String tempSaleAmount =
+                                  widget.searchServicelist.saleAmount;
+                              String amount = await profileController
+                                  .redeemCoupon(
+                                      amount: tempSaleAmount,
+                                      couponcode: redeemCouponcontroller.text,
+                                      serviceId: widget.searchServicelist.id
+                                          .toString(),
+                                      vendorId:
+                                          widget.searchServicelist.vendorId);
 
-}
+                              double tAmount = double.parse(amount);
+                              double tempSaleAmounz =
+                                  double.parse(tempSaleAmount);
+
+                              if (tAmount < tempSaleAmounz) {
+                                double totalAmountTobeAdded =
+                                    tempSaleAmounz - tAmount;
+
+                                setState(() {
+                                  widget.searchServicelist.saleAmount =
+                                      totalAmountTobeAdded.toStringAsFixed(2);
+                                });
+                              } else {
+                                Get.rawSnackbar(
+                                    message:
+                                        "Coupon is not applicable for this service",
+                                    backgroundColor: Colors.red);
+                              }
+                            } else {
+                              Get.rawSnackbar(
+                                  message: "Please enter coupon code",
+                                  backgroundColor: Colors.red);
+                            }
                           },
                           child: Center(
                             child: Text(
@@ -498,102 +500,175 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                   ),
                 ),
                 ksizedbox20,
-                Container(
-                  height: 60,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15), color: kyellow),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: Text(
-                          "Total : ₹${widget.searchServicelist.saleAmount}",
-                          style: primaryFont.copyWith(
-                              color: Colors.white,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      Obx(
-                        () => Padding(
-                          padding: const EdgeInsets.only(
-                              right: 5, top: 5, bottom: 5),
-                          child: homeController.isLoading.isTrue
-                              ? Container(
-                                  height: 65,
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                      color: kwhite,
-                                      borderRadius: BorderRadius.circular(16)),
-                                  child: const Center(
-                                      child: CircularProgressIndicator(
-                                    color: Colors.black87,
-                                  )),
+                widget.searchServicelist.isCoastApplicable == "0"
+                    ? InkWell(
+                        onTap: () {
+                          if (homeController.slotDetailList.isNotEmpty) {
+                            if (selectedValue != null) {
+                              homeController.addToCart(
+                                  amount: widget.searchServicelist.saleAmount,
+                                  startTime: selectedValue != null
+                                      ? "${selectedValue.weekday} ${selectedValue.startTime}-${selectedValue.endTime}"
+                                      : "",
+                                  slotId: selectedValue != null
+                                      ? selectedValue.id.toString()
+                                      : "",
+                                  bookingDate: selectedDate.toIso8601String(),
+                                  isCoastApplicable: widget
+                                      .searchServicelist.isCoastApplicable,
+                                  serviceid:
+                                      widget.searchServicelist.id.toString());
+                            } else {
+                              Get.rawSnackbar(
+                                  message: "Select a time slot",
+                                  backgroundColor: Colors.red);
+                            }
+                          } else {
+                            homeController.addToCart(
+                                amount: widget.searchServicelist.saleAmount,
+                                startTime: selectedValue != null
+                                    ? "${selectedValue.weekday} ${selectedValue.startTime}-${selectedValue.endTime}"
+                                    : "",
+                                slotId: selectedValue != null
+                                    ? selectedValue.id.toString()
+                                    : "",
+                                bookingDate: selectedDate.toIso8601String(),
+                                serviceid:
+                                    widget.searchServicelist.id.toString(),
+                                isCoastApplicable:
+                                    widget.searchServicelist.isCoastApplicable);
+                          }
+                        },
+                        child: Container(
+                          height: 60,
+                          width: size.width,
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 2,
+                                  color: Colors.grey.withOpacity(0.6),
                                 )
-                              : InkWell(
-                                  onTap: () {
-                                    if(homeController.slotDetailList.isNotEmpty){
-                                    if (selectedValue != null) {
-                                       homeController.addToCart(
-                                        amount:
-                                            widget.searchServicelist.saleAmount,
-                                        startTime: selectedValue != null
-                                            ? "${selectedValue.weekday} ${selectedValue.startTime}-${selectedValue.endTime}"
-                                            : "",
-                                            slotId: selectedValue != null
-                                            ?selectedValue.id.toString():"" ,
-                                             bookingDate: selectedDate.toIso8601String(),
-                                        serviceid: widget.searchServicelist.id
-                                            .toString());
-}else{
-   Get.rawSnackbar(
-        message:
-            "Select a time slot",
-        backgroundColor: Colors.red);
-}
-
-  }else{
-                                       homeController.addToCart(
-      amount:
-          widget.searchServicelist.saleAmount,
-      startTime: selectedValue != null
-          ? "${selectedValue.weekday} ${selectedValue.startTime}-${selectedValue.endTime}"
-          : "",
-          slotId: selectedValue != null
-          ?selectedValue.id.toString():"" ,
-          bookingDate: selectedDate.toIso8601String(),
-      serviceid: widget.searchServicelist.id
-          .toString());
-                                    }
-
-
-
-
-
-                                  },
-                                  child: Container(
-                                    height: 65,
-                                    width: 150,
-                                    decoration: BoxDecoration(
-                                        color: kwhite,
-                                        borderRadius:
-                                            BorderRadius.circular(16)),
-                                    child: const Center(
-                                        child: Text(
-                                      "Add To Booking",
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w700),
-                                    )),
-                                  ),
-                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(15),
+                              color: kyellow),
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Add To Booking",
+                            style: primaryFont.copyWith(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 60,
+                        width: size.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: kyellow),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15),
+                              child: Text(
+                                "Total : ₹${widget.searchServicelist.saleAmount}",
+                                style: primaryFont.copyWith(
+                                    color: Colors.white,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                            Obx(
+                              () => Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 5, top: 5, bottom: 5),
+                                child: homeController.isLoading.isTrue
+                                    ? Container(
+                                        height: 65,
+                                        width: 150,
+                                        decoration: BoxDecoration(
+                                            color: kwhite,
+                                            borderRadius:
+                                                BorderRadius.circular(16)),
+                                        child: const Center(
+                                            child: CircularProgressIndicator(
+                                          color: Colors.black87,
+                                        )),
+                                      )
+                                    : InkWell(
+                                        onTap: () {
+                                          if (homeController
+                                              .slotDetailList.isNotEmpty) {
+                                            if (selectedValue != null) {
+                                              homeController.addToCart(
+                                                  amount: widget
+                                                      .searchServicelist
+                                                      .saleAmount,
+                                                  startTime: selectedValue !=
+                                                          null
+                                                      ? "${selectedValue.weekday} ${selectedValue.startTime}-${selectedValue.endTime}"
+                                                      : "",
+                                                  slotId: selectedValue != null
+                                                      ? selectedValue.id
+                                                          .toString()
+                                                      : "",
+                                                  bookingDate: selectedDate
+                                                      .toIso8601String(),
+                                                  isCoastApplicable: widget
+                                                      .searchServicelist
+                                                      .isCoastApplicable,
+                                                  serviceid: widget
+                                                      .searchServicelist.id
+                                                      .toString());
+                                            } else {
+                                              Get.rawSnackbar(
+                                                  message: "Select a time slot",
+                                                  backgroundColor: Colors.red);
+                                            }
+                                          } else {
+                                            homeController.addToCart(
+                                                amount: widget.searchServicelist
+                                                    .saleAmount,
+                                                startTime: selectedValue != null
+                                                    ? "${selectedValue.weekday} ${selectedValue.startTime}-${selectedValue.endTime}"
+                                                    : "",
+                                                slotId: selectedValue != null
+                                                    ? selectedValue.id
+                                                        .toString()
+                                                    : "",
+                                                bookingDate: selectedDate
+                                                    .toIso8601String(),
+                                                serviceid: widget
+                                                    .searchServicelist.id
+                                                    .toString(),
+                                                isCoastApplicable: widget
+                                                    .searchServicelist
+                                                    .isCoastApplicable);
+                                          }
+                                        },
+                                        child: Container(
+                                          height: 65,
+                                          width: 150,
+                                          decoration: BoxDecoration(
+                                              color: kwhite,
+                                              borderRadius:
+                                                  BorderRadius.circular(16)),
+                                          child: const Center(
+                                              child: Text(
+                                            "Add To Booking",
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w700),
+                                          )),
+                                        ),
+                                      ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),

@@ -47,6 +47,7 @@ class GetServiceListData {
   dynamic status;
   List<Amenty> amenties;
   String image;
+  String isCoastApplicable;
   List<String> images;
   DateTime createdAt;
   DateTime updatedAt;
@@ -69,6 +70,7 @@ class GetServiceListData {
     required this.createdAt,
     required this.updatedAt,
     required this.isRecomended,
+    required this.isCoastApplicable,
   });
 
   factory GetServiceListData.fromJson(Map<String, dynamic> json) =>
@@ -95,6 +97,7 @@ class GetServiceListData {
             : List<String>.from(json["images"].map((x) => x)),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        isCoastApplicable: json["is_cost_applicable"] ?? "1"
       );
 
   Map<String, dynamic> toJson() => {

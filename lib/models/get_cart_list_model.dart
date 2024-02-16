@@ -45,6 +45,7 @@ class CartListData {
   String description;
   String bookDateTime;
   bool isSelected;
+  String isCoastApplicable;
 
   CartListData({
     required this.id,
@@ -61,6 +62,7 @@ class CartListData {
     required this.description,
     required this.bookDateTime,
     required this.isSelected,
+    required this.isCoastApplicable,
   });
 
   factory CartListData.fromJson(Map<String, dynamic> json) => CartListData(
@@ -79,6 +81,7 @@ class CartListData {
       amount: json["amount"] ?? "",
       description: json["description"] ?? "",
       bookDateTime: json["book_date_time"] ?? "",
+      isCoastApplicable: json["is_cost_applicable"] ?? "1",
       isSelected: true);
 
   Map<String, dynamic> toJson() => {

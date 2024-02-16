@@ -139,6 +139,8 @@ class _OthersServiceScreenState extends State<OthersServiceScreen> {
                                 couponAmount: "",
                                 offerPercentage: "",
                                 offerUptoAmount: "",
+                                isCoastApplicable: homeController
+                                    .serviceListData[index].isCoastApplicable,
                                 shareOption: "");
                         Get.to(
                           ServiceDetailsScreen(

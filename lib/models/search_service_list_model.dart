@@ -56,6 +56,7 @@ class SearchServiceListData {
   DateTime updatedAt;
   dynamic shareOption;
   dynamic bvcAmount;
+  String isCoastApplicable;
 
   SearchServiceListData({
     required this.id,
@@ -81,6 +82,7 @@ class SearchServiceListData {
     required this.updatedAt,
     this.shareOption,
     this.bvcAmount,
+    required this.isCoastApplicable
   });
 
   factory SearchServiceListData.fromJson(Map<String, dynamic> json) =>
@@ -111,6 +113,7 @@ class SearchServiceListData {
         shareOption: json["share_option"] ?? "",
         images: List<String>.from(json["images"].map((x) => x)),
         bvcAmount: json["bvc_amount"] ?? "",
+        isCoastApplicable: json["is_cost_applicable"] ?? "1",
       );
 
   Map<String, dynamic> toJson() => {

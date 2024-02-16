@@ -316,14 +316,13 @@ class HomeController extends GetxController {
       required String amount,
       required String slotId,
       required String bookingDate,
+      String isCoastApplicable = "1",
       required String startTime}) async {
     isLoading(true);
-
     dio.Response<dynamic> response =
         await addToCartApiServices.addToCartApiServices(
-            serviceid: serviceid, amount: amount, startTime: startTime,slotId: slotId,bookingDate: bookingDate);
+            serviceid: serviceid, amount: amount, startTime: startTime,slotId: slotId,bookingDate: bookingDate,isCoastApplicable: isCoastApplicable);
     isLoading(false);
-
     if (response.statusCode == 201) {
       Get.off(const CartScreen());
       Get.rawSnackbar(
@@ -414,6 +413,19 @@ class HomeController extends GetxController {
       //     ));
     }
     update();
+  }
+
+  //checking if the coast is applicable or not
+ bool checkForPaymentAvailable(){
+    bool isCoastApplicable = false;
+
+    for (var i = 0; i < cartListData.length; i++) {
+      if(cartListData[i].isCoastApplicable == "1"){
+        isCoastApplicable = true;
+      }
+      
+    }
+     return isCoastApplicable;
   }
 
   double getGrandTotal() {

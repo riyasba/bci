@@ -1185,4 +1185,52 @@ class ProfileController extends GetxController {
       Get.to(() => PaymentFailedScreen());
     }
   }
+
+
+
+
+  bookServiceWithoutPayment(){
+    final homeController = Get.find<HomeController>();
+      Get.to(() => const FlightLoadingPage());
+      print(">>-------------->>---------->>");
+      for (int i = 0; i < homeController.cartListData.length; i++) {
+        if (homeController.cartListData[i].isSelected) {
+          homeController.addBooking(
+              serviceid: homeController.cartListData[i].serviceId.toString(),
+              cartid: homeController.cartListData[i].id.toString(),
+              qty: homeController.cartListData[i].quantity.toString(),
+              offerOrCoupon: "",
+              couponcode: "",
+              debitFrom: "none",
+              referenceId: "",
+              amount: homeController.cartListData[i].price,
+              bookDateTime: homeController.cartListData[i].bookDateTime);
+        }
+      }
+
+      Get.offAll(
+        () => LoadingWidgets(),
+      );
+
+      // Get.find<HomeController>().addSubscription(
+      //     planId: id,
+      //     customerId: Get.find<ProfileController>().profileData.first.id);
+
+      //need to give id
+      Get.snackbar(
+        "Service Booked Successfully",
+        "",
+        icon: const Icon(Icons.check_circle_outline_outlined,
+            color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+  }
 }
